@@ -1,5 +1,7 @@
 version: '3.7'
 
+# for development
+
 services:
 
   postgres:
@@ -21,18 +23,24 @@ services:
     image: backend
     depends_on:
       - postgres
+    ports:
+      - ${BACKPORT}:${BACKPORT}
     build:
       context: .
       dockerfile: ./src/docker/backend.Dockerfile
+    restart: unless-stopped
   
   frontend:
     image: frontend
     depends_on:
       - postgres
       - backend
+    ports:
+      - ${FRONTPORT}:${FRONTPORT}
     build:
       context: .
       dockerfile: ./src/docker/frontend.Dockerfile
+    restart: unless-stopped
 
   pgadmin:
     image: dpage/pgadmin4
