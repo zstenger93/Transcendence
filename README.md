@@ -27,7 +27,9 @@
 ---
 ## Setup
 
-docker-compose
+docker-compose.dev.yaml for development
+
+docker-compose.yaml for deployment
 
 Services:
 
