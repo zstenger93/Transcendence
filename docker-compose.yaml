@@ -12,6 +12,7 @@ services:
     restart: unless-stopped
 
   backend:
+    image: backend
     depends_on:
       - postgres
     build:
@@ -19,22 +20,10 @@ services:
       dockerfile: ./src/docker/backend.Dockerfile
   
   frontend:
+    image: frontend
     depends_on:
       - postgres
       - backend
     build:
       context: .
       dockerfile: ./src/docker/frontend.Dockerfile
-
-  transcendence:
-    container_name: transcendence
-    depends_on:
-      - postgres
-      - backend
-      - frontend
-    build:
-      context: .
-      dockerfile: 
-    env_file:
-      - .env
-    restart: unless-stopped
