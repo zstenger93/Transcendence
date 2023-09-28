@@ -6,6 +6,8 @@
 
 ## Menu
 
+[Docker Setup](#setup)
+
 [DataBase](#database)
 
 [Frontend](#frontend)
@@ -19,6 +21,21 @@
 [Resources](#resources)
 
 [TODO](#todo)
+
+---
+## Setup
+
+docker-compose
+
+Services:
+
+	postgreSQL
+
+	pgAdmin
+
+	frontend
+
+	backend
 
 ---
 
@@ -61,4 +78,13 @@ our braincells
 ## TODO
 
 Done: :white_check_mark:
-Not: :x:
+
+Not done: :x:
+
+Basic structure :white_check_mark:
+
+First mindmap :x:
+
+Docker files for services :x:
+
+docker-compose :x:
