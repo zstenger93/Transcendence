@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    env_file:
+      - .env
+    expose:
+      - 5432
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  backend:
+    image: backend
+    depends_on:
+      - postgres
+    build:
+      context: .
+      dockerfile: ./src/docker/backend.Dockerfile
+  
+  frontend:
+    image: frontend
+    depends_on:
+      - postgres
+      - backend
+    build:
+      context: .
+      dockerfile: ./src/docker/frontend.Dockerfile
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    depends_on:
+      - postgres
+    ports:
+      - "5050:80"
+    env_file:
+      - .env
+    restart: unless-stopped

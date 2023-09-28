@@ -1,29 +1,23 @@
 version: '3.7'
 
 services:
-
   postgres:
     image: postgres:15
     container_name: postgres
+    environment:
+      DATABASE_NAME: ${DBNAME}
+      DATABASE_USER: ${DBUSER}
+      DATABASE_USER_PW: ${DBUSERPW}
     env_file:
       - .env
-    ports:
-      - 5432:5432
     restart: unless-stopped
 
-  backend:
-    image: backend
-    depends_on:
-      - postgres
+  transcendence:
+    image: transcendence
+    container_name: transcendence
     build:
       context: .
-      dockerfile: ./src/docker/backend.Dockerfile
-  
-  frontend:
-    image: frontend
-    depends_on:
-      - postgres
-      - backend
-    build:
-      context: .
-      dockerfile: ./src/docker/frontend.Dockerfile
+      dockerfile: 
+    env_file:
+      - .env
+    restart: unless-stopped
