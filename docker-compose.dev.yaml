@@ -26,6 +26,7 @@ services:
     build:
       context: .
       dockerfile: ./src/docker/backend.Dockerfile
+    restart: unless-stopped
   
   frontend:
     image: frontend
@@ -37,6 +38,7 @@ services:
     build:
       context: .
       dockerfile: ./src/docker/frontend.Dockerfile
+    restart: unless-stopped
 
   pgadmin:
     image: dpage/pgadmin4
