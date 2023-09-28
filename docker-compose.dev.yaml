@@ -21,6 +21,8 @@ services:
     image: backend
     depends_on:
       - postgres
+    ports:
+      - ${BACKPORT}:${BACKPORT}
     build:
       context: .
       dockerfile: ./src/docker/backend.Dockerfile
@@ -30,6 +32,8 @@ services:
     depends_on:
       - postgres
       - backend
+    ports:
+      - ${FRONTPORT}:${FRONTPORT}
     build:
       context: .
       dockerfile: ./src/docker/frontend.Dockerfile
