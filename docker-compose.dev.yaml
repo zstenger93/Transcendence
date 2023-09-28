@@ -33,6 +33,9 @@ services:
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PG_ADMIN_MAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PG_ADMIN_PW}
     depends_on:
       - postgres
     ports:
