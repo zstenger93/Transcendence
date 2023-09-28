@@ -29,8 +29,6 @@
 
 docker-compose.dev.yaml for development
 
-docker-compose.yaml for deployment
-
 Services:
 
 	postgreSQL
@@ -40,6 +38,15 @@ Services:
 	frontend
 
 	backend
+
+docker-compose.yaml for deployment
+
+
+Services:
+
+	postgreSQL
+
+	transcendence
 
 ---
 
