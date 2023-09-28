@@ -32,6 +32,9 @@ services:
       - postgres
       - backend
       - frontend
+    build:
+      context: .
+      dockerfile: 
     env_file:
       - .env
     restart: unless-stopped
