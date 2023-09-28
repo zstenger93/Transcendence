@@ -5,9 +5,9 @@ services:
     image: postgres:15
     container_name: postgres
     environment:
-      DATABASE_NAME: ${DBNAME}
-      DATABASE_USER: ${DBUSER}
-      DATABASE_USER_PW: ${DBUSERPW}
+      POSTGRES_USER: ${DBUSER}
+      POSTGRES_PASSWORD: ${DBUSERPW}
+      POSTGRES_DB: ${DBNAME}
     env_file:
       - .env
     restart: unless-stopped

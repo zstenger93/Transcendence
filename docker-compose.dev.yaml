@@ -5,6 +5,10 @@ services:
   postgres:
     image: postgres:15
     container_name: postgres
+    environment:
+      POSTGRES_USER: ${DBUSER}
+      POSTGRES_PASSWORD: ${DBUSERPW}
+      POSTGRES_DB: ${DBNAME}
     env_file:
       - .env
     expose:
