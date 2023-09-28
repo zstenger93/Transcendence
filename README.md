@@ -1,8 +1,8 @@
+<img align=center src="https://github.com/zstenger93/Transcendence/blob/master/images/transcendence.webp">
+
 <h1 align="center">📖 TRANSCENDENCE</h1>
 
 <h2 align="center">A group project to create a fully functional website with a</br>TypeScript framework for frontend</br>NestJS for backend</br>postgreSQL for database.</br>It will be a single-page application</h2>
-
-<img align=center src="https://github.com/zstenger93/Transcendence/blob/master/images/transcendence.webp">
 
 ---
 
