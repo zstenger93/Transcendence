@@ -27,7 +27,7 @@
 ---
 ## Setup
 
-docker-compose
+docker-compose.dev.yaml for development
 
 Services:
 
@@ -38,6 +38,15 @@ Services:
 	frontend
 
 	backend
+
+docker-compose.yaml for deployment
+
+
+Services:
+
+	postgreSQL
+
+	transcendence
 
 ---
 
