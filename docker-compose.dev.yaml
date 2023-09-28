@@ -12,9 +12,9 @@ services:
     env_file:
       - .env
     expose:
-      - 5432
+      - ${POSTPORT}
     ports:
-      - "5432:5432"
+      - ${POSTPORT}:${POSTPORT}
     restart: unless-stopped
 
   backend:
@@ -43,7 +43,7 @@ services:
     depends_on:
       - postgres
     ports:
-      - "5050:80"
+      - ${PGPORT1}:${PGPORT2}
     env_file:
       - .env
     restart: unless-stopped
