@@ -102,8 +102,43 @@ Not done: :x:
 
 Basic structure :white_check_mark:
 
-First mindmap :x:
+First mindmap :white_check_mark:
 
 Docker files for services :x:
 
-docker-compose :x:
+docker-compose.dev :x:
+
+hased passwords :x:
+
+using OAuth system from 42 :x:
+
+setting unique username :x:
+
+uploading an avatar for user :x:
+
+option to enable 2FA auth :x:
+
+friend list and their status :x:
+
+user stats of wins, losses etc.. :x:
+
+match history from games :x:
+
+user being able to create private, protected and public channels :x:
+
+be able to block and unblock other users :x:
+
+able to invite other users to play a game :x:
+
+accessing other users profile :x:
+
+playing live games on the site :x:
+
+matchmaking system :x:
+
+faithful to the original pong game :x:
+
+custom options for the game :x:
+
+the game must be responsive :x:
+
