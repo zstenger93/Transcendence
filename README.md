@@ -96,9 +96,7 @@ our braincells
 
 ## TODO
 
-Done: :white_check_mark:
-
-Not done: :x:
+Done: :white_check_mark: Not done: :x:
 
 Basic structure :white_check_mark:
 
