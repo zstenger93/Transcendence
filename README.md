@@ -100,7 +100,7 @@ Done: :white_check_mark: Not done: :x:
 
 Basic structure :white_check_mark:
 
-Backend structure setup
+Backend structure setup :x:
 
 First mindmap :white_check_mark:
 
