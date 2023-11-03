@@ -96,14 +96,49 @@ our braincells
 
 ## TODO
 
-Done: :white_check_mark:
-
-Not done: :x:
+Done: :white_check_mark: Not done: :x:
 
 Basic structure :white_check_mark:
 
-First mindmap :x:
+Backend structure setup :x:
+
+First mindmap :white_check_mark:
 
 Docker files for services :x:
 
-docker-compose :x:
+docker-compose.dev :x:
+
+Hased passwords :x:
+
+Using OAuth system from 42 :x:
+
+Setting unique username :x:
+
+Uploading an avatar for user :x:
+
+Option to enable 2FA auth :x:
+
+Friend list and their status :x:
+
+User stats of wins, losses etc.. :x:
+
+Match history from games :x:
+
+User being able to create private, protected and public channels :x:
+
+Be able to block and unblock other users :x:
+
+Able to invite other users to play a game :x:
+
+Accessing other users profile :x:
+
+Playing live games on the site :x:
+
+Matchmaking system :x:
+
+Faithful to the original pong game :x:
+
+Custom options for the game :x:
+
+The game must be responsive :x:
+
