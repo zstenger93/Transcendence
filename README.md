@@ -90,7 +90,7 @@ our braincells
 
 ## MindMap
 
-<img align=center src="https://github.com/zstenger93/Transcendence/blob/master/images/mindmap.png">
+<img align=center src="https://github.com/zstenger93/Transcendence/blob/master/images/sudo_transcEND.png">
 
 ---
 
