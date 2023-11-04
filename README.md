@@ -8,7 +8,9 @@
 
 ## Menu
 
-[Docker Setup](#setup)
+[MindMap](#mindmap)
+
+[Setup](#setup)
 
 [DataBase](#database)
 
@@ -22,11 +24,15 @@
 
 [Resources](#resources)
 
-[MindMap](#mindmap)
-
 [TODO](#todo)
 
 [Modules Used](#modules_used)
+
+---
+
+## MindMap
+
+<img align=center src="https://github.com/zstenger93/Transcendence/blob/master/images/sudo_transcEND.png">
 
 ---
 ## Setup
@@ -85,12 +91,6 @@ PONG
 ## Resources
 
 our braincells
-
----
-
-## MindMap
-
-<img align=center src="https://github.com/zstenger93/Transcendence/blob/master/images/sudo_transcEND.png">
 
 ---
 
