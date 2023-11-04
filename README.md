@@ -2,13 +2,15 @@
 
 <h1 align="center">📖 TRANSCENDENCE</h1>
 
-<h2 align="center">A group project to create a fully functional website with a</br>TypeScript framework for frontend</br>NestJS for backend</br>postgreSQL for database.</br>It will be a single-page application</h2>
+<h2 align="center">A group project to create a fully functional website with front and backend.</br>It will be a single-page application</h2>
 
 ---
 
 ## Menu
 
-[Docker Setup](#setup)
+[MindMap](#mindmap)
+
+[Setup](#setup)
 
 [DataBase](#database)
 
@@ -22,33 +24,37 @@
 
 [Resources](#resources)
 
-[MindMap](#mindmap)
-
 [TODO](#todo)
+
+[Modules Used](#modules_used)
+
+---
+
+## MindMap
+
+<img align=center src="https://github.com/zstenger93/Transcendence/blob/master/images/sudo_transcEND.png">
 
 ---
 ## Setup
 
 docker-compose.dev.yaml for development
 
-Services:
+- Services:
 
-	postgreSQL
+	- postgreSQL
 
-	pgAdmin
+	- frontend
 
-	frontend
+	- backend
 
-	backend
+	- na
 
 docker-compose.yaml for deployment
 
 
-Services:
+- Services:
 
-	postgreSQL
-
-	transcendence
+	- transcendence
 
 ---
 
@@ -60,17 +66,17 @@ postgreSQL
 
 ## Frontend
 
-Any TypeScript based
+
 
 ---
 
 ## Backend
 
-NestJS
+
 
 ---
 
-## Game
+## Original Game
 
 PONG
 
@@ -78,7 +84,7 @@ PONG
 
 ## Chat
 
-?
+
 
 ---
 
@@ -88,17 +94,13 @@ our braincells
 
 ---
 
-## MindMap
-
-<img align=center src="https://github.com/zstenger93/Transcendence/blob/master/images/mindmap.png">
-
----
-
 ## TODO
 
 Done: :white_check_mark: Not done: :x:
 
 Basic structure :white_check_mark:
+
+Backend structure setup :x:
 
 First mindmap :white_check_mark:
 
@@ -106,37 +108,80 @@ Docker files for services :x:
 
 docker-compose.dev :x:
 
-hased passwords :x:
+Hased passwords :x:
 
-using OAuth system from 42 :x:
+Using OAuth system from 42 :x:
 
-setting unique username :x:
+Setting unique username :x:
 
-uploading an avatar for user :x:
+Uploading an avatar for user :x:
 
-option to enable 2FA auth :x:
+Option to enable 2FA auth :x:
 
-friend list and their status :x:
+Friend list and their status :x:
 
-user stats of wins, losses etc.. :x:
+User stats of wins, losses etc.. :x:
 
-match history from games :x:
+Match history from games :x:
 
-user being able to create private, protected and public channels :x:
+User being able to create private, protected and public channels :x:
 
-be able to block and unblock other users :x:
+Be able to block and unblock other users :x:
 
-able to invite other users to play a game :x:
+Able to invite other users to play a game :x:
 
-accessing other users profile :x:
+Accessing other users profile :x:
 
-playing live games on the site :x:
+Playing live games on the site :x:
 
-matchmaking system :x:
+Matchmaking system :x:
 
-faithful to the original pong game :x:
+Faithful to the original pong game :x:
 
-custom options for the game :x:
+Custom options for the game :x:
 
-the game must be responsive :x:
+The game must be responsive :x:
 
+
+## Modules Used
+
+16 Major module
+
+11 Minor module
+
+- **Web**
+	- *Major module*: Use a framework as backend :x:
+	- *Minor module*: Use a front-end framework or toolkit :x:
+	- *Minor module*: Use a database for the backend :x:
+	- *Major module*: Store the score of a tournament in the Blockchain :x:
+- **User Management**
+	- *Major module*: Standard user management, authentication, users across tournaments :x:
+	- *Major module*: Implementing a remote authentication :x:
+- **Gameplay and User Experience**
+	- *Major module*: Remote players :x:
+	- *Major module*: Multiplayer (more than 2) :x:
+	- *Major module*: Add Another Game with User History and Matchmaking :x:
+	- *Minor module*: Game customization options :x:
+	- *Major module*: Live chat :x:
+- **AI-Algo**
+	- *Major module*: Introduce an AI opponent :x:
+	- *Minor module*: User and game stats dashboard :x:
+- **Cybersecurity**
+	- *Major module*: Implement WAF/ModSecurity with Hardened Configuration and HashiCorp Vault for Secrets Management :x:
+	- *Minor module*: GDPR Compliance Options with User Anonymization, Local Data Management, and Account Deletion :x:
+	- *Major module*: Implement Two-Factor Authentication (2FA) and JWT :x:
+- **Devops**
+	- *Major module*: Infrastructure Setup for Log Management :x:
+	- *Minor module*: Monitoring system :x:
+	- *Major module*: Designing the Backend as Microservices :x:
+- **Graphics**
+	- *Major module*: Use advanced 3D techniques :x:
+- **Accessibility**
+	- *Minor module*: Support on all devices :x:
+	- *Minor module*: Expanding browser compatibility :x:
+	- *Minor module*: Multiple language support :x:
+	- *Minor module*: Add accessibility for visually impaired users :x:
+	- *Minor module*: Server-side rendering (SSR) integration :x:
+- **Object Oriented**
+	- *Major module*: Replacing Basic Pong with Server-Side Pong and Implementing an API :x:
+	- *Major module*: Enabling Pong Gameplay via CLI against Web Users with API Integration :x:
