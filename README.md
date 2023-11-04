@@ -2,7 +2,7 @@
 
 <h1 align="center">📖 TRANSCENDENCE</h1>
 
-<h2 align="center">A group project to create a fully functional website with a</br>TypeScript framework for frontend</br>NestJS for backend</br>postgreSQL for database.</br>It will be a single-page application</h2>
+<h2 align="center">A group project to create a fully functional website with front and backend.</br>It will be a single-page application</h2>
 
 ---
 
@@ -26,29 +26,29 @@
 
 [TODO](#todo)
 
+[Modules Used](#modules)
+
 ---
 ## Setup
 
 docker-compose.dev.yaml for development
 
-Services:
+- Services:
 
-	postgreSQL
+	- postgreSQL
 
-	pgAdmin
+	- frontend
 
-	frontend
+	- backend
 
-	backend
+	- na
 
 docker-compose.yaml for deployment
 
 
-Services:
+- Services:
 
-	postgreSQL
-
-	transcendence
+	- transcendence
 
 ---
 
@@ -60,17 +60,17 @@ postgreSQL
 
 ## Frontend
 
-Any TypeScript based
+
 
 ---
 
 ## Backend
 
-NestJS
+
 
 ---
 
-## Game
+## Original Game
 
 PONG
 
@@ -78,7 +78,7 @@ PONG
 
 ## Chat
 
-?
+
 
 ---
 
@@ -142,3 +142,42 @@ Custom options for the game :x:
 
 The game must be responsive :x:
 
+
+## Modules
+
+- Web
+	- <u>Major module</u>: Use a framework as backend
+	- <u>Minor module</u>: Use a front-end framework or toolkit
+	- <u>Minor module</u>: Use a database for the backend
+	- <u>Major module</u>: Store the score of a tournament in the Blockchain
+- User Management
+	- <u>Major module</u>: Standard user management, authentication, users across tournaments
+	- <u>Major module</u>: Implementing a remote authentication
+- Gameplay and User Experience
+	- <u>Major module</u>: Remote players
+	- <u>Major module</u>: Multiplayer (more than 2)
+	- <u>Major module</u>: Add Another Game with User History and Matchmaking
+	- <u>Minor module</u>: Game customization options
+	- <u>Major module</u>: Live chat
+- AI-Algo
+	- <u>Major module</u>: Introduce an AI opponent
+	- <u>Minor module</u>: User and game stats dashboard
+- Cybersecurity
+	- <u>Major module</u>: Implement WAF/ModSecurity with Hardened Configuration and HashiCorp Vault for Secrets Management
+	- <u>Minor module</u>: GDPR Compliance Options with User Anonymization, Local Data Management, and Account Deletion
+	- <u>Major module</u>: Implement Two-Factor Authentication (2FA) and JWT
+- Devops
+	- <u>Major module</u>: Infrastructure Setup for Log Management
+	- <u>Minor module</u>: Monitoring system
+	- <u>Major module</u>: Designing the Backend as Microservices
+- Graphics
+	- <u>Major module</u>: Use advanced 3D techniques
+- Accessibility
+	- <u>Minor module</u>: Support on all devices
+	- <u>Minor module</u>: Expanding browser compatibility
+	- <u>Minor module</u>: Multiple language support
+	- <u>Minor module</u>: Add accessibility for visually impaired users
+	- <u>Minor module</u>: Server-side rendering (SSR) integration
+- Object Oriented
+	- <u>Major module</u>: Replacing Basic Pong with Server-Side Pong and Implementing an API
+	- <u>Major module</u>: Enabling Pong Gameplay via CLI against Web Users with API Integration
