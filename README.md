@@ -149,39 +149,39 @@ The game must be responsive :x:
 
 11 Minor module
 
-- Web
-	- <u>Major module</u>: Use a framework as backend :x:
-	- <u>Minor module</u>: Use a front-end framework or toolkit :x:
-	- <u>Minor module</u>: Use a database for the backend :x:
-	- <u>Major module</u>: Store the score of a tournament in the Blockchain :x:
-- User Management
-	- <u>Major module</u>: Standard user management, authentication, users across tournaments :x:
-	- <u>Major module</u>: Implementing a remote authentication :x:
-- Gameplay and User Experience
-	- <u>Major module</u>: Remote players :x:
-	- <u>Major module</u>: Multiplayer (more than 2) :x:
-	- <u>Major module</u>: Add Another Game with User History and Matchmaking :x:
-	- <u>Minor module</u>: Game customization options :x:
-	- <u>Major module</u>: Live chat :x:
-- AI-Algo
-	- <u>Major module</u>: Introduce an AI opponent :x:
-	- <u>Minor module</u>: User and game stats dashboard :x:
-- Cybersecurity
-	- <u>Major module</u>: Implement WAF/ModSecurity with Hardened Configuration and HashiCorp Vault for Secrets Management :x:
-	- <u>Minor module</u>: GDPR Compliance Options with User Anonymization, Local Data Management, and Account Deletion :x:
-	- <u>Major module</u>: Implement Two-Factor Authentication (2FA) and JWT :x:
-- Devops
-	- <u>Major module</u>: Infrastructure Setup for Log Management :x:
-	- <u>Minor module</u>: Monitoring system :x:
-	- <u>Major module</u>: Designing the Backend as Microservices :x:
-- Graphics
-	- <u>Major module</u>: Use advanced 3D techniques :x:
-- Accessibility
-	- <u>Minor module</u>: Support on all devices :x:
-	- <u>Minor module</u>: Expanding browser compatibility :x:
-	- <u>Minor module</u>: Multiple language support :x:
-	- <u>Minor module</u>: Add accessibility for visually impaired users :x:
-	- <u>Minor module</u>: Server-side rendering (SSR) integration :x:
-- Object Oriented
-	- <u>Major module</u>: Replacing Basic Pong with Server-Side Pong and Implementing an API :x:
-	- <u>Major module</u>: Enabling Pong Gameplay via CLI against Web Users with API Integration :x:
+- **Web**
+	- *Major module*: Use a framework as backend :x:
+	- *Minor module*: Use a front-end framework or toolkit :x:
+	- *Minor module*: Use a database for the backend :x:
+	- *Major module*: Store the score of a tournament in the Blockchain :x:
+- **User Management**
+	- *Major module*: Standard user management, authentication, users across tournaments :x:
+	- *Major module*: Implementing a remote authentication :x:
+- **Gameplay and User Experience**
+	- *Major module*: Remote players :x:
+	- *Major module*: Multiplayer (more than 2) :x:
+	- *Major module*: Add Another Game with User History and Matchmaking :x:
+	- *Minor module*: Game customization options :x:
+	- *Major module*: Live chat :x:
+- **AI-Algo**
+	- *Major module*: Introduce an AI opponent :x:
+	- *Minor module*: User and game stats dashboard :x:
+- **Cybersecurity**
+	- *Major module*: Implement WAF/ModSecurity with Hardened Configuration and HashiCorp Vault for Secrets Management :x:
+	- *Minor module*: GDPR Compliance Options with User Anonymization, Local Data Management, and Account Deletion :x:
+	- *Major module*: Implement Two-Factor Authentication (2FA) and JWT :x:
+- **Devops**
+	- *Major module*: Infrastructure Setup for Log Management :x:
+	- *Minor module*: Monitoring system :x:
+	- *Major module*: Designing the Backend as Microservices :x:
+- **Graphics**
+	- *Major module*: Use advanced 3D techniques :x:
+- **Accessibility**
+	- *Minor module*: Support on all devices :x:
+	- *Minor module*: Expanding browser compatibility :x:
+	- *Minor module*: Multiple language support :x:
+	- *Minor module*: Add accessibility for visually impaired users :x:
+	- *Minor module*: Server-side rendering (SSR) integration :x:
+- **Object Oriented**
+	- *Major module*: Replacing Basic Pong with Server-Side Pong and Implementing an API :x:
+	- *Major module*: Enabling Pong Gameplay via CLI against Web Users with API Integration :x:
