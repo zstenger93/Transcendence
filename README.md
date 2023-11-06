@@ -2,7 +2,7 @@
 
 <h1 align="center">📖 TRANSCENDENCE</h1>
 
-<h2 align="center">A group project to create a fully functional website with front and backend.</br>It will be a single-page application</h2>
+<h2 align="center">Creating a fully functional website with front and backend.</br>A single-page application</h2>
 
 ---
 
