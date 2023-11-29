@@ -2,7 +2,7 @@
 
 <h1 align="center">📖 TRANSCENDENCE</h1>
 
-<h2 align="center">Creating a fully functional website with front and backend.</br>A single-page application</h2>
+<h2 align="center">A group project to create a fully functional website with front and backend.</br>It will be a single-page application</h2>
 
 ---
 
@@ -72,7 +72,29 @@ postgreSQL
 
 ## Backend
 
-
+- Microservices
+	- Game
+		- Normal mode
+		- Mode with extra features
+			- Balanced matchmaking
+			- Optimized responsiveness
+			- Gamplay statistics
+			- Secure data storing
+	- AI opponent
+	- Acessibility features
+		- More browser support
+		- Multiple language support
+	- Security tools
+	- Chat
+		- Direct messages
+		- Access to profiles
+		- Sending invite to play
+		- Let players know who is next in line
+	- Statistics
+		- Win rate
+		- Score
+		- Match amount against players
+		- etc
 
 ---
 
@@ -98,6 +120,8 @@ our braincells
 
 Done: :white_check_mark: Not done: :x:
 
+Plan everything as a microservice :x:
+
 Basic structure :white_check_mark:
 
 Backend structure setup :x:
@@ -108,7 +132,7 @@ Docker files for services :x:
 
 docker-compose.dev :x:
 
-Hased passwords :x:
+Hashed passwords :x:
 
 Using OAuth system from 42 :x:
 
