@@ -30,6 +30,10 @@
 
 ---
 
+## Github Project
+
+https://github.com/users/zstenger93/projects/2
+
 ## MindMap
 
 <img align=center src="https://github.com/zstenger93/Transcendence/blob/master/images/sudo_transcEND.png">
