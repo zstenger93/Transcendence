@@ -30,9 +30,7 @@
 
 ---
 
-## Github Project
-
-https://github.com/users/zstenger93/projects/2
+## [Github Project](https://github.com/users/zstenger93/projects/2)
 
 ## MindMap
 
