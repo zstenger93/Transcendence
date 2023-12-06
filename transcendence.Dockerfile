@@ -16,11 +16,11 @@ RUN		cd .. && rm -f Python-3.12.0
 EXPOSE 8000
 
 RUN apt install python3.11-venv -y
-RUN python3 -m venv venv
-RUN source venv/bin/activate
-RUN pip install --no-cache-dir -r requirements.txt
+# RUN python3 -m venv venv
+# RUN source venv/bin/activate
+# RUN pip install --no-cache-dir -r requirements.txt
 
-# CMD ["tail", "-f", "/dev/null"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 
 # TO RUN 
