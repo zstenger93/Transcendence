@@ -11,6 +11,5 @@ services:
       - /Users/zstenger/Desktop/42/Transcendence:/app/
     ports:
       - 8000:8000
-    restart: unless-stopped
-    entrypoint: /bin/bash
-    command: -c "while true; do sleep 1; done"
+    # restart: unless-stopped
+    entrypoint: /app/start.sh

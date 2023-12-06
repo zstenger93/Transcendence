@@ -18,8 +18,18 @@ EXPOSE 8000
 
 RUN apt install python3.11-venv -y
 RUN python3 -m venv venv
+
+RUN /bin/bash -c "source venv/bin/activate && pip install --no-cache-dir django"
+
+
 RUN /bin/bash -c "source venv/bin/activate && echo 'source TranscEND/venv/bin/activate' >> /root/.bashrc"
-# RUN pip install --no-cache-dir -r requirements.txt
+
+COPY start.sh /app/
+
+RUN chmod +x /app/start.sh
+
+ENTRYPOINT ["bash", "/app/start.sh"]
+CMD ["python", "/app/TranscEND/manage.py", "runserver", "0.0.0.0:8000"]
 
 # CMD ["tail", "-f", "/dev/null"]
 
