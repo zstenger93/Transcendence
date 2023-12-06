@@ -30,6 +30,8 @@
 
 ---
 
+## [Github Project](https://github.com/users/zstenger93/projects/2)
+
 ## MindMap
 
 <img align=center src="https://github.com/zstenger93/Transcendence/blob/master/images/sudo_transcEND.png">
@@ -37,24 +39,18 @@
 ---
 ## Setup
 
-docker-compose.dev.yaml for development
 
-- Services:
+- docker-compose.dev.yaml for deployment
 
-	- postgreSQL
-
-	- frontend
-
-	- backend
-
-	- na
-
-docker-compose.yaml for deployment
-
-
-- Services:
-
-	- transcendence
+- docker-compose.yaml for deployment
+	- Installs python and other required packages
+	- Installs and sets venv
+	- Installs django
+	- Echoes the venv activation to bashrc
+	- Copies the starting script to the image
+	- Exposes the port
+	- Entrypoint
+	- CMD to run
 
 ---
 
