@@ -15,6 +15,7 @@ RUN		cd .. && rm -f Python-3.12.0
 
 EXPOSE 8000
 
+
 RUN apt install python3.11-venv -y
 RUN python3 -m venv venv
 RUN /bin/bash -c "source venv/bin/activate && echo 'source TranscEND/venv/bin/activate' >> /root/.bashrc"
