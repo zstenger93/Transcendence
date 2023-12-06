@@ -20,12 +20,14 @@ RUN python3 -m venv venv
 RUN /bin/bash -c "source venv/bin/activate && echo 'source TranscEND/venv/bin/activate' >> /root/.bashrc"
 # RUN pip install --no-cache-dir -r requirements.txt
 
+# CMD ["tail", "-f", "/dev/null"]
+
 # CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 
 # TO RUN 
 
-# docker build -t transcend -f transcendence.Dockerfile .
+# docker build -t transcend -f TranscEND.Dockerfile .
 
 # docker run -v ${PWD}:/app/ -it transcend bash
 

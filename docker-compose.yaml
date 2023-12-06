@@ -1,11 +1,14 @@
-version: '3.7'
+version: '3.8'
 
 # for deployment
 
 services:
-  web:
+  app:
     build:
       context: .
-      dockerfile: transcendence.Dockerfile
+      dockerfile: TranscEND.Dockerfile
+    volumes:
+      - /Users/zstenger/Desktop/42/Transcendence/TranscEND:/app/
     ports:
-      - "8000:8000"
+      - 8000:8000
+    restart: unless-stopped
