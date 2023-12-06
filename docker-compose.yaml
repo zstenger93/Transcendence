@@ -8,8 +8,8 @@ services:
       context: .
       dockerfile: TranscEND.Dockerfile
     volumes:
-      - /Users/jergashe/Documents/projects/all_transcendence/Transcendence:/app/
-      # - /Users/zstenger/Desktop/42/Transcendence:/app/
+      # - /Users/jergashe/Documents/projects/all_transcendence/Transcendence:/app/
+      - /Users/zstenger/Desktop/42/Transcendence:/app/
     ports:
       - 8000:8000
     # restart: unless-stopped
