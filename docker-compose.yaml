@@ -1,25 +1,15 @@
-version: '3.7'
+version: '3.8'
 
 # for deployment
 
 services:
-  postgres:
-    image: postgres:15
-    container_name: postgres
-    environment:
-      POSTGRES_USER: ${DBUSER}
-      POSTGRES_PASSWORD: ${DBUSERPW}
-      POSTGRES_DB: ${DBNAME}
-    env_file:
-      - .env
-    restart: unless-stopped
-
-  transcendence:
-    image: transcendence
-    container_name: transcendence
+  app:
     build:
       context: .
-      dockerfile: ./src/docker/transcendence.Dockerfile
-    env_file:
-      - .env
-    restart: unless-stopped
+      dockerfile: TranscEND.Dockerfile
+    volumes:
+      - ${PWD}:/app/
+    ports:
+      - 8000:8000
+    # restart: unless-stopped
+    entrypoint: /app/start.sh

@@ -1,4 +1,5 @@
 *.vscode
 *.env
-*.pdf
+*venv
 *.DS_Store
+*Transcend/venv
