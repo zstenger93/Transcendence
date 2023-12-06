@@ -16,11 +16,11 @@ RUN		cd .. && rm -f Python-3.12.0
 EXPOSE 8000
 
 RUN apt install python3.11-venv -y
-# RUN python3 -m venv venv
-# RUN source venv/bin/activate
+RUN python3 -m venv venv
+RUN /bin/bash -c "source venv/bin/activate && echo 'source TranscEND/venv/bin/activate' >> /root/.bashrc"
 # RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 
 # TO RUN 
@@ -28,3 +28,5 @@ CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 # docker build -t transcend -f transcendence.Dockerfile .
 
 # docker run -v ${PWD}:/app/ -it transcend bash
+
+# docker run -v ${PWD}:/app/ -p 8000:8000 --name TranscEND -it transcend bash
