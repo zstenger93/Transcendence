@@ -3,4 +3,4 @@
 *venv
 *.DS_Store
 *Transcend/venv
-*__pycache__
+*TranscEND/TranscEND/__pycache__
