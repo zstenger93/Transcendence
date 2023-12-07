@@ -3,13 +3,25 @@ version: '3.8'
 # for deployment
 
 services:
-  app:
+  frontend:
     build:
       context: .
-      dockerfile: TranscEND.Dockerfile
+      dockerfile: frontend.Dockerfile
     volumes:
       - ${PWD}:/app/
     ports:
       - 8000:8000
-    # restart: unless-stopped
-    entrypoint: /app/start.sh
+    restart: unless-stopped
+    entrypoint: /app/frontend.sh
+    depends_on:
+      - backend
+  backend:
+    build:
+      context: .
+      dockerfile: backend.Dockerfile
+    volumes:
+      - ${PWD}:/app/
+    ports:
+      - 8080:8000
+    restart: unless-stopped
+    entrypoint: /app/backend.sh
