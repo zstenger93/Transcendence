@@ -16,19 +16,10 @@ RUN apt install python3.11-venv -y && \
     pip install --no-cache-dir django && \
     echo 'source /app/venv/bin/activate' >> /root/.bashrc
 
-COPY frontend.sh /app/
-RUN chmod +x /app/frontend.sh
+COPY docker/backend/backend.sh /app/
+RUN chmod +x /app/backend.sh
 
 EXPOSE 8000
 
-ENTRYPOINT ["bash", "/app/frontend.sh"]
-CMD ["python", "/app/frontend/manage.py", "runserver", "0.0.0.0:8000"]
-
-
-# TO RUN 
-
-# docker build -t transcend -f TranscEND.Dockerfile .
-
-# docker run -v ${PWD}:/app/ -it transcend bash
-
-# docker run -v ${PWD}:/app/ -p 8000:8000 --name TranscEND -it transcend bash
+ENTRYPOINT ["bash", "/app/backend.sh"]
+CMD ["python", "/app/backend/manage.py", "runserver", "0.0.0.0:8000"]
