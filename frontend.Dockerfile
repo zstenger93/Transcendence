@@ -16,13 +16,13 @@ RUN apt install python3.11-venv -y && \
     pip install --no-cache-dir django && \
     echo 'source /app/venv/bin/activate' >> /root/.bashrc
 
-COPY start.sh /app/
-RUN chmod +x /app/start.sh
+COPY frontend.sh /app/
+RUN chmod +x /app/frontend.sh
 
 EXPOSE 8000
 
-ENTRYPOINT ["bash", "/app/start.sh"]
-CMD ["python", "/app/TranscEND/manage.py", "runserver", "0.0.0.0:8000"]
+ENTRYPOINT ["bash", "/app/frontend.sh"]
+CMD ["python", "/app/frontend/manage.py", "runserver", "0.0.0.0:8000"]
 
 
 # TO RUN 
