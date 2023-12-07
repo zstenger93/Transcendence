@@ -4,24 +4,26 @@ version: '3.8'
 
 services:
   frontend:
+    container_name: frontend
     build:
       context: .
-      dockerfile: frontend.Dockerfile
+      dockerfile: docker/frontend/frontend.Dockerfile
     volumes:
       - ${PWD}:/app/
     ports:
       - 8000:8000
     restart: unless-stopped
-    entrypoint: /app/frontend.sh
+    entrypoint: /app/docker/frontend/frontend.sh
     depends_on:
       - backend
   backend:
+    container_name: backend
     build:
       context: .
-      dockerfile: backend.Dockerfile
+      dockerfile: docker/backend/backend.Dockerfile
     volumes:
       - ${PWD}:/app/
     ports:
       - 8080:8000
     restart: unless-stopped
-    entrypoint: /app/backend.sh
+    entrypoint: /app/docker/backend/backend.sh
