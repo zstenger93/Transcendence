@@ -1,6 +1,19 @@
+# IDE files
 *.vscode
+*.DS_Store
+
+# Ignore local and virtual environment variables
 *.env
 *venv
-*.DS_Store
-*Transcend/venv
-*TranscEND/TranscEND/__pycache__
+
+# Logs and databases
+*.log
+*.sql
+
+# Locale development
+*__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
