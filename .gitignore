@@ -17,3 +17,6 @@
 *.pyd
 *.db
 *.sqlite3
+
+# Frontend
+/dist/
