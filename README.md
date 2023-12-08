@@ -39,10 +39,16 @@
 ---
 ## Setup
 
+- docker-compose.dev.yaml (later)
 
-- docker-compose.dev.yaml for deployment
+- docker-compose.yaml
+	- backend
+		- each microservice is an app
+	- frontend
+		- Jabbascript
 
-- docker-compose.yaml for deployment
+
+- images
 	- Installs python and other required packages
 	- Installs and sets venv
 	- Installs django
@@ -51,7 +57,6 @@
 	- Exposes the port
 	- Entrypoint
 	- CMD to run
-
 ---
 
 ## DataBase
@@ -71,11 +76,11 @@ postgreSQL
 - Microservices
 	- Game
 		- Normal mode
-		- Mode with extra features
-			- Balanced matchmaking
-			- Optimized responsiveness
-			- Gamplay statistics
-			- Secure data storing
+		- Balanced matchmaking
+		- Optimized responsiveness
+		- Gamplay statistics
+		- Secure data storing
+	- Extra game
 	- AI opponent
 	- Acessibility features
 		- More browser support
