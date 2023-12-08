@@ -76,11 +76,11 @@ postgreSQL
 - Microservices
 	- Game
 		- Normal mode
-		- Mode with extra features
-			- Balanced matchmaking
-			- Optimized responsiveness
-			- Gamplay statistics
-			- Secure data storing
+		- Balanced matchmaking
+		- Optimized responsiveness
+		- Gamplay statistics
+		- Secure data storing
+	- Extra game
 	- AI opponent
 	- Acessibility features
 		- More browser support
