@@ -27,27 +27,24 @@
 ---
 ## Setup
 
-docker-compose.dev.yaml for development
+- docker-compose.dev.yaml (later)
 
-Services:
-
-	postgreSQL
-
-	pgAdmin
-
-	frontend
-
-	backend
-
-docker-compose.yaml for deployment
+- docker-compose.yaml
+	- backend
+		- each microservice is an app
+	- frontend
+		- Jabbascript
 
 
-Services:
-
-	postgreSQL
-
-	transcendence
-
+- images
+	- Installs python and other required packages
+	- Installs and sets venv
+	- Installs django
+	- Echoes the venv activation to bashrc
+	- Copies the starting script to the image
+	- Exposes the port
+	- Entrypoint
+	- CMD to run
 ---
 
 ## DataBase
