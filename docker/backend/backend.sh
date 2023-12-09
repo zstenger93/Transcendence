@@ -5,4 +5,6 @@ python3 -m venv venv
 source venv/bin/activate
 pip install --no-cache-dir django
 echo 'source /app/venv/bin/activate' >> /root/.bashrc
-python3 manage.py runserver 0.0.0.0:8000
+
+echo "Starting Django Server, Enjoy!"
+python /app/backend/manage.py runserver 0.0.0.0:8000
