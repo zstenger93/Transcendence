@@ -18,12 +18,14 @@ services:
     #   - backend
   backend:
     container_name: backend
+    env_file:
+      - ./.env
     build:
       context: .
       dockerfile: docker/backend/backend.Dockerfile
     volumes:
       - ${PWD}:/app/
     ports:
-      - 8080:8000
+      - 8000:8000
     # restart: unless-stopped
     entrypoint: /app/docker/backend/backend.sh
