@@ -39,6 +39,7 @@ def auth_callback(request):
 
 		auth_response = requests.post("https://api.intra.42.fr/oauth/token", data=data)
 		access_token = auth_response.json()["access_token"]
+		print(access_token)
 		user_response = requests.get("https://api.intra.42.fr/v2/me", headers={"Authorization": f"Bearer {access_token}"})
 		username = user_response.json()["login"]
 		display_name = user_response.json()["displayname"]
@@ -47,7 +48,7 @@ def auth_callback(request):
 		request.session['username'] = username
 		request.session['display_name'] = display_name
 		request.session['email'] = email
-		return redirect("home")
+		return redirect("home")                                  
 	return HttpResponse("Auth callback Error, bad token maybe!!")
 
 def auth(request):
