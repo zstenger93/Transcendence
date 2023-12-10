@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
+from django.contrib.auth import authenticate, login
 from django.conf import settings
 import requests
 import os
@@ -7,6 +8,8 @@ import urllib
 # Create your views that you will be able to access on website.
 
 def home(request):
+	if not request.session.get('username', False):
+		return redirect('login')
 	username = request.session.get('username', '')
 	display_name = request.session.get('display_name', '')
 	email = request.session.get('email', '')
@@ -17,23 +20,11 @@ def home(request):
 		'email': email,
 	}
 	return render(request, "home.html", context)
-    # return redirect("login")
 
 def login(request):
 	return render(request, "login.html")
 
 def auth_callback(request):
-	"""
-        1. Get authorization code from 42 API
-        2. Get access token from 42 API
-        3. Get user information from 42 API
-        4. Create user if it doesn't exist
-        5. Login user
-        6. Redirect to 2FA page
-	"""
-	if request.user.is_authenticated:
-		return redirect("home")
-
 	if request.method == "GET":
 		code = request.GET.get("code")
 		print(code)
@@ -57,6 +48,7 @@ def auth_callback(request):
 		request.session['display_name'] = display_name
 		request.session['email'] = email
 		return redirect("home")
+	return HttpResponse("Auth callback Error, bad token maybe!!")
 
 def auth(request):
     auth_url = "https://api.intra.42.fr/oauth/authorize"
@@ -66,3 +58,7 @@ def auth(request):
         "response_type": "code",
     }
     return redirect(f"{auth_url}?{urllib.parse.urlencode(params)}")
+
+def logout(request):
+    request.session.flush()
+    return redirect('login')
