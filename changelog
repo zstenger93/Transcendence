@@ -1,6 +1,9 @@
 added environment to docker-compose
 changed compose port to 8000 instead of 8080 for now
 Now we're able to authenticate users and save sessions
+added postgresql to docker-compose
+changed db to postgresql in django
+
 
 why the venv is inside the backend not root, it's causing a lot of problems in testing
 also I have to go inside the machine and make changes so I will have to go the backend 
