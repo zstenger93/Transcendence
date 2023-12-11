@@ -36,6 +36,15 @@
 
 <img align=center src="https://github.com/zstenger93/Transcendence/blob/master/images/sudo_transcEND.png">
 
+
+## Git Flow
+```
+Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices
+     |                          |
+	 |__________ :x: _____________|
+
+```
+
 ---
 ## Setup
 
@@ -48,7 +57,7 @@
 		- Jabbascript
 
 
-- images
+- images (not customized yet for front and back)
 	- Installs python and other required packages
 	- Installs and sets venv
 	- Installs django
@@ -57,6 +66,7 @@
 	- Exposes the port
 	- Entrypoint
 	- CMD to run
+
 ---
 
 ## DataBase
