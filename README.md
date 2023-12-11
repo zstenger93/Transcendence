@@ -38,12 +38,11 @@
 
 
 ## Git Flow
-```
+
 Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices
      |                          |
 	 |__________ :x: _____________|
 
-```
 
 ---
 ## Setup
