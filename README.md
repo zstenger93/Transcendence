@@ -43,6 +43,15 @@ Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices
 .....|.............................................................| <br/>
 .....|________________ :x: ____________________|
 
+## General Explanation
+
+- Base of the project
+	- PostgreSQL
+	- Django backend
+	- Rest for API to connect back and frontend
+	- Frontend with vanilla JavaScript
+- Backend
+- Frontend
 
 ---
 ## Setup
@@ -134,13 +143,13 @@ Plan everything as a microservice :x:
 
 Basic structure :white_check_mark:
 
-Backend structure setup :x:
+Backend structure setup :white_check_mark:
 
 First mindmap :white_check_mark:
 
 Docker files for services :x:
 
-docker-compose.dev :x:
+docker-compose.dev :x: :white_check_mark:
 
 Hashed passwords :x:
 
