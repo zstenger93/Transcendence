@@ -39,8 +39,8 @@
 
 ## Git Flow
 
-Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices
-     |                          |
+Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices <br/>
+     |                           | <br/>
 	 |__________ :x: _____________|
 
 
