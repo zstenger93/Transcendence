@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth import authenticate, login
 from django.conf import settings
+from .models import User
 import requests
 import os
 import urllib
@@ -19,6 +20,7 @@ def home(request):
 		'display_name': display_name,
 		'email': email,
 	}
+
 	return render(request, "home.html", context)
 
 def login(request):
@@ -27,7 +29,6 @@ def login(request):
 def auth_callback(request):
 	if request.method == "GET":
 		code = request.GET.get("code")
-		print(code)
 		data = {
 			"grant_type": "authorization_code",
 			"client_id": os.environ.get("UID"),
@@ -35,16 +36,26 @@ def auth_callback(request):
 			"code": code,
 			"redirect_uri": settings.REDIRECT_URI,
 		}
-		print(data)
 
 		auth_response = requests.post("https://api.intra.42.fr/oauth/token", data=data)
 		access_token = auth_response.json()["access_token"]
 		print(access_token)
 		user_response = requests.get("https://api.intra.42.fr/v2/me", headers={"Authorization": f"Bearer {access_token}"})
+		
 		username = user_response.json()["login"]
 		display_name = user_response.json()["displayname"]
 		email = user_response.json()["email"]
+		picture = user_response.json()["image"]["link"]
 
+		user = User(username=username, display_name=display_name, email=email, picture=picture)
+		user.save()
+
+		print("----------------------------")
+		print(user)
+		users = User.objects.all()
+		print("----------------------------")
+		print(users)
+		print("----------------------------")
 		request.session['username'] = username
 		request.session['display_name'] = display_name
 		request.session['email'] = email
@@ -52,13 +63,13 @@ def auth_callback(request):
 	return HttpResponse("Auth callback Error, bad token maybe!!")
 
 def auth(request):
-    auth_url = "https://api.intra.42.fr/oauth/authorize"
-    params = {
-        "client_id": os.environ.get("UID"),
-        "redirect_uri": settings.REDIRECT_URI,
-        "response_type": "code",
-    }
-    return redirect(f"{auth_url}?{urllib.parse.urlencode(params)}")
+	auth_url = "https://api.intra.42.fr/oauth/authorize"
+	params = {
+		"client_id": os.environ.get("UID"),
+		"redirect_uri": settings.REDIRECT_URI,
+		"response_type": "code",
+	}
+	return redirect(f"{auth_url}?{urllib.parse.urlencode(params)}")
 
 def logout(request):
     request.session.flush()
