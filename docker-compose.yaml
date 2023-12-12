@@ -7,25 +7,25 @@ services:
     container_name: frontend
     build:
       context: .
-      dockerfile: /app/docker/frontend/frontend.Dockerfile
+      dockerfile: docker/frontend/frontend.Dockerfile
     image: transcendence_frontend
     volumes:
       - ${PWD}:/app/
     ports:
-      - 8080:8080
+      - 3000:3000
     restart: unless-stopped
-    entrypoint: /app/docker/frontend/frontend.sh
-  #   depends_on:
-  #     - backend
-  # backend:
-  #   container_name: backend
-  #   build:
-  #     context: .
-  #     dockerfile: docker/backend/backend.Dockerfile
-  #   image: transcendence_backend
-  #   volumes:
-  #     - ${PWD}:/app/
-  #   ports:
-  #     - 8000:8000
-  #   restart: unless-stopped
-  #   entrypoint: /app/docker/backend/backend.sh
+    command: npm start
+    depends_on:
+      - backend
+  backend:
+    container_name: backend
+    build:
+      context: .
+      dockerfile: docker/backend/backend.Dockerfile
+    image: transcendence_backend
+    volumes:
+      - ${PWD}:/app/
+    ports:
+      - 8000:8000
+    restart: unless-stopped
+    entrypoint: /app/docker/backend/backend.sh
