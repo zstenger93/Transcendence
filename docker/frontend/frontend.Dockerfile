@@ -1,20 +1,20 @@
 # Use an official Node.js runtime as a base image
-FROM node:alpine
+FROM node:14-alpine
 
 # Set the working directory in the container
-WORKDIR /usr/src/app
+WORKDIR /app/frontend
 
 # Copy package.json and package-lock.json to the working directory
-COPY frontend/package*.json ./
+COPY package*.json ./
 
 # Install app dependencies
 RUN npm install
 
-# Copy the application files to the container
-COPY frontend/ .
+# Copy the application files to the working directory
+COPY . .
 
-# Expose port 8080
-EXPOSE 8080
+# Expose the port on which the app will run
+EXPOSE 3000
 
-# Command to run the application
-CMD ["node", "App.js"]
+# Define the command to run your app
+CMD ["npm", "start"]
