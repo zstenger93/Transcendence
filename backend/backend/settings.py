@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-ej^v-=x0xri%*-u@r0(+)pbc+onq+^rupromej&wxag1esu(f4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '10.13.7.5']
 
 # Authentication settings
 REDIRECT_URI = "http://localhost:8000/auth_callback"

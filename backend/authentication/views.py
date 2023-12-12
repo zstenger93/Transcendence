@@ -20,7 +20,6 @@ def home(request):
 		'display_name': display_name,
 		'email': email,
 	}
-
 	return render(request, "home.html", context)
 
 def login(request):
@@ -39,7 +38,6 @@ def auth_callback(request):
 
 		auth_response = requests.post("https://api.intra.42.fr/oauth/token", data=data)
 		access_token = auth_response.json()["access_token"]
-		print(access_token)
 		user_response = requests.get("https://api.intra.42.fr/v2/me", headers={"Authorization": f"Bearer {access_token}"})
 		
 		username = user_response.json()["login"]
@@ -50,12 +48,6 @@ def auth_callback(request):
 		user = User(username=username, display_name=display_name, email=email, picture=picture)
 		user.save()
 
-		print("----------------------------")
-		print(user)
-		users = User.objects.all()
-		print("----------------------------")
-		print(users)
-		print("----------------------------")
 		request.session['username'] = username
 		request.session['display_name'] = display_name
 		request.session['email'] = email
