@@ -10,16 +10,9 @@ RUN apt update && \
     apt install python3-pip -y && \
     cd .. && rm -rf Python-3.12.0
 
-RUN apt install python3.11-venv -y && \
-    python3 -m venv venv && \
-    . venv/bin/activate && \
-    pip install --no-cache-dir django && \
-    echo 'source /app/venv/bin/activate' >> /root/.bashrc
-
 COPY docker/backend/backend.sh /app/
 RUN chmod +x /app/backend.sh
 
 EXPOSE 8000
 
-ENTRYPOINT ["bash", "/app/backend.sh"]
 CMD ["python", "/app/backend/manage.py", "runserver", "0.0.0.0:8000"]
