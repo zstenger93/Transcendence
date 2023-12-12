@@ -15,17 +15,17 @@ services:
       - 3000:3000
     restart: unless-stopped
     command: npm start
-    depends_on:
-      - backend
-  backend:
-    container_name: backend
-    build:
-      context: .
-      dockerfile: docker/backend/backend.Dockerfile
-    image: transcendence_backend
-    volumes:
-      - ${PWD}:/app/
-    ports:
-      - 8000:8000
-    restart: unless-stopped
-    entrypoint: /app/docker/backend/backend.sh
+  #   depends_on:
+  #     - backend
+  # backend:
+  #   container_name: backend
+  #   build:
+  #     context: .
+  #     dockerfile: docker/backend/backend.Dockerfile
+  #   image: transcendence_backend
+  #   volumes:
+  #     - ${PWD}:/app/
+  #   ports:
+  #     - 8000:8000
+  #   restart: unless-stopped
+  #   entrypoint: /app/docker/backend/backend.sh
