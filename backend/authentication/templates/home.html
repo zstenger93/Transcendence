@@ -1,0 +1,13 @@
+<h1>home page</h1>
+<p>
+    this page will be the main/home page that has a list of options(games, leaderboard, profile, etc)
+</p>
+
+<p>Username: {{ username }}</p>
+<p>Display Name: {{ display_name }}</p>
+<p>Email: {{ email }}</p>
+
+<form method="POST" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
