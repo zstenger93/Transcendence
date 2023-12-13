@@ -16,8 +16,22 @@ services:
     restart: unless-stopped
     command: npm start
     # depends_on:
+    #   - backend
+    #   - API
+
+  # API:
+  #   container_name: API
+  #   build:
+  #     context: .
+  #     dockerfile: docker/API/API.Dockerfile
+  #   image: transcendence_API
+  #   volumes:
+  #     - ${PWD}:/app/
+  #   ports:
+  #     - 5000:5000
+  #   restart: unless-stopped
+    # depends_on:
       # - backend
-  
   # backend:
   #   container_name: backend
   #   env_file:
@@ -44,3 +58,5 @@ services:
   #     POSTGRES_PASSWORD: transcend_pwd
   #   ports:
   #     - "5432:5432"
+
+
