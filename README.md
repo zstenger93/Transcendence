@@ -36,6 +36,25 @@
 
 <img align=center src="https://github.com/zstenger93/Transcendence/blob/master/images/sudo_transcEND.png">
 
+
+## Git Flow
+
+Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices <br/>
+.....|.............................................................| <br/>
+.....|________________ :x: ____________________|
+
+## [Microservices](https://www.youtube.com/watch?v=y8OnoxKotPQ)
+
+## General Explanation
+
+- Base of the project
+	- PostgreSQL
+	- Django backend
+	- Rest for API to connect back and frontend
+	- Frontend with React
+- Backend
+- Frontend
+
 ---
 ## Setup
 
@@ -44,11 +63,13 @@
 - docker-compose.yaml
 	- backend
 		- each microservice is an app
+	- PostgreSQL database
 	- frontend
-		- Jabbascript
+		- React application
+		- TailwindCss
 
 
-- images
+- images (not customized yet for front and back)
 	- Installs python and other required packages
 	- Installs and sets venv
 	- Installs django
@@ -57,6 +78,7 @@
 	- Exposes the port
 	- Entrypoint
 	- CMD to run
+
 ---
 
 ## DataBase
@@ -67,13 +89,15 @@ postgreSQL
 
 ## Frontend
 
-
+React
+Tailwindcss
 
 ---
 
 ## Backend
 
 - Microservices
+	- Authentication service
 	- Game
 		- Normal mode
 		- Balanced matchmaking
@@ -125,13 +149,13 @@ Plan everything as a microservice :x:
 
 Basic structure :white_check_mark:
 
-Backend structure setup :x:
+Backend structure setup :white_check_mark:
 
 First mindmap :white_check_mark:
 
 Docker files for services :x:
 
-docker-compose.dev :x:
+docker-compose.dev :x: :white_check_mark:
 
 Hashed passwords :x:
 
