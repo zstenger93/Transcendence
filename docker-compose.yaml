@@ -3,21 +3,21 @@ version: '3.8'
 # for deployment
 
 services:
-  # frontend:
-    # container_name: frontend
-    # build:
-    #   context: .
-    #   dockerfile: docker/frontend/frontend.Dockerfile
-    # volumes:
-    #   - ${PWD}:/app/
-    # ports:
-    #   - 8000:8000
-    # restart: unless-stopped
-    # entrypoint: /app/docker/frontend/frontend.sh
-    # depends_on:
-    #   - backend
-
-
+  frontend:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: docker/frontend/frontend.Dockerfile
+    image: transcendence_frontend
+    volumes:
+      - ${PWD}:/app/
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    command: npm start
+    depends_on:
+      - backend
+  
   backend:
     container_name: backend
     env_file:

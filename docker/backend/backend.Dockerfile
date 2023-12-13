@@ -11,7 +11,6 @@ RUN apt update && \
     apt install python3-pip -y && \
     cd .. && rm -rf Python-3.12.0
 
-
 COPY docker/backend/backend.sh /app/
 RUN chmod +x /app/backend.sh
 
