@@ -6,7 +6,6 @@ import requests
 import os
 import urllib
 
-# Create your views that you will be able to access on website.
 
 def home(request):
 	if not request.session.get('username', False):
@@ -14,6 +13,28 @@ def home(request):
 	username = request.session.get('username', '')
 	display_name = request.session.get('display_name', '')
 	email = request.session.get('email', '')
+
+
+# PRINTING
+# ---------------------------------------------------------------
+	# users = User.objects.all()
+	# print("LEN1: ")
+	# print(len(users))
+	# print(users)
+	# for user in users:
+	# 	print(user)
+
+	# print("method: ", request.method, type(request.method))
+	# print("GET: ", request.GET, type(request.GET))
+	# print("POST: ", request.POST, type(request.POST))
+	# print("FILES", request.FILES, type(request.FILES))
+	# print("path: ", request.path, type(request.path))
+	# print("user: ",request.user, type(request.user))
+
+	# print("Type of request:", type(request))
+	# for i in request:
+	# 	print(i)
+# ---------------------------------------------------------------
 
 	context = {
 		'username': username,
@@ -40,13 +61,18 @@ def auth_callback(request):
 		access_token = auth_response.json()["access_token"]
 		user_response = requests.get("https://api.intra.42.fr/v2/me", headers={"Authorization": f"Bearer {access_token}"})
 		
+		id = user_response.json()["id"]
 		username = user_response.json()["login"]
 		display_name = user_response.json()["displayname"]
 		email = user_response.json()["email"]
 		picture = user_response.json()["image"]["link"]
 
-		user = User(username=username, display_name=display_name, email=email, picture=picture)
-		user.save()
+		user = User(id=id, username=username, display_name=display_name, email=email, picture=picture)
+		if user.user_exists() == False:
+			print("\t\t\tNew user has been added!!!")
+			user.save()
+		else:
+			print("\t\t\tUser already exists!!!")
 
 		request.session['username'] = username
 		request.session['display_name'] = display_name
