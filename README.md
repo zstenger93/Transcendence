@@ -51,7 +51,7 @@ Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices
 	- PostgreSQL
 	- Django backend
 	- Rest for API to connect back and frontend
-	- Frontend with vanilla JavaScript
+	- Frontend with React
 - Backend
 - Frontend
 
@@ -63,8 +63,10 @@ Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices
 - docker-compose.yaml
 	- backend
 		- each microservice is an app
+	- PostgreSQL database
 	- frontend
-		- Jabbascript
+		- React application
+		- TailwindCss
 
 
 - images (not customized yet for front and back)
@@ -87,13 +89,15 @@ postgreSQL
 
 ## Frontend
 
-
+React
+Tailwindcss
 
 ---
 
 ## Backend
 
 - Microservices
+	- Authentication service
 	- Game
 		- Normal mode
 		- Balanced matchmaking
