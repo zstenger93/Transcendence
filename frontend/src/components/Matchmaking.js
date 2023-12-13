@@ -1,10 +1,10 @@
 import React from 'react';
 
-function Home() {
+function Matchmaking() {
 	return (
 		<div>
 		</div>
 	);
 }
 
-export default Home;
+export default Matchmaking;
