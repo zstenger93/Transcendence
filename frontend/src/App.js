@@ -6,6 +6,7 @@ import About from './components/About';
 import Welcome from './components/Welcome';
 import Profile from './components/Profile';
 import Matchmaking from './components/Matchmaking';
+import Chat from './components/Chat';
 
 function App() {
 	return (
@@ -21,8 +22,9 @@ function App() {
 							<Navigation />
 							<Routes>
 								<Route path="home" element={<Home />} />
-								<Route path="about" element={<About />} />
+								<Route path="chat" element={<Chat />} />
 								<Route path="matchmaking" element={<Matchmaking />} />
+								<Route path="about" element={<About />} />
 								<Route path="profile" element={<Profile />} />
 								<Route path="/" element={<Navigate to="/home" />} />
 							</Routes>

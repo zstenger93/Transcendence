@@ -35,21 +35,21 @@ const userDetails = {
 
 function FriendsList() {
 	return (
-		<div className="bg-gray-200 p-4 rounded-md max-h-200 overflow-y-auto">
+		<div className="bg-blue-500 bg-opacity-40 p-4 rounded-md max-h-200 overflow-y-auto">
 			<h3 className="text-xl font-bold mb-4 text-center">Friend List</h3>
 			<table className="w-full border-collapse border border-gray-500 mx-auto">
 				<thead>
 					<tr className="bg-gray-300">
 						<th className="p-2 border">Name</th>
-						<th className="p-2 border">Intra Profile</th>
+						<th className="p-2 border text-center">Intra</th>
 					</tr>
 				</thead>
 				<tbody>
 					{friendsListData.map((friend, index) => (
-						<tr key={index}>
+						<tr key={index} className='bg-grey-300'>
 							<td className="p-2 border">{friend.name}</td>
 							<td className="p-2 border text-center">
-								<a href={friend.profileLink} className='text-blue-500 underline' target="_blank" rel="noopener noreferrer">
+								<a href={friend.profileLink} className='text-blue-700 underline' target="_blank" rel="noopener noreferrer">
 									{friend.intra}
 								</a>
 							</td>
@@ -63,7 +63,7 @@ function FriendsList() {
 
 function MatchHistory() {
 	return (
-		<div className="bg-gray-200 p-4 rounded-md max-h-200 overflow-y-auto">
+		<div className="bg-blue-500 bg-opacity-40 p-6 shadow-md rounded-md max-h-200 overflow-y-auto">
 			<h3 className="text-xl font-bold mb-4 text-center">Match History</h3>
 			<table className="w-full border-collapse border border-gray-500 mx-auto">
 				<thead>
@@ -77,7 +77,7 @@ function MatchHistory() {
 				</thead>
 				<tbody>
 					{matchHistoryData.map((match, index) => (
-						<tr key={index}>
+						<tr key={index} className='bg-gray-300'>
 							<td className="p-2 border">{match.opponent}</td>
 							<td className={`p-2 border text-center ${match.result === 'Win' ? 'text-green-700' : 'text-red-700'}`}>
 								{match.result}
@@ -110,23 +110,23 @@ function Profile() {
 	return (
 		<div className="bg-gray-900 p-8 flex flex-col items-center min-h-screen">
 			<div className="max-w-md flex flex-col items-center">
-				<div className="bg-white rounded-md p-6 shadow-md text-center">
+				<div className="bg-red-500 bg-opacity-40 rounded-md p-6 shadow-md text-center">
 					<img
 						src="https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp"
 						alt="User Avatar"
 						className="w-20 h-20 rounded-full mx-auto mb-4"
 					/>
-					<h2 className="text-2xl font-semibold">{userDetails.title} {userDetails.username}</h2>
-					<p className="text-gray-600">{userDetails.email}</p>
+					<h2 className="text-black text-2xl font-bold">{userDetails.title} {userDetails.username}</h2>
+					<p className="text-black-600">{userDetails.email}</p>
 
 					<div className="mt-8">
 						<h3 className="text-xl font-semibold mb-4">About Me</h3>
-						<p className="text-gray-700">{userDetails.about}</p>
+						<p className="text-black-700">{userDetails.about}</p>
 					</div>
 
 					<div className="mt-8">
 						<h3 className="text-xl font-semibold mb-4">User Details</h3>
-						<p className="text-gray-700">
+						<p className="text-black-700">
 							<strong>Age:</strong> {userDetails.age} years old<br />
 							<strong>Gender:</strong> {userDetails.gender}<br />
 							<strong>School:</strong> {userDetails.school}<br />
