@@ -5,11 +5,11 @@ function Navigation() {
 	return (
 		<nav className="bg-gray-800 p-4 mx-auto">
 			<ul className="flex justify-center">
-				{/* <li className="mr-6">
-					<Link to="/" className="text-white font-bold">Welcome</Link>
-				</li> */}
 				<li className="mr-6">
 					<Link to="/home" className="text-white font-bold">Home</Link>
+				</li>
+				<li className="mr-6">
+					<Link to="/chat" className="text-white font-bold">Chat</Link>
 				</li>
 				<li className="mr-6">
 					<Link to="/matchmaking" className="text-white font-bold">Matchmaking</Link>
