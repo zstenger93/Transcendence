@@ -19,7 +19,7 @@ function Welcome() {
           Where the<br />Core journey<br /> Ends
         </h1>
       </div>
-      <div className='flex justify-center'>
+      <div className='flex items-center justify-center h-screen'>
         <button
           className="bg-red-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-red-700"
           onClick={redirectToHome}
