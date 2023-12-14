@@ -1,49 +1,57 @@
 import React, { useState } from 'react';
 
-// Dummy data for friends and match history (replace with actual data)
-const friendsListData = ['Zsolt', 'Karlis', 'Jergashe', 'Azer', 'Emotional Damage'];
-const matchHistoryData = [
-	{ opponent: 'Emotional Damage', result: 'Win' },
-	{ opponent: 'Chuck Norris', result: 'Loss' },
-	{ opponent: 'Segfault', result: 'Win' },
-	{ opponent: 'Jesus', result: 'Loss' },
-	{ opponent: 'I did parsing', result: 'Win' },
-	{ opponent: 'Karlis', result: 'Loss' },
-	{ opponent: 'Azer', result: 'Win' },
-	{ opponent: 'Jamshidbek', result: 'Win' },
-	{ opponent: 'Zsolt', result: 'Win' },
+
+const friendsListData = [
+	{ name: 'Zsolt', intra: 'zstenger', profileLink: 'https://profile.intra.42.fr/users/zstenger' },
+	{ name: 'Karlis', intra: 'kvebers', profileLink: 'https://profile.intra.42.fr/users/kvebers' },
+	{ name: 'Jergashe', intra: 'jergahse', profileLink: 'https://profile.intra.42.fr/users/jergashe' },
+	{ name: 'Azer', intra: 'asioud', profileLink: 'https://profile.intra.42.fr/users/asioud' },
+	{ name: 'Emotional Damage', intra: 'ed', profileLink: 'https://github.com/zstenger93/Transcendence' },
 ];
+
+const matchHistoryData = [
+	{ opponent: 'Emotional Damage', result: 'Win', score: '5 - 2', game: 'Pong', type: 'Original' },
+	{ opponent: 'Chuck Norris', result: 'Loss', score: '1 - 4', game: 'Pong', type: 'Modded' },
+	{ opponent: 'Segfault', result: 'Win', score: '3 - 0', game: 'Pong', type: 'Original' },
+	{ opponent: 'I did parsing', result: 'Win', score: '6 - 3', game: 'Pong', type: 'Original' },
+	{ opponent: 'Jesus', result: 'Loss', score: '0 - 3', game: 'Pong', type: 'Modded' },
+	{ opponent: 'Karlis', result: 'Loss', score: '1 - 4', game: 'Pong', type: 'Modded' },
+	{ opponent: 'Azer', result: 'Win', score: '5 - 2', game: 'Pong', type: 'Original' },
+	{ opponent: 'Jamshidbek', result: 'Win', score: '3 - 0', game: 'Pong', type: 'Modded' },
+	{ opponent: 'Zsolt', result: 'Win', score: '4 - 1', game: 'Pong', type: 'Original' },
+];
+
+const userDetails = {
+	title: 'Mastermind',
+	username: 'TrasnscEND',
+	email: 'fake@mail.com',
+	about: 'I turn people crazy with my clear subject description.',
+	age: 42,
+	gender: 'Computer',
+	school: '42 Heilbronn',
+	level: '42.42',
+	winRate: '42%',
+};
 
 function FriendsList() {
 	return (
 		<div className="bg-gray-200 p-4 rounded-md max-h-200 overflow-y-auto">
-			<h3 className="text-xl font-semibold mb-4">Friends List</h3>
-			<ul>
-				{friendsListData.map((friend, index) => (
-					<li key={index}>{friend}</li>
-				))}
-			</ul>
-		</div>
-	);
-}
-
-function MatchHistory() {
-	return (
-		<div className="bg-gray-200 p-4 rounded-md max-h-200 overflow-y-auto">
-			<h3 className="text-xl font-semibold mb-4">Match History</h3>
-			<table className="w-full border-collapse border border-gray-500">
+			<h3 className="text-xl font-bold mb-4 text-center">Friend List</h3>
+			<table className="w-full border-collapse border border-gray-500 mx-auto">
 				<thead>
 					<tr className="bg-gray-300">
-						<th className="p-2 border">Opponent</th>
-						<th className="p-2 border">Result</th>
+						<th className="p-2 border">Name</th>
+						<th className="p-2 border">Intra Profile</th>
 					</tr>
 				</thead>
 				<tbody>
-					{matchHistoryData.map((match, index) => (
+					{friendsListData.map((friend, index) => (
 						<tr key={index}>
-							<td className="p-2 border">{match.opponent}</td>
-							<td className={`p-2 border ${match.result === 'Win' ? 'text-green-500' : 'text-red-500'}`}>
-								{match.result}
+							<td className="p-2 border">{friend.name}</td>
+							<td className="p-2 border text-center">
+								<a href={friend.profileLink} className='text-blue-500 underline' target="_blank" rel="noopener noreferrer">
+									{friend.intra}
+								</a>
 							</td>
 						</tr>
 					))}
@@ -53,44 +61,63 @@ function MatchHistory() {
 	);
 }
 
-function Profile() {
-	const userDetails = {
-		username: 'TrasnscEND',
-		email: 'fake@mail.com',
-		about: 'I turn people crazy with my clear subject description.',
-		age: 25,
-		gender: 'Male',
-		school: '42 Heilbronn',
-		level: '9.42',
-	};
+function MatchHistory() {
+	return (
+		<div className="bg-gray-200 p-4 rounded-md max-h-200 overflow-y-auto">
+			<h3 className="text-xl font-bold mb-4 text-center">Match History</h3>
+			<table className="w-full border-collapse border border-gray-500 mx-auto">
+				<thead>
+					<tr className="bg-gray-300">
+						<th className="p-2 border">Opponent</th>
+						<th className="p-2 border text-center">Result</th>
+						<th className="p-2 border text-center">Score</th>
+						<th className="p-2 border text-center">Game</th>
+						<th className="p-2 border text-center">Type</th>
+					</tr>
+				</thead>
+				<tbody>
+					{matchHistoryData.map((match, index) => (
+						<tr key={index}>
+							<td className="p-2 border">{match.opponent}</td>
+							<td className={`p-2 border text-center ${match.result === 'Win' ? 'text-green-700' : 'text-red-700'}`}>
+								{match.result}
+							</td>
+							<td className="p-2 border text-center">{match.score}</td>
+							<td className="p-2 border text-center">{match.game}</td>
+							<td className={`p-2 border text-center ${match.type === 'Original' ? 'text-blue-700' : 'text-yellow-700'}`}>{match.type}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+	);
+}
 
+function Profile() {
 	const [showFriendsList, setShowFriendsList] = useState(false);
 	const [showMatchHistory, setShowMatchHistory] = useState(false);
 
 	const toggleFriendsList = () => {
 		setShowFriendsList(!showFriendsList);
-		setShowMatchHistory(false); // Close match history if open
+		setShowMatchHistory(false);
 	};
 
 	const toggleMatchHistory = () => {
 		setShowMatchHistory(!showMatchHistory);
-		setShowFriendsList(false); // Close friends list if open
+		setShowFriendsList(false);
 	};
 
 	return (
-		<div className="bg-gray-100 p-8 flex flex-col max-h-200 overflow-y-auto">
-			<div className="flex-grow grid grid-cols-2 gap-8">
-				{/* Profile section */}
-				<div className="max-w-md bg-white rounded-md p-6 shadow-md">
-					<div className="text-center">
-						<img
-							src="https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp"
-							alt="User Avatar"
-							className="w-20 h-20 rounded-full mx-auto mb-4"
-						/>
-						<h2 className="text-2xl font-semibold">{userDetails.username}</h2>
-						<p className="text-gray-600">{userDetails.email}</p>
-					</div>
+		<div className="bg-gray-900 p-8 flex flex-col items-center min-h-screen">
+			<div className="max-w-md flex flex-col items-center">
+				<div className="bg-white rounded-md p-6 shadow-md text-center">
+					<img
+						src="https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp"
+						alt="User Avatar"
+						className="w-20 h-20 rounded-full mx-auto mb-4"
+					/>
+					<h2 className="text-2xl font-semibold">{userDetails.title} {userDetails.username}</h2>
+					<p className="text-gray-600">{userDetails.email}</p>
 
 					<div className="mt-8">
 						<h3 className="text-xl font-semibold mb-4">About Me</h3>
@@ -103,11 +130,11 @@ function Profile() {
 							<strong>Age:</strong> {userDetails.age} years old<br />
 							<strong>Gender:</strong> {userDetails.gender}<br />
 							<strong>School:</strong> {userDetails.school}<br />
-							<strong>Level:</strong> {userDetails.level}
+							<strong>Level:</strong> {userDetails.level}<br />
+							<strong>Win Rate:</strong> {userDetails.winRate}
 						</p>
 					</div>
 
-					{/* Buttons for Edit Profile, Friend List, and Match History */}
 					<div className="mt-8 flex justify-center space-x-4">
 						<button
 							className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -124,8 +151,7 @@ function Profile() {
 					</div>
 				</div>
 
-				{/* Friend List or Match History section (conditionally rendered) */}
-				<div className="max-w-md">
+				<div className="mt-8">
 					{showFriendsList && <FriendsList />}
 					{showMatchHistory && <MatchHistory />}
 				</div>
