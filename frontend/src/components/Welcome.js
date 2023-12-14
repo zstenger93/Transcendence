@@ -21,10 +21,10 @@ function Welcome() {
       </div> */}
       <div className=' flex items-center justify-center h-screen'>
         <button
-          className="bg-red-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-red-700"
+          className="bg-red-700 bg-opacity-50 text-white px-4 py-2 rounded cursor-pointer hover:bg-red-700"
           onClick={redirectToHome}
         >
-          Log In
+          Sign In
         </button>
       </div>
     </div>

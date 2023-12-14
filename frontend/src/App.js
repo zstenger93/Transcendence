@@ -12,9 +12,7 @@ function App() {
 	return (
 		<Router>
 			<Routes>
-				{/* Welcome page without the Navigation */}
 				<Route path="/" element={<Welcome />} />
-				{/* Use a wrapper route for Home and About that includes the Navigation */}
 				<Route
 					path="/*"
 					element={
