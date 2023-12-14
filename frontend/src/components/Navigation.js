@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Navigation() {
 	return (
-		<nav className="bg-gray-900 p-4 mx-auto">
+		<nav className="bg-gray-800 p-4 mx-auto">
 			<ul className="flex justify-center">
 				{/* <li className="mr-6">
 					<Link to="/" className="text-white font-bold">Welcome</Link>
