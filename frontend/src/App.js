@@ -7,6 +7,7 @@ import Welcome from './components/Welcome';
 import Profile from './components/Profile';
 import Matchmaking from './components/Matchmaking';
 import Chat from './components/Chat';
+import Sidebar from './components/Sidebar';
 
 function App() {
 	return (
@@ -26,6 +27,7 @@ function App() {
 								<Route path="profile" element={<Profile />} />
 								<Route path="/" element={<Navigate to="/home" />} />
 							</Routes>
+							<Sidebar />
 						</div>
 					}
 				/>
