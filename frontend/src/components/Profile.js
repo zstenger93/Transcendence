@@ -36,11 +36,11 @@ const userDetails = {
 
 function FriendsList() {
 	return (
-		<div className="bg-blue-500 bg-opacity-40 p-4 rounded-md max-h-200 overflow-y-auto">
+		<div className="bg-red-500 bg-opacity-60 p-4 rounded-md max-h-200 overflow-y-auto">
 			<h3 className="text-xl font-bold mb-4 text-center">Friend List</h3>
-			<table className="w-full border-collapse border border-gray-500 mx-auto">
+			<table className="bg-white bg-opacity-80 w-full border-collapse border border-gray-500 mx-auto">
 				<thead>
-					<tr className="bg-gray-300">
+					<tr>
 						<th className="p-2 border">Name</th>
 						<th className="p-2 border text-center">Intra</th>
 					</tr>
@@ -50,7 +50,7 @@ function FriendsList() {
 						<tr key={index} className='bg-grey-300'>
 							<td className="p-2 border">{friend.name}</td>
 							<td className="p-2 border text-center">
-								<a href={friend.profileLink} className='text-blue-700 underline' target="_blank" rel="noopener noreferrer">
+								<a href={friend.profileLink} className='text-blue-900 underline' target="_blank" rel="noopener noreferrer">
 									{friend.intra}
 								</a>
 							</td>
@@ -64,11 +64,11 @@ function FriendsList() {
 
 function MatchHistory() {
 	return (
-		<div className="bg-blue-500 bg-opacity-40 p-6 shadow-md rounded-md max-h-200 overflow-y-auto">
+		<div className="bg-red-500 bg-opacity-60 p-6 shadow-md rounded-md max-h-200 overflow-y-auto">
 			<h3 className="text-xl font-bold mb-4 text-center">Match History</h3>
-			<table className="w-full border-collapse border border-gray-500 mx-auto">
+			<table className="bg-white bg-opacity-80 w-full border-collapse border border-gray-500 mx-auto">
 				<thead>
-					<tr className="bg-gray-300">
+					<tr>
 						<th className="p-2 border">Opponent</th>
 						<th className="p-2 border text-center">Result</th>
 						<th className="p-2 border text-center">Score</th>
@@ -78,7 +78,7 @@ function MatchHistory() {
 				</thead>
 				<tbody>
 					{matchHistoryData.map((match, index) => (
-						<tr key={index} className='bg-gray-300'>
+						<tr key={index} className='bg-white bg-opacity-80'>
 							<td className="p-2 border">{match.opponent}</td>
 							<td className={`p-2 border text-center ${match.result === 'Win' ? 'text-green-700' : 'text-red-700'}`}>
 								{match.result}
@@ -111,7 +111,7 @@ function Profile() {
 	return (
 		<div className="flex flex-col items-center justify-center h-screen bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${backgroundImage})` }}>
 			<div className="max-w-md flex flex-col items-center">
-				<div className="bg-red-500 bg-opacity-40 rounded-md p-6 shadow-md text-center">
+				<div className="bg-red-500 bg-opacity-60 rounded-md p-6 shadow-md text-center">
 					<img
 						src="https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp"
 						alt="User Avatar"
