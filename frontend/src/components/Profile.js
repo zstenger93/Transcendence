@@ -36,7 +36,7 @@ const userDetails = {
 
 function FriendsList() {
 	return (
-		<div className="bg-red-500 bg-opacity-60 p-4 rounded-md max-h-200 overflow-y-auto">
+		<div className="bg-red-500 bg-opacity-60 p-4 rounded-md max-h-96 overflow-y-auto">
 			<h3 className="text-xl font-bold mb-4 text-center">Friend List</h3>
 			<table className="bg-white bg-opacity-80 w-full border-collapse border border-gray-500 mx-auto">
 				<thead>
@@ -64,7 +64,7 @@ function FriendsList() {
 
 function MatchHistory() {
 	return (
-		<div className="bg-red-500 bg-opacity-60 p-6 shadow-md rounded-md max-h-200 overflow-y-auto">
+		<div className="bg-red-500 bg-opacity-60 p-6 shadow-md rounded-md max-h-96 overflow-y-auto">
 			<h3 className="text-xl font-bold mb-4 text-center">Match History</h3>
 			<table className="bg-white bg-opacity-80 w-full border-collapse border border-gray-500 mx-auto">
 				<thead>
