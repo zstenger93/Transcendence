@@ -1,28 +1,34 @@
 import React from 'react';
-import { BsPlus, BsFillLightingFill, BsGearFill } from 'react-icons/bs';
-import { FaFire, FaInfoCircle, FaHome, FaUser } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { FaInfoCircle, FaHome, FaUser } from 'react-icons/fa';
 import { SiGooglechat, SiGameandwatch } from "react-icons/si";
 
 
 const Sidebar = () => {
 	return (
 		<div className='fixed top-0 lef-0 h-screen w-16 m-0
-						flex flex-col bg-gray-800 text-white shadow-lg'>
-			<SidebarIcon icon={<FaHome size="32" />} />
-			<SidebarIcon icon={<SiGooglechat size="32" />} />
-			<SidebarIcon icon={<SiGameandwatch size="32" />} />
-			<SidebarIcon icon={<FaUser size="32" />} />
-			<SidebarIcon icon={<FaInfoCircle size="32" />} />
+						flex flex-col bg-gray-800 bg-opacity-30 text-white shadow-lg'>
+			<SidebarIcon icon={<FaHome size="32" />} text='Home' to='/home' margin='mb-10' />
+			<SidebarIcon icon={<SiGooglechat size="32" />} text='Chat Rooms' to='/chat' />
+			<SidebarIcon icon={<SiGameandwatch size="32" />} text='Play or Watch Games' to='/matchmaking' />
+			<SidebarIcon icon={<FaUser size="32" />} text='Profile' to='/profile' />
+			<SidebarIcon icon={<FaInfoCircle size="32" />} text='About Us' to='/about' margin='mt-150' />
 		</div>
 	);
 }
 
-const SidebarIcon = ({ icon, text = 'tooltip' }) => {
+const SidebarIcon = ({ icon, text = 'tooltip', to, margin }) => {
 	return (
-		<div className='sidebar-icon'>
+		<Link to={to} className={`relative flex items-center justify-center
+								h-12 w-12 mt-2 mb-2 mx-auto shadow-lg
+								bg-blue-800 bg-opacity-80 text-orange-300 hover:bg-blue-600
+								hover:text-white rounded-3xl hover:rounded-xl transition-all
+								duration-300 ease-linear cursor-pointer group ${margin}`}>
 			{icon}
-			<span className='sidebar-tooltip group-hover:scale-100'>{text}</span>
-		</div>
+			<span className='absolute w-auto p-2 m-2 min-w-max left-14 rounded-md shadow-md
+							text-white bg-gray-900 text-xs font-bold transition-all duration-100
+							scale-0 origin-left group-hover:scale-100'>{text}</span>
+		</Link>
 	);
 }
 
