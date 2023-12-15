@@ -1,28 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 function Navigation() {
-	return (
-		<nav className="bg-gray-800 p-4 mx-auto">
-			<ul className="flex justify-center">
-				<li className="mr-6">
-					<Link to="/home" className="text-white font-bold">Home</Link>
-				</li>
-				<li className="mr-6">
-					<Link to="/chat" className="text-white font-bold">Chat</Link>
-				</li>
-				<li className="mr-6">
-					<Link to="/matchmaking" className="text-white font-bold">Matchmaking</Link>
-				</li>
-				<li className="mr-6">
-					<Link to="/profile" className="text-white font-bold">Profile</Link>
-				</li>
-				<li>
-					<Link to="/about" className="text-white font-bold">About</Link>
-				</li>
-			</ul>
-		</nav>
-	);
+    return (
+        <nav className="bg-opacity-0 p-2 text-center">
+            <span className="text-white font-extrabold text-4xl">Welcome To<br />TranscENDence<br />Where Your Core Journey<br />Ends</span>
+        </nav>
+    );
 }
 
 export default Navigation;

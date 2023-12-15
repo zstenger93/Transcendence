@@ -8,6 +8,7 @@ import Profile from './components/Profile';
 import Matchmaking from './components/Matchmaking';
 import Chat from './components/Chat';
 import Sidebar from './components/Sidebar';
+import backgroundImage from './images/welcome.jpg';
 
 function App() {
 	return (
@@ -17,8 +18,8 @@ function App() {
 				<Route
 					path="/*"
 					element={
-						<div>
-							<Navigation />
+						<div className="bg-cover bg-center h-screen w-full" style={{ backgroundImage: `url(${backgroundImage})` }}>
+							<Sidebar />
 							<Routes>
 								<Route path="home" element={<Home />} />
 								<Route path="chat" element={<Chat />} />
@@ -27,7 +28,6 @@ function App() {
 								<Route path="profile" element={<Profile />} />
 								<Route path="/" element={<Navigate to="/home" />} />
 							</Routes>
-							<Sidebar />
 						</div>
 					}
 				/>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import backgroundImage from '../images/welcome.jpg';
 
 
 const friendsListData = [
@@ -108,7 +109,7 @@ function Profile() {
 	};
 
 	return (
-		<div className="bg-gray-900 p-8 flex flex-col items-center min-h-screen">
+		<div className="flex flex-col items-center justify-center h-screen bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${backgroundImage})` }}>
 			<div className="max-w-md flex flex-col items-center">
 				<div className="bg-red-500 bg-opacity-40 rounded-md p-6 shadow-md text-center">
 					<img
