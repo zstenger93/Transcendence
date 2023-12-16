@@ -1,53 +1,27 @@
 from django.shortcuts import render, HttpResponse, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.conf import settings
-from .models import User
 import requests
 import os
 import urllib
 
 
+@login_required(login_url='/login/')
 def home(request):
-	if not request.session.get('username', False):
-		return redirect('login')
-	username = request.session.get('username', '')
-	display_name = request.session.get('display_name', '')
-	email = request.session.get('email', '')
+    return render(request, "home.html")
 
-
-# PRINTING
-# ---------------------------------------------------------------
-	# users = User.objects.all()
-	# print("LEN1: ")
-	# print(len(users))
-	# print(users)
-	# for user in users:
-	# 	print(user)
-
-	# print("method: ", request.method, type(request.method))
-	# print("GET: ", request.GET, type(request.GET))
-	# print("POST: ", request.POST, type(request.POST))
-	# print("FILES", request.FILES, type(request.FILES))
-	# print("path: ", request.path, type(request.path))
-	# print("user: ",request.user, type(request.user))
-
-	# print("Type of request:", type(request))
-	# for i in request:
-	# 	print(i)
-# ---------------------------------------------------------------
-
-	context = {
-		'username': username,
-		'display_name': display_name,
-		'email': email,
-	}
-	return render(request, "home.html", context)
-
-def login(request):
+# don't name it 'login' because it will conflict with the built-in login function
+def myLogin(request):
+	if request.user.is_authenticated:
+		return redirect("home")
 	return render(request, "login.html")
 
 def auth_callback(request):
 	if request.method == "GET":
+
+		# ----------------------------------------––--------------- PREPARE DATA FOR REQUEST
 		code = request.GET.get("code")
 		data = {
 			"grant_type": "authorization_code",
@@ -57,26 +31,42 @@ def auth_callback(request):
 			"redirect_uri": settings.REDIRECT_URI,
 		}
 
+		# ----------------------------------------––--------------- REQEST TO 42 SERVER
 		auth_response = requests.post("https://api.intra.42.fr/oauth/token", data=data)
 		access_token = auth_response.json()["access_token"]
-		user_response = requests.get("https://api.intra.42.fr/v2/me", headers={"Authorization": f"Bearer {access_token}"})
-		
-		id = user_response.json()["id"]
-		username = user_response.json()["login"]
-		display_name = user_response.json()["displayname"]
-		email = user_response.json()["email"]
-		picture = user_response.json()["image"]["link"]
+		user_response = requests.get("https://api.intra.42.fr/v2/me", headers={"Authorization": f"Bearer {access_token}"})			
 
-		user = User(id=id, username=username, display_name=display_name, email=email, picture=picture)
-		if user.user_exists() == False:
+
+		# ---------------------------------------––---------------- GET USER DATA FROM 42 SERVER RESPONSE
+		# id will be implemented later, once we have a modified User model
+		# id = user_response.json()["id"]
+		username = user_response.json()["login"]
+		first_name = user_response.json()["first_name"]
+		last_name = user_response.json()["last_name"]
+		email = user_response.json()["email"]
+		# picture will be implemented later, once we have a modified User model
+		# picture = user_response.json()["image"]["link"]
+
+
+		# -----------------------------------------––-------------- CREATE USER TO AUTHENTICATE AND LOGIN
+		# user is a Model variable
+		# created is a boolean variable
+		user, created = User.objects.get_or_create(
+			username=username, 
+			defaults={
+				'username' : username,
+				'first_name': first_name, 
+				'last_name': last_name, 
+				'email': email
+			}
+		)
+		if created:
 			print("\t\t\tNew user has been added!!!")
-			user.save()
 		else:
 			print("\t\t\tUser already exists!!!")
+		login(request, user)
 
-		request.session['username'] = username
-		request.session['display_name'] = display_name
-		request.session['email'] = email
+		# ---------------------------------------––---------------- REDIRECT TO HOME PAGE
 		return redirect("home")                                  
 	return HttpResponse("Auth callback Error, bad token maybe!!")
 
@@ -92,3 +82,29 @@ def auth(request):
 def logout(request):
     request.session.flush()
     return redirect('login')
+
+def register(request):
+	if request.user.is_authenticated:
+		return redirect("home")
+	if request.method == 'POST':
+		# Get data from the form
+		username = request.POST.get('username').lower()
+		email = request.POST.get('email').lower()
+		password = request.POST.get('password')
+		first_name = request.POST.get('first_name').lower()
+		last_name = request.POST.get('last_name').lower()
+
+		# Create a new user
+		user = User.objects.create_user(username=username, email=email, password=password,
+										first_name=first_name, last_name=last_name)
+		# Log the user in
+		# login(request, user)
+		print("\t\t\tNew user has been added!!!")
+		print(f'Username: {user.username}')
+		print(f'Email: {user.email}')
+		print(f'First Name: {user.first_name}')
+		print(f'Last Name: {user.last_name}')
+
+		# Redirect to a success page or home
+		return redirect('home')  # Change 'home' to the actual name of your home page or dashboard
+	return render(request, 'register.html')
