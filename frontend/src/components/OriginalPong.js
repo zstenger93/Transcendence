@@ -19,7 +19,7 @@ const OriginalPong = () => {
 	// This Function Adds A White Stripe in The middle of the map
 	const drawWhiteStripe = (ctx, canvas) => {
 		ctx.fillStyle = '#FFFFFF';
-		const stripeWidth = 4;
+		const stripeWidth = 8;
 		const stripeHeight = canvas.height;
 		const x = canvas.width / 2 - stripeWidth / 2;
 		const y = 0;
@@ -45,14 +45,21 @@ const OriginalPong = () => {
 			ballX = canvas.width / 2;
 			ballY = canvas.width / 2;
 			ballSpeedX = -ballSpeedX;
-			scoreLeft += 1;
+			scoreRight += 1;
 		} else if (ballX + 8 > canvas.width) {
 		  ballX = canvas.width / 2;
 		  ballY = canvas.height / 2;
 		  ballSpeedX = -ballSpeedX;
-		  scoreRight += 1;
+		  scoreLeft += 1;
 		}
 	  };
+
+	const drawScores = (ctx, canvas) => {
+		ctx.fillStyle = '#FFFFFF';
+		ctx.font = '80px Helvetica';
+		ctx.fillText(`${scoreLeft}`, canvas.width / 2 - 100, 100);
+		ctx.fillText(`${scoreRight}`, canvas.width / 2 + 60, 100);
+	};
 
 	const drawBall = (ctx, canvas) => {
 		ctx.beginPath();
@@ -71,6 +78,7 @@ const OriginalPong = () => {
 	ArtificialInteligence(ctx, canvas);
 	updateBallPosition(canvas);
 	drawBall(ctx, canvas);
+	drawScores(ctx, canvas);
 	requestAnimationFrame(draw);
   };
   useEffect(() => {
