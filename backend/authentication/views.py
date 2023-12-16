@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.conf import settings
 import requests
 import os
@@ -13,7 +13,7 @@ def home(request):
     return render(request, "home.html")
 
 # don't name it 'login' because it will conflict with the built-in login function
-def myLogin(request):
+def my_login(request):
 	if request.user.is_authenticated:
 		return redirect("home")
 	return render(request, "login.html")
@@ -79,9 +79,12 @@ def auth(request):
 	}
 	return redirect(f"{auth_url}?{urllib.parse.urlencode(params)}")
 
-def logout(request):
-    request.session.flush()
-    return redirect('login')
+def my_logout(request):
+    # Log the user out using Django's built-in logout function
+	logout(request)
+
+    # Redirect the user to the login page
+	return redirect('login')  # Replace 'login' with the actual name or URL of your login view
 
 def register(request):
 	if request.user.is_authenticated:
