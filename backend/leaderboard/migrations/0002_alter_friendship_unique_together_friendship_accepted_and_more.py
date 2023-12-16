@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('authentication', '0002_alter_user_id'),
-        ('leaderboard', '0001_initial'),
+        # ('leaderboard', '0001_initial'),
     ]
 
     operations = [

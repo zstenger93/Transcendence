@@ -1,3 +1,12 @@
 1. is it safe to have an id of a user when sending a friend request?
 2. what should we use for this kind of requests?
 3.  seing yourself in a leaderboard. How to eliminate a friendship request button? and how to eliminate a friendship request button from users whom you already have in friends
+4. REWRITE AUTH APP!!!
+5. check if csrf stuff is needed for refister.html
+6. check if user who is already loged in can register...
+
+username1
+username@gmail.com
+42HeilbroNN
+Name1
+Lastname1
