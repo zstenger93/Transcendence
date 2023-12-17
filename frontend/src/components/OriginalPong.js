@@ -9,12 +9,18 @@ const OriginalPong = () => {
 	let scoreLeft = 0;
 	let scoreRight = 0;
 	const canvasRef = useRef(null);
-	const paddleWidth = 10, paddleHeight = 60;
+	let paddleWidth = canvasRef.current ? canvasRef.current.width / 80 : 0;
+	let paddleHeight = canvasRef.current ? canvasRef.current.width / 20 : 0;
 	let leftPaddleY = canvasRef.current ? canvasRef.current.height / 2 - paddleHeight / 2 : 0;
 	let rightPaddleY = canvasRef.current ? canvasRef.current.height / 2 - paddleHeight / 2 : 0;
 	let ballX = canvasRef.current ? canvasRef.current.width / 2 : 0;
 	let ballY = canvasRef.current ? canvasRef.current.height / 2 : 0;
-	let ballSpeedX = 3, ballSpeedY = 2;
+	let ballSpeedX = 100;
+	let ballSpeedY = 20;
+	let canvasDefaultWidth = 1920;
+	let sizeSpeedRatio = canvasRef.current ? canvasDefaultWidth / canvasRef.current.width : 1;
+	let lastFrame = 0;
+	let dt = 0;
 
 	// This Function Adds A White Stripe in The middle of the map
 	const drawWhiteStripe = (ctx, canvas) => {
@@ -35,8 +41,8 @@ const OriginalPong = () => {
 	}
 	// This function Updates The Ball Positions
 	const updateBallPosition = (canvas) => {
-		ballX += ballSpeedX;
-		ballY += ballSpeedY;
+		ballX += ballSpeedX * dt * sizeSpeedRatio;
+		ballY += ballSpeedY * dt * sizeSpeedRatio;
 		if (ballY - 8 < 0 || ballY + 8 > canvas.height)
 		  ballSpeedY = -ballSpeedY;
 		if ((ballX - 8 < paddleWidth + paddleOffset && ballY > leftPaddleY && ballY < leftPaddleY + paddleHeight) || (ballX + 8 > canvas.width - paddleWidth - paddleOffset && ballY > rightPaddleY && ballY < rightPaddleY + paddleHeight))
@@ -68,9 +74,25 @@ const OriginalPong = () => {
 		ctx.fill();
 		ctx.closePath();
 	}
-  const draw = () => {
+
+    const handleResize = () => {
+		const screenWidth = window.innerWidth;
+		const canvasWidth = 0.8 * screenWidth;
+		const canvasHeight = (canvasWidth / 16) * 9;
+		canvasRef.current.width = canvasWidth;
+		canvasRef.current.height = canvasHeight;
+		paddleWidth = canvasRef.current ? canvasRef.current.width / 80 : 0;
+		paddleHeight = canvasRef.current ? canvasRef.current.width / 20 : 0;
+
+	  };
+  
+
+  const draw = (timestamp) => {
 	const canvas = canvasRef.current;
+	if (!canvas) return;
 	const ctx = canvas.getContext('2d');
+	dt = (timestamp - lastFrame) / 1000;
+	lastFrame = timestamp;
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	drawWhiteStripe(ctx, canvas);
 	ctx.fillStyle = '#FF0000';
@@ -81,25 +103,26 @@ const OriginalPong = () => {
 	drawScores(ctx, canvas);
 	requestAnimationFrame(draw);
   };
+
   useEffect(() => {
     document.addEventListener('keydown', (event) => {
       if (event.key === 'ArrowUp') leftPaddleY -= 8;
       else if (event.key === 'ArrowDown') leftPaddleY += 8;
       leftPaddleY = Math.max(0, Math.min(leftPaddleY, canvasRef.current.height - paddleHeight));
     });
-    draw();
+	window.addEventListener('resize', handleResize);
+    handleResize();
+    draw(0);
     return () => {
       document.removeEventListener('keydown', () => {});
     };
-  }, [leftPaddleY]);
+  }, [canvasRef]);
 
   return (
     <div className="flex justify-center items-center h-screen">
       <canvas
         ref={canvasRef}
         className="border-8 border-solid border-white bg-black"
-        width="1600"
-        height="900	"
       ></canvas>
     </div>
   );
