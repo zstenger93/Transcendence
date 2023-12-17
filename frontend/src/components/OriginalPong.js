@@ -1,8 +1,5 @@
 	import React, { useEffect, useRef } from 'react';
 
-
-
-
 	const OriginalPong = () => {
 		// Default Parameters
 		let scoreLeft = 0;
@@ -33,22 +30,36 @@
 		// This is bloody AI
 		const ArtificialInteligence = (ctx, canvas) => {
 			const aiSpeed = 120;
+			let tempPadleY = rightPaddleY;
 			if (ballY > rightPaddleY + paddleHeight / 2)
-				rightPaddleY += aiSpeed * dt * sizeSpeedRatio;
+			  tempPadleY += aiSpeed * dt * sizeSpeedRatio;
 			else if (ballY < rightPaddleY + paddleHeight / 2)
-				rightPaddleY -= aiSpeed * dt * sizeSpeedRatio;
+			  tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
+			tempPadleY = Math.max(0, Math.min(tempPadleY, canvas.height - paddleHeight));
+			rightPaddleY = tempPadleY;
 			ctx.fillRect(canvas.width - paddleWidth, rightPaddleY, paddleWidth, paddleHeight);
 		}
 		// This function Updates The Ball Positions
 		const updateBallPosition = (canvas) => {
+			const ballOffset = 2;
 			ballX += ballSpeedX * dt * sizeSpeedRatio;
 			ballY += ballSpeedY * dt * sizeSpeedRatio;
 			if (ballY - 8 < 0 || ballY + 8 > canvas.height)
 				ballSpeedY = -ballSpeedY;
 			if (ballX - 8 < paddleWidth && ballY > leftPaddleY && ballY < leftPaddleY + paddleHeight)
-				ballSpeedX = -ballSpeedX;
+			{
+				const leftPaddleCenterY = leftPaddleY + paddleHeight / 2;
+				const distanceFromCenter = ballY - leftPaddleCenterY;
+				ballSpeedY = distanceFromCenter * ballOffset * sizeSpeedRatio;
+				ballSpeedX = -ballSpeedX;	
+			}
 			else if (ballX + 8 > canvas.width - paddleWidth && ballY > rightPaddleY && ballY < rightPaddleY + paddleHeight)
+			{
+				const rightPaddleCenterY = rightPaddleY + paddleHeight / 2;
+				const distanceFromCenter = ballY - rightPaddleCenterY;
+				ballSpeedY = distanceFromCenter * ballOffset * sizeSpeedRatio;
 				ballSpeedX = -ballSpeedX;
+			}
 			if (ballX - 8 < 0) {
 				ballX = canvas.width / 2;
 				ballY = canvas.width / 2;
@@ -80,7 +91,6 @@
 		
 		// This Monster resized the field
 		const handleResize = () => {
-			if (!canvasRef.current) return;
 			const screenWidth = window.innerWidth;
 			const canvasWidth = 0.8 * screenWidth;
 			const canvasHeight = (canvasWidth / 16) * 9;
