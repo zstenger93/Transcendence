@@ -2,6 +2,8 @@
 
 	const OriginalPong = () => {
 		// Default Parameters
+		const defaultSpeedX = 200;
+		const defaultSpeedY = 20;
 		let scoreLeft = 0;
 		let scoreRight = 0;
 		const canvasRef = useRef(null);
@@ -11,8 +13,8 @@
 		let rightPaddleY = canvasRef.current ? canvasRef.current.height / 2 - paddleHeight / 2 : 0;
 		let ballX = canvasRef.current ? canvasRef.current.width / 2 : 0;
 		let ballY = canvasRef.current ? canvasRef.current.height / 2 : 0;
-		let ballSpeedX = 200;
-		let ballSpeedY = 20;
+		let ballSpeedX = defaultSpeedX;
+		let ballSpeedY = defaultSpeedY;
 		let canvasDefaultWidth = 1920;
 		let sizeSpeedRatio = canvasRef.current ? canvasRef.current.width / canvasDefaultWidth : 1;
 		let lastFrame = 0;
@@ -29,7 +31,7 @@
 		};
 		// This is bloody AI
 		const ArtificialInteligence = (ctx, canvas) => {
-			const aiSpeed = 120;
+			const aiSpeed = 240;
 			let tempPadleY = rightPaddleY;
 			if (ballY > rightPaddleY + paddleHeight / 2)
 			  tempPadleY += aiSpeed * dt * sizeSpeedRatio;
@@ -41,7 +43,8 @@
 		}
 		// This function Updates The Ball Positions
 		const updateBallPosition = (canvas) => {
-			const ballOffset = 2;
+			const ballAngleOffset = 0.02;
+			const ballSpeedIncrease = 100;
 			ballX += ballSpeedX * dt * sizeSpeedRatio;
 			ballY += ballSpeedY * dt * sizeSpeedRatio;
 			if (ballY - 8 < 0 || ballY + 8 > canvas.height)
@@ -50,26 +53,36 @@
 			{
 				const leftPaddleCenterY = leftPaddleY + paddleHeight / 2;
 				const distanceFromCenter = ballY - leftPaddleCenterY;
-				ballSpeedY = distanceFromCenter * ballOffset * sizeSpeedRatio;
-				ballSpeedX = -ballSpeedX;	
+				ballSpeedX *= -1;
+				if (ballSpeedX < 0)
+					ballSpeedX -= ballSpeedIncrease;
+				else
+					ballSpeedX += ballSpeedIncrease;
+				ballSpeedY += distanceFromCenter * ballAngleOffset * sizeSpeedRatio * Math.abs(ballSpeedX);
 			}
 			else if (ballX + 8 > canvas.width - paddleWidth && ballY > rightPaddleY && ballY < rightPaddleY + paddleHeight)
 			{
 				const rightPaddleCenterY = rightPaddleY + paddleHeight / 2;
 				const distanceFromCenter = ballY - rightPaddleCenterY;
-				ballSpeedY = distanceFromCenter * ballOffset * sizeSpeedRatio;
-				ballSpeedX = -ballSpeedX;
+				ballSpeedX *= -1;
+				if (ballSpeedX < 0)
+					ballSpeedX -= ballSpeedIncrease;
+				else
+					ballSpeedX += ballSpeedIncrease;
+				ballSpeedY += distanceFromCenter * ballAngleOffset * sizeSpeedRatio * Math.abs(ballSpeedX);
 			}
 			if (ballX - 8 < 0) {
 				ballX = canvas.width / 2;
-				ballY = canvas.width / 2;
-				ballSpeedX = -ballSpeedX;
+				ballY = canvas.height / 2;
+				ballSpeedX = defaultSpeedX;
+				ballSpeedY = defaultSpeedY;
 				scoreRight += 1;
 			} else if (ballX + 8 > canvas.width) {
-			ballX = canvas.width / 2;
-			ballY = canvas.height / 2;
-			ballSpeedX = -ballSpeedX;
-			scoreLeft += 1;
+				ballX = canvas.width / 2;
+				ballY = canvas.height / 2;
+				ballSpeedX = -defaultSpeedX;
+				ballSpeedY = -defaultSpeedY;
+				scoreLeft += 1;
 			}
 		};
 		
@@ -134,10 +147,11 @@
 	};
 
 	useEffect(() => {
+		const playerSpeed = 10;
 		const handleKeyDown = (event) => {
 		  if (canvasRef.current) {
-			if (event.key === 'ArrowUp') leftPaddleY -= 8;
-			else if (event.key === 'ArrowDown') leftPaddleY += 8;
+			if (event.key === 'ArrowUp') leftPaddleY -= playerSpeed;
+			else if (event.key === 'ArrowDown') leftPaddleY += playerSpeed;
 			leftPaddleY = Math.max(0, Math.min(leftPaddleY, canvasRef.current.height - paddleHeight));
 		  }
 		};
