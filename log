@@ -1,0 +1,8 @@
+1. Now virtual environment works at startup of the backend container
+2. Requirements.txt changed accordingly for the Chat functionality
+3. Now the server works with the InMemoryChannelLayer, maybe should be changed to redis later
+3. Added A django Chat application
+4. 
+
+A consumer is a python file that handles communications between backend and frontend
+connecting, disconnnection, receiving messages and posting them to the room
