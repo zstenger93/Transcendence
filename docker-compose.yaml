@@ -25,6 +25,7 @@ services:
     build:
       context: .
       dockerfile: docker/backend/backend.Dockerfile
+    image: transcendence_backend
     volumes:
       - ${PWD}:/app/
     ports:
