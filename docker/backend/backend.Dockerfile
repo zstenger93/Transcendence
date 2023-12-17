@@ -11,10 +11,14 @@ RUN apt update && \
     apt install python3-pip -y && \
     cd .. && rm -rf Python-3.12.0
 
-
 COPY docker/backend/backend.sh /app/
 RUN chmod +x /app/backend.sh
 
 EXPOSE 8000
 
+<<<<<<< HEAD
 ENTRYPOINT [ "./backend.sh" ]
+=======
+# ENTRYPOINT ["tail", "-f", "/dev/null"]
+ENTRYPOINT ["docker/backend/backend.sh"]
+>>>>>>> 77d3998f6cecbbc71dd3bdd1d0241fcb17574bd8
