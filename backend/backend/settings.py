@@ -30,8 +30,10 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '10.13.7.5']
 # Authentication settings
 REDIRECT_URI = "http://localhost:8000/auth_callback"
 
-# Application definition
 
+# ASGI_APPLICATION = 'backend.asgi.application'
+
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,6 +44,9 @@ INSTALLED_APPS = [
 
     'authentication',
 	# 'leaderboard',
+
+    'daphne'	# Is a HTTP, HTTP2 and WebSocket protocol server for ASGI and ASGI-HTTP for django channels
+    'channels'  # To handle WebSockets, chat protocols, IoT protocols, and more.
 ]
 
 MIDDLEWARE = [
