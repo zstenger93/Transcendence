@@ -80,6 +80,7 @@
 		
 		// This Monster resized the field
 		const handleResize = () => {
+			if (!canvasRef.current) return;
 			const screenWidth = window.innerWidth;
 			const canvasWidth = 0.8 * screenWidth;
 			const canvasHeight = (canvasWidth / 16) * 9;
