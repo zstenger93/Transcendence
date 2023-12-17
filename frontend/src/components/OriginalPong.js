@@ -5,7 +5,7 @@ import React, { useEffect, useRef } from 'react';
 
 const OriginalPong = () => {
 	// Default Parameters
-	let paddleOffset = 0.05;
+	let paddleOffset = 20;
 	let scoreLeft = 0;
 	let scoreRight = 0;
 	const canvasRef = useRef(null);
@@ -38,7 +38,7 @@ const OriginalPong = () => {
 			rightPaddleY += aiSpeed * dt * sizeSpeedRatio;
 		else if (ballY < rightPaddleY + paddleHeight / 2)
 			rightPaddleY -= aiSpeed * dt * sizeSpeedRatio;
-		ctx.fillRect(canvas.width - paddleWidth - (sizeSpeedRatio / paddleOffset), rightPaddleY, paddleWidth, paddleHeight);
+		ctx.fillRect(canvas.width - paddleWidth - (sizeSpeedRatio * paddleOffset), rightPaddleY, paddleWidth, paddleHeight);
 	}
 	// This function Updates The Ball Positions
 	const updateBallPosition = (canvas) => {
@@ -46,8 +46,8 @@ const OriginalPong = () => {
 		ballY += ballSpeedY * dt * sizeSpeedRatio;
 		if (ballY - 8 < 0 || ballY + 8 > canvas.height)
 		  ballSpeedY = -ballSpeedY;
-		if ((ballX - 8 < paddleWidth + (sizeSpeedRatio / paddleOffset) && ballY > leftPaddleY && ballY < leftPaddleY + paddleHeight)
-			|| (ballX + 8 > canvas.width - paddleWidth - (sizeSpeedRatio / paddleOffset)
+		if ((ballX - 8 < paddleWidth + (sizeSpeedRatio * paddleOffset) && ballY > leftPaddleY && ballY < leftPaddleY + paddleHeight)
+			|| (ballX + 8 > canvas.width - paddleWidth - (sizeSpeedRatio * paddleOffset)
 			&& ballY > rightPaddleY && ballY < rightPaddleY + paddleHeight))
 		  ballSpeedX = -ballSpeedX;
 		if (ballX - 8 < 0) {
@@ -62,14 +62,15 @@ const OriginalPong = () => {
 		  scoreLeft += 1;
 		}
 	  };
-
+	
+	// this function draws scores
 	const drawScores = (ctx, canvas) => {
 		ctx.fillStyle = '#FFFFFF';
 		ctx.font = '80px Helvetica';
 		ctx.fillText(`${scoreLeft}`, canvas.width / 2 - 100, 100);
 		ctx.fillText(`${scoreRight}`, canvas.width / 2 + 60, 100);
 	};
-
+	// this Function Surprise draws a ball
 	const drawBall = (ctx, canvas) => {
 		ctx.beginPath();
 		ctx.arc(ballX, ballY, 8, 0, Math.PI * 2);
@@ -84,8 +85,8 @@ const OriginalPong = () => {
 		const canvasHeight = (canvasWidth / 16) * 9;
 		canvasRef.current.width = canvasWidth;
 		canvasRef.current.height = canvasHeight;
-		paddleWidth = canvasRef.current ? canvasRef.current.width / 80 : 0;
-		paddleHeight = canvasRef.current ? canvasRef.current.width / 20 : 0;
+		paddleWidth = canvasRef.current ? canvasRef.current.width / 80 : 1;
+		paddleHeight = canvasRef.current ? canvasRef.current.width / 20 : 1;
 		sizeSpeedRatio = canvasRef.current ? canvasRef.current.width / canvasDefaultWidth : 1;
 	  };
   
@@ -99,7 +100,7 @@ const OriginalPong = () => {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	drawWhiteStripe(ctx, canvas);
 	ctx.fillStyle = '#FF0000';
-	ctx.fillRect(sizeSpeedRatio / paddleOffset, leftPaddleY, paddleWidth, paddleHeight);
+	ctx.fillRect(sizeSpeedRatio * paddleOffset, leftPaddleY, paddleWidth, paddleHeight);
 	ArtificialInteligence(ctx, canvas);
 	updateBallPosition(canvas);
 	drawBall(ctx, canvas);
