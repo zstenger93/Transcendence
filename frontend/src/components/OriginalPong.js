@@ -5,7 +5,7 @@ import React, { useEffect, useRef } from 'react';
 
 const OriginalPong = () => {
 	// Default Parameters
-	let paddleOffset = 20;
+	let paddleOffset = 0.05;
 	let scoreLeft = 0;
 	let scoreRight = 0;
 	const canvasRef = useRef(null);
@@ -15,10 +15,10 @@ const OriginalPong = () => {
 	let rightPaddleY = canvasRef.current ? canvasRef.current.height / 2 - paddleHeight / 2 : 0;
 	let ballX = canvasRef.current ? canvasRef.current.width / 2 : 0;
 	let ballY = canvasRef.current ? canvasRef.current.height / 2 : 0;
-	let ballSpeedX = 100;
+	let ballSpeedX = 200;
 	let ballSpeedY = 20;
 	let canvasDefaultWidth = 1920;
-	let sizeSpeedRatio = canvasRef.current ? canvasDefaultWidth / canvasRef.current.width : 1;
+	let sizeSpeedRatio = canvasRef.current ? canvasRef.current.width / canvasDefaultWidth : 1;
 	let lastFrame = 0;
 	let dt = 0;
 
@@ -33,11 +33,12 @@ const OriginalPong = () => {
 	};
 	// This is bloody AI
 	const ArtificialInteligence = (ctx, canvas) => {
+		const aiSpeed = 40;
 		if (ballY > rightPaddleY + paddleHeight / 2)
-			rightPaddleY += 4
+			rightPaddleY += aiSpeed * dt * sizeSpeedRatio;
 		else if (ballY < rightPaddleY + paddleHeight / 2)
-			rightPaddleY -= 4
-		ctx.fillRect(canvas.width - paddleWidth - paddleOffset, rightPaddleY, paddleWidth, paddleHeight);
+			rightPaddleY -= aiSpeed * dt * sizeSpeedRatio;
+		ctx.fillRect(canvas.width - paddleWidth - (sizeSpeedRatio / paddleOffset), rightPaddleY, paddleWidth, paddleHeight);
 	}
 	// This function Updates The Ball Positions
 	const updateBallPosition = (canvas) => {
@@ -45,7 +46,9 @@ const OriginalPong = () => {
 		ballY += ballSpeedY * dt * sizeSpeedRatio;
 		if (ballY - 8 < 0 || ballY + 8 > canvas.height)
 		  ballSpeedY = -ballSpeedY;
-		if ((ballX - 8 < paddleWidth + paddleOffset && ballY > leftPaddleY && ballY < leftPaddleY + paddleHeight) || (ballX + 8 > canvas.width - paddleWidth - paddleOffset && ballY > rightPaddleY && ballY < rightPaddleY + paddleHeight))
+		if ((ballX - 8 < paddleWidth + (sizeSpeedRatio / paddleOffset) && ballY > leftPaddleY && ballY < leftPaddleY + paddleHeight)
+			|| (ballX + 8 > canvas.width - paddleWidth - (sizeSpeedRatio / paddleOffset)
+			&& ballY > rightPaddleY && ballY < rightPaddleY + paddleHeight))
 		  ballSpeedX = -ballSpeedX;
 		if (ballX - 8 < 0) {
 			ballX = canvas.width / 2;
@@ -83,7 +86,7 @@ const OriginalPong = () => {
 		canvasRef.current.height = canvasHeight;
 		paddleWidth = canvasRef.current ? canvasRef.current.width / 80 : 0;
 		paddleHeight = canvasRef.current ? canvasRef.current.width / 20 : 0;
-
+		sizeSpeedRatio = canvasRef.current ? canvasRef.current.width / canvasDefaultWidth : 1;
 	  };
   
 
@@ -96,7 +99,7 @@ const OriginalPong = () => {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	drawWhiteStripe(ctx, canvas);
 	ctx.fillStyle = '#FF0000';
-	ctx.fillRect(paddleOffset, leftPaddleY, paddleWidth, paddleHeight);
+	ctx.fillRect(sizeSpeedRatio / paddleOffset, leftPaddleY, paddleWidth, paddleHeight);
 	ArtificialInteligence(ctx, canvas);
 	updateBallPosition(canvas);
 	drawBall(ctx, canvas);
