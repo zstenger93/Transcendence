@@ -3,44 +3,44 @@ version: '3.8'
 # for deployment
 
 services:
-  # frontend:
-    # container_name: frontend
-    # build:
-    #   context: .
-    #   dockerfile: docker/frontend/frontend.Dockerfile
-    # volumes:
-    #   - ${PWD}:/app/
-    # ports:
-    #   - 8000:8000
-    # restart: unless-stopped
-    # entrypoint: /app/docker/frontend/frontend.sh
-    # depends_on:
-    #   - backend
-
-
-  backend:
-    container_name: backend
-    env_file:
-      - ./.env
+  frontend:
+    container_name: frontend
     build:
       context: .
-      dockerfile: docker/backend/backend.Dockerfile
-    image: transcendence_backend
+      dockerfile: docker/frontend/frontend.Dockerfile
+    image: transcendence_frontend
     volumes:
       - ${PWD}:/app/
     ports:
-      - 8000:8000
-    # restart: unless-stopped
-    entrypoint: /app/docker/backend/backend.sh
-    depends_on:
-      - db
+      - 3000:3000
+    restart: unless-stopped
+    command: npm start
+    # depends_on:
+      # - backend
+  
+  # backend:
+  #   container_name: backend
+  #   env_file:
+  #     - ./.env
+  #   build:
+  #     context: .
+  #     dockerfile: docker/backend/backend.Dockerfile
+  #   image: transcendence_backend
+  #   volumes:
+  #     - ${PWD}:/app/
+  #   ports:
+  #     - 8000:8000
+  #   # restart: unless-stopped
+  #   entrypoint: /app/docker/backend/backend.sh
+  #   depends_on:
+  #     - db
 
 
-  db:
-    image: postgres
-    environment:
-      POSTGRES_DB: transcend_users_db
-      POSTGRES_USER: transcend_user
-      POSTGRES_PASSWORD: transcend_pwd
-    ports:
-      - "5432:5432"
+  # db:
+  #   image: postgres
+  #   environment:
+  #     POSTGRES_DB: transcend_users_db
+  #     POSTGRES_USER: transcend_user
+  #     POSTGRES_PASSWORD: transcend_pwd
+  #   ports:
+  #     - "5432:5432"
