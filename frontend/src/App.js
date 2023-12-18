@@ -9,6 +9,7 @@ import Profile from './components/Profile';
 import Matchmaking from './components/Matchmaking';
 import backgroundImage from './images/welcome.jpg';
 import OriginalPong from './components/OriginalPong';
+import ChoosePongMode from './components/ChoosePongMode';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
 								<Route path="profile" element={<Profile />} />
 								<Route path="about" element={<About />} />
 								<Route path="originalpong" element={<OriginalPong />} />
+								<Route path="choosepongmode" element={<ChoosePongMode />} />
 							</Routes>
 						</div>
 					}
