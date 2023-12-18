@@ -1,12 +1,13 @@
-	import React, { useEffect, useRef } from 'react';
+	import React, { useEffect, useRef, useState } from 'react';
 
 	const OriginalPong = () => {
-		// Default Parameters
+		const [gameState, setGameState] = useState('start');
+		const canvasRef = useRef(null);
+		// default parameters
 		const defaultSpeedX = 300;
 		const defaultSpeedY = 20;
 		let scoreLeft = 0;
 		let scoreRight = 0;
-		const canvasRef = useRef(null);
 		let paddleWidth = canvasRef.current ? canvasRef.current.width / 80 : 0;
 		let paddleHeight = canvasRef.current ? canvasRef.current.width / 20 : 0;
 		let leftPaddleY = canvasRef.current ? canvasRef.current.height / 2 - paddleHeight / 2 : 0;
@@ -19,6 +20,11 @@
 		let sizeSpeedRatio = canvasRef.current ? canvasRef.current.width / canvasDefaultWidth : 1;
 		let lastFrame = 0;
 		let dt = 0;
+
+		const startGame = () => {
+			setGameState('playing');
+		};
+
 
 		// This Function Adds A White Stripe in The middle of the map
 		const drawWhiteStripe = (ctx, canvas) => {
@@ -95,6 +101,23 @@
 				scoreLeft += 1;
 			}
 		};
+
+		const handlePlayAgain = () => {
+			setGameState('start');
+			scoreLeft = 0;
+			scoreRight = 0;
+			paddleWidth = canvasRef.current ? canvasRef.current.width / 80 : 0;
+			paddleHeight = canvasRef.current ? canvasRef.current.width / 20 : 0;
+			leftPaddleY = canvasRef.current ? canvasRef.current.height / 2 - paddleHeight / 2 : 0;
+			rightPaddleY = canvasRef.current ? canvasRef.current.height / 2 - paddleHeight / 2 : 0;
+			ballX = canvasRef.current ? canvasRef.current.width / 2 : 400;
+			ballY = canvasRef.current ? canvasRef.current.height / 2 : 400;
+			ballSpeedX = defaultSpeedX;
+			ballSpeedY = defaultSpeedY;
+			sizeSpeedRatio = canvasRef.current ? canvasRef.current.width / canvasDefaultWidth : 1;
+			lastFrame = 0;
+			dt = 0;
+		};
 		
 		// this function draws scores
 		const drawScores = (ctx, canvas) => {
@@ -134,6 +157,19 @@
 			ballY = Math.max(0, Math.min(ballY, canvasRef.current.height));
 		};
 	
+	const drawStartScreen = (ctx, canvas) => {
+		ctx.fillStyle = '#FFFFFF';
+		ctx.font = '40px Helvetica';
+		ctx.fillText('Press "Start" to begin', canvas.width / 2 - 180, canvas.height / 2 - 40);
+	};
+	
+	const drawGameOverScreen = (ctx, canvas) => {
+		ctx.fillStyle = '#FFFFFF';
+		ctx.font = '40px Helvetica';
+		ctx.fillText(gameState === 'win' ? 'You Win!' : 'Game Over', canvas.width / 2 - 100, canvas.height / 2 - 40);
+		ctx.font = '20px Helvetica';
+		ctx.fillText('Press "Play Again" to restart', canvas.width / 2 - 120, canvas.height / 2 + 20);
+	};
 
 	const draw = (timestamp) => {
 		const canvas = canvasRef.current;
@@ -141,27 +177,38 @@
 		const ctx = canvas.getContext('2d');
 		dt = (timestamp - lastFrame) / 1000;
 		lastFrame = timestamp;
-		paddleWidth = canvasRef.current ? canvasRef.current.width / 80 : 0;
-		paddleHeight = canvasRef.current ? canvasRef.current.width / 20 : 0;
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		drawWhiteStripe(ctx, canvas);
-		ctx.fillStyle = '#FF0000';
-		ctx.fillRect(0, leftPaddleY, paddleWidth, paddleHeight);
-		ArtificialInteligence(ctx, canvas);
-		updateBallPosition(canvas);
-		drawBall(ctx, canvas);
-		drawScores(ctx, canvas);
+		if (gameState === 'restart') {
+			drawGameOverScreen(ctx, canvas);
+		}
+		else if (gameState === 'playing')
+		{
+			paddleWidth = canvasRef.current ? canvasRef.current.width / 80 : 0;
+			paddleHeight = canvasRef.current ? canvasRef.current.width / 20 : 0;
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			drawWhiteStripe(ctx, canvas);
+			ctx.fillStyle = '#FF0000';
+			ctx.fillRect(0, leftPaddleY, paddleWidth, paddleHeight);
+			ArtificialInteligence(ctx, canvas);
+			updateBallPosition(canvas);
+			drawBall(ctx, canvas);
+			drawScores(ctx, canvas);
+		} else {
+			drawStartScreen(ctx, canvas);
+		}
 		requestAnimationFrame(draw);
+
 	};
 
 	useEffect(() => {
 		const playerSpeed = 20;
 		const handleKeyDown = (event) => {
-		  if (canvasRef.current) {
-			if (event.key === 'ArrowUp') leftPaddleY -= playerSpeed;
-			else if (event.key === 'ArrowDown') leftPaddleY += playerSpeed;
-			leftPaddleY = Math.max(0, Math.min(leftPaddleY, canvasRef.current.height - paddleHeight));
-		  }
+			if (canvasRef.current && gameState === 'playing') {
+				if (canvasRef.current) {
+					if (event.key === 'ArrowUp') leftPaddleY -= playerSpeed;
+					else if (event.key === 'ArrowDown') leftPaddleY += playerSpeed;
+					leftPaddleY = Math.max(0, Math.min(leftPaddleY, canvasRef.current.height - paddleHeight));
+				}
+			}
 		};
 		document.addEventListener('keydown', handleKeyDown);
 		window.addEventListener('resize', handleResize);
@@ -170,16 +217,28 @@
 		return () => {
 		  document.removeEventListener('keydown', handleKeyDown);
 		};
-	  }, [canvasRef]);
+	}, [canvasRef, gameState]);
 	  
-	return (
+	  return (
 		<div className="flex justify-center items-center h-screen">
-		<canvas
-			ref={canvasRef}
-			className="border-8 border-solid border-white bg-black"
-		></canvas>
+		  <canvas ref={canvasRef} className="border-8 border-solid border-white bg-black"></canvas>
+		  {gameState === 'start' && (
+			<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
+			  <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={startGame}>
+				Start
+			  </button>
+			</div>
+		  )}
+		  {gameState !== 'start' && gameState !== 'playing' && (
+			<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
+			  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handlePlayAgain}>
+				Play Again
+			  </button>
+			</div>
+		  )}
 		</div>
-	);
+	  );
 	};
+
 
 	export default OriginalPong;
