@@ -180,5 +180,6 @@
 		></canvas>
 		</div>
 	);
+	};
 
 	export default OriginalPong;
