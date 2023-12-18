@@ -31,7 +31,7 @@
 		};
 		// This is bloody AI
 		const ArtificialInteligence = (ctx, canvas) => {
-			const aiSpeed = 240;
+			const aiSpeed = 440;
 			let tempPadleY = rightPaddleY;
 			if (ballY > rightPaddleY + paddleHeight / 2)
 			  tempPadleY += aiSpeed * dt * sizeSpeedRatio;
@@ -155,7 +155,7 @@
 	};
 
 	useEffect(() => {
-		const playerSpeed = 10;
+		const playerSpeed = 20;
 		const handleKeyDown = (event) => {
 		  if (canvasRef.current) {
 			if (event.key === 'ArrowUp') leftPaddleY -= playerSpeed;
