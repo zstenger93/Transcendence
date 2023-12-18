@@ -1,0 +1,26 @@
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+    <h1>User List</h1>
+
+    <ul>
+        {% for user in users %}
+        <li>
+            {{ user.email }}
+            <form method="post" action="{% url 'send_friend_request' %}">
+                {% csrf_token %}
+                <input type="hidden" name="receiver_id" value="{{ user.id }}">
+                <button type="submit">Send Friend Request</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>
