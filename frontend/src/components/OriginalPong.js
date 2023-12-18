@@ -4,7 +4,10 @@ import backgroundImage from "../images/pongCover.png";
 const GameCanvas = () => {
   // Default Parameters
   const defaultSpeedX = 300;
+  const winScore = 2;
   const defaultSpeedY = 20;
+  const [scoreLeftReact, setScoreLeft] = useState(0);
+  const [scoreRightReact, setScoreRight] = useState(0);
   let scoreLeft = 0;
   let scoreRight = 0;
   const canvasRef = useRef(null);
@@ -107,12 +110,14 @@ const GameCanvas = () => {
       ballSpeedX = defaultSpeedX;
       ballSpeedY = defaultSpeedY;
       scoreRight += 1;
+      setScoreRight(scoreRight);
     } else if (ballX + 8 > canvas.width) {
       ballX = canvas.width / 2;
       ballY = canvas.height / 2;
       ballSpeedX = -defaultSpeedX;
       ballSpeedY = -defaultSpeedY;
       scoreLeft += 1;
+      setScoreLeft(scoreLeft);
     }
   };
 
@@ -134,36 +139,38 @@ const GameCanvas = () => {
 
   // This Monster resized the field
   const handleResize = () => {
-    const screenWidth = window.innerWidth;
-    const canvasWidth = 0.8 * screenWidth;
-    const canvasHeight = (canvasWidth / 16) * 9;
-    canvasRef.current.width = canvasWidth;
-    canvasRef.current.height = canvasHeight;
-    const sizeRatioX = canvasRef.current
-      ? canvasRef.current.width / canvasWidth
-      : 1;
-    const sizeRatioY = canvasRef.current
-      ? canvasRef.current.height / canvasHeight
-      : 1;
-    paddleWidth = canvasRef.current ? canvasRef.current.width / 80 : 1;
-    paddleHeight = canvasRef.current ? canvasRef.current.width / 20 : 1;
-    sizeSpeedRatio = canvasRef.current
-      ? canvasRef.current.width / canvasDefaultWidth
-      : 1;
-    ballX *= sizeRatioX;
-    ballY *= sizeRatioY;
-    leftPaddleY *= sizeRatioY;
-    rightPaddleY *= sizeRatioY;
-    leftPaddleY = Math.max(
-      0,
-      Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
-    );
-    rightPaddleY = Math.max(
-      0,
-      Math.min(rightPaddleY, canvasRef.current.height - paddleHeight)
-    );
-    ballX = Math.max(0, Math.min(ballX, canvasRef.current.width));
-    ballY = Math.max(0, Math.min(ballY, canvasRef.current.height));
+    if (canvasRef.current) {
+      const screenWidth = window.innerWidth;
+      const canvasWidth = 0.8 * screenWidth;
+      const canvasHeight = (canvasWidth / 16) * 9;
+      canvasRef.current.width = canvasWidth;
+      canvasRef.current.height = canvasHeight;
+      const sizeRatioX = canvasRef.current
+        ? canvasRef.current.width / canvasWidth
+        : 1;
+      const sizeRatioY = canvasRef.current
+        ? canvasRef.current.height / canvasHeight
+        : 1;
+      paddleWidth = canvasRef.current ? canvasRef.current.width / 80 : 1;
+      paddleHeight = canvasRef.current ? canvasRef.current.width / 20 : 1;
+      sizeSpeedRatio = canvasRef.current
+        ? canvasRef.current.width / canvasDefaultWidth
+        : 1;
+      ballX *= sizeRatioX;
+      ballY *= sizeRatioY;
+      leftPaddleY *= sizeRatioY;
+      rightPaddleY *= sizeRatioY;
+      leftPaddleY = Math.max(
+        0,
+        Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
+      );
+      rightPaddleY = Math.max(
+        0,
+        Math.min(rightPaddleY, canvasRef.current.height - paddleHeight)
+      );
+      ballX = Math.max(0, Math.min(ballX, canvasRef.current.width));
+      ballY = Math.max(0, Math.min(ballY, canvasRef.current.height));
+    }
   };
 
   const draw = (timestamp) => {
@@ -186,7 +193,7 @@ const GameCanvas = () => {
   };
 
   useEffect(() => {
-    const playerSpeed = 20;
+    const playerSpeed = 30;
     const handleKeyDown = (event) => {
       if (canvasRef.current) {
         if (event.key === "ArrowUp") leftPaddleY -= playerSpeed;
@@ -203,15 +210,90 @@ const GameCanvas = () => {
     draw(0);
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("resize", handleResize);
     };
   }, [canvasRef]);
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <canvas
-        ref={canvasRef}
-        className="border-8 border-solid border-white bg-black"
-      ></canvas>
+      {scoreLeftReact === winScore || scoreRightReact === winScore ? (
+        scoreLeftReact === winScore ? (
+          <WinScreen />
+        ) : (
+          <LoseScreen />
+        )
+      ) : (
+        <canvas
+          ref={canvasRef}
+          className="border-8 border-solid border-white bg-black"
+        ></canvas>
+      )}
+    </div>
+  );
+};
+
+const WinScreen = () => {
+  const [gameStarted, setGameStarted] = useState(false);
+
+  const handleButtonClick = () => {
+    setGameStarted(true);
+  };
+
+  return (
+    <div className="flex justify-center items-center h-screen">
+      {gameStarted ? (
+        <GameCanvas />
+      ) : (
+        <div className="relative border-8 border-white">
+          <img
+            src={backgroundImage}
+            style={{ width: "80vw", height: "100%", objectFit: "cover" }}
+            alt="Background"
+          />
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+            <p> YOU WON!</p>
+            <button
+              onClick={handleButtonClick}
+              className="px-4 py-2 bg-white text-black"
+            >
+              Start Game
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const LoseScreen = () => {
+  const [gameStarted, setGameStarted] = useState(false);
+
+  const handleButtonClick = () => {
+    setGameStarted(true);
+  };
+
+  return (
+    <div className="flex justify-center items-center h-screen">
+      {gameStarted ? (
+        <GameCanvas />
+      ) : (
+        <div className="relative border-8 border-white">
+          <img
+            src={backgroundImage}
+            style={{ width: "80vw", height: "100%", objectFit: "cover" }}
+            alt="Background"
+          />
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+            <p> YOU LOST!</p>
+            <button
+              onClick={handleButtonClick}
+              className="px-4 py-2 bg-white text-black"
+            >
+              Start Game
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
