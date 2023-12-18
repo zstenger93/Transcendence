@@ -1,5 +1,5 @@
 import React from 'react';
-import backgroundImage from '../images/welcome.jpg';
+import backgroundImage from '../images/bg0.png';
 import { Link } from 'react-router-dom';
 
 function Games() {

@@ -7,7 +7,7 @@ import Sidebar from './components/Sidebar';
 import Welcome from './components/Welcome';
 import Profile from './components/Profile';
 import Matchmaking from './components/Matchmaking';
-import backgroundImage from './images/welcome.jpg';
+import backgroundImage from './images/bg0.png';
 import OriginalPong from './components/OriginalPong';
 import ChoosePongMode from './components/ChoosePongMode';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
