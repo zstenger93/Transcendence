@@ -38,7 +38,7 @@ function About() {
     },
     {
       name: "Laszlo",
-      title: '"I use Arch btw"',
+      title: '"Absolutely Proprietary"',
       description: `Customization is his middle name, and he navigates through life with the precision of a well-crafted script. 
 			Proprietary software? No thanks. He lives for that sweet feeling of freedom and collaboration in the Linux realm. 
 			Tux the penguin is his spirit animal, and the terminal is his happy place.`,
