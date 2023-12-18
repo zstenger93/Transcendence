@@ -7,7 +7,7 @@ function About() {
 		{ name: 'Jergashe', title: '"Can I drop the table?"', description: 'Description 2', image: 'https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp' },
 		{ name: 'Azer', title: 'DevOoOoops', description: 'Description 3', image: 'https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp' },
 		{ name: 'Karlis', title: '"I can fix it"', description: 'Description 4', image: 'https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp' },
-		{ name: 'Laszlo', title: 'Mr. Git', description: 'Description 5', image: 'https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp' },
+		{ name: 'Laszlo', title: '"I use Arch btw"', description: 'Description 5', image: 'https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp' },
 	];
 
 	const firstRowMembers = teamMembers.slice(0, 2);
