@@ -113,7 +113,7 @@ function FriendsList() {
       <h3 className="text-xl text-gray-300 font-nosifer font-bold mb-4 text-center">
         Friend List
       </h3>
-      <table className="bg-white bg-opacity-50 w-full border-collapse border border-gray-500 mx-auto">
+      <table className="bg-purple-900 bg-opacity-60 w-full border-collapse border border-gray-500 mx-auto">
         <thead>
           <tr>
             <th className="p-2 border border-gray-900 mx-auto">Name</th>
@@ -124,14 +124,14 @@ function FriendsList() {
         </thead>
         <tbody>
           {friendsListData.map((friend, index) => (
-            <tr key={index} className="bg-grey-300">
+            <tr key={index} className="bg-white bg-opacity-10">
               <td className="p-2 border border-gray-900 mx-auto">
                 {friend.name}
               </td>
               <td className="p-2 border text-center border-gray-900 mx-auto">
                 <a
                   href={friend.profileLink}
-                  className="text-blue-900 underline"
+                  className="text-blue-700 underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -152,7 +152,7 @@ function MatchHistory() {
       <h3 className="text-xl text-gray-300 font-nosifer font-bold mb-4 text-center">
         Match History
       </h3>
-      <table className="bg-white bg-opacity-50 w-full border-collapse border border-gray-900 mx-auto">
+      <table className="bg-purple-900 bg-opacity-60 w-full border-collapse border border-gray-900 mx-auto">
         <thead>
           <tr>
             <th className="p-2 border border-gray-900 mx-auto">Opponent</th>
@@ -235,20 +235,20 @@ function Profile() {
           <h2 className="text-gray-300 font-nosifer text-1.5xl font-bold">
             {userDetails.title} {userDetails.username}
           </h2>
-          <p className="text-gray-400">{userDetails.email}</p>
+          <p className="text-purple-400">{userDetails.email}</p>
 
           <div className="mt-8">
             <h3 className="font-nosifer text-gray-300 font-semibold mb-4">
               About Me
             </h3>
-            <p className="text-gray-400">{userDetails.about}</p>
+            <p className="text-purple-400">{userDetails.about}</p>
           </div>
 
           <div className="mt-8">
             <h3 className="font-nosifer text-gray-300 font-semibold mb-4">
               User Details
             </h3>
-            <p className="text-gray-400">
+            <p className="text-purple-400">
               <strong>Age:</strong> {userDetails.age} years old
               <br />
               <strong>Gender:</strong> {userDetails.gender}
