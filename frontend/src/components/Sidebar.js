@@ -24,7 +24,7 @@ const SidebarIcon = ({ icon, text = 'tooltip', to, margin }) => {
 	return (
 		<Link to={to} className={`relative flex items-center justify-center
 								h-12 w-12 mt-2 mb-2 mx-auto shadow-lg
-								bg-blue-800 bg-opacity-80 text-orange-300 hover:bg-blue-600
+								bg-purple-900 bg-opacity-50 text-gray-300 hover:bg-blue-600
 								hover:text-white rounded-3xl hover:rounded-xl transition-all
 								duration-300 ease-linear cursor-pointer group ${margin}`}>
 			{icon}
