@@ -37,7 +37,7 @@ const userDetails = {
 function FriendsList() {
 	return (
 		<div className="bg-gray-900 bg-opacity-80 p-4 rounded-md max-h-96 overflow-y-auto">
-			<h3 className="text-xl text-white font-bold mb-4 text-center">Friend List</h3>
+			<h3 className="text-xl text-gray-300 font-nosifer font-bold mb-4 text-center">Friend List</h3>
 			<table className="bg-white bg-opacity-50 w-full border-collapse border border-gray-500 mx-auto">
 				<thead>
 					<tr>
@@ -65,7 +65,7 @@ function FriendsList() {
 function MatchHistory() {
 	return (
 		<div className="bg-gray-900 bg-opacity-80 p-6 shadow-xl rounded-md max-h-96 overflow-y-auto">
-			<h3 className="text-xl text-white font-bold mb-4 text-center">Match History</h3>
+			<h3 className="text-xl text-gray-300 font-nosifer font-bold mb-4 text-center">Match History</h3>
 			<table className="bg-white bg-opacity-50 w-full border-collapse border border-gray-900 mx-auto">
 				<thead>
 					<tr>
@@ -117,16 +117,16 @@ function Profile() {
 						alt="User Avatar"
 						className="w-20 h-20 rounded-full mx-auto mb-4"
 					/>
-					<h2 className="text-white text-2xl font-bold">{userDetails.title} {userDetails.username}</h2>
+					<h2 className="text-gray-300 font-nosifer text-1.5xl font-bold">{userDetails.title} {userDetails.username}</h2>
 					<p className="text-gray-400">{userDetails.email}</p>
 
 					<div className="mt-8">
-						<h3 className="text-xl text-white font-semibold mb-4">About Me</h3>
+						<h3 className="font-nosifer text-gray-300 font-semibold mb-4">About Me</h3>
 						<p className="text-gray-400">{userDetails.about}</p>
 					</div>
 
 					<div className="mt-8">
-						<h3 className="text-xl text-white font-semibold mb-4">User Details</h3>
+						<h3 className="font-nosifer text-gray-300 font-semibold mb-4">User Details</h3>
 						<p className="text-gray-400">
 							<strong>Age:</strong> {userDetails.age} years old<br />
 							<strong>Gender:</strong> {userDetails.gender}<br />
