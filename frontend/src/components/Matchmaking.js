@@ -1,5 +1,5 @@
 import React from 'react';
-import backgroundImage from '../images/welcome.jpg';
+import backgroundImage from '../images/bg0.png';
 
 function Matchmaking() {
 	return (
