@@ -4,8 +4,11 @@ import React, { useEffect, useRef, useState } from 'react';
 
 const PongCanvas = () => {
 		// Default Parameters
-		const defaultSpeedX = 300;
+		const [scoreLeftReact, setScoreLeft] = useState(0);
+		const [scoreRightReact, setScoreRight] = useState(0);
+		const defaultSpeedX = 1200;
 		const defaultSpeedY = 20;
+		const winningScore = 5;
 		let scoreLeft = 0;
 		let scoreRight = 0;
 		const canvasRef = useRef(null);
@@ -89,12 +92,14 @@ const PongCanvas = () => {
 				ballSpeedX = defaultSpeedX;
 				ballSpeedY = defaultSpeedY;
 				scoreRight += 1;
+				setScoreRight(scoreRight);
 			} else if (ballX + 8 > canvas.width) {
 				ballX = canvas.width / 2;
 				ballY = canvas.height / 2;
 				ballSpeedX = -defaultSpeedX;
 				ballSpeedY = -defaultSpeedY;
 				scoreLeft += 1;
+				setScoreLeft(scoreLeft);
 			}
 		};
 		
@@ -113,6 +118,7 @@ const PongCanvas = () => {
 			ctx.fill();
 			ctx.closePath();
 		}
+		
 		
 		// This Monster resized the field
 		const handleResize = () => {
@@ -175,13 +181,97 @@ const PongCanvas = () => {
 		}, [canvasRef]);
 		return (
 			<div className="flex justify-center items-center h-screen">
-			<canvas
-				ref={canvasRef}
-				className="border-8 border-solid border-white bg-black"
-			></canvas>
+			  {scoreLeftReact === winningScore || scoreRightReact === winningScore ? (
+				scoreLeftReact === winningScore ? (
+				  <WinPong />
+				) : (
+				  <LosePong />
+				)
+			  ) : (
+				<canvas ref={canvasRef} className="border-8 border-solid border-white bg-black"></canvas>
+			  )}
 			</div>
+		  );
+}
+
+const LosePong = () => {
+	const [gameStarted, setGameStarted] = useState(false);
+  
+	const handleButtonClick = () => {
+	  setGameStarted(true);
+	};
+  
+	return (
+	  <div className="flex justify-center items-center h-screen">
+		{gameStarted ? (
+		  <PongCanvas />
+		) : (
+		  <div className="relative">
+			<canvas
+			  style={{ background: 'black' }}
+			  width={0.8 * window.innerWidth}
+			  height={(0.8 * window.innerWidth / 16) * 9}
+			  className="border-8 border-solid border-white bg-black"
+			>
+			  {/* {
+				add random stuff here to make it look better
+			  }  */}
+			</canvas>
+  
+			<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+			  <p className="text-white text-lg mb-2">You Lost</p>
+			  <button
+				onClick={handleButtonClick}
+				className="px-4 py-2 bg-white text-black"
+			  >
+				Start Game
+			  </button>
+			</div>
+		  </div>
+		)}
+	  </div>
 	);
-} 
+  };
+
+  const WinPong = () => {
+	const [gameStarted, setGameStarted] = useState(false);
+  
+	const handleButtonClick = () => {
+	  setGameStarted(true);
+	};
+  
+	return (
+	  <div className="flex justify-center items-center h-screen">
+		{gameStarted ? (
+		  <PongCanvas />
+		) : (
+		  <div className="relative">
+			<canvas
+			  style={{ background: 'black' }}
+			  width={0.8 * window.innerWidth}
+			  height={(0.8 * window.innerWidth / 16) * 9}
+			  className="border-8 border-solid border-white bg-black"
+			>
+			  {/* {
+				add random stuff here to make it look better
+			  }  */}
+			</canvas>
+  
+			<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+			  <p className="text-white text-lg mb-2">You Won</p>
+			  <button
+				onClick={handleButtonClick}
+				className="px-4 py-2 bg-white text-black"
+			  >
+				Start Game
+			  </button>
+			</div>
+		  </div>
+		)}
+	  </div>
+	);
+  };
+
 
 
 const OriginalPong = () => {
@@ -202,7 +292,9 @@ const OriginalPong = () => {
 			  height={(0.8 * window.innerWidth / 16) * 9}
 			  className="border-8 border-solid border-white bg-black"
 			>
-			  {/* Add canvas drawing logic here if needed */}
+			  {/* {
+				add random stuff here to make it look better
+			  }  */}
 			</canvas>
   
 			<button
