@@ -1,5 +1,6 @@
 	import React, { useEffect, useRef } from 'react';
 
+function OriginalPong() {
 	const OriginalPong = () => {
 		// Default Parameters
 		const defaultSpeedX = 300;
