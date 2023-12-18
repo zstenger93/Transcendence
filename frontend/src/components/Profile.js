@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import backgroundImage from '../images/welcome.jpg';
+import backgroundImage from '../images/bg0.png';
 
 
 const friendsListData = [
@@ -36,20 +36,20 @@ const userDetails = {
 
 function FriendsList() {
 	return (
-		<div className="bg-red-500 bg-opacity-60 p-4 rounded-md max-h-96 overflow-y-auto">
-			<h3 className="text-xl font-bold mb-4 text-center">Friend List</h3>
-			<table className="bg-white bg-opacity-80 w-full border-collapse border border-gray-500 mx-auto">
+		<div className="bg-gray-900 bg-opacity-80 p-4 rounded-md max-h-96 overflow-y-auto">
+			<h3 className="text-xl text-white font-bold mb-4 text-center">Friend List</h3>
+			<table className="bg-white bg-opacity-50 w-full border-collapse border border-gray-500 mx-auto">
 				<thead>
 					<tr>
-						<th className="p-2 border">Name</th>
-						<th className="p-2 border text-center">Intra</th>
+						<th className="p-2 border border-gray-900 mx-auto">Name</th>
+						<th className="p-2 border text-center border-gray-900 mx-auto">Intra</th>
 					</tr>
 				</thead>
 				<tbody>
 					{friendsListData.map((friend, index) => (
 						<tr key={index} className='bg-grey-300'>
-							<td className="p-2 border">{friend.name}</td>
-							<td className="p-2 border text-center">
+							<td className="p-2 border border-gray-900 mx-auto">{friend.name}</td>
+							<td className="p-2 border text-center border-gray-900 mx-auto">
 								<a href={friend.profileLink} className='text-blue-900 underline' target="_blank" rel="noopener noreferrer">
 									{friend.intra}
 								</a>
@@ -64,28 +64,28 @@ function FriendsList() {
 
 function MatchHistory() {
 	return (
-		<div className="bg-red-500 bg-opacity-60 p-6 shadow-md rounded-md max-h-96 overflow-y-auto">
-			<h3 className="text-xl font-bold mb-4 text-center">Match History</h3>
-			<table className="bg-white bg-opacity-80 w-full border-collapse border border-gray-500 mx-auto">
+		<div className="bg-gray-900 bg-opacity-80 p-6 shadow-xl rounded-md max-h-96 overflow-y-auto">
+			<h3 className="text-xl text-white font-bold mb-4 text-center">Match History</h3>
+			<table className="bg-white bg-opacity-50 w-full border-collapse border border-gray-900 mx-auto">
 				<thead>
 					<tr>
-						<th className="p-2 border">Opponent</th>
-						<th className="p-2 border text-center">Result</th>
-						<th className="p-2 border text-center">Score</th>
-						<th className="p-2 border text-center">Game</th>
-						<th className="p-2 border text-center">Type</th>
+						<th className="p-2 border border-gray-900 mx-auto">Opponent</th>
+						<th className="p-2 border text-center border-gray-900 mx-auto">Result</th>
+						<th className="p-2 border text-center border-gray-900 mx-auto">Score</th>
+						<th className="p-2 border text-center border-gray-900 mx-auto">Game</th>
+						<th className="p-2 border text-center border-gray-900 mx-auto">Type</th>
 					</tr>
 				</thead>
 				<tbody>
 					{matchHistoryData.map((match, index) => (
-						<tr key={index} className='bg-white bg-opacity-80'>
-							<td className="p-2 border">{match.opponent}</td>
-							<td className={`p-2 border text-center ${match.result === 'Win' ? 'text-green-700' : 'text-red-700'}`}>
+						<tr key={index} className='bg-white bg-opacity-10'>
+							<td className="p-2 border border-gray-900 mx-auto">{match.opponent}</td>
+							<td className={`p-2 border text-center border-gray-900 mx-auto ${match.result === 'Win' ? 'text-green-700' : 'text-red-700'}`}>
 								{match.result}
 							</td>
-							<td className="p-2 border text-center">{match.score}</td>
-							<td className="p-2 border text-center">{match.game}</td>
-							<td className={`p-2 border text-center ${match.type === 'Original' ? 'text-blue-700' : 'text-yellow-700'}`}>{match.type}</td>
+							<td className="p-2 border text-center border-gray-900 mx-auto">{match.score}</td>
+							<td className="p-2 border text-center border-gray-900 mx-auto">{match.game}</td>
+							<td className={`p-2 border text-center border-gray-900 mx-auto ${match.type === 'Original' ? 'text-blue-700' : 'text-yellow-700'}`}>{match.type}</td>
 						</tr>
 					))}
 				</tbody>
@@ -109,25 +109,25 @@ function Profile() {
 	};
 
 	return (
-		<div className="flex flex-col items-center justify-center h-screen bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${backgroundImage})` }}>
+		<div className="flex flex-col items-center justify-center h-screen bg-cover bg-center bg-no-repeat shadow-xl" style={{ backgroundImage: `url(${backgroundImage})` }}>
 			<div className="max-w-md flex flex-col items-center">
-				<div className="bg-red-500 bg-opacity-60 rounded-md p-6 shadow-md text-center">
+				<div className="bg-gray-900 bg-opacity-80 rounded-md p-6 shadow-md text-center">
 					<img
 						src="https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp"
 						alt="User Avatar"
 						className="w-20 h-20 rounded-full mx-auto mb-4"
 					/>
-					<h2 className="text-black text-2xl font-bold">{userDetails.title} {userDetails.username}</h2>
-					<p className="text-black-600">{userDetails.email}</p>
+					<h2 className="text-white text-2xl font-bold">{userDetails.title} {userDetails.username}</h2>
+					<p className="text-gray-400">{userDetails.email}</p>
 
 					<div className="mt-8">
-						<h3 className="text-xl font-semibold mb-4">About Me</h3>
-						<p className="text-black-700">{userDetails.about}</p>
+						<h3 className="text-xl text-white font-semibold mb-4">About Me</h3>
+						<p className="text-gray-400">{userDetails.about}</p>
 					</div>
 
 					<div className="mt-8">
-						<h3 className="text-xl font-semibold mb-4">User Details</h3>
-						<p className="text-black-700">
+						<h3 className="text-xl text-white font-semibold mb-4">User Details</h3>
+						<p className="text-gray-400">
 							<strong>Age:</strong> {userDetails.age} years old<br />
 							<strong>Gender:</strong> {userDetails.gender}<br />
 							<strong>School:</strong> {userDetails.school}<br />
