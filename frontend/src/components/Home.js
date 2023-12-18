@@ -4,7 +4,7 @@ import WelcomeMessage from './WelcomeMessage';
 
 function Home() {
 	return (
-		<div className="flex flex-col h-screen bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${backgroundImage})` }}>
+		<div className="flex flex-col h-screen bg-cover bg-center bg-no-repeat font-nosifer" style={{ backgroundImage: `url(${backgroundImage})` }}>
 			<WelcomeMessage />
 		</div>
 	);
