@@ -1,6 +1,5 @@
 	import React, { useEffect, useRef } from 'react';
 
-function OriginalPong() {
 	const OriginalPong = () => {
 		// Default Parameters
 		const defaultSpeedX = 300;
@@ -181,6 +180,5 @@ function OriginalPong() {
 		></canvas>
 		</div>
 	);
-	};
 
 	export default OriginalPong;
