@@ -2,7 +2,7 @@
 
 	const OriginalPong = () => {
 		// Default Parameters
-		const defaultSpeedX = 200;
+		const defaultSpeedX = 300;
 		const defaultSpeedY = 20;
 		let scoreLeft = 0;
 		let scoreRight = 0;
@@ -11,8 +11,8 @@
 		let paddleHeight = canvasRef.current ? canvasRef.current.width / 20 : 0;
 		let leftPaddleY = canvasRef.current ? canvasRef.current.height / 2 - paddleHeight / 2 : 0;
 		let rightPaddleY = canvasRef.current ? canvasRef.current.height / 2 - paddleHeight / 2 : 0;
-		let ballX = canvasRef.current ? canvasRef.current.width / 2 : 0;
-		let ballY = canvasRef.current ? canvasRef.current.height / 2 : 0;
+		let ballX = canvasRef.current ? canvasRef.current.width / 2 : 400;
+		let ballY = canvasRef.current ? canvasRef.current.height / 2 : 400;
 		let ballSpeedX = defaultSpeedX;
 		let ballSpeedY = defaultSpeedY;
 		let canvasDefaultWidth = 1920;
@@ -44,15 +44,24 @@
 		// This function Updates The Ball Positions
 		const updateBallPosition = (canvas) => {
 			const ballAngleOffset = 0.02;
-			const ballSpeedIncrease = 100;
+			const ballSpeedIncrease = 50;
 			ballX += ballSpeedX * dt * sizeSpeedRatio;
 			ballY += ballSpeedY * dt * sizeSpeedRatio;
-			if (ballY - 8 < 0 || ballY + 8 > canvas.height)
+			if (ballY < 0)
+			{
+				ballY = 2;
 				ballSpeedY = -ballSpeedY;
-			if (ballX - 8 < paddleWidth && ballY > leftPaddleY && ballY < leftPaddleY + paddleHeight)
+			}
+			else if (ballY > canvas.height)
+			{
+				ballY = canvas.height - 2;
+				ballSpeedY = -ballSpeedY;
+			}
+			if (ballX < paddleWidth && ballY > leftPaddleY && ballY < leftPaddleY + paddleHeight)
 			{
 				const leftPaddleCenterY = leftPaddleY + paddleHeight / 2;
 				const distanceFromCenter = ballY - leftPaddleCenterY;
+				ballX = paddleWidth + 10;
 				ballSpeedX *= -1;
 				if (ballSpeedX < 0)
 					ballSpeedX -= ballSpeedIncrease;
@@ -60,10 +69,11 @@
 					ballSpeedX += ballSpeedIncrease;
 				ballSpeedY += distanceFromCenter * ballAngleOffset * sizeSpeedRatio * Math.abs(ballSpeedX);
 			}
-			else if (ballX + 8 > canvas.width - paddleWidth && ballY > rightPaddleY && ballY < rightPaddleY + paddleHeight)
+			else if (ballX > canvas.width - paddleWidth && ballY > rightPaddleY && ballY < rightPaddleY + paddleHeight)
 			{
 				const rightPaddleCenterY = rightPaddleY + paddleHeight / 2;
 				const distanceFromCenter = ballY - rightPaddleCenterY;
+				ballX = canvas.width - paddleWidth - 10;
 				ballSpeedX *= -1;
 				if (ballSpeedX < 0)
 					ballSpeedX -= ballSpeedIncrease;
@@ -71,7 +81,7 @@
 					ballSpeedX += ballSpeedIncrease;
 				ballSpeedY += distanceFromCenter * ballAngleOffset * sizeSpeedRatio * Math.abs(ballSpeedX);
 			}
-			if (ballX - 8 < 0) {
+			else if (ballX - 8 < 0) {
 				ballX = canvas.width / 2;
 				ballY = canvas.height / 2;
 				ballSpeedX = defaultSpeedX;
@@ -122,10 +132,6 @@
 			rightPaddleY = Math.max(0, Math.min(rightPaddleY, canvasRef.current.height - paddleHeight));
 			ballX = Math.max(0, Math.min(ballX, canvasRef.current.width));
 			ballY = Math.max(0, Math.min(ballY, canvasRef.current.height));
-			if (ballX === 0 || ballX === canvasRef.current.width)
-				ballSpeedX = -ballSpeedX;
-			if (ballY === 0 || ballY === canvasRef.current.height)
-				ballSpeedY = -ballSpeedY;
 		};
 	
 
@@ -135,6 +141,8 @@
 		const ctx = canvas.getContext('2d');
 		dt = (timestamp - lastFrame) / 1000;
 		lastFrame = timestamp;
+		paddleWidth = canvasRef.current ? canvasRef.current.width / 80 : 0;
+		paddleHeight = canvasRef.current ? canvasRef.current.width / 20 : 0;
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		drawWhiteStripe(ctx, canvas);
 		ctx.fillStyle = '#FF0000';
@@ -163,7 +171,7 @@
 		  document.removeEventListener('keydown', handleKeyDown);
 		};
 	  }, [canvasRef]);
-
+	  
 	return (
 		<div className="flex justify-center items-center h-screen">
 		<canvas
