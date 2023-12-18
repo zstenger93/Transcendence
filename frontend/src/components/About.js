@@ -6,7 +6,7 @@ function About() {
     {
       name: "Zsolt",
       title: "Mr. Git",
-      description: `The version control virtuoso. Commits breakfast choices, branches weekend plans, and merges life decisions flawlessly. 
+      description: `The version control virtuoso, navigating through the chaos. Commits breakfast choices, branches weekend plans, and merges life decisions flawlessly. 
 			His code is as organized as his repository, and 'git push' is his mantra. Legend says he even forks his dreams.`,
       image:
         "https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp",
