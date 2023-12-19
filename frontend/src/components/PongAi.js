@@ -40,7 +40,26 @@ const GameCanvas = () => {
     const y = 0;
     ctx.fillRect(x, y, stripeWidth, stripeHeight);
   };
-
+  // This is bloody AI
+  const ArtificialInteligence = (ctx, canvas) => {
+    const aiSpeed = 440;
+    let tempPadleY = rightPaddleY;
+    if (ballY > rightPaddleY + paddleHeight / 2)
+      tempPadleY += aiSpeed * dt * sizeSpeedRatio;
+    else if (ballY < rightPaddleY + paddleHeight / 2)
+      tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
+    tempPadleY = Math.max(
+      0,
+      Math.min(tempPadleY, canvas.height - paddleHeight)
+    );
+    rightPaddleY = tempPadleY;
+    ctx.fillRect(
+      canvas.width - paddleWidth,
+      rightPaddleY,
+      paddleWidth,
+      paddleHeight
+    );
+  };
   // This function Updates The Ball Positions
   const updateBallPosition = (canvas) => {
     const ballAngleOffset = 0.02;
@@ -167,12 +186,7 @@ const GameCanvas = () => {
     drawWhiteStripe(ctx, canvas);
     ctx.fillStyle = "#FF3366";
     ctx.fillRect(0, leftPaddleY, paddleWidth, paddleHeight);
-    ctx.fillRect(
-      canvas.width - paddleWidth,
-      rightPaddleY,
-      paddleWidth,
-      paddleHeight
-    );
+    ArtificialInteligence(ctx, canvas);
     updateBallPosition(canvas);
     drawBall(ctx, canvas);
     drawScores(ctx, canvas);
@@ -181,52 +195,27 @@ const GameCanvas = () => {
 
   useEffect(() => {
     const playerSpeed = 30;
-    const keysPressed = {};
-
     const handleKeyDown = (event) => {
-      keysPressed[event.key] = true;
-      handleKeys();
-    };
-
-    const handleKeyUp = (event) => {
-      keysPressed[event.key] = false;
-      handleKeys();
-    };
-
-    const handleKeys = () => {
       if (canvasRef.current) {
-        // Left paddle controls
-        if (keysPressed["w"]) leftPaddleY -= playerSpeed * sizeSpeedRatio;
-        if (keysPressed["s"]) leftPaddleY += playerSpeed * sizeSpeedRatio;
+        if (event.key === "ArrowUp" || event.key === "w")
+          leftPaddleY -= playerSpeed * sizeSpeedRatio;
+        else if (event.key === "ArrowDown" ||  event.key === "s")
+          leftPaddleY += playerSpeed * sizeSpeedRatio;
         leftPaddleY = Math.max(
           0,
           Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
         );
-
-        // Right paddle controls
-        if (keysPressed["ArrowUp"])
-          rightPaddleY -= playerSpeed * sizeSpeedRatio;
-        if (keysPressed["ArrowDown"])
-          rightPaddleY += playerSpeed * sizeSpeedRatio;
-        rightPaddleY = Math.max(
-          0,
-          Math.min(rightPaddleY, canvasRef.current.height - paddleHeight)
-        );
       }
     };
-
-    document.addEventListener("keyup", handleKeyUp);
     document.addEventListener("keydown", handleKeyDown);
     window.addEventListener("resize", handleResize);
     handleResize();
     draw(0);
-
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("keyup", handleKeyUp);
       window.removeEventListener("resize", handleResize);
     };
-  }, [canvasRef, leftPaddleY, rightPaddleY, sizeSpeedRatio, paddleHeight]);
+  }, [canvasRef]);
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -313,7 +302,7 @@ const LoseScreen = () => {
   );
 };
 
-const OriginalPong = () => {
+const PongAi = () => {
   const [gameStarted, setGameStarted] = useState(false);
 
   const handleButtonClick = () => {
@@ -345,4 +334,4 @@ const OriginalPong = () => {
   );
 };
 
-export default OriginalPong;
+export default PongAi;
