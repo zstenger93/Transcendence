@@ -133,7 +133,7 @@ const GameCanvas = () => {
   const drawBall = (ctx, canvas) => {
     ctx.beginPath();
     ctx.arc(ballX, ballY, ballSize * sizeSpeedRatio, 0, Math.PI * 2);
-    ctx.fillStyle = "#FFFF00";
+    ctx.fillStyle = "#00FF00";
     ctx.fill();
     ctx.closePath();
   };
@@ -184,7 +184,7 @@ const GameCanvas = () => {
     paddleHeight = canvasRef.current ? canvasRef.current.width / 20 : 0;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawWhiteStripe(ctx, canvas);
-    ctx.fillStyle = "#FF0000";
+    ctx.fillStyle = "#FF3366";
     ctx.fillRect(0, leftPaddleY, paddleWidth, paddleHeight);
     ArtificialInteligence(ctx, canvas);
     updateBallPosition(canvas);
@@ -228,7 +228,8 @@ const GameCanvas = () => {
       ) : (
         <canvas
           ref={canvasRef}
-          className="border-8 border-solid border-white bg-black"
+          className="border-8 border-solid border-white"
+          style={{ backgroundColor: "#0F0F0F" }}
         ></canvas>
       )}
     </div>
