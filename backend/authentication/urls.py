@@ -9,5 +9,6 @@ urlpatterns = [
     path("auth/", views.auth, name="auth"),
     path("auth_callback/", views.auth_callback, name="auth_callback"),
     path("register/", views.register, name="register"),
+    path("test/", views.test, name="test"),
 ]
 
