@@ -8,6 +8,7 @@ function Chat() {
   const [currentChannel, setCurrentChannel] = useState("General");
   const [viewingImage, setViewingImage] = useState(null);
   const [pastedImage, setPastedImage] = useState(null);
+  const [uploadedFileName, setUploadedFileName] = React.useState("");
 
   const handleFileChange = (event) => {
     if (event.target.files.length > 0) {
@@ -16,6 +17,7 @@ function Chat() {
 
       reader.onloadend = () => {
         setPastedImage(reader.result);
+        setUploadedFileName(file.name);
       };
 
       reader.readAsDataURL(file);
@@ -44,15 +46,22 @@ function Chat() {
   };
 
   const handleSendMessage = (event) => {
-    event.preventDefault();
-    if (newMessage.trim() !== "" || pastedImage) {
-      setMessages([
-        ...messages,
-        { text: newMessage, image: pastedImage, channel: currentChannel },
-      ]);
-      setNewMessage("");
-      setPastedImage(null);
-    }
+	event.preventDefault();
+  
+	if (newMessage || pastedImage) {
+	  setMessages((messages) => [
+		...messages,
+		{
+		  channel: currentChannel,
+		  text: newMessage,
+		  image: pastedImage,
+		},
+	  ]);
+  
+	  setNewMessage('');
+	  setPastedImage(null);
+	  setUploadedFileName('');
+	}
   };
 
   const handleKeyPress = (event) => {
@@ -66,11 +75,11 @@ function Chat() {
 
     return (
       <div
-        className="flex flex-col justify-between w-1/7 p-6 text-white text-center bg-gray-900
-		  bg-opacity-80 rounded shadow"
+        className="flex flex-col justify-between w-1/7 p-6 text-white
+		text-center bg-gray-900 bg-opacity-80 rounded shadow"
       >
         <div>
-          <h2 className="mb-8 font-nosifer font-bold text-gray-300">
+          <h2 className="mb-8 text-2xl font-nosifer font-bold text-gray-300">
             Channels
           </h2>
           <ul>
@@ -101,7 +110,7 @@ function Chat() {
       <div className="flex w-2/5">
         <ChannelList />
         <div className="w-full p-6 text-white bg-gray-900 bg-opacity-80 rounded shadow">
-          <div className="overflow-auto h-64 mb-4 border rounded p-4 shadow">
+          <div className="overflow-auto h-96 mb-4 border border-purple-500 rounded p-4 shadow">
             {messages
               .filter((message) => message.channel === currentChannel)
               .map((message, index) => (
@@ -124,7 +133,7 @@ function Chat() {
               onChange={handleNewMessageChange}
               onKeyPress={handleKeyPress}
               onPaste={handlePaste}
-              className="border bg-gray-900 bg-opacity-80 rounded p-2 w-full"
+              className="border border-purple-500 bg-gray-900 bg-opacity-80 rounded p-2 w-full"
               placeholder="Type your message here..."
             />
             <input
@@ -133,18 +142,25 @@ function Chat() {
               onChange={handleFileChange}
               style={{ display: "none" }}
             />
-            <label
-              htmlFor="file"
-              className="cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Choose file
-            </label>
+            <div className="flex justify-center">
+              <label
+                htmlFor="file"
+                className="cursor-pointer bg-purple-900 hover:bg-purple-700 
+				text-white font-bold py-2 px-4 rounded"
+              >
+                Choose file
+              </label>
+            </div>
+            {uploadedFileName && (
+              <p className="text-center">{uploadedFileName}</p>
+            )}
           </form>
         </div>
       </div>
       {viewingImage && (
         <div
-          className="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-black bg-opacity-50"
+          className="fixed top-0 left-0 flex items-center justify-center w-full h-full 
+		  bg-black bg-opacity-50"
           onClick={() => setViewingImage(null)}
         >
           <img src={viewingImage} alt="" className="max-h-full max-w-full" />
