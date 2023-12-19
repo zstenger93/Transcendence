@@ -199,7 +199,7 @@ const GameCanvas = () => {
       if (canvasRef.current) {
         if (event.key === "ArrowUp" || event.key === "w")
           leftPaddleY -= playerSpeed * sizeSpeedRatio;
-        else if (event.key === "ArrowDown" ||  event.key === "s")
+        else if (event.key === "ArrowDown" || event.key === "s")
           leftPaddleY += playerSpeed * sizeSpeedRatio;
         leftPaddleY = Math.max(
           0,
