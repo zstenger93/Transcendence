@@ -1,23 +1,40 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.conf import settings
 import requests
 import os
 import urllib
 
+from .models import User
 
+# ----------------------------------------––--------------- HOME FUNCTION
 @login_required(login_url='/login/')
 def home(request):
-    return render(request, "home.html")
+	context = {
+		'username': request.user.username,
+		'email': request.user.email,
+	}
+	print(request.user)
+	return render(request, 'home.html', context)
 
+
+# ----------------------------------------––--------------- LOGIN FUNCTION
 # don't name it 'login' because it will conflict with the built-in login function
 def my_login(request):
 	if request.user.is_authenticated:
 		return redirect("home")
 	return render(request, "login.html")
 
+# ----------------------------------------––--------------- LOGOUT FUNCTION
+def my_logout(request):
+    # Log the user out using Django's built-in logout function
+	logout(request)
+    # Redirect the user to the login page
+	return redirect('login')  # Replace 'login' with the actual name or URL of your login view
+
+
+# ----------------------------------------––--------------- AUTHENTICATION CALLBACK FUNCTIONS
 def auth_callback(request):
 	if request.method == "GET":
 
@@ -64,12 +81,15 @@ def auth_callback(request):
 			print("\t\t\tNew user has been added!!!")
 		else:
 			print("\t\t\tUser already exists!!!")
+		
+		print(user)
 		login(request, user)
 
 		# ---------------------------------------––---------------- REDIRECT TO HOME PAGE
 		return redirect("home")                                  
 	return HttpResponse("Auth callback Error, bad token maybe!!")
 
+# ----------------------------------------––--------------- AUTHENTICATION FUNCTIONS
 def auth(request):
 	auth_url = "https://api.intra.42.fr/oauth/authorize"
 	params = {
@@ -79,13 +99,8 @@ def auth(request):
 	}
 	return redirect(f"{auth_url}?{urllib.parse.urlencode(params)}")
 
-def my_logout(request):
-    # Log the user out using Django's built-in logout function
-	logout(request)
 
-    # Redirect the user to the login page
-	return redirect('login')  # Replace 'login' with the actual name or URL of your login view
-
+# ----------------------------------------––--------------- REGISTER FUNCTION
 def register(request):
 	if request.user.is_authenticated:
 		return redirect("home")
@@ -101,7 +116,7 @@ def register(request):
 		user = User.objects.create_user(username=username, email=email, password=password,
 										first_name=first_name, last_name=last_name)
 		# Log the user in
-		# login(request, user)
+		login(request, user)
 		print("\t\t\tNew user has been added!!!")
 		print(f'Username: {user.username}')
 		print(f'Email: {user.email}')
@@ -111,3 +126,26 @@ def register(request):
 		# Redirect to a success page or home
 		return redirect('home')  # Change 'home' to the actual name of your home page or dashboard
 	return render(request, 'register.html')
+
+
+# ----------------------------------------––--------------- TEST FUNCTION
+def test(request):
+    # User data
+    username = 'Jason'
+    password = 'Bourne'
+
+    # Create or get the user
+    user, created = User.objects.get_or_create(username=username)
+    user.set_password(password)
+    user.save()
+
+    # Print messages for demonstration purposes
+    if created:
+        print("User created")
+    else:
+        print("User already exists")
+
+    print(user)
+
+    # Pass the user object to the template
+    return render(request, 'test.html', {'user': user})
