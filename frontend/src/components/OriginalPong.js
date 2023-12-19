@@ -8,10 +8,11 @@ const GameCanvas = () => {
   const defaultSpeedY = 20;
   const [scoreLeftReact, setScoreLeft] = useState(0);
   const [scoreRightReact, setScoreRight] = useState(0);
+  let ballSize = 8;
   let scoreLeft = 0;
   let scoreRight = 0;
   const canvasRef = useRef(null);
-  let paddleWidth = canvasRef.current ? canvasRef.current.width / 80 : 0;
+  let paddleWidth = canvasRef.current ? canvasRef.current.width / 70 : 0;
   let paddleHeight = canvasRef.current ? canvasRef.current.width / 20 : 0;
   let leftPaddleY = canvasRef.current
     ? canvasRef.current.height / 2 - paddleHeight / 2
@@ -19,8 +20,8 @@ const GameCanvas = () => {
   let rightPaddleY = canvasRef.current
     ? canvasRef.current.height / 2 - paddleHeight / 2
     : 0;
-  let ballX = canvasRef.current ? canvasRef.current.width / 2 : 400;
-  let ballY = canvasRef.current ? canvasRef.current.height / 2 : 400;
+  let ballX = canvasRef.current ? canvasRef.current.width / 2 : 5;
+  let ballY = canvasRef.current ? canvasRef.current.height / 2 : 5;
   let ballSpeedX = defaultSpeedX;
   let ballSpeedY = defaultSpeedY;
   let canvasDefaultWidth = 1920;
@@ -73,7 +74,7 @@ const GameCanvas = () => {
       ballSpeedY = -ballSpeedY;
     }
     if (
-      ballX < paddleWidth &&
+      ballX < paddleWidth + ballSize * sizeSpeedRatio &&
       ballY > leftPaddleY &&
       ballY < leftPaddleY + paddleHeight
     ) {
@@ -89,7 +90,7 @@ const GameCanvas = () => {
         sizeSpeedRatio *
         Math.abs(ballSpeedX);
     } else if (
-      ballX > canvas.width - paddleWidth &&
+      ballX > canvas.width - paddleWidth - ballSize * sizeSpeedRatio &&
       ballY > rightPaddleY &&
       ballY < rightPaddleY + paddleHeight
     ) {
@@ -104,14 +105,14 @@ const GameCanvas = () => {
         ballAngleOffset *
         sizeSpeedRatio *
         Math.abs(ballSpeedX);
-    } else if (ballX - 8 < 0) {
+    } else if (ballX + ballSize * 3 < 0) {
       ballX = canvas.width / 2;
       ballY = canvas.height / 2;
       ballSpeedX = defaultSpeedX;
       ballSpeedY = defaultSpeedY;
       scoreRight += 1;
       setScoreRight(scoreRight);
-    } else if (ballX + 8 > canvas.width) {
+    } else if (ballX - ballSize * 3 > canvas.width) {
       ballX = canvas.width / 2;
       ballY = canvas.height / 2;
       ballSpeedX = -defaultSpeedX;
@@ -131,7 +132,7 @@ const GameCanvas = () => {
   // this Function Surprise draws a ball
   const drawBall = (ctx, canvas) => {
     ctx.beginPath();
-    ctx.arc(ballX, ballY, 8, 0, Math.PI * 2);
+    ctx.arc(ballX, ballY, ballSize * sizeSpeedRatio, 0, Math.PI * 2);
     ctx.fillStyle = "#FFFF00";
     ctx.fill();
     ctx.closePath();
@@ -196,8 +197,10 @@ const GameCanvas = () => {
     const playerSpeed = 30;
     const handleKeyDown = (event) => {
       if (canvasRef.current) {
-        if (event.key === "ArrowUp") leftPaddleY -= playerSpeed;
-        else if (event.key === "ArrowDown") leftPaddleY += playerSpeed;
+        if (event.key === "ArrowUp")
+          leftPaddleY -= playerSpeed * sizeSpeedRatio;
+        else if (event.key === "ArrowDown")
+          leftPaddleY += playerSpeed * sizeSpeedRatio;
         leftPaddleY = Math.max(
           0,
           Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
