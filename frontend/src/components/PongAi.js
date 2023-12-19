@@ -186,12 +186,7 @@ const GameCanvas = () => {
     drawWhiteStripe(ctx, canvas);
     ctx.fillStyle = "#FF3366";
     ctx.fillRect(0, leftPaddleY, paddleWidth, paddleHeight);
-    ctx.fillRect(
-      canvas.width - paddleWidth,
-      rightPaddleY,
-      paddleWidth,
-      paddleHeight
-    );
+    ArtificialInteligence(ctx, canvas);
     updateBallPosition(canvas);
     drawBall(ctx, canvas);
     drawScores(ctx, canvas);
@@ -200,47 +195,23 @@ const GameCanvas = () => {
 
   useEffect(() => {
     const playerSpeed = 30;
-    const keysPressed = {};
-
     const handleKeyDown = (event) => {
-      keysPressed[event.key] = true;
-      handleKeys();
-    };
-
-    const handleKeyUp = (event) => {
-      keysPressed[event.key] = false;
-      handleKeys();
-    };
-
-    const handleKeys = () => {
       if (canvasRef.current) {
-        // Left paddle controls
-        if (keysPressed["w"]) leftPaddleY -= playerSpeed * sizeSpeedRatio;
-        if (keysPressed["s"]) leftPaddleY += playerSpeed * sizeSpeedRatio;
+        if (event.key === "ArrowUp" || event.key === "w")
+          leftPaddleY -= playerSpeed * sizeSpeedRatio;
+        else if (event.key === "ArrowDown" || event.key === "s")
+          leftPaddleY += playerSpeed * sizeSpeedRatio;
         leftPaddleY = Math.max(
           0,
           Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
         );
-
-        // Right paddle controls
-        if (keysPressed["ArrowUp"])
-          rightPaddleY -= playerSpeed * sizeSpeedRatio;
-        if (keysPressed["ArrowDown"])
-          rightPaddleY += playerSpeed * sizeSpeedRatio;
-        rightPaddleY = Math.max(
-          0,
-          Math.min(rightPaddleY, canvasRef.current.height - paddleHeight)
-        );
       }
     };
-
-    document.addEventListener("keyup", handleKeyUp);
     document.addEventListener("keydown", handleKeyDown);
     window.addEventListener("resize", handleResize);
     handleResize();
     draw(0);
     return () => {
-      document.addEventListener("keyup", handleKeyUp);
       document.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("resize", handleResize);
     };
@@ -331,7 +302,7 @@ const LoseScreen = () => {
   );
 };
 
-const Pong = () => {
+const PongAi = () => {
   const [gameStarted, setGameStarted] = useState(false);
 
   const handleButtonClick = () => {
@@ -363,4 +334,4 @@ const Pong = () => {
   );
 };
 
-export default Pong;
+export default PongAi;
