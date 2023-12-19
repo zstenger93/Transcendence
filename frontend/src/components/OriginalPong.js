@@ -40,7 +40,26 @@ const GameCanvas = () => {
     const y = 0;
     ctx.fillRect(x, y, stripeWidth, stripeHeight);
   };
-
+  // This is bloody AI
+  const ArtificialInteligence = (ctx, canvas) => {
+    const aiSpeed = 440;
+    let tempPadleY = rightPaddleY;
+    if (ballY > rightPaddleY + paddleHeight / 2)
+      tempPadleY += aiSpeed * dt * sizeSpeedRatio;
+    else if (ballY < rightPaddleY + paddleHeight / 2)
+      tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
+    tempPadleY = Math.max(
+      0,
+      Math.min(tempPadleY, canvas.height - paddleHeight)
+    );
+    rightPaddleY = tempPadleY;
+    ctx.fillRect(
+      canvas.width - paddleWidth,
+      rightPaddleY,
+      paddleWidth,
+      paddleHeight
+    );
+  };
   // This function Updates The Ball Positions
   const updateBallPosition = (canvas) => {
     const ballAngleOffset = 0.02;
@@ -220,13 +239,12 @@ const GameCanvas = () => {
     window.addEventListener("resize", handleResize);
     handleResize();
     draw(0);
-
     return () => {
+      document.addEventListener("keyup", handleKeyUp);
       document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("keyup", handleKeyUp);
       window.removeEventListener("resize", handleResize);
     };
-  }, [canvasRef, leftPaddleY, rightPaddleY, sizeSpeedRatio, paddleHeight]);
+  }, [canvasRef]);
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -313,7 +331,7 @@ const LoseScreen = () => {
   );
 };
 
-const OriginalPong = () => {
+const Pong = () => {
   const [gameStarted, setGameStarted] = useState(false);
 
   const handleButtonClick = () => {
@@ -345,4 +363,4 @@ const OriginalPong = () => {
   );
 };
 
-export default OriginalPong;
+export default Pong;
