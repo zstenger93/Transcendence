@@ -46,22 +46,22 @@ function Chat() {
   };
 
   const handleSendMessage = (event) => {
-	event.preventDefault();
-  
-	if (newMessage || pastedImage) {
-	  setMessages((messages) => [
-		...messages,
-		{
-		  channel: currentChannel,
-		  text: newMessage,
-		  image: pastedImage,
-		},
-	  ]);
-  
-	  setNewMessage('');
-	  setPastedImage(null);
-	  setUploadedFileName('');
-	}
+    event.preventDefault();
+
+    if (newMessage || pastedImage) {
+      setMessages((messages) => [
+        ...messages,
+        {
+          channel: currentChannel,
+          text: newMessage,
+          image: pastedImage,
+        },
+      ]);
+
+      setNewMessage("");
+      setPastedImage(null);
+      setUploadedFileName("");
+    }
   };
 
   const handleKeyPress = (event) => {
