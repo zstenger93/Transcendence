@@ -9,7 +9,7 @@ function Chat() {
   const [viewingImage, setViewingImage] = useState(null);
   const [pastedImage, setPastedImage] = useState(null);
   const [uploadedFileName, setUploadedFileName] = React.useState("");
-  const [onlineUsers, setOnlineUsers] = useState([
+  const [onlineUsers] = useState([
     "kvebers",
     "Jesus",
     "asioud",

@@ -112,7 +112,10 @@ function FriendsList() {
       <h3 className="text-xl text-gray-300 font-nosifer font-bold mb-4 text-center">
         Friend List
       </h3>
-      <table className="bg-purple-900 bg-opacity-60 w-full border-collapse border border-gray-500 mx-auto">
+      <table
+        className="bg-purple-900 bg-opacity-60 w-full border-collapse border 
+		border-gray-500 mx-auto"
+      >
         <thead>
           <tr>
             <th className="p-2 border border-gray-900 mx-auto">Name</th>
@@ -151,7 +154,10 @@ function MatchHistory() {
       <h3 className="text-xl text-gray-300 font-nosifer font-bold mb-4 text-center">
         Match History
       </h3>
-      <table className="bg-purple-900 bg-opacity-60 w-full border-collapse border border-gray-900 mx-auto">
+      <table
+        className="bg-purple-900 bg-opacity-60 w-full border-collapse border 
+		border-gray-900 mx-auto"
+      >
         <thead>
           <tr>
             <th className="p-2 border border-gray-900 mx-auto">Opponent</th>
