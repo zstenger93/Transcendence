@@ -8,6 +8,9 @@ import urllib
 
 from .models import User
 
+from django.core.files.base import ContentFile
+from django.contrib.auth import get_user_model
+
 # ----------------------------------------––--------------- HOME FUNCTION
 @login_required(login_url='/login/')
 def home(request):
@@ -78,31 +81,31 @@ def auth_callback(request):
 		# ---------------------------------------––---------------- GET USER DATA FROM 42 SERVER RESPONSE
 		# id will be implemented later, once we have a modified User model
 		# id = user_response.json()["id"]
+		# Extract user information from the response
 		username = user_response.json()["login"]
 		first_name = user_response.json()["first_name"]
 		last_name = user_response.json()["last_name"]
 		email = user_response.json()["email"]
-		# picture will be implemented later, once we have a modified User model
-		# picture = user_response.json()["image"]["link"]
+		picture_url = user_response.json()["image"]["versions"]["medium"]
 
-
-		# -----------------------------------------––-------------- CREATE USER TO AUTHENTICATE AND LOGIN
-		# user is a Model variable
-		# created is a boolean variable
 		user, created = User.objects.get_or_create(
-			username=username, 
+			username=username,
 			defaults={
-				'username' : username,
-				'first_name': first_name, 
-				'last_name': last_name, 
-				'email': email
+				'username': username,
+				'first_name': first_name,
+				'last_name': last_name,
+				'email': email,
 			}
 		)
 		if created:
 			print("\t\t\tNew user has been added!!!")
 		else:
 			print("\t\t\tUser already exists!!!")
-		
+
+		response = requests.get(picture_url)
+		if response.status_code == 200:
+			user.profile_picture.save(f"{username}_profile_picture.jpg", ContentFile(response.content), save=True)
+
 		print(user)
 		login(request, user)
 
