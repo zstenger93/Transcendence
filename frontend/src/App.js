@@ -10,6 +10,7 @@ import Matchmaking from "./components/Matchmaking";
 import backgroundImage from "./images/bg0.png";
 import OriginalPong from "./components/OriginalPong";
 import PongAi from "./components/PongAi";
+import Pong3D from "./components/Pong3D";
 import ChoosePongMode from "./components/ChoosePongMode";
 
 import {
@@ -47,6 +48,7 @@ function App() {
                 <Route path="about" element={<About />} />
                 <Route path="originalpong" element={<OriginalPong />} />
                 <Route path="pongai" element={<PongAi />} />
+                <Route path="pong3d" element={<Pong3D />} />
                 <Route path="choosepongmode" element={<ChoosePongMode />} />
               </Routes>
             </div>
