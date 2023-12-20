@@ -47,3 +47,6 @@ node_modules
 # Jamshidbek
 to-do
 jsonuser.json
+
+# backend/authentication
+backend/authentication/images/*

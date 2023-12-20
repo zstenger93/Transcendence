@@ -16,10 +16,14 @@
 			<div class="bg-white p-6 rounded-md shadow-md mb-4">
 				<h2 class="text-xl font-semibold mb-4">{{ user.username }}</h2>
 				<p class="text-gray-600">{{ user.email }}</p>
+				<p>Total Matches: {{ user.total_matches }}</p>
+				<p>Wins: {{ user.wins }}</p>
+				<p>Losses: {{ user.losses }}</p>
 			</div>
 			{% endfor %}
 		</div>
 	</div>
+
 
 </body>
 
