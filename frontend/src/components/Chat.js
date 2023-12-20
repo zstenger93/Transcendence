@@ -9,6 +9,13 @@ function Chat() {
   const [viewingImage, setViewingImage] = useState(null);
   const [pastedImage, setPastedImage] = useState(null);
   const [uploadedFileName, setUploadedFileName] = React.useState("");
+  const [onlineUsers, setOnlineUsers] = useState([
+    "kvebers",
+    "Jesus",
+    "asioud",
+    "zstenger",
+    "jergashe",
+  ]);
 
   const handleFileChange = (event) => {
     if (event.target.files.length > 0) {
@@ -76,7 +83,7 @@ function Chat() {
     return (
       <div
         className="flex flex-col justify-between w-1/7 p-6 text-white
-		text-center bg-gray-900 bg-opacity-80 rounded shadow"
+		text-center bg-gray-900 bg-opacity-80 rounded-xl shadow"
       >
         <div>
           <h2 className="mb-8 text-2xl font-nosifer font-bold text-gray-300">
@@ -105,12 +112,34 @@ function Chat() {
     );
   }
 
+  function OnlineUsersList() {
+    return (
+      <div
+        className="flex flex-col justify-between w-1/7 p-6 text-white
+		text-center bg-gray-900 bg-opacity-80 rounded-xl shadow"
+      >
+        <div>
+          <h2 className="mb-8 text-2xl font-nosifer font-bold text-gray-300">
+            Online
+          </h2>
+          <ul>
+            {onlineUsers.map((user, index) => (
+              <li key={index} className="mb-4">
+                {user}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <div className="flex w-2/5">
+      <div className="flex w-3/6 space-x-2">
         <ChannelList />
-        <div className="w-full p-6 text-white bg-gray-900 bg-opacity-80 rounded shadow">
-          <div className="overflow-auto h-96 mb-4 border border-purple-500 rounded p-4 shadow">
+        <div className="w-full p-6 text-white bg-gray-900 bg-opacity-80 rounded-xl shadow">
+          <div className="overflow-auto h-96 mb-4 border border-purple-500 rounded-xl p-4 shadow">
             {messages
               .filter((message) => message.channel === currentChannel)
               .map((message, index) => (
@@ -156,6 +185,7 @@ function Chat() {
             )}
           </form>
         </div>
+        <OnlineUsersList />
       </div>
       {viewingImage && (
         <div
