@@ -24,7 +24,28 @@ def home(request):
 def my_login(request):
 	if request.user.is_authenticated:
 		return redirect("home")
-	return render(request, "login.html")
+	if request.method == 'POST':
+		username = request.POST.get('username')
+		password = request.POST.get('password')
+
+
+        # Authenticate the user
+		user = authenticate(request, username=username, password=password)
+		print(f'Username: {username}')
+		print(f'Password: {password}')
+		print(f'User: {user}')
+
+		if user is not None:
+            # Authentication successful, log in the user
+			login(request, user)
+			return redirect('home')  # Redirect to the home page or another desired destination
+		else:
+            # Authentication failed, display an error message
+			error_message = 'Invalid username or password. Please try again.'
+			return render(request, 'login.html', {'error_message': error_message})
+
+    # Render the login form
+	return render(request, 'login.html')
 
 # ----------------------------------------––--------------- LOGOUT FUNCTION
 def my_logout(request):
@@ -149,3 +170,12 @@ def test(request):
 
     # Pass the user object to the template
     return render(request, 'test.html', {'user': user})
+
+
+# ----------------------------------------––--------------- USERS LIST FUNCTION
+def users_list(request):
+	# Get all users from the database
+	users = User.objects.all()
+
+	# Pass the users to the template
+	return render(request, 'users_list.html', {'users': users})
