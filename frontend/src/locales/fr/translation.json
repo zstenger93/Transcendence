@@ -1,0 +1,29 @@
+{
+	"profile": {
+	  "friendList": "Liste d'amis",
+	  "name": "Nom",
+	  "intra": "Intra",
+	  "matchHistory": "Historique des matchs",
+	  "opponent": "Adversaire",
+	  "score": "Score",
+	  "aboutMe": "À propos de moi",
+	  "userDetails": "Détails de l'utilisateur",
+	  "age": "Âge",
+	  "yearsOld": "ans",
+	  "gender": "Sexe",
+	  "school": "École",
+	  "level": "Niveau",
+	  "winRate": "Taux de victoire",
+	  "result": {
+		"win": "Gagner",
+		"loss": "Perte"
+	  },
+	  "game": {
+		"pong": "Pong"
+	  },
+	  "type": {
+		"original": "Original",
+		"modded": "Modifié"
+	  }
+	}
+  }
