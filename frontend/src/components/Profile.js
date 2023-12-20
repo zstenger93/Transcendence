@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 
 const friendsListData = [
   {
@@ -110,7 +111,10 @@ function FriendsList() {
   return (
     <div className="bg-gray-900 bg-opacity-80 p-4 rounded-md max-h-96 overflow-y-auto">
       <h3 className="text-xl text-gray-300 font-nosifer font-bold mb-4 text-center">
-        Friend List
+        <FormattedMessage
+          id="profile.friendList"
+          defaultMessage="Friend List"
+        />
       </h3>
       <table
         className="bg-purple-900 bg-opacity-60 w-full border-collapse border 
@@ -118,7 +122,9 @@ function FriendsList() {
       >
         <thead>
           <tr>
-            <th className="p-2 border border-gray-900 mx-auto">Name</th>
+            <th className="p-2 border border-gray-900 mx-auto">
+              <FormattedMessage id="profile.name" defaultMessage="Name" />
+            </th>
             <th className="p-2 border text-center border-gray-900 mx-auto">
               Intra
             </th>
@@ -149,10 +155,15 @@ function FriendsList() {
 }
 
 function MatchHistory() {
+  const { formatMessage } = useIntl();
+
   return (
     <div className="bg-gray-900 bg-opacity-80 p-6 shadow-xl rounded-md max-h-96 overflow-y-auto">
       <h3 className="text-xl text-gray-300 font-nosifer font-bold mb-4 text-center">
-        Match History
+        <FormattedMessage
+          id="profile.matchHistory"
+          defaultMessage="Match History"
+        />
       </h3>
       <table
         className="bg-purple-900 bg-opacity-60 w-full border-collapse border 
@@ -162,16 +173,16 @@ function MatchHistory() {
           <tr>
             <th className="p-2 border border-gray-900 mx-auto">Opponent</th>
             <th className="p-2 border text-center border-gray-900 mx-auto">
-              Result
+              <FormattedMessage id="profile.result" defaultMessage="Result" />
             </th>
             <th className="p-2 border text-center border-gray-900 mx-auto">
-              Score
+              <FormattedMessage id="profile.score" defaultMessage="Score" />
             </th>
             <th className="p-2 border text-center border-gray-900 mx-auto">
-              Game
+              <FormattedMessage id="profile.game" defaultMessage="Game" />
             </th>
             <th className="p-2 border text-center border-gray-900 mx-auto">
-              Type
+              <FormattedMessage id="profile.type" defaultMessage="Type" />
             </th>
           </tr>
         </thead>
@@ -186,13 +197,19 @@ function MatchHistory() {
                   match.result === "Win" ? "text-green-700" : "text-red-700"
                 }`}
               >
-                {match.result}
+                {formatMessage({
+                  id: `profile.${match.result.toLowerCase()}`,
+                  defaultMessage: match.result,
+                })}
               </td>
               <td className="p-2 border text-center border-gray-900 mx-auto">
                 {match.score}
               </td>
               <td className="p-2 border text-center border-gray-900 mx-auto">
-                {match.game}
+                {formatMessage({
+                  id: `profile.${match.game.toLowerCase()}`,
+                  defaultMessage: match.game,
+                })}
               </td>
               <td
                 className={`p-2 border text-center border-gray-900 mx-auto ${
@@ -201,7 +218,10 @@ function MatchHistory() {
                     : "text-yellow-700"
                 }`}
               >
-                {match.type}
+                {formatMessage({
+                  id: `profile.${match.type.toLowerCase()}`,
+                  defaultMessage: match.type,
+                })}
               </td>
             </tr>
           ))}
@@ -247,46 +267,80 @@ function Profile() {
 
           <div className="mt-8">
             <h3 className="font-nosifer text-gray-300 font-semibold mb-4">
-              About Me
+              <FormattedMessage
+                id="profile.aboutMe"
+                defaultMessage="About Me"
+              />
             </h3>
             <p className="text-purple-400">{userDetails.about}</p>
           </div>
 
           <div className="mt-8">
             <h3 className="font-nosifer text-gray-300 font-semibold mb-4">
-              User Details
+              <FormattedMessage
+                id="profile.userDetails"
+                defaultMessage="User Details"
+              />
             </h3>
             <p className="text-purple-400">
-              <strong>Age:</strong> {userDetails.age} years old
+              <strong>
+                <FormattedMessage id="profile.age" defaultMessage="Age" />:
+              </strong>{" "}
+              {userDetails.age}{" "}
+              <FormattedMessage
+                id="profile.yearsOld"
+                defaultMessage="years old"
+              />
               <br />
-              <strong>Gender:</strong> {userDetails.gender}
+              <strong>
+                <FormattedMessage id="profile.gender" defaultMessage="Gender" />
+                :
+              </strong>{" "}
+              {userDetails.gender}
               <br />
-              <strong>School:</strong> {userDetails.school}
+              <strong>
+                <FormattedMessage id="profile.school" defaultMessage="School" />
+                :
+              </strong>{" "}
+              {userDetails.school}
               <br />
-              <strong>Level:</strong> {userDetails.level}
+              <strong>
+                <FormattedMessage id="profile.level" defaultMessage="Level" />:
+              </strong>{" "}
+              {userDetails.level}
               <br />
-              <strong>Win Rate:</strong> {userDetails.winRate}
+              <strong>
+                <FormattedMessage
+                  id="profile.winRate"
+                  defaultMessage="Win Rate"
+                />
+                :
+              </strong>{" "}
+              {userDetails.winRate}
             </p>
           </div>
 
           <div className="mt-8 flex justify-center space-x-4">
             <button
-              className="bg-blue-500 hover:bg-blue-700 
-			  text-white font-bold py-2 px-4 rounded"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               onClick={toggleFriendsList}
             >
-              Friend List
+              <FormattedMessage
+                id="profile.friendList"
+                defaultMessage="Friend List"
+              />
             </button>
             <button
-              className="bg-green-500 hover:bg-green-700 
-			  text-white font-bold py-2 px-4 rounded"
+              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
               onClick={toggleMatchHistory}
             >
-              Match History
+              <FormattedMessage
+                id="profile.matchHistory"
+                defaultMessage="Match History"
+              />
             </button>
           </div>
         </div>
-
         <div className="mt-8">
           {showFriendsList && <FriendsList />}
           {showMatchHistory && <MatchHistory />}
