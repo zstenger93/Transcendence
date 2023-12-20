@@ -5,49 +5,48 @@ import { FaInfoCircle, FaHome, FaUser } from "react-icons/fa";
 import { SiGooglechat, SiGameandwatch } from "react-icons/si";
 
 const Sidebar = () => {
-  return (
-    <div
-      className="fixed top-0 lef-0 h-screen w-16 m-0
-						flex flex-col bg-gray-800 bg-opacity-30 text-white shadow-lg"
-    >
-      <SidebarIcon
-        icon={<FaHome size="32" />}
-        text="Home"
-        to="/home"
-        margin="mt-10"
-      />
-      <SidebarIcon
-        icon={<SiGooglechat size="32" />}
-        text="Chat Rooms"
-        to="/chat"
-        margin="mt-10"
-      />
-      <SidebarIcon
-        icon={<SiGameandwatch size="32" />}
-        text="Play or Watch Games"
-        to="/games"
-        margin="mt-5"
-      />
-      <SidebarIcon
-        icon={<FaUser size="32" />}
-        text="Profile"
-        to="/profile"
-        margin="mt-5"
-      />
-      <SidebarIcon
-        icon={<FaInfoCircle size="32" />}
-        text="About Us"
-        to="/about"
-        margin="mt-5"
-      />
-      <SidebarIcon
-        icon={<TbLogout size="32" />}
-        text="Logout"
-        to="/"
-        margin="mt-5"
-      />
-    </div>
-  );
+	return (
+		<div
+			className="fixed top-0 lef-0 h-screen w-16 m-0
+				flex flex-col bg-gray-800 bg-opacity-30 text-white 
+				shadow-lg"
+		>
+			<div className="mt-10 space-y-5">
+				<SidebarIcon
+					icon={<FaHome size="32" />}
+					text="Home"
+					to="/home"
+				/>
+				<SidebarIcon
+					icon={<SiGooglechat size="32" />}
+					text="Channels & Private Messages"
+					to="/chat"
+				/>
+				<SidebarIcon
+					icon={<SiGameandwatch size="32" />}
+					text="Play or Watch Games"
+					to="/games"
+				/>
+				<SidebarIcon
+					icon={<FaUser size="32" />}
+					text="Profile"
+					to="/profile"
+				/>
+				<SidebarIcon
+					icon={<FaInfoCircle size="32" />}
+					text="About Us"
+					to="/about"
+				/>
+			</div>
+			<div className="mb-10 mt-auto">
+				<SidebarIcon
+					icon={<TbLogout size="32" />}
+					text="Logout"
+					to="/"
+				/>
+			</div>
+		</div>
+	);
 };
 
 const SidebarIcon = ({ icon, text = "tooltip", to, margin }) => {
