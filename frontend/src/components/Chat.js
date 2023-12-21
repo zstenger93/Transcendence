@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 function Chat() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
@@ -87,7 +89,7 @@ function Chat() {
       >
         <div>
           <h2 className="mb-8 text-2xl font-nosifer font-bold text-gray-300">
-            Channels
+            {t('Channels')}
           </h2>
           <ul>
             {channels.map((channel, index) => (
@@ -106,7 +108,7 @@ function Chat() {
           className="bg-purple-900 bg-opacity-80 hover:bg-purple-700 
 		  text-white font-bold py-2 px-4 rounded"
         >
-          Back
+          {t('Back')}
         </button>
       </div>
     );
@@ -120,7 +122,7 @@ function Chat() {
       >
         <div>
           <h2 className="mb-8 text-2xl font-nosifer font-bold text-gray-300">
-            Online
+            {t('Online')}
           </h2>
           <ul>
             {onlineUsers.map((user, index) => (
@@ -163,7 +165,7 @@ function Chat() {
               onKeyPress={handleKeyPress}
               onPaste={handlePaste}
               className="border border-purple-500 bg-gray-900 bg-opacity-80 rounded p-2 w-full"
-              placeholder="Type your message here..."
+              placeholder={t('Type your message here...')}
             />
             <input
               type="file"
@@ -177,7 +179,7 @@ function Chat() {
                 className="cursor-pointer bg-purple-900 hover:bg-purple-700 
 				text-white font-bold py-2 px-4 rounded"
               >
-                Choose file
+                {t('Choose File')}
               </label>
             </div>
             {uploadedFileName && (

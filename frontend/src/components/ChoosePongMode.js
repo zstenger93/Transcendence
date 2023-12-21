@@ -1,8 +1,10 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 
 function ChoosePongMode() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
@@ -12,28 +14,35 @@ function ChoosePongMode() {
           className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer hover:bg-purple-700 
 		  text-white font-bold py-2 px-4 rounded block text-center"
         >
-          Original Pong
+          {t("Original Pong")}
         </Link>
         <Link
           to="/multiplayer"
           className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer hover:bg-purple-700 
 		  text-white font-bold py-2 px-4 rounded block text-center"
         >
-          Multiplayer
+          {t("Multiplayer")}
         </Link>
         <Link
           to="/moddedpong"
           className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer hover:bg-purple-700 
 		  text-white font-bold py-2 px-4 rounded block text-center"
         >
-          Modded Pong
+          {t("Modded Pong")}
         </Link>
         <Link
           to="/aiopponent"
           className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer hover:bg-purple-700 
 		  text-white font-bold py-2 px-4 rounded block text-center"
         >
-          Pong against AI
+          {t("Pong against AI")}
+        </Link>
+        <Link
+          to="/3dpong"
+          className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer hover:bg-purple-700 
+		  text-white font-bold py-2 px-4 rounded block text-center"
+        >
+          {t("3D Pong")}
         </Link>
         <div className="flex items-center justify-center">
           <button
@@ -41,7 +50,7 @@ function ChoosePongMode() {
             className="mt-6 bg-purple-900 bg-opacity-80 font-nosifer hover:bg-purple-700 
 			text-white font-bold py-2 px-4 rounded"
           >
-            Back
+            {t("Back")}
           </button>
         </div>
       </div>

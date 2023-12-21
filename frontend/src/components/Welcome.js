@@ -1,8 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import backgroundImage from "../images/bg0.png";
 
 function Welcome() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const redirectToHome = () => {
@@ -19,7 +21,7 @@ function Welcome() {
           className="bg-gray-900 text-gray-300 font-nosifer font-bold px-4 py-2 rounded cursor-pointer hover:bg-gray-900 hover:bg-opacity-70"
           onClick={redirectToHome}
         >
-          Sign In
+          {t("Sign In")}
         </button>
       </div>
     </div>
