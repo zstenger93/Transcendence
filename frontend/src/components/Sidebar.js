@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { TbLogout } from "react-icons/tb";
 import { useTranslation } from "react-i18next";
 import i18n from "i18next";
-import { FaInfoCircle, FaHome, FaUser, FaLanguage } from "react-icons/fa";
+import { FaInfoCircle, FaHome, FaUser } from "react-icons/fa";
+import { HiMiniLanguage } from "react-icons/hi2";
 import { SiGooglechat, SiGameandwatch } from "react-icons/si";
 
 const Sidebar = () => {
@@ -44,7 +45,7 @@ const Sidebar = () => {
           to="/about"
         />
         <SidebarDropdown
-          icon={<FaLanguage size="32" />}
+          icon={<HiMiniLanguage size="32" />}
           text={t("Language")}
           options={[
             { value: "en", label: "EN" },
