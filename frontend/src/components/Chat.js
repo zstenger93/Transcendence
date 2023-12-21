@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 function Chat() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
@@ -9,6 +11,13 @@ function Chat() {
   const [viewingImage, setViewingImage] = useState(null);
   const [pastedImage, setPastedImage] = useState(null);
   const [uploadedFileName, setUploadedFileName] = React.useState("");
+  const [onlineUsers] = useState([
+    "kvebers",
+    "Jesus",
+    "asioud",
+    "zstenger",
+    "jergashe",
+  ]);
 
   const handleFileChange = (event) => {
     if (event.target.files.length > 0) {
@@ -46,22 +55,22 @@ function Chat() {
   };
 
   const handleSendMessage = (event) => {
-	event.preventDefault();
-  
-	if (newMessage || pastedImage) {
-	  setMessages((messages) => [
-		...messages,
-		{
-		  channel: currentChannel,
-		  text: newMessage,
-		  image: pastedImage,
-		},
-	  ]);
-  
-	  setNewMessage('');
-	  setPastedImage(null);
-	  setUploadedFileName('');
-	}
+    event.preventDefault();
+
+    if (newMessage || pastedImage) {
+      setMessages((messages) => [
+        ...messages,
+        {
+          channel: currentChannel,
+          text: newMessage,
+          image: pastedImage,
+        },
+      ]);
+
+      setNewMessage("");
+      setPastedImage(null);
+      setUploadedFileName("");
+    }
   };
 
   const handleKeyPress = (event) => {
@@ -76,11 +85,11 @@ function Chat() {
     return (
       <div
         className="flex flex-col justify-between w-1/7 p-6 text-white
-		text-center bg-gray-900 bg-opacity-80 rounded shadow"
+		text-center bg-gray-900 bg-opacity-80 rounded-xl shadow"
       >
         <div>
           <h2 className="mb-8 text-2xl font-nosifer font-bold text-gray-300">
-            Channels
+            {t("Channels")}
           </h2>
           <ul>
             {channels.map((channel, index) => (
@@ -99,18 +108,46 @@ function Chat() {
           className="bg-purple-900 bg-opacity-80 hover:bg-purple-700 
 		  text-white font-bold py-2 px-4 rounded"
         >
-          Back
+          {t("Back")}
         </button>
+      </div>
+    );
+  }
+
+  function OnlineUsersList() {
+    return (
+      <div
+        className="flex flex-col justify-between w-1/7 p-6 text-white
+		text-center bg-gray-900 bg-opacity-80 rounded-xl shadow"
+      >
+        <div>
+          <h2 className="mb-8 text-2xl font-nosifer font-bold text-gray-300">
+            {t("Online")}
+          </h2>
+          <ul>
+            {onlineUsers.map((user, index) => (
+              <li key={index} className="mb-4">
+                {user}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <div className="flex w-2/5">
+      <div className="flex w-3/6 space-x-2">
         <ChannelList />
-        <div className="w-full p-6 text-white bg-gray-900 bg-opacity-80 rounded shadow">
-          <div className="overflow-auto h-96 mb-4 border border-purple-500 rounded p-4 shadow">
+        <div
+          className="w-full p-6 text-white bg-gray-900 bg-opacity-80 
+			rounded-xl shadow"
+        >
+          <div
+            className="overflow-auto h-96 mb-4 border border-purple-500 
+		  	rounded-xl p-4 shadow"
+          >
             {messages
               .filter((message) => message.channel === currentChannel)
               .map((message, index) => (
@@ -133,8 +170,9 @@ function Chat() {
               onChange={handleNewMessageChange}
               onKeyPress={handleKeyPress}
               onPaste={handlePaste}
-              className="border border-purple-500 bg-gray-900 bg-opacity-80 rounded p-2 w-full"
-              placeholder="Type your message here..."
+              className="border border-purple-500 bg-gray-900 bg-opacity-80 
+			  rounded p-2 w-full"
+              placeholder={t("Type your message here...")}
             />
             <input
               type="file"
@@ -148,7 +186,7 @@ function Chat() {
                 className="cursor-pointer bg-purple-900 hover:bg-purple-700 
 				text-white font-bold py-2 px-4 rounded"
               >
-                Choose file
+                {t("Choose File")}
               </label>
             </div>
             {uploadedFileName && (
@@ -156,6 +194,7 @@ function Chat() {
             )}
           </form>
         </div>
+        <OnlineUsersList />
       </div>
       {viewingImage && (
         <div
