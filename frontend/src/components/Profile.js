@@ -135,7 +135,7 @@ function FriendsList() {
               <td className="p-2 border text-center border-gray-900 mx-auto">
                 <a
                   href={friend.profileLink}
-                  className="text-blue-700 underline"
+                  className="text-blue-500 underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -276,18 +276,20 @@ function Profile() {
           </div>
 
           <div className="mt-8 flex justify-center space-x-4">
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              onClick={toggleFriendsList}
-            >
-              {t("Friends")}
-            </button>
-            <button
-              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-              onClick={toggleMatchHistory}
-            >
-              {t('Match History')}
-            </button>
+		  <button
+  className={`bg-blue-400 bg-opacity-50 ${showFriendsList ? 'bg-purple-600' : 'hover:bg-purple-600'} hover:bg-opacity-50 
+  text-gray-300 font-bold py-2 px-4 rounded`}
+  onClick={toggleFriendsList}
+>
+  {t("Friends")}
+</button>
+<button
+  className={`bg-blue-400 bg-opacity-50 ${showMatchHistory ? 'bg-purple-600' : 'hover:bg-purple-600'} hover:bg-opacity-50 
+  text-gray-300 font-bold py-2 px-4 rounded`}
+  onClick={toggleMatchHistory}
+>
+  {t("Match History")}
+</button>
           </div>
         </div>
         <div className="mt-8">
