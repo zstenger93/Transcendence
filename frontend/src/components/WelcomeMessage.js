@@ -1,16 +1,18 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 function WelcomeMessage() {
+  const { t } = useTranslation();
   return (
     <nav className="bg-opacity-0 p-2 text-center">
       <span className="text-gray-300 font-extrabold text-4xl">
-        Welcome To
+        {t("Welcome To")}
         <br />
-        TranscENDence
+        {t("TranscENDence")}
         <br />
-        Where Your Core Journey
+        {t("Where Your Core Journey")}
         <br />
-        Ends
+        {t("Ends")}
       </span>
     </nav>
   );
