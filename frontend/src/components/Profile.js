@@ -153,13 +153,15 @@ function FriendsList() {
 function MatchHistory() {
   const { t } = useTranslation();
   return (
-    <div className="bg-gray-900 bg-opacity-80 p-6 shadow-xl rounded-md max-h-96 overflow-y-auto">
+    <div
+      className="bg-gray-900 bg-opacity-80 p-6 shadow-xl
+      rounded-md max-h-96 overflow-y-auto">
       <h3 className="text-xl text-gray-300 font-nosifer font-bold mb-4 text-center">
         {t("Match History")}
       </h3>
       <table
         className="bg-purple-900 bg-opacity-60 w-full border-collapse border 
-		border-gray-900 mx-auto"
+		  border-gray-900 mx-auto"
       >
         <thead>
           <tr>
@@ -234,12 +236,12 @@ function Profile() {
   return (
     <div
       className="flex flex-col items-center justify-center
-	  h-screen bg-cover bg-center bg-no-repeat shadow-xl"
+	    h-screen bg-cover bg-center bg-no-repeat shadow-xl"
     >
       <div className="max-w-md flex flex-col items-center">
         <div
           className="bg-gray-900 bg-opacity-80 rounded-md
-			p-6 shadow-md text-center"
+			    p-6 shadow-md text-center"
         >
           <img
             src="https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp"
