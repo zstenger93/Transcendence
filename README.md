@@ -92,6 +92,23 @@ postgreSQL
 React
 Tailwindcss
 
+- root / Login
+	- Home / Welcome
+	- Game & Watch
+		- Pong
+			- Original
+			- AI Opponent
+			- Multiplayer
+			- Modded
+		- Future game
+	- Chat
+		- Different Channels
+		- Online Users (later)
+		- Image Sharing
+	- Profile
+	- About Us
+	- Logout
+
 ---
 
 ## Backend
@@ -126,6 +143,8 @@ Tailwindcss
 ## Original Game
 
 PONG
+
+Sortof works now and you can play on one keyboard. Also AI mode has been implemented.
 
 ---
 
