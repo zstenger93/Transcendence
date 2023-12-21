@@ -1,8 +1,9 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import enTranslations from "../locales/en/en.json";
-import frTranslations from "../locales/fr/fr.json";
-import huTranslations from "../locales/hu/hu.json";
+import enTranslations from "../locales/en/translation.json";
+import frTranslations from "../locales/fr/translation.json";
+import huTranslations from "../locales/hu/translation.json";
+import deTranslations from "../locales/de/translation.json";
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -14,6 +15,9 @@ i18n.use(initReactI18next).init({
     },
     hu: {
       translation: huTranslations,
+    },
+    de: {
+      translation: deTranslations,
     },
   },
   lng: "en",

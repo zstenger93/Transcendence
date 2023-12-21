@@ -8,7 +8,7 @@ import { SiGooglechat, SiGameandwatch } from "react-icons/si";
 
 const Sidebar = () => {
   const { t } = useTranslation();
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [, setDropdownOpen] = useState(false);
 
   const changeLanguage = (lang) => {
     i18n.changeLanguage(lang);
@@ -47,9 +47,10 @@ const Sidebar = () => {
           icon={<FaLanguage size="32" />}
           text={t("Language")}
           options={[
-            { value: "en", label: "English" },
-            { value: "fr", label: "French" },
-            { value: "hu", label: "Hungarian" },
+            { value: "en", label: "EN" },
+            { value: "fr", label: "FR" },
+            { value: "hu", label: "HU" },
+            { value: "de", label: "DE" },
             // Add more languages as needed
           ]}
           onSelect={changeLanguage}
@@ -86,10 +87,13 @@ const SidebarIcon = ({ icon, text = "tooltip", to, margin }) => {
 
 const SidebarDropdown = ({ icon, text, options, onSelect }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
 
   const handleSelect = (value) => {
     onSelect(value);
+	setCurrentLanguage(value);
     setDropdownOpen(false);
+	i18n.changeLanguage(value);
   };
 
   return (
@@ -114,12 +118,16 @@ const SidebarDropdown = ({ icon, text, options, onSelect }) => {
       {dropdownOpen && (
         <div
           className="absolute left-0 w-22 py-2 mt-2 bg-gray-900 bg-opacity-80
-					rounded-lg shadow-xl"
+					rounded-lg shadow-xl text-center"
         >
           {options.map((option) => (
             <button
               key={option.value}
-              className="block px-4 py-2 text-gray-300 hover:bg-indigo-500 hover:text-white"
+              className={`w-full py-2 ${
+                option.value === currentLanguage
+                  ? "text-blue-500"
+                  : "text-gray-300"
+              } hover:bg-indigo-500 hover:text-white`}
               onClick={() => handleSelect(option.value)}
             >
               {option.label}
