@@ -271,7 +271,7 @@ function Profile() {
               <br />
               <strong>{t("Level")}:</strong> {userDetails.level}
               <br />
-              <strong>{t("Win rate")}:</strong> {userDetails.winRate}
+              <strong>{t("Win Rate")}:</strong> {userDetails.winRate}
             </p>
           </div>
 
