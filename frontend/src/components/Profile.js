@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 const friendsListData = [
   {
@@ -108,10 +108,11 @@ const userDetails = {
 };
 
 function FriendsList() {
+  const { t } = useTranslation();
   return (
     <div className="bg-gray-900 bg-opacity-80 p-4 rounded-md max-h-96 overflow-y-auto">
       <h3 className="text-xl text-gray-300 font-nosifer font-bold mb-4 text-center">
-        Friends
+        {t("Friends")}
       </h3>
       <table
         className="bg-purple-900 bg-opacity-60 w-full border-collapse border 
@@ -119,11 +120,9 @@ function FriendsList() {
       >
         <thead>
           <tr>
-            <th className="p-2 border border-gray-900 mx-auto">
-              Name
-            </th>
+            <th className="p-2 border border-gray-900 mx-auto">{t("Name")}</th>
             <th className="p-2 border text-center border-gray-900 mx-auto">
-              Intra
+              {t("Intra")}
             </th>
           </tr>
         </thead>
@@ -152,11 +151,11 @@ function FriendsList() {
 }
 
 function MatchHistory() {
-
+  const { t } = useTranslation();
   return (
     <div className="bg-gray-900 bg-opacity-80 p-6 shadow-xl rounded-md max-h-96 overflow-y-auto">
       <h3 className="text-xl text-gray-300 font-nosifer font-bold mb-4 text-center">
-        Match History
+        {t("Match History")}
       </h3>
       <table
         className="bg-purple-900 bg-opacity-60 w-full border-collapse border 
@@ -164,18 +163,20 @@ function MatchHistory() {
       >
         <thead>
           <tr>
-            <th className="p-2 border border-gray-900 mx-auto">Opponent</th>
-            <th className="p-2 border text-center border-gray-900 mx-auto">
-              Result
+            <th className="p-2 border border-gray-900 mx-auto">
+              {t("Opponent")}
             </th>
             <th className="p-2 border text-center border-gray-900 mx-auto">
-              Score
+              {t("Result")}
             </th>
             <th className="p-2 border text-center border-gray-900 mx-auto">
-              Game
+              {t("Score")}
             </th>
             <th className="p-2 border text-center border-gray-900 mx-auto">
-              Type
+              {t("Game")}
+            </th>
+            <th className="p-2 border text-center border-gray-900 mx-auto">
+              {t("Type")}
             </th>
           </tr>
         </thead>
@@ -187,7 +188,7 @@ function MatchHistory() {
               </td>
               <td
                 className={`p-2 border text-center border-gray-900 mx-auto ${
-                  match.result === "Win" ? "text-green-700" : "text-red-700"
+                  match.result === t("Win") ? "text-green-700" : "text-red-700"
                 }`}
               >
                 {match.result}
@@ -200,7 +201,7 @@ function MatchHistory() {
               </td>
               <td
                 className={`p-2 border text-center border-gray-900 mx-auto ${
-                  match.type === "Original"
+                  match.type === t("Original")
                     ? "text-blue-700"
                     : "text-yellow-700"
                 }`}
@@ -252,41 +253,25 @@ function Profile() {
 
           <div className="mt-8">
             <h3 className="font-nosifer text-gray-300 font-semibold mb-4">
-              About Me
+              {t("About Me")}
             </h3>
             <p className="text-purple-400">{userDetails.about}</p>
           </div>
 
           <div className="mt-8">
             <h3 className="font-nosifer text-gray-300 font-semibold mb-4">
-              User Details
+              {t("User Details")}
             </h3>
             <p className="text-purple-400">
-              <strong>
-                Age:
-              </strong>{" "}
-              {userDetails.age}{" "}
-              years old
+              <strong>{t("Age")}:</strong> {userDetails.age} {t("years old")}
               <br />
-              <strong>
-                Gender:
-              </strong>{" "}
-              {userDetails.gender}
+              <strong>{t("Gender")}:</strong> {userDetails.gender}
               <br />
-              <strong>
-                School:
-              </strong>{" "}
-              {userDetails.school}
+              <strong>{t("School")}:</strong> {userDetails.school}
               <br />
-              <strong>
-                Level:
-              </strong>{" "}
-              {userDetails.level}
+              <strong>{t("Level")}:</strong> {userDetails.level}
               <br />
-              <strong>
-                Win rate:
-              </strong>{" "}
-              {userDetails.winRate}
+              <strong>{t("Win rate")}:</strong> {userDetails.winRate}
             </p>
           </div>
 
@@ -295,13 +280,13 @@ function Profile() {
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               onClick={toggleFriendsList}
             >
-              {t('Friends')}
+              {t("Friends")}
             </button>
             <button
               className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
               onClick={toggleMatchHistory}
             >
-              Match History
+              {t('Match History')}
             </button>
           </div>
         </div>
