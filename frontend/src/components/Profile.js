@@ -31,14 +31,14 @@ const friendsListData = [
 
 const matchHistoryData = [
   {
-    opponent: "Emotional Damage",
+    opponent: "EmotionalDamage",
     result: "Win",
     score: "5 - 2",
     game: "Pong",
     type: "Original",
   },
   {
-    opponent: "Chuck Norris",
+    opponent: "ChuckNorris",
     result: "Loss",
     score: "1 - 4",
     game: "Pong",
@@ -191,7 +191,7 @@ function MatchHistory() {
                   match.result === t("Win") ? "text-green-700" : "text-red-700"
                 }`}
               >
-                {match.result}
+                {t(match.result)}
               </td>
               <td className="p-2 border text-center border-gray-900 mx-auto">
                 {match.score}
@@ -206,7 +206,7 @@ function MatchHistory() {
                     : "text-yellow-700"
                 }`}
               >
-                {match.type}
+                {t(match.type)}
               </td>
             </tr>
           ))}
@@ -257,7 +257,6 @@ function Profile() {
             </h3>
             <p className="text-purple-400">{userDetails.about}</p>
           </div>
-
           <div className="mt-8">
             <h3 className="font-nosifer text-gray-300 font-semibold mb-4">
               {t("User Details")}
@@ -274,10 +273,9 @@ function Profile() {
               <strong>{t("Win Rate")}:</strong> {userDetails.winRate}
             </p>
           </div>
-
           <div className="mt-8 flex justify-center space-x-4">
             <button
-              className={`bg-blue-400 bg-opacity-50 ${
+              className={`w-36 bg-blue-300 bg-opacity-80 text-gray-500 ${
                 showFriendsList ? "bg-purple-600" : "hover:bg-purple-600"
               } hover:bg-opacity-50 text-gray-300 font-bold py-2 px-4 rounded`}
               onClick={toggleFriendsList}
@@ -285,7 +283,7 @@ function Profile() {
               {t("Friends")}
             </button>
             <button
-              className={`bg-blue-400 bg-opacity-50 ${
+              className={`w-36 bg-blue-300 bg-opacity-80 text-gray-500 ${
                 showMatchHistory ? "bg-purple-600" : "hover:bg-purple-600"
               } hover:bg-opacity-50 text-gray-300 font-bold py-2 px-4 rounded`}
               onClick={toggleMatchHistory}
