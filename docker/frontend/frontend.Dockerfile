@@ -5,10 +5,10 @@ WORKDIR /app/frontend
 COPY package*.json ./
 
 RUN npm install && \
-    npm install react-router-dom && \
-    npm install tailwindcss postcss autoprefixer && \
-    npm install react-slick slick-carousel && \
-    npm install react-intl
+    npm install react-router-dom --save && \
+    npm install tailwindcss postcss autoprefixer --save && \
+    npm install react-slick slick-carousel --save && \
+    npm install react-i18next i18next --save
 
 COPY . .
 
