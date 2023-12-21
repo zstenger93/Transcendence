@@ -51,7 +51,7 @@ const Sidebar = () => {
             { value: "fr", label: "FR" },
             { value: "hu", label: "HU" },
             { value: "de", label: "DE" },
-            // Add more languages as needed
+            { value: "jp", label: "JP" },
           ]}
           onSelect={changeLanguage}
         />
@@ -91,9 +91,9 @@ const SidebarDropdown = ({ icon, text, options, onSelect }) => {
 
   const handleSelect = (value) => {
     onSelect(value);
-	setCurrentLanguage(value);
+    setCurrentLanguage(value);
     setDropdownOpen(false);
-	i18n.changeLanguage(value);
+    i18n.changeLanguage(value);
   };
 
   return (
