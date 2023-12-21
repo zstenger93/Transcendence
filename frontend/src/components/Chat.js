@@ -89,7 +89,7 @@ function Chat() {
       >
         <div>
           <h2 className="mb-8 text-2xl font-nosifer font-bold text-gray-300">
-            {t('Channels')}
+            {t("Channels")}
           </h2>
           <ul>
             {channels.map((channel, index) => (
@@ -108,7 +108,7 @@ function Chat() {
           className="bg-purple-900 bg-opacity-80 hover:bg-purple-700 
 		  text-white font-bold py-2 px-4 rounded"
         >
-          {t('Back')}
+          {t("Back")}
         </button>
       </div>
     );
@@ -122,7 +122,7 @@ function Chat() {
       >
         <div>
           <h2 className="mb-8 text-2xl font-nosifer font-bold text-gray-300">
-            {t('Online')}
+            {t("Online")}
           </h2>
           <ul>
             {onlineUsers.map((user, index) => (
@@ -140,8 +140,14 @@ function Chat() {
     <div className="flex items-center justify-center min-h-screen">
       <div className="flex w-3/6 space-x-2">
         <ChannelList />
-        <div className="w-full p-6 text-white bg-gray-900 bg-opacity-80 rounded-xl shadow">
-          <div className="overflow-auto h-96 mb-4 border border-purple-500 rounded-xl p-4 shadow">
+        <div
+          className="w-full p-6 text-white bg-gray-900 bg-opacity-80 
+			rounded-xl shadow"
+        >
+          <div
+            className="overflow-auto h-96 mb-4 border border-purple-500 
+		  	rounded-xl p-4 shadow"
+          >
             {messages
               .filter((message) => message.channel === currentChannel)
               .map((message, index) => (
@@ -164,8 +170,9 @@ function Chat() {
               onChange={handleNewMessageChange}
               onKeyPress={handleKeyPress}
               onPaste={handlePaste}
-              className="border border-purple-500 bg-gray-900 bg-opacity-80 rounded p-2 w-full"
-              placeholder={t('Type your message here...')}
+              className="border border-purple-500 bg-gray-900 bg-opacity-80 
+			  rounded p-2 w-full"
+              placeholder={t("Type your message here...")}
             />
             <input
               type="file"
@@ -179,7 +186,7 @@ function Chat() {
                 className="cursor-pointer bg-purple-900 hover:bg-purple-700 
 				text-white font-bold py-2 px-4 rounded"
               >
-                {t('Choose File')}
+                {t("Choose File")}
               </label>
             </div>
             {uploadedFileName && (

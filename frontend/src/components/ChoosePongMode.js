@@ -11,44 +11,49 @@ function ChoosePongMode() {
       <div className="p-10 bg-gray-900 bg-opacity-80 rounded shadow-xl">
         <Link
           to="/originalpong"
-          className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer hover:bg-purple-700 
-		  text-white font-bold py-2 px-4 rounded block text-center"
+          className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer 
+		  hover:bg-purple-700 text-white font-bold py-2 px-4 rounded 
+		  block text-center"
         >
           {t("Original Pong")}
         </Link>
         <Link
           to="/multiplayer"
-          className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer hover:bg-purple-700 
-		  text-white font-bold py-2 px-4 rounded block text-center"
+          className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer 
+		  hover:bg-purple-700 text-white font-bold py-2 px-4 rounded 
+		  block text-center"
         >
           {t("Multiplayer")}
         </Link>
         <Link
           to="/moddedpong"
-          className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer hover:bg-purple-700 
-		  text-white font-bold py-2 px-4 rounded block text-center"
+          className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer 
+		  hover:bg-purple-700 text-white font-bold py-2 px-4 rounded 
+		  block text-center"
         >
           {t("Modded Pong")}
         </Link>
         <Link
           to="/aiopponent"
-          className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer hover:bg-purple-700 
-		  text-white font-bold py-2 px-4 rounded block text-center"
+          className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer 
+		  hover:bg-purple-700 text-white font-bold py-2 px-4 rounded 
+		  block text-center"
         >
           {t("Pong against AI")}
         </Link>
         <Link
           to="/3dpong"
-          className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer hover:bg-purple-700 
-		  text-white font-bold py-2 px-4 rounded block text-center"
+          className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer 
+		  hover:bg-purple-700 text-white font-bold py-2 px-4 rounded 
+		  block text-center"
         >
           {t("3D Pong")}
         </Link>
         <div className="flex items-center justify-center">
           <button
             onClick={() => navigate(-1)}
-            className="mt-6 bg-purple-900 bg-opacity-80 font-nosifer hover:bg-purple-700 
-			text-white font-bold py-2 px-4 rounded"
+            className="mt-6 bg-purple-900 bg-opacity-80 font-nosifer 
+			hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
           >
             {t("Back")}
           </button>

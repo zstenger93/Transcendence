@@ -276,20 +276,22 @@ function Profile() {
           </div>
 
           <div className="mt-8 flex justify-center space-x-4">
-		  <button
-  className={`bg-blue-400 bg-opacity-50 ${showFriendsList ? 'bg-purple-600' : 'hover:bg-purple-600'} hover:bg-opacity-50 
-  text-gray-300 font-bold py-2 px-4 rounded`}
-  onClick={toggleFriendsList}
->
-  {t("Friends")}
-</button>
-<button
-  className={`bg-blue-400 bg-opacity-50 ${showMatchHistory ? 'bg-purple-600' : 'hover:bg-purple-600'} hover:bg-opacity-50 
-  text-gray-300 font-bold py-2 px-4 rounded`}
-  onClick={toggleMatchHistory}
->
-  {t("Match History")}
-</button>
+            <button
+              className={`bg-blue-400 bg-opacity-50 ${
+                showFriendsList ? "bg-purple-600" : "hover:bg-purple-600"
+              } hover:bg-opacity-50 text-gray-300 font-bold py-2 px-4 rounded`}
+              onClick={toggleFriendsList}
+            >
+              {t("Friends")}
+            </button>
+            <button
+              className={`bg-blue-400 bg-opacity-50 ${
+                showMatchHistory ? "bg-purple-600" : "hover:bg-purple-600"
+              } hover:bg-opacity-50 text-gray-300 font-bold py-2 px-4 rounded`}
+              onClick={toggleMatchHistory}
+            >
+              {t("Match History")}
+            </button>
           </div>
         </div>
         <div className="mt-8">

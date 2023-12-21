@@ -18,7 +18,8 @@ function Games() {
 
   return (
     <div
-      className="flex flex-col items-center justify-center h-screen bg-cover bg-center bg-no-repeat"
+      className="flex flex-col items-center justify-center 
+	  h-screen bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="flex justify-center space-x-4 flex-wrap">
@@ -26,7 +27,8 @@ function Games() {
           <Link
             key={index}
             to="/choosepongmode"
-            className="relative bg-white p-4 rounded shadow border-black border-2 text-black overflow-hidden m-2"
+            className="relative bg-white p-4 rounded shadow 
+			border-black border-2 text-black overflow-hidden m-2"
             style={{ width: "30vw", height: "16.875vw" }}
           >
             <div
@@ -45,7 +47,8 @@ function Games() {
                 title={tile.name}
                 src={tile.video}
                 frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer; autoplay; clipboard-write; 
+				encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 style={{
                   position: "absolute",
@@ -57,7 +60,8 @@ function Games() {
               ></iframe>
             </div>
             <div
-              className="absolute top-0 left-0 w-full h-full flex items-center justify-center text-white text-4xl font-bold"
+              className="absolute top-0 left-0 w-full h-full flex items-center 
+			  justify-center text-white text-4xl font-bold"
               style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}
             >
               {tile.name}
