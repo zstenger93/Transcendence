@@ -11,6 +11,7 @@
 [MindMap](#mindmap)
 
 [Setup](#setup)
+	- [CI/CD pipeline](#ci_cd_pipeline)
 
 [DataBase](#database)
 
@@ -76,8 +77,22 @@ Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices
 	- Echoes the venv activation to bashrc
 	- Copies the starting script to the image
 	- Exposes the port
-	- Entrypoint
+	- Entrypoint (not always, depends because some things wont work directly from dockerfile)
 	- CMD to run
+
+## CI/CD pipeline
+
+- .github folder
+	- workflows
+		- workflow_name.yaml
+			- setting up jobs for the workflow
+				- testing
+					- need to upload artifacts 
+				- building
+					- need to download the uploaded artifacts
+					- ceraful with the correct path
+				- deploying
+					- in case of react project, in github settings directory should be changed to /doc instead of root
 
 ---
 
@@ -90,13 +105,13 @@ postgreSQL
 ## Frontend
 
 React
-Tailwindcss
+Tailwind
 
 ---
 
 ## Backend
 
-- Microservices
+- Microservices (kind of)
 	- Authentication service
 	- Game
 		- Normal mode
@@ -153,13 +168,17 @@ Backend structure setup :white_check_mark:
 
 First mindmap :white_check_mark:
 
-Docker files for services :x:
+Docker files for services :white_check_mark:
 
 docker-compose.dev :x: :white_check_mark:
 
 Hashed passwords :x:
 
 Using OAuth system from 42 :x:
+
+CI/CD pipeline setup :white_check_mark:
+
+Deploying to github pages :white_check_mark:
 
 Setting unique username :x:
 
