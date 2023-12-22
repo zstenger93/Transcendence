@@ -41,6 +41,5 @@ jobs:
 
       - name: Deploy to GitHub Pages
         run: |
-          npm install -g github-pages-deploy-action
-          deploy --token ${{ secrets.ACCESS_TOKEN }} --branch gh-pages --dir frontend/build
+          npx github-pages-deploy-action --token ${{ secrets.ACCESS_TOKEN }} --branch gh-pages --dir frontend/build
         working-directory: /
