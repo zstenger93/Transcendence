@@ -39,6 +39,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: List Folder Structure After Deploy
+        run: ls -R
+
       - name: Build and deploy
         uses: JamesIves/github-pages-deploy-action@v4
         env:
