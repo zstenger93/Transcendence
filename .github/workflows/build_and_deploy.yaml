@@ -36,10 +36,11 @@ jobs:
     needs: build
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: Deploy to GitHub Pages
+        run: |
+          npm install -g github-pages-deploy-action
+          gh-pages-deploy --token ${{ secrets.ACCESS_TOKEN }} --branch gh-pages --dir frontend/build
         working-directory: /
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          token: ${{ secrets.ACCESS_TOKEN }}
-          branch: gh-pages
-          folder: frontend/build
