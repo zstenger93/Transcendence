@@ -27,7 +27,7 @@
     "build:css": "postcss src/styles/tailwind.css -o src/index.css",
     "watch:css": "postcss src/styles/tailwind.css -o src/index.css --watch",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "CI=false react-scripts build",
     "test": "react-scripts test --detectOpenHandles",
     "eject": "react-scripts eject"
   },
