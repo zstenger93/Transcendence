@@ -1,7 +1,9 @@
 from django.urls import path
 from . import views
 
+
 # Create different uri roots to connect them to a view 
+
 urlpatterns = [
     path("", views.home, name="home"),
     path("login/", views.my_login, name="login"),
@@ -13,4 +15,3 @@ urlpatterns = [
     path("test/", views.test, name="test"),
 
 ]
-
