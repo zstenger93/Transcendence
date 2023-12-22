@@ -24,7 +24,7 @@ import {
 function App() {
   return (
     <I18nextProvider i18n={Translation}>
-      <Router>
+      <Router basename="/Transcendence">
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route
