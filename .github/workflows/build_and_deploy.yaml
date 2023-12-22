@@ -13,10 +13,21 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install Dependencies
+        working-directory: frontend  # Specify the frontend folder
+        run: npm install
+
       - name: Run Tests
+        working-directory: frontend
         run: npm test
 
       - name: Build Frontend
+        working-directory: frontend
         run: npm run build
 
   deploy:
@@ -30,4 +41,4 @@ jobs:
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: build
+          FOLDER: frontend/build  # Adjust this path to match your structure
