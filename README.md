@@ -11,7 +11,8 @@
 [MindMap](#mindmap)
 
 [Setup](#setup)
-	- [CI/CD pipeline](#ci_cd_pipeline)
+
+[CI/CD Pipeline](#pipeline)
 
 [DataBase](#database)
 
@@ -80,7 +81,7 @@ Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices
 	- Entrypoint (not always, depends because some things wont work directly from dockerfile)
 	- CMD to run
 
-## CI/CD pipeline
+## Pipeline
 
 - .github folder
 	- workflows
