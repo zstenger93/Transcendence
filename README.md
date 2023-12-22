@@ -100,10 +100,11 @@ Tailwindcss
 			- AI Opponent
 			- Multiplayer
 			- Modded
+			- 3D
 		- Future game
 	- Chat
-		- Different Channels
-		- Online Users (later)
+		- Channels
+		- Online
 		- Image Sharing
 	- Profile
 	- About Us
