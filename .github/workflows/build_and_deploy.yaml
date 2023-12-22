@@ -11,15 +11,15 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: 16
 
       - name: Install Dependencies
-        working-directory: frontend  # Specify the frontend folder
+        working-directory: frontend
         run: npm install
 
       - name: Run Tests
@@ -37,8 +37,8 @@ jobs:
 
     steps:
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@3.7.1
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: frontend/build  # Adjust this path to match your structure
+          FOLDER: frontend/build
