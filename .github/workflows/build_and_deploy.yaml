@@ -40,6 +40,5 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy to GitHub Pages
-        run: |
-          npx github-pages-deploy-action --token ${{ secrets.ACCESS_TOKEN }} --branch gh-pages --dir frontend/build
+        run: npx github-pages-deploy-action --token=${{ secrets.ACCESS_TOKEN }} --branch=gh-pages --dir=frontend/build
         working-directory: /
