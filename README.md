@@ -43,7 +43,7 @@
 
 Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices <br/>
 .....|.............................................................| <br/>
-.....|________________ :x: ____________________|
+.....|_______________ :x: ______________|
 
 ## [Microservices](https://www.youtube.com/watch?v=y8OnoxKotPQ)
 
