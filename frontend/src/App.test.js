@@ -1,8 +1,14 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('renders Sign In button', () => {
+  // Render the component
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+
+  // Use getByText to find the button with the text "Sign In"
+  const signInButton = screen.getByText('Sign In');
+
+  // Assert that the button is in the document
+  expect(signInButton).toBeInTheDocument();
 });
