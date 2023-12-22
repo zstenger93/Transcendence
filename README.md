@@ -100,10 +100,11 @@ Tailwindcss
 			- AI Opponent
 			- Multiplayer
 			- Modded
+			- 3D
 		- Future game
 	- Chat
-		- Different Channels
-		- Online Users (later)
+		- Channels
+		- Online
 		- Image Sharing
 	- Profile
 	- About Us
@@ -172,13 +173,13 @@ Backend structure setup :white_check_mark:
 
 First mindmap :white_check_mark:
 
-Docker files for services :x:
+Docker files for services :white_check_mark:
 
 docker-compose.dev :x: :white_check_mark:
 
 Hashed passwords :x:
 
-Using OAuth system from 42 :x:
+Using OAuth system from 42 :white_check_mark:
 
 Setting unique username :x:
 
@@ -218,13 +219,13 @@ The game must be responsive :x:
 11 Minor module
 
 - **Web**
-	- *Major module*: Use a framework as backend :x:
-	- *Minor module*: Use a front-end framework or toolkit :x:
-	- *Minor module*: Use a database for the backend :x:
+	- *Major module*: Use a framework as backend :white_check_mark:
+	- *Minor module*: Use a front-end framework or toolkit :white_check_mark: :question:
+	- *Minor module*: Use a database for the backend :white_check_mark:
 	- *Major module*: Store the score of a tournament in the Blockchain :x:
 - **User Management**
 	- *Major module*: Standard user management, authentication, users across tournaments :x:
-	- *Major module*: Implementing a remote authentication :x:
+	- *Major module*: Implementing a remote authentication :white_check_mark:
 - **Gameplay and User Experience**
 	- *Major module*: Remote players :x:
 	- *Major module*: Multiplayer (more than 2) :x:
@@ -232,7 +233,7 @@ The game must be responsive :x:
 	- *Minor module*: Game customization options :x:
 	- *Major module*: Live chat :x:
 - **AI-Algo**
-	- *Major module*: Introduce an AI opponent :x:
+	- *Major module*: Introduce an AI opponent :white_check_mark:
 	- *Minor module*: User and game stats dashboard :x:
 - **Cybersecurity**
 	- *Major module*: Implement WAF/ModSecurity with Hardened Configuration and HashiCorp Vault for Secrets Management :x:
@@ -246,8 +247,8 @@ The game must be responsive :x:
 	- *Major module*: Use advanced 3D techniques :x:
 - **Accessibility**
 	- *Minor module*: Support on all devices :x:
-	- *Minor module*: Expanding browser compatibility :x:
-	- *Minor module*: Multiple language support :x:
+	- *Minor module*: Expanding browser compatibility :white_check_mark:
+	- *Minor module*: Multiple language support :white_check_mark:
 	- *Minor module*: Add accessibility for visually impaired users :x:
 	- *Minor module*: Server-side rendering (SSR) integration :x:
 - **Object Oriented**
