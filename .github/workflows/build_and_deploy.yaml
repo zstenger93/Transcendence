@@ -37,8 +37,9 @@ jobs:
 
     steps:
       - name: Deploy to GitHub Pages
+        working-directory: /
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: frontend/build
+          token: ${{ secrets.ACCESS_TOKEN }}
+          branch: gh-pages
+          folder: frontend/build
