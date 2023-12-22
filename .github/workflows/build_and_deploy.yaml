@@ -36,9 +36,12 @@ jobs:
     needs: build
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@master
 
-      - name: Deploy to GitHub Pages
-        run: npx github-pages-deploy-action --token=${{ secrets.ACCESS_TOKEN }} --branch=gh-pages --dir=frontend/build
-        working-directory: /
+      - name: Build and deploy
+        uses: JamesIves/github-pages-deploy-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build
