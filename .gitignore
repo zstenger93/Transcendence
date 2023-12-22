@@ -50,3 +50,6 @@ jsonuser.json
 
 # backend/authentication
 backend/authentication/images/*
+
+# media
+media

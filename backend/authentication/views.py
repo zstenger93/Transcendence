@@ -88,6 +88,12 @@ def auth_callback(request):
 		email = user_response.json()["email"]
 		picture_url = user_response.json()["image"]["versions"]["medium"]
 
+		titles = user_response.json().get("titles", [])
+		title = ""
+		if titles:
+			title = titles[0].get("name", "")
+			title = str(title).split()[0] if title else ""
+
 		user, created = User.objects.get_or_create(
 			username=username,
 			defaults={
@@ -95,16 +101,16 @@ def auth_callback(request):
 				'first_name': first_name,
 				'last_name': last_name,
 				'email': email,
+				'title': title,
 			}
 		)
 		if created:
 			print("\t\t\tNew user has been added!!!")
+			response = requests.get(picture_url)
+			if response.status_code == 200:
+				user.profile_picture.save(f"{username}_profile_picture.jpg", ContentFile(response.content), save=True)
 		else:
 			print("\t\t\tUser already exists!!!")
-
-		response = requests.get(picture_url)
-		if response.status_code == 200:
-			user.profile_picture.save(f"{username}_profile_picture.jpg", ContentFile(response.content), save=True)
 
 		print(user)
 		login(request, user)
