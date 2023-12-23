@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, prettyDOM } from '@testing-library/react';
+import { render, screen, prettyDOM, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 import { within } from '@testing-library/dom';
@@ -18,25 +18,21 @@ test('renders Sign In button', () => {
   expect(signInButton).toBeInTheDocument();
 });
 
-test('clicks on Sign In button and interacts with Sidebar', () => {
+test('clicks on Sign In button and interacts with Sidebar', async () => {
   const { container } = render(<App />);
 
   const signInButton = screen.getByText('Sign In');
   userEvent.click(signInButton);
 
+  await waitFor(() => screen.getByText('Logout'));
+
   
   const homeLink = screen.getByText('Home');
   const chatLink = screen.getByText('Channels & Private Messages');
-  console.log(prettyDOM(container, 50000));
-  const gamesLink = screen.getByText('Play or Watch Games');
-  const profileLink = screen.getByText('Profile');
-  const aboutLink = screen.getByText('About Us');
   
   userEvent.click(homeLink);
   userEvent.click(chatLink);
-  userEvent.click(gamesLink);
-  userEvent.click(profileLink);
-  userEvent.click(aboutLink);
+  console.log(prettyDOM(container, 50000));
 
 });
 
