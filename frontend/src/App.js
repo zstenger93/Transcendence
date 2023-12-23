@@ -22,9 +22,11 @@ import {
 } from "react-router-dom";
 
 function App() {
+  const basename = process.env.NODE_ENV === 'production' ? '/Transcendence' : '';
+
   return (
     <I18nextProvider i18n={Translation}>
-      <Router basename="/Transcendence">
+      <Router basename={basename}>
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route
