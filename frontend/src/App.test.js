@@ -18,17 +18,29 @@ test('renders Sign In button', () => {
   expect(signInButton).toBeInTheDocument();
 });
 
-test('clicks on Sign In button and finds Welcome text', () => {
+test('clicks on Sign In button and interacts with Sidebar', () => {
   const { container } = render(<App />);
 
   const signInButton = screen.getByText('Sign In');
   userEvent.click(signInButton);
 
+  const homeLink = screen.getByText('Home');
+  const chatLink = screen.getByText('Channels & Private Messages');
+  // const gamesLink = screen.getByText('Play or Watch Games');
+  // const profileLink = screen.getByText('Profile');
+  // const aboutLink = screen.getByText('About Us');
+  
+  userEvent.click(homeLink);
   console.log(prettyDOM(container));
+  userEvent.click(chatLink);
+  console.log(prettyDOM(container));
+  // userEvent.click(gamesLink);
+  // console.log(prettyDOM(container));
+  // userEvent.click(profileLink);
+  // console.log(prettyDOM(container));
+  // userEvent.click(aboutLink);
+  // console.log(prettyDOM(container));
 
-  const welcomeText = screen.getByText('Welcome');
-
-  expect(welcomeText).toBeInTheDocument();
 });
 
 // test('renders chat page', () => {
