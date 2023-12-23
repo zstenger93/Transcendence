@@ -60,7 +60,9 @@ test('can upload an image on chat page', () => {
 test('can change language to Hungarian', () => {
   render(
     <I18nextProvider i18n={i18n}>
-      <Sidebar />
+      <MemoryRouter>
+        <Sidebar />
+      </MemoryRouter>
     </I18nextProvider>
   );
 
