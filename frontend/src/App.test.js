@@ -75,3 +75,28 @@ test('can change language to Hungarian', () => {
 
   expect(i18n.language).toBe('hu');
 });
+
+test('navigates to the correct page when a sidebar link is clicked', () => {
+  render(
+    <MemoryRouter>
+      <Sidebar />
+    </MemoryRouter>
+  );
+
+  const links = [
+    { text: 'Home', path: '/home' },
+    { text: 'Channels & Private Messages', path: '/chat' },
+    { text: 'Play & Watch Games', path: '/games' },
+    { text: 'Profile', path: '/profile' },
+    { text: 'About Us', path: '/about' },
+    { text: 'Logout', path: '/' },
+  ];
+
+  links.forEach(({ text, path }) => {
+    const link = screen.getByText(text);
+
+    userEvent.click(link);
+
+    expect(window.location.pathname).toBe(path);
+  });
+});
