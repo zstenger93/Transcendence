@@ -18,6 +18,23 @@ test('renders Sign In button', () => {
   expect(signInButton).toBeInTheDocument();
 });
 
+test('clicks on Sign In button and finds Welcome text', () => {
+  const { container } = render(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>
+  );
+
+  const signInButton = screen.getByText('Sign In');
+  userEvent.click(signInButton);
+
+  console.log(prettyDOM(container));
+
+  const welcomeText = screen.getByText('Welcome');
+
+  expect(welcomeText).toBeInTheDocument();
+});
+
 // test('renders chat page', () => {
 //   render(<App />);
 //   const chatElement = screen.getByText('Chat');
