@@ -19,11 +19,7 @@ test('renders Sign In button', () => {
 });
 
 test('clicks on Sign In button and finds Welcome text', () => {
-  const { container } = render(
-    <MemoryRouter>
-      <App />
-    </MemoryRouter>
-  );
+  const { container } = render(<App />);
 
   const signInButton = screen.getByText('Sign In');
   userEvent.click(signInButton);
