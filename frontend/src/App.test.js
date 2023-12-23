@@ -24,22 +24,19 @@ test('clicks on Sign In button and interacts with Sidebar', () => {
   const signInButton = screen.getByText('Sign In');
   userEvent.click(signInButton);
 
+  
   const homeLink = screen.getByText('Home');
   const chatLink = screen.getByText('Channels & Private Messages');
-  // const gamesLink = screen.getByText('Play or Watch Games');
-  // const profileLink = screen.getByText('Profile');
-  // const aboutLink = screen.getByText('About Us');
+  console.log(prettyDOM(container, 50000));
+  const gamesLink = screen.getByText('Play or Watch Games');
+  const profileLink = screen.getByText('Profile');
+  const aboutLink = screen.getByText('About Us');
   
   userEvent.click(homeLink);
-  console.log(prettyDOM(container));
   userEvent.click(chatLink);
-  console.log(prettyDOM(container));
-  // userEvent.click(gamesLink);
-  // console.log(prettyDOM(container));
-  // userEvent.click(profileLink);
-  // console.log(prettyDOM(container));
-  // userEvent.click(aboutLink);
-  // console.log(prettyDOM(container));
+  userEvent.click(gamesLink);
+  userEvent.click(profileLink);
+  userEvent.click(aboutLink);
 
 });
 
