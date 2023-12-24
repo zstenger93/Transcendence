@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import Chat from "./components/Chat";
 import Games from "./components/Games";
 import About from "./components/About";
+import NotFound from "./components/404";
 import PongAi from "./components/PongAi";
 import Sidebar from "./components/Sidebar";
 import Welcome from "./components/Welcome";
@@ -21,6 +22,25 @@ import {
   Navigate,
 } from "react-router-dom";
 
+const PageWrapper = ({ children }) => {
+  return (
+    <div
+      className="bg-cover bg-center h-screen w-full"
+      style={{
+        height: '100vh',
+        overflow: 'hidden',
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <Sidebar />
+      {children}
+    </div>
+  );
+};
+
 function App() {
   const basename = process.env.NODE_ENV === 'production' ? '/Transcendence' : '';
 
@@ -29,34 +49,16 @@ function App() {
       <Router basename={basename}>
         <Routes>
           <Route path="/" element={<Welcome />} />
-          <Route
-            path="/*"
-            element={
-              <div
-                className="bg-cover bg-center h-screen w-full"
-                style={{
-                  backgroundImage: `url(${backgroundImage})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  backgroundRepeat: "no-repeat",
-                }}
-              >
-                <Sidebar />
-                <Routes>
-                  <Route path="/" element={<Navigate to="/home" />} />
-                  <Route path="home" element={<Home />} />
-                  <Route path="chat" element={<Chat />} />
-                  <Route path="matchmaking" element={<Matchmaking />} />
-                  <Route path="games" element={<Games />} />
-                  <Route path="profile" element={<Profile />} />
-                  <Route path="about" element={<About />} />
-                  <Route path="originalpong" element={<OriginalPong />} />
-                  <Route path="pongai" element={<PongAi />} />
-                  <Route path="choosepongmode" element={<ChoosePongMode />} />
-                </Routes>
-              </div>
-            }
-          />
+          <Route path="home" element={<PageWrapper><Sidebar /><Home /></PageWrapper>} />
+          <Route path="chat" element={<PageWrapper><Sidebar /><Chat /></PageWrapper>} />
+          <Route path="matchmaking" element={<PageWrapper><Sidebar /><Matchmaking /></PageWrapper>} />
+          <Route path="games" element={<PageWrapper><Sidebar /><Games /></PageWrapper>} />
+          <Route path="profile" element={<PageWrapper><Sidebar /><Profile /></PageWrapper>} />
+          <Route path="about" element={<PageWrapper><Sidebar /><About /></PageWrapper>} />
+          <Route path="originalpong" element={<PageWrapper><Sidebar /><OriginalPong /></PageWrapper>} />
+          <Route path="pongai" element={<PageWrapper><Sidebar /><PongAi /></PageWrapper>} />
+          <Route path="choosepongmode" element={<PageWrapper><Sidebar /><ChoosePongMode /></PageWrapper>} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </I18nextProvider>
