@@ -1,5 +1,9 @@
 {
-	"Sign In": "Bejelentkezés",
+	"Join": "Csatlakozás",
+	"Password": "Jelszó",
+	"Email": "E-mail",
+	"Sign In via Email": "E-mail Bejelentkezés",
+	"Sign In via 42": "42 Bejelentkezés",
 	"Friends": "Barátok",
 	"Language": "Nyelv",
 	"Original Pong": "Eredeti Pong",
@@ -46,5 +50,4 @@
 	"Profile": "Profil",
 	"About Us": "Rólunk",
 	"Logout": "Kijelentkezés"
-  }
-  
+}
