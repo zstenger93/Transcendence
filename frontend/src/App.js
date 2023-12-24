@@ -1,5 +1,5 @@
-import React from "react";
-import { I18nextProvider } from "react-i18next";
+import React, { useEffect } from "react";
+import { I18nextProvider, useTranslation } from "react-i18next";
 import Translation from "./components/Translation";
 import Home from "./components/Home";
 import Chat from "./components/Chat";
@@ -42,7 +42,15 @@ const PageWrapper = ({ children }) => {
 };
 
 function App() {
+  const { i18n } = useTranslation();
   const basename = process.env.NODE_ENV === 'production' ? '/Transcendence' : '';
+
+  useEffect(() => {
+    const storedLanguage = localStorage.getItem('i18nextLng');
+    if (storedLanguage && i18n.language !== storedLanguage) {
+      i18n.changeLanguage(storedLanguage);
+    }
+  }, [i18n]);
 
   return (
     <I18nextProvider i18n={Translation}>
@@ -58,7 +66,7 @@ function App() {
           <Route path="originalpong" element={<PageWrapper><Sidebar /><OriginalPong /></PageWrapper>} />
           <Route path="pongai" element={<PageWrapper><Sidebar /><PongAi /></PageWrapper>} />
           <Route path="choosepongmode" element={<PageWrapper><Sidebar /><ChoosePongMode /></PageWrapper>} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound currentLanguage={i18n.language} />} />
         </Routes>
       </Router>
     </I18nextProvider>
