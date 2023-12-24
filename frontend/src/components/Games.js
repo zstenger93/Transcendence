@@ -1,5 +1,4 @@
 import React from "react";
-import backgroundImage from "../images/bg0.png";
 import { Link } from "react-router-dom";
 
 function Games() {
@@ -20,7 +19,6 @@ function Games() {
     <div
       className="flex flex-col items-center justify-center 
 	  h-screen bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="flex justify-center space-x-4 flex-wrap">
         {tiles.map((tile, index) => (

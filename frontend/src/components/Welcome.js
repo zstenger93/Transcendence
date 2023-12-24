@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import backgroundImage from "../images/bg0.png";
 import { HiMiniLanguage } from "react-icons/hi2";
 
 function LanguageButton() {
@@ -86,7 +85,6 @@ function Welcome() {
     <div
       className="flex flex-col items-center justify-center 
       h-screen bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <LanguageButton />
       <div className="flex flex-col items-center justify-center flex-grow">

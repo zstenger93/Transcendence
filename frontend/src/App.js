@@ -11,6 +11,9 @@ import Sidebar from "./components/Sidebar";
 import Welcome from "./components/Welcome";
 import Profile from "./components/Profile";
 import HomeBackground from "./images/bg0.png";
+import MortyBackground0 from "./images/morty0.png";
+import MortyBackground1 from "./images/morty1.png";
+import MortyBackground2 from "./images/morty2.png";
 import Matchmaking from "./components/Matchmaking";
 import OriginalPong from "./components/OriginalPong";
 import ChoosePongMode from "./components/ChoosePongMode";
@@ -22,20 +25,17 @@ import {
   Navigate,
 } from "react-router-dom";
 
-const PageWrapper = ({ children, backgroundImage }) => {
+const PageWrapper = ({ children, image, showSidebar = true }) => {
   return (
     <div
-      className="bg-cover bg-center h-screen w-full"
       style={{
-        height: '100vh',
-        overflow: 'hidden',
-        backgroundImage: `url(${backgroundImage})`,
+        backgroundImage: `url(${image})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
     >
-      <Sidebar />
+      {showSidebar && <Sidebar />}
       {children}
     </div>
   );
@@ -59,14 +59,18 @@ function App() {
           <Route
             path="/"
             element={
-              <Welcome />
+              <PageWrapper
+                image={HomeBackground}
+                showSidebar={false}
+              >
+                <Welcome />
+              </PageWrapper>
             }
           />
           <Route
             path="home"
             element={
-              <PageWrapper backgroundImage={HomeBackground}>
-                <Sidebar />
+              <PageWrapper image={MortyBackground0}>
                 <Home />
               </PageWrapper>
             }
@@ -74,8 +78,7 @@ function App() {
           <Route
             path="chat"
             element={
-              <PageWrapper backgroundImage={HomeBackground}>
-                <Sidebar />
+              <PageWrapper image={MortyBackground1}>
                 <Chat />
               </PageWrapper>
             }
@@ -83,8 +86,7 @@ function App() {
           <Route
             path="matchmaking"
             element={
-              <PageWrapper backgroundImage={HomeBackground}>
-                <Sidebar />
+              <PageWrapper image={HomeBackground}>
                 <Matchmaking />
               </PageWrapper>
             }
@@ -92,8 +94,7 @@ function App() {
           <Route
             path="games"
             element={
-              <PageWrapper backgroundImage={HomeBackground}>
-                <Sidebar />
+              <PageWrapper image={HomeBackground}>
                 <Games />
               </PageWrapper>
             }
@@ -101,8 +102,7 @@ function App() {
           <Route
             path="profile"
             element={
-              <PageWrapper backgroundImage={HomeBackground}>
-                <Sidebar />
+              <PageWrapper image={MortyBackground2}>
                 <Profile />
               </PageWrapper>
             }
@@ -110,8 +110,7 @@ function App() {
           <Route
             path="about"
             element={
-              <PageWrapper backgroundImage={HomeBackground}>
-                <Sidebar />
+              <PageWrapper image={HomeBackground}>
                 <About />
               </PageWrapper>
             }
@@ -119,8 +118,7 @@ function App() {
           <Route
             path="originalpong"
             element={
-              <PageWrapper backgroundImage={HomeBackground}>
-                <Sidebar />
+              <PageWrapper image={HomeBackground}>
                 <OriginalPong
                 />
               </PageWrapper>
@@ -129,15 +127,13 @@ function App() {
           <Route
             path="pongai"
             element={
-              <PageWrapper backgroundImage={HomeBackground}>
-                <Sidebar />
+              <PageWrapper image={HomeBackground}>
                 <PongAi />
               </PageWrapper>
             }
           />
           <Route path="choosepongmode" element={
-            <PageWrapper backgroundImage={HomeBackground}>
-              <Sidebar />
+            <PageWrapper image={HomeBackground}>
               <ChoosePongMode
               />
             </PageWrapper>
