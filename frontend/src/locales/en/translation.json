@@ -1,5 +1,9 @@
 {
-  "Sign In": "Sign In",
+  "Join": "Join",
+  "Password": "Password",
+  "Email": "Email",
+  "Sign In via Email": "Sign In via Email",
+  "Sign In via 42": "Sign In via 42",
   "Friends": "Friends",
   "Language": "Language",
   "Original Pong": "Original Pong",
