@@ -10,7 +10,7 @@ import PongAi from "./components/PongAi";
 import Sidebar from "./components/Sidebar";
 import Welcome from "./components/Welcome";
 import Profile from "./components/Profile";
-import backgroundImage from "./images/bg0.png";
+import HomeBackground from "./images/bg0.png";
 import Matchmaking from "./components/Matchmaking";
 import OriginalPong from "./components/OriginalPong";
 import ChoosePongMode from "./components/ChoosePongMode";
@@ -22,7 +22,7 @@ import {
   Navigate,
 } from "react-router-dom";
 
-const PageWrapper = ({ children }) => {
+const PageWrapper = ({ children, backgroundImage }) => {
   return (
     <div
       className="bg-cover bg-center h-screen w-full"
@@ -56,17 +56,99 @@ function App() {
     <I18nextProvider i18n={Translation}>
       <Router basename={basename}>
         <Routes>
-          <Route path="/" element={<Welcome />} />
-          <Route path="home" element={<PageWrapper><Sidebar /><Home /></PageWrapper>} />
-          <Route path="chat" element={<PageWrapper><Sidebar /><Chat /></PageWrapper>} />
-          <Route path="matchmaking" element={<PageWrapper><Sidebar /><Matchmaking /></PageWrapper>} />
-          <Route path="games" element={<PageWrapper><Sidebar /><Games /></PageWrapper>} />
-          <Route path="profile" element={<PageWrapper><Sidebar /><Profile /></PageWrapper>} />
-          <Route path="about" element={<PageWrapper><Sidebar /><About /></PageWrapper>} />
-          <Route path="originalpong" element={<PageWrapper><Sidebar /><OriginalPong /></PageWrapper>} />
-          <Route path="pongai" element={<PageWrapper><Sidebar /><PongAi /></PageWrapper>} />
-          <Route path="choosepongmode" element={<PageWrapper><Sidebar /><ChoosePongMode /></PageWrapper>} />
-          <Route path="*" element={<NotFound currentLanguage={i18n.language} />} />
+          <Route
+            path="/"
+            element={
+              <Welcome />
+            }
+          />
+          <Route
+            path="home"
+            element={
+              <PageWrapper backgroundImage={HomeBackground}>
+                <Sidebar />
+                <Home />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="chat"
+            element={
+              <PageWrapper backgroundImage={HomeBackground}>
+                <Sidebar />
+                <Chat />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="matchmaking"
+            element={
+              <PageWrapper backgroundImage={HomeBackground}>
+                <Sidebar />
+                <Matchmaking />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="games"
+            element={
+              <PageWrapper backgroundImage={HomeBackground}>
+                <Sidebar />
+                <Games />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="profile"
+            element={
+              <PageWrapper backgroundImage={HomeBackground}>
+                <Sidebar />
+                <Profile />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="about"
+            element={
+              <PageWrapper backgroundImage={HomeBackground}>
+                <Sidebar />
+                <About />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="originalpong"
+            element={
+              <PageWrapper backgroundImage={HomeBackground}>
+                <Sidebar />
+                <OriginalPong
+                />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="pongai"
+            element={
+              <PageWrapper backgroundImage={HomeBackground}>
+                <Sidebar />
+                <PongAi />
+              </PageWrapper>
+            }
+          />
+          <Route path="choosepongmode" element={
+            <PageWrapper backgroundImage={HomeBackground}>
+              <Sidebar />
+              <ChoosePongMode
+              />
+            </PageWrapper>
+          }
+          />
+          <Route
+            path="*"
+            element={
+              <NotFound currentLanguage={i18n.language} />
+            }
+          />
         </Routes>
       </Router>
     </I18nextProvider>
