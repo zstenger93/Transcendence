@@ -14,6 +14,8 @@ import HomeBackground from "./images/bg0.png";
 import MortyBackground0 from "./images/morty0.png";
 import MortyBackground1 from "./images/morty1.png";
 import MortyBackground2 from "./images/morty2.png";
+import MortyBackground3 from "./images/morty3.png";
+import MortyBackground4 from "./images/morty4.png";
 import Matchmaking from "./components/Matchmaking";
 import OriginalPong from "./components/OriginalPong";
 import ChoosePongMode from "./components/ChoosePongMode";
@@ -22,7 +24,6 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Navigate,
 } from "react-router-dom";
 
 const PageWrapper = ({ children, image, showSidebar = true }) => {
@@ -70,7 +71,7 @@ function App() {
           <Route
             path="home"
             element={
-              <PageWrapper image={MortyBackground0}>
+              <PageWrapper image={MortyBackground4}>
                 <Home />
               </PageWrapper>
             }
@@ -94,7 +95,7 @@ function App() {
           <Route
             path="games"
             element={
-              <PageWrapper image={HomeBackground}>
+              <PageWrapper image={MortyBackground0}>
                 <Games />
               </PageWrapper>
             }
@@ -110,7 +111,7 @@ function App() {
           <Route
             path="about"
             element={
-              <PageWrapper image={HomeBackground}>
+              <PageWrapper image={MortyBackground3}>
                 <About />
               </PageWrapper>
             }
