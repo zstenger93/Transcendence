@@ -13,7 +13,7 @@ test('renders Sign In button', () => {
 
   console.log(prettyDOM(container));
 
-  const signInButton = screen.getByText('Sign In');
+  const signInButton = screen.getByText('Sign In via 42');
 
   expect(signInButton).toBeInTheDocument();
 });
@@ -21,7 +21,7 @@ test('renders Sign In button', () => {
 test('clicks on Sign In button and interacts with Sidebar', async () => {
   const { container } = render(<App />);
 
-  const signInButton = screen.getByText('Sign In');
+  const signInButton = screen.getByText('Sign In via 42');
   userEvent.click(signInButton);
 
   await waitFor(() => screen.getByText('Logout'));
