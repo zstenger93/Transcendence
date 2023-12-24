@@ -42,14 +42,13 @@ CHANNEL_LAYERS = {
 # Application definition
 INSTALLED_APPS = [
     'daphne',	# Is a HTTP, HTTP2 and WebSocket protocol server for ASGI and ASGI-HTTP for django channels
-    # 'channels'  # To handle WebSockets, chat protocols, IoT protocols, and more.
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'chat'
     'authentication',
 	# 'leaderboard',
 
