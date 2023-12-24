@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Transcendence/static/css/main.ffea6a3a.css",
-    "main.js": "/Transcendence/static/js/main.03c503b5.js",
+    "main.css": "/Transcendence/static/css/main.d7aaebe4.css",
+    "main.js": "/Transcendence/static/js/main.06291526.js",
     "static/js/787.9e9f4ffd.chunk.js": "/Transcendence/static/js/787.9e9f4ffd.chunk.js",
     "static/media/pongCover.png": "/Transcendence/static/media/pongCover.d06b5fe004de9e08361d.png",
     "static/media/bg0.png": "/Transcendence/static/media/bg0.0843d571a61a96cb0dbd.png",
@@ -10,12 +10,12 @@
     "static/media/slick.ttf": "/Transcendence/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/Transcendence/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/Transcendence/index.html",
-    "main.ffea6a3a.css.map": "/Transcendence/static/css/main.ffea6a3a.css.map",
-    "main.03c503b5.js.map": "/Transcendence/static/js/main.03c503b5.js.map",
+    "main.d7aaebe4.css.map": "/Transcendence/static/css/main.d7aaebe4.css.map",
+    "main.06291526.js.map": "/Transcendence/static/js/main.06291526.js.map",
     "787.9e9f4ffd.chunk.js.map": "/Transcendence/static/js/787.9e9f4ffd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ffea6a3a.css",
-    "static/js/main.03c503b5.js"
+    "static/css/main.d7aaebe4.css",
+    "static/js/main.06291526.js"
   ]
 }
