@@ -31,7 +31,7 @@ function Welcome() {
           className="bg-gray-900 text-gray-300 font-nosifer font-bold 
           px-4 py-2 rounded cursor-pointer hover:bg-gray-900 hover:bg-opacity-70"
         >
-          Sign In via Email
+          {t('Sign In via Email')}
         </button>
         {showFields && (
           <>
@@ -39,7 +39,7 @@ function Welcome() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
+              placeholder={t("Email")}
               onKeyPress={(e) => e.key === 'Enter' && redirectToHome()}
               className="mb-2 mt-4 bg-gray-900 bg-opacity-60 text-white 
               rounded text-center"
@@ -48,7 +48,7 @@ function Welcome() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
+              placeholder={t("Password")}
               onKeyPress={(e) => e.key === 'Enter' && redirectToHome()}
               className="mb-4 bg-gray-900 bg-opacity-60 text-white 
               rounded text-center"
@@ -59,7 +59,7 @@ function Welcome() {
               font-nosifer font-bold px-4 py-2 rounded cursor-pointer 
               hover:bg-gray-900 hover:bg-opacity-30"
             >
-              Join
+              (t{'Join'})
             </button>
           </>
         )}
