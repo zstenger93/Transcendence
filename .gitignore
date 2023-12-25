@@ -44,6 +44,7 @@ node_modules
 *yarn-debug.log*
 *yarn-error.log*
 
+<<<<<<< HEAD
 # Jamshidbek
 to-do
 jsonuser.json
@@ -53,3 +54,6 @@ backend/authentication/images/*
 
 # media
 media
+=======
+node_modules
+>>>>>>> upstream/dev
