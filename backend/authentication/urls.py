@@ -12,6 +12,7 @@ urlpatterns = [
     path("auth_callback/", views.auth_callback, name="auth_callback"),
     path("register/", views.register, name="register"),
     path("users_list/", views.users_list, name="users_list"),
+	path('send_friend_request/<int:to_user_id>/', views.send_friend_request, name='send_friend_request'),
     path("test/", views.test, name="test"),
 
 ]

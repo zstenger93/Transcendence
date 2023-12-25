@@ -10,6 +10,9 @@ from .models import User
 
 from django.core.files.base import ContentFile
 from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
+from .models import FriendRequest
+
 
 # ----------------------------------------––--------------- HOME FUNCTION
 @login_required(login_url='/login/')
@@ -188,3 +191,24 @@ def users_list(request):
 
 	# Pass the users to the template
 	return render(request, 'users_list.html', {'users': users})
+
+
+def has_friend_request_sent(from_user, to_user):
+    return FriendRequest.objects.filter(from_user=from_user, to_user=to_user, status='pending').exists()
+
+def send_friend_request(request, to_user_id):
+    # Get the 'to_user' object using the 'to_user_id'
+    to_user = get_object_or_404(User, pk=to_user_id)
+
+    # Check if a friend request already exists or if the users are the same
+    existing_request = FriendRequest.objects.filter(from_user=request.user, to_user=to_user).first()
+    if existing_request or request.user == to_user:
+        # Handle the case where a request already exists or trying to send a request to oneself
+        # You may want to display an error message or redirect to a different page
+        pass
+    else:
+        # Create a new friend request
+        friend_request = FriendRequest(from_user=request.user, to_user=to_user)
+        friend_request.save()
+
+    return redirect('users_list')  # Redirect to the user's profile page or any other desired page
