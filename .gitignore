@@ -44,9 +44,8 @@ node_modules
 *yarn-debug.log*
 *yarn-error.log*
 
-<<<<<<< HEAD
 # Jamshidbek
-to-do
+to-do.txt
 jsonuser.json
 
 # backend/authentication
@@ -54,6 +53,4 @@ backend/authentication/images/*
 
 # media
 media
-=======
 node_modules
->>>>>>> upstream/dev
