@@ -3,7 +3,6 @@ version: '3.8'
 # for deployment
 
 services:
-  services:
   frontend:
     container_name: frontend
     build:
@@ -17,7 +16,6 @@ services:
     restart: unless-stopped
     command: npm start
 
-
   backend:
     container_name: backend
     env_file:
@@ -29,7 +27,6 @@ services:
     volumes:
       - ${PWD}:/app/
     ports:
-
       - 8000:8000
     # restart: unless-stopped
     depends_on:

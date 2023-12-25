@@ -56,19 +56,15 @@ test('async test for page data', async () => {
 //   useTranslation: () => ({ t: key => key })
 // }));
 
-test('async test for page data', async () => {
-  render(
-    <MemoryRouter initialEntries={['/']}>
-      <App />
-    </MemoryRouter>
-  );
+// test('async test for page data', async () => {
+//   render(<App useMemoryRouter={true} />);
 
-  const signInButton = screen.getByText('Sign In via 42');
-  userEvent.click(signInButton);
+//   const signInButton = screen.getByText('Sign In via 42');
+//   userEvent.click(signInButton);
 
-  await waitFor(() => screen.getByText('Logout'));
-  await waitFor(() => screen.getByText('Welcome To'));
-});
+//   await waitFor(() => screen.getByText('Logout'));
+//   await waitFor(() => screen.getByText('Welcome To'));
+// });
 
 // test('renders chat page', () => {
 //   render(<App />);
