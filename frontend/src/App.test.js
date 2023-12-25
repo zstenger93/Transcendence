@@ -52,9 +52,9 @@ test('async test for page data', async () => {
   await waitFor(() => screen.getByText('Welcome To'));
 });
 
-jest.mock('react-i18next', () => ({
-  useTranslation: () => ({ t: key => key })
-}));
+// jest.mock('react-i18next', () => ({
+//   useTranslation: () => ({ t: key => key })
+// }));
 
 test('async test for page data', async () => {
   render(
