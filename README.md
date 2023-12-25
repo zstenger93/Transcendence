@@ -6,11 +6,19 @@
 
 ---
 
+# The current version deployed can be accessed by the following link (only frontend atm)
+
+[TranscEND](https://zstenger93.github.io/Transcendence/)
+
+---
+
 ## Menu
 
 [MindMap](#mindmap)
 
 [Setup](#setup)
+
+[CI/CD Pipeline](#pipeline)
 
 [DataBase](#database)
 
@@ -41,7 +49,7 @@
 
 Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices <br/>
 .....|.............................................................| <br/>
-.....|________________ :x: ____________________|
+.....|_______________ :x: ______________|
 
 ## [Microservices](https://www.youtube.com/watch?v=y8OnoxKotPQ)
 
@@ -76,8 +84,22 @@ Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices
 	- Echoes the venv activation to bashrc
 	- Copies the starting script to the image
 	- Exposes the port
-	- Entrypoint
+	- Entrypoint (not always, depends because some things wont work directly from dockerfile)
 	- CMD to run
+
+## Pipeline
+
+- .github folder
+	- workflows
+		- workflow_name.yaml
+			- setting up jobs for the workflow
+				- testing
+					- need to upload artifacts 
+				- building
+					- need to download the uploaded artifacts
+					- ceraful with the correct path
+				- deploying
+					- in case of react project, in github settings directory should be changed to /doc instead of root
 
 ---
 
@@ -90,7 +112,7 @@ postgreSQL
 ## Frontend
 
 React
-Tailwindcss
+Tailwind
 
 - root / Login
 	- Home / Welcome
@@ -114,7 +136,7 @@ Tailwindcss
 
 ## Backend
 
-- Microservices
+- Microservices (kind of)
 	- Authentication service
 	- Game
 		- Normal mode
@@ -180,6 +202,10 @@ docker-compose.dev :x: :white_check_mark:
 Hashed passwords :x:
 
 Using OAuth system from 42 :white_check_mark:
+
+CI/CD pipeline setup :white_check_mark:
+
+Deploying to github pages :white_check_mark:
 
 Setting unique username :x:
 

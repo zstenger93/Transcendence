@@ -12,40 +12,40 @@ function ChoosePongMode() {
         <Link
           to="/originalpong"
           className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer 
-		  hover:bg-purple-700 text-white font-bold py-2 px-4 rounded 
-		  block text-center"
+		    hover:bg-purple-700 text-white font-bold py-2 px-4 rounded 
+		      block text-center border-b-2 border-r-2 border-purple-600"
         >
           {t("Original Pong")}
         </Link>
         <Link
           to="/multiplayer"
           className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer 
-		  hover:bg-purple-700 text-white font-bold py-2 px-4 rounded 
-		  block text-center"
+		    hover:bg-purple-700 text-white font-bold py-2 px-4 rounded 
+		      block text-center  border-b-2 border-r-2 border-purple-600"
         >
           {t("Multiplayer")}
         </Link>
         <Link
           to="/moddedpong"
           className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer 
-		  hover:bg-purple-700 text-white font-bold py-2 px-4 rounded 
-		  block text-center"
+		    hover:bg-purple-700 text-white font-bold py-2 px-4 rounded 
+		      block text-center  border-b-2 border-r-2 border-purple-600"
         >
           {t("Modded Pong")}
         </Link>
         <Link
           to="/aiopponent"
           className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer 
-		  hover:bg-purple-700 text-white font-bold py-2 px-4 rounded 
-		  block text-center"
+		    hover:bg-purple-700 text-white font-bold py-2 px-4 rounded 
+		      block text-center  border-b-2 border-r-2 border-purple-600"
         >
           {t("Pong against AI")}
         </Link>
         <Link
           to="/3dpong"
           className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer 
-		  hover:bg-purple-700 text-white font-bold py-2 px-4 rounded 
-		  block text-center"
+		    hover:bg-purple-700 text-white font-bold py-2 px-4 rounded 
+		      block text-center  border-b-2 border-r-2 border-purple-600"
         >
           {t("3D Pong")}
         </Link>
@@ -53,7 +53,8 @@ function ChoosePongMode() {
           <button
             onClick={() => navigate(-1)}
             className="mt-6 bg-purple-900 bg-opacity-80 font-nosifer 
-			hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
+			  hover:bg-purple-700 text-white font-bold py-2 px-4 rounded
+          border-b-2 border-r-2 border-purple-600"
           >
             {t("Back")}
           </button>
