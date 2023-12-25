@@ -23,7 +23,7 @@
 
 
 # dependencies
-*/node_modules
+node_modules
 */.pnp
 *.pnp.js
 
@@ -44,4 +44,13 @@
 *yarn-debug.log*
 *yarn-error.log*
 
+# Jamshidbek
+to-do.txt
+jsonuser.json
+
+# backend/authentication
+backend/authentication/images/*
+
+# media
+media
 node_modules
