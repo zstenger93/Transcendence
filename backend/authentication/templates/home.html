@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Welcome to Ping Pong World</title>
+	<!-- Include Tailwind CSS CDN or link to your local file -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+
+<body class="bg-gray-100">
+
+	<div class="container mx-auto mt-20 text-center">
+		<h1 class="text-4xl font-bold text-green-600 mb-4">Ping Pong Home Page</h1>
+		<p class="text-gray-600 mb-8">The Ultimate Ping Pong Experience!</p>
+
+		<!-- Display username and email from the context with enhanced styles -->
+		<p class="text-lg font-semibold text-gray-800 mb-4">
+			Welcome, <span class="bg-green-200 px-2 py-1 rounded-md">{{ username }}</span>!
+		</p>
+		<p class="text-sm text-gray-600 mb-8">
+			Email: <span class="bg-blue-200 px-2 py-1 rounded-md">{{ email }}</span>
+		</p>
+
+		<div class="flex justify-center">
+			<a href="#" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full mr-4">Play
+				Now</a>
+			<a href="#" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full">Learn More</a>
+
+			<!-- Add the logout button -->
+			<a href="{% url 'logout' %}"
+				class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full ml-4">Logout</a>
+		</div>
+
+
+		<a href="{% url 'users_list' %}"
+			class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full">Users List</a>
+	</div>
+
+	<!-- Include Tailwind CSS and JavaScript CDNs or link to your local files -->
+	<!-- Replace with the appropriate version numbers based on your project -->
+	<!-- <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script> -->
+
+</body>
+
+</html>
