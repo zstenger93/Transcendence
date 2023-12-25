@@ -1,5 +1,11 @@
 {
-	"Sign In": "Se connecter",
+	"Your portal gun must be busted ...": "Votre pistolet à portails doit être défectueux...",
+	"Your curious ass will be redirected in": "Votre cul curieux sera redirigé dans",
+	"Join": "Rejoindre",
+	"Password": "Mot de passe",
+	"Email": "E-mail",
+	"Sign In via Email": "Se connecter via e-mail",
+	"Sign In via 42": "Se connecter via 42",
 	"Friends": "Amis",
 	"Language": "Langue",
 	"Original Pong": "Pong Original",
@@ -51,4 +57,4 @@
 	"About asioud": "Maestro de l'automatisation et de l'orchestration du déploiement, mais danse parfois sur le bord du chaos. Équilibrant entre la brillance et les 'oops', ce gourou DevOps transforme chaque revers en une leçon précieuse. Scripts de déploiement le jour, confessions de débogage la nuit.",
 	"About kvebers": "Maître du chaos de codage, alimenté par des rafales d'hyperconcentration. Maestro multitâche avec un cerveau plus rapide que les temps de compilation. Sautant entre les projets comme un écureuil caféiné sur un clavier. Les bugs prenez garde, il vous débuguera dans l'oubli.",
 	"About slaszlo": "La personnalisation est son deuxième prénom, et il navigue dans la vie avec la précision d'un script bien conçu. Logiciel propriétaire ? Non merci. Il vit pour cette douce sensation de liberté et de collaboration dans le royaume Linux. Tux le pingouin est son animal spirituel, et le terminal est son lieu heureux."
-  }
+}

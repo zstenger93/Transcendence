@@ -3,7 +3,6 @@ import Slider from "react-slick";
 import { useTranslation } from "react-i18next";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import backgroundImage from "../images/bg0.png";
 
 function About() {
   const { t } = useTranslation();
@@ -57,7 +56,6 @@ function About() {
     <div
       className="flex items-center justify-center h-screen bg-cover 
 	  bg-center bg-no-repeat"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <Slider {...settings} className="max-w-sm">
         {teamMembers.map((member, index) => (

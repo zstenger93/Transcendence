@@ -1,5 +1,11 @@
 {
-	"Sign In": "Anmelden",
+	"Your portal gun must be busted ...": "Dein Portalstrahler muss kaputt sein...",
+	"Your curious ass will be redirected in": "Dein neugieriger Hintern wird umgeleitet in",
+	"Join": "Beitreten",
+	"Password": "Passwort",
+	"Email": "E-Mail",
+	"Sign In via Email": "Anmelden per E-Mail",
+	"Sign In via 42": "Anmelden über 42",
 	"Friends": "Freunde",
 	"Language": "Sprache",
 	"Original Pong": "Original Pong",
@@ -51,5 +57,4 @@
 	"About asioud": "Ein Maestro der Automatisierung und Bereitstellungsorchestrierung, der jedoch gelegentlich am Rande des Chaos tanzt. Die Balance zwischen Genialität und 'Oops', dieser DevOps-Guru verwandelt jede Niederlage in eine wertvolle Lektion. Bereitstellungsskripte tagsüber, Debugging-Beichten nachts.",
 	"About kvebers": "Meister des kodierten Chaos, genährt von Burst von Hyperfokus. Multitasking-Maestro mit einem Gehirn schneller als Kompilierzeiten. Springt zwischen Projekten wie ein koffeinierter Eichhörnchen auf einer Tastatur. Bugs, nehmt euch in Acht, er wird euch in die Debugging-Vergessenheit bringen.",
 	"About slaszlo": "Die Anpassung ist sein zweiter Vorname, und er navigiert durch das Leben mit der Präzision eines gut ausgearbeiteten Skripts. Eigenständige Software? Nein danke. Er lebt für das süße Gefühl von Freiheit und Zusammenarbeit in der Linux-Welt. Tux der Pinguin ist sein spirituelles Tier, und das Terminal ist sein glücklicher Ort."
-  }
-  
+}
