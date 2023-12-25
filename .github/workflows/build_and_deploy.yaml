@@ -21,6 +21,10 @@ jobs:
       - name: Install Dependencies
         working-directory: frontend
         run: npm install
+      
+      - name: Print npm log
+        if: failure()
+        run: cat /home/runner/.npm/_logs/*-debug.log
 
       - name: Run Tests
         working-directory: frontend
