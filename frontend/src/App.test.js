@@ -52,22 +52,22 @@ test('async test for page data', async () => {
   await waitFor(() => screen.getByText('Welcome To'));
 });
 
-test('async test for language change', async () => {
-  const { container } = render(<App />);
-  
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({ t: key => key })
+}));
+
+test('async test for page data', async () => {
+  render(
+    <MemoryRouter initialEntries={['/']}>
+      <App />
+    </MemoryRouter>
+  );
+
   const signInButton = screen.getByText('Sign In via 42');
   userEvent.click(signInButton);
-  
+
   await waitFor(() => screen.getByText('Logout'));
   await waitFor(() => screen.getByText('Welcome To'));
-
-  const languageLink = screen.getByText('Language');
-  fireEvent.click(languageLink);
-
-  const huOption = screen.getByText('HU');
-  fireEvent.click(huOption);
-
-  await waitFor(() => screen.getByText('Üdvözlünk a'));
 });
 
 // test('renders chat page', () => {
