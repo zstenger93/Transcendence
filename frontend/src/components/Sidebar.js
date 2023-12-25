@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { TbLogout } from "react-icons/tb";
 import { useTranslation } from "react-i18next";
@@ -16,51 +16,125 @@ const Sidebar = () => {
     setDropdownOpen(false);
   };
 
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(prevState => !prevState);
+  };
+
+
   return (
-    <div
-      className="fixed top-0 left-0 h-screen w-16 m-0
-								flex flex-col bg-gray-800 bg-opacity-30 text-white 
-								shadow-lg"
-    >
-      <div className="mt-10 space-y-5">
-        <SidebarIcon icon={<FaHome size="32" />} text={t("Home")} to="/home" />
-        <SidebarIcon
-          icon={<SiGooglechat size="32" />}
-          text={t("Channels & Private Messages")}
-          to="/chat"
-        />
-        <SidebarIcon
-          icon={<SiGameandwatch size="32" />}
-          text={t("Play or Watch Games")}
-          to="/games"
-        />
-        <SidebarIcon
-          icon={<FaUser size="32" />}
-          text={t("Profile")}
-          to="/profile"
-        />
-        <SidebarIcon
-          icon={<FaInfoCircle size="32" />}
-          text={t("About Us")}
-          to="/about"
-        />
-        <SidebarDropdown
-          icon={<HiMiniLanguage size="32" />}
-          text={t("Language")}
-          options={[
-            { value: "en", label: "EN" },
-            { value: "fr", label: "FR" },
-            { value: "hu", label: "HU" },
-            { value: "de", label: "DE" },
-            { value: "jp", label: "JP" },
-          ]}
-          onSelect={changeLanguage}
-        />
-      </div>
-      <div className="mb-10 mt-auto">
-        <SidebarIcon icon={<TbLogout size="32" />} text={t("Logout")} to="/" />
-      </div>
-    </div>
+    <>
+      {isMobile ? (
+        /* Render hamburger menu for small screens */
+        <div className="lg:hidden cursor-pointer p-4" onClick={toggleMenu}>
+          <div
+            className={`bar h-1 w-8 transition-all duration-300
+            ${isMenuOpen
+                ?
+                "rotate-45 translate-y-2.5 bg-white"
+                :
+                "bg-purple-700"
+              }`}
+            style={{ marginBottom: "4px" }}
+          ></div>
+          <div
+            className={`bar h-1 w-8 bg-purple-700 transition-all duration-300
+            ${isMenuOpen
+                ?
+                "opacity-0"
+                :
+                ""
+              }`}
+          ></div>
+          <div
+            className={`bar h-1 w-8 transition-all duration-300
+            ${isMenuOpen
+                ?
+                "-rotate-45 -translate-y-2 bg-white"
+                :
+                " bg-purple-700"
+              }`}
+            style={{ marginTop: "4px" }}
+          ></div>
+        </div>
+
+      ) : (
+        /* Render full sidebar for larger screens */
+        <div
+          className="fixed top-0 left-0 h-screen w-16 m-0
+          flex flex-col bg-gray-800 bg-opacity-30 text-white 
+          shadow-lg transition-all duration-300"
+        >
+          <div className="mt-10 space-y-5">
+            <SidebarIcon
+              icon={<FaHome size="32" />}
+              text={t("Home")}
+              to="/home" />
+            <SidebarIcon
+              icon={<SiGooglechat size="32" />}
+              text={t("Channels & Private Messages")}
+              to="/chat"
+            />
+            <SidebarIcon
+              icon={<SiGameandwatch size="32" />}
+              text={t("Play or Watch Games")}
+              to="/games"
+            />
+            <SidebarIcon
+              icon={<FaUser size="32" />}
+              text={t("Profile")}
+              to="/profile"
+            />
+            <SidebarIcon
+              icon={<FaInfoCircle size="32" />}
+              text={t("About Us")}
+              to="/about"
+            />
+            <SidebarDropdown
+              icon={<HiMiniLanguage size="32" />}
+              text={t("Language")}
+              options={[
+                { value: "en", label: "EN" },
+                { value: "fr", label: "FR" },
+                { value: "hu", label: "HU" },
+                { value: "de", label: "DE" },
+                { value: "jp", label: "JP" },
+              ]}
+              onSelect={changeLanguage}
+            />
+          </div>
+          <div className="mb-10 mt-auto">
+            <SidebarIcon
+              icon={<TbLogout size="32" />}
+              text={t("Logout")}
+              to="/" />
+          </div>
+        </div>
+      )}
+      {isMenuOpen && (
+        <div
+          className="fixed top-0 left-0 h-screen w-screen bg-gray-900 bg-opacity-70"
+          onClick={toggleMenu}
+        >
+          <SidebarIcon icon={<FaHome size="32" />} text={t("Home")} to="/home" />
+        </div>
+      )}
+    </>
   );
 };
 
@@ -124,11 +198,10 @@ const SidebarDropdown = ({ icon, text, options, onSelect }) => {
           {options.map((option) => (
             <button
               key={option.value}
-              className={`w-full py-2 ${
-                option.value === currentLanguage
-                  ? "text-blue-500 font-bold"
-                  : "text-gray-300"
-              } hover:bg-indigo-500 hover:text-white`}
+              className={`w-full py-2 ${option.value === currentLanguage
+                ? "text-blue-500 font-bold"
+                : "text-gray-300"
+                } hover:bg-indigo-500 hover:text-white`}
               onClick={() => handleSelect(option.value)}
             >
               {option.label}

@@ -1,5 +1,6 @@
 @import './styles/tailwind.css';
 
+/* wish it would be this easy to form my body .. */
 body {
   margin: 0;
   height: 100%;
@@ -15,4 +16,12 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* for the hamburger menu bars */
+.bar {
+  width: 24px;
+  height: 3px;
+  margin: 6px 0;
+  transition: 0.4s;
 }
