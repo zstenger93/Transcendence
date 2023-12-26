@@ -16,15 +16,19 @@
 			<div class="col-md-6 offset-md-3">
 				<h2 class="text-center mt-5">Login Page</h2>
 				<form class="mt-4" method="POST">
+					{% csrf_token %}
 					<!-- Email Field -->
 					<div class="form-group">
-						<label for="email">Email Address</label>
-						<input type="email" class="form-control" id="email" placeholder="Enter email">
+						<label for="username">Username</label>
+						<input type="text" class="form-control" id="username" name="username"
+							placeholder="Enter username">
 					</div>
+
 					<!-- Password Field -->
 					<div class="form-group">
 						<label for="password">Password</label>
-						<input type="password" class="form-control" id="password" placeholder="Password">
+						<input type="password" class="form-control" id="password" name="password"
+							placeholder="Password">
 					</div>
 					<!-- Buttons -->
 					<div class="text-center">
@@ -34,8 +38,15 @@
 				</form>
 				<h2 class="text-center mt-5">Or</h2><br>
 				<form class="text-center" action="{% url 'auth' %}">
+					{% csrf_token %}
 					<button type="submit" class="btn btn-secondary">Auth with 42</button>
 				</form>
+				<!-- Display error messages if they exist -->
+				{% if error_message %}
+				<div class="alert alert-danger mt-3" role="alert">
+					{{ error_message }}
+				</div>
+				{% endif %}
 			</div>
 		</div>
 	</div>

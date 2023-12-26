@@ -1,5 +1,11 @@
 {
-	"Sign In": "Bejelentkezés",
+	"Your portal gun must be busted ...": "Valószínűleg a portálpisztolyod elbaszódott ...",
+	"Your curious ass will be redirected in": "A kíváncsi feneked át lesz irányítva",
+	"Join": "Csatlakozás",
+	"Password": "Jelszó",
+	"Email": "E-mail",
+	"Sign In via Email": "E-mail Bejelentkezés",
+	"Sign In via 42": "42 Bejelentkezés",
 	"Friends": "Barátok",
 	"Language": "Nyelv",
 	"Original Pong": "Eredeti Pong",
@@ -7,7 +13,7 @@
 	"Modded Pong": "Módosított Pong",
 	"3D Pong": "3D Pong",
 	"Pong against AI": "Pong mesterséges intelligencia ellen",
-	"Online": "Online",
+	"Online": "Elérhető",
 	"Channels": "Csatornák",
 	"General": "Általános",
 	"Random": "Véletlenszerű",
@@ -46,5 +52,4 @@
 	"Profile": "Profil",
 	"About Us": "Rólunk",
 	"Logout": "Kijelentkezés"
-  }
-  
+}

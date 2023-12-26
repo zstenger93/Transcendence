@@ -1,8 +1,8 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "homepage": "https://zstenger93.github.io/Transcendence",
   "private": true,
+  "homepage": "https://zstenger93.github.io/Transcendence/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",

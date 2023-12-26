@@ -5,7 +5,7 @@ function WelcomeMessage() {
   const { t } = useTranslation();
   return (
     <nav className="bg-opacity-0 p-2 text-center">
-      <span className="text-gray-300 font-extrabold text-4xl">
+      <span className="text-gray-300 font-extrabold text-sm sm:text-base md:text-2xl lg:text-4xl">
         {t("Welcome To")}
         <br />
         {t("TranscENDence")}
