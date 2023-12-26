@@ -1,24 +1,15 @@
 import React, { useEffect } from "react";
 import { I18nextProvider, useTranslation } from "react-i18next";
-import React, { useEffect } from "react";
-import { I18nextProvider, useTranslation } from "react-i18next";
 import Translation from "./components/Translation";
 import Home from "./components/Home";
 import Chat from "./components/Chat";
 import Games from "./components/Games";
 import About from "./components/About";
 import NotFound from "./components/404";
-import NotFound from "./components/404";
 import PongAi from "./components/PongAi";
 import Sidebar from "./components/Sidebar";
 import Welcome from "./components/Welcome";
 import Profile from "./components/Profile";
-import HomeBackground from "./images/bg0.png";
-import MortyBackground0 from "./images/morty0.png";
-import MortyBackground1 from "./images/morty1.png";
-import MortyBackground2 from "./images/morty2.png";
-import MortyBackground3 from "./images/morty3.png";
-import MortyBackground4 from "./images/morty4.png";
 import HomeBackground from "./images/bg0.png";
 import MortyBackground0 from "./images/morty0.png";
 import MortyBackground1 from "./images/morty1.png";
@@ -54,15 +45,7 @@ const PageWrapper = ({ children, image, showSidebar = true }) => {
 
 function App() {
   const { i18n } = useTranslation();
-  const { i18n } = useTranslation();
   const basename = process.env.NODE_ENV === 'production' ? '/Transcendence' : '';
-
-  useEffect(() => {
-    const storedLanguage = localStorage.getItem('i18nextLng');
-    if (storedLanguage && i18n.language !== storedLanguage) {
-      i18n.changeLanguage(storedLanguage);
-    }
-  }, [i18n]);
 
   useEffect(() => {
     const storedLanguage = localStorage.getItem('i18nextLng');
@@ -77,92 +60,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            path="/"
             element={
-              <PageWrapper
-                image={HomeBackground}
-                showSidebar={false}
-              >
-                <Welcome />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="home"
-            element={
-              <PageWrapper image={MortyBackground4}>
-                <Home />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="chat"
-            element={
-              <PageWrapper image={MortyBackground1}>
-                <Chat />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="matchmaking"
-            element={
-              <PageWrapper image={HomeBackground}>
-                <Matchmaking />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="games"
-            element={
-              <PageWrapper image={MortyBackground0}>
-                <Games />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="profile"
-            element={
-              <PageWrapper image={MortyBackground2}>
-                <Profile />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="about"
-            element={
-              <PageWrapper image={MortyBackground3}>
-                <About />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="originalpong"
-            element={
-              <PageWrapper image={HomeBackground}>
-                <OriginalPong
-                />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="pongai"
-            element={
-              <PageWrapper image={HomeBackground}>
-                <PongAi />
-              </PageWrapper>
-            }
-          />
-          <Route path="choosepongmode" element={
-            <PageWrapper image={HomeBackground}>
-              <ChoosePongMode
-              />
-            </PageWrapper>
-          }
-          />
-          <Route
-            path="*"
-            element={
-              <NotFound currentLanguage={i18n.language} />
               <PageWrapper
                 image={HomeBackground}
                 showSidebar={false}

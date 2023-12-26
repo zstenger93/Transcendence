@@ -16,5 +16,4 @@ RUN chmod +x /app/backend.sh
 
 EXPOSE 8000
 
-ENTRYPOINT ["tail", "-f", "/dev/null"]
 ENTRYPOINT ["docker/backend/backend.sh"]

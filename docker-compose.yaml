@@ -28,7 +28,7 @@ services:
       - ${PWD}:/app/
     ports:
       - 8000:8000
-    # restart: unless-stopped
+    entrypoint: /app/docker/backend/backend.sh
     depends_on:
       - db
 
