@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const friendsListData = [
@@ -31,7 +31,7 @@ const friendsListData = [
 
 const matchHistoryData = [
   {
-    opponent: "EmotionalDamage",
+    opponent: "EmotionalDmg",
     result: "Win",
     score: "5 - 2",
     game: "Pong",
@@ -155,7 +155,7 @@ function MatchHistory() {
   return (
     <div
       className="bg-gray-900 bg-opacity-80 p-6 shadow-xl
-      rounded-md max-h-96 overflow-y-auto mb-10">
+      rounded-md max-h-96 overflow-y-auto mb-10 sm:w-full">
       <h3 className="text-xl text-gray-300 font-nosifer font-bold mb-4 text-center">
         {t("Match History")}
       </h3>
