@@ -41,7 +41,7 @@ const Sidebar = () => {
     <>
       {isMenuOpen && (
         <div
-          className="fixed top-0 left-0 h-screen w-screen bg-gray-900 bg-opacity-80"
+          className="fixed top-0 left-0 h-screen w-screen bg-gray-900 bg-opacity-80 z-50"
           onClick={toggleMenu}
         >
           <div className="flex flex-col justify-start items-center mt-24">

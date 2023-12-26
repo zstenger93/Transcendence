@@ -26,6 +26,7 @@ code {
   transition: 0.4s;
 }
 
+/* showing tooltip next to icons on phone if want, not sure yet */
 .tooltip.always-show .tooltiptext {
   visibility: visible;
   opacity: 1;

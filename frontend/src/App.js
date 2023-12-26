@@ -29,6 +29,7 @@ import {
 const PageWrapper = ({ children, image, showSidebar = true }) => {
   return (
     <div
+      className="overflow-y-auto"
       style={{
         backgroundImage: `url(${image})`,
         backgroundSize: "cover",

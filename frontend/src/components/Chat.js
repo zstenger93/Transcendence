@@ -85,7 +85,7 @@ function Chat() {
     return (
       <div
         className="flex flex-col justify-between w-1/7 p-6 text-white
-		text-center bg-gray-900 bg-opacity-80 rounded-xl shadow"
+		text-center bg-gray-900 bg-opacity-80 rounded-xl shadow h-full"
       >
         <div>
           <h2 className="mb-8 text-2xl font-nosifer font-bold text-gray-300">
@@ -118,7 +118,7 @@ function Chat() {
     return (
       <div
         className="flex flex-col justify-between w-1/7 p-6 text-white
-		text-center bg-gray-900 bg-opacity-80 rounded-xl shadow"
+		text-center bg-gray-900 bg-opacity-80 rounded-xl shadow h-full"
       >
         <div>
           <h2 className="mb-8 text-2xl font-nosifer font-bold text-gray-300">
@@ -137,9 +137,11 @@ function Chat() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="flex w-3/6 space-x-2">
-        <ChannelList />
+    <div className="flex items-center justify-center min-h-screen ">
+      <div className="flex w-full md:w-4/6 space-x-2">
+        <div className="hidden md:block">
+          <ChannelList />
+        </div>
         <div
           className="w-full p-6 text-white bg-gray-900 bg-opacity-80 
 			rounded-xl shadow"
@@ -194,7 +196,9 @@ function Chat() {
             )}
           </form>
         </div>
-        <OnlineUsersList />
+        <div className="hidden md:block">
+          <OnlineUsersList />
+        </div>
       </div>
       {viewingImage && (
         <div
