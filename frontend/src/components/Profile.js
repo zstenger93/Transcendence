@@ -110,7 +110,7 @@ const userDetails = {
 function FriendsList() {
   const { t } = useTranslation();
   return (
-    <div className="bg-gray-900 bg-opacity-80 p-4 rounded-md max-h-96 overflow-y-auto">
+    <div className="bg-gray-900 bg-opacity-80 p-4 rounded-md max-h-96 overflow-y-auto mb-10">
       <h3 className="text-xl text-gray-300 font-nosifer font-bold mb-4 text-center">
         {t("Friends")}
       </h3>
@@ -155,7 +155,7 @@ function MatchHistory() {
   return (
     <div
       className="bg-gray-900 bg-opacity-80 p-6 shadow-xl
-      rounded-md max-h-96 overflow-y-auto">
+      rounded-md max-h-96 overflow-y-auto mb-10">
       <h3 className="text-xl text-gray-300 font-nosifer font-bold mb-4 text-center">
         {t("Match History")}
       </h3>
@@ -234,24 +234,19 @@ function Profile() {
   };
 
   // THIS IS TOTALLY GARBAGE
-  useEffect(() => {
-    // Save the body's original background
-    const originalBackground = document.body.style.background;
+  // useEffect(() => {
+  //   const originalBackground = document.body.style.background;
   
-    // Set the body's background to the same as the div's background
-    document.body.style.background = "url('src/images/morty2.png') center center/cover no-repeat";
+  //   document.body.style.background = "url('src/images/morty2.png') center center/cover no-repeat";
   
-    // Make the body scrollable
-    document.body.classList.add('overflow-y-auto');
+  //   document.body.classList.add('overflow-y-auto');
   
-    return () => {
-      // Restore the body's original background
-      document.body.style.background = originalBackground;
+  //   return () => {
+  //     document.body.style.background = originalBackground;
   
-      // Remove the scrollable style
-      document.body.classList.remove('overflow-y-auto');
-    };
-  }, []);
+  //     document.body.classList.remove('overflow-y-auto');
+  //   };
+  // }, []);
 
   return (
     <div
@@ -322,7 +317,7 @@ function Profile() {
             </button>
           </div>
         </div>
-        <div className="mt-8">
+        <div className="mt-8 mb-10">
           {showFriendsList && <FriendsList />}
           {showMatchHistory && <MatchHistory />}
         </div>
