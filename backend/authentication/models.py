@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from .utils import user_profile_picture_path
-# Create your models here.
 
 class User(AbstractUser):
         
