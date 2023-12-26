@@ -41,7 +41,7 @@ const Sidebar = () => {
     <>
       {isMenuOpen && (
         <div
-          className="fixed top-0 left-0 h-screen w-screen bg-gray-900 bg-opacity-80"
+          className="fixed top-0 left-0 h-screen w-screen bg-gray-900 bg-opacity-80 z-10"
           onClick={toggleMenu}
         >
           <div className="flex flex-col justify-start items-center mt-24">
@@ -92,7 +92,7 @@ const Sidebar = () => {
       )}
       {isMobile ? (
         /* Render hamburger menu for small screens */
-        <div className="lg:hidden cursor-pointer p-4" onClick={toggleMenu}>
+        <div className="lg:hidden cursor-pointer p-4 z-20 relative" onClick={toggleMenu}>
           <div
             className={`bar h-1 w-8 transition-all duration-300
             ${isMenuOpen
