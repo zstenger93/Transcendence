@@ -9,7 +9,7 @@ function Games() {
         "https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&showinfo=0&rel=0&autoplay=1&mute=1&loop=1&playlist=dQw4w9WgXcQ",
     },
     {
-      name: "BRAINFUCK",
+      name: "Emotional Damage",
       video:
         "https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&showinfo=0&rel=0&autoplay=1&mute=1&loop=1&playlist=dQw4w9WgXcQ",
     },

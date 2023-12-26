@@ -14,8 +14,7 @@ services:
     ports:
       - 3000:3000
     restart: unless-stopped
-    command: tail -f /dev/null
-
+    command: npm start
 
   backend:
     container_name: backend
@@ -28,7 +27,6 @@ services:
     volumes:
       - ${PWD}:/app/
     ports:
-
       - 8000:8000
     # restart: unless-stopped
     depends_on:
