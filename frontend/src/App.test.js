@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, prettyDOM, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, prettyDOM, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 import { within } from '@testing-library/dom';
@@ -13,7 +13,7 @@ test('renders Sign In button', () => {
 
   console.log(prettyDOM(container));
 
-  const signInButton = screen.getByText('Sign In');
+  const signInButton = screen.getByText('Sign In via 42');
 
   expect(signInButton).toBeInTheDocument();
 });
@@ -21,7 +21,7 @@ test('renders Sign In button', () => {
 test('clicks on Sign In button and interacts with Sidebar', async () => {
   const { container } = render(<App />);
 
-  const signInButton = screen.getByText('Sign In');
+  const signInButton = screen.getByText('Sign In via 42');
   userEvent.click(signInButton);
 
   await waitFor(() => screen.getByText('Logout'));
@@ -29,12 +29,42 @@ test('clicks on Sign In button and interacts with Sidebar', async () => {
   
   const homeLink = screen.getByText('Home');
   const chatLink = screen.getByText('Channels & Private Messages');
+  const gamesLink = screen.getByText('Play & Watch Games');
+  const profileLink = screen.getByText('Profile');
+  const aboutLink = screen.getByText('About Us');
+  const logoutLink = screen.getByText('Logout');
   
   userEvent.click(homeLink);
   userEvent.click(chatLink);
-  console.log(prettyDOM(container, 50000));
-
+  userEvent.click(gamesLink);
+  userEvent.click(profileLink);
+  userEvent.click(aboutLink);
+  userEvent.click(logoutLink);
 });
+
+// test('async test for page data', async () => {
+//   const { container } = render(<App />);
+
+//   const signInButton = screen.getByText('Sign In via 42');
+//   userEvent.click(signInButton);
+
+//   await waitFor(() => screen.getByText('Logout'));
+//   await waitFor(() => screen.getByText('Welcome To'));
+// });
+
+// jest.mock('react-i18next', () => ({
+//   useTranslation: () => ({ t: key => key })
+// }));
+
+// test('async test for page data', async () => {
+//   render(<App useMemoryRouter={true} />);
+
+//   const signInButton = screen.getByText('Sign In via 42');
+//   userEvent.click(signInButton);
+
+//   await waitFor(() => screen.getByText('Logout'));
+//   await waitFor(() => screen.getByText('Welcome To'));
+// });
 
 // test('renders chat page', () => {
 //   render(<App />);

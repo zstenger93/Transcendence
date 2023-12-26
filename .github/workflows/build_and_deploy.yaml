@@ -44,6 +44,10 @@ jobs:
         working-directory: frontend
         run: npm install
 
+      - name: Print npm log
+        if: failure()
+        run: cat /home/runner/.npm/_logs/*.log
+
       - name: Build Frontend
         working-directory: frontend
         run: npm run build
