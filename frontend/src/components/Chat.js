@@ -95,7 +95,7 @@ function Chat() {
             {channels.map((channel, index) => (
               <li
                 key={index}
-                className="cursor-pointer my-4"
+                className={`cursor-pointer my-4 ${channel === currentChannel ? 'text-purple-500 font-nosifer' : ''}`}
                 onClick={() => setCurrentChannel(channel)}
               >
                 {channel}
