@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 const friendsListData = [
@@ -233,10 +233,30 @@ function Profile() {
     setShowFriendsList(false);
   };
 
+  // THIS IS TOTALLY GARBAGE
+  useEffect(() => {
+    // Save the body's original background
+    const originalBackground = document.body.style.background;
+  
+    // Set the body's background to the same as the div's background
+    document.body.style.background = "url('src/images/morty2.png') center center/cover no-repeat";
+  
+    // Make the body scrollable
+    document.body.classList.add('overflow-y-auto');
+  
+    return () => {
+      // Restore the body's original background
+      document.body.style.background = originalBackground;
+  
+      // Remove the scrollable style
+      document.body.classList.remove('overflow-y-auto');
+    };
+  }, []);
+
   return (
     <div
-      className="flex flex-col items-center justify-center
-	    h-screen bg-cover bg-center bg-no-repeat shadow-xl"
+    className="flex flex-col items-center justify-center
+    min-h-screen bg-cover bg-center bg-no-repeat shadow-xl"
     >
       <div className="max-w-md flex flex-col items-center">
         <div
