@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent, prettyDOM, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, prettyDOM, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 import { within } from '@testing-library/dom';
@@ -29,6 +30,10 @@ test('clicks on Sign In button and interacts with Sidebar', async () => {
   
   const homeLink = screen.getByText('Home');
   const chatLink = screen.getByText('Channels & Private Messages');
+  const gamesLink = screen.getByText('Play & Watch Games');
+  const profileLink = screen.getByText('Profile');
+  const aboutLink = screen.getByText('About Us');
+  const logoutLink = screen.getByText('Logout');
   const gamesLink = screen.getByText('Play & Watch Games');
   const profileLink = screen.getByText('Profile');
   const aboutLink = screen.getByText('About Us');
