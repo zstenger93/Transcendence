@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import * as THREE from "three";
+import coverImage from "../images/color.png";
 
 function Pong3D() {
   const containerRef = useRef(null);
@@ -9,6 +10,9 @@ function Pong3D() {
   const wallOffsetX = 23.5;
   const wallOffsetY = 15;
   const wallThickness = 3;
+  const longGeometry = 50;
+  const shortGeometry = 30;
+  const cylinderOffset = -1.5;
 
   useEffect(() => {
     const scene = new THREE.Scene();
@@ -23,13 +27,13 @@ function Pong3D() {
 
     // Create walls
     const wallGeometryLong = new THREE.BoxGeometry(
-      50,
+      longGeometry,
       wallThickness,
       wallThickness
     );
     const wallGeometryShort = new THREE.BoxGeometry(
       wallThickness,
-      30,
+      shortGeometry,
       wallThickness
     );
     const wallMaterial = new THREE.MeshStandardMaterial({
@@ -37,6 +41,43 @@ function Pong3D() {
       metalness: 1,
       roughness: 0.4,
     });
+
+    // Create cylinders
+    const cylinderGeometryLong = new THREE.CylinderGeometry(
+      0.5,
+      0.5,
+      longGeometry,
+      32
+    );
+    const cylinderGeometryShort = new THREE.CylinderGeometry(
+      0.5,
+      0.5,
+      shortGeometry,
+      32
+    );
+    const textureLoader = new THREE.TextureLoader();
+    const texture = textureLoader.load(coverImage);
+    const cylinderMaterial = new THREE.MeshStandardMaterial({
+      map: texture,
+    });
+    const cylinders = [
+      new THREE.Mesh(cylinderGeometryShort, cylinderMaterial),
+      new THREE.Mesh(cylinderGeometryShort, cylinderMaterial),
+      new THREE.Mesh(cylinderGeometryLong, cylinderMaterial),
+      new THREE.Mesh(cylinderGeometryLong, cylinderMaterial),
+    ];
+    cylinders[0].position.set(-wallOffsetX - cylinderOffset, 0, cylinderOffset);
+    cylinders[1].position.set(wallOffsetX + cylinderOffset, 0, cylinderOffset);
+    cylinders[2].position.set(0, -wallOffsetY - cylinderOffset, cylinderOffset);
+    cylinders[3].position.set(0, wallOffsetY + cylinderOffset, cylinderOffset);
+    cylinders[2].rotation.z = Math.PI / 2;
+    cylinders[3].rotation.z = Math.PI / 2;
+    cylinders.forEach((cylinder) => scene.add(cylinder));
+
+    // Add light to the cylinders
+    const cylinderLight = new THREE.PointLight(0x00ff00, 10, 30, 2);
+    cylinders.forEach((cylinder) => cylinder.add(cylinderLight));
+
     const walls = [
       new THREE.Mesh(wallGeometryLong, wallMaterial), // Top wall
       new THREE.Mesh(wallGeometryLong, wallMaterial), // Bottom wall
@@ -52,7 +93,7 @@ function Pong3D() {
     const paddleGeometry = new THREE.BoxGeometry(
       paddleWidth,
       paddleHeight,
-      wallThickness
+      wallThickness / 2
     );
     const paddleMaterialGeometry = new THREE.MeshBasicMaterial({
       color: 0xffff00,
