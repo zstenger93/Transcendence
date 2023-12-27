@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import * as THREE from "three";
 import coverImage from "../images/color.png";
+import world from "../images/world.jpg";
 
 function Pong3D() {
   const containerRef = useRef(null);
@@ -13,7 +14,7 @@ function Pong3D() {
   const longGeometry = 50;
   const shortGeometry = 30;
   const cylinderOffset = -1.5;
-  const ballSpeed = 0.8;
+  const ballSpeed = 0.4;
 
   useEffect(() => {
     const scene = new THREE.Scene();
@@ -27,6 +28,11 @@ function Pong3D() {
     camera.position.z = 35;
 
     // Create walls
+    const backgroundWall = new THREE.BoxGeometry(
+      longGeometry,
+      shortGeometry,
+      1
+    );
     const orbotGemetryLong = new THREE.BoxGeometry(
       longGeometry + 2 * wallThickness,
       wallThickness,
@@ -57,7 +63,7 @@ function Pong3D() {
       color: 0x00008b,
       roughness: 0.4,
       emissive: 0x00008b,
-      emissiveIntensity: 0.5,
+      emissiveIntensity: 800,
     });
 
     // Create cylinders
@@ -75,6 +81,7 @@ function Pong3D() {
     );
     const textureLoader = new THREE.TextureLoader();
     const texture = textureLoader.load(coverImage);
+    const textureWorld = textureLoader.load(world);
     const cylinderMaterial = new THREE.MeshStandardMaterial({
       map: texture,
     });
@@ -101,12 +108,14 @@ function Pong3D() {
       new THREE.Mesh(wallGeometryLong, wallMaterial), // Bottom wall
       new THREE.Mesh(wallGeometryShort, wallMaterial), // Left wall
       new THREE.Mesh(wallGeometryShort, wallMaterial), // Right wall
+      new THREE.Mesh(backgroundWall, wallMaterial), // Background
     ];
 
     walls[0].position.set(0, wallOffsetY, 0);
     walls[1].position.set(0, -wallOffsetY, 0);
     walls[2].position.set(-wallOffsetX, 0, 0);
     walls[3].position.set(wallOffsetX, 0, 0);
+    walls[4].position.set(0, 0, -2);
     walls.forEach((wall) => scene.add(wall));
 
     const orbits = [
@@ -136,23 +145,24 @@ function Pong3D() {
     const rightPaddle = new THREE.Mesh(paddleGeometry, paddleMaterialGeometry);
     rightPaddle.position.set(21, 0, 0);
     scene.add(rightPaddle);
-    // Create 
+    // Create
     const ballGeometry = new THREE.SphereGeometry(1, 32, 32);
     const ballMaterial = new THREE.MeshStandardMaterial({
       color: 0xff0000,
+      map: textureWorld,
     });
     const ball = new THREE.Mesh(ballGeometry, ballMaterial);
     ball.position.set(0, 0, 0);
     scene.add(ball);
 
     // Add light to the ball
-    const ballLight = new THREE.PointLight(0xff0000, 10, 30, 2);
+    const ballLight = new THREE.PointLight(0xffff00, 30, 30, 2);
     ballLight.position.set(0, 0, 0);
     ball.add(ballLight);
 
     // Add lights
     const pointLight = new THREE.PointLight(0xff0000, 600, 80, 2);
-    pointLight.position.set(0, 5, 5);
+    pointLight.position.set(0, 0, 5);
     const ambientLight = new THREE.AmbientLight(0xffffff);
     scene.add(pointLight, ambientLight);
 
@@ -162,6 +172,8 @@ function Pong3D() {
       requestAnimationFrame(animate);
 
       // Move the ball
+      ball.rotation.y += ballDirection.x * 0.01;
+      ball.rotation.z += ballDirection.y * 0.1;
       ball.position.add(ballDirection.clone().multiplyScalar(ballSpeed));
 
       // Animate Orbits position
