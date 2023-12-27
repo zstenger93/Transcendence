@@ -73,12 +73,12 @@ function Pong3D() {
     scene.add(ball);
 
     // Add light to the ball
-    const ballLight = new THREE.PointLight(0xffffff, 10, 30, 2);
+    const ballLight = new THREE.PointLight(0xff0000, 10, 30, 2);
     ballLight.position.set(0, 0, 0);
     ball.add(ballLight);
 
     // Add lights
-    const pointLight = new THREE.PointLight(0xb97999);
+    const pointLight = new THREE.PointLight(0xff0000, 600, 80, 2);
     pointLight.position.set(0, 5, 5);
     const ambientLight = new THREE.AmbientLight(0xffffff);
     scene.add(pointLight, ambientLight);
@@ -94,12 +94,18 @@ function Pong3D() {
 
       // My Amazing AI
       leftPaddle.position.y = Math.max(
-        -wallOffsetX + paddleHeight / 2,
-        Math.min(ball.position.y, wallOffsetX - paddleHeight / 2)
+        -wallOffsetY + paddleHeight / 2 + wallThickness / 2,
+        Math.min(
+          ball.position.y,
+          wallOffsetY - paddleHeight / 2 - wallThickness / 2
+        )
       );
       rightPaddle.position.y = Math.max(
-        wallOffsetX - paddleHeight / 2,
-        Math.min(ball.position.y, -wallOffsetX + paddleHeight / 2)
+        -wallOffsetY + paddleHeight / 2 + wallThickness / 2,
+        Math.min(
+          ball.position.y,
+          wallOffsetY - paddleHeight / 2 - wallThickness / 2
+        )
       );
       // Move Camera
       camera.rotation.x += ballDirection.x * ballSpeed * 0.01;
