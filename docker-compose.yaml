@@ -29,6 +29,7 @@ services:
     ports:
       - 8000:8000
     entrypoint: /app/docker/backend/backend.sh
+    restart: unless-stopped
     depends_on:
       - db
 
