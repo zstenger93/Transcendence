@@ -4,7 +4,7 @@ from rest_framework.authentication import SessionAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
-from rest_framework import permissions, status, viewsets
+from rest_framework import permissions, status, viewsets, authentication
 from .validations import custom_validation, validate_email, validate_password
 from django.shortcuts import render, HttpResponse, redirect
 from django.core.files.base import ContentFile
@@ -66,7 +66,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class OAuthCallback(APIView):
 	permission_classes = (permissions.AllowAny,)
-
+	##
 	def get(self, request):
 		if request.method == "GET":
 			code = request.GET.get("code")
@@ -111,11 +111,8 @@ class OAuthCallback(APIView):
 					user.profile_picture.save(f"{username}_profile_picture.jpg", ContentFile(response.content), save=True)
 			else:
 				print("\t\t\tUser already exists!!!")
-
-			print(user)
 			login(request, user)
-
-			return redirect("home")                                  
+			return redirect("home")                             
 		return HttpResponse("Auth callback Error, bad token maybe!!")
 
 
@@ -130,5 +127,4 @@ class OAuthAuthorize(APIView):
 			"response_type": "code",
 		}
 		return redirect(f"{auth_url}?{urllib.parse.urlencode(params)}")
-
 
