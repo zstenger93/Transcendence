@@ -172,7 +172,6 @@ function Pong3D() {
       requestAnimationFrame(animate);
 
       // Move the ball
-      ball.rotation.y += ballDirection.x * 0.01;
       ball.rotation.z += ballDirection.y * 0.1;
       ball.position.add(ballDirection.clone().multiplyScalar(ballSpeed));
 
