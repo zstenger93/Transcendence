@@ -317,7 +317,7 @@ const PongAi = () => {
         <div className="relative border-8 border-white">
           <img
             src={backgroundImage}
-            style={{ width: "80vw", height: "100%", objectFit: "cover" }}
+            style={{ width: "80vw", height: "45vw", objectFit: "cover" }}
             alt="Background"
           />
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
