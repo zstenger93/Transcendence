@@ -236,11 +236,11 @@ const GameCanvas = () => {
     // touchpad controlls
     const handleTouchMove = (event) => {
       if (canvasRef.current) {
-        const touches = event.touches;  
+        const touches = event.touches;
+        const rect = canvasRef.current.getBoundingClientRect();
         for (let i = 0; i < touches.length; i++) {
           const touch = touches[i];
-          const touchY = touch.clientY;
-          
+          const touchY = event.touches[i].clientY - rect.top - window.scrollY;
           // Left paddle controls
           if (touch.clientX < canvasRef.current.width / 2) {
             leftPaddleY = touchY - paddleHeight / 2;
@@ -260,14 +260,14 @@ const GameCanvas = () => {
         }
       }
     };
-  
+
     document.addEventListener("keyup", handleKeyUp);
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("touchmove", handleTouchMove);
     window.addEventListener("resize", handleResize);
     handleResize();
     draw(0);
-  
+
     return () => {
       document.removeEventListener("keyup", handleKeyUp);
       document.removeEventListener("keydown", handleKeyDown);
