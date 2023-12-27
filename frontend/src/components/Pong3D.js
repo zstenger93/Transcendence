@@ -1,55 +1,34 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect } from "react";
 import { Canvas } from "react-three-fiber";
-import { useFrame } from "@react-three/fiber"; // Import useFrame if needed
-import * as THREE from "three";
-
-// ... (rest of the code)
 
 const PongScene = () => {
-  const [score, setScore] = useState({ player1: 0, player2: 0 });
+  useEffect(() => {
+    const handleResize = () => {
+      // Handle resizing logic if needed
+    };
 
-  const ball = useRef();
-  const paddle1 = useRef();
-  const paddle2 = useRef();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
-    <>
-      <h3 id="scoreBoard">
-        Player 1: {score.player1} Player 2: {score.player2}
-      </h3>
-      <Canvas
-        style={{ position: "absolute", top: 0, left: 0 }}
-        camera={{ position: [0, 100, 500], fov: 45, near: 0.1, far: 10000 }}
-      >
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[0, 10, 0]} intensity={1} />
-        <mesh position={[0, -50, 0]}>
-          <boxGeometry args={[1200, 5, 3000]} />
-          <meshLambertMaterial color={0x003300} />
-        </mesh>
-        <mesh ref={paddle1} position={[0, 0, 1500]}>
-          <boxGeometry args={[200, 30, 10]} />
-          <meshLambertMaterial color={0xcccccc} />
-        </mesh>
-        <mesh ref={paddle2} position={[0, 0, -1500]}>
-          <boxGeometry args={[200, 30, 10]} />
-          <meshLambertMaterial color={0xcccccc} />
-        </mesh>
-        <mesh ref={ball} position={[0, 0, 0]}>
-          <sphereGeometry args={[20, 16, 16]} />
-          <meshLambertMaterial color={0xcc0000} />
-        </mesh>
+    <Canvas
+      camera={{ position: [0, 0, 5], fov: 50 }}
+      onCreated={({ gl }) => {
+        // Setup additional scene logic if needed
+      }}
+    >
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[5, 5, 5]} intensity={1} />
 
-        {/* Camera Control */}
-        <orbitControls
-          enableZoom={false}
-          enablePan={false}
-          enableDamping
-          dampingFactor={0.25}
-          target={[0, 0, 0]}
-        />
-      </Canvas>
-    </>
+      <mesh>
+        <boxGeometry args={[1, 1, 1]} />
+        <meshStandardMaterial color={0x00ff00} />
+      </mesh>
+    </Canvas>
   );
 };
 
