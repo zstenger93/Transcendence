@@ -209,7 +209,8 @@ const GameCanvas = () => {
     };
     const handleTouchMove = (event) => {
       if (canvasRef.current && event.touches.length > 0) {
-        const touchY = event.touches[0].clientY;
+        const rect = canvasRef.current.getBoundingClientRect();
+        const touchY = event.touches[0].clientY - rect.top - window.scrollY;
         leftPaddleY = touchY - paddleHeight / 2;
         leftPaddleY = Math.max(
           0,
