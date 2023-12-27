@@ -233,15 +233,45 @@ const GameCanvas = () => {
         );
       }
     };
-
+    // touchpad controlls
+    const handleTouchMove = (event) => {
+      if (canvasRef.current) {
+        const touches = event.touches;  
+        for (let i = 0; i < touches.length; i++) {
+          const touch = touches[i];
+          const touchY = touch.clientY;
+          
+          // Left paddle controls
+          if (touch.clientX < canvasRef.current.width / 2) {
+            leftPaddleY = touchY - paddleHeight / 2;
+            leftPaddleY = Math.max(
+              0,
+              Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
+            );
+          }
+          // Right paddle controls
+          else {
+            rightPaddleY = touchY - paddleHeight / 2;
+            rightPaddleY = Math.max(
+              0,
+              Math.min(rightPaddleY, canvasRef.current.height - paddleHeight)
+            );
+          }
+        }
+      }
+    };
+  
     document.addEventListener("keyup", handleKeyUp);
     document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("touchmove", handleTouchMove);
     window.addEventListener("resize", handleResize);
     handleResize();
     draw(0);
+  
     return () => {
-      document.addEventListener("keyup", handleKeyUp);
+      document.removeEventListener("keyup", handleKeyUp);
       document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("resize", handleResize);
     };
   }, [canvasRef]);

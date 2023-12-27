@@ -207,12 +207,26 @@ const GameCanvas = () => {
         );
       }
     };
+    const handleTouchMove = (event) => {
+      if (canvasRef.current && event.touches.length > 0) {
+        const touchY = event.touches[0].clientY;
+        leftPaddleY = touchY - paddleHeight / 2;
+        leftPaddleY = Math.max(
+          0,
+          Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
+        );
+      }
+    };
+
     document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("touchmove", handleTouchMove);
     window.addEventListener("resize", handleResize);
     handleResize();
     draw(0);
+
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("resize", handleResize);
     };
   }, [canvasRef]);
