@@ -1,15 +1,20 @@
 from django.shortcuts import render
 from django.contrib.auth import get_user_model, login, logout
+from django.core.files.base import ContentFile
+from django.shortcuts import render, HttpResponse, redirect
+from django.conf import settings
+
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
 from rest_framework import permissions, status, viewsets, authentication
+
+from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
 from .validations import custom_validation, validate_email, validate_password
-from django.shortcuts import render, HttpResponse, redirect
-from django.core.files.base import ContentFile
+from .models import FriendRequest
+from .serializers import FriendRequestSerializer
 from .models import AppUser
-from django.conf import settings
+
 import requests
 import urllib
 import os
@@ -128,3 +133,29 @@ class OAuthAuthorize(APIView):
 		}
 		return redirect(f"{auth_url}?{urllib.parse.urlencode(params)}")
 
+
+class FriendRequestViewSet(viewsets.ViewSet):
+	def list(self, request):
+		queryset = FriendRequest.objects.all()
+		serializer = FriendRequestSerializer(queryset, many=True)
+		return Response(serializer.data)
+
+	def create(self, request):
+		serializer = FriendRequestSerializer(data=request.data)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data, status=status.HTTP_201_CREATED)
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+	def partial_update(self, request, pk=None):
+		friend_request = FriendRequest.objects.get(pk=pk)
+		serializer = FriendRequestSerializer(friend_request, data=request.data, partial=True)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data)
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+	
+	def retrieve(self, request, pk=None):
+		friend_request = FriendRequest.objects.get(pk=pk)
+		serializer = FriendRequestSerializer(friend_request)
+		return Response(serializer.data)

@@ -46,5 +46,11 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 		return self.username
 
 class FriendRequest(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('accepted', 'Accepted'),
+        ('rejected', 'Rejected'),
+    ]
     from_user = models.ForeignKey(AppUser, related_name='sent_requests', on_delete=models.CASCADE)
     to_user = models.ForeignKey(AppUser, related_name='received_requests', on_delete=models.CASCADE)
+    status = models.CharField(max_length=8, choices=STATUS_CHOICES, default='pending')
