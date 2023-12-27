@@ -13,6 +13,7 @@ function Pong3D() {
   const longGeometry = 50;
   const shortGeometry = 30;
   const cylinderOffset = -1.5;
+  const ballSpeed = 0.8;
 
   useEffect(() => {
     const scene = new THREE.Scene();
@@ -26,6 +27,16 @@ function Pong3D() {
     camera.position.z = 35;
 
     // Create walls
+    const orbotGemetryLong = new THREE.BoxGeometry(
+      longGeometry + 2 * wallThickness,
+      wallThickness,
+      wallThickness
+    );
+    const orbotGemetryShort = new THREE.BoxGeometry(
+      wallThickness,
+      shortGeometry + 2 * wallThickness,
+      wallThickness
+    );
     const wallGeometryLong = new THREE.BoxGeometry(
       longGeometry,
       wallThickness,
@@ -40,6 +51,13 @@ function Pong3D() {
       color: 0xffff80,
       metalness: 1,
       roughness: 0.4,
+    });
+
+    const orbitMaterial = new THREE.MeshStandardMaterial({
+      color: 0x00008b,
+      roughness: 0.4,
+      emissive: 0x00008b,
+      emissiveIntensity: 0.5,
     });
 
     // Create cylinders
@@ -84,11 +102,25 @@ function Pong3D() {
       new THREE.Mesh(wallGeometryShort, wallMaterial), // Left wall
       new THREE.Mesh(wallGeometryShort, wallMaterial), // Right wall
     ];
+
     walls[0].position.set(0, wallOffsetY, 0);
     walls[1].position.set(0, -wallOffsetY, 0);
     walls[2].position.set(-wallOffsetX, 0, 0);
     walls[3].position.set(wallOffsetX, 0, 0);
     walls.forEach((wall) => scene.add(wall));
+
+    const orbits = [
+      new THREE.Mesh(orbotGemetryLong, orbitMaterial), // Top wall
+      new THREE.Mesh(orbotGemetryLong, orbitMaterial), // Bottom wall
+      new THREE.Mesh(orbotGemetryShort, orbitMaterial), // Left wall
+      new THREE.Mesh(orbotGemetryShort, orbitMaterial), // Right wall
+    ];
+
+    orbits[0].position.set(0, wallOffsetY + wallThickness, 0);
+    orbits[1].position.set(0, -wallOffsetY - wallThickness, 0);
+    orbits[2].position.set(-wallOffsetX - wallThickness, 0, 0);
+    orbits[3].position.set(wallOffsetX + wallThickness, 0, 0);
+    orbits.forEach((orbit) => scene.add(orbit));
 
     const paddleGeometry = new THREE.BoxGeometry(
       paddleWidth,
@@ -104,7 +136,7 @@ function Pong3D() {
     const rightPaddle = new THREE.Mesh(paddleGeometry, paddleMaterialGeometry);
     rightPaddle.position.set(21, 0, 0);
     scene.add(rightPaddle);
-    // Create ball
+    // Create 
     const ballGeometry = new THREE.SphereGeometry(1, 32, 32);
     const ballMaterial = new THREE.MeshStandardMaterial({
       color: 0xff0000,
@@ -125,7 +157,6 @@ function Pong3D() {
     scene.add(pointLight, ambientLight);
 
     // Animation loop
-    const ballSpeed = 0.1;
     let ballDirection = new THREE.Vector3(1, 1, 0).normalize();
     function animate() {
       requestAnimationFrame(animate);
@@ -133,6 +164,24 @@ function Pong3D() {
       // Move the ball
       ball.position.add(ballDirection.clone().multiplyScalar(ballSpeed));
 
+      // Animate Orbits position
+      orbits.forEach((orbit, index) => {
+        orbit.rotation.x += 0.01;
+        if (index === 0) {
+          const radius = -wallOffsetX + wallThickness * 2;
+          const angle = orbit.rotation.x;
+          const y = Math.cos(angle) * radius;
+          const z = Math.sin(angle) * radius;
+          orbit.position.set(0, y, z);
+        }
+        if (index === 1) {
+          const radius = wallOffsetX - wallThickness * 2;
+          const angle = orbit.rotation.x;
+          const y = Math.cos(angle) * radius;
+          const z = Math.sin(angle) * radius;
+          orbit.position.set(0, y, z);
+        }
+      });
       // My Amazing AI
       leftPaddle.position.y = Math.max(
         -wallOffsetY + paddleHeight / 2 + wallThickness / 2,
