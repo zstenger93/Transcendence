@@ -17,7 +17,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '10.13.7.5']
 
 # Authentication settings
-REDIRECT_URI = "http://localhost:8000/auth_callback"
+REDIRECT_URI = "http://localhost:8000/api/oauth/callback/"
 
 # Application definition
 

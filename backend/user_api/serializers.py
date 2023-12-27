@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model, authenticate
 from django.core.exceptions import ValidationError
+from .models import FriendRequest
 
 UserModel = get_user_model()
 
@@ -27,10 +28,14 @@ class UserLoginSerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = UserModel
-		fields = ('email', 'username')
+		fields = ('email', 'username', 'profile_picture', \
+			 	'total_matches', 'wins', 'losses', \
+				'title', 'friends', 'received_friend_requests'
+				, 'sent_friend_requests')
 
-# {
-# 	"email":"sioudazer8@gmail.com",
-# 	"username":"azer",
-# 	"password":"azerazer"
-# }
+
+class FriendRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FriendRequest
+        fields = ['from_user', 'to_user']
+

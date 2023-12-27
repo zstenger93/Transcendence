@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractUser
 from .utils import user_profile_picture_path
 
 class User(AbstractUser):
-        
 	profile_picture = models.ImageField(upload_to=user_profile_picture_path, null=True, blank=True, default='default_profile_picture.PNG')
 	total_matches = models.PositiveIntegerField(default=0)
 	wins = models.PositiveIntegerField(default=0)
