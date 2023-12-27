@@ -1,18 +1,25 @@
-from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from django.conf import settings
-import requests
-import os
-import urllib
-
-from .models import User
-
-from django.core.files.base import ContentFile
 from django.contrib.auth import get_user_model
+from django.shortcuts import render, HttpResponse, redirect
+from django.core.files.base import ContentFile
 from django.shortcuts import get_object_or_404
-from .models import FriendRequest
 
+from .models import FriendRequest
+from .models import User
+from django.conf import settings
+
+import requests
+import urllib
+import os
+
+from rest_framework import viewsets
+from .models import User
+from .serializers import UserSerializer
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 # ----------------------------------------––--------------- HOME FUNCTION
 @login_required(login_url='/login/')
