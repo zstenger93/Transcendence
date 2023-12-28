@@ -9,6 +9,7 @@ import jupiter from "../images/jupiter.jpg";
 import saturn from "../images/saturn.png";
 import uranus from "../images/uranus.png";
 import neptune from "../images/neptun.png";
+
 // import { TextGeometry, MeshBasicMaterial, Mesh } from "three";
 
 function Pong3D() {
@@ -337,10 +338,17 @@ function Pong3D() {
         }}
       ></div>
       <button
+        className="absolute top-0 right-0 p-2 rounded"
         onClick={() => {
           removeShake = !removeShake;
         }}
-      ></button>
+      >
+        <img
+          src={world}
+          alt="Image"
+          class="w-16 h-16 object-cover rounded-full"
+        />
+      </button>
     </>
   );
 }
