@@ -2,6 +2,14 @@ import React, { useEffect, useState, useRef } from "react";
 import * as THREE from "three";
 import coverImage from "../images/color.png";
 import world from "../images/world.jpg";
+import mercury from "../images/mercury.png";
+import venus from "../images/venus.jpg";
+import mars from "../images/mars.jpg";
+import jupiter from "../images/jupiter.jpg";
+import saturn from "../images/saturn.png";
+import uranus from "../images/uranus.png";
+import neptune from "../images/neptun.png";
+// import { TextGeometry, MeshBasicMaterial, Mesh } from "three";
 
 function Pong3D() {
   const containerRef = useRef(null);
@@ -61,13 +69,6 @@ function Pong3D() {
       roughness: 0.4,
     });
 
-    const orbitMaterial = new THREE.MeshStandardMaterial({
-      color: 0x00008b,
-      roughness: 0.4,
-      emissive: 0x00008b,
-      emissiveIntensity: 800,
-    });
-
     const cylinderGeometryLong = new THREE.CylinderGeometry(
       0.5,
       0.5,
@@ -82,6 +83,29 @@ function Pong3D() {
     );
 
     const textureLoader = new THREE.TextureLoader();
+
+    const planetTextures = [
+      textureLoader.load(mercury),
+      textureLoader.load(venus),
+      textureLoader.load(world),
+      textureLoader.load(mars),
+      textureLoader.load(jupiter),
+      textureLoader.load(saturn),
+      textureLoader.load(uranus),
+      textureLoader.load(neptune),
+    ];
+
+    const planetMaterials = [
+      new THREE.MeshStandardMaterial({ map: planetTextures[0] }),
+      new THREE.MeshStandardMaterial({ map: planetTextures[1] }),
+      new THREE.MeshStandardMaterial({ map: planetTextures[2] }),
+      new THREE.MeshStandardMaterial({ map: planetTextures[3] }),
+      new THREE.MeshStandardMaterial({ map: planetTextures[4] }),
+      new THREE.MeshStandardMaterial({ map: planetTextures[5] }),
+      new THREE.MeshStandardMaterial({ map: planetTextures[6] }),
+      new THREE.MeshStandardMaterial({ map: planetTextures[7] }),
+    ];
+
     const texture = textureLoader.load(coverImage);
     const textureWorld = textureLoader.load(world);
     const cylinderMaterial = new THREE.MeshStandardMaterial({
@@ -126,14 +150,14 @@ function Pong3D() {
     walls.forEach((wall) => scene.add(wall));
 
     const orbits = [
-      new THREE.Mesh(new THREE.SphereGeometry(1, 32, 32), ballMaterial),
-      new THREE.Mesh(new THREE.SphereGeometry(2, 32, 32), ballMaterial),
-      new THREE.Mesh(new THREE.SphereGeometry(3, 32, 32), ballMaterial),
-      new THREE.Mesh(new THREE.SphereGeometry(2, 32, 32), ballMaterial),
-      new THREE.Mesh(new THREE.SphereGeometry(30, 32, 32), ballMaterial),
-      new THREE.Mesh(new THREE.SphereGeometry(10, 32, 32), ballMaterial),
-      new THREE.Mesh(new THREE.SphereGeometry(5, 32, 32), ballMaterial),
-      new THREE.Mesh(new THREE.SphereGeometry(3, 32, 32), ballMaterial),
+      new THREE.Mesh(new THREE.SphereGeometry(1, 32, 32), planetMaterials[0]),
+      new THREE.Mesh(new THREE.SphereGeometry(2, 32, 32), planetMaterials[1]),
+      new THREE.Mesh(new THREE.SphereGeometry(3, 32, 32), planetMaterials[2]),
+      new THREE.Mesh(new THREE.SphereGeometry(2, 32, 32), planetMaterials[3]),
+      new THREE.Mesh(new THREE.SphereGeometry(30, 32, 32), planetMaterials[4]),
+      new THREE.Mesh(new THREE.SphereGeometry(10, 32, 32), planetMaterials[5]),
+      new THREE.Mesh(new THREE.SphereGeometry(5, 32, 32), planetMaterials[6]),
+      new THREE.Mesh(new THREE.SphereGeometry(3, 32, 32), planetMaterials[7]),
     ];
 
     orbits[0].position.set(-19, wallOffsetY + wallThickness, 10);
@@ -269,3 +293,14 @@ function Pong3D() {
 }
 
 export default Pong3D;
+
+// const textGeometry = new TextGeometry("Hello, World!", {
+//   font: new THREE.FontLoader().load("path/to/font.json"),
+//   size: 1,
+//   height: 0.1,
+// });
+
+// const textMaterial = new MeshBasicMaterial({ color: 0xffffff });
+// const textMesh = new Mesh(textGeometry, textMaterial);
+// textMesh.position.set(0, 0, 0);
+// scene.add(textMesh);
