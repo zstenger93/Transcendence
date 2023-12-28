@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import backgroundImage from "../images/pongCover.png";
+import settings from "../images/settings.png";
 
 const GameCanvas = () => {
   // Default Parameters
   const defaultSpeedX = 300;
+  let resize = true;
   const winScore = 2;
   const defaultSpeedY = 20;
   const [scoreLeftReact, setScoreLeft] = useState(0);
@@ -142,7 +144,8 @@ const GameCanvas = () => {
   const handleResize = () => {
     if (canvasRef.current) {
       const screenWidth = window.innerWidth;
-      const canvasWidth = 0.8 * screenWidth;
+      let canvasWidth = screenWidth;
+      if (resize === true) canvasWidth = 0.8 * screenWidth;
       const canvasHeight = (canvasWidth / 16) * 9;
       canvasRef.current.width = canvasWidth;
       canvasRef.current.height = canvasHeight;
@@ -232,6 +235,12 @@ const GameCanvas = () => {
     };
   }, [canvasRef]);
 
+  const handleButtonClick = () => {
+    resize = !resize;
+    handleResize();
+    console.log("Something should have happened");
+  };
+
   return (
     <div className="flex justify-center items-center h-screen">
       {scoreLeftReact === winScore || scoreRightReact === winScore ? (
@@ -248,10 +257,14 @@ const GameCanvas = () => {
             style={{ backgroundColor: "#0F0F0F" }}
           ></canvas>
           <button
-            className="absolute top-0 right-0"
-            style={{ backgroundColor: "white" }}
+            className="absolute top-0 right-0 p-2 rounded"
+            onClick={handleButtonClick}
           >
-            Change Resolution
+            <img
+              src={settings}
+              alt="Image"
+              class="w-32 h-32 object-cover rounded-full"
+            />
           </button>
         </>
       )}
@@ -274,7 +287,7 @@ const WinScreen = () => {
         <div className="relative border-8 border-white">
           <img
             src={backgroundImage}
-            style={{ width: "80vw", height: "100%", objectFit: "cover" }}
+            style={{ width: "80vw", height: "45vw", objectFit: "cover" }}
             alt="Background"
           />
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
@@ -307,7 +320,7 @@ const LoseScreen = () => {
         <div className="relative border-8 border-white">
           <img
             src={backgroundImage}
-            style={{ width: "80vw", height: "100%", objectFit: "cover" }}
+            style={{ width: "80vw", height: "45vw", objectFit: "cover" }}
             alt="Background"
           />
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
