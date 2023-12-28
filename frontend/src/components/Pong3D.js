@@ -263,12 +263,19 @@ function Pong3D() {
         )
       );
       // Move Camera
-      camera.rotation.x += ballDirection.x * ballSpeed * 0.01;
-      camera.rotation.y -= ballDirection.y * ballSpeed * 0.01;
-      camera.rotation.z -= ballDirection.x * ballSpeed * 0.01;
-
-      const cameraZOffset = 35 - Math.pow(Math.abs(ball.position.x), 0.8);
-      camera.position.set(ball.position.x, ball.position.y, cameraZOffset);
+      if (removeShake === true) {
+        camera.rotation.x += ballDirection.x * ballSpeed * 0.01;
+        camera.rotation.y -= ballDirection.y * ballSpeed * 0.01;
+        camera.rotation.z -= ballDirection.x * ballSpeed * 0.01;
+        const cameraZOffset = 35 - Math.pow(Math.abs(ball.position.x), 0.8);
+        camera.position.set(ball.position.x, ball.position.y, cameraZOffset);
+      } else {
+        camera.rotation.x = 0;
+        camera.rotation.y = 0;
+        camera.rotation.z = 0;
+        const cameraZOffset = 35;
+        camera.position.set(0, 0, cameraZOffset);
+      }
 
       const leftPaddleBoundingBox = new THREE.Box3().setFromObject(leftPaddle);
       const rightPaddleBoundingBox = new THREE.Box3().setFromObject(
@@ -311,20 +318,27 @@ function Pong3D() {
     return window.innerWidth / window.innerHeight;
   }
 
-    useEffect(() => {
-      function handleResize() {
-        
-      }
-      window.addEventListener("resize", handleResize);
-      return () => window.removeEventListener("resize", handleResize);
-    }, []);
+  useEffect(() => {
+    function handleResize() {}
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-    return (
+  return (
+    <>
       <div
         ref={containerRef}
-        style={{ width: "100%", height: "100%", margin:"auto", overflow: "hidden" }}
+        style={{
+          width: "100%",
+          height: "100%",
+          margin: "auto",
+          overflow: "hidden",
+        }}
       ></div>
-    );
-  }
+      <button
+      ></button>
+    </>
+  );
+}
 
 export default Pong3D;
