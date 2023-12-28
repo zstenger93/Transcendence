@@ -8,7 +8,8 @@ RUN npm install && \
     npm install react-router-dom --save && \
     npm install tailwindcss postcss autoprefixer --save && \
     npm install react-slick slick-carousel --save && \
-    npm install react-i18next i18next --save
+    npm install react-i18next i18next --save && \
+    npm install three --save
 
 COPY . .
 
