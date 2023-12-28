@@ -14,7 +14,7 @@ function Pong3D() {
   const longGeometry = 50;
   const shortGeometry = 30;
   const cylinderOffset = -1.5;
-  const ballSpeed = 0.4;
+  const ballSpeed = 0.1;
 
   useEffect(() => {
     const scene = new THREE.Scene();
@@ -161,7 +161,7 @@ function Pong3D() {
     ball.add(ballLight);
 
     // Add lights
-    const pointLight = new THREE.PointLight(0xff0000, 600, 80, 2);
+    const pointLight = new THREE.PointLight(0xaaaa00, 600, 80, 2);
     pointLight.position.set(0, 0, 5);
     const ambientLight = new THREE.AmbientLight(0xffffff);
     scene.add(pointLight, ambientLight);
@@ -172,8 +172,8 @@ function Pong3D() {
       requestAnimationFrame(animate);
 
       // Move the ball
-      ball.rotation.z += ballDirection.y * 0.1;
       ball.position.add(ballDirection.clone().multiplyScalar(ballSpeed));
+      ball.rotation.z += ballDirection.y * 0.1;
 
       // Animate Orbits position
       orbits.forEach((orbit, index) => {
@@ -232,7 +232,7 @@ function Pong3D() {
         const wallBoundingBox = new THREE.Box3().setFromObject(wall);
         const ballBoundingBox = new THREE.Box3().setFromObject(ball);
         if (wallBoundingBox.intersectsBox(ballBoundingBox)) {
-          if (i == 2 || i == 3) ballDirection.x *= -1;
+          if (i === 2 || i === 3) ballDirection.x *= -1;
           else ballDirection.y *= -1;
         }
       }
