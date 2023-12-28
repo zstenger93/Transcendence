@@ -142,6 +142,7 @@ function App() {
                 <Pong3D />
               </PageWrapper>
           }
+          />
           <Route
             path="pongai"
             element={
