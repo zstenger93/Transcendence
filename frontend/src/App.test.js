@@ -8,7 +8,7 @@ import i18n from 'i18next';
 import Sidebar from './components/Sidebar';
 import { MemoryRouter } from 'react-router-dom';
 
-test('renders Sign In button', () => {
+test('Root Page', () => {
   const { container } = render(<App />);
 
   console.log(prettyDOM(container));
@@ -18,7 +18,7 @@ test('renders Sign In button', () => {
   expect(signInButton).toBeInTheDocument();
 });
 
-test('clicks on Sign In button and interacts with Sidebar', async () => {
+test('Sidebar', async () => {
   const { container } = render(<App />);
 
   const signInButton = screen.getByText('Sign In via 42');

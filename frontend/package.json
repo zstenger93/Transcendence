@@ -27,7 +27,8 @@
     "watch:css": "postcss src/styles/tailwind.css -o src/index.css --watch",
     "start": "react-scripts start",
     "build": "CI=false react-scripts build",
-    "test": "react-scripts test --detectOpenHandles",
+    "test_root_page": "react-scripts test -t 'Root Page'",
+    "test_Sidebar": "react-scripts test -t 'Sidebar'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

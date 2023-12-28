@@ -6,7 +6,7 @@ on:
       - dev
 
 jobs:
-  test:
+  test_root_page:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,9 +22,29 @@ jobs:
         working-directory: frontend
         run: npm install
 
-      - name: Run Tests
+      - name: Run Root Tests
         working-directory: frontend
-        run: npm test
+        run: npm run test_root_page
+    
+  test_Sidebar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16
+
+      - name: Install Dependencies
+        working-directory: frontend
+        run: npm install
+
+      - name: Run Sidebar Tests
+        working-directory: frontend
+        run: npm run test_Sidebar
 
   build:
     runs-on: ubuntu-latest
