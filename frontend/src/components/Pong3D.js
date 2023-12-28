@@ -35,6 +35,28 @@ function Pong3D() {
 
     camera.position.z = 35;
 
+    // Create canvas for rendering text
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+    context.font = "24px Arial";
+    context.fillStyle = "white";
+    context.fillText("BLACKHOLE PONG", 44, 24);
+
+    // Create texture from the canvas
+    const textureText = new THREE.CanvasTexture(canvas);
+
+    // Create material with text texture
+    const textMaterial = new THREE.MeshBasicMaterial({
+      map: textureText,
+      transparent: true,
+    });
+
+    // Apply the material to a plane
+    const textGeometry = new THREE.PlaneGeometry(10, 10);
+    const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+    textMesh.position.set(0, -shortGeometry / 2 - wallThickness * 1.3, wallThickness / 2 + 0.1); // Adjust position as needed
+    scene.add(textMesh);
+
     // Create stars
     const starGeometry = new THREE.SphereGeometry(0.2, 32, 32);
     const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
@@ -293,14 +315,3 @@ function Pong3D() {
 }
 
 export default Pong3D;
-
-// const textGeometry = new TextGeometry("Hello, World!", {
-//   font: new THREE.FontLoader().load("path/to/font.json"),
-//   size: 1,
-//   height: 0.1,
-// });
-
-// const textMaterial = new MeshBasicMaterial({ color: 0xffffff });
-// const textMesh = new Mesh(textGeometry, textMaterial);
-// textMesh.position.set(0, 0, 0);
-// scene.add(textMesh);
