@@ -39,6 +39,7 @@ const Sidebar = () => {
 
   return (
     <>
+      {/* hamburger menu icons */}
       {isMenuOpen && (
         <div
           className="fixed top-0 left-0 h-screen w-screen bg-gray-900 bg-opacity-80 z-10"
@@ -91,7 +92,7 @@ const Sidebar = () => {
         </div>
       )}
       {isMobile ? (
-        /* Render hamburger menu for small screens */
+        /* menu for small screens */
         <div className="lg:hidden cursor-pointer p-4 z-20 relative" onClick={toggleMenu}>
           <div
             className={`bar h-1 w-8 transition-all duration-300
@@ -125,7 +126,7 @@ const Sidebar = () => {
         </div>
 
       ) : (
-        /* Render full sidebar for larger screens */
+        /* default sidebar for larger screens */
         <div
           className="fixed top-0 left-0 h-screen w-16 m-0
           flex flex-col bg-gray-800 bg-opacity-30 text-white 
