@@ -13,7 +13,7 @@ import neptune from "../images/neptun.png";
 
 function Pong3D() {
   const containerRef = useRef(null);
-  const [aspectRatio, setAspectRatio] = useState(getAspectRatio());
+  let aspectRatio = getAspectRatio();
   const paddleHeight = 6;
   const paddleWidth = 1;
   const wallOffsetX = 23.5;
@@ -22,7 +22,7 @@ function Pong3D() {
   const longGeometry = 50;
   const shortGeometry = 30;
   const cylinderOffset = -1.5;
-  const ballSpeed = 0.5;
+  const ballSpeed = 0.3;
 
   useEffect(() => {
     const scene = new THREE.Scene();
@@ -54,7 +54,11 @@ function Pong3D() {
     // Apply the material to a plane
     const textGeometry = new THREE.PlaneGeometry(10, 10);
     const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-    textMesh.position.set(0, -shortGeometry / 2 - wallThickness * 1.3, wallThickness / 2 + 0.1); // Adjust position as needed
+    textMesh.position.set(
+      0,
+      -shortGeometry / 2 - wallThickness * 1.3,
+      wallThickness / 2 + 0.1
+    ); // Adjust position as needed
     scene.add(textMesh);
 
     // Create stars
@@ -288,12 +292,16 @@ function Pong3D() {
       }
 
       renderer.render(scene, camera);
+      handleResize();
     }
 
     animate();
 
     function handleResize() {
-      setAspectRatio(getAspectRatio());
+      const newAspectRatio = getAspectRatio();
+      aspectRatio = newAspectRatio;
+      camera.aspect = newAspectRatio;
+      renderer.setSize(window.innerWidth, window.innerHeight);
     }
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -303,15 +311,20 @@ function Pong3D() {
     return window.innerWidth / window.innerHeight;
   }
 
-  useEffect(() => {
-    function handleResize() {
-      setAspectRatio(getAspectRatio());
-    }
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    useEffect(() => {
+      function handleResize() {
+        
+      }
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
-  return <div ref={containerRef}></div>;
-}
+    return (
+      <div
+        ref={containerRef}
+        style={{ width: "100%", height: "100%", margin:"auto", overflow: "hidden" }}
+      ></div>
+    );
+  }
 
 export default Pong3D;
