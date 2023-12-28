@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const friendsListData = [
   {
@@ -30,14 +31,14 @@ const friendsListData = [
 
 const matchHistoryData = [
   {
-    opponent: "Emotional Damage",
+    opponent: "EmotionalDmg",
     result: "Win",
     score: "5 - 2",
     game: "Pong",
     type: "Original",
   },
   {
-    opponent: "Chuck Norris",
+    opponent: "ChuckNorris",
     result: "Loss",
     score: "1 - 4",
     game: "Pong",
@@ -107,17 +108,21 @@ const userDetails = {
 };
 
 function FriendsList() {
+  const { t } = useTranslation();
   return (
-    <div className="bg-gray-900 bg-opacity-80 p-4 rounded-md max-h-96 overflow-y-auto">
+    <div className="bg-gray-900 bg-opacity-80 p-4 rounded-md max-h-96 overflow-y-auto mb-10">
       <h3 className="text-xl text-gray-300 font-nosifer font-bold mb-4 text-center">
-        Friend List
+        {t("Friends")}
       </h3>
-      <table className="bg-purple-900 bg-opacity-60 w-full border-collapse border border-gray-500 mx-auto">
+      <table
+        className="bg-purple-900 bg-opacity-60 w-full border-collapse border 
+		border-gray-500 mx-auto"
+      >
         <thead>
           <tr>
-            <th className="p-2 border border-gray-900 mx-auto">Name</th>
+            <th className="p-2 border border-gray-900 mx-auto">{t("Name")}</th>
             <th className="p-2 border text-center border-gray-900 mx-auto">
-              Intra
+              {t("Intra")}
             </th>
           </tr>
         </thead>
@@ -130,7 +135,7 @@ function FriendsList() {
               <td className="p-2 border text-center border-gray-900 mx-auto">
                 <a
                   href={friend.profileLink}
-                  className="text-blue-700 underline"
+                  className="text-blue-500 underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -146,26 +151,34 @@ function FriendsList() {
 }
 
 function MatchHistory() {
+  const { t } = useTranslation();
   return (
-    <div className="bg-gray-900 bg-opacity-80 p-6 shadow-xl rounded-md max-h-96 overflow-y-auto">
+    <div
+      className="bg-gray-900 bg-opacity-80 p-6 shadow-xl
+      rounded-md max-h-96 overflow-y-auto mb-10 sm:w-full">
       <h3 className="text-xl text-gray-300 font-nosifer font-bold mb-4 text-center">
-        Match History
+        {t("Match History")}
       </h3>
-      <table className="bg-purple-900 bg-opacity-60 w-full border-collapse border border-gray-900 mx-auto">
+      <table
+        className="bg-purple-900 bg-opacity-60 w-full border-collapse border 
+		  border-gray-900 mx-auto"
+      >
         <thead>
           <tr>
-            <th className="p-2 border border-gray-900 mx-auto">Opponent</th>
-            <th className="p-2 border text-center border-gray-900 mx-auto">
-              Result
+            <th className="p-2 border border-gray-900 mx-auto">
+              {t("Opponent")}
             </th>
             <th className="p-2 border text-center border-gray-900 mx-auto">
-              Score
+              {t("Result")}
             </th>
             <th className="p-2 border text-center border-gray-900 mx-auto">
-              Game
+              {t("Score")}
             </th>
             <th className="p-2 border text-center border-gray-900 mx-auto">
-              Type
+              {t("Game")}
+            </th>
+            <th className="p-2 border text-center border-gray-900 mx-auto">
+              {t("Type")}
             </th>
           </tr>
         </thead>
@@ -177,10 +190,10 @@ function MatchHistory() {
               </td>
               <td
                 className={`p-2 border text-center border-gray-900 mx-auto ${
-                  match.result === "Win" ? "text-green-700" : "text-red-700"
+                  match.result === t("Win") ? "text-green-700" : "text-red-700"
                 }`}
               >
-                {match.result}
+                {t(match.result)}
               </td>
               <td className="p-2 border text-center border-gray-900 mx-auto">
                 {match.score}
@@ -190,12 +203,12 @@ function MatchHistory() {
               </td>
               <td
                 className={`p-2 border text-center border-gray-900 mx-auto ${
-                  match.type === "Original"
+                  match.type === t("Original")
                     ? "text-blue-700"
                     : "text-yellow-700"
                 }`}
               >
-                {match.type}
+                {t(match.type)}
               </td>
             </tr>
           ))}
@@ -206,6 +219,7 @@ function MatchHistory() {
 }
 
 function Profile() {
+  const { t } = useTranslation();
   const [showFriendsList, setShowFriendsList] = useState(false);
   const [showMatchHistory, setShowMatchHistory] = useState(false);
 
@@ -219,15 +233,30 @@ function Profile() {
     setShowFriendsList(false);
   };
 
+  // THIS IS TOTALLY GARBAGE
+  // useEffect(() => {
+  //   const originalBackground = document.body.style.background;
+  
+  //   document.body.style.background = "url('src/images/morty2.png') center center/cover no-repeat";
+  
+  //   document.body.classList.add('overflow-y-auto');
+  
+  //   return () => {
+  //     document.body.style.background = originalBackground;
+  
+  //     document.body.classList.remove('overflow-y-auto');
+  //   };
+  // }, []);
+
   return (
     <div
-      className="flex flex-col items-center justify-center
-	  h-screen bg-cover bg-center bg-no-repeat shadow-xl"
+    className="flex flex-col items-center justify-center
+    min-h-screen bg-cover bg-center bg-no-repeat shadow-xl"
     >
       <div className="max-w-md flex flex-col items-center">
         <div
           className="bg-gray-900 bg-opacity-80 rounded-md
-			p-6 shadow-md text-center"
+			    p-6 shadow-md text-center"
         >
           <img
             src="https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp"
@@ -241,47 +270,54 @@ function Profile() {
 
           <div className="mt-8">
             <h3 className="font-nosifer text-gray-300 font-semibold mb-4">
-              About Me
+              {t("About Me")}
             </h3>
             <p className="text-purple-400">{userDetails.about}</p>
           </div>
-
           <div className="mt-8">
             <h3 className="font-nosifer text-gray-300 font-semibold mb-4">
-              User Details
+              {t("User Details")}
             </h3>
             <p className="text-purple-400">
-              <strong>Age:</strong> {userDetails.age} years old
+              <strong>{t("Age")}:</strong> {userDetails.age} {t("years old")}
               <br />
-              <strong>Gender:</strong> {userDetails.gender}
+              <strong>{t("Gender")}:</strong> {userDetails.gender}
               <br />
-              <strong>School:</strong> {userDetails.school}
+              <strong>{t("School")}:</strong> {userDetails.school}
               <br />
-              <strong>Level:</strong> {userDetails.level}
+              <strong>{t("Level")}:</strong> {userDetails.level}
               <br />
-              <strong>Win Rate:</strong> {userDetails.winRate}
+              <strong>{t("Win Rate")}:</strong> {userDetails.winRate}
             </p>
           </div>
-
           <div className="mt-8 flex justify-center space-x-4">
             <button
-              className="bg-blue-500 hover:bg-blue-700 
-			  text-white font-bold py-2 px-4 rounded"
+              className={`w-36 bg-blue-300 bg-opacity-80 font-bold py-2 px-4 rounded 
+              border-b-2 border-r-2 border-purple-600
+              ${
+                showFriendsList
+                ?
+                "bg-purple-600 text-white"
+                :
+                "text-gray-700 hover:bg-purple-600 hover:text-white"
+              }`}
               onClick={toggleFriendsList}
             >
-              Friend List
+              {t("Friends")}
             </button>
             <button
-              className="bg-green-500 hover:bg-green-700 
-			  text-white font-bold py-2 px-4 rounded"
+              className={`w-36 bg-blue-300 bg-opacity-80 font-bold py-2 px-4 rounded 
+              border-b-2 border-r-2 border-purple-600
+              ${
+                showMatchHistory ? "bg-purple-600 text-white" : "text-gray-700 hover:bg-purple-600 hover:text-white"
+              }`}
               onClick={toggleMatchHistory}
             >
-              Match History
+              {t("Match History")}
             </button>
           </div>
         </div>
-
-        <div className="mt-8">
+        <div className="mt-8 mb-10">
           {showFriendsList && <FriendsList />}
           {showMatchHistory && <MatchHistory />}
         </div>

@@ -1,7 +1,13 @@
 @import './styles/tailwind.css';
 
+/* wish it would be this easy to form my body .. */
 body {
   margin: 0;
+  height: 100%;
+  width: 100%;
+  /* overflow: hidden; */
+  background-attachment: fixed;
+  background-color: rgb(3, 3, 25);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -12,4 +18,18 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* for the hamburger menu bars */
+.bar {
+  width: 24px;
+  height: 3px;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+/* showing tooltip next to icons on phone if want, not sure yet */
+.tooltip.always-show .tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }
