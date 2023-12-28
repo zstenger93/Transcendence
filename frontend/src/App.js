@@ -6,7 +6,6 @@ import Chat from "./components/Chat";
 import Games from "./components/Games";
 import About from "./components/About";
 import NotFound from "./components/404";
-import PongAi from "./components/PongAi";
 import Sidebar from "./components/Sidebar";
 import Welcome from "./components/Welcome";
 import Profile from "./components/Profile";
