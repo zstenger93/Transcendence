@@ -13,6 +13,7 @@ import neptune from "../images/neptun.png";
 
 function Pong3D() {
   const containerRef = useRef(null);
+  let removeShake = true;
   let aspectRatio = getAspectRatio();
   const paddleHeight = 6;
   const paddleWidth = 1;
@@ -336,6 +337,9 @@ function Pong3D() {
         }}
       ></div>
       <button
+        onClick={() => {
+          removeShake = !removeShake;
+        }}
       ></button>
     </>
   );
