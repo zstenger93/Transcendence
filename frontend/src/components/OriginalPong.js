@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import backgroundImage from "../images/pongCover.png";
+import settings from "../images/settings.png";
 
 const GameCanvas = () => {
   // Default Parameters
+  let resize = true;
   const defaultSpeedX = 300;
   const winScore = 2;
   const defaultSpeedY = 20;
@@ -142,7 +144,8 @@ const GameCanvas = () => {
   const handleResize = () => {
     if (canvasRef.current) {
       const screenWidth = window.innerWidth;
-      const canvasWidth = 0.8 * screenWidth;
+      let canvasWidth = screenWidth;
+      if (resize === true) canvasWidth = 0.8 * screenWidth;
       const canvasHeight = (canvasWidth / 16) * 9;
       canvasRef.current.width = canvasWidth;
       canvasRef.current.height = canvasHeight;
@@ -233,18 +236,54 @@ const GameCanvas = () => {
         );
       }
     };
+    // touchpad controlls
+    const handleTouchMove = (event) => {
+      if (canvasRef.current) {
+        const touches = event.touches;
+        const rect = canvasRef.current.getBoundingClientRect();
+        for (let i = 0; i < touches.length; i++) {
+          const touch = touches[i];
+          const touchY = event.touches[i].clientY - rect.top - window.scrollY;
+          // Left paddle controls
+          if (touch.clientX < window.innerWidth / 2) {
+            leftPaddleY = touchY - paddleHeight / 2;
+            leftPaddleY = Math.max(
+              0,
+              Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
+            );
+          }
+          // Right paddle controls
+          else {
+            rightPaddleY = touchY - paddleHeight / 2;
+            rightPaddleY = Math.max(
+              0,
+              Math.min(rightPaddleY, canvasRef.current.height - paddleHeight)
+            );
+          }
+        }
+      }
+    };
 
     document.addEventListener("keyup", handleKeyUp);
     document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("touchmove", handleTouchMove);
     window.addEventListener("resize", handleResize);
     handleResize();
     draw(0);
+
     return () => {
-      document.addEventListener("keyup", handleKeyUp);
+      document.removeEventListener("keyup", handleKeyUp);
       document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("resize", handleResize);
     };
   }, [canvasRef]);
+
+  const handleButtonClick = () => {
+    resize = !resize;
+    handleResize();
+    console.log("Something should have happened");
+  };
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -255,11 +294,23 @@ const GameCanvas = () => {
           <LoseScreen />
         )
       ) : (
-        <canvas
-          ref={canvasRef}
-          className="border-8 border-solid border-white"
-          style={{ backgroundColor: "#0F0F0F" }}
-        ></canvas>
+        <>
+          <canvas
+            ref={canvasRef}
+            className="border-8 border-solid border-white"
+            style={{ backgroundColor: "#0F0F0F" }}
+          ></canvas>
+          <button
+            className="absolute top-0 right-0 p-2 rounded"
+            onClick={handleButtonClick}
+          >
+            <img
+              src={settings}
+              alt="Image"
+              class="w-32 h-32 object-cover rounded-full"
+            />
+          </button>
+        </>
       )}
     </div>
   );
@@ -346,7 +397,7 @@ const Pong = () => {
         <div className="relative border-8 border-white">
           <img
             src={backgroundImage}
-            style={{ width: "80vw", height: "100%", objectFit: "cover" }}
+            style={{ width: "80vw", height: "45vw", objectFit: "cover" }}
             alt="Background"
           />
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
