@@ -310,6 +310,7 @@ function Pong3D() {
       const newAspectRatio = getAspectRatio();
       aspectRatio = newAspectRatio;
       camera.aspect = newAspectRatio;
+      camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     }
     window.addEventListener("resize", handleResize);
