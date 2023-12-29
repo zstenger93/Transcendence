@@ -390,7 +390,7 @@ const Pong = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div id="oP" className="flex justify-center items-center h-screen">
       {gameStarted ? (
         <GameCanvas />
       ) : (
