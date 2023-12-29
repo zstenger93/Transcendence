@@ -12,17 +12,13 @@ export const goFullScreen = (elementId) => {
     }
 };
 
-export const exitFullScreen = (elementId) => {
-    const elem = document.getElementById(elementId);
-
-    if (elem.exitFullscreen) {
-      elem.exitFullscreen();
-    } else if (elem.mozCancelFullScreen) { /* Firefox */
-      elem.mozCancelFullScreen();
-    } else if (elem.webkitExitFullscreen) { /* Chrome, Safari and Opera */
-      elem.webkitExitFullscreen();
-    } else if (elem.msExitFullscreen) { /* IE/Edge */
-      elem.msExitFullscreen();
-    }
+export const exitFullScreen = () => {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.webkitExitFullscreen) { /* Safari */
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) { /* IE11 */
+    document.msExitFullscreen();
+  }
 };
   
