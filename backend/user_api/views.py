@@ -14,8 +14,6 @@ from rest_framework_simplejwt.token_blacklist.models import OutstandingToken, Bl
 
 from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
 from .validations import custom_validation, validate_email, validate_password
-from .models import FriendRequest
-from .serializers import FriendRequestSerializer
 from .models import AppUser
 
 import requests
@@ -59,7 +57,7 @@ class UserLogout(APIView):
 		return Response(status=status.HTTP_200_OK)
 
 
-class UserView(APIView):
+class UserProfileView(APIView):
 	permission_classes = (permissions.IsAuthenticated,)
 	authentication_classes = (JWTAuthentication,)
 	##
@@ -80,6 +78,7 @@ class UserViewSet(viewsets.ModelViewSet):
 		response.data['refresh'] = str(refresh)
 		response.data['access'] = str(refresh.access_token)
 		return response
+
 
 class OAuthCallback(APIView):
 	permission_classes = (permissions.AllowAny,)
@@ -147,28 +146,4 @@ class OAuthAuthorize(APIView):
 		return redirect(f"{auth_url}?{urllib.parse.urlencode(params)}")
 
 
-class FriendRequestViewSet(viewsets.ViewSet):
-	def list(self, request):
-		queryset = FriendRequest.objects.all()
-		serializer = FriendRequestSerializer(queryset, many=True)
-		return Response(serializer.data)
 
-	def create(self, request):
-		serializer = FriendRequestSerializer(data=request.data)
-		if serializer.is_valid():
-			serializer.save()
-			return Response(serializer.data, status=status.HTTP_201_CREATED)
-		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-	def partial_update(self, request, pk=None):
-		friend_request = FriendRequest.objects.get(pk=pk)
-		serializer = FriendRequestSerializer(friend_request, data=request.data, partial=True)
-		if serializer.is_valid():
-			serializer.save()
-			return Response(serializer.data)
-		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-	
-	def retrieve(self, request, pk=None):
-		friend_request = FriendRequest.objects.get(pk=pk)
-		serializer = FriendRequestSerializer(friend_request)
-		return Response(serializer.data)

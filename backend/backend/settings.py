@@ -30,9 +30,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    ## apps
+    'friendship',
     'rest_framework',
+    'rest_friendship',
     'corsheaders',
-    # 'authentication',
     'user_api.apps.UserApiConfig',
 ]
 
@@ -57,6 +59,12 @@ REST_FRAMEWORK = {
                   'rest_framework.permissions.AllowAny', # will allow connection from react
                   ]}
 
+REST_FRIENDSHIP = {
+   'PERMISSION_CLASSES': [
+      'rest_framework.permissions.IsAuthenticated',
+   ],
+   'USER_SERIALIZER': 'rest_friendship.serializers.FriendSerializer',
+},
 
 ROOT_URLCONF = 'backend.urls'
 

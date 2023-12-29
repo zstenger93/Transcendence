@@ -26,6 +26,7 @@ class AppUserManager(BaseUserManager):
 
 
 class AppUser(AbstractBaseUser, PermissionsMixin):
+	## user identity
 	profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
 	id = models.AutoField(primary_key=True)
 	email = models.EmailField(max_length=50, unique=True)
@@ -34,9 +35,8 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 	wins = models.PositiveIntegerField(default=0)
 	losses = models.PositiveIntegerField(default=0)
 	title = models.CharField(max_length=100, null=True, blank=True)
-	friends = models.ManyToManyField('self', blank=True)
-	received_friend_requests = models.ManyToManyField('self', blank=True)
-	sent_friend_requests = models.ManyToManyField('self', blank=True)
+	## user friendship
+	# friends = models.ManyToManyField('self', blank=True)
 
 	USERNAME_FIELD = 'email'
 	REQUIRED_FIELDS = ['username']
@@ -45,12 +45,3 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 	def __str__(self):
 		return self.username
 
-class FriendRequest(models.Model):
-    STATUS_CHOICES = [
-        ('pending', 'Pending'),
-        ('accepted', 'Accepted'),
-        ('rejected', 'Rejected'),
-    ]
-    from_user = models.ForeignKey(AppUser, related_name='sent_requests', on_delete=models.CASCADE)
-    to_user = models.ForeignKey(AppUser, related_name='received_requests', on_delete=models.CASCADE)
-    status = models.CharField(max_length=8, choices=STATUS_CHOICES, default='pending')
