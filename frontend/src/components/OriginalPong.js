@@ -1,6 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import backgroundImage from "../images/pongCover.png";
 import settings from "../images/settings.png";
+import { goFullScreen, exitFullScreen } from './FullScreen';
+import { AiOutlineFullscreenExit } from "react-icons/ai";
+import { BsArrowsFullscreen } from "react-icons/bs";
+import { useLocation } from "react-router-dom";
+
 
 const GameCanvas = () => {
   // Default Parameters
@@ -382,7 +387,23 @@ const LoseScreen = () => {
   );
 };
 
+
+
+
 const Pong = () => {
+  const location = useLocation();
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  
+  const handleGoFullScreen = (elementId) => {
+    goFullScreen(elementId);
+    setIsFullScreen(true);
+  };
+  
+  const handleExitFullScreen = (elementId) => {
+    exitFullScreen(elementId);
+    setIsFullScreen(false);
+  };
+
   const [gameStarted, setGameStarted] = useState(false);
 
   const handleButtonClick = () => {
@@ -390,7 +411,15 @@ const Pong = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div id="oP" className="flex justify-center items-center h-screen relative">
+  {location.pathname === '/originalpong' || location.pathname === '/pongai' || location.pathname === '/pong3d' ? (
+    <button
+      onClick={() => isFullScreen ? handleExitFullScreen() : handleGoFullScreen("oP")}
+      className="absolute top-0 right-0 mr-4"
+    >
+      {isFullScreen ? <AiOutlineFullscreenExit size="32" color="white" /> : <BsArrowsFullscreen size="32" color="white" />}
+    </button>
+  ) : null}
       {gameStarted ? (
         <GameCanvas />
       ) : (
