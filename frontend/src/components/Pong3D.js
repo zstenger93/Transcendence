@@ -14,7 +14,6 @@ import neptune from "../images/neptun.png";
 
 function Pong3D() {
   const containerRef = useRef(null);
-  let removeShake = true;
   let aspectRatio = getAspectRatio();
   const paddleHeight = 6;
   const paddleWidth = 1;
@@ -24,6 +23,7 @@ function Pong3D() {
   const longGeometry = 50;
   const shortGeometry = 30;
   const cylinderOffset = -1.5;
+  const moonRadius = 1.2;
   const ballSpeed = 0.3;
 
   useEffect(() => {
@@ -142,6 +142,8 @@ function Pong3D() {
 
     const ballMaterial = new THREE.MeshStandardMaterial({
       map: textureWorld,
+      metalness: 0,
+      roughness: 1,
     });
 
     const cylinders = [
@@ -215,18 +217,18 @@ function Pong3D() {
     // Create
     const ballGeometry = new THREE.SphereGeometry(1, 32, 32);
     const ball = new THREE.Mesh(ballGeometry, ballMaterial);
-    ball.position.set(0, 0, 0);
+    ball.position.set(0, 0, 0.5);
     scene.add(ball);
 
-    // Add light to the ball
-    const ballLight = new THREE.PointLight(0xffff00, 30, 30, 2);
-    ballLight.position.set(0, 0, 0);
-    ball.add(ballLight);
+    const moonGeo = new THREE.SphereGeometry(0.25, 32, 32);
+    const moon = new THREE.Mesh(moonGeo, planetMaterials[0]);
 
+    moon.position.set(0, 0, 1.5);
+    ball.add(moon);
     // Add lights
     const pointLight = new THREE.PointLight(0xaaaa00, 600, 80, 2);
-    pointLight.position.set(0, 0, 5);
-    const ambientLight = new THREE.AmbientLight(0xffffff);
+    pointLight.position.set(0, 0, 0.1);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 2);
     scene.add(pointLight, ambientLight);
 
     // Animation loop
@@ -236,8 +238,12 @@ function Pong3D() {
 
       // Move the ball
       ball.position.add(ballDirection.clone().multiplyScalar(ballSpeed));
-      ball.rotation.z += ballDirection.y * 0.1;
-
+      ball.rotation.y += ballDirection.x * 0.06;
+      moon.position.set(
+        Math.cos(-ball.rotation.y * 2) * 1.2,
+        Math.sin(ball.rotation.y * 2) * 1.2,
+        0.5
+      );
       // Animate Orbits position
       orbits.forEach((orbit, index) => {
         orbit.rotation.x += 0.01;
@@ -264,20 +270,18 @@ function Pong3D() {
           wallOffsetY - paddleHeight / 2 - wallThickness / 2
         )
       );
-      // Move Camera
-      if (removeShake === true) {
-        camera.rotation.x += ballDirection.x * ballSpeed * 0.01;
-        camera.rotation.y -= ballDirection.y * ballSpeed * 0.01;
-        camera.rotation.z -= ballDirection.x * ballSpeed * 0.01;
-        const cameraZOffset = 35 - Math.pow(Math.abs(ball.position.x), 0.8);
-        camera.position.set(ball.position.x, ball.position.y, cameraZOffset);
-      } else {
-        camera.rotation.x = 0;
-        camera.rotation.y = 0;
-        camera.rotation.z = 0;
-        const cameraZOffset = 35;
-        camera.position.set(0, 0, cameraZOffset);
-      }
+      const cameraRotationSpeed = 0.004;
+
+      camera.rotation.x += ballDirection.x * ballSpeed * cameraRotationSpeed;
+      camera.rotation.y -= ballDirection.y * ballSpeed * cameraRotationSpeed;
+      camera.rotation.z -= ballDirection.x * ballSpeed * cameraRotationSpeed;
+
+      const cameraZOffset = 35 - Math.pow(Math.abs(ball.position.x), 0.8);
+      camera.position.set(
+        ball.position.x * 0.5,
+        ball.position.y * 0.5,
+        cameraZOffset
+      );
 
       const leftPaddleBoundingBox = new THREE.Box3().setFromObject(leftPaddle);
       const rightPaddleBoundingBox = new THREE.Box3().setFromObject(
@@ -338,18 +342,6 @@ function Pong3D() {
           overflow: "hidden",
         }}
       ></div>
-      <button
-        className="absolute top-0 right-0 p-2 rounded"
-        onClick={() => {
-          removeShake = !removeShake;
-        }}
-      >
-        <img
-          src={world}
-          alt="Image"
-          class="w-16 h-16 object-cover rounded-full"
-        />
-      </button>
     </>
   );
 }
