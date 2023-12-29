@@ -23,6 +23,7 @@ function Pong3D() {
   const longGeometry = 50;
   const shortGeometry = 30;
   const cylinderOffset = -1.5;
+  const moonRadius = 1.2;
   const ballSpeed = 0.3;
 
   useEffect(() => {
@@ -219,6 +220,11 @@ function Pong3D() {
     ball.position.set(0, 0, 0.5);
     scene.add(ball);
 
+    const moonGeo = new THREE.SphereGeometry(0.25, 32, 32);
+    const moon = new THREE.Mesh(moonGeo, planetMaterials[0]);
+
+    moon.position.set(0, 0, 1.5);
+    ball.add(moon);
     // Add lights
     const pointLight = new THREE.PointLight(0xaaaa00, 600, 80, 2);
     pointLight.position.set(0, 0, 0.1);
@@ -233,7 +239,7 @@ function Pong3D() {
       // Move the ball
       ball.position.add(ballDirection.clone().multiplyScalar(ballSpeed));
       ball.rotation.y += ballDirection.x * 0.1;
-
+      moon.position.set(Math.cos(ball.rotation.y) * 1.2, Math.sin(-ball.rotation.y) * 1.2, 0.5);
       // Animate Orbits position
       orbits.forEach((orbit, index) => {
         orbit.rotation.x += 0.01;
