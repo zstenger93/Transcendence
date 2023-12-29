@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { TbLogout } from "react-icons/tb";
 import { useTranslation } from "react-i18next";
 import i18n from "i18next";
 import { FaInfoCircle, FaHome, FaUser } from "react-icons/fa";
 import { HiMiniLanguage } from "react-icons/hi2";
 import { SiGooglechat, SiGameandwatch } from "react-icons/si";
+import { BsArrowsFullscreen } from "react-icons/bs";
+import { goFullScreen, exitFullScreen } from "./FullScreen";
+import { AiOutlineFullscreenExit } from "react-icons/ai";
 
 const Sidebar = () => {
   const { t } = useTranslation();
@@ -16,7 +19,7 @@ const Sidebar = () => {
     setDropdownOpen(false);
   };
 
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
 
   useEffect(() => {
     const handleResize = () => {
@@ -36,13 +39,37 @@ const Sidebar = () => {
     setIsMenuOpen(prevState => !prevState);
   };
 
+  const location = useLocation();
+  const [isFullScreen, setIsFullScreen] = useState(false);
+
+  const handleGoFullScreen = (elementId) => {
+    goFullScreen(elementId);
+    setIsFullScreen(true);
+  };
+
+  const handleExitFullScreen = (elementId) => {
+    exitFullScreen(elementId);
+    setIsFullScreen(false);
+  };
 
   return (
     <>
+      {/* full screen button */}
+      <div id="parentElement">
+      {isFullScreen && (
+        <button
+        className={`absolute top-2 left-2 m-4 ${isFullScreen ? 'visible' : 'invisible'}`}
+          onClick={() => handleExitFullScreen("parentElement")}
+        >
+          <AiOutlineFullscreenExit size="32" color="white" />
+        </button>
+      )}
+      </div>
       {/* hamburger menu icons */}
       {isMenuOpen && (
         <div
-          className="fixed top-0 left-0 h-screen w-screen bg-gray-900 bg-opacity-80 z-10"
+          className="fixed top-0 left-0 h-screen w-screen bg-gray-900 bg-opacity-80 z-10
+          overflow-y-auto"
           onClick={toggleMenu}
         >
           <div className="flex flex-col justify-start items-center mt-24">
@@ -88,6 +115,13 @@ const Sidebar = () => {
               ]}
               onSelect={changeLanguage}
             />
+            {location.pathname === '/originalpong' && (
+              <SidebarIcon
+              icon={isFullScreen ? <AiOutlineFullscreenExit size="32" /> : <BsArrowsFullscreen size="32" />}
+              text={t("Full Screen")}
+              onClick={isFullScreen ? handleExitFullScreen("parentElement") : handleGoFullScreen("parentElement")}
+            />
+            )}
           </div>
         </div>
       )}
@@ -183,10 +217,13 @@ const Sidebar = () => {
   );
 };
 
-const SidebarIcon = ({ icon, text = "tooltip", to, margin, alwaysShowTooltip }) => {
+const SidebarIcon = ({ icon, text = "tooltip", to, margin, alwaysShowTooltip, onClick }) => {
+  const Component = onClick ? 'button' : Link;
+  const componentProps = onClick ? { onClick } : { to };
+
   return (
-    <Link
-      to={to}
+    <Component
+      {...componentProps}
       className={`relative flex items-center justify-center
       h-12 w-12 mt-2 mb-2 mx-auto shadow-lg
       bg-purple-900 bg-opacity-50 text-blue-300 hover:bg-blue-300
@@ -202,7 +239,7 @@ const SidebarIcon = ({ icon, text = "tooltip", to, margin, alwaysShowTooltip }) 
       >
         {text}
       </span>
-    </Link>
+    </Component>
   );
 };
 
