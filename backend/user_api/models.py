@@ -27,7 +27,7 @@ class AppUserManager(BaseUserManager):
 
 class AppUser(AbstractBaseUser, PermissionsMixin):
 	profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
-	user_id = models.AutoField(primary_key=True)
+	id = models.AutoField(primary_key=True)
 	email = models.EmailField(max_length=50, unique=True)
 	username = models.CharField(max_length=50)
 	total_matches = models.PositiveIntegerField(default=0)

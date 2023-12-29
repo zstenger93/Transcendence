@@ -28,7 +28,7 @@ class UserLoginSerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = UserModel
-		fields = ('user_id', 'email', 'username', 'profile_picture', \
+		fields = ('id', 'email', 'username', 'profile_picture', \
 			 	'total_matches', 'wins', 'losses', \
 				'title', 'friends', 'received_friend_requests'
 				, 'sent_friend_requests')

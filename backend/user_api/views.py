@@ -4,10 +4,13 @@ from django.core.files.base import ContentFile
 from django.shortcuts import render, HttpResponse, redirect
 from django.conf import settings
 
-from rest_framework.authentication import SessionAuthentication
+from rest_framework import permissions, status, viewsets, authentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import permissions, status, viewsets, authentication
+from rest_framework.authentication import SessionAuthentication
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_simplejwt.token_blacklist.models import OutstandingToken, BlacklistedToken
 
 from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
 from .validations import custom_validation, validate_email, validate_password
@@ -22,6 +25,7 @@ import os
 
 class UserRegister(APIView):
 	permission_classes = (permissions.AllowAny,)
+	authentication_classes = (JWTAuthentication,)
 	def post(self, request):
 		clean_data = custom_validation(request.data)
 		serializer = UserRegisterSerializer(data=clean_data)
@@ -34,7 +38,7 @@ class UserRegister(APIView):
 
 class UserLogin(APIView):
 	permission_classes = (permissions.AllowAny,)
-	authentication_classes = (SessionAuthentication,)
+	authentication_classes = (JWTAuthentication,)
 	##
 	def post(self, request):
 		data = request.data
@@ -49,7 +53,7 @@ class UserLogin(APIView):
 
 class UserLogout(APIView):
 	permission_classes = (permissions.AllowAny,)
-	authentication_classes = ()
+	authentication_classes = (JWTAuthentication,)
 	def post(self, request):
 		logout(request)
 		return Response(status=status.HTTP_200_OK)
@@ -57,7 +61,7 @@ class UserLogout(APIView):
 
 class UserView(APIView):
 	permission_classes = (permissions.IsAuthenticated,)
-	authentication_classes = (SessionAuthentication,)
+	authentication_classes = (JWTAuthentication,)
 	##
 	def get(self, request):
 		serializer = UserSerializer(request.user)
@@ -65,12 +69,21 @@ class UserView(APIView):
 
 
 class UserViewSet(viewsets.ModelViewSet):
+	authentication_classes = (JWTAuthentication,)
 	queryset = AppUser.objects.all()
 	serializer_class = UserSerializer
-
+	def create(self, request, *args, **kwargs):
+		response = super().create(request, *args, **kwargs)
+		email = request.data.get('email', '')
+		user = AppUser.objects.get(email=email)
+		refresh = RefreshToken.for_user(user)
+		response.data['refresh'] = str(refresh)
+		response.data['access'] = str(refresh.access_token)
+		return response
 
 class OAuthCallback(APIView):
 	permission_classes = (permissions.AllowAny,)
+	# authentication_classes = (JWTAuthentication,)
 	##
 	def get(self, request):
 		if request.method == "GET":
