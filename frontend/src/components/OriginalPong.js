@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import backgroundImage from "../images/pongCover.png";
-import settings from "../images/settings.png";
 import { goFullScreen, exitFullScreen } from './FullScreen';
 import { AiOutlineFullscreenExit } from "react-icons/ai";
 import { BsArrowsFullscreen } from "react-icons/bs";
@@ -305,16 +304,6 @@ const GameCanvas = () => {
             className="border-8 border-solid border-white"
             style={{ backgroundColor: "#0F0F0F" }}
           ></canvas>
-          <button
-            className="absolute top-0 right-0 p-2 rounded"
-            onClick={handleButtonClick}
-          >
-            <img
-              src={settings}
-              alt="Image"
-              class="w-32 h-32 object-cover rounded-full"
-            />
-          </button>
         </>
       )}
     </div>
