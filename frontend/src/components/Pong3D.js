@@ -238,8 +238,12 @@ function Pong3D() {
 
       // Move the ball
       ball.position.add(ballDirection.clone().multiplyScalar(ballSpeed));
-      ball.rotation.y += ballDirection.x * 0.1;
-      moon.position.set(Math.cos(ball.rotation.y) * 1.2, Math.sin(-ball.rotation.y) * 1.2, 0.5);
+      ball.rotation.y += ballDirection.x * 0.06;
+      moon.position.set(
+        Math.cos(-ball.rotation.y * 2) * 1.2,
+        Math.sin(ball.rotation.y * 2) * 1.2,
+        0.5
+      );
       // Animate Orbits position
       orbits.forEach((orbit, index) => {
         orbit.rotation.x += 0.01;
