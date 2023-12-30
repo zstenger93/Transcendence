@@ -228,7 +228,7 @@ function Pong3D() {
     // Add lights
     const pointLight = new THREE.PointLight(0xaaaa00, 600, 80, 2);
     pointLight.position.set(0, 0, 0.1);
-    const ambientLight = new THREE.AmbientLight(0xffffff, 2);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
     scene.add(pointLight, ambientLight);
 
     // Animation loop
