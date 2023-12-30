@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model, authenticate
 from django.core.exceptions import ValidationError
+from user_api.models import Follower
 
 UserModel = get_user_model()
 
@@ -14,6 +15,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 		user_obj.save()
 		return user_obj
 
+
 class UserLoginSerializer(serializers.Serializer):
 	email = serializers.EmailField()
 	password = serializers.CharField()
@@ -24,10 +26,21 @@ class UserLoginSerializer(serializers.Serializer):
 			raise ValidationError('user not found')
 		return user
 
+
 class UserSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = UserModel
 		fields = ('id', 'email', 'username', 'profile_picture', \
 			 	'total_matches', 'wins', 'losses', \
-				'title', 'friends')
+				'title')
+
+
+class FollowerSerializer(serializers.ModelSerializer):
+    user = serializers.DictField(child = serializers.CharField(), source = 'get_user_info', read_only = True)
+    is_followed_by = serializers.DictField(child = serializers.CharField(), source = 'get_is_followed_by_info', read_only = True)
+
+    class Meta:
+        model = Follower
+        fields = ('user', 'is_followed_by')
+        read_only_fields = ('user', 'is_followed_by')
 
