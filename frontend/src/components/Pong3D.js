@@ -24,6 +24,7 @@ function Pong3D() {
   const shortGeometry = 30;
   const cylinderOffset = -1.5;
   const ballSpeed = 0.3;
+  let leftPaddlePosition = 0;
 
   useEffect(() => {
     const scene = new THREE.Scene();
@@ -43,23 +44,19 @@ function Pong3D() {
     context.fillStyle = "white";
     context.fillText("BLACKHOLE PONG", 44, 24);
 
-    // Create texture from the canvas
+    //Text
     const textureText = new THREE.CanvasTexture(canvas);
-
-    // Create material with text texture
     const textMaterial = new THREE.MeshBasicMaterial({
       map: textureText,
       transparent: true,
     });
-
-    // Apply the material to a plane
     const textGeometry = new THREE.PlaneGeometry(10, 10);
     const textMesh = new THREE.Mesh(textGeometry, textMaterial);
     textMesh.position.set(
       0,
       -shortGeometry / 2 - wallThickness * 1.3,
       wallThickness / 2 + 0.1
-    ); // Adjust position as needed
+    );
     scene.add(textMesh);
 
     // Create stars
@@ -166,7 +163,6 @@ function Pong3D() {
       cylinder.add(directionalLight.clone());
     });
 
-
     const walls = [
       new THREE.Mesh(wallGeometryLong, wallMaterial), // Top wall
       new THREE.Mesh(wallGeometryLong, wallMaterial), // Bottom wall
@@ -260,7 +256,14 @@ function Pong3D() {
       });
 
       // My Amazing AI
-
+      leftPaddle.position.y = Math.max(
+        -wallOffsetY + paddleHeight / 2 + wallThickness / 2,
+        Math.min(
+          leftPaddlePosition,
+          wallOffsetY - paddleHeight / 2 - wallThickness / 2
+        )
+      );
+      leftPaddlePosition = leftPaddle.position.y;
       rightPaddle.position.y = Math.max(
         -wallOffsetY + paddleHeight / 2 + wallThickness / 2,
         Math.min(
@@ -326,7 +329,27 @@ function Pong3D() {
   useEffect(() => {
     function handleResize() {}
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+
+    function handleKeyDown(event) {
+      if (event.key === "w" || event.key === "W") leftPaddlePosition += 1;
+      if (event.key === "s" || event.key === "S") leftPaddlePosition -= 1;
+    }
+
+    function handleTouchStart(event) {
+      const touchY = event.touches[0].clientY;
+      // if (touchY < paddleTop) {
+      // } else if (touchY > paddleBottom) {
+      // }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("touchstart", handleTouchStart);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("touchstart", handleTouchStart);
+    };
   }, []);
 
   return (
