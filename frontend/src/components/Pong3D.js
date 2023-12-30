@@ -25,6 +25,7 @@ function Pong3D() {
   const cylinderOffset = -1.5;
   const ballSpeed = 0.3;
   let leftPaddlePosition = 0;
+  let bounceCounter;
 
   useEffect(() => {
     const scene = new THREE.Scene();
@@ -289,6 +290,8 @@ function Pong3D() {
         rightPaddle
       );
       const ballBoundingBox = new THREE.Box3().setFromObject(ball);
+      if (leftPaddleBoundingBox.intersectsBox(ballBoundingBox))
+        bounceCounter += 1;
       if (
         leftPaddleBoundingBox.intersectsBox(ballBoundingBox) ||
         rightPaddleBoundingBox.intersectsBox(ballBoundingBox)
@@ -336,8 +339,10 @@ function Pong3D() {
     let startY = 0;
 
     function handleKeyDown(event) {
-      if (event.key === "w" || event.key === "W" || event.key === "ArrowUp") leftPaddlePosition += 1;
-      if (event.key === "s" || event.key === "S" || event.key === "ArrowDown") leftPaddlePosition -= 1;
+      if (event.key === "w" || event.key === "W" || event.key === "ArrowUp")
+        leftPaddlePosition += 1;
+      if (event.key === "s" || event.key === "S" || event.key === "ArrowDown")
+        leftPaddlePosition -= 1;
     }
 
     function handleTouchStart(event) {
