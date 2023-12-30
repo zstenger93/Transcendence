@@ -26,6 +26,7 @@ function Pong3D() {
   const ballSpeed = 0.3;
   let leftPaddlePosition = 0;
   let bounceCounter;
+  let lifes = 7;
 
   useEffect(() => {
     const scene = new THREE.Scene();
@@ -137,12 +138,6 @@ function Pong3D() {
       map: texture,
     });
 
-    const ballMaterial = new THREE.MeshStandardMaterial({
-      map: textureWorld,
-      metalness: 0,
-      roughness: 1,
-    });
-
     const cylinders = [
       new THREE.Mesh(cylinderGeometryShort, cylinderMaterial),
       new THREE.Mesh(cylinderGeometryShort, cylinderMaterial),
@@ -216,7 +211,7 @@ function Pong3D() {
     scene.add(rightPaddle);
     // Create
     const ballGeometry = new THREE.SphereGeometry(1, 32, 32);
-    const ball = new THREE.Mesh(ballGeometry, ballMaterial);
+    const ball = new THREE.Mesh(ballGeometry, planetMaterials[7]);
     ball.position.set(0, 0, 0.5);
     scene.add(ball);
 
@@ -305,8 +300,26 @@ function Pong3D() {
         const wallBoundingBox = new THREE.Box3().setFromObject(wall);
         const ballBoundingBox = new THREE.Box3().setFromObject(ball);
         if (wallBoundingBox.intersectsBox(ballBoundingBox)) {
-          if (i === 2 || i === 3) ballDirection.x *= -1;
-          else ballDirection.y *= -1;
+          if (i === 2 || i === 3) {
+            ballDirection.x *= -1;
+            ball.position.x = 0;
+            ball.position.y = 0;
+            if (lifes > 0) {
+              lifes = orbits.length - 1;
+              ball.material = planetMaterials[lifes];
+              ball.material.needsUpdate = true;
+              camera.position.set(0, 0, 35);
+              camera.rotation.set(0, 0, 0);
+              scene.remove(orbits[orbits.length - 1]);
+              orbits.pop();
+            } else {
+              alert("GAME OVER");
+              window.location.reload();
+            }
+          } else {
+            ballDirection.y *= -1;
+          }
+          break; // Add break statement to exit the loop after collision
         }
       }
 
