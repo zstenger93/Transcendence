@@ -23,7 +23,6 @@ function Pong3D() {
   const longGeometry = 50;
   const shortGeometry = 30;
   const cylinderOffset = -1.5;
-  const moonRadius = 1.2;
   const ballSpeed = 0.3;
 
   useEffect(() => {
@@ -161,8 +160,12 @@ function Pong3D() {
     cylinders.forEach((cylinder) => scene.add(cylinder));
 
     // Add light to the cylinders
-    const cylinderLight = new THREE.PointLight(0x00ff00, 10, 30, 2);
-    cylinders.forEach((cylinder) => cylinder.add(cylinderLight));
+    const directionalLight = new THREE.DirectionalLight(0x666666, 1);
+    directionalLight.position.set(0, 0, 1);
+    cylinders.forEach((cylinder) => {
+      cylinder.add(directionalLight.clone());
+    });
+
 
     const walls = [
       new THREE.Mesh(wallGeometryLong, wallMaterial), // Top wall
@@ -255,14 +258,9 @@ function Pong3D() {
         const z = Math.sin(angle) * radius;
         orbit.position.set(x, y, z);
       });
+
       // My Amazing AI
-      leftPaddle.position.y = Math.max(
-        -wallOffsetY + paddleHeight / 2 + wallThickness / 2,
-        Math.min(
-          ball.position.y,
-          wallOffsetY - paddleHeight / 2 - wallThickness / 2
-        )
-      );
+
       rightPaddle.position.y = Math.max(
         -wallOffsetY + paddleHeight / 2 + wallThickness / 2,
         Math.min(
