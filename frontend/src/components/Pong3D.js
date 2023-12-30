@@ -303,20 +303,21 @@ function Pong3D() {
             ballDirection.x *= -1;
             ball.position.x = 0;
             ball.position.y = 0;
-            if (lifes > 0) {
-              lifes = orbits.length - 1;
-              ball.material = planetMaterials[lifes];
-              ball.material.needsUpdate = true;
-              camera.position.set(0, 0, 35);
-              camera.rotation.set(0, 0, 0);
-              scene.remove(orbits[orbits.length - 1]);
-              orbits.pop();
-              pointLight.intensity += 50;
-              pointLight.distance += 10;
-            } else if (lifes === 0) {
+            lifes = orbits.length - 1;
+            camera.position.set(0, 0, 35);
+            camera.rotation.set(0, 0, 0);
+            if (orbits.length === 0) {
               alert("GAME OVER");
               window.location.reload();
             }
+            if (orbits.length > 0) {
+              scene.remove(orbits[orbits.length - 1]);
+              orbits.pop();
+              ball.material = planetMaterials[lifes];
+              ball.material.needsUpdate = true;
+            }
+            pointLight.intensity += 50;
+            pointLight.distance += 10;
           } else ballDirection.y *= -1;
         }
       }
