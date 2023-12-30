@@ -13,4 +13,7 @@ urlpatterns = [
     path('users/', views.UserViewSet.as_view({'get': 'list'}), name='users'),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('follow/<int:pk>/', views.follow, name='follow'),
+    path('following/<int:pk>/', views.Following.as_view(), name='following'),
+    path('followers/<int:pk>/', views.Followers.as_view(), name='followers'),
 ]
