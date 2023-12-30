@@ -133,7 +133,6 @@ function Pong3D() {
     ];
 
     const texture = textureLoader.load(coverImage);
-    const textureWorld = textureLoader.load(world);
     const cylinderMaterial = new THREE.MeshStandardMaterial({
       map: texture,
     });
@@ -312,14 +311,13 @@ function Pong3D() {
               camera.rotation.set(0, 0, 0);
               scene.remove(orbits[orbits.length - 1]);
               orbits.pop();
-            } else {
+              pointLight.intensity += 50;
+              pointLight.distance += 10;
+            } else if (lifes === 0) {
               alert("GAME OVER");
               window.location.reload();
             }
-          } else {
-            ballDirection.y *= -1;
-          }
-          break; // Add break statement to exit the loop after collision
+          } else ballDirection.y *= -1;
         }
       }
 
