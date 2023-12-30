@@ -334,6 +334,11 @@ function Pong3D() {
 
     let isDragging = false;
     let startY = 0;
+    
+    function handleKeyDown(event) {
+      if (event.key === "w" || event.key === "W") leftPaddlePosition += 1;
+      if (event.key === "s" || event.key === "S") leftPaddlePosition -= 1;
+    }
 
     function handleTouchStart(event) {
       isDragging = true;
@@ -357,12 +362,14 @@ function Pong3D() {
     window.addEventListener("touchstart", handleTouchStart);
     window.addEventListener("touchmove", handleTouchMove);
     window.addEventListener("touchend", handleTouchEnd);
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
