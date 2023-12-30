@@ -1,5 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import backgroundImage from "../images/pongCover.png";
+import { goFullScreen, exitFullScreen } from './FullScreen';
+import { AiOutlineFullscreenExit } from "react-icons/ai";
+import { BsArrowsFullscreen } from "react-icons/bs";
+import { useLocation } from "react-router-dom";
 
 const GameCanvas = () => {
   // Default Parameters
