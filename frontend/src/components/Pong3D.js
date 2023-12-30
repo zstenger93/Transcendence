@@ -332,25 +332,37 @@ function Pong3D() {
     function handleResize() {}
     window.addEventListener("resize", handleResize);
 
-    function handleKeyDown(event) {
-      if (event.key === "w" || event.key === "W") leftPaddlePosition += 1;
-      if (event.key === "s" || event.key === "S") leftPaddlePosition -= 1;
-    }
+    let isDragging = false;
+    let startY = 0;
 
     function handleTouchStart(event) {
-      const touchY = event.touches[0].clientY;
-      // if (touchY < paddleTop) {
-      // } else if (touchY > paddleBottom) {
-      // }
+      isDragging = true;
+      startY = event.touches[0].clientY;
     }
 
-    window.addEventListener("keydown", handleKeyDown);
+    function handleTouchMove(event) {
+      if (!isDragging) return;
+      const touchY = event.touches[0].clientY;
+      let temp =
+        ((touchY / window.innerHeight) * shortGeometry - shortGeometry / 2) *
+        -1;
+      if (leftPaddlePosition < temp) leftPaddlePosition += 1;
+      else if (leftPaddlePosition > temp) leftPaddlePosition -= 1;
+    }
+
+    function handleTouchEnd() {
+      isDragging = false;
+    }
+
     window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchmove", handleTouchMove);
+    window.addEventListener("touchend", handleTouchEnd);
 
     return () => {
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
     };
   }, []);
 
