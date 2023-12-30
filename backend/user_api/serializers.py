@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model, authenticate
 from django.core.exceptions import ValidationError
-from friendship.models import FriendshipRequest
 
 UserModel = get_user_model()
 
@@ -31,34 +30,4 @@ class UserSerializer(serializers.ModelSerializer):
 		fields = ('id', 'email', 'username', 'profile_picture', \
 			 	'total_matches', 'wins', 'losses', \
 				'title', 'friends')
-
-
-# class FriendSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = get_user_model()
-#         fields = ('id', 'username', 'email')
-
-
-# class FriendshipRequestSerializer(serializers.ModelSerializer):
-#     to_user = serializers.CharField()
-#     from_user = serializers.StringRelatedField()
-
-#     class Meta:
-#         model = FriendshipRequest
-#         fields = ('id', 'from_user', 'to_user', 'message',
-#                   'created', 'rejected', 'viewed')
-#         extra_kwargs = {
-#             'from_user': {'read_only': True},
-#             'created': {'read_only': True},
-#             'rejected': {'read_only': True},
-#             'viewed': {'read_only': True},
-#         }
-
-
-# class FriendshipRequestResponseSerializer(serializers.ModelSerializer):
-#     id = serializers.IntegerField()
-
-#     class Meta:
-#         model = FriendshipRequest
-#         fields = ('id',)
 
