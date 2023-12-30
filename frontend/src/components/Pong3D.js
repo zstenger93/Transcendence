@@ -334,10 +334,10 @@ function Pong3D() {
 
     let isDragging = false;
     let startY = 0;
-    
+
     function handleKeyDown(event) {
-      if (event.key === "w" || event.key === "W") leftPaddlePosition += 1;
-      if (event.key === "s" || event.key === "S") leftPaddlePosition -= 1;
+      if (event.key === "w" || event.key === "W" || event.key === "ArrowUp") leftPaddlePosition += 1;
+      if (event.key === "s" || event.key === "S" || event.key === "ArrowDown") leftPaddlePosition -= 1;
     }
 
     function handleTouchStart(event) {
