@@ -313,6 +313,7 @@ const GameCanvas = () => {
 
 const WinScreen = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [gameStarted, setGameStarted] = useState(false);
 
   const handleButtonClick = () => {
@@ -345,6 +346,7 @@ const WinScreen = () => {
               {t("Play Again")}
             </button>
           </div>
+		  <BackButton navigate={navigate} t={t} />
         </div>
       )}
     </div>
@@ -353,6 +355,7 @@ const WinScreen = () => {
 
 const LoseScreen = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [gameStarted, setGameStarted] = useState(false);
 
   const handleButtonClick = () => {
@@ -385,6 +388,7 @@ const LoseScreen = () => {
               {t("Play Again")}
             </button>
           </div>
+		  <BackButton navigate={navigate} t={t} />
         </div>
       )}
     </div>
