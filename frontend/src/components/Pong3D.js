@@ -266,19 +266,6 @@ function Pong3D() {
           wallOffsetY - paddleHeight / 2 - wallThickness / 2
         )
       );
-      const cameraRotationSpeed = 0.004;
-
-      camera.rotation.x += ballDirection.x * ballSpeed * cameraRotationSpeed;
-      camera.rotation.y -= ballDirection.y * ballSpeed * cameraRotationSpeed;
-      camera.rotation.z -= ballDirection.x * ballSpeed * cameraRotationSpeed;
-
-      const cameraZOffset = 35 - Math.pow(Math.abs(ball.position.x), 0.8);
-      camera.position.set(
-        ball.position.x * 0.5,
-        ball.position.y * 0.5,
-        cameraZOffset
-      );
-
       const leftPaddleBoundingBox = new THREE.Box3().setFromObject(leftPaddle);
       const rightPaddleBoundingBox = new THREE.Box3().setFromObject(
         rightPaddle
