@@ -51,4 +51,13 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 		return self.username
 
 
+class BlacklistedToken(models.Model):
+    token = models.CharField(max_length=500)
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ['token', 'user']
+
+
 
