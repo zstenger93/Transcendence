@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     ## apps
     'friendship',
     'rest_framework',
+    'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'user_api.apps.UserApiConfig',
     'friendship_api',
@@ -55,9 +56,13 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-                  'rest_framework.permissions.AllowAny', # will allow connection from react
-                  ]}
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'user_api.authentication.BlacklistCheckJWTAuthentication',
+    ),
+}
 
 
 ROOT_URLCONF = 'backend.urls'
@@ -82,16 +87,6 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 ## User model
 AUTH_USER_MODEL = 'user_api.AppUser'
-
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        # 'rest_framework.authentication.SessionAuthentication',
-        'rest_framework_simplejwt.authentication.JWTAuthentication'
-    ),
-}
 
 
 # Database
