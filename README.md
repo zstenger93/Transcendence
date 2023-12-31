@@ -118,6 +118,7 @@ Tailwind
 - Multi language support
 - Extra browser support
 - Multiple device support
+- Fullscreen mode for games except on IOS
 
 - root / Login
 	- Home / Welcome
