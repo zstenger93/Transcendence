@@ -46,7 +46,11 @@ class UserLogin(APIView):
 		if serializer.is_valid(raise_exception=True):
 			user = serializer.check_user(data)
 			login(request, user)
-			return Response(serializer.data, status=status.HTTP_200_OK)
+			token = RefreshToken.for_user(user)
+			return Response({
+				'refresh': str(token),
+				'access': str(token.access_token),
+			}, status=status.HTTP_200_OK)
 
 
 class UserLogout(APIView):
