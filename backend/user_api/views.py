@@ -64,7 +64,6 @@ class UserLogout(APIView):
 	def post(self, request):
 		if request.user.is_authenticated:
 			logout(request)
-			localStorage.removeItem('jwtToken');
 			return Response(status=status.HTTP_200_OK)
 		else:
 			return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
