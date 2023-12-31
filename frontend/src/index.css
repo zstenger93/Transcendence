@@ -5,7 +5,9 @@ body {
   margin: 0;
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
+  background-attachment: fixed;
+  background-color: rgb(3, 3, 25);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -26,6 +28,7 @@ code {
   transition: 0.4s;
 }
 
+/* showing tooltip next to icons on phone if want, not sure yet */
 .tooltip.always-show .tooltiptext {
   visibility: visible;
   opacity: 1;

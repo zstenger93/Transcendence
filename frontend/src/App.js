@@ -6,7 +6,6 @@ import Chat from "./components/Chat";
 import Games from "./components/Games";
 import About from "./components/About";
 import NotFound from "./components/404";
-import PongAi from "./components/PongAi";
 import Sidebar from "./components/Sidebar";
 import Welcome from "./components/Welcome";
 import Profile from "./components/Profile";
@@ -18,6 +17,8 @@ import MortyBackground3 from "./images/morty3.png";
 import MortyBackground4 from "./images/morty4.png";
 import Matchmaking from "./components/Matchmaking";
 import OriginalPong from "./components/OriginalPong";
+import PongAi from "./components/PongAi";
+import Pong3D from "./components/Pong3D";
 import ChoosePongMode from "./components/ChoosePongMode";
 
 import {
@@ -29,6 +30,7 @@ import {
 const PageWrapper = ({ children, image, showSidebar = true }) => {
   return (
     <div
+      className="overflow-y-auto"
       style={{
         backgroundImage: `url(${image})`,
         backgroundSize: "cover",
@@ -132,6 +134,22 @@ function App() {
                 <PongAi />
               </PageWrapper>
             }
+          />
+          <Route
+            path="pong3d"
+            element={
+              <PageWrapper image={HomeBackground}>
+                <Pong3D />
+              </PageWrapper>
+          }
+          />
+          <Route
+            path="pongai"
+            element={
+              <PageWrapper image={HomeBackground}>
+                <PongAi />
+              </PageWrapper>
+          }
           />
           <Route path="choosepongmode" element={
             <PageWrapper image={HomeBackground}>
