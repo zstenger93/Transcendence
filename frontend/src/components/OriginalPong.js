@@ -400,7 +400,7 @@ const Pong = () => {
   };
 
   return (
-    <div id="oP" className="flex justify-center items-center h-screen relative">
+    <div id="oP" className="flex justify-center items-center h-screen">
   {location.pathname === '/originalpong' || location.pathname === '/pongai' || location.pathname === '/pong3d' ? (
     <button
       onClick={() => isFullScreen ? handleExitFullScreen() : handleGoFullScreen("oP")}
