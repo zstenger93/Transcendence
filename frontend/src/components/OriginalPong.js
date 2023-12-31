@@ -331,7 +331,10 @@ const WinScreen = () => {
             alt="Background"
             className="rounded-xl shadow-lg"
           />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center font-bold font-nosifer">
+          <div
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 
+		  -translate-y-1/2 text-center font-bold font-nosifer"
+          >
             <p>{t("YOU WON!")}</p>
             <button
               onClick={handleButtonClick}
@@ -368,7 +371,10 @@ const LoseScreen = () => {
             alt="Background"
             className="rounded-xl shadow-lg"
           />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+          <div
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 
+		  -translate-y-1/2 text-center font-bold font-nosifer"
+          >
             <p>{t("YOU LOST!")}</p>
             <button
               onClick={handleButtonClick}
@@ -387,9 +393,8 @@ const LoseScreen = () => {
 
 const Pong = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
-
   const location = useLocation();
+  const navigate = useNavigate();
   const [isFullScreen, setIsFullScreen] = useState(false);
 
   const handleGoFullScreen = (elementId) => {
@@ -438,7 +443,10 @@ const Pong = () => {
             alt="Background"
             className="rounded-xl shadow-lg"
           />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+          <div
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 
+		  -translate-y-1/2 text-center"
+          >
             <button
               onClick={handleButtonClick}
               className="mt-6 bg-purple-900 bg-opacity-80 font-nosifer 
