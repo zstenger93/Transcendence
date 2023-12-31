@@ -14,11 +14,17 @@ class AppUserManager(BaseUserManager):
 		user.save()
 		return user
 
-	def create_superuser(self, email, password=None):
+	def create_superuser(self, email, username=None, password=None, **extra_fields):
+		extra_fields.setdefault('is_staff', True)
+		extra_fields.setdefault('is_superuser', True)
 		if not email:
 			raise ValueError('An email is required.')
 		if not password:
 			raise ValueError('A password is required.')
+		if extra_fields.get('is_staff') is not True:
+			raise ValueError('Superuser must have is_staff=True.')
+		if extra_fields.get('is_superuser') is not True:
+			raise ValueError('Superuser must have is_superuser=True.')
 		user = self.create_user(email, password)
 		user.is_superuser = True
 		user.save()
@@ -26,6 +32,7 @@ class AppUserManager(BaseUserManager):
 
 
 class AppUser(AbstractBaseUser, PermissionsMixin):
+	is_staff = models.BooleanField(default=True)
 	## user identity
 	profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
 	id = models.AutoField(primary_key=True)
@@ -35,8 +42,6 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 	wins = models.PositiveIntegerField(default=0)
 	losses = models.PositiveIntegerField(default=0)
 	title = models.CharField(max_length=100, null=True, blank=True)
-	## user friendship
-	# friends = models.ManyToManyField('self', blank=True)
 
 	USERNAME_FIELD = 'email'
 	REQUIRED_FIELDS = ['username']
