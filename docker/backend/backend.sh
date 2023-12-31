@@ -9,7 +9,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 echo 'source /app/backend/venv/bin/activate' >> /root/.bashrc
 
-alias migrate="python manage.py makemigrations && python manage.py migrate"
+echo "alias migrate='python manage.py makemigrations && python manage.py migrate'" >> /root/.bashrc
 
 echo "Starting Django Server, Enjoy!"
 python /app/backend/manage.py runserver 0.0.0.0:8000

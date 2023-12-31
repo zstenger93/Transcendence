@@ -31,9 +31,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     ## apps
+    'friendship',
     'rest_framework',
     'corsheaders',
     'user_api.apps.UserApiConfig',
+    'friendship_api',
 ]
 
 MIDDLEWARE = [
