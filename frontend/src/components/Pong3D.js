@@ -37,7 +37,8 @@ function Pong3D() {
       containerRef.current.appendChild(renderer.domElement);
     }
 
-    camera.position.z = 35;
+    camera.position.set(-15, 5, 35);
+    camera.rotation.set(-0.3, -0.3, -0.3);
 
     // Create canvas for rendering text
     const canvas = document.createElement("canvas");
@@ -90,9 +91,11 @@ function Pong3D() {
       wallThickness
     );
     const wallMaterial = new THREE.MeshStandardMaterial({
-      color: 0xffff80,
-      metalness: 1,
-      roughness: 0.4,
+      // color: 0xffff80,
+      // metalness: 1,
+      // roughness: 0.4,
+      transparent: true,
+      opacity: 0, // Set the opacity value between 0 and 1
     });
 
     const cylinderGeometryLong = new THREE.CylinderGeometry(
@@ -291,8 +294,6 @@ function Pong3D() {
             ball.position.x = 0;
             ball.position.y = 0;
             lifes = orbits.length - 1;
-            camera.position.set(0, 0, 35);
-            camera.rotation.set(0, 0, 0);
             if (orbits.length === 0) {
               alert("GAME OVER");
               window.location.reload();
