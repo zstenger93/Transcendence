@@ -34,7 +34,7 @@ function ChoosePongMode() {
           {t("Modded Pong")}
         </Link>
         <Link
-          to="/aiopponent"
+          to="/pongai"
           className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer 
 		    hover:bg-purple-700 text-white font-bold py-2 px-4 rounded 
 		      block text-center  border-b-2 border-r-2 border-purple-600"
@@ -42,7 +42,7 @@ function ChoosePongMode() {
           {t("Pong against AI")}
         </Link>
         <Link
-          to="/3dpong"
+          to="/pong3d"
           className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer 
 		    hover:bg-purple-700 text-white font-bold py-2 px-4 rounded 
 		      block text-center  border-b-2 border-r-2 border-purple-600"
