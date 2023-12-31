@@ -312,6 +312,7 @@ const GameCanvas = () => {
 };
 
 const WinScreen = () => {
+	const { t } = useTranslation();
   const [gameStarted, setGameStarted] = useState(false);
 
   const handleButtonClick = () => {
@@ -330,12 +331,12 @@ const WinScreen = () => {
             alt="Background"
           />
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-            <p> YOU WON!</p>
+            <p>YOU WON!</p>
             <button
               onClick={handleButtonClick}
               className="px-4 py-2 bg-white text-black"
             >
-              Start Game
+              {t("Start Game")}
             </button>
           </div>
         </div>
@@ -345,6 +346,7 @@ const WinScreen = () => {
 };
 
 const LoseScreen = () => {
+  const { t } = useTranslation();
   const [gameStarted, setGameStarted] = useState(false);
 
   const handleButtonClick = () => {
@@ -363,12 +365,12 @@ const LoseScreen = () => {
             alt="Background"
           />
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-            <p> YOU LOST!</p>
+            <p>YOU LOST!</p>
             <button
               onClick={handleButtonClick}
               className="px-4 py-2 bg-white text-black"
             >
-              Start Game
+              {t("Start Game")}
             </button>
           </div>
         </div>
@@ -378,8 +380,9 @@ const LoseScreen = () => {
 };
 
 const Pong = () => {
-  const navigate = useNavigate();
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
   const location = useLocation();
   const [isFullScreen, setIsFullScreen] = useState(false);
 
@@ -422,12 +425,12 @@ const Pong = () => {
           <GameCanvas />
         </>
       ) : (
-		  <div className="relative">
+        <div className="relative">
           <img
             src={backgroundImage}
             style={{ width: "80vw", height: "45vw", objectFit: "cover" }}
             alt="Background"
-			className="rounded-xl shadow-lg"
+            className="rounded-xl shadow-lg"
           />
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
             <button
@@ -436,10 +439,10 @@ const Pong = () => {
 			  hover:bg-purple-700 text-white font-bold py-2 px-4 rounded
 				  border-b-2 border-r-2 border-purple-600"
             >
-              {t('Start Game')}
+              {t("Start Game")}
             </button>
           </div>
-		  <BackButton navigate={navigate} t={t} />
+          <BackButton navigate={navigate} t={t} />
         </div>
       )}
     </div>
