@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { HiMiniLanguage } from "react-icons/hi2";
+import axios from "axios";
 
 function LanguageButton() {
   const { t, i18n } = useTranslation();
@@ -63,6 +64,15 @@ function LanguageButton() {
     </div>
   );
 }
+
+const loginVia42 = async () => {
+	try {
+	  const response = await axios.get('http://localhost:8000/api/oauth/authorize/');
+	  console.log(response.data);
+	} catch (error) {
+	  console.error(error);
+	}
+  };
 
 function Welcome() {
   const { t } = useTranslation();
@@ -130,7 +140,7 @@ function Welcome() {
           </>
         )}
         <button
-          onClick={() => redirectToHome(false)}
+          onClick={() => loginVia42()}
           className="bg-gray-900 text-gray-300 mt-10 font-nosifer 
           font-bold px-4 py-2 rounded cursor-pointer hover:bg-gray-900 
           hover:bg-opacity-70 border-b-2 border-r-2 border-purple-600"
