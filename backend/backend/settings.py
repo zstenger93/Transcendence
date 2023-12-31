@@ -59,9 +59,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
-    # 'DEFAULT_AUTHENTICATION_CLASSES': (
-    #     'your_app_name.authentication.BlacklistCheckJWTAuthentication',
-    # ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'user_api.authentication.BlacklistCheckJWTAuthentication',
+    ),
 }
 
 
