@@ -111,8 +111,6 @@ class OAuthCallback(APIView):
 			user_response = requests.get("https://api.intra.42.fr/v2/me", headers={"Authorization": f"Bearer {access_token}"})
 			
 			username = user_response.json()["login"]
-			first_name = user_response.json()["first_name"]
-			last_name = user_response.json()["last_name"]
 			email = user_response.json()["email"]
 			picture_url = user_response.json()["image"]["versions"]["medium"]
 
@@ -126,8 +124,6 @@ class OAuthCallback(APIView):
 				username=username,
 				defaults={
 					'username': username,
-					'first_name': first_name,
-					'last_name': last_name,
 					'email': email,
 					'title': title,
 				}
@@ -140,7 +136,11 @@ class OAuthCallback(APIView):
 			else:
 				print("\t\t\tUser already exists!!!")
 			login(request, user)
-			return redirect("home")                             
+			token = RefreshToken.for_user(user)
+			return Response({
+				'refresh': str(token),
+				'access': str(token.access_token),
+			}, status=status.HTTP_200_OK)                        
 		return HttpResponse("Auth callback Error, bad token maybe!!")
 
 
