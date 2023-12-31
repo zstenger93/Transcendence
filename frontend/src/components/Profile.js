@@ -31,7 +31,7 @@ const friendsListData = [
 
 const matchHistoryData = [
   {
-    opponent: "EmotionalDamage",
+    opponent: "EmotionalDmg",
     result: "Win",
     score: "5 - 2",
     game: "Pong",
@@ -110,7 +110,7 @@ const userDetails = {
 function FriendsList() {
   const { t } = useTranslation();
   return (
-    <div className="bg-gray-900 bg-opacity-80 p-4 rounded-md max-h-96 overflow-y-auto">
+    <div className="bg-gray-900 bg-opacity-80 p-4 rounded-md max-h-96 overflow-y-auto mb-10">
       <h3 className="text-xl text-gray-300 font-nosifer font-bold mb-4 text-center">
         {t("Friends")}
       </h3>
@@ -155,7 +155,7 @@ function MatchHistory() {
   return (
     <div
       className="bg-gray-900 bg-opacity-80 p-6 shadow-xl
-      rounded-md max-h-96 overflow-y-auto">
+      rounded-md max-h-96 overflow-y-auto mb-10 sm:w-full">
       <h3 className="text-xl text-gray-300 font-nosifer font-bold mb-4 text-center">
         {t("Match History")}
       </h3>
@@ -233,10 +233,25 @@ function Profile() {
     setShowFriendsList(false);
   };
 
+  // THIS IS TOTALLY GARBAGE
+  // useEffect(() => {
+  //   const originalBackground = document.body.style.background;
+  
+  //   document.body.style.background = "url('src/images/morty2.png') center center/cover no-repeat";
+  
+  //   document.body.classList.add('overflow-y-auto');
+  
+  //   return () => {
+  //     document.body.style.background = originalBackground;
+  
+  //     document.body.classList.remove('overflow-y-auto');
+  //   };
+  // }, []);
+
   return (
     <div
-      className="flex flex-col items-center justify-center
-	    h-screen bg-cover bg-center bg-no-repeat shadow-xl"
+    className="flex flex-col items-center justify-center
+    min-h-screen bg-cover bg-center bg-no-repeat shadow-xl"
     >
       <div className="max-w-md flex flex-col items-center">
         <div
@@ -302,7 +317,7 @@ function Profile() {
             </button>
           </div>
         </div>
-        <div className="mt-8">
+        <div className="mt-8 mb-10">
           {showFriendsList && <FriendsList />}
           {showMatchHistory && <MatchHistory />}
         </div>
