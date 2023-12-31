@@ -16,28 +16,29 @@ services:
     restart: unless-stopped
     command: npm start
 
-  # backend:
-  #   container_name: backend
-  #   env_file:
-  #     - ./.env
-  #   build:
-  #     context: .
-  #     dockerfile: docker/backend/backend.Dockerfile
-  #   image: transcendence_backend
-  #   volumes:
-  #     - ${PWD}:/app/
-  #   ports:
-  #     - 8000:8000
-  #   # restart: unless-stopped
-  #   depends_on:
-  #     - db
+  backend:
+    container_name: backend
+    env_file:
+      - ./.env
+    build:
+      context: .
+      dockerfile: docker/backend/backend.Dockerfile
+    image: transcendence_backend
+    volumes:
+      - ${PWD}:/app/
+    ports:
+      - 8000:8000
+    entrypoint: /app/docker/backend/backend.sh
+    restart: unless-stopped
+    depends_on:
+      - db
 
-  # db:
-  #   image: postgres
-  #   container_name: database
-  #   environment:
-  #     POSTGRES_DB: transcend_users_db
-  #     POSTGRES_USER: transcend_user
-  #     POSTGRES_PASSWORD: transcend_pwd
-  #   ports:
-  #     - "5432:5432"
+  db:
+    image: postgres
+    container_name: database
+    environment:
+      POSTGRES_DB: transcend_users_db
+      POSTGRES_USER: transcend_user
+      POSTGRES_PASSWORD: transcend_pwd
+    ports:
+      - "5432:5432"

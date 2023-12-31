@@ -10,8 +10,11 @@ all:
 	docker-compose up --build -d && \
 	docker-compose logs -f backend
 
-exec:
-	docker exec -it backend bash
+execbackend:
+	docker exec -it backend /bin/bash
+
+execfrontend:
+	docker exec -it frontend /bin/bash
 
 up:
 	docker-compose up
