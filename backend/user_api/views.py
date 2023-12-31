@@ -1,38 +1,30 @@
-from django.shortcuts import render
-from django.contrib.auth import get_user_model, login, logout
+from django.contrib.auth import login, logout
 from django.core.files.base import ContentFile
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import HttpResponse, redirect
 from django.conf import settings
 
-from rest_framework import permissions, status, viewsets, authentication
+from rest_framework import permissions, status, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.authentication import SessionAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework_simplejwt.token_blacklist.models import OutstandingToken, BlacklistedToken
+from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken
 
 from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
 from .validations import custom_validation, validate_email, validate_password
-from .models import AppUser
+from .authentication import BlacklistCheckJWTAuthentication
+from .models import AppUser, BlacklistedToken
 
 import requests
 import urllib
 import os
 
-from django.contrib.auth.decorators import login_required
-
-from django.shortcuts import redirect, get_object_or_404
-from django.http import JsonResponse
-
-from user_api.models import AppUser
-from friendship_api.models import Follower
-from rest_framework import generics, permissions
-
 
 class UserRegister(APIView):
 	permission_classes = (permissions.AllowAny,)
-	authentication_classes = (JWTAuthentication,)
+	# authentication_classes = (JWTAuthentication,)
+	# authentication_classes = (BlacklistCheckJWTAuthentication,)
+
 	def post(self, request):
 		clean_data = custom_validation(request.data)
 		serializer = UserRegisterSerializer(data=clean_data)
@@ -45,9 +37,11 @@ class UserRegister(APIView):
 
 class UserLogin(APIView):
 	permission_classes = (permissions.AllowAny,)
-	authentication_classes = (JWTAuthentication,)
+	# authentication_classes = (BlacklistCheckJWTAuthentication,)
 	##
 	def post(self, request):
+		if request.user.is_authenticated:
+				return Response({"detail": "You are already logged in, logout if you want to identify as someone else ;)"}, status=status.HTTP_400_BAD_REQUEST)
 		data = request.data
 		assert validate_email(data)
 		assert validate_password(data)
@@ -55,14 +49,23 @@ class UserLogin(APIView):
 		if serializer.is_valid(raise_exception=True):
 			user = serializer.check_user(data)
 			login(request, user)
-			return Response(serializer.data, status=status.HTTP_200_OK)
+			token = RefreshToken.for_user(user)
+			return Response({
+				'refresh': str(token),
+				'access': str(token.access_token),
+			}, status=status.HTTP_200_OK)
 
 
 class UserLogout(APIView):
 	permission_classes = (permissions.AllowAny,)
-	authentication_classes = (JWTAuthentication,)
+	authentication_classes = (BlacklistCheckJWTAuthentication,)
+
 	def post(self, request):
 		if request.user.is_authenticated:
+			# Add the token to the blacklist
+			token = request.META.get('HTTP_AUTHORIZATION', " ").split(' ')[1]
+			BlacklistedToken.objects.create(user=request.user, token=token)
+			print(BlacklistedToken.objects.all())
 			logout(request)
 			return Response(status=status.HTTP_200_OK)
 		else:
@@ -71,7 +74,7 @@ class UserLogout(APIView):
 
 class UserProfileView(APIView):
 	permission_classes = (permissions.IsAuthenticated,)
-	authentication_classes = (JWTAuthentication,)
+	authentication_classes = (BlacklistCheckJWTAuthentication,)
 	##
 	def get(self, request):
 		serializer = UserSerializer(request.user)
@@ -79,7 +82,7 @@ class UserProfileView(APIView):
 
 
 class UserViewSet(viewsets.ModelViewSet):
-	authentication_classes = (JWTAuthentication,)
+	authentication_classes = (BlacklistCheckJWTAuthentication,)
 	queryset = AppUser.objects.all()
 	serializer_class = UserSerializer
 	def create(self, request, *args, **kwargs):
@@ -112,8 +115,6 @@ class OAuthCallback(APIView):
 			user_response = requests.get("https://api.intra.42.fr/v2/me", headers={"Authorization": f"Bearer {access_token}"})
 			
 			username = user_response.json()["login"]
-			first_name = user_response.json()["first_name"]
-			last_name = user_response.json()["last_name"]
 			email = user_response.json()["email"]
 			picture_url = user_response.json()["image"]["versions"]["medium"]
 
@@ -127,8 +128,6 @@ class OAuthCallback(APIView):
 				username=username,
 				defaults={
 					'username': username,
-					'first_name': first_name,
-					'last_name': last_name,
 					'email': email,
 					'title': title,
 				}
@@ -141,7 +140,11 @@ class OAuthCallback(APIView):
 			else:
 				print("\t\t\tUser already exists!!!")
 			login(request, user)
-			return redirect("home")                             
+			token = RefreshToken.for_user(user)
+			return Response({
+				'refresh': str(token),
+				'access': str(token.access_token),
+			}, status=status.HTTP_200_OK)                        
 		return HttpResponse("Auth callback Error, bad token maybe!!")
 
 
