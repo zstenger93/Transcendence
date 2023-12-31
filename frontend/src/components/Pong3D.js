@@ -14,6 +14,20 @@ import sunTex from "../images/sun.jpg";
 // import { TextGeometry, MeshBasicMaterial, Mesh } from "three";
 
 function Pong3D() {
+  const textureLoader = new THREE.TextureLoader();
+
+  class Asteroid {
+    constructor(position, texture, size, waypoint) {
+      const geometry = new THREE.SphereGeometry(size, 32, 32);
+      const material = new THREE.MeshBasicMaterial({ map: texture });
+      this.mesh = new THREE.Mesh(geometry, material);
+      this.mesh.position.set(position.x, position.y, position.z);
+      this.waypoint = waypoint;
+    }
+    
+    class 
+  }
+
   const containerRef = useRef(null);
   let aspectRatio = getAspectRatio();
   const paddleHeight = 6;
@@ -37,8 +51,7 @@ function Pong3D() {
     if (containerRef.current) {
       containerRef.current.appendChild(renderer.domElement);
     }
-    var loader = new THREE.GLTFLoader();
-    const textureLoader = new THREE.TextureLoader();
+    // var loader = new THREE.GLTFLoader();
     const planetTextures = [
       textureLoader.load(mercury),
       textureLoader.load(venus),
@@ -79,6 +92,14 @@ function Pong3D() {
     // Create stars
     const starGeometry = new THREE.SphereGeometry(0.2, 32, 32);
     const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const sunMaterialLayer2 = new THREE.MeshBasicMaterial({
+      color: 0xffff00,
+      map: sunTexture,
+      rougness: 0.1,
+      metalness: 1,
+      opacity: 0.1,
+      transparent: true,
+    });
     const sunMaterial = new THREE.MeshBasicMaterial({
       color: 0xff8800,
       map: sunTexture,
@@ -86,9 +107,12 @@ function Pong3D() {
       metalness: 1,
     });
     const sunGeometry = new THREE.SphereGeometry(10, 32, 32);
+    const sunGeometryLayer2 = new THREE.SphereGeometry(12, 32, 32);
     const sun = new THREE.Mesh(sunGeometry, sunMaterial);
     sun.position.set(0, 0, -20);
+    const sunLayer2 = new THREE.Mesh(sunGeometryLayer2, sunMaterialLayer2);
     scene.add(sun);
+    sun.add(sunLayer2);
 
     for (let i = 0; i < 150; i++) {
       const star = new THREE.Mesh(starGeometry, starMaterial);
