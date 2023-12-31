@@ -58,6 +58,3 @@ class BlacklistedToken(models.Model):
 
     class Meta:
         unique_together = ['token', 'user']
-
-
-
