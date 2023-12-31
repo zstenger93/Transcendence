@@ -1,33 +1,24 @@
-from django.shortcuts import render
-from django.contrib.auth import get_user_model, login, logout
+from django.contrib.auth import login, logout
 from django.core.files.base import ContentFile
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import HttpResponse, redirect
 from django.conf import settings
 
-from rest_framework import permissions, status, viewsets, authentication
+from rest_framework import permissions, status, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.authentication import SessionAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework_simplejwt.token_blacklist.models import OutstandingToken, BlacklistedToken
+from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken
 
 from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
 from .validations import custom_validation, validate_email, validate_password
-from .models import AppUser
+from .models import AppUser, BlacklistedToken
+
+from user_api.models import AppUser
 
 import requests
 import urllib
 import os
-
-from django.contrib.auth.decorators import login_required
-
-from django.shortcuts import redirect, get_object_or_404
-from django.http import JsonResponse
-
-from user_api.models import AppUser
-from friendship_api.models import Follower
-from rest_framework import generics, permissions
 
 
 class UserRegister(APIView):
@@ -55,18 +46,26 @@ class UserLogin(APIView):
 		if serializer.is_valid(raise_exception=True):
 			user = serializer.check_user(data)
 			login(request, user)
-			return Response(serializer.data, status=status.HTTP_200_OK)
+			token = RefreshToken.for_user(user)
+			return Response({
+				'refresh': str(token),
+				'access': str(token.access_token),
+			}, status=status.HTTP_200_OK)
 
 
 class UserLogout(APIView):
-	permission_classes = (permissions.AllowAny,)
-	authentication_classes = (JWTAuthentication,)
-	def post(self, request):
-		if request.user.is_authenticated:
-			logout(request)
-			return Response(status=status.HTTP_200_OK)
-		else:
-			return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = (JWTAuthentication,)
+
+    def post(self, request):
+        if request.user.is_authenticated:
+            # Add the token to the blacklist
+            token = request.META.get('HTTP_AUTHORIZATION', " ").split(' ')[1]
+            BlacklistedToken.objects.create(user=request.user, token=token)
+            logout(request)
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserProfileView(APIView):
