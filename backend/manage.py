@@ -20,3 +20,11 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# {
+#     "email":"test@gmail.com",
+#     "username":"test",
+#     "password":"password"
+# }
+
+# eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA0MTA4NTA0LCJpYXQiOjE3MDQwMjIxMDQsImp0aSI6ImNmZTEzYjRjYzVmNzQ2NTY4OTRiMGJlNzZmNTBlZDNjIiwidXNlcl9pZCI6MX0.0zZJj7sZUcyTnCaAgdgOWDRUgY6uiL-TlfNqcati8yQ
