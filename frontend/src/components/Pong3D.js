@@ -37,8 +37,20 @@ function Pong3D() {
       containerRef.current.appendChild(renderer.domElement);
     }
 
-    camera.position.set(-15, 5, 35);
-    camera.rotation.set(-0.3, -0.3, -0.3);
+    const textureLoader = new THREE.TextureLoader();
+    const planetTextures = [
+      textureLoader.load(mercury),
+      textureLoader.load(venus),
+      textureLoader.load(world),
+      textureLoader.load(mars),
+      textureLoader.load(jupiter),
+      textureLoader.load(saturn),
+      textureLoader.load(uranus),
+      textureLoader.load(neptune),
+    ];
+    // camera.position.set(-15, 5, 35);
+    camera.position.set(0, 0, 35);
+    camera.rotation.set(0, 0, 0); // -0.3. -0.3 -0.3
 
     // Create canvas for rendering text
     const canvas = document.createElement("canvas");
@@ -65,8 +77,19 @@ function Pong3D() {
     // Create stars
     const starGeometry = new THREE.SphereGeometry(0.2, 32, 32);
     const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const sunMaterial = new THREE.MeshBasicMaterial({
+      color: 0xff8800,
+      map: planetTextures[0],
+      rougness: 0.1,
+      metalness: 1,
 
-    for (let i = 0; i < 100; i++) {
+    });
+    const sunGeometry = new THREE.SphereGeometry(10, 32, 32);
+    const sun = new THREE.Mesh(sunGeometry, sunMaterial);
+    sun.position.set(0, 0, -20);
+    scene.add(sun);
+
+    for (let i = 0; i < 150; i++) {
       const star = new THREE.Mesh(starGeometry, starMaterial);
       star.position.x = Math.random() * longGeometry * 6 - longGeometry * 3;
       star.position.y = Math.random() * shortGeometry * 4 - shortGeometry * 2;
@@ -111,19 +134,6 @@ function Pong3D() {
       32
     );
 
-    const textureLoader = new THREE.TextureLoader();
-
-    const planetTextures = [
-      textureLoader.load(mercury),
-      textureLoader.load(venus),
-      textureLoader.load(world),
-      textureLoader.load(mars),
-      textureLoader.load(jupiter),
-      textureLoader.load(saturn),
-      textureLoader.load(uranus),
-      textureLoader.load(neptune),
-    ];
-
     const planetMaterials = [
       new THREE.MeshStandardMaterial({ map: planetTextures[0] }),
       new THREE.MeshStandardMaterial({ map: planetTextures[1] }),
@@ -135,31 +145,31 @@ function Pong3D() {
       new THREE.MeshStandardMaterial({ map: planetTextures[7] }),
     ];
 
-    const texture = textureLoader.load(coverImage);
-    const cylinderMaterial = new THREE.MeshStandardMaterial({
-      map: texture,
-    });
+    // const texture = textureLoader.load(coverImage);
+    // const cylinderMaterial = new THREE.MeshStandardMaterial({
+    //   map: texture,
+    // });
 
-    const cylinders = [
-      new THREE.Mesh(cylinderGeometryShort, cylinderMaterial),
-      new THREE.Mesh(cylinderGeometryShort, cylinderMaterial),
-      new THREE.Mesh(cylinderGeometryLong, cylinderMaterial),
-      new THREE.Mesh(cylinderGeometryLong, cylinderMaterial),
-    ];
-    cylinders[0].position.set(-wallOffsetX - cylinderOffset, 0, cylinderOffset);
-    cylinders[1].position.set(wallOffsetX + cylinderOffset, 0, cylinderOffset);
-    cylinders[2].position.set(0, -wallOffsetY - cylinderOffset, cylinderOffset);
-    cylinders[3].position.set(0, wallOffsetY + cylinderOffset, cylinderOffset);
-    cylinders[2].rotation.z = Math.PI / 2;
-    cylinders[3].rotation.z = Math.PI / 2;
-    cylinders.forEach((cylinder) => scene.add(cylinder));
+    // const cylinders = [
+    //   new THREE.Mesh(cylinderGeometryShort, cylinderMaterial),
+    //   new THREE.Mesh(cylinderGeometryShort, cylinderMaterial),
+    //   new THREE.Mesh(cylinderGeometryLong, cylinderMaterial),
+    //   new THREE.Mesh(cylinderGeometryLong, cylinderMaterial),
+    // ];
+    // cylinders[0].position.set(-wallOffsetX - cylinderOffset, 0, cylinderOffset);
+    // cylinders[1].position.set(wallOffsetX + cylinderOffset, 0, cylinderOffset);
+    // cylinders[2].position.set(0, -wallOffsetY - cylinderOffset, cylinderOffset);
+    // cylinders[3].position.set(0, wallOffsetY + cylinderOffset, cylinderOffset);
+    // cylinders[2].rotation.z = Math.PI / 2;
+    // cylinders[3].rotation.z = Math.PI / 2;
+    // cylinders.forEach((cylinder) => scene.add(cylinder));
 
-    // Add light to the cylinders
-    const directionalLight = new THREE.DirectionalLight(0x666666, 1);
-    directionalLight.position.set(0, 0, 1);
-    cylinders.forEach((cylinder) => {
-      cylinder.add(directionalLight.clone());
-    });
+    // // Add light to the cylinders
+    // const directionalLight = new THREE.DirectionalLight(0x666666, 1);
+    // directionalLight.position.set(0, 0, 1);
+    // cylinders.forEach((cylinder) => {
+    //   cylinder.add(directionalLight.clone());
+    // });
 
     const walls = [
       new THREE.Mesh(wallGeometryLong, wallMaterial), // Top wall
@@ -223,9 +233,9 @@ function Pong3D() {
     moon.position.set(0, 0, 1.5);
     ball.add(moon);
     // Add lights
-    const pointLight = new THREE.PointLight(0xaaaa00, 600, 80, 2);
-    pointLight.position.set(0, 0, 0.1);
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
+    const pointLight = new THREE.PointLight(0xff8800, 1200, 80, 2);
+    pointLight.position.set(0, 0, -9);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.05);
     scene.add(pointLight, ambientLight);
 
     // Animation loop
