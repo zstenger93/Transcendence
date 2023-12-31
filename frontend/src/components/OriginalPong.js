@@ -312,7 +312,7 @@ const GameCanvas = () => {
 };
 
 const WinScreen = () => {
-	const { t } = useTranslation();
+  const { t } = useTranslation();
   const [gameStarted, setGameStarted] = useState(false);
 
   const handleButtonClick = () => {
@@ -324,19 +324,22 @@ const WinScreen = () => {
       {gameStarted ? (
         <GameCanvas />
       ) : (
-        <div className="relative border-8 border-white">
+        <div className="relative">
           <img
             src={backgroundImage}
             style={{ width: "80vw", height: "100%", objectFit: "cover" }}
             alt="Background"
+            className="rounded-xl shadow-lg"
           />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-            <p>YOU WON!</p>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center font-bold font-nosifer">
+            <p>{t("YOU WON!")}</p>
             <button
               onClick={handleButtonClick}
-              className="px-4 py-2 bg-white text-black"
+              className="mt-10 bg-purple-900 bg-opacity-80 font-nosifer 
+			  hover:bg-purple-700 text-white font-bold py-2 px-4 rounded
+				  border-b-2 border-r-2 border-purple-600"
             >
-              {t("Start Game")}
+              {t("Play Again")}
             </button>
           </div>
         </div>
@@ -358,19 +361,22 @@ const LoseScreen = () => {
       {gameStarted ? (
         <GameCanvas />
       ) : (
-        <div className="relative border-8 border-white">
+        <div className="relative">
           <img
             src={backgroundImage}
             style={{ width: "80vw", height: "100%", objectFit: "cover" }}
             alt="Background"
+            className="rounded-xl shadow-lg"
           />
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-            <p>YOU LOST!</p>
+            <p>{t("YOU LOST!")}</p>
             <button
               onClick={handleButtonClick}
-              className="px-4 py-2 bg-white text-black"
+              className="mt-10 bg-purple-900 bg-opacity-80 font-nosifer 
+			  hover:bg-purple-700 text-white font-bold py-2 px-4 rounded
+				  border-b-2 border-r-2 border-purple-600"
             >
-              {t("Start Game")}
+              {t("Play Again")}
             </button>
           </div>
         </div>
