@@ -12,9 +12,8 @@ from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken
 
 from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
 from .validations import custom_validation, validate_email, validate_password
+from .authentication import BlacklistCheckJWTAuthentication
 from .models import AppUser, BlacklistedToken
-
-from user_api.models import AppUser
 
 import requests
 import urllib
@@ -23,7 +22,9 @@ import os
 
 class UserRegister(APIView):
 	permission_classes = (permissions.AllowAny,)
-	authentication_classes = (JWTAuthentication,)
+	# authentication_classes = (JWTAuthentication,)
+	# authentication_classes = (BlacklistCheckJWTAuthentication,)
+
 	def post(self, request):
 		clean_data = custom_validation(request.data)
 		serializer = UserRegisterSerializer(data=clean_data)
@@ -36,9 +37,11 @@ class UserRegister(APIView):
 
 class UserLogin(APIView):
 	permission_classes = (permissions.AllowAny,)
-	authentication_classes = (JWTAuthentication,)
+	# authentication_classes = (BlacklistCheckJWTAuthentication,)
 	##
 	def post(self, request):
+		if request.user.is_authenticated:
+				return Response({"detail": "You are already logged in, logout if you want to identify as someone else ;)"}, status=status.HTTP_400_BAD_REQUEST)
 		data = request.data
 		assert validate_email(data)
 		assert validate_password(data)
@@ -54,23 +57,24 @@ class UserLogin(APIView):
 
 
 class UserLogout(APIView):
-    permission_classes = (permissions.AllowAny,)
-    authentication_classes = (JWTAuthentication,)
+	permission_classes = (permissions.AllowAny,)
+	authentication_classes = (BlacklistCheckJWTAuthentication,)
 
-    def post(self, request):
-        if request.user.is_authenticated:
-            # Add the token to the blacklist
-            token = request.META.get('HTTP_AUTHORIZATION', " ").split(' ')[1]
-            BlacklistedToken.objects.create(user=request.user, token=token)
-            logout(request)
-            return Response(status=status.HTTP_200_OK)
-        else:
-            return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
+	def post(self, request):
+		if request.user.is_authenticated:
+			# Add the token to the blacklist
+			token = request.META.get('HTTP_AUTHORIZATION', " ").split(' ')[1]
+			BlacklistedToken.objects.create(user=request.user, token=token)
+			print(BlacklistedToken.objects.all())
+			logout(request)
+			return Response(status=status.HTTP_200_OK)
+		else:
+			return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserProfileView(APIView):
 	permission_classes = (permissions.IsAuthenticated,)
-	authentication_classes = (JWTAuthentication,)
+	authentication_classes = (BlacklistCheckJWTAuthentication,)
 	##
 	def get(self, request):
 		serializer = UserSerializer(request.user)
@@ -78,7 +82,7 @@ class UserProfileView(APIView):
 
 
 class UserViewSet(viewsets.ModelViewSet):
-	authentication_classes = (JWTAuthentication,)
+	authentication_classes = (BlacklistCheckJWTAuthentication,)
 	queryset = AppUser.objects.all()
 	serializer_class = UserSerializer
 	def create(self, request, *args, **kwargs):
