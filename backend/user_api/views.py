@@ -142,10 +142,23 @@ class OAuthCallback(APIView):
 			else:
 				print("\t\t\tUser already exists!!!")
 			login(request, user)
-			if settings.IS_PRODUCTION:
-				return redirect('http://localhost:3000/home')                     
-			else:
-				return redirect('https://zstenger93.github.io/Transcendence/home')
+			html = """
+			<!DOCTYPE html>
+			<html>
+			<body>
+			<script>
+			// Check if window.opener is not null
+			if (window.opener) {
+			// Send a message to the original window with the authentication status
+			window.opener.postMessage({ 'is_authenticated': true }, '*');
+			}
+			// Close this window
+			window.close();
+			</script>
+			</body>
+			</html>
+			"""
+			return HttpResponse(html)
 		return HttpResponse("Auth callback Error, bad token maybe!!")
 
 
