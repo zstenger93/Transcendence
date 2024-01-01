@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-IS_PRODUCTION = os.getenv('DEBUG')
+IS_PRODUCTION = os.getenv('DEBUG') == 'True'
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

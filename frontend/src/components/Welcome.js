@@ -94,12 +94,13 @@ function Welcome() {
 	  // Check if the user is authenticated again
 	  response = await fetch("http://localhost:8000/api/is_authenticated/", {
 		credentials: "include",
+		redirect: "manual",
 	  });
 	  data = await response.json();
 	}
   
 	if (data.is_authenticated) {
-	  navigate("/home");
+		navigate("/home");
 	}
   };
 
