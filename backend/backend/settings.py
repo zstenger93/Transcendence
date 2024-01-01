@@ -1,10 +1,13 @@
 from pathlib import Path
 from datetime import timedelta
 import os
+import dj_database_url
 from dotenv import load_dotenv
 load_dotenv()
 
-IS_PRODUCTION = os.getenv('DEBUG') == 'True'
+IS_PRODUCTION = os.getenv('IS_PRODUCTION', 'False') == 'True'
+
+# postgres://transcendence_db_user:TyO3oKD9ARZQFWRy1TkBoLBOqRy5IlZv@dpg-cm993a7109ks73cilvk0-a/transcendence_db
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -107,16 +110,21 @@ AUTH_USER_MODEL = 'user_api.AppUser'
 # }
 
 # THIS IS THE DATABASE CONFIGURATION FOR THE DOCKER CONTAINER
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'transcend_users_db',
-        'USER': 'transcend_user',
-        'PASSWORD': 'transcend_pwd',
-        'HOST': 'db',
-        'PORT': '5432',
+if IS_PRODUCTION:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'transcend_users_db',
+            'USER': 'transcend_user',
+            'PASSWORD': 'transcend_pwd',
+            'HOST': 'db',
+            'PORT': '5432',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -136,6 +144,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# postgres://transcendence_db_user:TyO3oKD9ARZQFWRy1TkBoLBOqRy5IlZv@dpg-cm993a7109ks73cilvk0-a.frankfurt-postgres.render.com/transcendence_db
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
