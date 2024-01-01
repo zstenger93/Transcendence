@@ -82,26 +82,40 @@ function Welcome() {
   };
 
   const loginVia42 = async () => {
-	let response = await fetch("http://localhost:8000/api/is_authenticated/", {
-	  credentials: "include",
-	});
-	let data = await response.json();
-  
-	if (!data.is_authenticated) {
-	  window.location.href = "http://localhost:8000/api/oauth/authorize/";
-	  // Wait for the user to be redirected back to your application
-	  await new Promise(resolve => setTimeout(resolve, 5000));
-	  // Check if the user is authenticated again
-	  response = await fetch("http://localhost:8000/api/is_authenticated/", {
-		credentials: "include",
-		redirect: "manual",
-	  });
-	  data = await response.json();
-	}
-  
-	if (data.is_authenticated) {
-		navigate("/home");
-	}
+    let response = await fetch("http://localhost:8000/api/is_authenticated/", {
+      credentials: "include",
+    });
+    let data = await response.json();
+
+    if (!data.is_authenticated) {
+      // Open a new window for the OAuth authorization
+      const authWindow = window.open(
+        "http://localhost:8000/api/oauth/authorize/"
+      );
+
+      // Listen for messages from the auth window
+      window.addEventListener(
+        "message",
+        (event) => {
+          if (event.origin !== "http://localhost:8000") {
+            // Ignore messages from other origins
+            return;
+          }
+
+          // The auth window should send a message with the authentication status
+          if (event.data.is_authenticated) {
+            // Close the auth window
+            authWindow.close();
+
+            // Navigate to the home page
+            redirectToHome();
+          }
+        },
+        false
+      );
+    }
+
+    redirectToHome();
   };
 
   return (
