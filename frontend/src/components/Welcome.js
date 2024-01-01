@@ -45,14 +45,16 @@ function LanguageButton() {
       {dropdownOpen && (
         <div
           className="absolute left-0 w-22 py-2 mt-2 bg-gray-900 
-          bg-opacity-80 rounded-xl shadow-xl text-center">
+          bg-opacity-80 rounded-xl shadow-xl text-center"
+        >
           {languages.map((lang) => (
             <button
               key={lang.value}
-              className={`w-full py-2 ${lang.value === currentLanguage
-                ? "text-blue-500 font-bold"
-                : "text-gray-300"
-                } hover:bg-indigo-500 hover:text-white`}
+              className={`w-full py-2 ${
+                lang.value === currentLanguage
+                  ? "text-blue-500 font-bold"
+                  : "text-gray-300"
+              } hover:bg-indigo-500 hover:text-white`}
               onClick={() => changeLanguage(lang.value)}
             >
               {lang.label}
@@ -71,7 +73,6 @@ function Welcome() {
   const [password, setPassword] = useState("");
   const [showFields, setShowFields] = useState(false);
 
-
   const redirectToHome = (isJoinButton) => {
     if (isJoinButton && (!email || !password)) {
       alert("Please enter email and password");
@@ -80,6 +81,27 @@ function Welcome() {
     }
   };
 
+  const loginVia42 = async () => {
+	let response = await fetch("http://localhost:8000/api/is_authenticated/", {
+	  credentials: "include",
+	});
+	let data = await response.json();
+  
+	if (!data.is_authenticated) {
+	  window.location.href = "http://localhost:8000/api/oauth/authorize/";
+	  // Wait for the user to be redirected back to your application
+	  await new Promise(resolve => setTimeout(resolve, 5000));
+	  // Check if the user is authenticated again
+	  response = await fetch("http://localhost:8000/api/is_authenticated/", {
+		credentials: "include",
+	  });
+	  data = await response.json();
+	}
+  
+	if (data.is_authenticated) {
+	  navigate("/home");
+	}
+  };
 
   return (
     <div
@@ -89,12 +111,12 @@ function Welcome() {
       <LanguageButton />
       <div className="flex flex-col items-center justify-center flex-grow">
         <button
-          onClick={() => setShowFields(prevShowFields => !prevShowFields)}
+          onClick={() => setShowFields((prevShowFields) => !prevShowFields)}
           className="bg-gray-900 text-gray-300 font-nosifer font-bold 
           px-4 py-2 rounded cursor-pointer hover:bg-gray-900 hover:bg-opacity-70
           border-b-2 border-r-2 border-purple-600"
         >
-          {t('Sign In via Email')}
+          {t("Sign In via Email")}
         </button>
         {showFields && (
           <>
@@ -103,7 +125,7 @@ function Welcome() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder={t("Email")}
-              onKeyPress={(e) => e.key === 'Enter' && redirectToHome()}
+              onKeyPress={(e) => e.key === "Enter" && redirectToHome()}
               className="mb-2 mt-4 bg-gray-900 bg-opacity-60 text-white 
               rounded text-center border-b-2 border-r-2 border-purple-600"
               autocomplete="new-email"
@@ -113,7 +135,7 @@ function Welcome() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder={t("Password")}
-              onKeyPress={(e) => e.key === 'Enter' && redirectToHome()}
+              onKeyPress={(e) => e.key === "Enter" && redirectToHome()}
               className="mb-4 bg-gray-900 bg-opacity-60 text-white 
               rounded text-center border-b-2 border-r-2 border-purple-600"
               autocomplete="new-password"
@@ -125,12 +147,12 @@ function Welcome() {
             hover:bg-gray-900 hover:bg-opacity-70 border-b-2 border-r-2 
             border-purple-600"
             >
-              {t('Join')}
+              {t("Join")}
             </button>
           </>
         )}
         <button
-          onClick={() => redirectToHome(false)}
+          onClick={() => loginVia42()}
           className="bg-gray-900 text-gray-300 mt-10 font-nosifer 
           font-bold px-4 py-2 rounded cursor-pointer hover:bg-gray-900 
           hover:bg-opacity-70 border-b-2 border-r-2 border-purple-600"
@@ -138,8 +160,7 @@ function Welcome() {
           {t("Sign In via 42")}
         </button>
       </div>
-      <div className="flex items-center justify-center">
-      </div>
+      <div className="flex items-center justify-center"></div>
     </div>
   );
 }

@@ -3,11 +3,13 @@ from django.core.files.base import ContentFile
 from django.shortcuts import HttpResponse, redirect
 from django.conf import settings
 
+
+from django.http import HttpResponseRedirect, JsonResponse
+
 from rest_framework import permissions, status, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken
 
 from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
@@ -140,11 +142,10 @@ class OAuthCallback(APIView):
 			else:
 				print("\t\t\tUser already exists!!!")
 			login(request, user)
-			token = RefreshToken.for_user(user)
-			return Response({
-				'refresh': str(token),
-				'access': str(token.access_token),
-			}, status=status.HTTP_200_OK)                        
+			if settings.IS_PRODUCTION:
+				return redirect('http://localhost:3000/home')                     
+			else:
+				return redirect('https://zstenger93.github.io/Transcendence/home')
 		return HttpResponse("Auth callback Error, bad token maybe!!")
 
 
@@ -158,6 +159,9 @@ class OAuthAuthorize(APIView):
 			"redirect_uri": settings.REDIRECT_URI,
 			"response_type": "code",
 		}
-		return redirect(f"{auth_url}?{urllib.parse.urlencode(params)}")
+		return HttpResponseRedirect(f"{auth_url}?{urllib.parse.urlencode(params)}")
+
+def is_authenticated(request):
+	return JsonResponse({'is_authenticated': request.user.is_authenticated})
 
 
