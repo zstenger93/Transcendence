@@ -1,6 +1,10 @@
 from pathlib import Path
 from datetime import timedelta
 import os
+from dotenv import load_dotenv
+load_dotenv()
+
+IS_PRODUCTION = os.getenv('DEBUG')
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -11,10 +15,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#klz0g4gt37#*8aou2@a&u-k)rofekot&_7$o8ee1^=er*=1&0'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG')
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '10.13.7.5']
 
@@ -50,7 +54,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-ORS_ALLOWED_ORIGINS = ["http://localhost:3000",]
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000",]
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
@@ -63,6 +67,8 @@ REST_FRAMEWORK = {
         'user_api.authentication.BlacklistCheckJWTAuthentication',
     ),
 }
+
+SESSION_COOKIE_SAMESITE = 'Lax'
 
 
 ROOT_URLCONF = 'backend.urls'
