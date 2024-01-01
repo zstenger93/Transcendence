@@ -1,4 +1,3 @@
-// HamburgerButton.js
 import React from 'react';
 
 const HamburgerButton = ({ isMenuOpen, toggleMenu }) => {

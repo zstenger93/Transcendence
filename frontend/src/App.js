@@ -15,6 +15,7 @@ import MortyBackground1 from "./images/morty1.png";
 import MortyBackground2 from "./images/morty2.png";
 import MortyBackground3 from "./images/morty3.png";
 import MortyBackground4 from "./images/morty4.png";
+import BreakingBadMorty from "./images/rmb3.png";
 import Matchmaking from "./components/Matchmaking";
 import OriginalPong from "./components/OriginalPong";
 import PongAi from "./components/PongAi";
@@ -152,7 +153,7 @@ function App() {
           }
           />
           <Route path="choosepongmode" element={
-            <PageWrapper image={HomeBackground}>
+            <PageWrapper image={BreakingBadMorty}>
               <ChoosePongMode
               />
             </PageWrapper>
