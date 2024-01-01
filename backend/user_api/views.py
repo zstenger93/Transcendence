@@ -143,9 +143,9 @@ class OAuthCallback(APIView):
 				print("\t\t\tUser already exists!!!")
 			login(request, user)
 			if settings.IS_PRODUCTION:
-				return redirect('https://zstenger93.github.io/Transcendence/home')
-			else:
 				return redirect('http://localhost:3000/home')                     
+			else:
+				return redirect('https://zstenger93.github.io/Transcendence/home')
 		return HttpResponse("Auth callback Error, bad token maybe!!")
 
 

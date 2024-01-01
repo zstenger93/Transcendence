@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { HiMiniLanguage } from "react-icons/hi2";
-import axios from "axios";
 
 function LanguageButton() {
   const { t, i18n } = useTranslation();
