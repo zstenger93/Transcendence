@@ -64,6 +64,8 @@ REST_FRAMEWORK = {
     ),
 }
 
+SESSION_COOKIE_SAMESITE = 'Lax'
+
 
 ROOT_URLCONF = 'backend.urls'
 
