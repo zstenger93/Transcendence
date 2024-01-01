@@ -142,7 +142,23 @@ class OAuthCallback(APIView):
 			else:
 				print("\t\t\tUser already exists!!!")
 			login(request, user)
-			return JsonResponse({'is_authenticated': True})
+			html = """
+			<!DOCTYPE html>
+			<html>
+			<body>
+			<script>
+			// Check if window.opener is not null
+			if (window.opener) {
+			// Send a message to the original window with the authentication status
+			window.opener.postMessage({ 'is_authenticated': true }, '*');
+			}
+			// Close this window
+			window.close();
+			</script>
+			</body>
+			</html>
+			"""
+			return HttpResponse(html)
 		return HttpResponse("Auth callback Error, bad token maybe!!")
 
 
