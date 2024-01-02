@@ -30,10 +30,7 @@ function Pong3D() {
       this.scene = scene;
       this.radius = radius;
       this.currentWayPoint = currentWayPoint;
-      this.asteroid = new THREE.Mesh(
-        asteroidGeometry,
-        asteroidMaterial,
-      );
+      this.asteroid = new THREE.Mesh(asteroidGeometry, asteroidMaterial);
       this.asteroid.position.set(x, y, 0);
       this.asteroid.scale.set(
         Math.random() / 2 + 0.5,
