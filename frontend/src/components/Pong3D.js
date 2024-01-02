@@ -15,22 +15,62 @@ import sunTex from "../images/sun.jpg";
 
 function Pong3D() {
   const textureLoader = new THREE.TextureLoader();
+  const longGeometry = 50;
+  const shortGeometry = 30;
+  const asteroidMaterial = new THREE.MeshLambertMaterial({
+    color: 0xffffff,
+    map: textureLoader.load(venus),
+    reflectivity: 1,
+  });
+
+  const asteroidGeometry = new THREE.SphereGeometry(1, 32, 32);
 
   class Asteroid {
     constructor(x, y, radius, currentWayPoint, scene) {
       this.scene = scene;
-      this.x = x;
-      this.y = y;
       this.radius = radius;
       this.currentWayPoint = currentWayPoint;
-      const asteroidGeometry = new THREE.SphereGeometry(radius, 32, 32);
-      const asteroidMaterial = new THREE.MeshBasicMaterial({
-        color: 0x222200,
-        map: textureLoader.load(venus),
-      });
-      const asteroid = new THREE.Mesh(asteroidGeometry, asteroidMaterial);
-      asteroid.position.set(x, y, 0);
-      this.scene.add(asteroid);
+      this.asteroid = new THREE.Mesh(
+        asteroidGeometry,
+        asteroidMaterial,
+      );
+      this.asteroid.position.set(x, y, 0);
+      this.asteroid.scale.set(
+        Math.random() / 2 + 0.5,
+        Math.random() / 2 + 0.5,
+        Math.random() / 2 + 0.5
+      );
+      this.scene.add(this.asteroid);
+    }
+
+    move() {
+      this.asteroid.rotation.x += 0.01;
+      this.asteroid.rotation.y += 0.01;
+      this.asteroid.rotation.z += 0.01;
+      switch (this.currentWayPoint) {
+        case 0:
+          this.asteroid.position.x += 0.1;
+          if (this.asteroid.position.x > longGeometry / 2)
+            this.currentWayPoint = 1;
+          break;
+        case 1:
+          this.asteroid.position.y += 0.1;
+          if (this.asteroid.position.y > shortGeometry / 2)
+            this.currentWayPoint = 2;
+          break;
+        case 2:
+          this.asteroid.position.x -= 0.1;
+          if (this.asteroid.position.x < -longGeometry / 2)
+            this.currentWayPoint = 3;
+          break;
+        case 3:
+          this.asteroid.position.y -= 0.1;
+          if (this.asteroid.position.y < -shortGeometry / 2)
+            this.currentWayPoint = 0;
+          break;
+        default:
+          break;
+      }
     }
   }
 
@@ -42,8 +82,6 @@ function Pong3D() {
   const wallOffsetX = 23.5;
   const wallOffsetY = 15;
   const wallThickness = 3;
-  const longGeometry = 50;
-  const shortGeometry = 30;
   const cylinderOffset = -1.5;
   const ballSpeed = 0.3;
   let leftPaddlePosition = 0;
@@ -91,7 +129,7 @@ function Pong3D() {
     const textMesh = new THREE.Mesh(textGeometry, textMaterial);
     textMesh.position.set(
       0,
-      -shortGeometry / 2 - wallThickness * 1.3,
+      -shortGeometry / 2 - wallThickness * 2,
       wallThickness / 2 + 0.1
     );
     scene.add(textMesh);
@@ -231,7 +269,7 @@ function Pong3D() {
     scene.add(ball);
 
     // Add lights
-    const pointLight = new THREE.PointLight(0xff8800, 1200, 80, 2);
+    const pointLight = new THREE.PointLight(0xff8800, 1200, 120, 2);
     pointLight.position.set(0, 0, -9);
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.05);
     scene.add(pointLight, ambientLight);
@@ -242,7 +280,7 @@ function Pong3D() {
         longGeometry / 2,
         -shortGeometry / 2 + (shortGeometry / 8) * i,
         1,
-        0,
+        1,
         scene
       );
       asteroids.push(newAsteroid);
@@ -252,7 +290,7 @@ function Pong3D() {
         -longGeometry / 2,
         -shortGeometry / 2 + (shortGeometry / 8) * i,
         1,
-        2,
+        3,
         scene
       );
       asteroids.push(newAsteroid);
@@ -263,7 +301,7 @@ function Pong3D() {
         -longGeometry / 2 + (longGeometry / 14) * i,
         -shortGeometry / 2,
         1,
-        3,
+        0,
         scene
       );
       asteroids.push(newAsteroid);
@@ -274,7 +312,7 @@ function Pong3D() {
         -longGeometry / 2 + (longGeometry / 14) * i,
         shortGeometry / 2,
         1,
-        1,
+        2,
         scene
       );
       asteroids.push(newAsteroid);
@@ -299,6 +337,12 @@ function Pong3D() {
         const z = Math.sin(angle) * radius;
         orbit.position.set(x, y, z);
       });
+
+      // Move the asteroids
+      asteroids.forEach((asteroid) => {
+        asteroid.move();
+      });
+
       sun.rotation.y += 0.01;
       sun.rotation.z += 0.01;
       // My Amazing AI
