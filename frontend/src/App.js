@@ -1,31 +1,27 @@
 import React, { useEffect } from "react";
 import { I18nextProvider, useTranslation } from "react-i18next";
 import Translation from "./components/Translation";
-import Home from "./components/Home";
-import Chat from "./components/Chat";
-import Games from "./components/Games";
-import About from "./components/About";
+import Home from "./pages/Home";
+import Chat from "./pages/Chat";
+import Games from "./pages/Games";
+import About from "./pages/About";
 import NotFound from "./components/404";
-import Sidebar from "./components/Sidebar";
+import Sidebar from "./components/hamburger_menu/Hamburger";
 import Welcome from "./pages/Welcome";
-import Profile from "./components/Profile";
+import Profile from "./pages/Profile";
 import HomeBackground from "./images/bg0.png";
 import MortyBackground0 from "./images/morty0.png";
 import MortyBackground1 from "./images/morty1.png";
 import MortyBackground2 from "./images/morty2.png";
 import MortyBackground3 from "./images/morty3.png";
 import MortyBackground4 from "./images/morty4.png";
-import Matchmaking from "./components/Matchmaking";
-import OriginalPong from "./components/OriginalPong";
-import PongAi from "./components/PongAi";
-import Pong3D from "./components/Pong3D";
-import ChoosePongMode from "./components/ChoosePongMode";
+import Matchmaking from "./pages/Matchmaking";
+import OriginalPong from "./pages/OriginalPong";
+import PongAi from "./pages/PongAi";
+import Pong3D from "./pages/Pong3D";
+import ChoosePongMode from "./pages/ChoosePongMode";
 
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 const PageWrapper = ({ children, image, showSidebar = true }) => {
   return (
@@ -46,10 +42,11 @@ const PageWrapper = ({ children, image, showSidebar = true }) => {
 
 function App() {
   const { i18n } = useTranslation();
-  const basename = process.env.NODE_ENV === 'production' ? '/Transcendence' : '';
+  const basename =
+    process.env.NODE_ENV === "production" ? "/Transcendence" : "";
 
   useEffect(() => {
-    const storedLanguage = localStorage.getItem('i18nextLng');
+    const storedLanguage = localStorage.getItem("i18nextLng");
     if (storedLanguage && i18n.language !== storedLanguage) {
       i18n.changeLanguage(storedLanguage);
     }
@@ -62,10 +59,7 @@ function App() {
           <Route
             path="/"
             element={
-              <PageWrapper
-                image={HomeBackground}
-                showSidebar={false}
-              >
+              <PageWrapper image={HomeBackground} showSidebar={false}>
                 <Welcome />
               </PageWrapper>
             }
@@ -122,8 +116,7 @@ function App() {
             path="originalpong"
             element={
               <PageWrapper image={HomeBackground}>
-                <OriginalPong
-                />
+                <OriginalPong />
               </PageWrapper>
             }
           />
@@ -141,7 +134,7 @@ function App() {
               <PageWrapper image={HomeBackground}>
                 <Pong3D />
               </PageWrapper>
-          }
+            }
           />
           <Route
             path="pongai"
@@ -149,20 +142,19 @@ function App() {
               <PageWrapper image={HomeBackground}>
                 <PongAi />
               </PageWrapper>
-          }
+            }
           />
-          <Route path="choosepongmode" element={
-            <PageWrapper image={HomeBackground}>
-              <ChoosePongMode
-              />
-            </PageWrapper>
-          }
+          <Route
+            path="choosepongmode"
+            element={
+              <PageWrapper image={HomeBackground}>
+                <ChoosePongMode />
+              </PageWrapper>
+            }
           />
           <Route
             path="*"
-            element={
-              <NotFound currentLanguage={i18n.language} />
-            }
+            element={<NotFound currentLanguage={i18n.language} />}
           />
         </Routes>
       </Router>

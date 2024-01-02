@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import i18n from "i18next";
 import HamburgerMenu from "./HamburgerMenu";
-import SidebarBigScreen from "./Sidebar_Monitor";
+import SidebarBigScreen from "../sidebar/Sidebar_Monitor";
 import HamburgerButton from "./HamburgerBars";
 
 const Sidebar = () => {
@@ -28,11 +28,10 @@ const Sidebar = () => {
     };
   }, []);
 
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
-    setIsMenuOpen(prevState => !prevState);
+    setIsMenuOpen((prevState) => !prevState);
   };
 
   return (
@@ -47,10 +46,7 @@ const Sidebar = () => {
         />
       )}
       {isMobile && (
-        <HamburgerButton
-          isMenuOpen={isMenuOpen}
-          toggleMenu={toggleMenu}
-        />
+        <HamburgerButton isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       )}
       {!isMobile && (
         /* default sidebar for larger screens */
