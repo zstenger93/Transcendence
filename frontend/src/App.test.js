@@ -5,7 +5,7 @@ import App from './App';
 import { within } from '@testing-library/dom';
 import { I18nextProvider } from 'react-i18next';
 import i18n from 'i18next';
-import Sidebar from './components/Sidebar';
+import Sidebar from './components/Sidebar_Monitor';
 import { MemoryRouter } from 'react-router-dom';
 
 test('renders Sign In button', () => {
