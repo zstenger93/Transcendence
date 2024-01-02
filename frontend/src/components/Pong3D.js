@@ -16,18 +16,6 @@ import sunTex from "../images/sun.jpg";
 function Pong3D() {
   const textureLoader = new THREE.TextureLoader();
 
-  class Asteroid {
-    constructor(position, texture, size, waypoint) {
-      const geometry = new THREE.SphereGeometry(size, 32, 32);
-      const material = new THREE.MeshBasicMaterial({ map: texture });
-      this.mesh = new THREE.Mesh(geometry, material);
-      this.mesh.position.set(position.x, position.y, position.z);
-      this.waypoint = waypoint;
-    }
-    
-    class 
-  }
-
   const containerRef = useRef(null);
   let aspectRatio = getAspectRatio();
   const paddleHeight = 6;
