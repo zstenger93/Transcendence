@@ -24,53 +24,6 @@ function Pong3D() {
   });
 
   const asteroidGeometry = new THREE.SphereGeometry(1, 32, 32);
-
-  class Asteroid {
-    constructor(x, y, radius, currentWayPoint, scene) {
-      this.scene = scene;
-      this.radius = radius;
-      this.currentWayPoint = currentWayPoint;
-      this.asteroid = new THREE.Mesh(asteroidGeometry, asteroidMaterial);
-      this.asteroid.position.set(x, y, 0);
-      this.asteroid.scale.set(
-        Math.random() / 2 + 0.5,
-        Math.random() / 2 + 0.5,
-        Math.random() / 2 + 0.5
-      );
-      this.scene.add(this.asteroid);
-    }
-
-    move() {
-      this.asteroid.rotation.x += 0.01;
-      this.asteroid.rotation.y += 0.01;
-      this.asteroid.rotation.z += 0.01;
-      switch (this.currentWayPoint) {
-        case 0:
-          this.asteroid.position.x += 0.1;
-          if (this.asteroid.position.x > longGeometry / 2)
-            this.currentWayPoint = 1;
-          break;
-        case 1:
-          this.asteroid.position.y += 0.1;
-          if (this.asteroid.position.y > shortGeometry / 2)
-            this.currentWayPoint = 2;
-          break;
-        case 2:
-          this.asteroid.position.x -= 0.1;
-          if (this.asteroid.position.x < -longGeometry / 2)
-            this.currentWayPoint = 3;
-          break;
-        case 3:
-          this.asteroid.position.y -= 0.1;
-          if (this.asteroid.position.y < -shortGeometry / 2)
-            this.currentWayPoint = 0;
-          break;
-        default:
-          break;
-      }
-    }
-  }
-
   const asteroids = [];
   const containerRef = useRef(null);
   let aspectRatio = getAspectRatio();
@@ -84,6 +37,57 @@ function Pong3D() {
   let leftPaddlePosition = 0;
   let bounceCounter;
   let lifes = 7;
+
+  class Asteroid {
+    constructor(x, y, radius, currentWayPoint, scene) {
+      this.offset = Math.random() * 6 - wallThickness / 2;
+      this.speed =
+        ((2 * longGeometry + 2 * shortGeometry + 10 * this.offset) /
+          (2 * longGeometry + 2 * shortGeometry)) *
+        0.1;
+      this.scene = scene;
+      this.radius = radius;
+      this.currentWayPoint = currentWayPoint;
+      this.asteroid = new THREE.Mesh(asteroidGeometry, asteroidMaterial);
+      this.asteroid.position.set(x + this.offset, y + this.offset, 0);
+      this.asteroid.scale.set(
+        Math.random() / 2 + 0.5,
+        Math.random() / 2 + 0.5,
+        Math.random() / 2 + 0.5
+      );
+      this.scene.add(this.asteroid);
+    }
+
+    move() {
+      this.asteroid.rotation.x += this.offset * 0.01;
+      this.asteroid.rotation.y += this.offset * 0.01;
+      this.asteroid.rotation.z += 0.01;
+      switch (this.currentWayPoint) {
+        case 0:
+          this.asteroid.position.x += this.speed;
+          if (this.asteroid.position.x - this.offset > longGeometry / 2)
+            this.currentWayPoint = 1;
+          break;
+        case 1:
+          this.asteroid.position.y += this.speed;
+          if (this.asteroid.position.y - this.offset > shortGeometry / 2)
+            this.currentWayPoint = 2;
+          break;
+        case 2:
+          this.asteroid.position.x -= this.speed;
+          if (this.asteroid.position.x + this.offset < -longGeometry / 2)
+            this.currentWayPoint = 3;
+          break;
+        case 3:
+          this.asteroid.position.y -= this.speed;
+          if (this.asteroid.position.y + this.offset < -shortGeometry / 2)
+            this.currentWayPoint = 0;
+          break;
+        default:
+          break;
+      }
+    }
+  }
 
   useEffect(() => {
     const scene = new THREE.Scene();
