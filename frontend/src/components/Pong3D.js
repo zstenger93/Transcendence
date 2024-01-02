@@ -16,6 +16,25 @@ import sunTex from "../images/sun.jpg";
 function Pong3D() {
   const textureLoader = new THREE.TextureLoader();
 
+  class Asteroid {
+    constructor(x, y, radius, currentWayPoint, scene) {
+      this.scene = scene;
+      this.x = x;
+      this.y = y;
+      this.radius = radius;
+      this.currentWayPoint = currentWayPoint;
+      const asteroidGeometry = new THREE.SphereGeometry(radius, 32, 32);
+      const asteroidMaterial = new THREE.MeshBasicMaterial({
+        color: 0x222200,
+        map: textureLoader.load(venus),
+      });
+      const asteroid = new THREE.Mesh(asteroidGeometry, asteroidMaterial);
+      asteroid.position.set(x, y, 0);
+      this.scene.add(asteroid);
+    }
+  }
+
+  const asteroids = [];
   const containerRef = useRef(null);
   let aspectRatio = getAspectRatio();
   const paddleHeight = 6;
@@ -216,6 +235,50 @@ function Pong3D() {
     pointLight.position.set(0, 0, -9);
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.05);
     scene.add(pointLight, ambientLight);
+
+    // Loop to add asteroids
+    for (let i = 0; i < 8; i++) {
+      const newAsteroid = new Asteroid(
+        longGeometry / 2,
+        -shortGeometry / 2 + (shortGeometry / 8) * i,
+        1,
+        0,
+        scene
+      );
+      asteroids.push(newAsteroid);
+    }
+    for (let i = 0; i < 8; i++) {
+      const newAsteroid = new Asteroid(
+        -longGeometry / 2,
+        -shortGeometry / 2 + (shortGeometry / 8) * i,
+        1,
+        2,
+        scene
+      );
+      asteroids.push(newAsteroid);
+    }
+
+    for (let i = 0; i < 14; i++) {
+      const newAsteroid = new Asteroid(
+        -longGeometry / 2 + (longGeometry / 14) * i,
+        -shortGeometry / 2,
+        1,
+        3,
+        scene
+      );
+      asteroids.push(newAsteroid);
+    }
+
+    for (let i = 0; i < 15; i++) {
+      const newAsteroid = new Asteroid(
+        -longGeometry / 2 + (longGeometry / 14) * i,
+        shortGeometry / 2,
+        1,
+        1,
+        scene
+      );
+      asteroids.push(newAsteroid);
+    }
 
     // Animation loop
     let ballDirection = new THREE.Vector3(1, 1, 0).normalize();
