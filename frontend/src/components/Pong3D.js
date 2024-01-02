@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import * as THREE from "three";
-import coverImage from "../images/color.png";
 import world from "../images/world.jpg";
 import mercury from "../images/mercury.png";
 import venus from "../images/venus.jpg";
