@@ -5,7 +5,7 @@ import dj_database_url
 from dotenv import load_dotenv
 load_dotenv()
 
-IS_PRODUCTION = os.getenv('IS_PRODUCTION', 'False') == 'True'
+IS_PRODUCTION = os.getenv('DEBUG', 'False') == 'True'
 
 # postgres://transcendence_db_user:TyO3oKD9ARZQFWRy1TkBoLBOqRy5IlZv@dpg-cm993a7109ks73cilvk0-a/transcendence_db
 
