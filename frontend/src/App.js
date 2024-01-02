@@ -7,7 +7,7 @@ import Games from "./components/Games";
 import About from "./components/About";
 import NotFound from "./components/404";
 import Sidebar from "./components/Sidebar";
-import Welcome from "./components/Welcome";
+import Welcome from "./pages/Welcome";
 import Profile from "./components/Profile";
 import HomeBackground from "./images/bg0.png";
 import MortyBackground0 from "./images/morty0.png";
