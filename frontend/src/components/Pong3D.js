@@ -32,10 +32,9 @@ function Pong3D() {
   const wallOffsetX = 23.5;
   const wallOffsetY = 15;
   const wallThickness = 3;
-  const cylinderOffset = -1.5;
   const ballSpeed = 0.3;
   let leftPaddlePosition = 0;
-  let bounceCounter;
+  let bounceCounter = 0;
   let lifes = 7;
 
   class Asteroid {
