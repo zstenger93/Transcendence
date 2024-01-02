@@ -3,7 +3,7 @@ import { I18nextProvider, useTranslation } from "react-i18next";
 import Translation from "./components/Translation";
 import Home from "./pages/Home";
 import Chat from "./pages/Chat";
-import Games from "./pages/Games";
+import Games from "./pages/Games/Games";
 import About from "./pages/About";
 import NotFound from "./components/404";
 import Sidebar from "./components/hamburger_menu/Hamburger";
@@ -15,11 +15,11 @@ import MortyBackground1 from "./images/morty1.png";
 import MortyBackground2 from "./images/morty2.png";
 import MortyBackground3 from "./images/morty3.png";
 import MortyBackground4 from "./images/morty4.png";
-import Matchmaking from "./pages/Matchmaking";
-import OriginalPong from "./pages/OriginalPong";
-import PongAi from "./pages/PongAi";
-import Pong3D from "./pages/Pong3D";
-import ChoosePongMode from "./pages/ChoosePongMode";
+import Matchmaking from "./pages/Games/Matchmaking";
+import OriginalPong from "./pages/Games/OriginalPong";
+import PongAi from "./pages/Games/PongAi";
+import Pong3D from "./pages/Games/Pong3D";
+import ChoosePongMode from "./pages/Games/ChoosePongMode";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 

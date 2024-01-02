@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import * as THREE from "three";
-import coverImage from "../images/color.png";
-import world from "../images/world.jpg";
-import mercury from "../images/mercury.png";
-import venus from "../images/venus.jpg";
-import mars from "../images/mars.jpg";
-import jupiter from "../images/jupiter.jpg";
-import saturn from "../images/saturn.png";
-import uranus from "../images/uranus.png";
-import neptune from "../images/neptun.png";
+import coverImage from "../../images/color.png";
+import world from "../../images/world.jpg";
+import mercury from "../../images/mercury.png";
+import venus from "../../images/venus.jpg";
+import mars from "../../images/mars.jpg";
+import jupiter from "../../images/jupiter.jpg";
+import saturn from "../../images/saturn.png";
+import uranus from "../../images/uranus.png";
+import neptune from "../../images/neptun.png";
 
 // import { TextGeometry, MeshBasicMaterial, Mesh } from "three";
 

@@ -1,14 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import backgroundImage from "../images/pongCover.png";
-import { goFullScreen, exitFullScreen } from "../components/FullScreen";
-import { AiOutlineFullscreenExit } from "react-icons/ai";
-import { BsArrowsFullscreen } from "react-icons/bs";
-import { useLocation } from "react-router-dom";
+import backgroundImage from "../../images/pongCover.png";
+import settings from "../../images/settings.png";
 
 const GameCanvas = () => {
   // Default Parameters
-  let resize = true;
   const defaultSpeedX = 300;
+  let resize = true;
   const winScore = 2;
   const defaultSpeedY = 20;
   const [scoreLeftReact, setScoreLeft] = useState(0);
@@ -192,12 +189,7 @@ const GameCanvas = () => {
     drawWhiteStripe(ctx, canvas);
     ctx.fillStyle = "#FF3366";
     ctx.fillRect(0, leftPaddleY, paddleWidth, paddleHeight);
-    ctx.fillRect(
-      canvas.width - paddleWidth,
-      rightPaddleY,
-      paddleWidth,
-      paddleHeight
-    );
+    ArtificialInteligence(ctx, canvas);
     updateBallPosition(canvas);
     drawBall(ctx, canvas);
     drawScores(ctx, canvas);
@@ -206,68 +198,30 @@ const GameCanvas = () => {
 
   useEffect(() => {
     const playerSpeed = 30;
-    const keysPressed = {};
-
     const handleKeyDown = (event) => {
-      keysPressed[event.key] = true;
-      handleKeys();
-    };
-
-    const handleKeyUp = (event) => {
-      keysPressed[event.key] = false;
-      handleKeys();
-    };
-
-    const handleKeys = () => {
       if (canvasRef.current) {
-        // Left paddle controls
-        if (keysPressed["w"]) leftPaddleY -= playerSpeed * sizeSpeedRatio;
-        if (keysPressed["s"]) leftPaddleY += playerSpeed * sizeSpeedRatio;
+        if (event.key === "ArrowUp" || event.key === "w")
+          leftPaddleY -= playerSpeed * sizeSpeedRatio;
+        else if (event.key === "ArrowDown" || event.key === "s")
+          leftPaddleY += playerSpeed * sizeSpeedRatio;
         leftPaddleY = Math.max(
           0,
           Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
         );
-
-        // Right paddle controls
-        if (keysPressed["ArrowUp"])
-          rightPaddleY -= playerSpeed * sizeSpeedRatio;
-        if (keysPressed["ArrowDown"])
-          rightPaddleY += playerSpeed * sizeSpeedRatio;
-        rightPaddleY = Math.max(
+      }
+    };
+    const handleTouchMove = (event) => {
+      if (canvasRef.current && event.touches.length > 0) {
+        const rect = canvasRef.current.getBoundingClientRect();
+        const touchY = event.touches[0].clientY - rect.top - window.scrollY;
+        leftPaddleY = touchY - paddleHeight / 2;
+        leftPaddleY = Math.max(
           0,
-          Math.min(rightPaddleY, canvasRef.current.height - paddleHeight)
+          Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
         );
       }
     };
-    // touchpad controlls
-    const handleTouchMove = (event) => {
-      if (canvasRef.current) {
-        const touches = event.touches;
-        const rect = canvasRef.current.getBoundingClientRect();
-        for (let i = 0; i < touches.length; i++) {
-          const touch = touches[i];
-          const touchY = event.touches[i].clientY - rect.top - window.scrollY;
-          // Left paddle controls
-          if (touch.clientX < window.innerWidth / 2) {
-            leftPaddleY = touchY - paddleHeight / 2;
-            leftPaddleY = Math.max(
-              0,
-              Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
-            );
-          }
-          // Right paddle controls
-          else {
-            rightPaddleY = touchY - paddleHeight / 2;
-            rightPaddleY = Math.max(
-              0,
-              Math.min(rightPaddleY, canvasRef.current.height - paddleHeight)
-            );
-          }
-        }
-      }
-    };
 
-    document.addEventListener("keyup", handleKeyUp);
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("touchmove", handleTouchMove);
     window.addEventListener("resize", handleResize);
@@ -275,7 +229,6 @@ const GameCanvas = () => {
     draw(0);
 
     return () => {
-      document.removeEventListener("keyup", handleKeyUp);
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("resize", handleResize);
@@ -303,6 +256,16 @@ const GameCanvas = () => {
             className="border-8 border-solid border-white"
             style={{ backgroundColor: "#0F0F0F" }}
           ></canvas>
+          <button
+            className="absolute top-0 right-0 p-2 rounded"
+            onClick={handleButtonClick}
+          >
+            <img
+              src={settings}
+              alt="Image"
+              class="w-32 h-32 object-cover rounded-full"
+            />
+          </button>
         </>
       )}
     </div>
@@ -324,7 +287,7 @@ const WinScreen = () => {
         <div className="relative border-8 border-white">
           <img
             src={backgroundImage}
-            style={{ width: "80vw", height: "100%", objectFit: "cover" }}
+            style={{ width: "80vw", height: "45vw", objectFit: "cover" }}
             alt="Background"
           />
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
@@ -357,7 +320,7 @@ const LoseScreen = () => {
         <div className="relative border-8 border-white">
           <img
             src={backgroundImage}
-            style={{ width: "80vw", height: "100%", objectFit: "cover" }}
+            style={{ width: "80vw", height: "45vw", objectFit: "cover" }}
             alt="Background"
           />
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
@@ -375,20 +338,7 @@ const LoseScreen = () => {
   );
 };
 
-const Pong = () => {
-  const location = useLocation();
-  const [isFullScreen, setIsFullScreen] = useState(false);
-
-  const handleGoFullScreen = (elementId) => {
-    goFullScreen(elementId);
-    setIsFullScreen(true);
-  };
-
-  const handleExitFullScreen = (elementId) => {
-    exitFullScreen(elementId);
-    setIsFullScreen(false);
-  };
-
+const PongAi = () => {
   const [gameStarted, setGameStarted] = useState(false);
 
   const handleButtonClick = () => {
@@ -396,23 +346,7 @@ const Pong = () => {
   };
 
   return (
-    <div id="oP" className="flex justify-center items-center h-screen relative">
-      {location.pathname === "/originalpong" ||
-      location.pathname === "/pongai" ||
-      location.pathname === "/pong3d" ? (
-        <button
-          onClick={() =>
-            isFullScreen ? handleExitFullScreen() : handleGoFullScreen("oP")
-          }
-          className="absolute top-0 right-0 mr-4"
-        >
-          {isFullScreen ? (
-            <AiOutlineFullscreenExit size="32" color="white" />
-          ) : (
-            <BsArrowsFullscreen size="32" color="white" />
-          )}
-        </button>
-      ) : null}
+    <div className="flex justify-center items-center h-screen">
       {gameStarted ? (
         <GameCanvas />
       ) : (
@@ -436,4 +370,4 @@ const Pong = () => {
   );
 };
 
-export default Pong;
+export default PongAi;
