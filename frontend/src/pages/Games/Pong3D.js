@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import world from "../../images/world.jpg";
 import mercury from "../../images/mercury.png";
@@ -187,18 +187,18 @@ function Pong3D() {
       opacity: 0,
     });
 
-    const cylinderGeometryLong = new THREE.CylinderGeometry(
-      0.5,
-      0.5,
-      longGeometry,
-      32
-    );
-    const cylinderGeometryShort = new THREE.CylinderGeometry(
-      0.5,
-      0.5,
-      shortGeometry,
-      32
-    );
+    // const cylinderGeometryLong = new THREE.CylinderGeometry(
+    //   0.5,
+    //   0.5,
+    //   longGeometry,
+    //   32
+    // );
+    // const cylinderGeometryShort = new THREE.CylinderGeometry(
+    //   0.5,
+    //   0.5,
+    //   shortGeometry,
+    //   32
+    // );
 
     const planetMaterials = [
       new THREE.MeshStandardMaterial({ map: planetTextures[0] }),
@@ -352,6 +352,7 @@ function Pong3D() {
           wallOffsetY - paddleHeight / 2 - wallThickness / 2
         )
       );
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       leftPaddlePosition = leftPaddle.position.y;
       rightPaddle.position.y = Math.max(
         -wallOffsetY + paddleHeight / 2 + wallThickness / 2,
@@ -366,6 +367,7 @@ function Pong3D() {
       );
       const ballBoundingBox = new THREE.Box3().setFromObject(ball);
       if (leftPaddleBoundingBox.intersectsBox(ballBoundingBox))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         bounceCounter += 1;
       if (
         leftPaddleBoundingBox.intersectsBox(ballBoundingBox) ||
@@ -384,6 +386,7 @@ function Pong3D() {
             ballDirection.x *= -1;
             ball.position.x = 0;
             ball.position.y = 0;
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             lifes = orbits.length - 1;
             if (orbits.length === 0) {
               alert("GAME OVER");
@@ -409,6 +412,7 @@ function Pong3D() {
 
     function handleResize() {
       const newAspectRatio = getAspectRatio();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       aspectRatio = newAspectRatio;
       camera.aspect = newAspectRatio;
       camera.updateProjectionMatrix();
@@ -427,10 +431,13 @@ function Pong3D() {
     window.addEventListener("resize", handleResize);
 
     let isDragging = false;
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     let startY = 0;
 
     function handleKeyDown(event) {
       if (event.key === "w" || event.key === "W" || event.key === "ArrowUp")
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         leftPaddlePosition += 1;
       if (event.key === "s" || event.key === "S" || event.key === "ArrowDown")
         leftPaddlePosition -= 1;
