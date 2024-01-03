@@ -12,35 +12,30 @@ const RegisterButt = ({ t, redirectToHome }) => {
 
   const registerTheUser = async () => {
     try {
-		const response = await axios.post(
-		  "http://localhost:8000/api/register",
-		  {
-			email: email,
-			username: username,
-			password: password,
-		  },
-		  { withCredentials: true }
-		);
-		console.log(response.data);
-	  } catch (error) {
-		if (error.response && error.response.data) {
-		  let errorMessage;
-		  if (typeof error.response.data === 'string') {
-			errorMessage = error.response.data.match(
-			  /<pre class="exception_value">([^<]+)<\/pre>/
-			);
-		  }
-		  setError(
-			errorMessage
-			  ? errorMessage[1].replace(/[\[\]"']/g, "")
-			  : "An unexpected error occurred."
-		  );
-		} else {
-		  console.error("An unexpected error occurred:", error.message);
-		  setError("An unexpected error occurred.");
-		}
-		setShowError(true);
-	  }
+      const response = await axios.post(
+        "http://localhost:8000/api/register",
+        {
+          email: email,
+          username: username,
+          password: password,
+        },
+        { withCredentials: true }
+      );
+      console.log(response.data);
+	  redirectToHome();
+    } catch (error) {
+      if (error.response && error.response.data) {
+        let errorMessage;
+        if (typeof error.response.data === "object") {
+          errorMessage = error.response.data.detail;
+        }
+        setError(errorMessage ? errorMessage : "An unexpected error occurred.");
+      } else {
+        console.error("An unexpected error occurred:", error.message);
+        setError("An unexpected error occurred.");
+      }
+      setShowError(true);
+    }
   };
 
   return (
@@ -48,8 +43,8 @@ const RegisterButt = ({ t, redirectToHome }) => {
       <button
         onClick={() => setShowFields((prevShowFields) => !prevShowFields)}
         className="bg-gray-900 text-gray-300 font-nosifer font-bold 
-				px-4 py-2 rounded cursor-pointer hover:bg-gray-900 hover:bg-opacity-70
-				border-b-2 border-r-2 border-purple-600 mb-4"
+		px-4 py-2 rounded cursor-pointer hover:bg-gray-900 hover:bg-opacity-70
+		border-b-2 border-r-2 border-purple-600 mb-4"
       >
         {t("Register")}
       </button>
@@ -62,7 +57,7 @@ const RegisterButt = ({ t, redirectToHome }) => {
             placeholder={t("Username")}
             onKeyPress={(e) => e.key === "Enter" && redirectToHome()}
             className="mb-2 mt-4 bg-gray-900 bg-opacity-60 text-white 
-						rounded text-center border-b-2 border-r-2 border-purple-600"
+			rounded text-center border-b-2 border-r-2 border-purple-600"
             autoComplete="new-username"
           />
           <input
@@ -72,7 +67,7 @@ const RegisterButt = ({ t, redirectToHome }) => {
             placeholder={t("Email")}
             onKeyPress={(e) => e.key === "Enter" && redirectToHome()}
             className="mb-2 bg-gray-900 bg-opacity-60 text-white 
-						rounded text-center border-b-2 border-r-2 border-purple-600"
+			rounded text-center border-b-2 border-r-2 border-purple-600"
             autoComplete="new-email"
           />
           <input
@@ -82,15 +77,15 @@ const RegisterButt = ({ t, redirectToHome }) => {
             placeholder={t("Password")}
             onKeyPress={(e) => e.key === "Enter" && redirectToHome()}
             className="mb-4 bg-gray-900 bg-opacity-60 text-white 
-						rounded text-center border-b-2 border-r-2 border-purple-600"
+			rounded text-center border-b-2 border-r-2 border-purple-600"
             autoComplete="new-password"
           />
           <button
             onClick={() => registerTheUser()}
             className="bg-gray-900 text-gray-300 
-						font-nosifer font-bold px-4 py-2 rounded cursor-pointer 
-						hover:bg-gray-900 hover:bg-opacity-70 border-b-2 border-r-2 
-						border-purple-600 mb-20"
+			font-nosifer font-bold px-4 py-2 rounded cursor-pointer 
+			hover:bg-gray-900 hover:bg-opacity-70 border-b-2 border-r-2 
+			border-purple-600 mb-20"
           >
             {t("Join")}
           </button>
@@ -98,14 +93,15 @@ const RegisterButt = ({ t, redirectToHome }) => {
       )}
       {showError && (
         <div className="fixed inset-0 flex items-start justify-center pt-20 z-50">
-          <div className="bg-gray-900 bg-opacity-80 text-white p-8 rounded-xl shadow-xl relative border border-red-700">
-            <div
-              className=""
-              dangerouslySetInnerHTML={{ __html: error }}
-            />
+          <div
+            className="bg-gray-900 bg-opacity-80 text-white p-8 rounded-xl 
+		  	shadow-xl relative border border-red-700"
+          >
+            <div className="" dangerouslySetInnerHTML={{ __html: error }} />
             <button
               onClick={() => setShowError(false)}
-              className="absolute top-0 right-0 mt-2 mr-2 text-2xl leading-none hover:text-gray-300"
+              className="absolute top-0 right-0 mt-2 mr-2 text-2xl leading-none 
+			  hover:text-gray-300"
             >
               &times;
             </button>

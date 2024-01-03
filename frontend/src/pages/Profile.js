@@ -155,7 +155,8 @@ function MatchHistory() {
   return (
     <div
       className="bg-gray-900 bg-opacity-80 p-6 shadow-xl
-      rounded-md max-h-96 overflow-y-auto mb-10 sm:w-full">
+      rounded-md max-h-96 overflow-y-auto mb-10 sm:w-full"
+    >
       <h3 className="text-xl text-gray-300 font-nosifer font-bold mb-4 text-center">
         {t("Match History")}
       </h3>
@@ -236,21 +237,21 @@ function Profile() {
   // THIS IS TOTALLY GARBAGE
   // useEffect(() => {
   //   const originalBackground = document.body.style.background;
-  
+
   //   document.body.style.background = "url('src/images/morty2.png') center center/cover no-repeat";
-  
+
   //   document.body.classList.add('overflow-y-auto');
-  
+
   //   return () => {
   //     document.body.style.background = originalBackground;
-  
+
   //     document.body.classList.remove('overflow-y-auto');
   //   };
   // }, []);
 
   return (
     <div
-    className="flex flex-col items-center justify-center
+      className="flex flex-col items-center justify-center
     min-h-screen bg-cover bg-center bg-no-repeat shadow-xl"
     >
       <div className="max-w-md flex flex-col items-center">
@@ -296,10 +297,8 @@ function Profile() {
               border-b-2 border-r-2 border-purple-600
               ${
                 showFriendsList
-                ?
-                "bg-purple-600 text-white"
-                :
-                "text-gray-700 hover:bg-purple-600 hover:text-white"
+                  ? "bg-purple-600 text-white"
+                  : "text-gray-700 hover:bg-purple-600 hover:text-white"
               }`}
               onClick={toggleFriendsList}
             >
@@ -309,7 +308,9 @@ function Profile() {
               className={`w-36 bg-blue-300 bg-opacity-80 font-bold py-2 px-4 rounded 
               border-b-2 border-r-2 border-purple-600
               ${
-                showMatchHistory ? "bg-purple-600 text-white" : "text-gray-700 hover:bg-purple-600 hover:text-white"
+                showMatchHistory
+                  ? "bg-purple-600 text-white"
+                  : "text-gray-700 hover:bg-purple-600 hover:text-white"
               }`}
               onClick={toggleMatchHistory}
             >

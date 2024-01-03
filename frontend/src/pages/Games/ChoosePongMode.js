@@ -12,16 +12,16 @@ function ChoosePongMode() {
         <Link
           to="/originalpong"
           className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer 
-		    hover:bg-purple-700 text-white font-bold py-2 px-4 rounded 
-		      block text-center border-b-2 border-r-2 border-purple-600"
+			hover:bg-purple-700 text-white font-bold py-2 px-4 rounded
+			block text-center border-b-2 border-r-2 border-purple-600"
         >
           {t("Original Pong")}
         </Link>
         <Link
           to="/multiplayer"
           className="mb-4 bg-purple-900 bg-opacity-80 font-nosifer 
-		    hover:bg-purple-700 text-white font-bold py-2 px-4 rounded 
-		      block text-center  border-b-2 border-r-2 border-purple-600"
+			hover:bg-purple-700 text-white font-bold py-2 px-4 rounded 
+			block text-center  border-b-2 border-r-2 border-purple-600"
         >
           {t("Multiplayer")}
         </Link>
@@ -53,8 +53,8 @@ function ChoosePongMode() {
           <button
             onClick={() => navigate(-1)}
             className="mt-6 bg-purple-900 bg-opacity-80 font-nosifer 
-			  hover:bg-purple-700 text-white font-bold py-2 px-4 rounded
-          border-b-2 border-r-2 border-purple-600"
+			hover:bg-purple-700 text-white font-bold py-2 px-4 rounded
+			border-b-2 border-r-2 border-purple-600"
           >
             {t("Back")}
           </button>
