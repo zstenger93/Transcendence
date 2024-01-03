@@ -10,8 +10,9 @@ RUN npm install && \
     npm install react-slick slick-carousel --save && \
     npm install react-i18next i18next --save && \
     npm install three --save && \
-	  npm install --save-dev @babel/plugin-proposal-private-property-in-object && \
-	  npm install matchmedia-polyfill
+	npm install --save-dev @babel/plugin-proposal-private-property-in-object && \
+	npm install matchmedia-polyfill && \
+    npm install axios --save
 
 COPY . .
 

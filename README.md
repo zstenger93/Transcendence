@@ -48,7 +48,7 @@
 ## Git Flow
 
 Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices <br/>
-.....|.............................................................| <br/>
+.....|............................................................| <br/>
 .....|_______________ :x: ______________|
 
 ## [Microservices](https://www.youtube.com/watch?v=y8OnoxKotPQ)
@@ -62,6 +62,7 @@ Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices
 	- Frontend with React
 - Backend
 - Frontend
+	- React
 
 ---
 ## Setup
@@ -92,14 +93,14 @@ Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices
 - .github folder
 	- workflows
 		- workflow_name.yaml
-			- setting up jobs for the workflow
-				- testing
-					- need to upload artifacts 
-				- building
-					- need to download the uploaded artifacts
-					- ceraful with the correct path
-				- deploying
-					- in case of react project, in github settings directory should be changed to /doc instead of root
+- workflow jobs
+	- testing
+		- need to upload artifacts 
+	- building
+		- need to download the uploaded artifacts
+		- ceraful with the correct path
+	- deploying
+		- in case of react project, in github settings directory should be changed to /doc instead of root
 
 ---
 
@@ -114,23 +115,31 @@ postgreSQL
 React
 Tailwind
 
+- Multi language support
+- Extra browser support
+- Multiple device support
+- Fullscreen mode for games except on IOS
+
 - root / Login
-	- Home / Welcome
-	- Game & Watch
-		- Pong
-			- Original
-			- AI Opponent
-			- Multiplayer
-			- Modded
-			- 3D
-		- Future game
-	- Chat
-		- Channels
-		- Online
-		- Image Sharing
-	- Profile
-	- About Us
-	- Logout
+	- Register with username email and password to the site
+	- Login with your username and password
+	- Login via 42 auth
+- Home / Welcome
+- Game & Watch
+	- Pong
+		- Original
+		- AI Opponent
+		- Multiplayer
+		- Modded
+		- 3D Pong
+	- Future game
+- Chat
+	- Channels
+	- Online
+	- Image Sharing
+- Profile
+- About Us
+- Logout
 
 ---
 
@@ -168,6 +177,10 @@ Tailwind
 PONG
 
 Sortof works now and you can play on one keyboard. Also AI mode has been implemented.
+
+- Extra Pong versions implemented:
+	- AI Pong
+	- 3D Pong
 
 ---
 
