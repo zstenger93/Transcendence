@@ -41,11 +41,21 @@ const PageWrapper = ({ children, image, showSidebar = true }) => {
   );
 };
 
+
 function App() {
   const { i18n } = useTranslation();
   const basename =
-    process.env.NODE_ENV === "production" ? "/Transcendence" : "";
-
+  process.env.NODE_ENV === "production" ? "/Transcendence" : "";
+  
+  // const DEBUG = process.env.REACT_APP_DEBUG === "true";
+  const DEBUG = false;
+  let REDIRECT_URI;
+  
+  if (DEBUG) {
+      REDIRECT_URI = "http://localhost:8000";
+  } else {
+      REDIRECT_URI = "http://transcendence-backend-znhl.onrender.com";
+  }
   useEffect(() => {
     const storedLanguage = localStorage.getItem("i18nextLng");
     if (storedLanguage && i18n.language !== storedLanguage) {
@@ -61,7 +71,7 @@ function App() {
             path="/"
             element={
               <PageWrapper image={HomeBackground} showSidebar={false}>
-                <Welcome />
+                <Welcome redirectUri={REDIRECT_URI} />
               </PageWrapper>
             }
           />
