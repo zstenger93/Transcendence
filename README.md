@@ -121,22 +121,25 @@ Tailwind
 - Fullscreen mode for games except on IOS
 
 - root / Login
-	- Home / Welcome
-	- Game & Watch
-		- Pong
-			- Original
-			- AI Opponent
-			- Multiplayer
-			- Modded
-			- 3D Pong
-		- Future game
-	- Chat
-		- Channels
-		- Online
-		- Image Sharing
-	- Profile
-	- About Us
-	- Logout
+	- Register with username email and password to the site
+	- Login with your username and password
+	- Login via 42 auth
+- Home / Welcome
+- Game & Watch
+	- Pong
+		- Original
+		- AI Opponent
+		- Multiplayer
+		- Modded
+		- 3D Pong
+	- Future game
+- Chat
+	- Channels
+	- Online
+	- Image Sharing
+- Profile
+- About Us
+- Logout
 
 ---
 
