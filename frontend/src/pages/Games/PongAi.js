@@ -206,6 +206,7 @@ const GameCanvas = () => {
     const handleKeyDown = (event) => {
       if (canvasRef.current) {
         if (event.key === "ArrowUp" || event.key === "w")
+          // eslint-disable-next-line
           leftPaddleY -= playerSpeed * sizeSpeedRatio;
         else if (event.key === "ArrowDown" || event.key === "s")
           leftPaddleY += playerSpeed * sizeSpeedRatio;
@@ -239,12 +240,6 @@ const GameCanvas = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [canvasRef]);
-
-  const handleButtonClick = () => {
-    resize = !resize;
-    handleResize();
-    console.log("Something should have happened");
-  };
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -302,7 +297,7 @@ const WinScreen = () => {
               {t("Play Again")}
             </button>
           </div>
-		  <BackButton navigate={navigate} t={t} />
+          <BackButton navigate={navigate} t={t} />
         </div>
       )}
     </div>
@@ -344,7 +339,7 @@ const LoseScreen = () => {
               {t("Play Again")}
             </button>
           </div>
-		  <BackButton navigate={navigate} t={t} />
+          <BackButton navigate={navigate} t={t} />
         </div>
       )}
     </div>

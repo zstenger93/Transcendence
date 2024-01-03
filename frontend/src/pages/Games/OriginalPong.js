@@ -47,26 +47,7 @@ const GameCanvas = () => {
     const y = 0;
     ctx.fillRect(x, y, stripeWidth, stripeHeight);
   };
-  // This is bloody AI
-  const ArtificialInteligence = (ctx, canvas) => {
-    const aiSpeed = 440;
-    let tempPadleY = rightPaddleY;
-    if (ballY > rightPaddleY + paddleHeight / 2)
-      tempPadleY += aiSpeed * dt * sizeSpeedRatio;
-    else if (ballY < rightPaddleY + paddleHeight / 2)
-      tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
-    tempPadleY = Math.max(
-      0,
-      Math.min(tempPadleY, canvas.height - paddleHeight)
-    );
-    rightPaddleY = tempPadleY;
-    ctx.fillRect(
-      canvas.width - paddleWidth,
-      rightPaddleY,
-      paddleWidth,
-      paddleHeight
-    );
-  };
+
   // This function Updates The Ball Positions
   const updateBallPosition = (canvas) => {
     const ballAngleOffset = 0.02;
@@ -207,22 +188,23 @@ const GameCanvas = () => {
   };
 
   useEffect(() => {
-    const playerSpeed = 30;
-    const keysPressed = {};
-
-    const handleKeyDown = (event) => {
-      keysPressed[event.key] = true;
-      handleKeys();
-    };
-
-    const handleKeyUp = (event) => {
-      keysPressed[event.key] = false;
-      handleKeys();
-    };
-
-    const handleKeys = () => {
-      if (canvasRef.current) {
-        // Left paddle controls
+	  const playerSpeed = 30;
+	  const keysPressed = {};
+	  
+	  const handleKeyDown = (event) => {
+		  keysPressed[event.key] = true;
+		  handleKeys();
+		};
+		
+		const handleKeyUp = (event) => {
+			keysPressed[event.key] = false;
+			handleKeys();
+		};
+		
+		const handleKeys = () => {
+			if (canvasRef.current) {
+				// Left paddle controls
+				// eslint-disable-next-line react-hooks/exhaustive-deps
         if (keysPressed["w"]) leftPaddleY -= playerSpeed * sizeSpeedRatio;
         if (keysPressed["s"]) leftPaddleY += playerSpeed * sizeSpeedRatio;
         leftPaddleY = Math.max(
@@ -232,6 +214,7 @@ const GameCanvas = () => {
 
         // Right paddle controls
         if (keysPressed["ArrowUp"])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
           rightPaddleY -= playerSpeed * sizeSpeedRatio;
         if (keysPressed["ArrowDown"])
           rightPaddleY += playerSpeed * sizeSpeedRatio;
@@ -283,12 +266,6 @@ const GameCanvas = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [canvasRef]);
-
-  const handleButtonClick = () => {
-    resize = !resize;
-    handleResize();
-    console.log("Something should have happened");
-  };
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -346,7 +323,7 @@ const WinScreen = () => {
               {t("Play Again")}
             </button>
           </div>
-		  <BackButton navigate={navigate} t={t} />
+          <BackButton navigate={navigate} t={t} />
         </div>
       )}
     </div>
@@ -388,7 +365,7 @@ const LoseScreen = () => {
               {t("Play Again")}
             </button>
           </div>
-		  <BackButton navigate={navigate} t={t} />
+          <BackButton navigate={navigate} t={t} />
         </div>
       )}
     </div>
