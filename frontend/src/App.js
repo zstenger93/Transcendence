@@ -20,6 +20,7 @@ import OriginalPong from "./pages/Games/OriginalPong";
 import PongAi from "./pages/Games/PongAi";
 import Pong3D from "./pages/Games/Pong3D";
 import ChoosePongMode from "./pages/Games/ChoosePongMode";
+import BreakingBadMorty from "./images/rmb3.png";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -142,7 +143,14 @@ function App() {
               <PageWrapper image={HomeBackground}>
                 <PongAi />
               </PageWrapper>
-            }
+          }
+          />
+          <Route path="choosepongmode" element={
+            <PageWrapper image={BreakingBadMorty}>
+              <ChoosePongMode
+              />
+            </PageWrapper>
+          }
           />
           <Route
             path="choosepongmode"
