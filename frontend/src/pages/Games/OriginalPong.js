@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import backgroundImage from "../../images/pongCover.png";
+import backgroundImage from "../../images/pongbg.png";
 import { goFullScreen, exitFullScreen } from "../../components/FullScreen";
 import { AiOutlineFullscreenExit } from "react-icons/ai";
 import { BsArrowsFullscreen } from "react-icons/bs";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import BackButton from "../../components/BackButton";
+import { useTranslation } from "react-i18next";
 
 const GameCanvas = () => {
   // Default Parameters
@@ -310,6 +312,8 @@ const GameCanvas = () => {
 };
 
 const WinScreen = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const [gameStarted, setGameStarted] = useState(false);
 
   const handleButtonClick = () => {
@@ -321,21 +325,28 @@ const WinScreen = () => {
       {gameStarted ? (
         <GameCanvas />
       ) : (
-        <div className="relative border-8 border-white">
+        <div className="relative">
           <img
             src={backgroundImage}
             style={{ width: "80vw", height: "100%", objectFit: "cover" }}
             alt="Background"
+            className="rounded-xl shadow-lg"
           />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-            <p> YOU WON!</p>
+          <div
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 
+		  -translate-y-1/2 text-center font-bold font-nosifer"
+          >
+            <p>{t("YOU WON!")}</p>
             <button
               onClick={handleButtonClick}
-              className="px-4 py-2 bg-white text-black"
+              className="mt-10 bg-purple-900 bg-opacity-80 font-nosifer 
+			  hover:bg-purple-700 text-white font-bold py-2 px-4 rounded
+				  border-b-2 border-r-2 border-purple-600"
             >
-              Start Game
+              {t("Play Again")}
             </button>
           </div>
+		  <BackButton navigate={navigate} t={t} />
         </div>
       )}
     </div>
@@ -343,6 +354,8 @@ const WinScreen = () => {
 };
 
 const LoseScreen = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const [gameStarted, setGameStarted] = useState(false);
 
   const handleButtonClick = () => {
@@ -354,21 +367,28 @@ const LoseScreen = () => {
       {gameStarted ? (
         <GameCanvas />
       ) : (
-        <div className="relative border-8 border-white">
+        <div className="relative">
           <img
             src={backgroundImage}
             style={{ width: "80vw", height: "100%", objectFit: "cover" }}
             alt="Background"
+            className="rounded-xl shadow-lg"
           />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-            <p> YOU LOST!</p>
+          <div
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 
+		  -translate-y-1/2 text-center font-bold font-nosifer"
+          >
+            <p>{t("YOU LOST!")}</p>
             <button
               onClick={handleButtonClick}
-              className="px-4 py-2 bg-white text-black"
+              className="mt-10 bg-purple-900 bg-opacity-80 font-nosifer 
+			  hover:bg-purple-700 text-white font-bold py-2 px-4 rounded
+				  border-b-2 border-r-2 border-purple-600"
             >
-              Start Game
+              {t("Play Again")}
             </button>
           </div>
+		  <BackButton navigate={navigate} t={t} />
         </div>
       )}
     </div>
@@ -376,7 +396,9 @@ const LoseScreen = () => {
 };
 
 const Pong = () => {
+  const { t } = useTranslation();
   const location = useLocation();
+  const navigate = useNavigate();
   const [isFullScreen, setIsFullScreen] = useState(false);
 
   const handleGoFullScreen = (elementId) => {
@@ -396,7 +418,7 @@ const Pong = () => {
   };
 
   return (
-    <div id="oP" className="flex justify-center items-center h-screen relative">
+    <div id="oP" className="flex justify-center items-center h-screen">
       {location.pathname === "/originalpong" ||
       location.pathname === "/pongai" ||
       location.pathname === "/pong3d" ? (
@@ -404,7 +426,7 @@ const Pong = () => {
           onClick={() =>
             isFullScreen ? handleExitFullScreen() : handleGoFullScreen("oP")
           }
-          className="absolute top-0 right-0 mr-4"
+          className="absolute top-2 right-2 m-4"
         >
           {isFullScreen ? (
             <AiOutlineFullscreenExit size="32" color="white" />
@@ -414,22 +436,31 @@ const Pong = () => {
         </button>
       ) : null}
       {gameStarted ? (
-        <GameCanvas />
+        <>
+          <GameCanvas />
+        </>
       ) : (
-        <div className="relative border-8 border-white">
+        <div className="relative">
           <img
             src={backgroundImage}
             style={{ width: "80vw", height: "45vw", objectFit: "cover" }}
             alt="Background"
+            className="rounded-xl shadow-lg"
           />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+          <div
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 
+		  -translate-y-1/2 text-center"
+          >
             <button
               onClick={handleButtonClick}
-              className="px-4 py-2 bg-white text-black"
+              className="mt-6 bg-purple-900 bg-opacity-80 font-nosifer 
+			  hover:bg-purple-700 text-white font-bold py-2 px-4 rounded
+				  border-b-2 border-r-2 border-purple-600"
             >
-              Start Game
+              {t("Start Game")}
             </button>
           </div>
+          <BackButton navigate={navigate} t={t} />
         </div>
       )}
     </div>

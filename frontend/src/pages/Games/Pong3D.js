@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import * as THREE from "three";
-import coverImage from "../../images/color.png";
 import world from "../../images/world.jpg";
 import mercury from "../../images/mercury.png";
 import venus from "../../images/venus.jpg";
@@ -9,10 +8,22 @@ import jupiter from "../../images/jupiter.jpg";
 import saturn from "../../images/saturn.png";
 import uranus from "../../images/uranus.png";
 import neptune from "../../images/neptun.png";
+import sunTex from "../../images/sun.jpg";
 
 // import { TextGeometry, MeshBasicMaterial, Mesh } from "three";
 
 function Pong3D() {
+  const textureLoader = new THREE.TextureLoader();
+  const longGeometry = 50;
+  const shortGeometry = 30;
+  const asteroidMaterial = new THREE.MeshLambertMaterial({
+    color: 0xffffff,
+    map: textureLoader.load(venus),
+    reflectivity: 1,
+  });
+
+  const asteroidGeometry = new THREE.SphereGeometry(1, 32, 32);
+  const asteroids = [];
   const containerRef = useRef(null);
   let aspectRatio = getAspectRatio();
   const paddleHeight = 6;
@@ -20,11 +31,61 @@ function Pong3D() {
   const wallOffsetX = 23.5;
   const wallOffsetY = 15;
   const wallThickness = 3;
-  const longGeometry = 50;
-  const shortGeometry = 30;
-  const cylinderOffset = -1.5;
-  const moonRadius = 1.2;
   const ballSpeed = 0.3;
+  let leftPaddlePosition = 0;
+  let bounceCounter = 0;
+  let lifes = 7;
+
+  class Asteroid {
+    constructor(x, y, radius, currentWayPoint, scene) {
+      this.offset = Math.random() * 6 - wallThickness / 2;
+      this.speed =
+        ((2 * longGeometry + 2 * shortGeometry + 10 * this.offset) /
+          (2 * longGeometry + 2 * shortGeometry)) *
+        0.1;
+      this.scene = scene;
+      this.radius = radius;
+      this.currentWayPoint = currentWayPoint;
+      this.asteroid = new THREE.Mesh(asteroidGeometry, asteroidMaterial);
+      this.asteroid.position.set(x + this.offset, y + this.offset, 0);
+      this.asteroid.scale.set(
+        Math.random() / 2 + 0.5,
+        Math.random() / 2 + 0.5,
+        Math.random() / 2 + 0.5
+      );
+      this.scene.add(this.asteroid);
+    }
+
+    move() {
+      this.asteroid.rotation.x += this.offset * 0.01;
+      this.asteroid.rotation.y += this.offset * 0.01;
+      this.asteroid.rotation.z += 0.01;
+      switch (this.currentWayPoint) {
+        case 0:
+          this.asteroid.position.x += this.speed;
+          if (this.asteroid.position.x - this.offset > longGeometry / 2)
+            this.currentWayPoint = 1;
+          break;
+        case 1:
+          this.asteroid.position.y += this.speed;
+          if (this.asteroid.position.y - this.offset > shortGeometry / 2)
+            this.currentWayPoint = 2;
+          break;
+        case 2:
+          this.asteroid.position.x -= this.speed;
+          if (this.asteroid.position.x + this.offset < -longGeometry / 2)
+            this.currentWayPoint = 3;
+          break;
+        case 3:
+          this.asteroid.position.y -= this.speed;
+          if (this.asteroid.position.y + this.offset < -shortGeometry / 2)
+            this.currentWayPoint = 0;
+          break;
+        default:
+          break;
+      }
+    }
+  }
 
   useEffect(() => {
     const scene = new THREE.Scene();
@@ -34,8 +95,21 @@ function Pong3D() {
     if (containerRef.current) {
       containerRef.current.appendChild(renderer.domElement);
     }
-
-    camera.position.z = 35;
+    // var loader = new THREE.GLTFLoader();
+    const planetTextures = [
+      textureLoader.load(mercury),
+      textureLoader.load(venus),
+      textureLoader.load(world),
+      textureLoader.load(mars),
+      textureLoader.load(jupiter),
+      textureLoader.load(saturn),
+      textureLoader.load(uranus),
+      textureLoader.load(neptune),
+    ];
+    const sunTexture = textureLoader.load(sunTex);
+    // camera.position.set(-15, 5, 35);
+    camera.position.set(0, 0, 35);
+    camera.rotation.set(0, 0, 0); // -0.3. -0.3 -0.3
 
     // Create canvas for rendering text
     const canvas = document.createElement("canvas");
@@ -44,30 +118,47 @@ function Pong3D() {
     context.fillStyle = "white";
     context.fillText("BLACKHOLE PONG", 44, 24);
 
-    // Create texture from the canvas
+    //Text
     const textureText = new THREE.CanvasTexture(canvas);
-
-    // Create material with text texture
     const textMaterial = new THREE.MeshBasicMaterial({
       map: textureText,
       transparent: true,
     });
-
-    // Apply the material to a plane
     const textGeometry = new THREE.PlaneGeometry(10, 10);
     const textMesh = new THREE.Mesh(textGeometry, textMaterial);
     textMesh.position.set(
       0,
-      -shortGeometry / 2 - wallThickness * 1.3,
+      -shortGeometry / 2 - wallThickness * 2,
       wallThickness / 2 + 0.1
-    ); // Adjust position as needed
+    );
     scene.add(textMesh);
 
     // Create stars
     const starGeometry = new THREE.SphereGeometry(0.2, 32, 32);
     const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const sunMaterialLayer2 = new THREE.MeshBasicMaterial({
+      color: 0xffff00,
+      map: sunTexture,
+      rougness: 0.1,
+      metalness: 1,
+      opacity: 0.1,
+      transparent: true,
+    });
+    const sunMaterial = new THREE.MeshBasicMaterial({
+      color: 0xff8800,
+      map: sunTexture,
+      rougness: 0.1,
+      metalness: 1,
+    });
+    const sunGeometry = new THREE.SphereGeometry(10, 32, 32);
+    const sunGeometryLayer2 = new THREE.SphereGeometry(12, 32, 32);
+    const sun = new THREE.Mesh(sunGeometry, sunMaterial);
+    sun.position.set(0, 0, -20);
+    const sunLayer2 = new THREE.Mesh(sunGeometryLayer2, sunMaterialLayer2);
+    scene.add(sun);
+    sun.add(sunLayer2);
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 150; i++) {
       const star = new THREE.Mesh(starGeometry, starMaterial);
       star.position.x = Math.random() * longGeometry * 6 - longGeometry * 3;
       star.position.y = Math.random() * shortGeometry * 4 - shortGeometry * 2;
@@ -92,9 +183,8 @@ function Pong3D() {
       wallThickness
     );
     const wallMaterial = new THREE.MeshStandardMaterial({
-      color: 0xffff80,
-      metalness: 1,
-      roughness: 0.4,
+      transparent: true,
+      opacity: 0,
     });
 
     const cylinderGeometryLong = new THREE.CylinderGeometry(
@@ -110,19 +200,6 @@ function Pong3D() {
       32
     );
 
-    const textureLoader = new THREE.TextureLoader();
-
-    const planetTextures = [
-      textureLoader.load(mercury),
-      textureLoader.load(venus),
-      textureLoader.load(world),
-      textureLoader.load(mars),
-      textureLoader.load(jupiter),
-      textureLoader.load(saturn),
-      textureLoader.load(uranus),
-      textureLoader.load(neptune),
-    ];
-
     const planetMaterials = [
       new THREE.MeshStandardMaterial({ map: planetTextures[0] }),
       new THREE.MeshStandardMaterial({ map: planetTextures[1] }),
@@ -133,36 +210,6 @@ function Pong3D() {
       new THREE.MeshStandardMaterial({ map: planetTextures[6] }),
       new THREE.MeshStandardMaterial({ map: planetTextures[7] }),
     ];
-
-    const texture = textureLoader.load(coverImage);
-    const textureWorld = textureLoader.load(world);
-    const cylinderMaterial = new THREE.MeshStandardMaterial({
-      map: texture,
-    });
-
-    const ballMaterial = new THREE.MeshStandardMaterial({
-      map: textureWorld,
-      metalness: 0,
-      roughness: 1,
-    });
-
-    const cylinders = [
-      new THREE.Mesh(cylinderGeometryShort, cylinderMaterial),
-      new THREE.Mesh(cylinderGeometryShort, cylinderMaterial),
-      new THREE.Mesh(cylinderGeometryLong, cylinderMaterial),
-      new THREE.Mesh(cylinderGeometryLong, cylinderMaterial),
-    ];
-    cylinders[0].position.set(-wallOffsetX - cylinderOffset, 0, cylinderOffset);
-    cylinders[1].position.set(wallOffsetX + cylinderOffset, 0, cylinderOffset);
-    cylinders[2].position.set(0, -wallOffsetY - cylinderOffset, cylinderOffset);
-    cylinders[3].position.set(0, wallOffsetY + cylinderOffset, cylinderOffset);
-    cylinders[2].rotation.z = Math.PI / 2;
-    cylinders[3].rotation.z = Math.PI / 2;
-    cylinders.forEach((cylinder) => scene.add(cylinder));
-
-    // Add light to the cylinders
-    const cylinderLight = new THREE.PointLight(0x00ff00, 10, 30, 2);
-    cylinders.forEach((cylinder) => cylinder.add(cylinderLight));
 
     const walls = [
       new THREE.Mesh(wallGeometryLong, wallMaterial), // Top wall
@@ -216,20 +263,59 @@ function Pong3D() {
     scene.add(rightPaddle);
     // Create
     const ballGeometry = new THREE.SphereGeometry(1, 32, 32);
-    const ball = new THREE.Mesh(ballGeometry, ballMaterial);
+    const ball = new THREE.Mesh(ballGeometry, planetMaterials[7]);
     ball.position.set(0, 0, 0.5);
     scene.add(ball);
 
-    const moonGeo = new THREE.SphereGeometry(0.25, 32, 32);
-    const moon = new THREE.Mesh(moonGeo, planetMaterials[0]);
-
-    moon.position.set(0, 0, 1.5);
-    ball.add(moon);
     // Add lights
-    const pointLight = new THREE.PointLight(0xaaaa00, 600, 80, 2);
-    pointLight.position.set(0, 0, 0.1);
-    const ambientLight = new THREE.AmbientLight(0xffffff, 2);
+    const pointLight = new THREE.PointLight(0xff8800, 1200, 120, 2);
+    pointLight.position.set(0, 0, -9);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.05);
     scene.add(pointLight, ambientLight);
+
+    // Loop to add asteroids
+    for (let i = 0; i < 8; i++) {
+      const newAsteroid = new Asteroid(
+        longGeometry / 2,
+        -shortGeometry / 2 + (shortGeometry / 8) * i,
+        1,
+        1,
+        scene
+      );
+      asteroids.push(newAsteroid);
+    }
+    for (let i = 0; i < 8; i++) {
+      const newAsteroid = new Asteroid(
+        -longGeometry / 2,
+        -shortGeometry / 2 + (shortGeometry / 8) * i,
+        1,
+        3,
+        scene
+      );
+      asteroids.push(newAsteroid);
+    }
+
+    for (let i = 0; i < 14; i++) {
+      const newAsteroid = new Asteroid(
+        -longGeometry / 2 + (longGeometry / 14) * i,
+        -shortGeometry / 2,
+        1,
+        0,
+        scene
+      );
+      asteroids.push(newAsteroid);
+    }
+
+    for (let i = 0; i < 15; i++) {
+      const newAsteroid = new Asteroid(
+        -longGeometry / 2 + (longGeometry / 14) * i,
+        shortGeometry / 2,
+        1,
+        2,
+        scene
+      );
+      asteroids.push(newAsteroid);
+    }
 
     // Animation loop
     let ballDirection = new THREE.Vector3(1, 1, 0).normalize();
@@ -239,11 +325,6 @@ function Pong3D() {
       // Move the ball
       ball.position.add(ballDirection.clone().multiplyScalar(ballSpeed));
       ball.rotation.y += ballDirection.x * 0.06;
-      moon.position.set(
-        Math.cos(-ball.rotation.y * 2) * 1.2,
-        Math.sin(ball.rotation.y * 2) * 1.2,
-        0.5
-      );
       // Animate Orbits position
       orbits.forEach((orbit, index) => {
         orbit.rotation.x += 0.01;
@@ -255,14 +336,23 @@ function Pong3D() {
         const z = Math.sin(angle) * radius;
         orbit.position.set(x, y, z);
       });
+
+      // Move the asteroids
+      asteroids.forEach((asteroid) => {
+        asteroid.move();
+      });
+
+      sun.rotation.y += 0.01;
+      sun.rotation.z += 0.01;
       // My Amazing AI
       leftPaddle.position.y = Math.max(
         -wallOffsetY + paddleHeight / 2 + wallThickness / 2,
         Math.min(
-          ball.position.y,
+          leftPaddlePosition,
           wallOffsetY - paddleHeight / 2 - wallThickness / 2
         )
       );
+      leftPaddlePosition = leftPaddle.position.y;
       rightPaddle.position.y = Math.max(
         -wallOffsetY + paddleHeight / 2 + wallThickness / 2,
         Math.min(
@@ -270,37 +360,44 @@ function Pong3D() {
           wallOffsetY - paddleHeight / 2 - wallThickness / 2
         )
       );
-      const cameraRotationSpeed = 0.004;
-
-      camera.rotation.x += ballDirection.x * ballSpeed * cameraRotationSpeed;
-      camera.rotation.y -= ballDirection.y * ballSpeed * cameraRotationSpeed;
-      camera.rotation.z -= ballDirection.x * ballSpeed * cameraRotationSpeed;
-
-      const cameraZOffset = 35 - Math.pow(Math.abs(ball.position.x), 0.8);
-      camera.position.set(
-        ball.position.x * 0.5,
-        ball.position.y * 0.5,
-        cameraZOffset
-      );
-
       const leftPaddleBoundingBox = new THREE.Box3().setFromObject(leftPaddle);
       const rightPaddleBoundingBox = new THREE.Box3().setFromObject(
         rightPaddle
       );
       const ballBoundingBox = new THREE.Box3().setFromObject(ball);
+      if (leftPaddleBoundingBox.intersectsBox(ballBoundingBox))
+        bounceCounter += 1;
       if (
         leftPaddleBoundingBox.intersectsBox(ballBoundingBox) ||
         rightPaddleBoundingBox.intersectsBox(ballBoundingBox)
       ) {
         ballDirection.x *= -1;
+        ball.position.x += ballDirection.x * ballSpeed;
+        ball.position.y += ballDirection.y * ballSpeed;
       }
       for (let i = 0; i < walls.length; i++) {
         const wall = walls[i];
         const wallBoundingBox = new THREE.Box3().setFromObject(wall);
         const ballBoundingBox = new THREE.Box3().setFromObject(ball);
         if (wallBoundingBox.intersectsBox(ballBoundingBox)) {
-          if (i === 2 || i === 3) ballDirection.x *= -1;
-          else ballDirection.y *= -1;
+          if (i === 2 || i === 3) {
+            ballDirection.x *= -1;
+            ball.position.x = 0;
+            ball.position.y = 0;
+            lifes = orbits.length - 1;
+            if (orbits.length === 0) {
+              alert("GAME OVER");
+              window.location.reload();
+            }
+            if (orbits.length > 0) {
+              scene.remove(orbits[orbits.length - 1]);
+              orbits.pop();
+              ball.material = planetMaterials[lifes];
+              ball.material.needsUpdate = true;
+            }
+            pointLight.intensity += 50;
+            pointLight.distance += 10;
+          } else ballDirection.y *= -1;
         }
       }
 
@@ -328,7 +425,48 @@ function Pong3D() {
   useEffect(() => {
     function handleResize() {}
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+
+    let isDragging = false;
+    let startY = 0;
+
+    function handleKeyDown(event) {
+      if (event.key === "w" || event.key === "W" || event.key === "ArrowUp")
+        leftPaddlePosition += 1;
+      if (event.key === "s" || event.key === "S" || event.key === "ArrowDown")
+        leftPaddlePosition -= 1;
+    }
+
+    function handleTouchStart(event) {
+      isDragging = true;
+      startY = event.touches[0].clientY;
+    }
+
+    function handleTouchMove(event) {
+      if (!isDragging) return;
+      const touchY = event.touches[0].clientY;
+      let temp =
+        ((touchY / window.innerHeight) * shortGeometry - shortGeometry / 2) *
+        -1;
+      if (leftPaddlePosition < temp) leftPaddlePosition += 1;
+      else if (leftPaddlePosition > temp) leftPaddlePosition -= 1;
+    }
+
+    function handleTouchEnd() {
+      isDragging = false;
+    }
+
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchmove", handleTouchMove);
+    window.addEventListener("touchend", handleTouchEnd);
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   return (
