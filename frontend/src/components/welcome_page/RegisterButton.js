@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const RegisterButt = ({ t, redirectToHome }) => {
+const RegisterButt = ({ t, redirectToHome, redirect_uri }) => {
   const [showFields, setShowFields] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,7 +13,7 @@ const RegisterButt = ({ t, redirectToHome }) => {
   const registerTheUser = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/register",
+        `${redirect_uri}/api/register`,
         {
           email: email,
           username: username,
