@@ -5,8 +5,6 @@ import dj_database_url
 from dotenv import load_dotenv
 load_dotenv()
 
-IS_PRODUCTION = os.getenv('DEBUG', 'False') == 'True'
-
 # postgres://transcendence_db_user:TyO3oKD9ARZQFWRy1TkBoLBOqRy5IlZv@dpg-cm993a7109ks73cilvk0-a/transcendence_db
 
 
@@ -23,10 +21,13 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '10.13.7.5']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '10.13.7.5', 'transcendence-backend-znhl.onrender.com']
 
 # Authentication settings
-REDIRECT_URI = "http://localhost:8000/api/oauth/callback/"
+if DEBUG:
+    REDIRECT_URI = "http://localhost:8000"
+else:
+    REDIRECT_URI = "http://transcendence-backend-znhl.onrender.com"
 
 # Application definition
 
@@ -110,7 +111,7 @@ AUTH_USER_MODEL = 'user_api.AppUser'
 # }
 
 # THIS IS THE DATABASE CONFIGURATION FOR THE DOCKER CONTAINER
-if IS_PRODUCTION:
+if DEBUG:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',

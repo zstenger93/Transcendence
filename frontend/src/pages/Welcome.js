@@ -8,7 +8,7 @@ import LoginVia42 from "../components/welcome_page/LoginVia42";
 
 
 
-function Welcome() {
+function Welcome({redirectUri}) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [email] = useState("");
@@ -21,7 +21,7 @@ function Welcome() {
       navigate("/home");
     }
   };
-
+  
   return (
     <div
       className="flex flex-col items-center justify-center 
@@ -29,9 +29,9 @@ function Welcome() {
     >
       <LanguageButton />
       <div className="flex flex-col items-center justify-center flex-grow">
-	  	<SignInButton t={t} redirectToHome={redirectToHome} />
-	  	<RegisterButton t={t} redirectToHome={redirectToHome} />
-		<LoginVia42 t={t} navigate={navigate} />
+        <SignInButton t={t} redirectToHome={redirectToHome} redirect_uri={redirectUri} />
+        <RegisterButton t={t} redirectToHome={redirectToHome} redirect_uri={redirectUri} />
+        <LoginVia42 t={t} navigate={navigate} redirect_uri={redirectUri} />
       </div>
       <div className="flex items-center justify-center"></div>
     </div>
