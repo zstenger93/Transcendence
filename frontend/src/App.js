@@ -54,7 +54,7 @@ function App() {
   if (DEBUG) {
       REDIRECT_URI = "http://localhost:8000";
   } else {
-      REDIRECT_URI = "http://transcendence-backend-znhl.onrender.com";
+      REDIRECT_URI = "https://transcendence-backend-znhl.onrender.com";
   }
   useEffect(() => {
     const storedLanguage = localStorage.getItem("i18nextLng");
