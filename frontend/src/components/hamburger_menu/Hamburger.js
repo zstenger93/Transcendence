@@ -36,7 +36,6 @@ const Sidebar = () => {
 
   return (
     <>
-      {/* hamburger menu icons */}
       {isMenuOpen && (
         <HamburgerMenu
           isMenuOpen={isMenuOpen}
@@ -49,7 +48,6 @@ const Sidebar = () => {
         <HamburgerButton isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       )}
       {!isMobile && (
-        /* default sidebar for larger screens */
         <SidebarBigScreen t={t} changeLanguage={changeLanguage} />
       )}
     </>

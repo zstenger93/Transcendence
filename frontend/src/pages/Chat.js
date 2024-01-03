@@ -95,7 +95,11 @@ function Chat() {
             {channels.map((channel, index) => (
               <li
                 key={index}
-                className={`cursor-pointer my-4 ${channel === currentChannel ? 'text-purple-500 font-nosifer' : ''}`}
+                className={`cursor-pointer my-4 ${
+                  channel === currentChannel
+                    ? "text-purple-500 font-nosifer"
+                    : ""
+                }`}
                 onClick={() => setCurrentChannel(channel)}
               >
                 {channel}
@@ -106,7 +110,8 @@ function Chat() {
         <button
           onClick={() => navigate(-1)}
           className="bg-purple-900 bg-opacity-80 hover:bg-purple-700 
-		  text-white font-bold py-2 px-4 rounded  border-b-2 border-r-2 border-purple-600"
+		  text-white font-bold py-2 px-4 rounded  border-b-2 border-r-2 
+		  border-purple-600"
         >
           {t("Back")}
         </button>
@@ -186,7 +191,8 @@ function Chat() {
               <label
                 htmlFor="file"
                 className="cursor-pointer bg-purple-900 hover:bg-purple-700 
-				text-white font-bold py-2 px-4 rounded  border-b-2 border-r-2 border-purple-600"
+				text-white font-bold py-2 px-4 rounded  border-b-2 border-r-2 
+				border-purple-600"
               >
                 {t("Choose File")}
               </label>

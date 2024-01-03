@@ -11,8 +11,8 @@ const HamburgerMenu = ({ isMenuOpen, toggleMenu, t, changeLanguage }) => {
 
   return (
     <div
-      className="fixed top-0 left-0 h-screen w-screen bg-gray-900 bg-opacity-80 z-10
-            overflow-y-auto"
+      className="fixed top-0 left-0 h-screen w-screen bg-gray-900
+	  bg-opacity-80 z-10 overflow-y-auto"
       onClick={toggleMenu}
     >
       <div className="flex flex-col justify-start items-center mt-24">
