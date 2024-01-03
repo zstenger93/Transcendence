@@ -1,12 +1,11 @@
 {
   "files": {
-    "main.css": "/Transcendence/static/css/main.1e98f38c.css",
-    "main.js": "/Transcendence/static/js/main.66e8bb2c.js",
+    "main.css": "/Transcendence/static/css/main.be3847af.css",
+    "main.js": "/Transcendence/static/js/main.8d868c8b.js",
     "static/js/787.c2fa796c.chunk.js": "/Transcendence/static/js/787.c2fa796c.chunk.js",
     "static/media/404.mp4": "/Transcendence/static/media/404.036827f1db48d0ae1d47.mp4",
     "static/media/rmb3.png": "/Transcendence/static/media/rmb3.841283b86bf14f3b2d33.png",
-    "static/media/sun.jpg": "/Transcendence/static/media/sun.b34e6ead10e18ad3ad77.jpg",
-    "static/media/pongbg.png": "/Transcendence/static/media/pongbg.0ff053be531e42371c9d.png",
+    "static/media/pongCover.png": "/Transcendence/static/media/pongCover.d06b5fe004de9e08361d.png",
     "static/media/bg0.png": "/Transcendence/static/media/bg0.0843d571a61a96cb0dbd.png",
     "static/media/morty3.png": "/Transcendence/static/media/morty3.bdd5b0dd31f599a9cab7.png",
     "static/media/morty2.png": "/Transcendence/static/media/morty2.cfd94a5c6f971d0e122a.png",
@@ -21,17 +20,18 @@
     "static/media/uranus.png": "/Transcendence/static/media/uranus.14a96a0871a8ad9ba89a.png",
     "static/media/world.jpg": "/Transcendence/static/media/world.b8a85c872c155ae4708b.jpg",
     "static/media/neptun.png": "/Transcendence/static/media/neptun.ad33b1344bb86f5ad954.png",
+    "static/media/settings.png": "/Transcendence/static/media/settings.2640dba6f427b20412cc.png",
     "static/media/slick.svg": "/Transcendence/static/media/slick.2630a3e3eab21c607e21.svg",
     "static/media/slick.eot": "/Transcendence/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/Transcendence/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/Transcendence/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/Transcendence/index.html",
-    "main.1e98f38c.css.map": "/Transcendence/static/css/main.1e98f38c.css.map",
-    "main.66e8bb2c.js.map": "/Transcendence/static/js/main.66e8bb2c.js.map",
+    "main.be3847af.css.map": "/Transcendence/static/css/main.be3847af.css.map",
+    "main.8d868c8b.js.map": "/Transcendence/static/js/main.8d868c8b.js.map",
     "787.c2fa796c.chunk.js.map": "/Transcendence/static/js/787.c2fa796c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1e98f38c.css",
-    "static/js/main.66e8bb2c.js"
+    "static/css/main.be3847af.css",
+    "static/js/main.8d868c8b.js"
   ]
 }
