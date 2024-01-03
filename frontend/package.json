@@ -8,6 +8,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "autoprefixer": "^10.4.16",
+    "axios": "^1.6.3",
     "i18next": "^23.7.11",
     "matchmedia-polyfill": "^0.3.2",
     "postcss": "^8.4.32",
