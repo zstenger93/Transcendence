@@ -113,6 +113,7 @@ AUTH_USER_MODEL = 'user_api.AppUser'
 # }
 
 DEBUG = os.getenv('DEBUG')
+
 if DEBUG != "True":
     DEBUG = False
 

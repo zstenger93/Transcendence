@@ -114,7 +114,7 @@ class OAuthCallback(APIView):
 				"client_id": os.environ.get("UID"),
 				"client_secret": os.environ.get("SECRET"),
 				"code": code,
-				"redirect_uri": settings.REDIRECT_URI + "/api/oauth/callback/",
+				"redirect_uri": "http://localhost:8000/api/oauth/callback/",
 			}
 		
 			auth_response = requests.post("https://api.intra.42.fr/oauth/token", data=data)
@@ -174,7 +174,7 @@ class OAuthAuthorize(APIView):
 		auth_url = "https://api.intra.42.fr/oauth/authorize"
 		params = {
 			"client_id": os.environ.get("UID"),
-			"redirect_uri": settings.REDIRECT_URI + "/api/oauth/callback/",
+			"redirect_uri": "http://localhost:8000/api/oauth/callback/",
 			"response_type": "code",
 		}
 		return HttpResponseRedirect(f"{auth_url}?{urllib.parse.urlencode(params)}")
