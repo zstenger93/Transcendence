@@ -25,7 +25,7 @@ const SignInButt = ({ t, redirectToHome }) => {
             onKeyPress={(e) => e.key === "Enter" && redirectToHome()}
             className="mb-2 mt-4 bg-gray-900 bg-opacity-60 text-white 
 			rounded text-center border-b-2 border-r-2 border-purple-600"
-            autocomplete="new-email"
+            autoComplete="new-email"
           />
           <input
             type="password"
@@ -35,7 +35,7 @@ const SignInButt = ({ t, redirectToHome }) => {
             onKeyPress={(e) => e.key === "Enter" && redirectToHome()}
             className="mb-4 bg-gray-900 bg-opacity-60 text-white 
 			rounded text-center border-b-2 border-r-2 border-purple-600"
-            autocomplete="new-password"
+            autoComplete="new-password"
           />
           <button
             onClick={() => redirectToHome(true)}
