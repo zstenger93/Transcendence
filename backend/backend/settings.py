@@ -20,7 +20,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
-if DEBUG != "True":
+if DEBUG is None or DEBUG != "True":
     DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '10.13.7.5', 'transcendence-backend-znhl.onrender.com']
@@ -111,11 +111,6 @@ AUTH_USER_MODEL = 'user_api.AppUser'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-
-DEBUG = os.getenv('DEBUG')
-
-if DEBUG != "True":
-    DEBUG = False
 
 # THIS IS THE DATABASE CONFIGURATION FOR THE DOCKER CONTAINER
 if DEBUG:
