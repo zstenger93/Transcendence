@@ -130,7 +130,7 @@ function Pong3D() {
     const textMesh = new THREE.Mesh(textGeometry, textMaterial);
     textMesh.position.set(
       0,
-      -shortGeometry / 2 - wallThickness * 2,
+      -shortGeometry / 2 - wallThickness * 3,
       wallThickness / 2 + 0.1
     );
     scene.add(textMesh);
@@ -373,7 +373,7 @@ function Pong3D() {
         rightPaddleBoundingBox.intersectsBox(ballBoundingBox)
       ) {
         ballDirection.x *= -1;
-        ball.position.x += ballDirection.x * ballSpeed * 2;
+        ball.position.x += ballDirection.x * ballSpeed * 3;
       }
       for (let i = 0; i < walls.length; i++) {
         const wall = walls[i];
