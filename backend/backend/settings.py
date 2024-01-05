@@ -3,10 +3,6 @@ from datetime import timedelta
 import os
 import dj_database_url
 
-
-# postgres://transcendence_db_user:TyO3oKD9ARZQFWRy1TkBoLBOqRy5IlZv@dpg-cm993a7109ks73cilvk0-a/transcendence_db
-
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -148,7 +144,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# postgres://transcendence_db_user:TyO3oKD9ARZQFWRy1TkBoLBOqRy5IlZv@dpg-cm993a7109ks73cilvk0-a.frankfurt-postgres.render.com/transcendence_db
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
