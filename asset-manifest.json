@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Transcendence/static/css/main.9128116d.css",
-    "main.js": "/Transcendence/static/js/main.8bd7e9ba.js",
-    "static/js/787.c2fa796c.chunk.js": "/Transcendence/static/js/787.c2fa796c.chunk.js",
+    "main.js": "/Transcendence/static/js/main.37142414.js",
+    "static/js/787.9e9f4ffd.chunk.js": "/Transcendence/static/js/787.9e9f4ffd.chunk.js",
     "static/media/404.mp4": "/Transcendence/static/media/404.036827f1db48d0ae1d47.mp4",
     "static/media/rmb3.png": "/Transcendence/static/media/rmb3.841283b86bf14f3b2d33.png",
     "static/media/sun.jpg": "/Transcendence/static/media/sun.b34e6ead10e18ad3ad77.jpg",
@@ -14,6 +14,8 @@
     "static/media/morty4.png": "/Transcendence/static/media/morty4.52a18b91652e333a1d8b.png",
     "static/media/morty1.png": "/Transcendence/static/media/morty1.a9e34e5f3e2aa719966d.png",
     "static/media/mercury.png": "/Transcendence/static/media/mercury.f2eac5ed5c1a68540945.png",
+    "static/media/stayhard.png": "/Transcendence/static/media/stayhard.bf444b1b544bc3d91b61.png",
+    "static/media/deathstar.png": "/Transcendence/static/media/deathstar.7fcb2c71f5281638b46b.png",
     "static/media/venus.jpg": "/Transcendence/static/media/venus.b431256724651b4e2fb6.jpg",
     "static/media/saturn.png": "/Transcendence/static/media/saturn.73d1ef8108e1daf5c624.png",
     "static/media/mars.jpg": "/Transcendence/static/media/mars.871e422803417c08cdd4.jpg",
@@ -27,11 +29,11 @@
     "static/media/slick.woff": "/Transcendence/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/Transcendence/index.html",
     "main.9128116d.css.map": "/Transcendence/static/css/main.9128116d.css.map",
-    "main.8bd7e9ba.js.map": "/Transcendence/static/js/main.8bd7e9ba.js.map",
-    "787.c2fa796c.chunk.js.map": "/Transcendence/static/js/787.c2fa796c.chunk.js.map"
+    "main.37142414.js.map": "/Transcendence/static/js/main.37142414.js.map",
+    "787.9e9f4ffd.chunk.js.map": "/Transcendence/static/js/787.9e9f4ffd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9128116d.css",
-    "static/js/main.8bd7e9ba.js"
+    "static/js/main.37142414.js"
   ]
 }
