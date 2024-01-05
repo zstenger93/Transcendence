@@ -21,6 +21,7 @@ DEBUG = os.getenv('DEBUG')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
+
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '10.13.7.5', 'transcendence-backend-znhl.onrender.com']
 
 # Authentication settings
