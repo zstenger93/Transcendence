@@ -1,11 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import backgroundImage from "../../images/pongbg.png";
-import { goFullScreen, exitFullScreen } from "../../components/FullScreen";
+import {
+  goFullScreen,
+  exitFullScreen,
+} from "../../components/buttons/FullScreen";
 import { AiOutlineFullscreenExit } from "react-icons/ai";
 import { BsArrowsFullscreen } from "react-icons/bs";
 import { useLocation, useNavigate } from "react-router-dom";
-import BackButton from "../../components/BackButton";
+import BackButton from "../../components/buttons/BackButton";
 import { useTranslation } from "react-i18next";
+import { WelcomeButtonStyle } from "../../components/buttons/ButtonStyle";
 
 const GameCanvas = () => {
   // Default Parameters
@@ -290,9 +294,7 @@ const WinScreen = () => {
             <p>{t("YOU WON!")}</p>
             <button
               onClick={handleButtonClick}
-              className="mt-10 bg-purple-900 bg-opacity-80 font-nosifer 
-			  hover:bg-purple-700 text-white font-bold py-2 px-4 rounded
-				  border-b-2 border-r-2 border-purple-600"
+              className={`mt-10 ${WelcomeButtonStyle}`}
             >
               {t("Play Again")}
             </button>
@@ -332,9 +334,7 @@ const LoseScreen = () => {
             <p>{t("YOU LOST!")}</p>
             <button
               onClick={handleButtonClick}
-              className="mt-10 bg-purple-900 bg-opacity-80 font-nosifer 
-			  hover:bg-purple-700 text-white font-bold py-2 px-4 rounded
-				  border-b-2 border-r-2 border-purple-600"
+              className={`mt-10 ${WelcomeButtonStyle}`}
             >
               {t("Play Again")}
             </button>
@@ -400,12 +400,7 @@ const PongAi = () => {
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 
 		  -translate-y-1/2 text-center"
           >
-            <button
-              onClick={handleButtonClick}
-              className="mt-6 bg-purple-900 bg-opacity-80 font-nosifer 
-			  hover:bg-purple-700 text-white font-bold py-2 px-4 rounded
-				  border-b-2 border-r-2 border-purple-600"
-            >
+            <button onClick={handleButtonClick} className={WelcomeButtonStyle}>
               {t("Start Game")}
             </button>
           </div>

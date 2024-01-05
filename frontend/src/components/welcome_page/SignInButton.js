@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { WelcomeButtonStyle } from "../buttons/ButtonStyle";
 
 const SignInButt = ({ t, redirectToHome }) => {
   const [showFields, setShowFields] = useState(false);
@@ -9,9 +10,7 @@ const SignInButt = ({ t, redirectToHome }) => {
     <>
       <button
         onClick={() => setShowFields((prevShowFields) => !prevShowFields)}
-        className="bg-gray-900 text-gray-300 font-nosifer font-bold 
-		px-4 py-2 rounded cursor-pointer hover:bg-gray-900 hover:bg-opacity-70
-		border-b-2 border-r-2 border-purple-600 mb-4"
+        className={`mb-4 ${WelcomeButtonStyle}`}
       >
         {t("Sign In")}
       </button>
@@ -25,7 +24,7 @@ const SignInButt = ({ t, redirectToHome }) => {
             onKeyPress={(e) => e.key === "Enter" && redirectToHome()}
             className="mb-2 mt-4 bg-gray-900 bg-opacity-60 text-white 
 			rounded text-center border-b-2 border-r-2 border-purple-600"
-            autocomplete="new-email"
+            autoComplete="new-email"
           />
           <input
             type="password"
@@ -35,14 +34,11 @@ const SignInButt = ({ t, redirectToHome }) => {
             onKeyPress={(e) => e.key === "Enter" && redirectToHome()}
             className="mb-4 bg-gray-900 bg-opacity-60 text-white 
 			rounded text-center border-b-2 border-r-2 border-purple-600"
-            autocomplete="new-password"
+            autoComplete="new-password"
           />
           <button
             onClick={() => redirectToHome(true)}
-            className="bg-gray-900 text-gray-300 
-			font-nosifer font-bold px-4 py-2 rounded cursor-pointer 
-			hover:bg-gray-900 hover:bg-opacity-70 border-b-2 border-r-2 
-			border-purple-600 mb-20"
+            className={`mb-20 ${WelcomeButtonStyle}`}
           >
             {t("Login")}
           </button>

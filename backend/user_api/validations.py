@@ -21,7 +21,7 @@ def custom_validation(data):
         raise ValidationError('Invalid email format')
     if UserModel.objects.filter(email=email).exists():
         raise ValidationError("This email is already in use")
-    # using Django's built-in password validation, don't have to reinvent the wheel
+    # using the built-in password validation instead, don't have to reinvent the wheel
     if not password:
         raise ValidationError('Please provide a password')
     try:

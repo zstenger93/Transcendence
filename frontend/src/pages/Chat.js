@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import BackButton from "../components/buttons/BackButton";
+import { ButtonStyle } from "../components/buttons/ButtonStyle";
 
 function Chat() {
   const { t } = useTranslation();
@@ -80,6 +82,7 @@ function Chat() {
   };
 
   function ChannelList() {
+    const { t } = useTranslation();
     const channels = ["General", "Random", "Memes"];
 
     return (
@@ -107,14 +110,7 @@ function Chat() {
             ))}
           </ul>
         </div>
-        <button
-          onClick={() => navigate(-1)}
-          className="bg-purple-900 bg-opacity-80 hover:bg-purple-700 
-		  text-white font-bold py-2 px-4 rounded  border-b-2 border-r-2 
-		  border-purple-600"
-        >
-          {t("Back")}
-        </button>
+        <BackButton navigate={navigate} t={t} />
       </div>
     );
   }
@@ -190,9 +186,7 @@ function Chat() {
             <div className="flex justify-center">
               <label
                 htmlFor="file"
-                className="cursor-pointer bg-purple-900 hover:bg-purple-700 
-				text-white font-bold py-2 px-4 rounded  border-b-2 border-r-2 
-				border-purple-600"
+                className={`cursor-pointer ${ButtonStyle}`}
               >
                 {t("Choose File")}
               </label>
