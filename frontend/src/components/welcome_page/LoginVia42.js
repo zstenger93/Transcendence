@@ -1,30 +1,35 @@
 import React from "react";
 import { WelcomeButtonStyle } from "../buttons/ButtonStyle";
 
+let stopFetching = false;
+
 const OAuth = async ({ navigate, redirect_uri }) => {
   const auth = `${redirect_uri}/api/is_authenticated/`;
-  let response = await fetch(auth, {
+  let response, data;
+
+  response = await fetch(auth, {
     credentials: "include",
   });
+  data = await response.json();
 
-  let data = await response.json();
   if (!data.is_authenticated) {
     const authWindow = window.open(`${redirect_uri}/api/oauth/authorize/`);
-    const checkAuthentication = async () => {
+
+    while (!stopFetching) {
       response = await fetch(auth, {
         credentials: "include",
       });
       data = await response.json();
+
       if (data.is_authenticated) {
         console.log("authenticated");
+        stopFetching = true;
         navigate("/home");
         authWindow.close();
       } else {
         await new Promise(resolve => setTimeout(resolve, 1000));
-        checkAuthentication();
       }
-    };
-    checkAuthentication();
+    }
   } else {
     navigate("/home");
   }
