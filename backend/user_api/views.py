@@ -116,8 +116,10 @@ class OAuthCallback(APIView):
 				"code": code,
 				"redirect_uri": settings.REDIRECT_URI + "/api/oauth/callback/",
 			}
-		
+			print("Data sent to OAuth server:", data)
 			auth_response = requests.post("https://api.intra.42.fr/oauth/token", data=data)
+			print("asfasfasf", auth_response.json())
+			# return JsonResponse(auth_response.json(), safe=False)
 			access_token = auth_response.json()["access_token"]
 			user_response = requests.get("https://api.intra.42.fr/v2/me", headers={"Authorization": f"Bearer {access_token}"})
 			

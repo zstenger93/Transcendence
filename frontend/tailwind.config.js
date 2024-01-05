@@ -16,6 +16,7 @@ module.exports = {
         "purple-950-opacity-welcome": "rgba(26, 24, 36, 0.8)",
         "purple-700-opacity-welcome": "rgba(99, 39, 120, 0.8)",
         "purple-750-opacity-welcome": "rgba(76, 41, 88, 0.9)",
+        "gray-900-opacity": "rgba(31, 41, 55, 0.2)",
       },
     },
   },
