@@ -9,6 +9,8 @@ import saturn from "../../images/saturn.png";
 import uranus from "../../images/uranus.png";
 import neptune from "../../images/neptun.png";
 import sunTex from "../../images/sun.jpg";
+import goggins from "../../images/stayhard.jpg";
+import death from "../../images/deathstar.png";
 
 // import { TextGeometry, MeshBasicMaterial, Mesh } from "three";
 
@@ -239,8 +241,9 @@ function Pong3D() {
       paddleHeight,
       wallThickness / 2
     );
-    const paddleMaterialGeometry = new THREE.MeshBasicMaterial({
-      color: 0xffff00,
+    const paddleMaterialGeometry = new THREE.MeshLambertMaterial({
+      map: textureLoader.load(death),
+      color: 0xffffff, 
     });
     const leftPaddle = new THREE.Mesh(paddleGeometry, paddleMaterialGeometry);
     leftPaddle.position.set(-21, 0, 0);
