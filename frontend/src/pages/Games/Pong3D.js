@@ -9,6 +9,8 @@ import saturn from "../../images/saturn.png";
 import uranus from "../../images/uranus.png";
 import neptune from "../../images/neptun.png";
 import sunTex from "../../images/sun.jpg";
+import goggins from "../../images/stayhard.png";
+import death from "../../images/deathstar.png";
 
 // import { TextGeometry, MeshBasicMaterial, Mesh } from "three";
 
@@ -34,6 +36,7 @@ function Pong3D() {
   const ballSpeed = 0.3;
   let leftPaddlePosition = 0;
   let bounceCounter = 0;
+  let isCodeExecuted = false;
   let lifes = 7;
 
   class Asteroid {
@@ -128,11 +131,23 @@ function Pong3D() {
     const textMesh = new THREE.Mesh(textGeometry, textMaterial);
     textMesh.position.set(
       0,
-      -shortGeometry / 2 - wallThickness * 2,
+      -shortGeometry / 2 - wallThickness * 3,
       wallThickness / 2 + 0.1
     );
     scene.add(textMesh);
-
+    const boucneCanvas = document.createElement("canvas");
+    const bounceContext = boucneCanvas.getContext("2d");
+    bounceContext.font = "24px Arial";
+    bounceContext.fillStyle = "white";
+    bounceContext.fillText("BOUNCE COUNTER: 0", 44, 24);
+    const bounceMaterialTexture = new THREE.CanvasTexture(boucneCanvas);
+    const bounceMaterial = new THREE.MeshBasicMaterial({
+      map: bounceMaterialTexture,
+      transparent: true,
+    });
+    const bounceMesh = new THREE.Mesh(textGeometry, bounceMaterial);
+    bounceMesh.position.set(shortGeometry / 2 + wallThickness, shortGeometry / 2 + wallThickness, 0);
+    scene.add(bounceMesh);
     // Create stars
     const starGeometry = new THREE.SphereGeometry(0.2, 32, 32);
     const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
@@ -239,8 +254,9 @@ function Pong3D() {
       paddleHeight,
       wallThickness / 2
     );
-    const paddleMaterialGeometry = new THREE.MeshBasicMaterial({
-      color: 0xffff00,
+    const paddleMaterialGeometry = new THREE.MeshLambertMaterial({
+      map: textureLoader.load(death),
+      color: 0xffffff,
     });
     const leftPaddle = new THREE.Mesh(paddleGeometry, paddleMaterialGeometry);
     leftPaddle.position.set(-21, 0, 0);
@@ -304,6 +320,15 @@ function Pong3D() {
       asteroids.push(newAsteroid);
     }
 
+    const david = new THREE.Mesh(
+      new THREE.PlaneGeometry(2, 2),
+      new THREE.MeshBasicMaterial({
+        map: textureLoader.load(goggins),
+        transparent: true,
+      })
+    );
+    david.position.set(0, 1.41, 0);
+    ball.add(david);
     // Animation loop
     let ballDirection = new THREE.Vector3(1, 1, 0).normalize();
     function animate() {
@@ -353,16 +378,30 @@ function Pong3D() {
         rightPaddle
       );
       const ballBoundingBox = new THREE.Box3().setFromObject(ball);
-      if (leftPaddleBoundingBox.intersectsBox(ballBoundingBox))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        bounceCounter += 1;
       if (
         leftPaddleBoundingBox.intersectsBox(ballBoundingBox) ||
         rightPaddleBoundingBox.intersectsBox(ballBoundingBox)
       ) {
+        if (leftPaddleBoundingBox.intersectsBox(ballBoundingBox)) {
+          // eslint-disable-next-line react-hooks/exhaustive-deps
+          if (!isCodeExecuted) {
+            bounceCounter = bounceCounter + 1;
+            bounceContext.clearRect(
+              0,
+              0,
+              boucneCanvas.width,
+              boucneCanvas.height
+            );
+            bounceContext.fillText("BOUNCE COUNTER: " + bounceCounter, 44, 24);
+            bounceMaterialTexture.needsUpdate = true;
+            isCodeExecuted = true;
+          }
+          else {
+            isCodeExecuted = false;
+          }
+        }
         ballDirection.x *= -1;
-        ball.position.x += ballDirection.x * ballSpeed;
-        ball.position.y += ballDirection.y * ballSpeed;
+        ball.position.x += ballDirection.x * ballSpeed * 3;
       }
       for (let i = 0; i < walls.length; i++) {
         const wall = walls[i];
