@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import backgroundImage from "../../images/pongbg.png";
-import { goFullScreen, exitFullScreen } from "../../components/FullScreen";
+import {
+  goFullScreen,
+  exitFullScreen,
+} from "../../components/buttons/FullScreen";
 import { AiOutlineFullscreenExit } from "react-icons/ai";
 import { BsArrowsFullscreen } from "react-icons/bs";
 import { useLocation, useNavigate } from "react-router-dom";

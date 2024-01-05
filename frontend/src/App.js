@@ -41,20 +41,16 @@ const PageWrapper = ({ children, image, showSidebar = true }) => {
   );
 };
 
-
 function App() {
   const { i18n } = useTranslation();
   const basename =
-  process.env.NODE_ENV === "production" ? "/Transcendence" : "";
-  
-  // const DEBUG = process.env.REACT_APP_DEBUG === "true"; // TODO: Fix this
-  const DEBUG = true;
+    process.env.NODE_ENV === "production" ? "/Transcendence" : "";
   let REDIRECT_URI;
-  
-  if (DEBUG) {
-      REDIRECT_URI = "http://localhost:8000";
+
+  if (process.env.NODE_ENV === "development") {
+    REDIRECT_URI = process.env.REACT_APP_LOCAL_URI;
   } else {
-      REDIRECT_URI = "https://transcendence-backend-znhl.onrender.com";
+    REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
   }
   useEffect(() => {
     const storedLanguage = localStorage.getItem("i18nextLng");
@@ -153,14 +149,15 @@ function App() {
               <PageWrapper image={HomeBackground}>
                 <PongAi />
               </PageWrapper>
-          }
+            }
           />
-          <Route path="choosepongmode" element={
-            <PageWrapper image={BreakingBadMorty}>
-              <ChoosePongMode
-              />
-            </PageWrapper>
-          }
+          <Route
+            path="choosepongmode"
+            element={
+              <PageWrapper image={BreakingBadMorty}>
+                <ChoosePongMode />
+              </PageWrapper>
+            }
           />
           <Route
             path="choosepongmode"
