@@ -377,7 +377,7 @@ const PongAi = () => {
           onClick={() =>
             isFullScreen ? handleExitFullScreen() : handleGoFullScreen("aiP")
           }
-          className="absolute top-0 right-0 mr-4"
+          className="absolute top-2 right-2 mr-4"
         >
           {isFullScreen ? (
             <AiOutlineFullscreenExit size="32" color="white" />
@@ -387,7 +387,7 @@ const PongAi = () => {
         </button>
       ) : null}
       {gameStarted ? (
-        <GameCanvas />
+        <GameCanvas className="m-4" />
       ) : (
         <div className="relative">
           <img
