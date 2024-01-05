@@ -2,8 +2,7 @@ from pathlib import Path
 from datetime import timedelta
 import os
 import dj_database_url
-from dotenv import load_dotenv
-load_dotenv()
+
 
 # postgres://transcendence_db_user:TyO3oKD9ARZQFWRy1TkBoLBOqRy5IlZv@dpg-cm993a7109ks73cilvk0-a/transcendence_db
 
@@ -19,9 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG')
-if DEBUG is None or DEBUG != "True":
-    DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '10.13.7.5', 'transcendence-backend-znhl.onrender.com']
 
