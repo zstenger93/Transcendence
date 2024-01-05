@@ -4,7 +4,7 @@ import { goFullScreen, exitFullScreen } from "../../components/FullScreen";
 import { AiOutlineFullscreenExit } from "react-icons/ai";
 import { BsArrowsFullscreen } from "react-icons/bs";
 import { useLocation, useNavigate } from "react-router-dom";
-import BackButton from "../../components/BackButton";
+import BackButton from "../../components/buttons/BackButton";
 import { useTranslation } from "react-i18next";
 
 const GameCanvas = () => {
@@ -188,23 +188,23 @@ const GameCanvas = () => {
   };
 
   useEffect(() => {
-	  const playerSpeed = 30;
-	  const keysPressed = {};
-	  
-	  const handleKeyDown = (event) => {
-		  keysPressed[event.key] = true;
-		  handleKeys();
-		};
-		
-		const handleKeyUp = (event) => {
-			keysPressed[event.key] = false;
-			handleKeys();
-		};
-		
-		const handleKeys = () => {
-			if (canvasRef.current) {
-				// Left paddle controls
-				// eslint-disable-next-line react-hooks/exhaustive-deps
+    const playerSpeed = 30;
+    const keysPressed = {};
+
+    const handleKeyDown = (event) => {
+      keysPressed[event.key] = true;
+      handleKeys();
+    };
+
+    const handleKeyUp = (event) => {
+      keysPressed[event.key] = false;
+      handleKeys();
+    };
+
+    const handleKeys = () => {
+      if (canvasRef.current) {
+        // Left paddle controls
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         if (keysPressed["w"]) leftPaddleY -= playerSpeed * sizeSpeedRatio;
         if (keysPressed["s"]) leftPaddleY += playerSpeed * sizeSpeedRatio;
         leftPaddleY = Math.max(
@@ -214,7 +214,7 @@ const GameCanvas = () => {
 
         // Right paddle controls
         if (keysPressed["ArrowUp"])
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+          // eslint-disable-next-line react-hooks/exhaustive-deps
           rightPaddleY -= playerSpeed * sizeSpeedRatio;
         if (keysPressed["ArrowDown"])
           rightPaddleY += playerSpeed * sizeSpeedRatio;

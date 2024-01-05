@@ -4,7 +4,7 @@ import { goFullScreen, exitFullScreen } from "../../components/FullScreen";
 import { AiOutlineFullscreenExit } from "react-icons/ai";
 import { BsArrowsFullscreen } from "react-icons/bs";
 import { useLocation, useNavigate } from "react-router-dom";
-import BackButton from "../../components/BackButton";
+import BackButton from "../../components/buttons/BackButton";
 import { useTranslation } from "react-i18next";
 
 const GameCanvas = () => {
