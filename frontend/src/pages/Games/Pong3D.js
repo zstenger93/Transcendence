@@ -373,8 +373,7 @@ function Pong3D() {
         rightPaddleBoundingBox.intersectsBox(ballBoundingBox)
       ) {
         ballDirection.x *= -1;
-        ball.position.x += ballDirection.x * ballSpeed;
-        ball.position.y += ballDirection.y * ballSpeed;
+        ball.position.x += ballDirection.x * ballSpeed * 2;
       }
       for (let i = 0; i < walls.length; i++) {
         const wall = walls[i];
