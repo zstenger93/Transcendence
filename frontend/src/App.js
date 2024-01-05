@@ -47,8 +47,8 @@ function App() {
   const basename =
   process.env.NODE_ENV === "production" ? "/Transcendence" : "";
   
-  // const DEBUG = process.env.REACT_APP_DEBUG === "true";
-  const DEBUG = true;
+  // const DEBUG = process.env.REACT_APP_DEBUG === "true"; // TODO: Fix this
+  const DEBUG = false;
   let REDIRECT_URI;
   
   if (DEBUG) {
