@@ -9,7 +9,7 @@ import saturn from "../../images/saturn.png";
 import uranus from "../../images/uranus.png";
 import neptune from "../../images/neptun.png";
 import sunTex from "../../images/sun.jpg";
-import goggins from "../../images/stayhard.jpg";
+import goggins from "../../images/stayhard.png";
 import death from "../../images/deathstar.png";
 
 // import { TextGeometry, MeshBasicMaterial, Mesh } from "three";
@@ -243,7 +243,7 @@ function Pong3D() {
     );
     const paddleMaterialGeometry = new THREE.MeshLambertMaterial({
       map: textureLoader.load(death),
-      color: 0xffffff, 
+      color: 0xffffff,
     });
     const leftPaddle = new THREE.Mesh(paddleGeometry, paddleMaterialGeometry);
     leftPaddle.position.set(-21, 0, 0);
@@ -307,6 +307,15 @@ function Pong3D() {
       asteroids.push(newAsteroid);
     }
 
+    const david = new THREE.Mesh(
+      new THREE.PlaneGeometry(2, 2),
+      new THREE.MeshBasicMaterial({
+        map: textureLoader.load(goggins),
+        transparent: true,
+      })
+    );
+    david.position.set(0, 1.41, 0);
+    ball.add(david);
     // Animation loop
     let ballDirection = new THREE.Vector3(1, 1, 0).normalize();
     function animate() {
