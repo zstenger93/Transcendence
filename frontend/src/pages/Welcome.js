@@ -6,9 +6,7 @@ import SignInButton from "../components/welcome_page/SignInButton";
 import RegisterButton from "../components/welcome_page/RegisterButton";
 import LoginVia42 from "../components/welcome_page/LoginVia42";
 
-
-
-function Welcome({redirectUri}) {
+function Welcome({ redirectUri }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [email] = useState("");
@@ -21,16 +19,27 @@ function Welcome({redirectUri}) {
       navigate("/home");
     }
   };
-  
+
   return (
     <div
       className="flex flex-col items-center justify-center 
-      h-screen bg-cover bg-center bg-no-repeat"
+      h-screen"
     >
       <LanguageButton />
-      <div className="flex flex-col items-center justify-center flex-grow">
-        <SignInButton t={t} redirectToHome={redirectToHome} redirect_uri={redirectUri} />
-        <RegisterButton t={t} redirectToHome={redirectToHome} redirect_uri={redirectUri} />
+      <div
+        className=" 
+	  	flex flex-col items-center justify-center"
+      >
+        <SignInButton
+          t={t}
+          redirectToHome={redirectToHome}
+          redirect_uri={redirectUri}
+        />
+        <RegisterButton
+          t={t}
+          redirectToHome={redirectToHome}
+          redirect_uri={redirectUri}
+        />
         <LoginVia42 t={t} navigate={navigate} redirect_uri={redirectUri} />
       </div>
       <div className="flex items-center justify-center"></div>

@@ -28,8 +28,8 @@
   "scripts": {
     "build:css": "postcss src/styles/tailwind.css -o src/index.css",
     "watch:css": "postcss src/styles/tailwind.css -o src/index.css --watch",
-    "start": "react-scripts start",
-    "build": "CI=false react-scripts build",
+    "start": "REACT_APP_LOCAL_URI=http://localhost:8000 react-scripts start",
+    "build": "CI=false REACT_APP_REDIRECT_URI=https://transcendence-backend-znhl.onrender.com react-scripts build",
     "test": "react-scripts test --detectOpenHandles",
     "eject": "react-scripts eject"
   },

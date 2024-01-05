@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { ButtonStyle } from "../components/buttons/ButtonStyle";
 
 const friendsListData = [
   {
@@ -110,7 +111,10 @@ const userDetails = {
 function FriendsList() {
   const { t } = useTranslation();
   return (
-    <div className="bg-gray-900 bg-opacity-80 p-4 rounded-md max-h-96 overflow-y-auto mb-10">
+    <div
+      className="bg-gray-900 bg-opacity-80 p-4 rounded-md max-h-96
+	overflow-y-auto mb-10 border-r-2 border-b-2 border-purple-600"
+    >
       <h3 className="text-xl text-gray-300 font-nosifer font-bold mb-4 text-center">
         {t("Friends")}
       </h3>
@@ -155,7 +159,8 @@ function MatchHistory() {
   return (
     <div
       className="bg-gray-900 bg-opacity-80 p-6 shadow-xl
-      rounded-md max-h-96 overflow-y-auto mb-10 sm:w-full"
+      rounded-md max-h-96 overflow-y-auto mb-10 sm:w-full
+	  border-r-2 border-b-2 border-purple-600"
     >
       <h3 className="text-xl text-gray-300 font-nosifer font-bold mb-4 text-center">
         {t("Match History")}
@@ -234,21 +239,6 @@ function Profile() {
     setShowFriendsList(false);
   };
 
-  // THIS IS TOTALLY GARBAGE
-  // useEffect(() => {
-  //   const originalBackground = document.body.style.background;
-
-  //   document.body.style.background = "url('src/images/morty2.png') center center/cover no-repeat";
-
-  //   document.body.classList.add('overflow-y-auto');
-
-  //   return () => {
-  //     document.body.style.background = originalBackground;
-
-  //     document.body.classList.remove('overflow-y-auto');
-  //   };
-  // }, []);
-
   return (
     <div
       className="flex flex-col items-center justify-center
@@ -256,8 +246,9 @@ function Profile() {
     >
       <div className="max-w-md flex flex-col items-center">
         <div
-          className="bg-gray-900 bg-opacity-80 rounded-md
-			    p-6 shadow-md text-center"
+          className="bg-gray-900 bg-opacity-80 rounded-xl
+			p-6 shadow-md text-center border-r-2 border-b-2 
+			border-purple-600"
         >
           <img
             src="https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp"
@@ -293,24 +284,22 @@ function Profile() {
           </div>
           <div className="mt-8 flex justify-center space-x-4">
             <button
-              className={`w-36 bg-blue-300 bg-opacity-80 font-bold py-2 px-4 rounded 
-              border-b-2 border-r-2 border-purple-600
+              className={`w-38 ${ButtonStyle}
               ${
                 showFriendsList
-                  ? "bg-purple-600 text-white"
-                  : "text-gray-700 hover:bg-purple-600 hover:text-white"
+                  ? "bg-purple-600 text-gray-300"
+                  : "text-gray-300"
               }`}
               onClick={toggleFriendsList}
             >
               {t("Friends")}
             </button>
             <button
-              className={`w-36 bg-blue-300 bg-opacity-80 font-bold py-2 px-4 rounded 
-              border-b-2 border-r-2 border-purple-600
+              className={`w-38 ${ButtonStyle}
               ${
                 showMatchHistory
-                  ? "bg-purple-600 text-white"
-                  : "text-gray-700 hover:bg-purple-600 hover:text-white"
+                  ? "bg-purple-600 text-gray-300"
+                  : "text-gray-300"
               }`}
               onClick={toggleMatchHistory}
             >
