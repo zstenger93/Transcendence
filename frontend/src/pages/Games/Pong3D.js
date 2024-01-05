@@ -36,6 +36,7 @@ function Pong3D() {
   const ballSpeed = 0.3;
   let leftPaddlePosition = 0;
   let bounceCounter = 0;
+  let isCodeExecuted = false;
   let lifes = 7;
 
   class Asteroid {
@@ -383,18 +384,24 @@ function Pong3D() {
       ) {
         if (leftPaddleBoundingBox.intersectsBox(ballBoundingBox)) {
           // eslint-disable-next-line react-hooks/exhaustive-deps
-          bounceCounter = bounceCounter + 1;
-          bounceContext.clearRect(
-            0,
-            0,
-            boucneCanvas.width,
-            boucneCanvas.height
-          );
-          bounceContext.fillText("BOUNCE COUNTER: " + bounceCounter, 44, 24);
-          bounceMaterialTexture.needsUpdate = true;
+          if (!isCodeExecuted) {
+            bounceCounter = bounceCounter + 1;
+            bounceContext.clearRect(
+              0,
+              0,
+              boucneCanvas.width,
+              boucneCanvas.height
+            );
+            bounceContext.fillText("BOUNCE COUNTER: " + bounceCounter, 44, 24);
+            bounceMaterialTexture.needsUpdate = true;
+            isCodeExecuted = true;
+          }
+          else {
+            isCodeExecuted = false;
+          }
         }
         ballDirection.x *= -1;
-        ball.position.x += ballDirection.x * ballSpeed * 5;
+        ball.position.x += ballDirection.x * ballSpeed * 3;
       }
       for (let i = 0; i < walls.length; i++) {
         const wall = walls[i];
