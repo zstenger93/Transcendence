@@ -2,14 +2,16 @@ import React from "react";
 import { WelcomeButtonStyle } from "../buttons/ButtonStyle";
 
 const OAuth = async ({ navigate, redirect_uri }) => {
+  console.log("OAuth");
+  console.log(redirect_uri);
   const auth = `${redirect_uri}/api/is_authenticated/`;
 	let response = await fetch(auth, {
     credentials: "include",
 	});
   
 	let data = await response.json();
-  // console.log(data);
-	if (!data.is_authenticated) {
+	
+  if (!data.is_authenticated) {
     const authWindow = window.open(`${redirect_uri}/api/oauth/authorize/`);
     while (!authWindow.closed) {
       response = await fetch(auth, {

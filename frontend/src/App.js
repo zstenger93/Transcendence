@@ -52,6 +52,9 @@ function App() {
   } else {
     REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
   }
+
+  console.log(REDIRECT_URI);
+
   useEffect(() => {
     const storedLanguage = localStorage.getItem("i18nextLng");
     if (storedLanguage && i18n.language !== storedLanguage) {
