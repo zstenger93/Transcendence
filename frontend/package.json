@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Fullstack SPA",
   "main": "index.js",
-  "homepage": "https://transcendence-frontend-3otz.onrender.com",
+  "homepage": "https://transcend-frontend.onrender.com",
   "scripts": {
     "build:css": "postcss src/styles/tailwind.css -o src/index.css",
     "watch:css": "postcss src/styles/tailwind.css -o src/index.css --watch",
