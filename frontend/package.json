@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://zstenger93.github.io/Transcendence/",
+  "homepage": "https://transcendence-frontend-bamv.onrender.com",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -31,6 +31,7 @@
     "start": "REACT_APP_LOCAL_URI=http://localhost:8000 react-scripts start",
     "build": "CI=false NODE_ENV=production REACT_APP_REDIRECT_URI=https://transcendence-backend-znhl.onrender.com react-scripts build",
     "test": "react-scripts test --detectOpenHandles",
+	"serve": "react-scripts serve",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
