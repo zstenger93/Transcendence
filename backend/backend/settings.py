@@ -21,14 +21,12 @@ DEBUG = os.getenv('DEBUG')
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '10.13.7.5', 'transcendence-backend-znhl.onrender.com', 'https://transcendence-frontend-3otz.onrender.com']
 
 # Authentication settings
-# if DEBUG:
-#     REDIRECT_URI = "http://localhost:8000"
-# else:
-# 	REDIRECT_URI = "https://transcendence-backend-znhl.onrender.com"
+if DEBUG == 'True':
+    REDIRECT_URI = "http://localhost:8000"
+else:
+	REDIRECT_URI = "https://transcendence-backend-znhl.onrender.com"
 
-REDIRECT_URI = "https://transcendence-backend-znhl.onrender.com"
-
-if DEBUG:
+if DEBUG == 'True':
 	print("DEBUG: True: ", DEBUG)
 else:
 	print("DEBUG: False: ", DEBUG)
@@ -117,25 +115,21 @@ AUTH_USER_MODEL = 'user_api.AppUser'
 # }
 
 # THIS IS THE DATABASE CONFIGURATION FOR THE DOCKER CONTAINER
-# if DEBUG:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': 'transcend_users_db',
-#             'USER': 'transcend_user',
-#             'PASSWORD': 'transcend_pwd',
-#             'HOST': 'db',
-#             'PORT': '5432',
-#         }
-#     }
-# else:
-# 	DATABASES = {
-# 		'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
-# 	}
-
-DATABASES = {
-	'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
-}
+if DEBUG == 'True':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'transcend_users_db',
+            'USER': 'transcend_user',
+            'PASSWORD': 'transcend_pwd',
+            'HOST': 'db',
+            'PORT': '5432',
+        }
+    }
+else:
+	DATABASES = {
+		'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
+	}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

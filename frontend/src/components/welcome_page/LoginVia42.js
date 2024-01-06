@@ -13,7 +13,7 @@ const OAuth = async ({ navigate, redirect_uri }) => {
 
   if (!data.is_authenticated) {
     window.open(`${redirect_uri}/api/oauth/authorize/`);
-    if (!data.is_authenticated) {
+    while (!data.is_authenticated) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       response = await fetch(auth, {
         credentials: "include",
