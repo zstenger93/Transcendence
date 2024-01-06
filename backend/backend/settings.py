@@ -24,9 +24,14 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '10.13.7.5', 'transcendenc
 # if DEBUG:
 #     REDIRECT_URI = "http://localhost:8000"
 # else:
+# 	REDIRECT_URI = "https://transcendence-backend-znhl.onrender.com"
+
 REDIRECT_URI = "https://transcendence-backend-znhl.onrender.com"
 
-print("DEBUG:", DEBUG)
+if DEBUG:
+	print("DEBUG: True: ", DEBUG)
+else:
+	print("DEBUG: False: ", DEBUG)
 
 # Application definition
 
@@ -124,6 +129,10 @@ AUTH_USER_MODEL = 'user_api.AppUser'
 #         }
 #     }
 # else:
+# 	DATABASES = {
+# 		'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
+# 	}
+
 DATABASES = {
 	'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
 }
