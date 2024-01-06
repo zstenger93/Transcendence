@@ -28,7 +28,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '10.13.7.5', 'transcendenc
 
 REDIRECT_URI = "https://transcendence-backend-znhl.onrender.com"
 
-if DEBUG == 'True':
+if DEBUG:
 	print("DEBUG: True: ", DEBUG)
 else:
 	print("DEBUG: False: ", DEBUG)
@@ -62,7 +62,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "https://zstenger93.github.io", "https://transcendence-frontend-bamv.onrender.com"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "https://zstenger93.github.io"]
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
