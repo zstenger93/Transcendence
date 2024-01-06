@@ -10,6 +10,7 @@ import Sidebar from "./components/hamburger_menu/Hamburger";
 import Welcome from "./pages/Welcome";
 import Profile from "./pages/Profile";
 import HomeBackground from "./images/bg0.png";
+import WelcomeBackground from "./images/welcomebg.jpg";
 import MortyBackground0 from "./images/morty0.png";
 import MortyBackground1 from "./images/morty1.png";
 import MortyBackground2 from "./images/morty2.png";
@@ -69,7 +70,7 @@ function App() {
           <Route
             path="/"
             element={
-              <PageWrapper image={HomeBackground} showSidebar={false}>
+              <PageWrapper image={WelcomeBackground} showSidebar={false}>
                 <Welcome redirectUri={REDIRECT_URI} />
               </PageWrapper>
             }
