@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
-const WinScreen = ({ t, navigate, GameCanvas, backgroundImage, WelcomeButtonStyle, BackButton }) => {
+
+
+const WinScreen = ({GameCanvas, backgroundImage, WelcomeButtonStyle, BackButton }) => {
     const [gameStarted, setGameStarted] = useState(false);
+    const { t } = useTranslation();
+    const navigate = useNavigate();
 
     const handleButtonClick = () => {
         setGameStarted(true);

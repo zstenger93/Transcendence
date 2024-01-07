@@ -1,17 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import backgroundImage from "../../images/pongbg.png";
-import {
-  goFullScreen,
-  exitFullScreen,
-} from "../../components/buttons/FullScreen";
-import { AiOutlineFullscreenExit } from "react-icons/ai";
-import { BsArrowsFullscreen } from "react-icons/bs";
 import { useLocation, useNavigate } from "react-router-dom";
 import BackButton from "../../components/buttons/BackButton";
 import { useTranslation } from "react-i18next";
 import { WelcomeButtonStyle } from "../../components/buttons/ButtonStyle";
 import LoseScreen from '../../components/game/LoseScreen';
 import WinScreen from '../../components/game/WinScreen';
+import handleResize from "../../components/game/HandleResize";
+import FullScreenButton from "../../components/buttons/FullScreen";
 
 const GameCanvas = () => {
   // Default Parameters
@@ -132,43 +128,6 @@ const GameCanvas = () => {
     ctx.closePath();
   };
 
-  // This Monster resized the field
-  const handleResize = () => {
-    if (canvasRef.current) {
-      const screenWidth = window.innerWidth;
-      let canvasWidth = screenWidth;
-      if (resize === true) canvasWidth = 0.8 * screenWidth;
-      const canvasHeight = (canvasWidth / 16) * 9;
-      canvasRef.current.width = canvasWidth;
-      canvasRef.current.height = canvasHeight;
-      const sizeRatioX = canvasRef.current
-        ? canvasRef.current.width / canvasWidth
-        : 1;
-      const sizeRatioY = canvasRef.current
-        ? canvasRef.current.height / canvasHeight
-        : 1;
-      paddleWidth = canvasRef.current ? canvasRef.current.width / 80 : 1;
-      paddleHeight = canvasRef.current ? canvasRef.current.width / 20 : 1;
-      sizeSpeedRatio = canvasRef.current
-        ? canvasRef.current.width / canvasDefaultWidth
-        : 1;
-      ballX *= sizeRatioX;
-      ballY *= sizeRatioY;
-      leftPaddleY *= sizeRatioY;
-      rightPaddleY *= sizeRatioY;
-      leftPaddleY = Math.max(
-        0,
-        Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
-      );
-      rightPaddleY = Math.max(
-        0,
-        Math.min(rightPaddleY, canvasRef.current.height - paddleHeight)
-      );
-      ballX = Math.max(0, Math.min(ballX, canvasRef.current.width));
-      ballY = Math.max(0, Math.min(ballY, canvasRef.current.height));
-    }
-  };
-
   const draw = (timestamp) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -261,8 +220,30 @@ const GameCanvas = () => {
     document.addEventListener("keyup", handleKeyUp);
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("touchmove", handleTouchMove);
-    window.addEventListener("resize", handleResize);
-    handleResize();
+    window.addEventListener("resize", () => handleResize(
+      canvasRef,
+      resize,
+      paddleWidth,
+      paddleHeight,
+      sizeSpeedRatio,
+      canvasDefaultWidth,
+      ballX,
+      ballY,
+      leftPaddleY,
+      rightPaddleY
+    ));
+    handleResize(
+      canvasRef,
+      resize,
+      paddleWidth,
+      paddleHeight,
+      sizeSpeedRatio,
+      canvasDefaultWidth,
+      ballX,
+      ballY,
+      leftPaddleY,
+      rightPaddleY
+    );
     draw(0);
 
     return () => {
@@ -278,8 +259,6 @@ const GameCanvas = () => {
       {scoreLeftReact === winScore || scoreRightReact === winScore ? (
         scoreLeftReact === winScore ? (
           <WinScreen
-            t={t}
-            navigate={navigate}
             GameCanvas={GameCanvas}
             backgroundImage={backgroundImage}
             WelcomeButtonStyle={WelcomeButtonStyle}
@@ -287,8 +266,6 @@ const GameCanvas = () => {
           />
         ) : (
           <LoseScreen
-            t={t}
-            navigate={navigate}
             GameCanvas={GameCanvas}
             backgroundImage={backgroundImage}
             WelcomeButtonStyle={WelcomeButtonStyle}
@@ -312,18 +289,6 @@ const Pong = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
-  const [isFullScreen, setIsFullScreen] = useState(false);
-
-  const handleGoFullScreen = (elementId) => {
-    goFullScreen(elementId);
-    setIsFullScreen(true);
-  };
-
-  const handleExitFullScreen = (elementId) => {
-    exitFullScreen(elementId);
-    setIsFullScreen(false);
-  };
-
   const [gameStarted, setGameStarted] = useState(false);
 
   const handleButtonClick = () => {
@@ -332,22 +297,7 @@ const Pong = () => {
 
   return (
     <div id="oP" className="flex justify-center items-center h-screen">
-      {location.pathname === "/originalpong" ||
-        location.pathname === "/pongai" ||
-        location.pathname === "/pong3d" ? (
-        <button
-          onClick={() =>
-            isFullScreen ? handleExitFullScreen() : handleGoFullScreen("oP")
-          }
-          className="absolute bottom-2 right-2 m-4"
-        >
-          {isFullScreen ? (
-            <AiOutlineFullscreenExit size="32" color="white" />
-          ) : (
-            <BsArrowsFullscreen size="32" color="white" />
-          )}
-        </button>
-      ) : null}
+      <FullScreenButton location={location} page="oP" />
       {gameStarted ? (
         <GameCanvas className="m-4" />
       ) : (
