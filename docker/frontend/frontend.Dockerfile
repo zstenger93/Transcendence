@@ -1,18 +1,12 @@
-FROM node:14
+FROM node:20
 
 WORKDIR /app/frontend
 
-COPY package*.json ./
+COPY ./frontend/package*.json ./
 
-RUN npm install && \
-    npm install react-router-dom --save && \
-    npm install tailwindcss postcss autoprefixer --save && \
-    npm install react-slick slick-carousel --save && \
-    npm install react-i18next i18next --save && \
-    npm install three --save && \
-	npm install --save-dev @babel/plugin-proposal-private-property-in-object && \
-	npm install matchmedia-polyfill && \
-    npm install axios --save
+RUN npm install -g npm@latest
+
+RUN npm install
 
 COPY . .
 
