@@ -1,8 +1,9 @@
 /* eslint-disable */
 import React, { useState } from "react";
 import axios from "axios";
+import { WelcomeButtonStyle } from "../buttons/ButtonStyle";
 
-const RegisterButt = ({ t, redirectToHome }) => {
+const RegisterButt = ({ t, redirectToHome, redirect_uri }) => {
   const [showFields, setShowFields] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,7 +14,7 @@ const RegisterButt = ({ t, redirectToHome }) => {
   const registerTheUser = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/register",
+        `${redirect_uri}/api/register`,
         {
           email: email,
           username: username,
@@ -22,7 +23,7 @@ const RegisterButt = ({ t, redirectToHome }) => {
         { withCredentials: true }
       );
       console.log(response.data);
-	  redirectToHome();
+      redirectToHome();
     } catch (error) {
       if (error.response && error.response.data) {
         let errorMessage;
@@ -42,9 +43,7 @@ const RegisterButt = ({ t, redirectToHome }) => {
     <>
       <button
         onClick={() => setShowFields((prevShowFields) => !prevShowFields)}
-        className="bg-gray-900 text-gray-300 font-nosifer font-bold 
-		px-4 py-2 rounded cursor-pointer hover:bg-gray-900 hover:bg-opacity-70
-		border-b-2 border-r-2 border-purple-600 mb-4"
+        className={`mb-4 ${WelcomeButtonStyle}`}
       >
         {t("Register")}
       </button>
@@ -82,10 +81,7 @@ const RegisterButt = ({ t, redirectToHome }) => {
           />
           <button
             onClick={() => registerTheUser()}
-            className="bg-gray-900 text-gray-300 
-			font-nosifer font-bold px-4 py-2 rounded cursor-pointer 
-			hover:bg-gray-900 hover:bg-opacity-70 border-b-2 border-r-2 
-			border-purple-600 mb-20"
+            className={`mb-20 ${WelcomeButtonStyle}`}
           >
             {t("Join")}
           </button>

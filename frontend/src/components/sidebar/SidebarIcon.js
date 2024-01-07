@@ -12,7 +12,8 @@ const SidebarIcon = ({ icon, text = "tooltip", to, margin, alwaysShowTooltip, on
         h-12 w-12 mt-2 mb-2 mx-auto shadow-lg
         bg-purple-900 bg-opacity-50 text-blue-300 hover:bg-blue-300
         hover:text-purple-900 rounded-3xl hover:rounded-xl transition-all
-        duration-300 ease-linear cursor-pointer group ${margin}`}
+        duration-300 ease-linear cursor-pointer group border-r-2 border-b-2
+		border-purple-600 ${margin}`}
       >
         {icon}
         <span

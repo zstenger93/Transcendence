@@ -2,13 +2,6 @@ from pathlib import Path
 from datetime import timedelta
 import os
 import dj_database_url
-from dotenv import load_dotenv
-load_dotenv()
-
-IS_PRODUCTION = os.getenv('DEBUG', 'False') == 'True'
-
-# postgres://transcendence_db_user:TyO3oKD9ARZQFWRy1TkBoLBOqRy5IlZv@dpg-cm993a7109ks73cilvk0-a/transcendence_db
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,14 +12,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '10.13.7.5']
+
+# SECURITY WARNING: don't run with debug turned on in production!
+
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '10.13.7.5', 'transcendence-backend-znhl.onrender.com', 'https://transcendence-frontend-3otz.onrender.com']
 
 # Authentication settings
-REDIRECT_URI = "http://localhost:8000/api/oauth/callback/"
+if DEBUG == 'True':
+    REDIRECT_URI = "http://localhost:8000"
+else:
+	REDIRECT_URI = "https://transcendence-backend-znhl.onrender.com"
+
+if DEBUG == 'True':
+	print("DEBUG: True: ", DEBUG)
+else:
+	print("DEBUG: False: ", DEBUG)
 
 # Application definition
 
@@ -57,10 +60,12 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000",]
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "https://transcendence-frontend-3otz.onrender.com", "https://zstenger93.github.io"]
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
+SESSION_COOKIE_SAMESITE = None
+SESSION_COOKIE_SECURE = False
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -110,7 +115,7 @@ AUTH_USER_MODEL = 'user_api.AppUser'
 # }
 
 # THIS IS THE DATABASE CONFIGURATION FOR THE DOCKER CONTAINER
-if IS_PRODUCTION:
+if DEBUG == 'True':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -122,9 +127,9 @@ if IS_PRODUCTION:
         }
     }
 else:
-    DATABASES = {
-        'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
-    }
+	DATABASES = {
+		'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
+	}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -144,7 +149,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# postgres://transcendence_db_user:TyO3oKD9ARZQFWRy1TkBoLBOqRy5IlZv@dpg-cm993a7109ks73cilvk0-a.frankfurt-postgres.render.com/transcendence_db
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
