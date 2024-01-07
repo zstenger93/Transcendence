@@ -1,30 +1,9 @@
 {
   "name": "frontend",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": "https://zstenger93.github.io/Transcendence/",
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "autoprefixer": "^10.4.16",
-    "axios": "^1.6.3",
-    "i18next": "^23.7.11",
-    "matchmedia-polyfill": "^0.3.2",
-    "postcss": "^8.4.32",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-i18next": "^13.5.0",
-    "react-icons": "^4.12.0",
-    "react-intl": "^6.5.5",
-    "react-router-dom": "^6.20.1",
-    "react-scripts": "5.0.1",
-    "react-slick": "^0.29.0",
-    "slick-carousel": "^1.8.1",
-    "tailwindcss": "^3.3.6",
-    "three": "^0.160.0",
-    "web-vitals": "^2.1.4"
-  },
+  "version": "1.0.0",
+  "description": "Fullstack SPA",
+  "main": "index.js",
+  "homepage": "https://transcendence-frontend-3otz.onrender.com",
   "scripts": {
     "build:css": "postcss src/styles/tailwind.css -o src/index.css",
     "watch:css": "postcss src/styles/tailwind.css -o src/index.css --watch",
@@ -32,6 +11,30 @@
     "build": "CI=false NODE_ENV=production REACT_APP_REDIRECT_URI=https://transcendence-backend-znhl.onrender.com react-scripts build",
     "test": "react-scripts test --detectOpenHandles",
     "eject": "react-scripts eject"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^10.4.16",
+    "axios": "^1.6.5",
+    "i18next": "^23.7.16",
+    "matchmedia-polyfill": "^0.3.2",
+    "postcss": "^8.4.33",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^14.0.0",
+    "react-icons": "^4.12.0",
+    "react-router-dom": "^6.21.1",
+    "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
+    "slick-carousel": "^1.8.1",
+    "tailwindcss": "^3.4.1",
+    "three": "^0.160.0",
+    "web-vitals": "^3.5.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   },
   "eslintConfig": {
     "extends": [
@@ -50,8 +53,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }
