@@ -10,6 +10,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import BackButton from "../../components/buttons/BackButton";
 import { useTranslation } from "react-i18next";
 import { WelcomeButtonStyle } from "../../components/buttons/ButtonStyle";
+import LoseScreen from '../../components/game/LoseScreen';
+import WinScreen from '../../components/game/WinScreen';
 
 const GameCanvas = () => {
   // Default Parameters
@@ -275,9 +277,23 @@ const GameCanvas = () => {
     <div className="flex justify-center items-center h-screen">
       {scoreLeftReact === winScore || scoreRightReact === winScore ? (
         scoreLeftReact === winScore ? (
-          <WinScreen />
+          <WinScreen
+            t={t}
+            navigate={navigate}
+            GameCanvas={GameCanvas}
+            backgroundImage={backgroundImage}
+            WelcomeButtonStyle={WelcomeButtonStyle}
+            BackButton={BackButton}
+          />
         ) : (
-          <LoseScreen />
+          <LoseScreen
+            t={t}
+            navigate={navigate}
+            GameCanvas={GameCanvas}
+            backgroundImage={backgroundImage}
+            WelcomeButtonStyle={WelcomeButtonStyle}
+            BackButton={BackButton}
+          />
         )
       ) : (
         <>
@@ -287,86 +303,6 @@ const GameCanvas = () => {
             style={{ backgroundColor: "#0F0F0F" }}
           ></canvas>
         </>
-      )}
-    </div>
-  );
-};
-
-const WinScreen = () => {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-  const [gameStarted, setGameStarted] = useState(false);
-
-  const handleButtonClick = () => {
-    setGameStarted(true);
-  };
-
-  return (
-    <div className="flex justify-center items-center h-screen">
-      {gameStarted ? (
-        <GameCanvas />
-      ) : (
-        <div className="relative">
-          <img
-            src={backgroundImage}
-            style={{ width: "80vw", height: "100%", objectFit: "cover" }}
-            alt="Background"
-            className="rounded-xl shadow-lg"
-          />
-          <div
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 
-		  -translate-y-1/2 text-center font-bold font-nosifer"
-          >
-            <p>{t("YOU WON!")}</p>
-            <button
-              onClick={handleButtonClick}
-              className={`mt-10 ${WelcomeButtonStyle}`}
-            >
-              {t("Play Again")}
-            </button>
-          </div>
-          <BackButton navigate={navigate} t={t} />
-        </div>
-      )}
-    </div>
-  );
-};
-
-const LoseScreen = () => {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-  const [gameStarted, setGameStarted] = useState(false);
-
-  const handleButtonClick = () => {
-    setGameStarted(true);
-  };
-
-  return (
-    <div className="flex justify-center items-center h-screen">
-      {gameStarted ? (
-        <GameCanvas />
-      ) : (
-        <div className="relative">
-          <img
-            src={backgroundImage}
-            style={{ width: "80vw", height: "100%", objectFit: "cover" }}
-            alt="Background"
-            className="rounded-xl shadow-lg"
-          />
-          <div
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 
-		  -translate-y-1/2 text-center font-bold font-nosifer"
-          >
-            <p>{t("YOU LOST!")}</p>
-            <button
-              onClick={handleButtonClick}
-              className={`mt-10 ${WelcomeButtonStyle}`}
-            >
-              {t("Play Again")}
-            </button>
-          </div>
-          <BackButton navigate={navigate} t={t} />
-        </div>
       )}
     </div>
   );
@@ -397,8 +333,8 @@ const Pong = () => {
   return (
     <div id="oP" className="flex justify-center items-center h-screen">
       {location.pathname === "/originalpong" ||
-      location.pathname === "/pongai" ||
-      location.pathname === "/pong3d" ? (
+        location.pathname === "/pongai" ||
+        location.pathname === "/pong3d" ? (
         <button
           onClick={() =>
             isFullScreen ? handleExitFullScreen() : handleGoFullScreen("oP")
@@ -413,7 +349,7 @@ const Pong = () => {
         </button>
       ) : null}
       {gameStarted ? (
-          <GameCanvas className="m-4" />
+        <GameCanvas className="m-4" />
       ) : (
         <div className="relative">
           <img
@@ -424,7 +360,7 @@ const Pong = () => {
           />
           <div
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 
-		  -translate-y-1/2 text-center"
+		        -translate-y-1/2 text-center"
           >
             <button onClick={handleButtonClick} className={WelcomeButtonStyle}>
               {t("Start Game")}
