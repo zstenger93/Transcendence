@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Fullstack SPA",
   "main": "index.js",
-  "homepage": "https://transcendence-frontend-3otz.onrender.com",
+  "homepage": "https://zstenger93.github.io/Transcendence/",
   "scripts": {
     "build:css": "postcss src/styles/tailwind.css -o src/index.css",
     "watch:css": "postcss src/styles/tailwind.css -o src/index.css --watch",
@@ -34,7 +34,8 @@
     "web-vitals": "^3.5.1"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@testing-library/jest-dom": "^6.2.0"
   },
   "eslintConfig": {
     "extends": [
