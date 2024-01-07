@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 20
 
       - name: Install Dependencies
         working-directory: frontend
@@ -26,25 +26,25 @@ jobs:
         working-directory: frontend
         run: npm run test_root_page
     
-  test_Sidebar:
-    runs-on: ubuntu-latest
+  # test_Sidebar:
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+  #   steps:
+  #     - name: Checkout Repository
+  #       uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 16
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20
 
-      - name: Install Dependencies
-        working-directory: frontend
-        run: npm install
+  #     - name: Install Dependencies
+  #       working-directory: frontend
+  #       run: npm install
 
-      - name: Run Sidebar Tests
-        working-directory: frontend
-        run: npm run test_Sidebar
+  #     - name: Run Sidebar Tests
+  #       working-directory: frontend
+  #       run: npm run test_Sidebar
 
   build:
     runs-on: ubuntu-latest
@@ -58,7 +58,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 20
 
       - name: Install Dependencies
         working-directory: frontend

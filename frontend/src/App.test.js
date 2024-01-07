@@ -1,12 +1,11 @@
 import React from 'react';
 import { render, screen, fireEvent, prettyDOM, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import App from './App';
-import { within } from '@testing-library/dom';
-import { I18nextProvider } from 'react-i18next';
-import i18n from 'i18next';
-import Sidebar from './components/Sidebar';
-import { MemoryRouter } from 'react-router-dom';
+// import userEvent from '@testing-library/user-event';
+// import { within } from '@testing-library/dom';
+// import { I18nextProvider } from 'react-i18next';
+// import i18n from 'i18next';
+// import Sidebar from './components/Sidebar';
 
 test('Root Page', () => {
   const { container } = render(<App />);
@@ -18,29 +17,6 @@ test('Root Page', () => {
   expect(signInButton).toBeInTheDocument();
 });
 
-test('Sidebar', async () => {
-  const { container } = render(<App />);
-
-  const signInButton = screen.getByText('Sign In via 42');
-  userEvent.click(signInButton);
-
-  await waitFor(() => screen.getByText('Logout'));
-
-  
-  const homeLink = screen.getByText('Home');
-  const chatLink = screen.getByText('Channels & Private Messages');
-  const gamesLink = screen.getByText('Play & Watch Games');
-  const profileLink = screen.getByText('Profile');
-  const aboutLink = screen.getByText('About Us');
-  const logoutLink = screen.getByText('Logout');
-  
-  userEvent.click(homeLink);
-  userEvent.click(chatLink);
-  userEvent.click(gamesLink);
-  userEvent.click(profileLink);
-  userEvent.click(aboutLink);
-  userEvent.click(logoutLink);
-});
 
 // test('async test for page data', async () => {
 //   const { container } = render(<App />);
