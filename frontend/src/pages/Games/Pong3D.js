@@ -127,7 +127,7 @@ function Pong3D() {
       map: textureText,
       transparent: true,
     });
-    const textGeometry = new THREE.PlaneGeometry(10, 10);
+    const textGeometry = new THREE.PlaneGeometry(15, 10);
     const textMesh = new THREE.Mesh(textGeometry, textMaterial);
     textMesh.position.set(
       0,
@@ -470,7 +470,19 @@ function Pong3D() {
 
     let isDragging = false;
 
+    const disableScroll = (event) => {
+      event.preventDefault();
+    };
+
+    const enableScroll = () => {
+      window.removeEventListener("wheel", disableScroll, { passive: false });
+      window.removeEventListener("touchmove", disableScroll, {
+        passive: false,
+      });
+    };
+
     function handleKeyDown(event) {
+      event.preventDefault();
       if (event.key === "w" || event.key === "W" || event.key === "ArrowUp")
         // eslint-disable-next-line react-hooks/exhaustive-deps
         leftPaddlePosition += 1;
@@ -496,12 +508,15 @@ function Pong3D() {
       isDragging = false;
     }
 
+    window.addEventListener("wheel", disableScroll, { passive: false });
+    window.addEventListener("touchmove", disableScroll, { passive: false });
     window.addEventListener("touchstart", handleTouchStart);
     window.addEventListener("touchmove", handleTouchMove);
     window.addEventListener("touchend", handleTouchEnd);
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
+      enableScroll();
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
