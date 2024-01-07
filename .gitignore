@@ -54,3 +54,8 @@ backend/authentication/images/*
 # media
 media
 node_modules
+
+*settings.py
+backend/backend/settings.py
+
+
