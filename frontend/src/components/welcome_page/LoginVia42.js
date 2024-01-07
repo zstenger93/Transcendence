@@ -1,40 +1,39 @@
 import React from "react";
+import { WelcomeButtonStyle } from "../buttons/ButtonStyle";
 
-const OAuth = async ({ navigate }) => {
-  let response = await fetch("http://localhost:8000/api/is_authenticated/", {
+const OAuth = async ({ navigate, redirect_uri }) => {
+  console.log("OAuth");
+  console.log(redirect_uri);
+  const auth = `${redirect_uri}/api/is_authenticated/`;
+  let response = await fetch(auth, {
     credentials: "include",
   });
+
   let data = await response.json();
 
   if (!data.is_authenticated) {
-    const authWindow = window.open(
-      "http://localhost:8000/api/oauth/authorize/"
-    );
-    window.addEventListener(
-      "message",
-      (event) => {
-        if (event.origin !== "http://localhost:8000") {
-          return;
-        }
-        if (event.data.is_authenticated) {
-          authWindow.close();
-          navigate("/home");
-        }
-      },
-      false
-    );
+    window.open(`${redirect_uri}/api/oauth/authorize/`);
+    if (!data.is_authenticated) {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      response = await fetch(auth, {
+        credentials: "include",
+      });
+      data = await response.json();
+	  console.log("I'm stuck in authception")
+    }
+	console.log(data.is_authenticated);
+	console.log("authenticated");
+	navigate("/home");
+  } else {
+    navigate("/home");
   }
-
-  navigate("/home");
 };
 
-const LoginButton = ({ t, navigate }) => {
+const LoginButton = ({ t, navigate, redirect_uri }) => {
   return (
     <button
-      onClick={() => OAuth({ navigate })}
-      className="bg-gray-900 text-gray-300 font-nosifer font-bold 
-		px-4 py-2 rounded cursor-pointer hover:bg-gray-900 hover:bg-opacity-70
-		border-b-2 border-r-2 border-purple-600"
+      onClick={() => OAuth({ navigate, redirect_uri })}
+      className={`${WelcomeButtonStyle}`}
     >
       {t("Sign In via 42")}
     </button>
