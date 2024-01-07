@@ -9,20 +9,13 @@ import NotFound from "./components/404";
 import Sidebar from "./components/hamburger_menu/Hamburger";
 import Welcome from "./pages/Welcome";
 import Profile from "./pages/Profile";
-import HomeBackground from "./images/bg0.png";
-import WelcomeBackground from "./images/welcomebg.jpg";
-import MortyBackground0 from "./images/morty0.png";
-import MortyBackground1 from "./images/morty1.png";
-import MortyBackground2 from "./images/morty2.png";
-import MortyBackground3 from "./images/morty3.png";
-import MortyBackground4 from "./images/morty4.png";
 import Matchmaking from "./pages/Games/Matchmaking";
 import OriginalPong from "./pages/Games/OriginalPong";
 import PongAi from "./pages/Games/PongAi";
 import Pong3D from "./pages/Games/Pong3D";
 import ChoosePongMode from "./pages/Games/ChoosePongMode";
+import Background from "./images/welcomebg.jpg";
 import BreakingBadMorty from "./images/rmb3.png";
-
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 const PageWrapper = ({ children, image, showSidebar = true }) => {
@@ -44,8 +37,8 @@ const PageWrapper = ({ children, image, showSidebar = true }) => {
 
 function App() {
   const { i18n } = useTranslation();
-//   const basename =
-//     process.env.NODE_ENV === "production" ? "/Transcendence" : "";
+  const basename =
+    process.env.NODE_ENV === "production" ? "/Transcendence" : "";
   let REDIRECT_URI;
 
   if (process.env.NODE_ENV === "development") {
@@ -65,12 +58,12 @@ function App() {
 
   return (
     <I18nextProvider i18n={Translation}>
-      <Router>
+      <Router basename={basename}>
         <Routes>
           <Route
             path="/"
             element={
-              <PageWrapper image={WelcomeBackground} showSidebar={false}>
+              <PageWrapper image={Background} showSidebar={false}>
                 <Welcome redirectUri={REDIRECT_URI} />
               </PageWrapper>
             }
@@ -78,7 +71,7 @@ function App() {
           <Route
             path="home"
             element={
-              <PageWrapper image={MortyBackground4}>
+              <PageWrapper image={Background}>
                 <Home />
               </PageWrapper>
             }
@@ -86,7 +79,7 @@ function App() {
           <Route
             path="chat"
             element={
-              <PageWrapper image={MortyBackground1}>
+              <PageWrapper image={Background}>
                 <Chat />
               </PageWrapper>
             }
@@ -94,7 +87,7 @@ function App() {
           <Route
             path="matchmaking"
             element={
-              <PageWrapper image={HomeBackground}>
+              <PageWrapper image={Background}>
                 <Matchmaking />
               </PageWrapper>
             }
@@ -102,7 +95,7 @@ function App() {
           <Route
             path="games"
             element={
-              <PageWrapper image={MortyBackground0}>
+              <PageWrapper image={Background}>
                 <Games />
               </PageWrapper>
             }
@@ -110,7 +103,7 @@ function App() {
           <Route
             path="profile"
             element={
-              <PageWrapper image={MortyBackground2}>
+              <PageWrapper image={Background}>
                 <Profile />
               </PageWrapper>
             }
@@ -118,7 +111,7 @@ function App() {
           <Route
             path="about"
             element={
-              <PageWrapper image={MortyBackground3}>
+              <PageWrapper image={Background}>
                 <About />
               </PageWrapper>
             }
@@ -126,7 +119,7 @@ function App() {
           <Route
             path="originalpong"
             element={
-              <PageWrapper image={HomeBackground}>
+              <PageWrapper image={Background}>
                 <OriginalPong />
               </PageWrapper>
             }
@@ -134,7 +127,7 @@ function App() {
           <Route
             path="pongai"
             element={
-              <PageWrapper image={HomeBackground}>
+              <PageWrapper image={Background}>
                 <PongAi />
               </PageWrapper>
             }
@@ -142,16 +135,8 @@ function App() {
           <Route
             path="pong3d"
             element={
-              <PageWrapper image={HomeBackground}>
+              <PageWrapper image={Background}>
                 <Pong3D />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="pongai"
-            element={
-              <PageWrapper image={HomeBackground}>
-                <PongAi />
               </PageWrapper>
             }
           />
@@ -159,14 +144,6 @@ function App() {
             path="choosepongmode"
             element={
               <PageWrapper image={BreakingBadMorty}>
-                <ChoosePongMode />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="choosepongmode"
-            element={
-              <PageWrapper image={HomeBackground}>
                 <ChoosePongMode />
               </PageWrapper>
             }
