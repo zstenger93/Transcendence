@@ -1,16 +1,16 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
-import world from "../../images/world.jpg";
-import mercury from "../../images/mercury.png";
-import venus from "../../images/venus.jpg";
-import mars from "../../images/mars.jpg";
-import jupiter from "../../images/jupiter.jpg";
-import saturn from "../../images/saturn.png";
-import uranus from "../../images/uranus.png";
-import neptune from "../../images/neptun.png";
-import sunTex from "../../images/sun.jpg";
-import goggins from "../../images/stayhard.png";
-import death from "../../images/deathstar.png";
+import world from "../../images/game/world.jpg";
+import mercury from "../../images/game/mercury.png";
+import venus from "../../images/game/venus.jpg";
+import mars from "../../images/game/mars.jpg";
+import jupiter from "../../images/game/jupiter.jpg";
+import saturn from "../../images/game/saturn.png";
+import uranus from "../../images/game/uranus.png";
+import neptune from "../../images/game/neptun.png";
+import sunTex from "../../images/game/sun.jpg";
+import goggins from "../../images/game/stayhard.png";
+import death from "../../images/game/deathstar.png";
 
 // import { TextGeometry, MeshBasicMaterial, Mesh } from "three";
 
@@ -127,7 +127,7 @@ function Pong3D() {
       map: textureText,
       transparent: true,
     });
-    const textGeometry = new THREE.PlaneGeometry(10, 10);
+    const textGeometry = new THREE.PlaneGeometry(15, 10);
     const textMesh = new THREE.Mesh(textGeometry, textMaterial);
     textMesh.position.set(
       0,
@@ -146,7 +146,11 @@ function Pong3D() {
       transparent: true,
     });
     const bounceMesh = new THREE.Mesh(textGeometry, bounceMaterial);
-    bounceMesh.position.set(shortGeometry / 2 + wallThickness, shortGeometry / 2 + wallThickness, 0);
+    bounceMesh.position.set(
+      shortGeometry / 2 + wallThickness,
+      shortGeometry / 2 + wallThickness,
+      0
+    );
     scene.add(bounceMesh);
     // Create stars
     const starGeometry = new THREE.SphereGeometry(0.2, 32, 32);
@@ -159,6 +163,7 @@ function Pong3D() {
       opacity: 0.1,
       transparent: true,
     });
+
     const sunMaterial = new THREE.MeshBasicMaterial({
       color: 0xff8800,
       map: sunTexture,
@@ -173,12 +178,14 @@ function Pong3D() {
     scene.add(sun);
     sun.add(sunLayer2);
 
+    const stars = [];
     for (let i = 0; i < 150; i++) {
       const star = new THREE.Mesh(starGeometry, starMaterial);
       star.position.x = Math.random() * longGeometry * 6 - longGeometry * 3;
       star.position.y = Math.random() * shortGeometry * 4 - shortGeometry * 2;
-      star.position.z = -(Math.random() + 1) * 40;
+      star.position.z = (Math.random() + 1) * -40;
       scene.add(star);
+      stars.push(star);
     }
 
     // Create walls
@@ -330,9 +337,15 @@ function Pong3D() {
     david.position.set(0, 1.41, 0);
     ball.add(david);
     // Animation loop
+
     let ballDirection = new THREE.Vector3(1, 1, 0).normalize();
     function animate() {
       requestAnimationFrame(animate);
+      for (let i = 0; i < stars.length; i++) {
+        stars[i].position.x += 0.1;
+        if (stars[i].position.x > longGeometry * 3)
+          stars[i].position.x = -longGeometry * 3;
+      }
 
       // Move the ball
       ball.position.add(ballDirection.clone().multiplyScalar(ballSpeed));
@@ -395,8 +408,7 @@ function Pong3D() {
             bounceContext.fillText("BOUNCE COUNTER: " + bounceCounter, 44, 24);
             bounceMaterialTexture.needsUpdate = true;
             isCodeExecuted = true;
-          }
-          else {
+          } else {
             isCodeExecuted = false;
           }
         }
@@ -458,7 +470,19 @@ function Pong3D() {
 
     let isDragging = false;
 
+    const disableScroll = (event) => {
+      event.preventDefault();
+    };
+
+    const enableScroll = () => {
+      window.removeEventListener("wheel", disableScroll, { passive: false });
+      window.removeEventListener("touchmove", disableScroll, {
+        passive: false,
+      });
+    };
+
     function handleKeyDown(event) {
+      event.preventDefault();
       if (event.key === "w" || event.key === "W" || event.key === "ArrowUp")
         // eslint-disable-next-line react-hooks/exhaustive-deps
         leftPaddlePosition += 1;
@@ -484,12 +508,15 @@ function Pong3D() {
       isDragging = false;
     }
 
+    window.addEventListener("wheel", disableScroll, { passive: false });
+    window.addEventListener("touchmove", disableScroll, { passive: false });
     window.addEventListener("touchstart", handleTouchStart);
     window.addEventListener("touchmove", handleTouchMove);
     window.addEventListener("touchend", handleTouchEnd);
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
+      enableScroll();
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
