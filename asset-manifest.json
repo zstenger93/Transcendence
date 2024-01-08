@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Transcendence/static/css/main.0a683623.css",
-    "main.js": "/Transcendence/static/js/main.fdc27ea0.js",
+    "main.js": "/Transcendence/static/js/main.9d5d6b93.js",
     "static/js/496.a8c07071.chunk.js": "/Transcendence/static/js/496.a8c07071.chunk.js",
     "static/media/404.mp4": "/Transcendence/static/media/404.036827f1db48d0ae1d47.mp4",
     "static/media/welcomebg.jpg": "/Transcendence/static/media/welcomebg.e865aad312e9f209a8e9.jpg",
@@ -24,11 +24,11 @@
     "static/media/slick.woff": "/Transcendence/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/Transcendence/index.html",
     "main.0a683623.css.map": "/Transcendence/static/css/main.0a683623.css.map",
-    "main.fdc27ea0.js.map": "/Transcendence/static/js/main.fdc27ea0.js.map",
+    "main.9d5d6b93.js.map": "/Transcendence/static/js/main.9d5d6b93.js.map",
     "496.a8c07071.chunk.js.map": "/Transcendence/static/js/496.a8c07071.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0a683623.css",
-    "static/js/main.fdc27ea0.js"
+    "static/js/main.9d5d6b93.js"
   ]
 }
