@@ -11,10 +11,15 @@ import neptune from "../../images/game/neptun.png";
 import sunTex from "../../images/game/sun.jpg";
 import goggins from "../../images/game/stayhard.png";
 import death from "../../images/game/deathstar.png";
-
-// import { TextGeometry, MeshBasicMaterial, Mesh } from "three";
+import FullScreenButton from "../../components/buttons/FullScreen";
+import BackButton from "../../components/buttons/BackButton";
+import { useLocation } from "react-router-dom";
+import backgroundImage from "../../images/pongbg.png";
+import { WelcomeButtonStyle } from "../../components/buttons/ButtonStyle";
+import EndScreen from "../../components/game/EndScreen";
 
 function Pong3D() {
+  const location = useLocation();
   const textureLoader = new THREE.TextureLoader();
   const longGeometry = 50;
   const shortGeometry = 30;
@@ -23,6 +28,8 @@ function Pong3D() {
     map: textureLoader.load(venus),
     reflectivity: 1,
   });
+  const [gameOver, setGameOver] = React.useState(false);
+
 
   const asteroidGeometry = new THREE.SphereGeometry(1, 32, 32);
   const asteroids = [];
@@ -33,7 +40,7 @@ function Pong3D() {
   const wallOffsetX = 23.5;
   const wallOffsetY = 15;
   const wallThickness = 3;
-  const ballSpeed = 0.3;
+  const ballSpeed = 1;
   let leftPaddlePosition = 0;
   let bounceCounter = 0;
   let isCodeExecuted = false;
@@ -95,6 +102,7 @@ function Pong3D() {
     const camera = new THREE.PerspectiveCamera(75, aspectRatio, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
+
     if (containerRef.current) {
       containerRef.current.appendChild(renderer.domElement);
     }
@@ -117,9 +125,9 @@ function Pong3D() {
     // Create canvas for rendering text
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
-    context.font = "24px Arial";
+    context.font = "20px nosifer";
     context.fillStyle = "white";
-    context.fillText("BLACKHOLE PONG", 44, 24);
+    context.fillText("BLACKHOLE PONG", 4, 24);
 
     //Text
     const textureText = new THREE.CanvasTexture(canvas);
@@ -127,7 +135,7 @@ function Pong3D() {
       map: textureText,
       transparent: true,
     });
-    const textGeometry = new THREE.PlaneGeometry(15, 10);
+    const textGeometry = new THREE.PlaneGeometry(15, 15);
     const textMesh = new THREE.Mesh(textGeometry, textMaterial);
     textMesh.position.set(
       0,
@@ -137,9 +145,9 @@ function Pong3D() {
     scene.add(textMesh);
     const boucneCanvas = document.createElement("canvas");
     const bounceContext = boucneCanvas.getContext("2d");
-    bounceContext.font = "24px Arial";
+    bounceContext.font = "20px nosifer";
     bounceContext.fillStyle = "white";
-    bounceContext.fillText("BOUNCE COUNTER: 0", 44, 24);
+    bounceContext.fillText("BOUNCE COUNT: 0", 6, 24);
     const bounceMaterialTexture = new THREE.CanvasTexture(boucneCanvas);
     const bounceMaterial = new THREE.MeshBasicMaterial({
       map: bounceMaterialTexture,
@@ -405,7 +413,7 @@ function Pong3D() {
               boucneCanvas.width,
               boucneCanvas.height
             );
-            bounceContext.fillText("BOUNCE COUNTER: " + bounceCounter, 44, 24);
+            bounceContext.fillText("BOUNCE COUNT: " + bounceCounter, 6, 24);
             bounceMaterialTexture.needsUpdate = true;
             isCodeExecuted = true;
           } else {
@@ -427,8 +435,9 @@ function Pong3D() {
             // eslint-disable-next-line react-hooks/exhaustive-deps
             lifes = orbits.length - 1;
             if (orbits.length === 0) {
-              alert("GAME OVER");
-              window.location.reload();
+              if (orbits.length === 0) {
+                setGameOver(true);
+              }
             }
             if (orbits.length > 0) {
               scene.remove(orbits[orbits.length - 1]);
@@ -526,17 +535,31 @@ function Pong3D() {
   }, []);
 
   return (
-    <>
-      <div
-        ref={containerRef}
-        style={{
-          width: "100%",
-          height: "100%",
-          margin: "auto",
-          overflow: "hidden",
-        }}
-      ></div>
-    </>
+    <div id="3P" className="flex justify-center items-center h-screen">
+      <FullScreenButton location={location} page="3P" />
+      {gameOver ? (
+        <EndScreen
+          Game={Pong3D}
+          backgroundImage={backgroundImage}
+          WelcomeButtonStyle={WelcomeButtonStyle}
+          BackButton={BackButton}
+        />
+      ) : (
+        <>
+          <div
+            ref={containerRef}
+            style={{
+              width: "100%",
+              height: "100%",
+              margin: "auto",
+              overflow: "hidden",
+            }}
+          >
+          </div>
+          {/* <BackButton navigate={navigate} t={t} /> */}
+        </>
+      )}
+    </div>
   );
 }
 
