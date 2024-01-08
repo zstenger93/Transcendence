@@ -21,7 +21,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 const PageWrapper = ({ children, image, showSidebar = true }) => {
   return (
     <div
-      className="overflow-y-auto"
+      className="overflow-y-auto h-svh"
       style={{
         backgroundImage: `url(${image})`,
         backgroundSize: "cover",
