@@ -3,6 +3,9 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   theme: {
     extend: {
+      height: {
+        svh: "var(--svh)",
+      },
       fontSize: {
         "1.5xl": "1.275rem",
       },
@@ -17,7 +20,7 @@ module.exports = {
         "purple-700-opacity-welcome": "rgba(99, 39, 120, 0.8)",
         "purple-750-opacity-welcome": "rgba(76, 41, 88, 0.9)",
         "gray-900-opacity": "rgba(31, 41, 55, 0.2)",
-		"darkred": '#330404',
+        darkred: "#330404",
       },
     },
   },

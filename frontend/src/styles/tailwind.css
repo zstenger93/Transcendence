@@ -19,3 +19,7 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #666;
 }
+
+:root {
+	--svh: calc(100vh - var(--safe-area-inset-bottom) - var(--safe-area-inset-top));
+  }
