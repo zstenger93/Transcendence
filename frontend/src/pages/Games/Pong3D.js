@@ -414,10 +414,6 @@ function Pong3D() {
             ball.position.y = 0;
             // eslint-disable-next-line react-hooks/exhaustive-deps
             lifes = orbits.length - 1;
-            if (orbits.length === 0) {
-              alert("GAME OVER");
-              window.location.reload();
-            }
             if (orbits.length > 0) {
               scene.remove(orbits[orbits.length - 1]);
               orbits.pop();
