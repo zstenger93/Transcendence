@@ -11,11 +11,12 @@ RUN apt update && \
     apt install python3-pip -y && \
     cd .. && rm -rf Python-3.12.0
 
-RUN apt install lsof curl procps -y # For Development
+# For Development
+RUN apt install lsof curl procps -y 
 
 COPY docker/backend/backend.sh /app/
 RUN chmod +x /app/backend.sh
 
-EXPOSE 8000
+EXPOSE 80
 
 ENTRYPOINT ["docker/backend/backend.sh"]

@@ -12,10 +12,18 @@ echo 'source /app/backend/venv/bin/activate' >> /root/.bashrc
 echo "alias migrate='python manage.py makemigrations && python manage.py migrate'" >> /root/.bashrc
 echo "alias get='http --follow --timeout 6'" >> /root/.bashrc
 
-echo "Starting Django Server, Enjoy!"
+echo "Starting Django Server, Enjoy!!!"
+
+mkdir -pv /var/{log,run}/gunicorn/
+gunicorn -c config/gunicorn/dev.py # for logs: tail -f /var/log/gunicorn/dev.log
+
+apt install nginx -y
+service nginx start
+service nginx status
+
+
 tail -f /dev/null
 
-# gunicorn -c config/gunicorn/dev.py # for logs: tail -f /var/log/gunicorn/dev.log
 
 # python /app/backend/manage.py runserver 0.0.0.0:8000
 
