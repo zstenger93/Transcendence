@@ -17,6 +17,10 @@ import ChoosePongMode from "./pages/Games/ChoosePongMode";
 import Background from "./images/welcomebg.jpg";
 import BreakingBadMorty from "./images/rmb3.png";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import StartScreen from "./components/game/StartScreen";
+import { WelcomeButtonStyle } from "./components/buttons/ButtonStyle";
+import BackButton from "./components/buttons/BackButton";
+import backgroundimage from "./images/pongbg.png";
 
 const PageWrapper = ({ children, image, showSidebar = true }) => {
   return (
@@ -136,7 +140,12 @@ function App() {
             path="pong3d"
             element={
               <PageWrapper image={Background}>
-                <Pong3D />
+                <StartScreen
+                  Game={Pong3D}
+                  backgroundImage={backgroundimage}
+                  WelcomeButtonStyle={WelcomeButtonStyle}
+                  BackButton={BackButton}
+                />
               </PageWrapper>
             }
           />

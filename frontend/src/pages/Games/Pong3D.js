@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import world from "../../images/game/world.jpg";
 import mercury from "../../images/game/mercury.png";
@@ -13,18 +13,12 @@ import goggins from "../../images/game/stayhard.png";
 import death from "../../images/game/deathstar.png";
 import FullScreenButton from "../../components/buttons/FullScreen";
 import BackButton from "../../components/buttons/BackButton";
-import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
-
+import { useLocation } from "react-router-dom";
 import backgroundImage from "../../images/pongbg.png";
 import { WelcomeButtonStyle } from "../../components/buttons/ButtonStyle";
 import EndScreen from "../../components/game/EndScreen";
 
-// import { TextGeometry, MeshBasicMaterial, Mesh } from "three";
-
 function Pong3D() {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
   const location = useLocation();
   const textureLoader = new THREE.TextureLoader();
   const longGeometry = 50;
@@ -35,7 +29,6 @@ function Pong3D() {
     reflectivity: 1,
   });
   const [gameOver, setGameOver] = React.useState(false);
-  const [gameStarted, setGameStarted] = useState(false);
 
 
   const asteroidGeometry = new THREE.SphereGeometry(1, 32, 32);
@@ -541,10 +534,6 @@ function Pong3D() {
     };
   }, []);
 
-  const handleButtonClick = () => {
-    setGameStarted(true);
-  };
-
   return (
     <div id="3P" className="flex justify-center items-center h-screen">
       <FullScreenButton location={location} page="3P" />
@@ -567,7 +556,7 @@ function Pong3D() {
             }}
           >
           </div>
-          <BackButton navigate={navigate} t={t} />
+          {/* <BackButton navigate={navigate} t={t} /> */}
         </>
       )}
     </div>
