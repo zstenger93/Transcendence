@@ -49,7 +49,7 @@ const FullScreenButton = ({ location, page }) => {
           onClick={() =>
             isFullScreen ? handleExitFullScreen() : handleGoFullScreen(page)
           }
-          className="absolute top-2 right-2 mr-4"
+          className="absolute bottom-2 right-2 mr-4"
         >
           {isFullScreen ? (
             <AiOutlineFullscreenExit size="32" color="white" />
