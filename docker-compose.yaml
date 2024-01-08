@@ -42,3 +42,20 @@ services:
       POSTGRES_PASSWORD: transcend_pwd
     ports:
       - "5432:5432"
+  
+  # https:
+  #   container_name: nginx
+  #   build:
+  #     context: .
+  #     dockerfile: docker/nginx/nginx.Dockerfile
+  #   image: transcendence_nginx
+  #   # volumes:
+  #   #   - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+  #   #   - ./docker/nginx/ssl:/etc/nginx/ssl
+  #   ports:
+  #     - "8000:8000"
+  #     - "3000:3000"
+  #   depends_on:
+  #     - frontend
+  #     - backendFROM nginx:latest
+
