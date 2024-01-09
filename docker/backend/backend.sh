@@ -33,7 +33,6 @@ server_tokens               off;
 access_log                  /var/log/nginx/backend.access.log;
 error_log                   /var/log/nginx/backend.error.log;
 
-# This configuration will be changed to redirect to HTTPS later
 server {
   server_name               localhost;
   listen                    80;
@@ -41,22 +40,22 @@ server {
     proxy_pass              http://localhost:8000;
     proxy_set_header        Host \$host;
   }
-}
+
   location /static {
     autoindex on;
     alias /var/www/backend/static/;
   }
   
   listen 443 ssl;
-  ssl_certificate ../nginx/localhost.crt;
-  ssl_certificate_key ../nginx/localhost.key;
+  ssl_certificate /app/docker/nginx/localhost.crt;
+  ssl_certificate_key /app/docker/nginx/localhost.key;
 }
 EOF
 
 cd /etc/nginx/sites-enabled
 ln -s ../sites-available/backend .
 
-service nginx start
+service nginx restart
 service nginx status
 
 tail -f /var/log/gunicorn/dev.log

@@ -27,6 +27,7 @@ services:
     volumes:
       - ${PWD}:/app/
     ports:
+      - 443:443
       - 80:80
     entrypoint: /app/docker/backend/backend.sh
     # restart: unless-stopped
