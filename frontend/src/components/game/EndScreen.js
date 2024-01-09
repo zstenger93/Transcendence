@@ -31,7 +31,7 @@ const EndScreen = ({
           />
           <div
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 
-                    -translate-y-1/2 text-center font-bold font-nosifer"
+              -translate-y-1/2 text-center font-bold font-nosifer flex flex-col items-center justify-center"
           >
             <p>{t("YOU BOUNCED THE BALL")}</p>
             <p>{t(score)}</p>
