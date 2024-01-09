@@ -21,5 +21,11 @@
 }
 
 :root {
-	--svh: calc(100vh - var(--safe-area-inset-bottom) - var(--safe-area-inset-top));
-  }
+  --svh: calc(
+    100vh - var(--safe-area-inset-bottom) - var(--safe-area-inset-top)
+  );
+}
+
+.writing-mode-vertical {
+  writing-mode: vertical-lr;
+}
