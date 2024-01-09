@@ -438,6 +438,7 @@ function Pong3D() {
               if (orbits.length === 0) {
                 setGameOver(true);
                 setBounceCounter(bounceCounter);
+                ballSpeed = 0;
               }
             }
             if (orbits.length > 0) {
@@ -556,8 +557,7 @@ function Pong3D() {
               margin: "auto",
               overflow: "hidden",
             }}
-          >
-          </div>
+          ></div>
           {/* <BackButton navigate={navigate} t={t} /> */}
         </>
       )}
