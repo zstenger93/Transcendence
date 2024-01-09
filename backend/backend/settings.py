@@ -21,13 +21,13 @@ DEBUG = os.getenv('DEBUG')
 ALLOWED_HOSTS = [
         '*', 
         'localhost', 
-        '172.18.0.4' 
-        ,'127.0.0.1', 
-        '0.0.0.0',
+        '172.18.0.4',
+        '127.0.0.1', 
+        '0.0.0.0', 
         '10.13.7.5', 
-        'transcendence-backend-znhl.onrender.com',
+        'transcendence-backend-znhl.onrender.com', 
         'https://transcendence-frontend-3otz.onrender.com'
-	]
+    ]
 
 # Authentication settings
 if DEBUG == 'True':
