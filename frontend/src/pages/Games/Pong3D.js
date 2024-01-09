@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import world from "../../images/game/world.jpg";
 import mercury from "../../images/game/mercury.png";
@@ -29,7 +29,7 @@ function Pong3D() {
     reflectivity: 1,
   });
   const [gameOver, setGameOver] = React.useState(false);
-
+  const [returnCounter, setBounceCounter] = useState(0);
 
   const asteroidGeometry = new THREE.SphereGeometry(1, 32, 32);
   const asteroids = [];
@@ -437,6 +437,7 @@ function Pong3D() {
             if (orbits.length === 0) {
               if (orbits.length === 0) {
                 setGameOver(true);
+                setBounceCounter(bounceCounter);
               }
             }
             if (orbits.length > 0) {
@@ -543,6 +544,7 @@ function Pong3D() {
           backgroundImage={backgroundImage}
           WelcomeButtonStyle={WelcomeButtonStyle}
           BackButton={BackButton}
+          score={returnCounter}
         />
       ) : (
         <>
