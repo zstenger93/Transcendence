@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       height: {
         svh: "var(--svh)",
+		'192': '48rem',
       },
       fontSize: {
         "1.5xl": "1.275rem",
@@ -21,6 +22,9 @@ module.exports = {
         "purple-750-opacity-welcome": "rgba(76, 41, 88, 0.9)",
         "gray-900-opacity": "rgba(31, 41, 55, 0.2)",
         darkred: "#330404",
+      },
+	  borderRadius: {
+        'custom': '6%',
       },
     },
   },
