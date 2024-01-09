@@ -40,7 +40,7 @@ function Pong3D() {
   const wallOffsetX = 23.5;
   const wallOffsetY = 15;
   const wallThickness = 3;
-  const ballSpeed = 1;
+  let ballSpeed = 1;
   let leftPaddlePosition = 0;
   let bounceCounter = 0;
   let isCodeExecuted = false;
