@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       height: {
         svh: "var(--svh)",
-		'192': '48rem',
+		'192': '36rem',
       },
       fontSize: {
         "1.5xl": "1.275rem",

@@ -7,6 +7,8 @@ import "slick-carousel/slick/slick-theme.css";
 import backgroundImage from "../images/welcomebg.jpg";
 import zsolt from "../images/about/zsolt.jpeg";
 import jamshidbek from "../images/about/jamshidbek.jpg";
+import karlis from "../images/about/karlis.png";
+import laszlo from "../images/about/laszlo.png";
 
 function About() {
   const [selectedCard, setSelectedCard] = React.useState(null);
@@ -35,15 +37,13 @@ function About() {
       name: "Karlis",
       title: '"I can fix it"',
       description: t("About kvebers"),
-      image:
-        "https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp",
+      image: karlis,
     },
     {
       name: "Laszlo",
       title: '"Absolutely Proprietary"',
       description: t("About slaszlo"),
-      image:
-        "https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp",
+      image: laszlo,
     },
   ];
 
@@ -56,7 +56,7 @@ function About() {
 
   const settings = {
     dots: false,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -65,14 +65,18 @@ function About() {
   return (
     <div className="flex items-center justify-center h-screen bg-cover bg-center bg-no-repeat z-0">
       <div className="w-full h-screen flex items-center justify-center lg:hidden">
-        <Slider {...settings} className="max-w-sm">
+        <Slider {...settings} className="max-w-sm flex flex-col">
           {teamMembers.map((member, index) => (
             <div
               key={index}
-              className="max-w-sm rounded overflow-hidden shadow-lg 
+              className="flex flex-col min-h-full max-w-sm rounded overflow-hidden shadow-lg 
 			bg-gray-900"
             >
-              <img className="w-full" src={member.image} alt={member.name} />
+              <img
+                className="w-auto h-96 block mx-auto mt-3"
+                src={member.image}
+                alt={member.name}
+              />
               <div className="px-6 py-4">
                 <div
                   className="font-bold text-white font-nosifer 
