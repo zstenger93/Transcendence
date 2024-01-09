@@ -12,7 +12,7 @@ RUN apt update && \
     cd .. && rm -rf Python-3.12.0
 
 # For Development
-RUN apt install lsof curl procps -y 
+RUN apt install lsof curl procps vim -y 
 
 COPY docker/backend/backend.sh /app/
 RUN chmod +x /app/backend.sh

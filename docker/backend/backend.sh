@@ -17,16 +17,34 @@ echo "Starting Django Server, Enjoy!!!"
 mkdir -pv /var/{log,run}/gunicorn/
 gunicorn -c config/gunicorn/dev.py # for logs: tail -f /var/log/gunicorn/dev.log
 
-apt install nginx -y
-service nginx start
-service nginx status
-
-
-tail -f /dev/null
-
 
 # python /app/backend/manage.py runserver 0.0.0.0:8000
 
 # lsof -n -P -i TCP:8000 -s TCP:LISTEN
 
-# tail -f /var/log/gunicorn/dev.log
+apt install nginx -y
+service nginx start
+
+cat << EOF > /etc/nginx/sites-available/backend
+server_tokens               off;
+access_log                  /var/log/nginx/backend.access.log;
+error_log                   /var/log/nginx/backend.error.log;
+
+# This configuration will be changed to redirect to HTTPS later
+server {
+  server_name               localhost;
+  listen                    80;
+  location / {
+    proxy_pass              http://localhost:8000;
+    proxy_set_header        Host \$host;
+  }
+}
+EOF
+
+cd /etc/nginx/sites-enabled
+ln -s ../sites-available/backend .
+
+service nginx start
+service nginx status
+
+tail -f /var/log/gunicorn/dev.log
