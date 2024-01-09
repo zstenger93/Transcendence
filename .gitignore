@@ -55,3 +55,7 @@ backend/authentication/images/*
 media
 node_modules
 
+#ssl_keys
+*.crt
+*.key
+*.pem
