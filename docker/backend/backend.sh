@@ -25,6 +25,9 @@ gunicorn -c config/gunicorn/dev.py # for logs: tail -f /var/log/gunicorn/dev.log
 apt install nginx -y
 service nginx start
 
+openssl req -x509 -nodes -new -sha256 -days 1024 -newkey rsa:2048 -keyout docker/nginx/localhost.key -out docker/nginx/localhost.pem -subj "/C=DE/CN=localhost"
+openssl x509 -outform pem -in docker/nginx/localhost.pem -out docker/nginx/localhost.crt
+
 cat << EOF > /etc/nginx/sites-available/backend
 server_tokens               off;
 access_log                  /var/log/nginx/backend.access.log;
@@ -38,6 +41,15 @@ server {
     proxy_pass              http://localhost:8000;
     proxy_set_header        Host \$host;
   }
+}
+  location /static {
+    autoindex on;
+    alias /var/www/backend/static/;
+  }
+  
+  listen 443 ssl;
+  ssl_certificate ../nginx/localhost.crt;
+  ssl_certificate_key ../nginx/localhost.key;
 }
 EOF
 
