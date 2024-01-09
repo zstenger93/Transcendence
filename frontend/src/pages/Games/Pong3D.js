@@ -40,7 +40,7 @@ function Pong3D() {
   const wallOffsetX = 23.5;
   const wallOffsetY = 15;
   const wallThickness = 3;
-  const ballSpeed = 1;
+  let ballSpeed = 1;
   let leftPaddlePosition = 0;
   let bounceCounter = 0;
   let isCodeExecuted = false;
@@ -438,6 +438,7 @@ function Pong3D() {
               if (orbits.length === 0) {
                 setGameOver(true);
                 setBounceCounter(bounceCounter);
+                ballSpeed = 0;
               }
             }
             if (orbits.length > 0) {
@@ -556,8 +557,7 @@ function Pong3D() {
               margin: "auto",
               overflow: "hidden",
             }}
-          >
-          </div>
+          ></div>
           {/* <BackButton navigate={navigate} t={t} /> */}
         </>
       )}
