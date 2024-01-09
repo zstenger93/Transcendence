@@ -21,10 +21,22 @@ function About() {
       image: zsolt,
     },
     {
+      name: "Karlis",
+      title: '"I can fix it"',
+      description: t("About kvebers"),
+      image: karlis,
+    },
+    {
       name: "Jamshidbek",
       title: '"Can I drop the table?"',
       description: t("About jergashe"),
       image: jamshidbek,
+    },
+    {
+      name: "Laszlo",
+      title: '"Absolutely Proprietary"',
+      description: t("About slaszlo"),
+      image: laszlo,
     },
     {
       name: "Azer",
@@ -32,18 +44,6 @@ function About() {
       description: t("About asioud"),
       image:
         "https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp",
-    },
-    {
-      name: "Karlis",
-      title: '"I can fix it"',
-      description: t("About kvebers"),
-      image: karlis,
-    },
-    {
-      name: "Laszlo",
-      title: '"Absolutely Proprietary"',
-      description: t("About slaszlo"),
-      image: laszlo,
     },
   ];
 
@@ -95,59 +95,72 @@ function About() {
           ))}
         </Slider>
       </div>
-      <div className="hidden lg:flex lg:items-center lg:justify-center w-full h-screen">
-        <div className="h-192 flex flex-wrap justify-center">
+      <div className="h-192 hidden lg:flex lg:items-center lg:justify-center w-full relative">
+        <div className=" flex flex-wrap justify-center items-center">
           {teamMembers.map((member, index) => (
-            <label
-              key={index}
-              htmlFor={`c${index}`}
-              className={`w-20 bg-cover cursor-pointer overflow-hidden rounded-2xl m-2
-			  flex flex-col items-center justify-center transition-all duration-800
-			  ease-in-out transform-gpu shadow-2xl ${selectedCard === index ? "w-96" : ""}`}
-              style={{ backgroundImage: `url(${backgroundImage})` }}
-            >
-              <input
-                type="radio"
-                id={`c${index}`}
-                name="card"
-                className="hidden"
-                onChange={() => setSelectedCard(index)}
+            <div className="flex flex-col items-center">
+              <div
+                className={`w-20 m-2 ${selectedCard === index ? "w-96" : ""}`}
+                style={{
+                  visibility: selectedCard === index ? "visible" : "hidden",
+                }}
               />
-              <div className="flex flex-col items-center justify-center">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="m-3 p-3 rounded-custom"
+              <label
+                key={index}
+                htmlFor={`c${index}`}
+                className={`w-20 bg-cover cursor-pointer overflow-hidden rounded-2xl m-2
+				flex flex-col items-center justify-start transition-all duration-800
+				ease-in-out transform-gpu shadow-2xl
+				${
+					selectedCard === index
+					? "w-96 absolute top-1/2 transform -translate-y-1/2"
+					: ""
+				}`}
+                style={{ backgroundImage: `url(${backgroundImage})`, transition: "transform 0.0s ease-in-out", }}
+              >
+                <input
+                  type="radio"
+                  id={`c${index}`}
+                  name="card"
+                  className="hidden"
+                  onChange={() => setSelectedCard(index)}
                 />
-                <h4
-                  className={`mt-1 mb-1 font-nosifer text-xl text-white text-center
+                <div className="flex flex-col items-center justify-center">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="m-3 mt-5 p-3 rounded-custom"
+                  />
+                  <h4
+                    className={`mt-1 mb-1 font-nosifer text-xl text-white text-center
 				  transform
 				  ${selectedCard === index ? "" : "flex flex-col"}`}
-                >
-                  {member.name.split("").map((letter, i) => (
-                    <span key={i}>{letter}</span>
-                  ))}
-                </h4>
-                {selectedCard === index && (
-                  <>
-                    <p
-                      className={`transition-opacity duration-500 ease-in-out overflow-hidden 
+                  >
+                    {member.name.split("").map((letter, i) => (
+                      <span key={i}>{letter}</span>
+                    ))}
+                  </h4>
+                  {selectedCard === index && (
+                    <>
+                      <p
+                        className={`transition-opacity duration-500 ease-in-out overflow-hidden 
 					  text-white text-center mb-3
 					  ${selectedCard === index ? "opacity-100 max-h-full" : "opacity-0 max-h-0"}`}
-                    >
-                      {member.title}
-                    </p>
-                    <p
-                      className={`transition-opacity duration-500 ease-in-out overflow-hidden 
-					  text-white text-center mb-3
+                      >
+                        {member.title}
+                      </p>
+                      <p
+                        className={`transition-opacity duration-500 ease-in-out overflow-hidden 
+					  text-white text-center mb-5 p-5
 					  ${selectedCard === index ? "opacity-100 max-h-full" : "opacity-0 max-h-0"}`}
-                    >
-                      {member.description}
-                    </p>
-                  </>
-                )}
-              </div>
-            </label>
+                      >
+                        {member.description}
+                      </p>
+                    </>
+                  )}
+                </div>
+              </label>
+            </div>
           ))}
         </div>
       </div>
