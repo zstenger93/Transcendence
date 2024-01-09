@@ -36,6 +36,7 @@ error_log                   /var/log/nginx/backend.error.log;
 server {
   server_name               localhost;
   listen                    80;
+  #return                    307 https://\$host\$request_uri;
   location / {
     proxy_pass              http://localhost:8000;
     proxy_set_header        Host \$host;
@@ -59,3 +60,7 @@ service nginx restart
 service nginx status
 
 tail -f /var/log/gunicorn/dev.log
+
+# todo:  oragnize structure, nginx.conf, sites-available.conf, 
+# certs location, check cors problem, setup a firewall, only 443 is allowd
+# change ip to environment variable, check the redirect loop,
