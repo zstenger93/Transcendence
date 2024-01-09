@@ -1,5 +1,9 @@
 #!/bin/bash
 
+
+############################################
+# python environment                       #
+############################################
 cd /app/backend
 
 apt install python3.11-venv -y
@@ -12,46 +16,22 @@ echo 'source /app/backend/venv/bin/activate' >> /root/.bashrc
 echo "alias migrate='python manage.py makemigrations && python manage.py migrate'" >> /root/.bashrc
 echo "alias get='http --follow --timeout 6'" >> /root/.bashrc
 
-echo "Starting Django Server, Enjoy!!!"
 
+############################################
+# gunicorn server                          #
+############################################
 mkdir -pv /var/{log,run}/gunicorn/
-gunicorn -c config/gunicorn/dev.py # for logs: tail -f /var/log/gunicorn/dev.log
+gunicorn -c config/gunicorn/dev.py 
 
 
-# python /app/backend/manage.py runserver 0.0.0.0:8000
-
-# lsof -n -P -i TCP:8000 -s TCP:LISTEN
-
+############################################
+# nginx server                             #
+############################################
 apt install nginx -y
 service nginx start
 
-openssl req -x509 -nodes -new -sha256 -days 1024 -newkey rsa:2048 -keyout docker/nginx/localhost.key -out docker/nginx/localhost.pem -subj "/C=DE/CN=localhost"
-openssl x509 -outform pem -in docker/nginx/localhost.pem -out docker/nginx/localhost.crt
-
-cat << EOF > /etc/nginx/sites-available/backend
-server_tokens               off;
-access_log                  /var/log/nginx/backend.access.log;
-error_log                   /var/log/nginx/backend.error.log;
-
-server {
-  server_name               localhost;
-  listen                    80;
-  #return                    307 https://\$host\$request_uri;
-  location / {
-    proxy_pass              http://localhost:8000;
-    proxy_set_header        Host \$host;
-  }
-
-  location /static {
-    autoindex on;
-    alias /var/www/backend/static/;
-  }
-  
-  listen 443 ssl;
-  ssl_certificate /app/docker/nginx/localhost.crt;
-  ssl_certificate_key /app/docker/nginx/localhost.key;
-}
-EOF
+openssl req -x509 -nodes -new -sha256 -days 1024 -newkey rsa:2048 -keyout /etc/ssl/localhost.key -out /etc/ssl/localhost.pem -subj "/C=DE/CN=localhost"
+openssl x509 -outform pem -in /etc/ssl/localhost.pem -out /etc/ssl/localhost.crt
 
 cd /etc/nginx/sites-enabled
 ln -s ../sites-available/backend .
@@ -61,6 +41,16 @@ service nginx status
 
 tail -f /var/log/gunicorn/dev.log
 
-# todo:  oragnize structure, nginx.conf, sites-available.conf, 
-# certs location, check cors problem, setup a firewall, only 443 is allowd
-# change ip to environment variable, check the redirect loop,
+
+
+
+# todo:  
+# oragnize structure: nginx.conf, sites-available.conf certs location
+# check cors problem
+# setup a firewall only 443 is allowd and 80 is redirected to 443
+# change ip to environment variable
+# check the redirect loop
+# make it frontend compatible
+# add a rebuild rule in makefile
+
+
