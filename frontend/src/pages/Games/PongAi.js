@@ -13,7 +13,7 @@ const GameCanvas = () => {
   // Default Parameters
   const defaultSpeedX = 300;
   let resize = true;
-  const winScore = 2;
+  const winScore = 10;
   const defaultSpeedY = 20;
   const [scoreLeftReact, setScoreLeft] = useState(0);
   const [scoreRightReact, setScoreRight] = useState(0);
@@ -197,18 +197,20 @@ const GameCanvas = () => {
 
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("touchmove", handleTouchMove);
-    window.addEventListener("resize", () => handleResize(
-      canvasRef,
-      resize,
-      paddleWidth,
-      paddleHeight,
-      sizeSpeedRatio,
-      canvasDefaultWidth,
-      ballX,
-      ballY,
-      leftPaddleY,
-      rightPaddleY
-    ));
+    window.addEventListener("resize", () =>
+      handleResize(
+        canvasRef,
+        resize,
+        paddleWidth,
+        paddleHeight,
+        sizeSpeedRatio,
+        canvasDefaultWidth,
+        ballX,
+        ballY,
+        leftPaddleY,
+        rightPaddleY
+      )
+    );
     handleResize(
       canvasRef,
       resize,
@@ -255,7 +257,7 @@ const GameCanvas = () => {
             className="border-8 border-solid border-white"
             style={{ backgroundColor: "#0F0F0F" }}
           ></canvas>
-          </>
+        </>
       )}
     </div>
   );
