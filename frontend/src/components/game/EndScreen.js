@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-const EndScreen = ({ Game, backgroundImage, WelcomeButtonStyle, BackButton }) => {
+const EndScreen = ({
+  Game,
+  backgroundImage,
+  WelcomeButtonStyle,
+  BackButton,
+  score,
+}) => {
   const [gameStarted, setGameStarted] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -27,7 +33,9 @@ const EndScreen = ({ Game, backgroundImage, WelcomeButtonStyle, BackButton }) =>
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 
                     -translate-y-1/2 text-center font-bold font-nosifer"
           >
-            <p>{t("YOU LOST!")}</p>
+            <p>{t("YOU BOUNCED THE BALL")}</p>
+            <p>{t(score)}</p>
+            <p>{t("TIMES!")}</p>
             <button
               onClick={handleButtonClick}
               className={`mt-10 ${WelcomeButtonStyle}`}
