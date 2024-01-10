@@ -23,52 +23,52 @@ const HowToPlay = ({ isOpen, setIsOpen, background, backgroundimage }) => {
         }}
       >
         <div className="text-center">
-          <h1 className="text-4xl mb-10">Original Pong</h1>
+          <h1 className="text-4xl mb-10">{t("Original Pong")}</h1>
           <p>
-            The classic game of Pong.
+            {t("The classic game of Pong.")}
             <br />
-            Hit the ball back and forth
+            {t("Hit the ball back and forth")}
             <br />
-            and try to score on your opponent.
+            {t("and try to score on your opponent.")}
           </p>
         </div>
         <div className="text-center">
-          <h1 className="text-4xl mb-10">AI Pong</h1>
+          <h1 className="text-4xl mb-10">{t("Pong against AI")}</h1>
           <p>
-            Play Pong against an AI opponent.
+            {t("Play Pong against an AI opponent.")}
             <br />
-            Can you beat the computer?
+            {t("Can you beat the computer?")}
           </p>
         </div>
         <div className="text-center">
-          <h1 className="text-4xl mb-10">3D Pong</h1>
+          <h1 className="text-4xl mb-10">{t("3D Pong")}</h1>
           <p>
-            Our 3D, endless version of Pong.
+            {t("Our 3D, endless version of Pong.")}
             <br />
-            Adds a new dimension to the classic game.
+            {t("Adds a new dimension to the classic game.")}
             <br />
-            If the blackhole swallows your planets, you lose.
+            {t("If the blackhole swallows your planets, you lose.")}
           </p>
         </div>
         <div className="text-center">
-          <h1 className="text-4xl mb-10">KeyBinds</h1>
+          <h1 className="text-4xl mb-10">{t("Keybinds")}</h1>
           <div className="flex justify-between">
             <div className="w-1/2 p-2">
-              <h3 className="underline mb-3">Key</h3>
+              <h3 className="underline mb-3">{t("Key")}</h3>
               <div className="flex flex-col space-y-2">
                 <p>W</p>
                 <p>S</p>
-                <p>Up Arrow</p>
-                <p>Down Arrow</p>
+                <p>{t("Up Arrow")}</p>
+                <p>{t("Down Arrow")}</p>
               </div>
             </div>
             <div className=" p-2">
-              <h3 className="underline mb-3">Action</h3>
+              <h3 className="underline mb-3">{t("Action")}</h3>
               <div className="flex flex-col space-y-2">
-                <p>Left bar Up</p>
-                <p>Left bar Down</p>
-                <p>Right bar Up</p>
-                <p>Right bar Down</p>
+                <p>{t("Left bar Up")}</p>
+                <p>{t("Left bar Down")}</p>
+                <p>{t("Right bar Up")}</p>
+                <p>`{t("Right bar Down")}`</p>
               </div>
             </div>
           </div>
