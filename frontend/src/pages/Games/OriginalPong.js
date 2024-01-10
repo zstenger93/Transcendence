@@ -13,7 +13,7 @@ const GameCanvas = () => {
   // Default Parameters
   let resize = true;
   const defaultSpeedX = 300;
-  const winScore = 2;
+  const winScore = 10;
   const defaultSpeedY = 20;
   const [scoreLeftReact, setScoreLeft] = useState(0);
   const [scoreRightReact, setScoreRight] = useState(0);
