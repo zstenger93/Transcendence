@@ -44,7 +44,8 @@ function ChoosePongMode() {
       </div>
       {isOpen && (
         <div
-          className="absolute inset-0 z-50 flex items-center justify-center bg-center bg-cover bg-no-repeat"
+          className="absolute inset-0 z-50 flex items-center
+		  justify-center bg-center bg-cover bg-no-repeat"
           style={{ backgroundImage: `url(${backgroundimage})` }}
         >
           <div className="flex flex-col justify-between h-full">
