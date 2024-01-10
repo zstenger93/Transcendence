@@ -4,20 +4,17 @@ import { useTranslation } from "react-i18next";
 function WelcomeMessage() {
   const { t } = useTranslation();
   return (
-    <nav className="bg-opacity-0 p-2 text-center">
+    <div className="bg-opacity-0 p-2 text-center">
       <span
         className="text-gray-300 font-extrabold text-md
-	  	sm:text-base md:text-2xl lg:text-4xl"
+		sm:text-base md:text-2xl lg:text-4xl leading-loose"
       >
-        {t("Welcome To")}
-        <br />
-        {t("TranscENDence")}
-        <br />
-        {t("Where Your Core Journey")}
-        <br />
-        {t("Ends")}
+        <div className="mb-4">{t("Welcome To")}</div>
+        <div className="mb-4">{t("TranscENDence")}</div>
+        <div className="mb-4">{t("Where Your Core Journey")}</div>
+        <div>{t("Ends")}</div>
       </span>
-    </nav>
+    </div>
   );
 }
 
