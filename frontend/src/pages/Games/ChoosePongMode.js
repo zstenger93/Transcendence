@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import BackButton from "../../components/buttons/BackButton";
-import {
-  ButtonStyle,
-  WelcomeButtonStyle,
-} from "../../components/buttons/ButtonStyle";
+import { ButtonStyle } from "../../components/buttons/ButtonStyle";
 import backgroundimage from "../../images/pongbg.png";
+import background from "../../images/welcomebg.jpg";
+import HowToPlay from "../../components/game/HowToPlay";
 
 function ChoosePongMode() {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,25 +40,13 @@ function ChoosePongMode() {
           {t("How to play")}
         </Link>
         <BackButton navigate={navigate} t={t} />
+        <HowToPlay
+          isOpen={isOpen}
+		  setIsOpen={setIsOpen}
+          background={background}
+          backgroundimage={backgroundimage}
+        />
       </div>
-      {isOpen && (
-        <div
-          className="absolute inset-0 z-50 flex items-center
-		  justify-center bg-center bg-cover bg-no-repeat"
-          style={{ backgroundImage: `url(${backgroundimage})` }}
-        >
-          <div className="flex flex-col justify-between h-full">
-		  <div className="flex-grow">
-		  </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className={`mb-12 ${WelcomeButtonStyle}`}
-            >
-              {t("Back")}
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
