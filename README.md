@@ -61,8 +61,9 @@ Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices
 	- Rest for API to connect back and frontend
 	- Frontend with React
 - Backend
+	- Django
 - Frontend
-	- React
+	- React app
 
 ---
 ## Setup
@@ -74,8 +75,6 @@ Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices
 		- each microservice is an app
 	- PostgreSQL database
 	- frontend
-		- React application
-		- TailwindCss
 
 
 - images (not customized yet for front and back)
@@ -125,19 +124,22 @@ Tailwind
 	- Login with your username and password
 	- Login via 42 auth
 - Home / Welcome
+	- ?
 - Game & Watch
 	- Pong
 		- Original
 		- AI Opponent
 		- Multiplayer
-		- Modded
 		- 3D Pong
 	- Future game
 - Chat
 	- Channels
-	- Online
+	- Online ppl
 	- Image Sharing
 - Profile
+	- Basic details
+	- Friends
+	- Match history
 - About Us
 - Logout
 
@@ -175,8 +177,6 @@ Tailwind
 ## Original Game
 
 PONG
-
-Sortof works now and you can play on one keyboard. Also AI mode has been implemented.
 
 - Extra Pong versions implemented:
 	- AI Pong
