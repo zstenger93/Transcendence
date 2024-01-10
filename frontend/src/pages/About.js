@@ -54,6 +54,15 @@ function About() {
     });
   }, []);
 
+  useEffect(() => {
+	const closeCards = () => setSelectedCard(null);
+	document.addEventListener('click', closeCards);
+  
+	return () => {
+	  document.removeEventListener('click', closeCards);
+	};
+  }, []);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -117,6 +126,7 @@ function About() {
 					: ""
 				}`}
                 style={{ backgroundImage: `url(${backgroundImage})`, transition: "transform 0.0s ease-in-out", }}
+				onClick={(e) => e.stopPropagation()}
               >
                 <input
                   type="radio"
