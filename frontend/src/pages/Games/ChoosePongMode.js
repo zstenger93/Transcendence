@@ -48,7 +48,8 @@ function ChoosePongMode() {
           style={{ backgroundImage: `url(${backgroundimage})` }}
         >
           <div className="flex flex-col justify-between h-full">
-		  <div className="flex-grow"></div>
+		  <div className="flex-grow">
+		  </div>
             <button
               onClick={() => setIsOpen(false)}
               className={`mb-12 ${WelcomeButtonStyle}`}
