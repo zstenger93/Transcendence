@@ -149,6 +149,22 @@ const GameCanvas = () => {
     }
   };
 
+  const playerSpeed = 10;
+  let keys = {};
+
+  const movePaddle = () => {
+    if (canvasRef.current) {
+      if (keys["ArrowUp"] || keys["w"])
+        leftPaddleY -= playerSpeed * sizeSpeedRatio;
+      else if (keys["ArrowDown"] || keys["s"])
+        leftPaddleY += playerSpeed * sizeSpeedRatio;
+      leftPaddleY = Math.max(
+        0,
+        Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
+      );
+    }
+  };
+
   const draw = (timestamp) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -166,23 +182,19 @@ const GameCanvas = () => {
     drawBall(ctx, canvas);
     drawScores(ctx, canvas);
     requestAnimationFrame(draw);
+    movePaddle();
   };
 
   useEffect(() => {
-    const playerSpeed = 30;
+
     const handleKeyDown = (event) => {
-      if (canvasRef.current) {
-        if (event.key === "ArrowUp" || event.key === "w")
-          // eslint-disable-next-line
-          leftPaddleY -= playerSpeed * sizeSpeedRatio;
-        else if (event.key === "ArrowDown" || event.key === "s")
-          leftPaddleY += playerSpeed * sizeSpeedRatio;
-        leftPaddleY = Math.max(
-          0,
-          Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
-        );
-      }
+      keys[event.key] = true;
     };
+
+    const handleKeyUp = (event) => {
+      keys[event.key] = false;
+    };
+
     const handleTouchMove = (event) => {
       if (canvasRef.current && event.touches.length > 0) {
         const rect = canvasRef.current.getBoundingClientRect();
@@ -195,7 +207,8 @@ const GameCanvas = () => {
       }
     };
 
-    document.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
     document.addEventListener("touchmove", handleTouchMove);
     window.addEventListener("resize", () =>
       handleResize(
