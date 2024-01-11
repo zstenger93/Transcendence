@@ -30,7 +30,6 @@ RUN     apt install lsof curl procps vim -y
 COPY    docker/backend/backend.sh /app/
 RUN     chmod +x /app/backend.sh
 
-EXPOSE  443
-EXPOSE  80
+EXPOSE 8000
 
 ENTRYPOINT  ["docker/backend/backend.sh"]
