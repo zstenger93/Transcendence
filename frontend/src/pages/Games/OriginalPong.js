@@ -4,8 +4,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import BackButton from "../../components/buttons/BackButton";
 import { useTranslation } from "react-i18next";
 import { WelcomeButtonStyle } from "../../components/buttons/ButtonStyle";
-import LoseScreen from '../../components/game/LoseScreen';
-import WinScreen from '../../components/game/WinScreen';
+import LoseScreen from "../../components/game/LoseScreen";
+import WinScreen from "../../components/game/WinScreen";
 import handleResize from "../../components/game/HandleResize";
 import FullScreenButton from "../../components/buttons/FullScreen";
 
@@ -150,45 +150,45 @@ const GameCanvas = () => {
     drawBall(ctx, canvas);
     drawScores(ctx, canvas);
     requestAnimationFrame(draw);
+    handleKeys();
+  };
+
+  const playerSpeed = 5;
+  const keysPressed = {};
+
+  const handleKeys = () => {
+    if (canvasRef.current) {
+      // Left paddle controls
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      if (keysPressed["w"]) leftPaddleY -= playerSpeed * sizeSpeedRatio;
+      if (keysPressed["s"]) leftPaddleY += playerSpeed * sizeSpeedRatio;
+      leftPaddleY = Math.max(
+        0,
+        Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
+      );
+
+      // Right paddle controls
+      if (keysPressed["ArrowUp"])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        rightPaddleY -= playerSpeed * sizeSpeedRatio;
+      if (keysPressed["ArrowDown"])
+        rightPaddleY += playerSpeed * sizeSpeedRatio;
+      rightPaddleY = Math.max(
+        0,
+        Math.min(rightPaddleY, canvasRef.current.height - paddleHeight)
+      );
+    }
   };
 
   useEffect(() => {
-    const playerSpeed = 30;
-    const keysPressed = {};
-
     const handleKeyDown = (event) => {
       keysPressed[event.key] = true;
-      handleKeys();
     };
 
     const handleKeyUp = (event) => {
       keysPressed[event.key] = false;
-      handleKeys();
     };
 
-    const handleKeys = () => {
-      if (canvasRef.current) {
-        // Left paddle controls
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        if (keysPressed["w"]) leftPaddleY -= playerSpeed * sizeSpeedRatio;
-        if (keysPressed["s"]) leftPaddleY += playerSpeed * sizeSpeedRatio;
-        leftPaddleY = Math.max(
-          0,
-          Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
-        );
-
-        // Right paddle controls
-        if (keysPressed["ArrowUp"])
-          // eslint-disable-next-line react-hooks/exhaustive-deps
-          rightPaddleY -= playerSpeed * sizeSpeedRatio;
-        if (keysPressed["ArrowDown"])
-          rightPaddleY += playerSpeed * sizeSpeedRatio;
-        rightPaddleY = Math.max(
-          0,
-          Math.min(rightPaddleY, canvasRef.current.height - paddleHeight)
-        );
-      }
-    };
     // touchpad controlls
     const handleTouchMove = (event) => {
       if (canvasRef.current) {
@@ -217,21 +217,23 @@ const GameCanvas = () => {
       }
     };
 
-    document.addEventListener("keyup", handleKeyUp);
-    document.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+    window.addEventListener("keydown", handleKeyDown);
     document.addEventListener("touchmove", handleTouchMove);
-    window.addEventListener("resize", () => handleResize(
-      canvasRef,
-      resize,
-      paddleWidth,
-      paddleHeight,
-      sizeSpeedRatio,
-      canvasDefaultWidth,
-      ballX,
-      ballY,
-      leftPaddleY,
-      rightPaddleY
-    ));
+    window.addEventListener("resize", () =>
+      handleResize(
+        canvasRef,
+        resize,
+        paddleWidth,
+        paddleHeight,
+        sizeSpeedRatio,
+        canvasDefaultWidth,
+        ballX,
+        ballY,
+        leftPaddleY,
+        rightPaddleY
+      )
+    );
     handleResize(
       canvasRef,
       resize,
