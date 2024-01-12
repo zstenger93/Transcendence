@@ -1,28 +1,28 @@
 /* disable eslint */
 
 import React from "react";
+import image from "../../images/transcendence.webp";
 
 function Readme() {
   const GreenCheck = () => <span style={{ color: "green" }}>&#x2714;</span>;
   const Major = () => <span className="text-orange-500">Major module:</span>;
   const Minor = () => <span className="text-blue-500">Minor module:</span>;
   return (
-    <div className="prose max-w-none text-white">
+    <div className="max-w-none text-white">
       <div className="text-center mt-10 mb-10 font-nosifer lg:text-8xl">
         The Project
       </div>
       <div>
-        <div className="mt-10">
+        <div className="mt-10 mb-10">
           <div className="text-center mb-10">
-            <p>16 Major module --- 11 Minor module</p>
-            <h2>Modules Used</h2>
+            <p className="font-bold">16 Major & 11 Minor module</p>
           </div>
           <div className="flex flex-wrap justify-start">
             <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 text-center mb-10 xl:pr-10 xl:pl-10">
               <h3 className="font-nosifer mb-5">Web</h3>
               <ul>
                 <li>
-				<Major /> Use a framework as backend <GreenCheck />
+                  <Major /> Use a framework as backend <GreenCheck />
                 </li>
                 <li>
                   <Minor /> Use a front-end framework or toolkit <GreenCheck />
@@ -155,6 +155,40 @@ function Readme() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="text-center mb-10">
+        <h1 className="font-nosifer lg:text-6xl mb-10">Games</h1>
+        <div>
+          <div className="flex justify-center items-center mb-4 p-5">
+            <img className="order-first mr-10" src={image} alt="Game 1" />
+            <p className="order-last">Game 1 description</p>
+          </div>
+          <div className="flex justify-center items-center mb-4 p-5">
+            <p className="order-first">Game 2 description</p>
+            <img className="order-last ml-10" src={image} alt="Game 2" />
+          </div>
+          <div className="flex justify-center items-center mb-4 p-5">
+            <img className="order-first mr-10" src={image} alt="Game 3" />
+            <p className="order-last">Game 3 description</p>
+          </div>
+          <div className="flex justify-center items-center mb-4 p-5">
+            <p className="order-first">Game 4 description</p>
+            <img className="order-last ml-10" src={image} alt="Game 4" />
+          </div>
+          <div className="flex justify-center items-center mb-4 p-5">
+            <img className="order-first mr-10" src={image} alt="Game 5" />
+            <p className="order-last">Game 5 description</p>
+          </div>
+        </div>
+      </div>
+      <div className="text-center mb-10 ">
+          <p className="mb-5 font-nosifer lg:text-6xl">Github</p>
+        <a href="https://github.com/zstenger93/Transcendence">
+			<p className="lg:text-3xl underline font-bold text-orange-500">TranscEND</p>
+        </a>
+      </div>
+      <div className="text-center mb-10 font-nosifer lg:text-6xl">
+        <p>Contributors</p>
       </div>
     </div>
   );
