@@ -25,7 +25,8 @@ gunicorn -c config/gunicorn/dev.py
 sleep 5
 tail -f /var/log/gunicorn/dev.log
 
-
+# next: figure out the routing problem how to route to 
+# backend and frontend at the smae time]
 # todo:  
 # oragnize structure: nginx.conf, sites-available.conf certs location 
 # check cors problem
