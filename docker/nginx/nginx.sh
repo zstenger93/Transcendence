@@ -1,8 +1,6 @@
 #!/bin/bash
-service nginx start
-echo "!!!!! Nginx Status !!!!!"
+
 service nginx status
-echo "!!!!! Nginx Status !!!!!"
 
 cp /app/docker/nginx/config/nginx.conf /etc/nginx/nginx.conf
 cp /app/docker/nginx/config/backend.conf /etc/nginx/sites-available/backend
