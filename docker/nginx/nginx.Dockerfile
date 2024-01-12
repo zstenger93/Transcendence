@@ -1,6 +1,12 @@
-FROM nginx:1.25.3
+FROM debian:bookworm
+
+RUN apt update && apt install -y openssl nginx
+
+WORKDIR /app
 
 EXPOSE 80
 EXPOSE 443
 
-CMD [ "service", "nginx", "start" ]
+
+# CMD [ "nginx", "-g", "daemon off;" ]
+CMD [ "tail", "-f", "/dev/null" ]
