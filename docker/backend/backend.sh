@@ -21,9 +21,8 @@ echo "alias get='http --follow --timeout 6'" >> /root/.bashrc
 # gunicorn server                          #
 ############################################
 mkdir -pv /var/{log,run}/gunicorn/
-tail -f "/dev/null"
-cd backend && gunicorn -c config/gunicorn/dev.py
-
+gunicorn -c config/gunicorn/dev.py
+sleep 5
 tail -f /var/log/gunicorn/dev.log
 
 
