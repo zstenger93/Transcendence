@@ -20,12 +20,3 @@ function Home() {
 }
 
 export default Home;
-
-// Implementation of the orignal<br />
-//               Pong game, released by Atari in 1972,<br />
-//               is one of the earliest arcade video games.<br />
-//               It's a 2D simulation of table tennis where<br />
-//               each playercontrols a paddle on the screen.<br />
-//               The game, created by Allan Alcorn,<br />
-//               established the video game industry<br />
-//               due to its commercial success.

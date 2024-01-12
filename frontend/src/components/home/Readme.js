@@ -160,9 +160,9 @@ function Readme() {
         <h1 className="font-nosifer lg:text-6xl mb-10">Games</h1>
         <div>
           <div className="flex flex-col lg:flex-row justify-center items-center mb-4 p-5">
-            <img className="order-first -ml-20 mr-40 max-w-[600px] max-h-[400px]" src={image} alt="Game 1" />
+            <img className="order-first lg:-ml-20 lg:mr-40 max-w-[600px] max-h-[400px]" src={image} alt="Game 1" />
             <p className="order-last">
-              <p className="mt-5 font-nosifer text-xl">Pong</p>
+              <p className="mt-5 font-nosifer text-xl text-orange-500">Pong</p>
               Implementation of the orignal<br />
               Pong game, released by Atari in 1972,<br />
               is one of the earliest arcade video games.<br />
@@ -175,7 +175,7 @@ function Readme() {
           </div>
           <div className="flex flex-col lg:flex-row justify-center items-center mb-4 p-5">
             <p className="mt-5 order-last lg:order-first">
-              <p className="mt-5 font-nosifer text-xl">Pong</p>
+              <p className="mt-5 font-nosifer text-xl text-orange-500">Pong</p>
               Implementation of the orignal<br />
               Pong game, released by Atari in 1972,<br />
               is one of the earliest arcade video games.<br />
@@ -184,12 +184,12 @@ function Readme() {
               The game, created by Allan Alcorn,<br />
               established the video game industry<br />
               due to its commercial success.</p>
-            <img className="order-first -mr-20 lg:order-last ml-40 max-w-[600px] max-h-[400px]" src={image} alt="Game 2" />
+            <img className="order-first lg:-mr-20 lg:order-last lg:ml-40 max-w-[600px] max-h-[400px]" src={image} alt="Game 2" />
           </div>
           <div className="flex flex-col lg:flex-row justify-center items-center mb-4 p-5">
-            <img className="order-first -ml-20 mr-40 max-w-[600px] max-h-[400px]" src={image} alt="Game 1" />
+            <img className="order-first lg:-ml-20 lg:mr-40 max-w-[600px] max-h-[400px]" src={image} alt="Game 1" />
             <p className="order-last">
-              <p className="mt-5 font-nosifer text-xl">Pong</p>
+              <p className="mt-5 font-nosifer text-xl text-orange-500">Pong</p>
               Implementation of the orignal<br />
               Pong game, released by Atari in 1972,<br />
               is one of the earliest arcade video games.<br />
@@ -200,9 +200,9 @@ function Readme() {
               due to its commercial success.
             </p>
           </div>
-          <div className="flex flex-col lg:flex-row justify-center items-center mb-4 p-5">
+          <div className="flex flex-col lg:flex-row justify-center items-center mb-10 p-5">
             <p className="mt-5 order-last lg:order-first">
-              <p className="mt-5 font-nosifer text-xl">Pong</p>
+              <p className="mt-5 font-nosifer text-xl text-orange-500">Pong</p>
               Implementation of the orignal<br />
               Pong game, released by Atari in 1972,<br />
               is one of the earliest arcade video games.<br />
@@ -211,18 +211,45 @@ function Readme() {
               The game, created by Allan Alcorn,<br />
               established the video game industry<br />
               due to its commercial success.</p>
-            <img className="order-first -mr-20 lg:order-last ml-40 max-w-[600px] max-h-[400px]" src={image} alt="Game 2" />
+            <img className="order-first lg:-mr-20 lg:order-last lg:ml-40 max-w-[600px] max-h-[400px]" src={image} alt="Game 2" />
           </div>
         </div>
       </div>
-      <div className="text-center mb-10 ">
+      <div className="text-center mt-10 mb-10">
         <p className="mb-5 font-nosifer lg:text-6xl">Github</p>
         <a href="https://github.com/zstenger93/Transcendence">
-          <p className="lg:text-3xl underline font-bold text-orange-500">TranscEND</p>
+          <p className="mb-10 lg:text-3xl underline font-bold hover:text-blue-700 text-orange-500">
+            TranscEND
+          </p>
         </a>
       </div>
-      <div className="text-center mb-10 font-nosifer lg:text-6xl">
-        <p>Contributors</p>
+      <div className="text-center mb-10 mt-10">
+        <p className="font-nosifer lg:text-6xl mb-10">Contributors</p>
+        <p className="font-bold mb-2 underline hover:text-blue-700 text-orange-500">
+          <a href="https://github.com/zstenger93" target="_blank" rel="noopener noreferrer">
+            Zsolt Stenger
+          </a>
+        </p>
+        <p className="font-bold mb-2 underline hover:text-blue-700 text-orange-500">
+          <a href="https://github.com/kvebers" target="_blank" rel="noopener noreferrer">
+            Kārlis Vilhelms Vēbers
+          </a>
+        </p>
+        <p className="font-bold mb-2 underline hover:text-blue-700 text-orange-500">
+          <a href="https://github.com/Jamshidbek2000" target="_blank" rel="noopener noreferrer">
+            Jamshidbek Ergashev
+          </a>
+        </p>
+        <p className="font-bold mb-2 underline hover:text-blue-700 text-orange-500">
+          <a href="https://github.com/AzerSD" target="_blank" rel="noopener noreferrer">
+            Azer Sioud
+          </a>
+        </p>
+        <p className="font-bold mb-2 underline hover:text-blue-700 text-orange-500">
+          <a href="https://github.com/Lacusch" target="_blank" rel="noopener noreferrer">
+            Szabó László
+          </a>
+        </p>
       </div>
     </div>
   );
