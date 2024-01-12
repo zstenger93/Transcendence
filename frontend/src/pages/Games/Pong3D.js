@@ -492,14 +492,53 @@ function Pong3D() {
       });
     };
 
+    let isWKeyPressed = false;
+    let isSKeyPressed = false;
+
     function handleKeyDown(event) {
       event.preventDefault();
-      if (event.key === "w" || event.key === "W" || event.key === "ArrowUp")
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        leftPaddlePosition += 1;
-      if (event.key === "s" || event.key === "S" || event.key === "ArrowDown")
-        leftPaddlePosition -= 1;
+
+      if (event.key === "w" || event.key === "W" || event.key === "ArrowUp") {
+        isWKeyPressed = true;
+      }
+
+      if (event.key === "s" || event.key === "S" || event.key === "ArrowDown") {
+        isSKeyPressed = true;
+      }
     }
+
+    function handleKeyUp(event) {
+      event.preventDefault();
+
+      if (event.key === "w" || event.key === "W" || event.key === "ArrowUp") {
+        isWKeyPressed = false;
+      }
+
+      if (event.key === "s" || event.key === "S" || event.key === "ArrowDown") {
+        isSKeyPressed = false;
+      }
+    }
+
+    function animatePaddle() {
+      if (isWKeyPressed) {
+        leftPaddlePosition += 0.5;
+      }
+
+      if (isSKeyPressed) {
+        leftPaddlePosition -= 0.5;
+      }
+
+      leftPaddlePosition = Math.max(
+        -wallOffsetY + paddleHeight / 2 + wallThickness / 2,
+        Math.min(
+          leftPaddlePosition,
+          wallOffsetY - paddleHeight / 2 - wallThickness / 2
+        )
+      );
+      requestAnimationFrame(animatePaddle);
+    }
+
+    animatePaddle();
 
     function handleTouchStart(event) {
       isDragging = true;
@@ -525,6 +564,7 @@ function Pong3D() {
     window.addEventListener("touchmove", handleTouchMove);
     window.addEventListener("touchend", handleTouchEnd);
     window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
 
     return () => {
       enableScroll();
@@ -532,7 +572,8 @@ function Pong3D() {
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
-      window.removeEventListener("keydown", handleKeyDown);
+      window.addEventListener("keydown", handleKeyDown);
+      window.addEventListener("keyup", handleKeyUp);
     };
   }, []);
 
@@ -558,7 +599,6 @@ function Pong3D() {
               overflow: "hidden",
             }}
           ></div>
-          {/* <BackButton navigate={navigate} t={t} /> */}
         </>
       )}
     </div>
