@@ -71,7 +71,7 @@ function App() {
           <Route
             path="home"
             element={
-              <PageWrapper image={Background}>
+              <PageWrapper image={Background} showSidebar={false}>
                 <Home />
               </PageWrapper>
             }

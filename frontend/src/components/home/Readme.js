@@ -159,32 +159,66 @@ function Readme() {
       <div className="text-center mb-10">
         <h1 className="font-nosifer lg:text-6xl mb-10">Games</h1>
         <div>
-          <div className="flex justify-center items-center mb-4 p-5">
-            <img className="order-first mr-10" src={image} alt="Game 1" />
-            <p className="order-last">Game 1 description</p>
+          <div className="flex flex-col lg:flex-row justify-center items-center mb-4 p-5">
+            <img className="order-first -ml-20 mr-40 max-w-[600px] max-h-[400px]" src={image} alt="Game 1" />
+            <p className="order-last">
+              <p className="mt-5 font-nosifer text-xl">Pong</p>
+              Implementation of the orignal<br />
+              Pong game, released by Atari in 1972,<br />
+              is one of the earliest arcade video games.<br />
+              It's a 2D simulation of table tennis where<br />
+              each playercontrols a paddle on the screen.<br />
+              The game, created by Allan Alcorn,<br />
+              established the video game industry<br />
+              due to its commercial success.
+            </p>
           </div>
-          <div className="flex justify-center items-center mb-4 p-5">
-            <p className="order-first">Game 2 description</p>
-            <img className="order-last ml-10" src={image} alt="Game 2" />
+          <div className="flex flex-col lg:flex-row justify-center items-center mb-4 p-5">
+            <p className="mt-5 order-last lg:order-first">
+              <p className="mt-5 font-nosifer text-xl">Pong</p>
+              Implementation of the orignal<br />
+              Pong game, released by Atari in 1972,<br />
+              is one of the earliest arcade video games.<br />
+              It's a 2D simulation of table tennis where<br />
+              each playercontrols a paddle on the screen.<br />
+              The game, created by Allan Alcorn,<br />
+              established the video game industry<br />
+              due to its commercial success.</p>
+            <img className="order-first -mr-20 lg:order-last ml-40 max-w-[600px] max-h-[400px]" src={image} alt="Game 2" />
           </div>
-          <div className="flex justify-center items-center mb-4 p-5">
-            <img className="order-first mr-10" src={image} alt="Game 3" />
-            <p className="order-last">Game 3 description</p>
+          <div className="flex flex-col lg:flex-row justify-center items-center mb-4 p-5">
+            <img className="order-first -ml-20 mr-40 max-w-[600px] max-h-[400px]" src={image} alt="Game 1" />
+            <p className="order-last">
+              <p className="mt-5 font-nosifer text-xl">Pong</p>
+              Implementation of the orignal<br />
+              Pong game, released by Atari in 1972,<br />
+              is one of the earliest arcade video games.<br />
+              It's a 2D simulation of table tennis where<br />
+              each playercontrols a paddle on the screen.<br />
+              The game, created by Allan Alcorn,<br />
+              established the video game industry<br />
+              due to its commercial success.
+            </p>
           </div>
-          <div className="flex justify-center items-center mb-4 p-5">
-            <p className="order-first">Game 4 description</p>
-            <img className="order-last ml-10" src={image} alt="Game 4" />
-          </div>
-          <div className="flex justify-center items-center mb-4 p-5">
-            <img className="order-first mr-10" src={image} alt="Game 5" />
-            <p className="order-last">Game 5 description</p>
+          <div className="flex flex-col lg:flex-row justify-center items-center mb-4 p-5">
+            <p className="mt-5 order-last lg:order-first">
+              <p className="mt-5 font-nosifer text-xl">Pong</p>
+              Implementation of the orignal<br />
+              Pong game, released by Atari in 1972,<br />
+              is one of the earliest arcade video games.<br />
+              It's a 2D simulation of table tennis where<br />
+              each playercontrols a paddle on the screen.<br />
+              The game, created by Allan Alcorn,<br />
+              established the video game industry<br />
+              due to its commercial success.</p>
+            <img className="order-first -mr-20 lg:order-last ml-40 max-w-[600px] max-h-[400px]" src={image} alt="Game 2" />
           </div>
         </div>
       </div>
       <div className="text-center mb-10 ">
-          <p className="mb-5 font-nosifer lg:text-6xl">Github</p>
+        <p className="mb-5 font-nosifer lg:text-6xl">Github</p>
         <a href="https://github.com/zstenger93/Transcendence">
-			<p className="lg:text-3xl underline font-bold text-orange-500">TranscEND</p>
+          <p className="lg:text-3xl underline font-bold text-orange-500">TranscEND</p>
         </a>
       </div>
       <div className="text-center mb-10 font-nosifer lg:text-6xl">
