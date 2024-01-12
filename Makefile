@@ -13,6 +13,9 @@ execbackend:
 execfrontend:
 	docker exec -it frontend /bin/bash
 
+exenginx:
+	docker exec -it nginx /bin/bash
+
 
 re_backend:
 	docker compose stop backend
