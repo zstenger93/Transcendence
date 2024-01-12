@@ -15,8 +15,6 @@ services:
       - 3000:3000
     restart: unless-stopped
     command: npm start
-    depends_on:
-      - nginx
 
   backend:
     container_name: backend
@@ -28,13 +26,12 @@ services:
     image: transcendence_backend
     volumes:
       - ${PWD}:/app/
-    ports:
-      - 8000:8000
+    # ports:
+    #   - 8000:8000
     entrypoint: /app/docker/backend/backend.sh
     # restart: unless-stopped
     depends_on:
       - db
-      - nginx
 
   db:
     image: postgres
@@ -58,3 +55,6 @@ services:
     ports:
       - 80:80
       - 443:443
+    depends_on:
+      - frontend
+      - backend

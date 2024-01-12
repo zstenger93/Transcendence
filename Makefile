@@ -2,6 +2,7 @@
 
 .DEFAULT_GOAL := all
 
+
 all:
 	docker-compose up --build -d && \
 
@@ -13,7 +14,8 @@ execbackend:
 execfrontend:
 	docker exec -it frontend /bin/bash
 
-exenginx:
+
+execnginx:
 	docker exec -it nginx /bin/bash
 
 
@@ -27,6 +29,7 @@ re_frontend:
 	docker compose stop frontend
 	docker rmi -f $(docker images | grep frontend | awk '{print $3}')
 	docker compose up -d --build frontend
+
 
 # carefull :D
 fclean:
