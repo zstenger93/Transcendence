@@ -47,9 +47,13 @@ services:
       - "5432:5432"
   
   nginx:
+    container_name: nginx
     build:
       context: .
       dockerfile: docker/nginx/nginx.Dockerfile
+    entrypoint: /app/docker/nginx/nginx.sh
+    volumes:
+      - ${PWD}:/app/
     image: transcendence_nginx
     ports:
       - 80:80
