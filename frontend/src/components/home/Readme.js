@@ -1,22 +1,57 @@
 /* disable eslint */
 
-import React from "react";
+import React, { useState } from "react";
 import image from "../../images/transcendence.webp";
+import mindmap from "../../images/sudo_transcEND.png";
 
 function Readme() {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleOpen = () => setIsOpen(true);
+  const handleClose = () => setIsOpen(false);
   const GreenCheck = () => <span style={{ color: "green" }}>&#x2714;</span>;
   const Major = () => <span className="text-orange-500">Major module:</span>;
   const Minor = () => <span className="text-blue-500">Minor module:</span>;
+
   return (
     <div className="max-w-none text-white">
       <div className="text-center mt-10 mb-10 font-nosifer lg:text-8xl">
         The Project
       </div>
+      {/* DIV CONTAINER FOR THE MINDMAP + OPENING ZOOMED IN & CLOSING */}
+      <div className="flex items-center justify-center">
+        <img
+          className="max-w-[400px] max-h-[400px]"
+          src={mindmap}
+          alt="Mindmap"
+          onClick={handleOpen}
+        />
+      </div>
+      {isOpen && (
+        <div
+          className="fixed top-0 left-0 w-full h-full flex items-center
+			justify-center bg-black bg-opacity-70 rounded-xl"
+        >
+          <div className="">
+            <button
+              className="text-red-950 font-bold text-xl"
+              onClick={handleClose}
+            >
+              X
+            </button>
+            <img
+              className="max-w-[1400px] max-h-[1400px]"
+              src={mindmap}
+              alt="Game 2"
+            />
+          </div>
+        </div>
+      )}
       <div>
         <div className="mt-10 mb-10">
           <div className="text-center mb-10">
-            <p className="font-bold">16 Major & 11 Minor module</p>
+            <p className="font-bold">16 Major & 11 Minor modules</p>
           </div>
+          {/* DIV CONTAINER FOR THE AVAILABLE MODULES FOR THE PROJECT WE CAN CHOOSE FROM */}
           <div className="flex flex-wrap justify-start">
             <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 text-center mb-10 xl:pr-10 xl:pl-10">
               <h3 className="font-nosifer mb-5">Web</h3>
@@ -156,6 +191,7 @@ function Readme() {
           </div>
         </div>
       </div>
+      {/* DIV CONTAINER FOR THE DIFFERENT GAME DISPLAYS */}
       <div className="text-center mb-10">
         <h1 className="font-nosifer lg:text-6xl mb-10">Games</h1>
         <div>
@@ -166,7 +202,9 @@ function Readme() {
               alt="Game 1"
             />
             <div className="order-last">
-              <p className="mt-5 font-nosifer text-xl text-orange-500">Pong</p>
+              <p className="mt-5 mb-5 font-nosifer text-xl text-orange-500">
+                Pong
+              </p>
               Implementation of the orignal
               <br />
               Pong game, released by Atari in 1972,
@@ -186,22 +224,16 @@ function Readme() {
           </div>
           <div className="flex flex-col lg:flex-row justify-center items-center mb-4 p-5">
             <div className="mt-5 order-last lg:order-first">
-              <p className="mt-5 font-nosifer text-xl text-orange-500">Pong</p>
-              Implementation of the orignal
+              <p className="mt-5 mb-5 font-nosifer text-xl text-orange-500">
+                AI Pong
+              </p>
+              You are against the mighty & challanging AI!
               <br />
-              Pong game, released by Atari in 1972,
+              Where you controll only one paddle
               <br />
-              is one of the earliest arcade video games.
+              The other is taken by the AI!
               <br />
-              It's a 2D simulation of table tennis where
-              <br />
-              each playercontrols a paddle on the screen.
-              <br />
-              The game, created by Allan Alcorn,
-              <br />
-              established the video game industry
-              <br />
-              due to its commercial success.
+              Can you be the terminator and beat it?
             </div>
             <img
               className="order-first lg:-mr-20 lg:order-last lg:ml-40 max-w-[600px] max-h-[400px]"
@@ -216,27 +248,23 @@ function Readme() {
               alt="Game 1"
             />
             <div className="order-last">
-              <p className="mt-5 font-nosifer text-xl text-orange-500">Pong</p>
-              Implementation of the orignal
+              <p className="mt-5 mb-5 font-nosifer text-xl text-orange-500">
+                3D Pong
+              </p>
+              Now the the challange is to survive the
               <br />
-              Pong game, released by Atari in 1972,
+              Blackhole!
               <br />
-              is one of the earliest arcade video games.
+              You lose a ball, you lose a planet!
               <br />
-              It's a 2D simulation of table tennis where
-              <br />
-              each playercontrols a paddle on the screen.
-              <br />
-              The game, created by Allan Alcorn,
-              <br />
-              established the video game industry
-              <br />
-              due to its commercial success.
+              Can you navigate thru the asteroid fields?
             </div>
           </div>
           <div className="flex flex-col lg:flex-row justify-center items-center mb-10 p-5">
             <div className="mt-5 order-last lg:order-first">
-              <p className="mt-5 font-nosifer text-xl text-orange-500">Pong</p>
+              <p className="mt-5 mb-5 font-nosifer text-xl text-orange-500">
+                wanna be a game
+              </p>
               Implementation of the orignal
               <br />
               Pong game, released by Atari in 1972,
@@ -261,6 +289,7 @@ function Readme() {
           </div>
         </div>
       </div>
+      {/* DIV CONTAINER FOR THE GITHUB LINK TO THE PROJECT AND TO THE CONTRIBUTORS */}
       <div className="text-center mt-10 mb-10">
         <p className="mb-5 font-nosifer lg:text-6xl">Github</p>
         <a
