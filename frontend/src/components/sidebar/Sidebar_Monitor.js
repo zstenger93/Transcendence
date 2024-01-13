@@ -11,7 +11,7 @@ const SidebarContent = ({ t, changeLanguage }) => (
     className="fixed top-0 left-0 h-screen w-16 m-0
 	flex flex-col bg-gradient-to-r from-gray-900 
 	to-gray-900-opacity bg-opacity-30 text-white 
-	shadow-lg transition-all duration-300"
+	shadow-lg transition-all duration-300 z-999"
   >
     <div className="mt-10 space-y-5">
       <SidebarIcon icon={<FaHome size="32" />} text={t("Home")} to="/home" />
