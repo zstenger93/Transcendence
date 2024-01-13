@@ -1,10 +1,11 @@
 /* disable eslint */
 
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import image from "../../images/transcendence.webp";
 import mindmap from "../../images/sudo_transcEND.png";
 
 function Readme() {
+  const [ref, visible] = useOnScreen();
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);
@@ -12,9 +13,37 @@ function Readme() {
   const Major = () => <span className="text-orange-500">Major module:</span>;
   const Minor = () => <span className="text-blue-500">Minor module:</span>;
 
+  function useOnScreen() {
+	const ref = useRef();
+	const [isIntersecting, setIntersecting] = useState(false);
+  
+	const checkIntersect = ([entry], observer) => {
+	  setIntersecting(entry.isIntersecting);
+	};
+  
+	useEffect(() => {
+	  const observer = new IntersectionObserver(checkIntersect, {
+		threshold: 0.1,
+	  });
+	  if (ref.current) {
+		observer.observe(ref.current);
+	  }
+	  return () => {
+		observer.disconnect();
+	  };
+	}, []);
+  
+	return [ref, isIntersecting];
+  }
+
   return (
     <div className="max-w-none text-white">
-      <div className="text-center mt-10 mb-10 font-nosifer lg:text-8xl">
+      <div
+        ref={ref}
+        className={`text-center mt-10 mb-10 font-nosifer lg:text-8xl ${
+          visible ? "animate-fadeIn" : ""
+        }`}
+      >
         The Project
       </div>
       {/* DIV CONTAINER FOR THE MINDMAP + OPENING ZOOMED IN & CLOSING */}
