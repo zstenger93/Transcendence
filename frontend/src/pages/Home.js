@@ -9,7 +9,7 @@ import Sidebar from "../components/hamburger_menu/Hamburger";
 function ScrollDownIndicator() {
 	return (
 		<div className="absolute bottom-0 flex justify-center items-center h-24 w-full">
-			<span className="animate-bounce text-8xl text-orange-900 text-opacity-40">
+			<span className="animate-bounce text-8xl text-gray-900 text-opacity-40">
 				&#8595;
 			</span>
 		</div>
