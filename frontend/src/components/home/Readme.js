@@ -2,10 +2,27 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import image from "../../images/transcendence.webp";
-import mindmap from "../../images/sudo_transcEND.png";
+import mind from "../../images/sudo_transcEND.png";
 
 function Readme() {
-  const [ref, visible] = useOnScreen();
+  const [project, visibleProject] = useOnScreen();
+  const [mindmap, visibleMindmap] = useOnScreen();
+  const [module1, visible1] = useOnScreen();
+  const [module2, visible2] = useOnScreen();
+  const [module3, visible3] = useOnScreen();
+  const [module4, visible4] = useOnScreen();
+  const [module5, visible5] = useOnScreen();
+  const [module6, visible6] = useOnScreen();
+  const [module7, visible7] = useOnScreen();
+  const [module8, visible8] = useOnScreen();
+  const [module9, visible9] = useOnScreen();
+  const [games, visibleGames] = useOnScreen();
+  const [pong, visiblePong] = useOnScreen();
+  const [pongai, visiblePongai] = useOnScreen();
+  const [pong3d, visiblePong3d] = useOnScreen();
+  const [game, visibleGame] = useOnScreen();
+  const [contributors, visibleContributors] = useOnScreen();
+  const [github, visibleGithub] = useOnScreen();
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);
@@ -14,34 +31,37 @@ function Readme() {
   const Minor = () => <span className="text-blue-500">Minor module:</span>;
 
   function useOnScreen() {
-	const ref = useRef();
-	const [isIntersecting, setIntersecting] = useState(false);
-  
-	const checkIntersect = ([entry], observer) => {
-	  setIntersecting(entry.isIntersecting);
-	};
-  
-	useEffect(() => {
-	  const observer = new IntersectionObserver(checkIntersect, {
-		threshold: 0.1,
-	  });
-	  if (ref.current) {
-		observer.observe(ref.current);
-	  }
-	  return () => {
-		observer.disconnect();
-	  };
-	}, []);
-  
-	return [ref, isIntersecting];
+    const ref = useRef();
+    const [isIntersecting, setIntersecting] = useState(false);
+
+    const checkIntersect = ([entry], observer) => {
+      setIntersecting(entry.isIntersecting);
+      if (entry.isIntersecting) {
+        observer.unobserve(entry.target);
+      }
+    };
+
+    useEffect(() => {
+      const observer = new IntersectionObserver(checkIntersect, {
+        threshold: 0.1,
+      });
+      if (ref.current) {
+        observer.observe(ref.current);
+      }
+      return () => {
+        observer.disconnect();
+      };
+    }, []);
+
+    return [ref, isIntersecting];
   }
 
   return (
     <div className="max-w-none text-white">
       <div
-        ref={ref}
+        ref={project}
         className={`text-center mt-10 mb-10 font-nosifer lg:text-8xl ${
-          visible ? "animate-fadeIn" : ""
+          visibleProject ? "animate-fadeIn" : "opacity-0"
         }`}
       >
         The Project
@@ -49,8 +69,11 @@ function Readme() {
       {/* DIV CONTAINER FOR THE MINDMAP + OPENING ZOOMED IN & CLOSING */}
       <div className="flex items-center justify-center">
         <img
-          className="max-w-[400px] max-h-[400px]"
-          src={mindmap}
+          ref={mindmap}
+          className={`cursor-pointer max-w-[400px] max-h-[400px] ${
+            visibleMindmap ? "animate-fadeIn" : "opacity-0"
+          }`}
+          src={mind}
           alt="Mindmap"
           onClick={handleOpen}
         />
@@ -69,8 +92,8 @@ function Readme() {
             </button>
             <img
               className="max-w-[1400px] max-h-[1400px]"
-              src={mindmap}
-              alt="Game 2"
+              src={mind}
+              alt="Mindmap"
             />
           </div>
         </div>
@@ -82,7 +105,12 @@ function Readme() {
           </div>
           {/* DIV CONTAINER FOR THE AVAILABLE MODULES FOR THE PROJECT WE CAN CHOOSE FROM */}
           <div className="flex flex-wrap justify-start">
-            <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 text-center mb-10 xl:pr-10 xl:pl-10">
+            <div
+              ref={module1}
+              className={`w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 text-center mb-10 xl:pr-10 xl:pl-10 ${
+                visible1 ? "animate-fadeIn" : "opacity-0"
+              }`}
+            >
               <h3 className="font-nosifer mb-5">Web</h3>
               <ul>
                 <li>
@@ -100,7 +128,12 @@ function Readme() {
                 </li>
               </ul>
             </div>
-            <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 text-center mb-10 xl:pr-10 xl:pl-10">
+            <div
+              ref={module2}
+              className={`w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 text-center mb-10 xl:pr-10 xl:pl-10 ${
+                visible2 ? "animate-fadeIn" : "opacity-0"
+              }`}
+            >
               <h3 className="font-nosifer mb-5">User Management</h3>
               <ul>
                 <li>
@@ -112,7 +145,12 @@ function Readme() {
                 </li>
               </ul>
             </div>
-            <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 text-center mb-10 xl:pr-10 xl:pl-10">
+            <div
+              ref={module3}
+              className={`w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 text-center mb-10 xl:pr-10 xl:pl-10 ${
+                visible3 ? "animate-fadeIn" : "opacity-0"
+              }`}
+            >
               <h3 className="font-nosifer mb-5">
                 Gameplay and User Experience
               </h3>
@@ -135,7 +173,12 @@ function Readme() {
                 </li>
               </ul>
             </div>
-            <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 text-center mb-10 xl:pr-10 xl:pl-10">
+            <div
+              ref={module4}
+              className={`w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 text-center mb-10 xl:pr-10 xl:pl-10 ${
+                visible4 ? "animate-fadeIn" : "opacity-0"
+              }`}
+            >
               <h3 className="font-nosifer mb-5">AI-Algo</h3>
               <ul>
                 <li>
@@ -146,7 +189,12 @@ function Readme() {
                 </li>
               </ul>
             </div>
-            <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 text-center mb-10 xl:pr-10 xl:pl-10">
+            <div
+              ref={module5}
+              className={`w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 text-center mb-10 xl:pr-10 xl:pl-10 ${
+                visible5 ? "animate-fadeIn" : "opacity-0"
+              }`}
+            >
               <h3 className="font-nosifer mb-5">Cybersecurity</h3>
               <ul>
                 <li>
@@ -162,7 +210,12 @@ function Readme() {
                 </li>
               </ul>
             </div>
-            <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 text-center mb-10 xl:pr-10 xl:pl-10">
+            <div
+              ref={module6}
+              className={`w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 text-center mb-10 xl:pr-10 xl:pl-10 ${
+                visible6 ? "animate-fadeIn" : "opacity-0"
+              }`}
+            >
               <h3 className="font-nosifer mb-5">Devops</h3>
               <ul>
                 <li>
@@ -176,7 +229,12 @@ function Readme() {
                 </li>
               </ul>
             </div>
-            <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 text-center mb-10 xl:pr-10 xl:pl-10">
+            <div
+              ref={module7}
+              className={`w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 text-center mb-10 xl:pr-10 xl:pl-10 ${
+                visible7 ? "animate-fadeIn" : "opacity-0"
+              }`}
+            >
               <h3 className="font-nosifer mb-5">Graphics</h3>
               <ul>
                 <li>
@@ -184,7 +242,12 @@ function Readme() {
                 </li>
               </ul>
             </div>
-            <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 text-center mb-10 xl:pr-10 xl:pl-10">
+            <div
+              ref={module8}
+              className={`w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 text-center mb-10 xl:pr-10 xl:pl-10 ${
+                visible8 ? "animate-fadeIn" : "opacity-0"
+              }`}
+            >
               <h3 className="font-nosifer mb-5">Accessibility</h3>
               <ul>
                 <li>
@@ -204,7 +267,12 @@ function Readme() {
                 </li>
               </ul>
             </div>
-            <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 text-center mb-10 xl:pr-10 xl:pl-10">
+            <div
+              ref={module9}
+              className={`w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 text-center mb-10 xl:pr-10 xl:pl-10 ${
+                visible9 ? "animate-fadeIn" : "opacity-0"
+              }`}
+            >
               <h3 className="font-nosifer mb-5">Object Oriented</h3>
               <ul>
                 <li>
@@ -222,9 +290,21 @@ function Readme() {
       </div>
       {/* DIV CONTAINER FOR THE DIFFERENT GAME DISPLAYS */}
       <div className="text-center mb-10">
-        <h1 className="font-nosifer lg:text-6xl mb-10">Games</h1>
+        <h1
+          ref={games}
+          className={`font-nosifer lg:text-6xl mb-10 ${
+            visibleGames ? "animate-fadeIn" : "opacity-0"
+          }`}
+        >
+          Games
+        </h1>
         <div>
-          <div className="flex flex-col lg:flex-row justify-center items-center mb-4 p-5">
+          <div
+            ref={pong}
+            className={`flex flex-col lg:flex-row justify-center items-center mb-4 p-5 ${
+              visiblePong ? "animate-fadeIn" : "opacity-0"
+            }`}
+          >
             <img
               className="order-first lg:-ml-20 lg:mr-40 max-w-[600px] max-h-[400px]"
               src={image}
@@ -251,7 +331,12 @@ function Readme() {
               due to its commercial success.
             </div>
           </div>
-          <div className="flex flex-col lg:flex-row justify-center items-center mb-4 p-5">
+          <div
+            ref={pongai}
+            className={`flex flex-col lg:flex-row justify-center items-center mb-4 p-5 ${
+              visiblePongai ? "animate-fadeIn" : "opacity-0"
+            }`}
+          >
             <div className="mt-5 order-last lg:order-first">
               <p className="mt-5 mb-5 font-nosifer text-xl text-orange-500">
                 AI Pong
@@ -270,7 +355,12 @@ function Readme() {
               alt="Game 2"
             />
           </div>
-          <div className="flex flex-col lg:flex-row justify-center items-center mb-4 p-5">
+          <div
+            ref={pong3d}
+            className={`flex flex-col lg:flex-row justify-center items-center mb-4 p-5 ${
+              visiblePong3d ? "animate-fadeIn" : "opacity-0"
+            }`}
+          >
             <img
               className="order-first lg:-ml-20 lg:mr-40 max-w-[600px] max-h-[400px]"
               src={image}
@@ -289,7 +379,12 @@ function Readme() {
               Can you navigate thru the asteroid fields?
             </div>
           </div>
-          <div className="flex flex-col lg:flex-row justify-center items-center mb-10 p-5">
+          <div
+            ref={game}
+            className={`flex flex-col lg:flex-row justify-center items-center mb-10 p-5 ${
+              visibleGame ? "animate-fadeIn" : "opacity-0"
+            }`}
+          >
             <div className="mt-5 order-last lg:order-first">
               <p className="mt-5 mb-5 font-nosifer text-xl text-orange-500">
                 wanna be a game
@@ -319,7 +414,12 @@ function Readme() {
         </div>
       </div>
       {/* DIV CONTAINER FOR THE GITHUB LINK TO THE PROJECT AND TO THE CONTRIBUTORS */}
-      <div className="text-center mt-10 mb-10">
+      <div
+        ref={github}
+        className={`text-center mt-10 mb-10 ${
+          visibleGithub ? "animate-fadeIn" : "opacity-0"
+        }`}
+      >
         <p className="mb-5 font-nosifer lg:text-6xl">Github</p>
         <a
           href="https://github.com/zstenger93/Transcendence"
@@ -331,7 +431,12 @@ function Readme() {
           </p>
         </a>
       </div>
-      <div className="text-center mb-10 mt-10">
+      <div
+        ref={contributors}
+        className={`text-center mt-10 mb-10 ${
+          visibleContributors ? "animate-fadeIn" : "opacity-0"
+        }`}
+      >
         <p className="font-nosifer lg:text-6xl mb-10">Contributors</p>
         <p className="font-bold mb-2 underline hover:text-blue-700 text-orange-500">
           <a
