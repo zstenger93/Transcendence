@@ -21,11 +21,16 @@
 }
 
 :root {
-  --svh: calc(
-    100vh - var(--safe-area-inset-bottom) - var(--safe-area-inset-top)
-  );
+  --svh: calc(100vh - var(--safe-area-inset-bottom) - var(--safe-area-inset-top));
 }
 
 .writing-mode-vertical {
   writing-mode: vertical-lr;
+}
+
+.home-bg-black-gradient {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6) 85%, rgba(0, 0, 0, 0.3) 98%, rgba(0, 0, 0, 0));
+  position: absolute;
+  top: 100%;
+  width: 100%;
 }
