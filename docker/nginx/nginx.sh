@@ -11,7 +11,6 @@ openssl x509 -outform pem -in /etc/ssl/localhost.pem -out /etc/ssl/localhost.crt
 
 cd /etc/nginx/sites-enabled
 ln -s ../sites-available/backend .
-ln -s ../sites-available/frontend .
 
 service nginx restart
 service nginx status
