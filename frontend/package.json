@@ -7,8 +7,9 @@
   "scripts": {
     "build:css": "postcss src/styles/tailwind.css -o src/index.css",
     "watch:css": "postcss src/styles/tailwind.css -o src/index.css --watch",
-    "start": "REACT_APP_LOCAL_URI=http://localhost:8000 react-scripts start",
+    "start": "REACT_APP_LOCAL_URI=http://localhost:8000/ react-scripts start",
     "build": "CI=false NODE_ENV=production REACT_APP_REDIRECT_URI=https://transcendence-backend-znhl.onrender.com react-scripts build",
+    "buildnginx": "CI=false NODE_ENV=production REACT_APP_REDIRECT_URI=http://backend:8000 node --max-old-space-size=4096 node_modules/react-scripts/scripts/build.js",
     "test": "react-scripts test --detectOpenHandles",
     "eject": "react-scripts eject"
   },
