@@ -54,3 +54,5 @@ backend/authentication/images/*
 # media
 media
 node_modules
+docker/prometheus
+docker/grafana/grafana-data
