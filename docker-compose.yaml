@@ -42,3 +42,12 @@ services:
       POSTGRES_PASSWORD: transcend_pwd
     ports:
       - "5432:5432"
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./docker/prometheus:/etc/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
