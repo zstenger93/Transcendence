@@ -1,4 +1,4 @@
-// set-homepage.js
+// THIS IS USED TO SET THE homepage FIELD IN package.json FOR DIFFERENT BUILDS
 const fs = require('fs');
 const packageJson = require('./package.json');
 

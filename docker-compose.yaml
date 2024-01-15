@@ -47,9 +47,14 @@ services:
 
   nginx:
     container_name: nginx
+    env_file:
+      - ./.env
     build:
       context: .
       dockerfile: docker/nginx/nginx.Dockerfile
+      args:
+        FRONTEND_URL: ${FRONTEND_URL}
+        BACKEND_URL: ${BACKEND_URL}
     entrypoint: /app/docker/nginx/nginx.sh
     volumes:
       - ${PWD}:/app/
