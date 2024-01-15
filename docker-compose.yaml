@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 # for deployment
 
@@ -13,6 +13,7 @@ services:
       - ${PWD}:/app/
     ports:
       - 3000:3000
+      - 4000:4000
     restart: unless-stopped
     command: npm start
 
@@ -24,10 +25,12 @@ services:
       context: .
       dockerfile: docker/backend/backend.Dockerfile
     image: transcendence_backend
+    ports:
+      - 8000:8000
     volumes:
       - ${PWD}:/app/
     entrypoint: /app/docker/backend/backend.sh
-    # restart: unless-stopped
+    restart: unless-stopped
     depends_on:
       - db
 
@@ -40,7 +43,8 @@ services:
       POSTGRES_PASSWORD: transcend_pwd
     ports:
       - "5432:5432"
-  
+    restart: unless-stopped
+
   nginx:
     container_name: nginx
     build:
@@ -56,3 +60,4 @@ services:
     depends_on:
       - frontend
       - backend
+    restart: unless-stopped

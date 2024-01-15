@@ -182,6 +182,8 @@ class OAuthAuthorize(APIView):
 		return HttpResponseRedirect(f"{auth_url}?{urllib.parse.urlencode(params)}")
 
 def is_authenticated(request):
-	return JsonResponse({'is_authenticated': request.user.is_authenticated})
+    response = JsonResponse({'is_authenticated': request.user.is_authenticated})
+    response["Access-Control-Allow-Credentials"] = 'true'
+    return response
 
 
