@@ -10,7 +10,10 @@ openssl req -x509 -nodes -new -sha256 -days 1024 -newkey rsa:2048 -keyout /etc/s
 openssl x509 -outform pem -in /etc/ssl/localhost.pem -out /etc/ssl/localhost.crt
 
 cd /etc/nginx/sites-enabled
-ln -s ../sites-available/backend .
+
+if [ ! -e ./backend ]; then
+    ln -s ../sites-available/backend .
+fi
 
 service nginx restart
 service nginx status
