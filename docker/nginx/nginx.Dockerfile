@@ -4,6 +4,8 @@ RUN apt update && apt install -y openssl nginx
 
 WORKDIR /app
 
+COPY ./nginx.sh /app/
+
 # Gunicorn
 EXPOSE 8000
 # Node
