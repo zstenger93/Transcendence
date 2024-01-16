@@ -111,8 +111,9 @@ function App() {
           <Route
             path="about"
             element={
-              <PageWrapper image={Background}>
+              <PageWrapper image={Background} showSidebar={false}>
                 <About />
+				<Sidebar />
               </PageWrapper>
             }
           />
