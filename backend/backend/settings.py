@@ -18,7 +18,16 @@ DEBUG = os.getenv('DEBUG')
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '10.13.7.5', 'transcendence-backend-znhl.onrender.com', 'https://transcendence-frontend-3otz.onrender.com']
+ALLOWED_HOSTS = [
+        '*', 
+        'localhost', 
+        '172.19.0.4',
+        '127.0.0.1', 
+        '0.0.0.0', 
+        '10.13.7.5', 
+        'transcendence-backend-znhl.onrender.com', 
+        'https://transcendence-frontend-3otz.onrender.com'
+    ]
 
 # Authentication settings
 if DEBUG == 'True':
@@ -60,12 +69,18 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "https://transcendence-frontend-3otz.onrender.com", "https://zstenger93.github.io"]
+CORS_ALLOWED_ORIGINS = [
+		"http://localhost:4000",
+	    "http://localhost:3000",
+		"https://transcendence-frontend-3otz.onrender.com",
+		"https://zstenger93.github.io"
+	]
 
-CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_ALLOW_ALL = True
-SESSION_COOKIE_SAMESITE = None
-SESSION_COOKIE_SECURE = False
+# CORS_ALLOW_CREDENTIALS = True
+# CORS_ORIGIN_ALLOW_ALL = True
+# SESSION_COOKIE_SAMESITE = None
+# SESSION_COOKIE_SECURE = False
+# SESSION_COOKIE_SAMESITE = 'Lax'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -75,8 +90,6 @@ REST_FRAMEWORK = {
         'user_api.authentication.BlacklistCheckJWTAuthentication',
     ),
 }
-
-SESSION_COOKIE_SAMESITE = 'Lax'
 
 
 ROOT_URLCONF = 'backend.urls'
