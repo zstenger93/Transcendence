@@ -21,4 +21,4 @@ EXPOSE 443
 
 CMD [ "nginx", "-g", "daemon off;" ]
 
-ENTRYPOINT [ "/app/nginx.sh" ]
+ENTRYPOINT [ "/app/nginx_deployment.sh" ]
