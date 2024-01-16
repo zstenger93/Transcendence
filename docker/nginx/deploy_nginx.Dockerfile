@@ -4,6 +4,9 @@ RUN apt update && apt install -y openssl nginx
 
 WORKDIR /app
 
+COPY ./nginx.sh /app/
+
+RUN chmod +x /app/nginx.sh
 # Gunicorn
 EXPOSE 8000
 # Node
@@ -14,3 +17,5 @@ EXPOSE 80
 EXPOSE 443
 
 CMD [ "nginx", "-g", "daemon off;" ]
+
+ENTRYPOINT [ "/app/nginx.sh" ]
