@@ -17,6 +17,7 @@ const OAuth = async ({ navigate, redirect_uri }) => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
       response = await fetch(auth, {
         credentials: "include",
+		AccessControlAllowCredentials: true,
       });
       data = await response.json();
 	  console.log("I'm stuck in authception")
