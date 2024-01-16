@@ -55,6 +55,7 @@ services:
       args:
         FRONTEND_URL: ${FRONTEND_URL}
         BACKEND_URL: ${BACKEND_URL}
+        SERVER: ${SERVER}
     entrypoint: /app/docker/nginx/nginx.sh
     volumes:
       - ${PWD}:/app/
