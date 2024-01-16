@@ -32,7 +32,7 @@ function Readme() {
   const Minor = () => <span className="text-blue-500">Minor module:</span>;
 
   return (
-    <div className="max-w-none text-white">
+    <div className="text-white">
       <div
         ref={project}
         className={`text-center mt-10 mb-10 font-nosifer lg:text-8xl 
@@ -42,7 +42,7 @@ function Readme() {
         The Project
       </div>
       {/* DIV CONTAINER FOR THE MINDMAP + OPENING ZOOMED IN & CLOSING */}
-      <div className="flex items-center justify-center">
+      <div className="flex flex-col items-center justify-center">
         <img
           ref={mindmap}
           className={`cursor-pointer max-w-[400px] max-h-[400px] 
@@ -52,6 +52,9 @@ function Readme() {
           alt="Mindmap"
           onClick={handleOpen}
         />
+		<div className="text-center mt-10 mb-10">
+		  <p className="font-bold">16 Major & 11 Minor modules</p>
+		</div>
       </div>
       {isOpen && (
         <div
@@ -76,9 +79,6 @@ function Readme() {
       )}
       <div>
         <div className="mt-10 mb-10">
-          <div className="text-center mb-10">
-            <p className="font-bold">16 Major & 11 Minor modules</p>
-          </div>
           {/* DIV CONTAINER FOR THE AVAILABLE MODULES FOR THE PROJECT WE CAN CHOOSE FROM */}
           <div className="flex flex-wrap justify-start">
             <div
