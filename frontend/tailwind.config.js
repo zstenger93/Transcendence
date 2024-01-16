@@ -27,7 +27,7 @@ module.exports = {
         'custom': '6%',
       },
       animation: {
-        fadeIn: 'fadeIn 2s ease-in forwards'
+        fadeIn: 'fadeIn 1s ease-in forwards'
       },
       keyframes: {
         fadeIn: {
