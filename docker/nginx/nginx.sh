@@ -5,6 +5,9 @@ service nginx status
 cp /app/docker/nginx/config/nginx.conf /etc/nginx/nginx.conf
 cp /app/docker/nginx/config/backend.conf /etc/nginx/sites-available/backend
 
+sed -i 's|${FRONTEND_URL}|'${FRONTEND_URL}'|g' /etc/nginx/sites-available/backend
+sed -i 's|${BACKEND_URL}|'${BACKEND_URL}'|g' /etc/nginx/sites-available/backend
+
 openssl req -x509 -nodes -new -sha256 -days 1024 -newkey rsa:2048 -keyout /etc/ssl/localhost.key -out /etc/ssl/localhost.pem -subj "/C=DE/CN=localhost"
 openssl x509 -outform pem -in /etc/ssl/localhost.pem -out /etc/ssl/localhost.crt
 
