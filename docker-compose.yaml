@@ -12,7 +12,7 @@ services:
     volumes:
       - ${PWD}:/app/
     ports:
-      - 3000:3000
+      - 3000:3000 # should be removed in production
     restart: unless-stopped
     command: npm start --only=prod
 
@@ -30,6 +30,8 @@ services:
     # restart: unless-stopped
     depends_on:
       - db
+    ports:
+      - 8000:8000 # should be removed in production
 
   db:
     image: postgres
