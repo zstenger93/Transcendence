@@ -32,7 +32,6 @@ services:
       - db
     ports:
       - 8000:8000 # should be removed in production
-      - 80:80 # should be removed in production
 
 
 
