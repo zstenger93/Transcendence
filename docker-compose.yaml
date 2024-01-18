@@ -27,7 +27,7 @@ services:
     volumes:
       - ${PWD}:/app/
     entrypoint: /app/docker/backend/backend.sh
-    # restart: unless-stopped
+    restart: unless-stopped
     depends_on:
       - db
     ports:
