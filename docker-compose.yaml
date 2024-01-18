@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 # for deployment
 
@@ -12,7 +12,8 @@ services:
     volumes:
       - ${PWD}:/app/
     ports:
-      - 3000:3000 # should be removed in production
+      - 4000:4000 # should be removed in production
+      - 4000:4000 
     restart: unless-stopped
     command: npm start --only=prod
 
@@ -24,16 +25,14 @@ services:
       context: .
       dockerfile: docker/backend/backend.Dockerfile
     image: transcendence_backend
+    ports:
+      - 8000:8000 # should be removed in production
     volumes:
       - ${PWD}:/app/
     entrypoint: /app/docker/backend/backend.sh
     restart: unless-stopped
     depends_on:
       - db
-    ports:
-      - 8000:8000 # should be removed in production
-
-
 
   db:
     image: postgres
@@ -44,12 +43,20 @@ services:
       POSTGRES_PASSWORD: transcend_pwd
     ports:
       - "5432:5432"
-  
+    restart: unless-stopped
+
   nginx:
     container_name: nginx
+    env_file:
+      - ./.env
     build:
       context: .
       dockerfile: docker/nginx/nginx.Dockerfile
+      args:
+        FRONTEND_URL: ${FRONTEND_URL}
+        BACKEND_URL: ${BACKEND_URL}
+        SERVER: ${SERVER}
+        LOCATION: ${LOCATION}
     entrypoint: /app/docker/nginx/nginx.sh
     volumes:
       - ${PWD}:/app/
@@ -60,3 +67,4 @@ services:
     depends_on:
       - frontend
       - backend
+    restart: unless-stopped
