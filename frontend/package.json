@@ -3,13 +3,12 @@
   "version": "1.0.0",
   "description": "Fullstack SPA",
   "main": "index.js",
-  "homepage": "https://transcendence-frontend-3otz.onrender.com",
   "scripts": {
     "build:css": "postcss src/styles/tailwind.css -o src/index.css",
     "watch:css": "postcss src/styles/tailwind.css -o src/index.css --watch",
-    "start": "REACT_APP_LOCAL_URI=http://localhost:8000/ react-scripts start",
-    "build": "CI=false NODE_ENV=production REACT_APP_REDIRECT_URI=https://transcendence-backend-znhl.onrender.com react-scripts build",
-    "buildnginx": "CI=false NODE_ENV=production REACT_APP_REDIRECT_URI=http://backend:8000 node --max-old-space-size=4096 node_modules/react-scripts/scripts/build.js",
+    "start": "REACT_APP_LOCAL_URI=https://localhost react-scripts start",
+    "build": "HOMEPAGE=https://zstenger93.github.io/Transcendence/ node SetHomepage.js && CI=false NODE_ENV=production REACT_APP_REDIRECT_URI=https://transcendence-backend-znhl.onrender.com react-scripts build",
+    "local_build": "node SetHomepage.js && CI=false NODE_ENV=production REACT_APP_REDIRECT_URI=https://localhost react-scripts build",
     "test": "react-scripts test --detectOpenHandles",
     "eject": "react-scripts eject"
   },
