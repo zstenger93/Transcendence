@@ -115,10 +115,7 @@ class OAuthCallback(APIView):
 				"code": code,
 				"redirect_uri": settings.REDIRECT_URI + "/api/oauth/callback/",
 			}
-			print("Data sent to OAuth server:", data)
 			auth_response = requests.post("https://api.intra.42.fr/oauth/token", data=data)
-			print("asfasfasf", auth_response.json())
-			# return JsonResponse(auth_response.json(), safe=False)
 			access_token = auth_response.json()["access_token"]
 			user_response = requests.get("https://api.intra.42.fr/v2/me", headers={"Authorization": f"Bearer {access_token}"})
 			
@@ -140,13 +137,9 @@ class OAuthCallback(APIView):
 					'title': title,
 				}
 			)
-			if created:
-				print("\t\t\tNew user has been added!!!")
-				response = requests.get(picture_url)
-				if response.status_code == 200:
-					user.profile_picture.save(f"{username}_profile_picture.jpg", ContentFile(response.content), save=True)
-			else:
-				print("\t\t\tUser already exists!!!")
+			response = requests.get(picture_url)
+			if response.status_code == 200:
+				user.profile_picture.save(f"{username}_profile_picture.jpg", ContentFile(response.content), save=True)
 			login(request, user)
 			html = """
 			<!DOCTYPE html>
