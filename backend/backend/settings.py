@@ -72,6 +72,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
+		"http://localhost:4000",
 	    "http://localhost:3000",
 		"https://transcendence-frontend-3otz.onrender.com",
 		"https://zstenger93.github.io"

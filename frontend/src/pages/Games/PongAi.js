@@ -1,21 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
 import backgroundImage from "../../images/pongbg.png";
-import {
-  goFullScreen,
-  exitFullScreen,
-} from "../../components/buttons/FullScreen";
-import { AiOutlineFullscreenExit } from "react-icons/ai";
-import { BsArrowsFullscreen } from "react-icons/bs";
 import { useLocation, useNavigate } from "react-router-dom";
 import BackButton from "../../components/buttons/BackButton";
 import { useTranslation } from "react-i18next";
 import { WelcomeButtonStyle } from "../../components/buttons/ButtonStyle";
+import LoseScreen from "../../components/game/LoseScreen";
+import WinScreen from "../../components/game/WinScreen";
+import FullScreenButton from "../../components/buttons/FullScreen";
+import handleResize from "../../components/game/HandleResize";
 
 const GameCanvas = () => {
   // Default Parameters
   const defaultSpeedX = 300;
   let resize = true;
-  const winScore = 2;
+  const winScore = 10;
   const defaultSpeedY = 20;
   const [scoreLeftReact, setScoreLeft] = useState(0);
   const [scoreRightReact, setScoreRight] = useState(0);
@@ -51,6 +49,7 @@ const GameCanvas = () => {
     const y = 0;
     ctx.fillRect(x, y, stripeWidth, stripeHeight);
   };
+
   // This is bloody AI
   const ArtificialInteligence = (ctx, canvas) => {
     const aiSpeed = 440;
@@ -71,7 +70,24 @@ const GameCanvas = () => {
       paddleHeight
     );
   };
-  // This function Updates The Ball Positions
+
+  // this function draws scores
+  const drawScores = (ctx, canvas) => {
+    ctx.fillStyle = "#FFFFFF";
+    ctx.font = "80px Helvetica";
+    ctx.fillText(`${scoreLeft}`, canvas.width / 2 - 100, 100);
+    ctx.fillText(`${scoreRight}`, canvas.width / 2 + 60, 100);
+  };
+
+  // this Function Surprise draws a ball
+  const drawBall = (ctx) => {
+    ctx.beginPath();
+    ctx.arc(ballX, ballY, ballSize * sizeSpeedRatio, 0, Math.PI * 2);
+    ctx.fillStyle = "#00FF00";
+    ctx.fill();
+    ctx.closePath();
+  };
+
   const updateBallPosition = (canvas) => {
     const ballAngleOffset = 0.02;
     const ballSpeedIncrease = 50;
@@ -133,56 +149,19 @@ const GameCanvas = () => {
     }
   };
 
-  // this function draws scores
-  const drawScores = (ctx, canvas) => {
-    ctx.fillStyle = "#FFFFFF";
-    ctx.font = "80px Helvetica";
-    ctx.fillText(`${scoreLeft}`, canvas.width / 2 - 100, 100);
-    ctx.fillText(`${scoreRight}`, canvas.width / 2 + 60, 100);
-  };
-  // this Function Surprise draws a ball
-  const drawBall = (ctx, canvas) => {
-    ctx.beginPath();
-    ctx.arc(ballX, ballY, ballSize * sizeSpeedRatio, 0, Math.PI * 2);
-    ctx.fillStyle = "#00FF00";
-    ctx.fill();
-    ctx.closePath();
-  };
+  const playerSpeed = 10;
+  let keys = {};
 
-  // This Monster resized the field
-  const handleResize = () => {
+  const movePaddle = () => {
     if (canvasRef.current) {
-      const screenWidth = window.innerWidth;
-      let canvasWidth = screenWidth;
-      if (resize === true) canvasWidth = 0.8 * screenWidth;
-      const canvasHeight = (canvasWidth / 16) * 9;
-      canvasRef.current.width = canvasWidth;
-      canvasRef.current.height = canvasHeight;
-      const sizeRatioX = canvasRef.current
-        ? canvasRef.current.width / canvasWidth
-        : 1;
-      const sizeRatioY = canvasRef.current
-        ? canvasRef.current.height / canvasHeight
-        : 1;
-      paddleWidth = canvasRef.current ? canvasRef.current.width / 80 : 1;
-      paddleHeight = canvasRef.current ? canvasRef.current.width / 20 : 1;
-      sizeSpeedRatio = canvasRef.current
-        ? canvasRef.current.width / canvasDefaultWidth
-        : 1;
-      ballX *= sizeRatioX;
-      ballY *= sizeRatioY;
-      leftPaddleY *= sizeRatioY;
-      rightPaddleY *= sizeRatioY;
+      if (keys["ArrowUp"] || keys["w"])
+        leftPaddleY -= playerSpeed * sizeSpeedRatio;
+      else if (keys["ArrowDown"] || keys["s"])
+        leftPaddleY += playerSpeed * sizeSpeedRatio;
       leftPaddleY = Math.max(
         0,
         Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
       );
-      rightPaddleY = Math.max(
-        0,
-        Math.min(rightPaddleY, canvasRef.current.height - paddleHeight)
-      );
-      ballX = Math.max(0, Math.min(ballX, canvasRef.current.width));
-      ballY = Math.max(0, Math.min(ballY, canvasRef.current.height));
     }
   };
 
@@ -203,23 +182,19 @@ const GameCanvas = () => {
     drawBall(ctx, canvas);
     drawScores(ctx, canvas);
     requestAnimationFrame(draw);
+    movePaddle();
   };
 
   useEffect(() => {
-    const playerSpeed = 30;
+
     const handleKeyDown = (event) => {
-      if (canvasRef.current) {
-        if (event.key === "ArrowUp" || event.key === "w")
-          // eslint-disable-next-line
-          leftPaddleY -= playerSpeed * sizeSpeedRatio;
-        else if (event.key === "ArrowDown" || event.key === "s")
-          leftPaddleY += playerSpeed * sizeSpeedRatio;
-        leftPaddleY = Math.max(
-          0,
-          Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
-        );
-      }
+      keys[event.key] = true;
     };
+
+    const handleKeyUp = (event) => {
+      keys[event.key] = false;
+    };
+
     const handleTouchMove = (event) => {
       if (canvasRef.current && event.touches.length > 0) {
         const rect = canvasRef.current.getBoundingClientRect();
@@ -232,10 +207,35 @@ const GameCanvas = () => {
       }
     };
 
-    document.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
     document.addEventListener("touchmove", handleTouchMove);
-    window.addEventListener("resize", handleResize);
-    handleResize();
+    window.addEventListener("resize", () =>
+      handleResize(
+        canvasRef,
+        resize,
+        paddleWidth,
+        paddleHeight,
+        sizeSpeedRatio,
+        canvasDefaultWidth,
+        ballX,
+        ballY,
+        leftPaddleY,
+        rightPaddleY
+      )
+    );
+    handleResize(
+      canvasRef,
+      resize,
+      paddleWidth,
+      paddleHeight,
+      sizeSpeedRatio,
+      canvasDefaultWidth,
+      ballX,
+      ballY,
+      leftPaddleY,
+      rightPaddleY
+    );
     draw(0);
 
     return () => {
@@ -249,9 +249,19 @@ const GameCanvas = () => {
     <div className="flex justify-center items-center h-screen">
       {scoreLeftReact === winScore || scoreRightReact === winScore ? (
         scoreLeftReact === winScore ? (
-          <WinScreen />
+          <WinScreen
+            GameCanvas={GameCanvas}
+            backgroundImage={backgroundImage}
+            WelcomeButtonStyle={WelcomeButtonStyle}
+            BackButton={BackButton}
+          />
         ) : (
-          <LoseScreen />
+          <LoseScreen
+            GameCanvas={GameCanvas}
+            backgroundImage={backgroundImage}
+            WelcomeButtonStyle={WelcomeButtonStyle}
+            BackButton={BackButton}
+          />
         )
       ) : (
         <>
@@ -266,101 +276,10 @@ const GameCanvas = () => {
   );
 };
 
-const WinScreen = () => {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-  const [gameStarted, setGameStarted] = useState(false);
-
-  const handleButtonClick = () => {
-    setGameStarted(true);
-  };
-
-  return (
-    <div className="flex justify-center items-center h-screen">
-      {gameStarted ? (
-        <GameCanvas />
-      ) : (
-        <div className="relative">
-          <img
-            src={backgroundImage}
-            style={{ width: "80vw", height: "45vw", objectFit: "cover" }}
-            alt="Background"
-            className="rounded-xl shadow-lg"
-          />
-          <div
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 
-		  -translate-y-1/2 text-center font-bold font-nosifer"
-          >
-            <p>{t("YOU WON!")}</p>
-            <button
-              onClick={handleButtonClick}
-              className={`mt-10 ${WelcomeButtonStyle}`}
-            >
-              {t("Play Again")}
-            </button>
-          </div>
-          <BackButton navigate={navigate} t={t} />
-        </div>
-      )}
-    </div>
-  );
-};
-
-const LoseScreen = () => {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-  const [gameStarted, setGameStarted] = useState(false);
-
-  const handleButtonClick = () => {
-    setGameStarted(true);
-  };
-
-  return (
-    <div className="flex justify-center items-center h-screen">
-      {gameStarted ? (
-        <GameCanvas />
-      ) : (
-        <div className="relative">
-          <img
-            src={backgroundImage}
-            style={{ width: "80vw", height: "45vw", objectFit: "cover" }}
-            alt="Background"
-            className="rounded-xl shadow-lg"
-          />
-          <div
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 
-		  -translate-y-1/2 text-center font-bold font-nosifer"
-          >
-            <p>{t("YOU LOST!")}</p>
-            <button
-              onClick={handleButtonClick}
-              className={`mt-10 ${WelcomeButtonStyle}`}
-            >
-              {t("Play Again")}
-            </button>
-          </div>
-          <BackButton navigate={navigate} t={t} />
-        </div>
-      )}
-    </div>
-  );
-};
-
 const PongAi = () => {
   const { t } = useTranslation();
-  const location = useLocation();
   const navigate = useNavigate();
-  const [isFullScreen, setIsFullScreen] = useState(false);
-
-  const handleGoFullScreen = (elementId) => {
-    goFullScreen(elementId);
-    setIsFullScreen(true);
-  };
-
-  const handleExitFullScreen = (elementId) => {
-    exitFullScreen(elementId);
-    setIsFullScreen(false);
-  };
+  const location = useLocation();
 
   const [gameStarted, setGameStarted] = useState(false);
 
@@ -370,24 +289,9 @@ const PongAi = () => {
 
   return (
     <div id="aiP" className="flex justify-center items-center h-screen">
-      {location.pathname === "/originalpong" ||
-      location.pathname === "/pongai" ||
-      location.pathname === "/pong3d" ? (
-        <button
-          onClick={() =>
-            isFullScreen ? handleExitFullScreen() : handleGoFullScreen("aiP")
-          }
-          className="absolute top-2 right-2 mr-4"
-        >
-          {isFullScreen ? (
-            <AiOutlineFullscreenExit size="32" color="white" />
-          ) : (
-            <BsArrowsFullscreen size="32" color="white" />
-          )}
-        </button>
-      ) : null}
+      <FullScreenButton location={location} page="aiP" />
       {gameStarted ? (
-        <GameCanvas className="m-4" />
+        <GameCanvas className="m-4" t={t} navigate={navigate} />
       ) : (
         <div className="relative">
           <img
