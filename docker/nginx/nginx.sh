@@ -2,8 +2,12 @@
 
 service nginx status
 
+
 cp /app/docker/nginx/config/nginx.conf /etc/nginx/nginx.conf
 cp /app/docker/nginx/config/backend.conf /etc/nginx/sites-available/backend
+
+sed -i 's|${FRONTEND_URL}|'${FRONTEND_URL}'|g' /etc/nginx/sites-available/backend
+sed -i 's|${BACKEND_URL}|'${BACKEND_URL}'|g' /etc/nginx/sites-available/backend
 
 sed -i 's|${FRONTEND_URL}|'${FRONTEND_URL}'|g' /etc/nginx/sites-available/backend
 sed -i 's|${BACKEND_URL}|'${BACKEND_URL}'|g' /etc/nginx/sites-available/backend

@@ -61,8 +61,9 @@ Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices
 	- Rest for API to connect back and frontend
 	- Frontend with React
 - Backend
+	- Django
 - Frontend
-	- React
+	- React app
 
 ---
 ## Setup
@@ -74,8 +75,6 @@ Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices
 		- each microservice is an app
 	- PostgreSQL database
 	- frontend
-		- React application
-		- TailwindCss
 
 
 - images (not customized yet for front and back)
@@ -125,19 +124,22 @@ Tailwind
 	- Login with your username and password
 	- Login via 42 auth
 - Home / Welcome
+	- ?
 - Game & Watch
 	- Pong
 		- Original
 		- AI Opponent
 		- Multiplayer
-		- Modded
 		- 3D Pong
 	- Future game
 - Chat
 	- Channels
-	- Online
+	- Online ppl
 	- Image Sharing
 - Profile
+	- Basic details
+	- Friends
+	- Match history
 - About Us
 - Logout
 
@@ -175,8 +177,6 @@ Tailwind
 ## Original Game
 
 PONG
-
-Sortof works now and you can play on one keyboard. Also AI mode has been implemented.
 
 - Extra Pong versions implemented:
 	- AI Pong
@@ -244,11 +244,11 @@ Playing live games on the site :x:
 
 Matchmaking system :x:
 
-Faithful to the original pong game :x:
+Faithful to the original pong game :white_check_mark:
 
 Custom options for the game :x:
 
-The game must be responsive :x:
+The game must be responsive :white_check_mark:
 
 
 ## Modules Used
@@ -283,9 +283,9 @@ The game must be responsive :x:
 	- *Minor module*: Monitoring system :x:
 	- *Major module*: Designing the Backend as Microservices :x:
 - **Graphics**
-	- *Major module*: Use advanced 3D techniques :x:
+	- *Major module*: Use advanced 3D techniques :white_check_mark:
 - **Accessibility**
-	- *Minor module*: Support on all devices :x:
+	- *Minor module*: Support more devices :x: :white_check_mark:
 	- *Minor module*: Expanding browser compatibility :white_check_mark:
 	- *Minor module*: Multiple language support :white_check_mark:
 	- *Minor module*: Add accessibility for visually impaired users :x:

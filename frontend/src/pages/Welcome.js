@@ -28,7 +28,9 @@ function Welcome({ redirectUri }) {
       <LanguageButton />
       <div
         className=" 
-	  	flex flex-col items-center justify-center"
+	  	flex flex-col items-center justify-center bg-darkred
+		bg-opacity-40 rounded-xl shadow-xl border-r-2 border-b-2
+		border-darkred p-4"
       >
         <SignInButton
           t={t}
