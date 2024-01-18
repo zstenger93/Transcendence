@@ -12,6 +12,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
 from .validations import custom_validation, validate_email, validate_password
@@ -24,27 +25,26 @@ import os
 
 
 class UserRegister(APIView):
-    permission_classes = (permissions.AllowAny,)
-    # authentication_classes = (JWTAuthentication,)
-    # authentication_classes = (BlacklistCheckJWTAuthentication,)
-
-    def post(self, request):
-        try:
-            clean_data = custom_validation(request.data)
-            serializer = UserRegisterSerializer(data=clean_data)
-            if serializer.is_valid(raise_exception=True):
-                user = serializer.create(clean_data)
-                if user:
-                    return Response(serializer.data, status=status.HTTP_201_CREATED)
-        except ValidationError as e:
-            return Response({'detail': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-        
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+	permission_classes = (permissions.AllowAny,)
+	# authentication_classes = (BlacklistCheckJWTAuthentication,)
+	##
+	def post(self, request):
+		try:
+			clean_data = custom_validation(request.data)
+			serializer = UserRegisterSerializer(data=clean_data)
+			if serializer.is_valid(raise_exception=True):
+				user = serializer.create(clean_data)
+				if user:
+					return Response(serializer.data, status=status.HTTP_201_CREATED)
+		except ValidationError as e:
+			return Response({'detail': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+		
+		return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserLogin(APIView):
 	permission_classes = (permissions.AllowAny,)
-	# authentication_classes = (BlacklistCheckJWTAuthentication,)
+	authentication_classes = (BlacklistCheckJWTAuthentication,)
 	##
 	def post(self, request):
 		if request.user.is_authenticated:
@@ -55,8 +55,9 @@ class UserLogin(APIView):
 		serializer = UserLoginSerializer(data=data)
 		if serializer.is_valid(raise_exception=True):
 			user = serializer.check_user(data)
-			login(request, user)
 			token = RefreshToken.for_user(user)
+			token['email'] = user.email
+			token['username'] = user.username
 			return Response({
 				'refresh': str(token),
 				'access': str(token.access_token),
@@ -66,15 +67,13 @@ class UserLogin(APIView):
 class UserLogout(APIView):
 	permission_classes = (permissions.AllowAny,)
 	authentication_classes = (BlacklistCheckJWTAuthentication,)
-
+	##
 	def post(self, request):
 		if request.user.is_authenticated:
 			# Add the token to the blacklist
 			token = request.META.get('HTTP_AUTHORIZATION', " ").split(' ')[1]
 			BlacklistedToken.objects.create(user=request.user, token=token)
-			print(BlacklistedToken.objects.all())
-			logout(request)
-			return Response(status=status.HTTP_200_OK)
+			return Response({"detail": "Logged out Successfully"}, status=status.HTTP_200_OK)
 		else:
 			return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -92,6 +91,7 @@ class UserViewSet(viewsets.ModelViewSet):
 	authentication_classes = (BlacklistCheckJWTAuthentication,)
 	queryset = AppUser.objects.all()
 	serializer_class = UserSerializer
+	##
 	def create(self, request, *args, **kwargs):
 		response = super().create(request, *args, **kwargs)
 		email = request.data.get('email', '')
@@ -104,7 +104,6 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class OAuthCallback(APIView):
 	permission_classes = (permissions.AllowAny,)
-	# authentication_classes = (JWTAuthentication,)
 	##
 	def get(self, request):
 		if request.method == "GET":
@@ -171,7 +170,7 @@ class OAuthCallback(APIView):
 
 class OAuthAuthorize(APIView):
 	permission_classes = (permissions.AllowAny,)
-
+	##
 	def get(self, request):
 		auth_url = "https://api.intra.42.fr/oauth/authorize"
 		params = {
