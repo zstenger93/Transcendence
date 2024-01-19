@@ -24,22 +24,28 @@ import os
 
 
 class UserRegister(APIView):
-    permission_classes = (permissions.AllowAny,)
-    # authentication_classes = (JWTAuthentication,)
-    # authentication_classes = (BlacklistCheckJWTAuthentication,)
+	permission_classes = (permissions.AllowAny,)
+	# authentication_classes = (JWTAuthentication,)
+	# authentication_classes = (BlacklistCheckJWTAuthentication,)
 
-    def post(self, request):
-        try:
-            clean_data = custom_validation(request.data)
-            serializer = UserRegisterSerializer(data=clean_data)
-            if serializer.is_valid(raise_exception=True):
-                user = serializer.create(clean_data)
-                if user:
-                    return Response(serializer.data, status=status.HTTP_201_CREATED)
-        except ValidationError as e:
-            return Response({'detail': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-        
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+	def post(self, request):
+		try:
+			clean_data = custom_validation(request.data)
+			serializer = UserRegisterSerializer(data=clean_data)
+			if serializer.is_valid(raise_exception=True):
+				user = serializer.create(clean_data)
+				if user:
+					response = Response(serializer.data, status=status.HTTP_201_CREATED)
+					response["Access-Control-Allow-Credentials"] = 'true'
+					return response
+		except ValidationError as e:
+			response = Response({'detail': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+			response["Access-Control-Allow-Credentials"] = 'true'
+			return response
+		
+		response = Response(status=status.HTTP_400_BAD_REQUEST)
+		response["Access-Control-Allow-Credentials"] = 'true'
+		return response
 
 
 class UserLogin(APIView):
