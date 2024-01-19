@@ -14,7 +14,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken
 
 from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
-from .validations import custom_validation, validate_email, validate_password
+from .validations import user_registration, is_valid_email, is_valid_password
 from .authentication import BlacklistCheckJWTAuthentication
 from .models import AppUser, BlacklistedToken
 
@@ -24,43 +24,58 @@ import os
 
 
 class UserRegister(APIView):
-    permission_classes = (permissions.AllowAny,)
-    # authentication_classes = (JWTAuthentication,)
-    # authentication_classes = (BlacklistCheckJWTAuthentication,)
+	permission_classes = (permissions.AllowAny,)
+	# authentication_classes = (JWTAuthentication,)
+	# authentication_classes = (BlacklistCheckJWTAuthentication,)
 
-    def post(self, request):
-        try:
-            clean_data = custom_validation(request.data)
-            serializer = UserRegisterSerializer(data=clean_data)
-            if serializer.is_valid(raise_exception=True):
-                user = serializer.create(clean_data)
-                if user:
-                    return Response(serializer.data, status=status.HTTP_201_CREATED)
-        except ValidationError as e:
-            return Response({'detail': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-        
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+	def post(self, request):
+		try:
+			clean_data = user_registration(request.data)
+			serializer = UserRegisterSerializer(data=clean_data)
+			if serializer.is_valid(raise_exception=True):
+				user = serializer.create(clean_data)
+				if user:
+					response = Response(serializer.data, status=status.HTTP_201_CREATED)
+					response["Access-Control-Allow-Credentials"] = 'true'
+					return response
+		except ValidationError as e:
+			response = Response({'detail': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+			response["Access-Control-Allow-Credentials"] = 'true'
+			return response
+		
+		response = Response(status=status.HTTP_400_BAD_REQUEST)
+		response["Access-Control-Allow-Credentials"] = 'true'
+		return response
 
 
 class UserLogin(APIView):
 	permission_classes = (permissions.AllowAny,)
 	# authentication_classes = (BlacklistCheckJWTAuthentication,)
-	##
+
 	def post(self, request):
 		if request.user.is_authenticated:
-				return Response({"detail": "You are already logged in, logout if you want to identify as someone else ;)"}, status=status.HTTP_400_BAD_REQUEST)
+			response = Response({"detail": "You are already logged in, logout if you want to identify as someone else ;)"}, status=status.HTTP_400_BAD_REQUEST)
+			response["Access-Control-Allow-Credentials"] = 'true'
+			return response
 		data = request.data
-		assert validate_email(data)
-		assert validate_password(data)
-		serializer = UserLoginSerializer(data=data)
-		if serializer.is_valid(raise_exception=True):
-			user = serializer.check_user(data)
-			login(request, user)
-			token = RefreshToken.for_user(user)
-			return Response({
-				'refresh': str(token),
-				'access': str(token.access_token),
-			}, status=status.HTTP_200_OK)
+		try:
+			assert is_valid_email(data)
+			assert is_valid_password(data)
+			serializer = UserLoginSerializer(data=data)
+			if serializer.is_valid(raise_exception=True):
+				user = serializer.check_user(data)
+				login(request, user)
+				token = RefreshToken.for_user(user)
+				response = Response({
+					'refresh': str(token),
+					'access': str(token.access_token),
+				}, status=status.HTTP_200_OK)
+				response["Access-Control-Allow-Credentials"] = 'true'
+				return response
+		except ValidationError as e:
+			response = Response({'detail': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+			response["Access-Control-Allow-Credentials"] = 'true'
+			return response
 
 
 class UserLogout(APIView):

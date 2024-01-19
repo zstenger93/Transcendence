@@ -22,7 +22,6 @@ const RegisterButt = ({ t, redirectToHome, redirect_uri }) => {
         },
         { withCredentials: true }
       );
-      console.log(response.data);
       redirectToHome();
     } catch (error) {
       if (error.response && error.response.data) {

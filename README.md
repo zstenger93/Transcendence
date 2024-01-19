@@ -6,9 +6,7 @@
 
 ---
 
-# The current version deployed can be accessed by the following link (only frontend atm)
-
-[TranscEND](https://zstenger93.github.io/Transcendence/)
+# The current version deployed can be accessed here: [TranscEND](https://zstenger93.github.io/Transcendence/)
 
 ---
 
@@ -58,8 +56,9 @@ Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices
 - Base of the project
 	- PostgreSQL
 	- Django backend
-	- Rest for API to connect back and frontend
+	- Rest API to connect back and frontend
 	- Frontend with React
+	- Nginx proxy
 - Backend
 	- Django
 - Frontend
@@ -75,6 +74,7 @@ Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices
 		- each microservice is an app
 	- PostgreSQL database
 	- frontend
+	- nginx proxy
 
 
 - images (not customized yet for front and back)
@@ -113,6 +113,7 @@ postgreSQL
 
 React
 Tailwind
+ThreeJS
 
 - Multi language support
 - Extra browser support
@@ -123,8 +124,8 @@ Tailwind
 	- Register with username email and password to the site
 	- Login with your username and password
 	- Login via 42 auth
-- Home / Welcome
-	- ?
+- Home
+	- Readme styled (kinda)
 - Game & Watch
 	- Pong
 		- Original
@@ -212,7 +213,7 @@ Docker files for services :white_check_mark:
 
 docker-compose.dev :x: :white_check_mark:
 
-Hashed passwords :x:
+Hashed passwords :white_check_mark:
 
 Using OAuth system from 42 :white_check_mark:
 
