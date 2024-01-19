@@ -1,10 +1,41 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { WelcomeButtonStyle } from "../buttons/ButtonStyle";
 
-const SignInButt = ({ t, redirectToHome }) => {
+const SignInButt = ({ t, redirectToHome, redirect_uri }) => {
   const [showFields, setShowFields] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showError, setShowError] = useState(false);
+  const [error, setError] = useState(null);
+
+  const loginUser = async (email, password, redirect_uri) => {
+
+    try {
+      const response = await axios.post(
+        `${redirect_uri}/api/login`,
+        {
+          email: email,
+          password: password,
+        },
+        { withCredentials: true }
+      );
+	  redirectToHome();
+      return response.data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        let errorMessage;
+        if (typeof error.response.data === "object") {
+          errorMessage = error.response.data.detail;
+        }
+        setError(errorMessage ? errorMessage : "An unexpected error occurred.");
+      } else {
+        console.error("An unexpected error occurred:", error.message);
+        setError("An unexpected error occurred.");
+      }
+	  setShowError(true);
+    }
+  };
 
   return (
     <>
@@ -37,12 +68,35 @@ const SignInButt = ({ t, redirectToHome }) => {
             autoComplete="new-password"
           />
           <button
-            onClick={() => redirectToHome(true)}
+            onClick={async () => {
+              try {
+                await loginUser(email, password, redirect_uri);
+              } catch (error) {
+                console.error("An error occurred:", error);
+              }
+            }}
             className={`mb-20 ${WelcomeButtonStyle}`}
           >
             {t("Login")}
           </button>
         </>
+      )}
+      {showError && (
+        <div className="fixed inset-0 flex items-start justify-center pt-20 z-50">
+          <div
+            className="bg-gray-900 bg-opacity-80 text-white p-8 rounded-xl 
+		  	shadow-xl relative border border-red-700"
+          >
+            <div className="" dangerouslySetInnerHTML={{ __html: error }} />
+            <button
+              onClick={() => setShowError(false)}
+              className="absolute top-0 right-0 mt-2 mr-2 text-2xl leading-none 
+			  hover:text-gray-300"
+            >
+              &times;
+            </button>
+          </div>
+        </div>
       )}
     </>
   );
