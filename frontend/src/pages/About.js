@@ -55,12 +55,12 @@ function About() {
   }, []);
 
   useEffect(() => {
-	const closeCards = () => setSelectedCard(null);
-	document.addEventListener('click', closeCards);
-  
-	return () => {
-	  document.removeEventListener('click', closeCards);
-	};
+    const closeCards = () => setSelectedCard(null);
+    document.addEventListener("click", closeCards);
+
+    return () => {
+      document.removeEventListener("click", closeCards);
+    };
   }, []);
 
   const settings = {
@@ -121,12 +121,15 @@ function About() {
 				flex flex-col items-center justify-start transition-all duration-800
 				ease-in-out transform-gpu shadow-2xl
 				${
-					selectedCard === index
+				selectedCard === index
 					? "w-96 absolute top-1/2 transform -translate-y-1/2"
 					: ""
 				}`}
-                style={{ backgroundImage: `url(${backgroundImage})`, transition: "transform 0.0s ease-in-out", }}
-				onClick={(e) => e.stopPropagation()}
+                style={{
+                  backgroundImage: `url(${backgroundImage})`,
+                  transition: "transform 0.0s ease-in-out",
+                }}
+                onClick={(e) => e.stopPropagation()}
               >
                 <input
                   type="radio"
