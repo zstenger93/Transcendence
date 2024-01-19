@@ -2,8 +2,6 @@ import React from "react";
 import { WelcomeButtonStyle } from "../buttons/ButtonStyle";
 
 const OAuth = async ({ navigate, redirect_uri }) => {
-  console.log("OAuth");
-  console.log(redirect_uri);
   const auth = `${redirect_uri}/api/is_authenticated/`;
   let response = await fetch(auth, {
     credentials: "include",
@@ -20,10 +18,7 @@ const OAuth = async ({ navigate, redirect_uri }) => {
 		AccessControlAllowCredentials: true,
       });
       data = await response.json();
-	  console.log("I'm stuck in authception")
     }
-	console.log(data.is_authenticated);
-	console.log("authenticated");
 	navigate("/home");
   } else {
     navigate("/home");
