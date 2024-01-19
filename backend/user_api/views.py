@@ -58,17 +58,22 @@ class UserLogin(APIView):
 			response["Access-Control-Allow-Credentials"] = 'true'
 			return response
 		data = request.data
-		assert is_valid_email(data)
-		assert is_valid_password(data)
-		serializer = UserLoginSerializer(data=data)
-		if serializer.is_valid(raise_exception=True):
-			user = serializer.check_user(data)
-			login(request, user)
-			token = RefreshToken.for_user(user)
-			response = Response({
-				'refresh': str(token),
-				'access': str(token.access_token),
-			}, status=status.HTTP_200_OK)
+		try:
+			assert is_valid_email(data)
+			assert is_valid_password(data)
+			serializer = UserLoginSerializer(data=data)
+			if serializer.is_valid(raise_exception=True):
+				user = serializer.check_user(data)
+				login(request, user)
+				token = RefreshToken.for_user(user)
+				response = Response({
+					'refresh': str(token),
+					'access': str(token.access_token),
+				}, status=status.HTTP_200_OK)
+				response["Access-Control-Allow-Credentials"] = 'true'
+				return response
+		except ValidationError as e:
+			response = Response({'detail': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 			response["Access-Control-Allow-Credentials"] = 'true'
 			return response
 

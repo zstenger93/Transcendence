@@ -38,7 +38,6 @@ def user_registration(data):
     return data
 
 
-# THIS AIN'T WORKING
 def is_valid_email(data):
 	email = data['email'].strip()
 	if not email:
