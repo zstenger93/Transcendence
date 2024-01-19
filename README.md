@@ -213,7 +213,7 @@ Docker files for services :white_check_mark:
 
 docker-compose.dev :x: :white_check_mark:
 
-Hashed passwords :x:
+Hashed passwords :white_check_mark:
 
 Using OAuth system from 42 :white_check_mark:
 
