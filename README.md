@@ -6,9 +6,7 @@
 
 ---
 
-# The current version deployed can be accessed by the following link (only frontend atm)
-
-[TranscEND](https://zstenger93.github.io/Transcendence/)
+# The current version deployed can be accessed here: [TranscEND](https://zstenger93.github.io/Transcendence/)
 
 ---
 
