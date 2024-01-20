@@ -43,6 +43,7 @@ services:
   prometheus:
     image: prom/prometheus
     container_name: prometheus
+    user: "root:root"
     ports:
       - "9090:9090"
     volumes:
@@ -63,6 +64,7 @@ services:
   grafana:
     image: grafana/grafana-oss:latest
     container_name: grafana
+    user: "root:root"
     ports:
       - '3200:3000'
     volumes:
