@@ -67,5 +67,5 @@ services:
       - '3200:3000'
     volumes:
       - ./docker/grafana/grafana-data:/var/lib/grafana
+      - ./docker/grafana/provisioning/:/etc/grafana/provisioning/
     restart: unless-stopped
-
