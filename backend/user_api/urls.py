@@ -12,4 +12,6 @@ urlpatterns = [
     path('oauth/callback/', views.OAuthCallback.as_view(), name='oauth_callback'),
     path('users/', views.UserViewSet.as_view({'get': 'list'}), name='users'),
 	path('is_authenticated/', views.is_authenticated, name='is_authenticated'),
+	path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+	path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
 ]

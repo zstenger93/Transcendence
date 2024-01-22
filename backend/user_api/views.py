@@ -12,6 +12,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
 from .validations import user_registration, is_valid_email, is_valid_password
@@ -50,8 +51,8 @@ class UserRegister(APIView):
 
 class UserLogin(APIView):
 	permission_classes = (permissions.AllowAny,)
-	# authentication_classes = (BlacklistCheckJWTAuthentication,)
-
+	authentication_classes = (BlacklistCheckJWTAuthentication,)
+	##
 	def post(self, request):
 		if request.user.is_authenticated:
 			response = Response({"detail": "You are already logged in, logout if you want to identify as someone else ;)"}, status=status.HTTP_400_BAD_REQUEST)
@@ -81,15 +82,13 @@ class UserLogin(APIView):
 class UserLogout(APIView):
 	permission_classes = (permissions.AllowAny,)
 	authentication_classes = (BlacklistCheckJWTAuthentication,)
-
+	##
 	def post(self, request):
 		if request.user.is_authenticated:
 			# Add the token to the blacklist
 			token = request.META.get('HTTP_AUTHORIZATION', " ").split(' ')[1]
 			BlacklistedToken.objects.create(user=request.user, token=token)
-			print(BlacklistedToken.objects.all())
-			logout(request)
-			return Response(status=status.HTTP_200_OK)
+			return Response({"detail": "Logged out Successfully"}, status=status.HTTP_200_OK)
 		else:
 			return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -107,6 +106,7 @@ class UserViewSet(viewsets.ModelViewSet):
 	authentication_classes = (BlacklistCheckJWTAuthentication,)
 	queryset = AppUser.objects.all()
 	serializer_class = UserSerializer
+	##
 	def create(self, request, *args, **kwargs):
 		response = super().create(request, *args, **kwargs)
 		email = request.data.get('email', '')
@@ -119,7 +119,6 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class OAuthCallback(APIView):
 	permission_classes = (permissions.AllowAny,)
-	# authentication_classes = (JWTAuthentication,)
 	##
 	def get(self, request):
 		if request.method == "GET":
@@ -131,10 +130,7 @@ class OAuthCallback(APIView):
 				"code": code,
 				"redirect_uri": settings.REDIRECT_URI + "/api/oauth/callback/",
 			}
-			print("Data sent to OAuth server:", data)
 			auth_response = requests.post("https://api.intra.42.fr/oauth/token", data=data)
-			print("asfasfasf", auth_response.json())
-			# return JsonResponse(auth_response.json(), safe=False)
 			access_token = auth_response.json()["access_token"]
 			user_response = requests.get("https://api.intra.42.fr/v2/me", headers={"Authorization": f"Bearer {access_token}"})
 			
@@ -156,13 +152,9 @@ class OAuthCallback(APIView):
 					'title': title,
 				}
 			)
-			if created:
-				print("\t\t\tNew user has been added!!!")
-				response = requests.get(picture_url)
-				if response.status_code == 200:
-					user.profile_picture.save(f"{username}_profile_picture.jpg", ContentFile(response.content), save=True)
-			else:
-				print("\t\t\tUser already exists!!!")
+			response = requests.get(picture_url)
+			if response.status_code == 200:
+				user.profile_picture.save(f"{username}_profile_picture.jpg", ContentFile(response.content), save=True)
 			login(request, user)
 			html = """
 			<!DOCTYPE html>
@@ -186,7 +178,7 @@ class OAuthCallback(APIView):
 
 class OAuthAuthorize(APIView):
 	permission_classes = (permissions.AllowAny,)
-
+	##
 	def get(self, request):
 		auth_url = "https://api.intra.42.fr/oauth/authorize"
 		params = {
