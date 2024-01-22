@@ -35,6 +35,6 @@ class UserSerializer(serializers.ModelSerializer):
 		model = UserModel
 		fields = ('id', 'email', 'username', 'profile_picture', \
 			 	'total_matches', 'wins', 'losses', \
-				'title')
+				'title', 'TwoFA')
 
 
