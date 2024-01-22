@@ -4,7 +4,7 @@ from django.shortcuts import HttpResponse, redirect
 from django.conf import settings
 
 
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect
 from django.core.exceptions import ValidationError
 
 from rest_framework import permissions, status, viewsets
@@ -14,6 +14,13 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
+from django_otp.forms import OTPAuthenticationForm
+from django_otp import devices_for_user
+from django_otp.plugins.otp_totp.models import TOTPDevice
+from django.core.mail import EmailMessage
+from django_otp import match_token
+
+from .authentication import account_activation_token, is_authenticated
 from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
 from .validations import user_registration, is_valid_email, is_valid_password
 from .authentication import BlacklistCheckJWTAuthentication
@@ -22,6 +29,7 @@ from .models import AppUser, BlacklistedToken
 import requests
 import urllib
 import os
+
 
 
 class UserRegister(APIView):
@@ -188,9 +196,74 @@ class OAuthAuthorize(APIView):
 		}
 		return HttpResponseRedirect(f"{auth_url}?{urllib.parse.urlencode(params)}")
 
-def is_authenticated(request):
-    response = JsonResponse({'is_authenticated': request.user.is_authenticated})
-    response["Access-Control-Allow-Credentials"] = 'true'
-    return response
+
+class activateTwoFa(APIView):
+	permission_classes = (permissions.IsAuthenticated,)
+	authentication_classes = (BlacklistCheckJWTAuthentication,)
+	##
+	def post(self, request):
+		if request.user.is_authenticated:
+			request.user.TwoFA = True
+			request.user.save()
+			return Response({"detail": "Two Factor Authentication activated"}, status=status.HTTP_200_OK)
+		else:
+			return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
 
 
+class deactivateTwoFa(APIView):
+	permission_classes = (permissions.IsAuthenticated,)
+	authentication_classes = (BlacklistCheckJWTAuthentication,)
+	##
+	def post(self, request):
+		if request.user.is_authenticated:
+			request.user.TwoFA = False
+			request.user.save()
+			return Response({"detail": "Two Factor Authentication deactivated"}, status=status.HTTP_200_OK)
+		else:
+			return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
+		
+
+class sendQrCode(APIView):
+	permission_classes = (permissions.IsAuthenticated,)
+	authentication_classes = (BlacklistCheckJWTAuthentication,)
+	##
+	def post(self, request):
+		if request.user.is_authenticated:
+			if request.user.TwoFA:
+				devices = devices_for_user(request.user) # get all devices for user
+				if devices:
+					device = devices[0]
+					if isinstance(device, TOTPDevice):
+						device_config = device.config
+						qrcode = device_config['qrcode']
+						qrcode.save(f"{request.user.username}_qrcode.png", ContentFile(qrcode.read()), save=True)
+						email = EmailMessage(
+							'Your QR Code for 2FA',
+							'Here is your QR Code for 2FA',
+							os.environ.get("EMAIL_HOST_USER"),
+							[request.user.email],
+						)
+						email.attach_file(f"{request.user.username}_qrcode.png")
+						email.send()
+						return Response({"detail": "QR Code sent to your email"}, status=status.HTTP_200_OK)
+					else:
+						return Response({"detail": "No TOTP device found"}, status=status.HTTP_400_BAD_REQUEST)
+				else:
+					return Response({"detail": "No device found"}, status=status.HTTP_400_BAD_REQUEST)
+			else:
+				return Response({"detail": "Two Factor Authentication is not activated"}, status=status.HTTP_400_BAD_REQUEST)
+		else:
+			return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
+		
+
+class TwoFactorAuth(APIView):
+	permission_classes = (permissions.AllowAny,)
+	##
+	def post(self, request):
+		if request.method == "POST":
+			form = OTPAuthenticationForm(request.POST)
+			if form.is_valid():
+				return HttpResponse("Logged in Successfully")
+			else:
+				return HttpResponse("Invalid OTP")
+		return HttpResponse("Bad Request")
