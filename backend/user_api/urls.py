@@ -5,19 +5,19 @@ from . import views
 urlpatterns = [
 
     ## user_management
-	path('register',
+	path('register/',
 		views.UserRegister.as_view(),
 		name='register'
 	),
-	path('login',
+	path('login/',
 		views.UserLogin.as_view(),
 		name='login'
 	),
-	path('logout',
+	path('logout/',
 		views.UserLogout.as_view(),
 		name='logout'
 	),
-	path('profile',
+	path('profile/',
 		views.UserProfileView.as_view(),
 		name='profile'
 	),
