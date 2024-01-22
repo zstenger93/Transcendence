@@ -12,10 +12,10 @@ services:
     volumes:
       - ${PWD}:/app/
     ports:
-      - 3000:3000
-      - 4000:4000
+      - 3000:3000 # should be removed in production
+      - 4000:4000 
     restart: unless-stopped
-    command: npm start
+    command: npm start --only=prod
 
   backend:
     container_name: backend
@@ -26,7 +26,7 @@ services:
       dockerfile: docker/backend/backend.Dockerfile
     image: transcendence_backend
     ports:
-      - 8000:8000
+      - 8000:8000 # should be removed in production
     volumes:
       - ${PWD}:/app/
     entrypoint: /app/docker/backend/backend.sh
