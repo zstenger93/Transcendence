@@ -30,7 +30,7 @@ services:
     volumes:
       - ${PWD}:/app/
     entrypoint: /app/docker/backend/backend.sh
-    restart: unless-stopped
+    restart: always
     depends_on:
       - db
 
