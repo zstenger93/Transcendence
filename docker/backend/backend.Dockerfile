@@ -1,6 +1,6 @@
 FROM debian:bookworm
 
-WORKDIR /app
+WORKDIR /app/backend
 
 RUN     apt update && \
 		apt install -y \

@@ -67,5 +67,4 @@ urlpatterns = [
 		views.verifyTwoFaToken,
 		name='verifyTwoFaToken'
 	),
-
 ]
