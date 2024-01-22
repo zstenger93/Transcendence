@@ -16,7 +16,6 @@ DEBUG = os.getenv('DEBUG')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-
 ALLOWED_HOSTS = [
         '*', 
         'localhost', 
@@ -48,7 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    ## apps
+	'django_otp',
+    'django_otp.plugins.otp_totp',
     'friendship',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
@@ -58,6 +58,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+	'django_otp.middleware.OTPMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -162,7 +163,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -199,3 +199,11 @@ MEDIA_ROOT = BASE_DIR / 'media'
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
 }
+
+
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'yourmailadress'
+EMAIL_HOST_PASSWORD = 'yourpass'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
