@@ -15,7 +15,7 @@ services:
       - 3000:3000 # should be removed in production
       - 4000:4000 
     restart: unless-stopped
-    command: npm start --only=prod
+    command: npm start
 
   backend:
     container_name: backend
