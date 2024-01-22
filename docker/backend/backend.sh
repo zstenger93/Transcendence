@@ -26,5 +26,4 @@ sleep 5
 python manage.py makemigrations && python manage.py migrate
 tail -f /var/log/gunicorn/dev.log
 
-
-
+# gunicorn -c config/gunicorn/dev.py --reload
