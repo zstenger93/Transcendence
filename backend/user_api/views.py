@@ -13,12 +13,15 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.permissions import IsAuthenticated
+
 
 from django_otp.forms import OTPAuthenticationForm
 from django_otp import devices_for_user
 from django_otp.plugins.otp_totp.models import TOTPDevice
 from django.core.mail import EmailMessage
 from django_otp import match_token
+from email.mime.image import MIMEImage
 
 from .authentication import account_activation_token, is_authenticated
 from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
@@ -26,9 +29,14 @@ from .validations import user_registration, is_valid_email, is_valid_password
 from .authentication import BlacklistCheckJWTAuthentication
 from .models import AppUser, BlacklistedToken
 
+from django.contrib import messages
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+
 import requests
 import urllib
 import os
+import qrcode
 
 
 
@@ -227,43 +235,57 @@ class sendQrCode(APIView):
 	permission_classes = (permissions.IsAuthenticated,)
 	authentication_classes = (BlacklistCheckJWTAuthentication,)
 	##
+	def get_user_totp_device(self,user, confirmed=None):
+		devices = devices_for_user(user, confirmed=confirmed)
+		for device in devices:
+			if isinstance(device, TOTPDevice):
+				return device
+
 	def post(self, request):
 		if request.user.is_authenticated:
 			if request.user.TwoFA:
-				devices = devices_for_user(request.user) # get all devices for user
-				if devices:
-					device = devices[0]
-					if isinstance(device, TOTPDevice):
-						device_config = device.config
-						qrcode = device_config['qrcode']
-						qrcode.save(f"{request.user.username}_qrcode.png", ContentFile(qrcode.read()), save=True)
-						email = EmailMessage(
-							'Your QR Code for 2FA',
-							'Here is your QR Code for 2FA',
-							os.environ.get("EMAIL_HOST_USER"),
-							[request.user.email],
-						)
-						email.attach_file(f"{request.user.username}_qrcode.png")
-						email.send()
-						return Response({"detail": "QR Code sent to your email"}, status=status.HTTP_200_OK)
-					else:
-						return Response({"detail": "No TOTP device found"}, status=status.HTTP_400_BAD_REQUEST)
-				else:
-					return Response({"detail": "No device found"}, status=status.HTTP_400_BAD_REQUEST)
+				device = self.get_user_totp_device(request.user)
+				if not device:
+					device = request.user.totpdevice_set.create(confirmed=True)
+				current_site = get_current_site(request)
+
+				# Generate QR code
+				img = qrcode.make(device.config_url)
+				img.save("qrcode.png")
+
+				mail_subject = 'DJANGO OTP DEMO'
+				message = f"Hello {request.user},\n\nYour QR Code is: <img src='cid:image1'>"
+				to_email = request.user.email
+				email = EmailMessage(
+					mail_subject, message, to=[to_email]
+				)
+
+				# Attach image
+				fp = open('qrcode.png', 'rb')
+				msg_image = MIMEImage(fp.read())
+				fp.close()
+				msg_image.add_header('Content-ID', '<image1>')
+				email.attach(msg_image)
+
+				email.content_subtype = "html"
+				email.send()
+				messages.success(request, ('Please Confirm your email to complete registration.'))
+				return Response({"detail": "QR Code sent to your email"}, status=status.HTTP_200_OK)
 			else:
 				return Response({"detail": "Two Factor Authentication is not activated"}, status=status.HTTP_400_BAD_REQUEST)
 		else:
 			return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
-		
+
 
 class TwoFactorAuth(APIView):
-	permission_classes = (permissions.AllowAny,)
-	##
+	permission_classes = (permissions.IsAuthenticated,)
+	authentication_classes = (BlacklistCheckJWTAuthentication,)
+	## check if use is authenticated
 	def post(self, request):
-		if request.method == "POST":
-			form = OTPAuthenticationForm(request.POST)
-			if form.is_valid():
-				return HttpResponse("Logged in Successfully")
-			else:
-				return HttpResponse("Invalid OTP")
-		return HttpResponse("Bad Request")
+		otp_code = request.data.get('otp_code')
+		device = TOTPDevice.objects.filter(user=request.user).first()
+
+		if device and device.verify_token(otp_code):
+			return Response({"detail": "OTP verified"}, status=status.HTTP_200_OK)
+		else:
+			return Response({"detail": "Invalid OTP"}, status=status.HTTP_400_BAD_REQUEST)
