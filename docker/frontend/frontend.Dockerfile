@@ -12,4 +12,4 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["npm", "start", "--only=prod"]
+CMD ["npm", "start"]

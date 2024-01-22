@@ -9,8 +9,6 @@ cp /app/docker/nginx/config/backend.conf /etc/nginx/sites-available/backend
 sed -i 's|${FRONTEND_URL}|'${FRONTEND_URL}'|g' /etc/nginx/sites-available/backend
 sed -i 's|${BACKEND_URL}|'${BACKEND_URL}'|g' /etc/nginx/sites-available/backend
 
-sed -i 's|${FRONTEND_URL}|'${FRONTEND_URL}'|g' /etc/nginx/sites-available/backend
-sed -i 's|${BACKEND_URL}|'${BACKEND_URL}'|g' /etc/nginx/sites-available/backend
 sed -i 's|${SERVER}|'${SERVER}'|g' /etc/nginx/sites-available/backend
 sed -i 's|${LOCATION}|'${LOCATION}'|g' /etc/nginx/sites-available/backend
 
