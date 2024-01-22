@@ -12,10 +12,7 @@ if [ ! -d "venv" ]; then
 fi
 
 source venv/bin/activate
-
-if ! pip freeze | grep -q -F -r requirements.txt; then
-    pip install -r requirements.txt
-fi
+pip install -r requirements.txt
 
 echo 'source /app/backend/venv/bin/activate' >> /root/.bashrc
 
