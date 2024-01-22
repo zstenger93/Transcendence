@@ -23,6 +23,7 @@ echo "alias get='http --follow --timeout 6'" >> /root/.bashrc
 mkdir -pv /var/{log,run}/gunicorn/
 gunicorn -c config/gunicorn/dev.py
 sleep 5
+python manage.py makemigrations && python manage.py migrate
 tail -f /var/log/gunicorn/dev.log
 
 
