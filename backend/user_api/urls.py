@@ -51,19 +51,19 @@ urlpatterns = [
     
 
 	## Two Factor Authentication
-	path('activateTwoFa/',
+	path('activateTwoFa',
 		views.activateTwoFa.as_view(),
 		name='activateTwoFa'
 	),
-	path('deactivateTwoFa/',
+	path('deactivateTwoFa',
 		views.deactivateTwoFa.as_view(),
 		name='deactivateTwoFa'
 	),
-	path('sendQrCode/',
+	path('sendQrCode',
 		views.sendQrCode.as_view(),
 		name='sendQrCode'
 	),
-	path('TwoFactorAuth/',
+	path('TwoFactorAuth',
 		views.TwoFactorAuth.as_view(),
 		name='TwoFactorAuth'
 	),
