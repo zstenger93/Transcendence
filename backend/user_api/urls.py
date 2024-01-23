@@ -25,7 +25,10 @@ urlpatterns = [
 		views.UserViewSet.as_view({'get': 'list'}),
 		name='users'
 	),
-
+	path('accountDeletion',
+		views.accountDeletion.as_view(),
+		name='accountDeletion'
+	),
 
 	## JWT Authentication
     path('oauth/authorize/',
