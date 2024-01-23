@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ButtonStyle } from "../components/buttons/ButtonStyle";
+import UserSettings from "../components/profile/UserSettings";
 
 const friendsListData = [
   {
@@ -228,15 +229,24 @@ function Profile() {
   const { t } = useTranslation();
   const [showFriendsList, setShowFriendsList] = useState(false);
   const [showMatchHistory, setShowMatchHistory] = useState(false);
+  const [showUserSettings, setShowUserSettings] = useState(false);
 
   const toggleFriendsList = () => {
     setShowFriendsList(!showFriendsList);
     setShowMatchHistory(false);
+    setShowUserSettings(false);
   };
 
   const toggleMatchHistory = () => {
     setShowMatchHistory(!showMatchHistory);
     setShowFriendsList(false);
+    setShowUserSettings(false);
+  };
+
+  const toggleUserSettings = () => {
+    setShowUserSettings(!showUserSettings);
+    setShowFriendsList(false);
+    setShowMatchHistory(false);
   };
 
   return (
@@ -282,34 +292,38 @@ function Profile() {
               <strong>{t("Win Rate")}:</strong> {userDetails.winRate}
             </p>
           </div>
-          <div className="mt-8 flex justify-center space-x-4">
-            <button
-              className={`w-38 ${ButtonStyle}
-              ${
-                showFriendsList
-                  ? "bg-purple-600 text-gray-300"
-                  : "text-gray-300"
-              }`}
-              onClick={toggleFriendsList}
-            >
-              {t("Friends")}
-            </button>
-            <button
-              className={`w-38 ${ButtonStyle}
-              ${
-                showMatchHistory
-                  ? "bg-purple-600 text-gray-300"
-                  : "text-gray-300"
-              }`}
-              onClick={toggleMatchHistory}
-            >
-              {t("Match History")}
-            </button>
+          <div className="mt-8 justify-center space-x-4 text-center">
+            <div className="inline-flex space-x-4 justify-center">
+              <button
+                className={`w-38 ${ButtonStyle}
+				${showFriendsList ? "bg-purple-600 text-gray-300" : "text-gray-300"}`}
+                onClick={toggleFriendsList}
+              >
+                {t("Friends")}
+              </button>
+              <button
+                className={`w-38 ${ButtonStyle}
+				${showUserSettings ? "bg-purple-600 text-gray-300" : "text-gray-300"}`}
+                onClick={toggleUserSettings}
+              >
+                {t("Settings")}
+              </button>
+            </div>
+            <div className="mt-4 inline-flex justify-center text-center">
+              <button
+                className={`w-38 ${ButtonStyle}
+				${showMatchHistory ? "bg-purple-600 text-gray-300" : "text-gray-300"}`}
+                onClick={toggleMatchHistory}
+              >
+                {t("Match History")}
+              </button>
+            </div>
           </div>
         </div>
         <div className="mt-8 mb-10">
           {showFriendsList && <FriendsList />}
           {showMatchHistory && <MatchHistory />}
+		  {showUserSettings && <UserSettings />}
         </div>
       </div>
     </div>
