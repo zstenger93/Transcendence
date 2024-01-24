@@ -42,6 +42,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 	wins = models.PositiveIntegerField(default=0)
 	losses = models.PositiveIntegerField(default=0)
 	title = models.CharField(max_length=100, null=True, blank=True)
+	TwoFA = models.BooleanField(default=False)
 
 	USERNAME_FIELD = 'email'
 	REQUIRED_FIELDS = ['username']
