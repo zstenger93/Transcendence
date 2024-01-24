@@ -4,7 +4,7 @@ from django.shortcuts import HttpResponse, redirect
 from django.conf import settings
 
 
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect
 from django.core.exceptions import ValidationError
 
 from rest_framework import permissions, status, viewsets
@@ -13,15 +13,31 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.permissions import IsAuthenticated
 
+
+from django_otp.forms import OTPAuthenticationForm
+from django_otp import devices_for_user
+from django_otp.plugins.otp_totp.models import TOTPDevice
+from django.core.mail import EmailMessage
+from django_otp import match_token
+from email.mime.image import MIMEImage
+
+from .authentication import account_activation_token, is_authenticated
 from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
 from .validations import user_registration, is_valid_email, is_valid_password
 from .authentication import BlacklistCheckJWTAuthentication
 from .models import AppUser, BlacklistedToken
 
+from django.contrib import messages
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+
 import requests
 import urllib
 import os
+import qrcode
+
 
 
 class UserRegister(APIView):
@@ -188,9 +204,101 @@ class OAuthAuthorize(APIView):
 		}
 		return HttpResponseRedirect(f"{auth_url}?{urllib.parse.urlencode(params)}")
 
-def is_authenticated(request):
-    response = JsonResponse({'is_authenticated': request.user.is_authenticated})
-    response["Access-Control-Allow-Credentials"] = 'true'
-    return response
 
 
+class accountDeletion(APIView):
+	permission_classes = (permissions.IsAuthenticated,)
+	authentication_classes = (BlacklistCheckJWTAuthentication,)
+	##
+	def post(self, request):
+		if request.user.is_authenticated:
+			request.user.delete()
+			return Response({"detail": "Account deleted"}, status=status.HTTP_200_OK)
+		else:
+			return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class activateTwoFa(APIView):
+	permission_classes = (permissions.IsAuthenticated,)
+	authentication_classes = (BlacklistCheckJWTAuthentication,)
+	##
+	def post(self, request):
+		if request.user.is_authenticated:
+			request.user.TwoFA = True
+			request.user.save()
+			return Response({"detail": "Two Factor Authentication activated"}, status=status.HTTP_200_OK)
+		else:
+			return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class deactivateTwoFa(APIView):
+	permission_classes = (permissions.IsAuthenticated,)
+	authentication_classes = (BlacklistCheckJWTAuthentication,)
+	##
+	def post(self, request):
+		if request.user.is_authenticated:
+			request.user.TwoFA = False
+			request.user.save()
+			return Response({"detail": "Two Factor Authentication deactivated"}, status=status.HTTP_200_OK)
+		else:
+			return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
+		
+
+class sendQrCode(APIView):
+	permission_classes = (permissions.IsAuthenticated,)
+	authentication_classes = (BlacklistCheckJWTAuthentication,)
+	##
+	def get_user_totp_device(self,user, confirmed=None):
+		devices = devices_for_user(user, confirmed=confirmed)
+		for device in devices:
+			if isinstance(device, TOTPDevice):
+				return device
+
+	def post(self, request):
+		if request.user.is_authenticated:
+			if request.user.TwoFA:
+				device = self.get_user_totp_device(request.user)
+				if not device:
+					device = request.user.totpdevice_set.create(confirmed=True)
+				current_site = get_current_site(request)
+
+				# Generate QR code
+				img = qrcode.make(device.config_url)
+				img.save("qrcode.png")
+
+				mail_subject = 'DJANGO OTP DEMO'
+				message = f"Hello {request.user},\n\nYour QR Code is: <img src='cid:image1'>"
+				to_email = request.user.email
+				email = EmailMessage(
+					mail_subject, message, to=[to_email]
+				)
+
+				# Attach image
+				fp = open('qrcode.png', 'rb')
+				msg_image = MIMEImage(fp.read())
+				fp.close()
+				msg_image.add_header('Content-ID', '<image1>')
+				email.attach(msg_image)
+
+				email.content_subtype = "html"
+				email.send()
+				messages.success(request, ('Please Confirm your email to complete registration.'))
+				return Response({"detail": "QR Code sent to your email"}, status=status.HTTP_200_OK)
+			else:
+				return Response({"detail": "Two Factor Authentication is not activated"}, status=status.HTTP_400_BAD_REQUEST)
+		else:
+			return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class TwoFactorAuth(APIView):
+	permission_classes = (permissions.IsAuthenticated,)
+	authentication_classes = (BlacklistCheckJWTAuthentication,)
+	## check if use is authenticated
+	def post(self, request):
+		otp_code = request.data.get('otp_code')
+		device = TOTPDevice.objects.filter(user=request.user).first()
+
+		if device and device.verify_token(otp_code):
+			return Response({"detail": "OTP verified"}, status=status.HTTP_200_OK)
+		else:
+			return Response({"detail": "Invalid OTP"}, status=status.HTTP_400_BAD_REQUEST)
