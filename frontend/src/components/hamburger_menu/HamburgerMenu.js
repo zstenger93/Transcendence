@@ -5,8 +5,18 @@ import { FaInfoCircle, FaHome, FaUser } from "react-icons/fa";
 import { HiMiniLanguage } from "react-icons/hi2";
 import { SiGooglechat, SiGameandwatch } from "react-icons/si";
 import { TbLogout } from "react-icons/tb";
+import userLogout from "../sidebar/Logout";
+import { useNavigate } from "react-router-dom";
 
-const HamburgerMenu = ({ isMenuOpen, toggleMenu, t, changeLanguage }) => {
+const HamburgerMenu = ({
+  isMenuOpen,
+  toggleMenu,
+  t,
+  changeLanguage,
+  redirectUri,
+}) => {
+  console.log("HamburgerMenu", redirectUri);
+  const navigate = useNavigate();
   if (!isMenuOpen) return null;
 
   return (
@@ -37,7 +47,14 @@ const HamburgerMenu = ({ isMenuOpen, toggleMenu, t, changeLanguage }) => {
           text={t("About Us")}
           to="/about"
         />
-        <SidebarIcon icon={<TbLogout size="32" />} text={t("Logout")} to="/" />
+        <SidebarIcon
+          icon={<TbLogout size="32" />}
+          text={t("Logout")}
+          onClick={async () => {
+            await userLogout({ redirectUri });
+            navigate("/");
+          }}
+        />
         <SidebarDropdown
           icon={<HiMiniLanguage size="32" />}
           text={t("Language")}

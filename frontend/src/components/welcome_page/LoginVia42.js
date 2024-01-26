@@ -16,9 +16,11 @@ const OAuth = async ({ navigate, redirect_uri }) => {
       response = await fetch(auth, {
         credentials: "include",
 		    AccessControlAllowCredentials: true,
+        AccessControlAllowCredentials: true,
       });
       data = await response.json();
     }
+    navigate("/home");
     navigate("/home");
   } else {
     navigate("/home");

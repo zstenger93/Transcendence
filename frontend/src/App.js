@@ -22,7 +22,8 @@ import { WelcomeButtonStyle } from "./components/buttons/ButtonStyle";
 import BackButton from "./components/buttons/BackButton";
 import backgroundimage from "./images/pongbg.png";
 
-const PageWrapper = ({ children, image, showSidebar = true }) => {
+const PageWrapper = ({ children, image, showSidebar = true, redirectUri }) => {
+	console.log("PageWrapper", redirectUri);
   return (
     <div
       className="overflow-y-auto h-svh"
@@ -33,7 +34,7 @@ const PageWrapper = ({ children, image, showSidebar = true }) => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {showSidebar && <Sidebar />}
+      {showSidebar && <Sidebar redirectUri={redirectUri} />}
       {children}
     </div>
   );
@@ -65,7 +66,11 @@ function App() {
           <Route
             path="/"
             element={
-              <PageWrapper image={Background} showSidebar={false}>
+              <PageWrapper
+                image={Background}
+                showSidebar={false}
+                redirectUri={REDIRECT_URI}
+              >
                 <Welcome redirectUri={REDIRECT_URI} />
               </PageWrapper>
             }
@@ -73,15 +78,19 @@ function App() {
           <Route
             path="home"
             element={
-              <PageWrapper image={Background} showSidebar={false}>
-                <Home />
+              <PageWrapper
+                image={Background}
+                showSidebar={false}
+                redirectUri={REDIRECT_URI}
+              >
+                <Home redirectUri={REDIRECT_URI} />
               </PageWrapper>
             }
           />
           <Route
             path="chat"
             element={
-              <PageWrapper image={Background}>
+              <PageWrapper image={Background} redirectUri={REDIRECT_URI}>
                 <Chat />
               </PageWrapper>
             }
@@ -89,7 +98,7 @@ function App() {
           <Route
             path="matchmaking"
             element={
-              <PageWrapper image={Background}>
+              <PageWrapper image={Background} redirectUri={REDIRECT_URI}>
                 <Matchmaking />
               </PageWrapper>
             }
@@ -97,7 +106,7 @@ function App() {
           <Route
             path="games"
             element={
-              <PageWrapper image={Background}>
+              <PageWrapper image={Background} redirectUri={REDIRECT_URI}>
                 <Games />
               </PageWrapper>
             }
@@ -105,7 +114,7 @@ function App() {
           <Route
             path="profile"
             element={
-              <PageWrapper image={Background}>
+              <PageWrapper image={Background} redirectUri={REDIRECT_URI}>
                 <Profile />
               </PageWrapper>
             }
@@ -113,16 +122,20 @@ function App() {
           <Route
             path="about"
             element={
-              <PageWrapper image={Background} showSidebar={false}>
+              <PageWrapper
+                image={Background}
+                showSidebar={false}
+                redirectUri={REDIRECT_URI}
+              >
                 <About />
-				<Sidebar />
+                <Sidebar redirectUri={REDIRECT_URI} />
               </PageWrapper>
             }
           />
           <Route
             path="originalpong"
             element={
-              <PageWrapper image={Background}>
+              <PageWrapper image={Background} redirectUri={REDIRECT_URI}>
                 <OriginalPong />
               </PageWrapper>
             }
@@ -130,7 +143,7 @@ function App() {
           <Route
             path="pongai"
             element={
-              <PageWrapper image={Background}>
+              <PageWrapper image={Background} redirectUri={REDIRECT_URI}>
                 <PongAi />
               </PageWrapper>
             }
@@ -138,7 +151,7 @@ function App() {
           <Route
             path="pong3d"
             element={
-              <PageWrapper image={Background}>
+              <PageWrapper image={Background} redirectUri={REDIRECT_URI}>
                 <StartScreen
                   Game={Pong3D}
                   backgroundImage={backgroundimage}
@@ -151,7 +164,7 @@ function App() {
           <Route
             path="choosepongmode"
             element={
-              <PageWrapper image={BreakingBadMorty}>
+              <PageWrapper image={BreakingBadMorty} redirectUri={REDIRECT_URI}>
                 <ChoosePongMode />
               </PageWrapper>
             }

@@ -1,6 +1,6 @@
 version: "3.8"
 
-# for deployment
+# for development
 
 services:
   frontend:
@@ -12,7 +12,7 @@ services:
     volumes:
       - ${PWD}:/app/
     ports:
-      - 3000:3000 # should be removed in production
+      - 3000:3000
       - 4000:4000 
     restart: unless-stopped
     command: npm start
@@ -26,11 +26,11 @@ services:
       dockerfile: docker/backend/backend.Dockerfile
     image: transcendence_backend
     ports:
-      - 8000:8000 # should be removed in production
+      - 8000:8000
     volumes:
       - ${PWD}:/app/
     entrypoint: /app/docker/backend/backend.sh
-    restart: always
+    restart: unless-stopped
     depends_on:
       - db
 
