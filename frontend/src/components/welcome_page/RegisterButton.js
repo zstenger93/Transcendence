@@ -11,7 +11,7 @@ const RegisterButt = ({ t, redirectToHome, redirect_uri }) => {
   const [error, setError] = useState(null);
   const [showError, setShowError] = useState(false);
 
-  const registerTheUser = async () => {
+  const registerUser = async () => {
     try {
       const response = await axios.post(
         `${redirect_uri}/api/register`,
@@ -79,7 +79,7 @@ const RegisterButt = ({ t, redirectToHome, redirect_uri }) => {
             autoComplete="new-password"
           />
           <button
-            onClick={() => registerTheUser()}
+            onClick={() => registerUser()}
             className={`mb-20 ${WelcomeButtonStyle}`}
           >
             {t("Join")}
