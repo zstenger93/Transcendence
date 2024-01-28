@@ -49,7 +49,7 @@
     ]
   },
   "description": "This dashboard works with postgres_exporter for prometheus",
-  "editable": true,
+  "editable": false,
   "gnetId": 9628,
   "graphTooltip": 0,
   "id": null,
@@ -78,7 +78,10 @@
         "#7eb26d",
         "#d44a3a"
       ],
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheusdatasource"
+      },
       "format": "none",
       "gauge": {
         "maxValue": 100,

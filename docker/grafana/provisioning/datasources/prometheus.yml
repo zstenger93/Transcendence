@@ -6,6 +6,8 @@ datasources:
     access: proxy
     # Access mode - proxy (server in the UI) or direct (browser in the UI).
     url: http://prometheus:9090
+    editable: false
+    uid: prometheusdatasource
     jsonData:
       httpMethod: POST
       manageAlerts: true
