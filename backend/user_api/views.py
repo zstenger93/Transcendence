@@ -83,6 +83,8 @@ class UserLogin(APIView):
 				user = serializer.check_user(data)
 				login(request, user)
 				token = RefreshToken.for_user(user)
+				token['email'] = user.email
+				token['username'] = user.username
 				response = Response({
 					'refresh': str(token),
 					'access': str(token.access_token),
@@ -256,6 +258,8 @@ class updateProfile(APIView):
 				request.user.match_history = history
 			if data.get('TwoFA'):
 				request.user.TwoFA = data.get('TwoFA')
+			if data.get('password'):
+				request.user.set_password(data.get('password'))
 			request.user.save()
 			
 			return Response({"detail": "Profile updated"}, status=status.HTTP_200_OK)
