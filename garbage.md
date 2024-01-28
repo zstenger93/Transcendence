@@ -53,12 +53,20 @@ Result <-
 - Input: {"otp_code":"your_otp_code"}
 
 
-# Missing Endpoints:
-- Password Reset
-- Update Profile (e.g Update Picture, name, etc)
-- Look for a match / Start Match / Save Score
-- 
 
 
 ## Tools
 Header Changer: https://chromewebstore.google.com/detail/requestly-open-source-htt/mdnleldcmiljblolnjhpnblkcekpdkpa
+
+
+## TODO
+### MAKE A MORE SECURE WAY TO SAVE PWD, ALSO TO CHANGE IT
+
+- check if the token is valid
+- check if the token is expired
+
+api endpoints for:
+changing picture
+changing username
+changing password
+setting about me text for profile?
