@@ -218,6 +218,51 @@ class accountDeletion(APIView):
 			return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
 
 
+class updateProfile(APIView):
+	permission_classes = (permissions.IsAuthenticated,)
+	authentication_classes = (BlacklistCheckJWTAuthentication,)
+	##
+	def post(self, request):
+		if request.user.is_authenticated:
+			data = request.data
+			if data.get('profile_picture'):
+				request.user.profile_picture = data.get('profile_picture')
+			if data.get('email'):
+				request.user.email = data.get('email')
+			if data.get('username'):
+				request.user.username = data.get('username')
+			if data.get('title'):
+				request.user.title = data.get('title')
+			if data.get('AboutMe'):
+				request.user.AboutMe = data.get('AboutMe')
+			if data.get('school'):
+				request.user.school = data.get('school')
+			if data.get('wins'):
+				request.user.wins = data.get('wins')
+			if data.get('losses'):
+				request.user.losses = data.get('losses')
+			if data.get('win_rate'):
+				if request.user.total_matches == 0:
+					request.user.win_rate = 0
+				else:
+					request.user.win_rate = request.user.wins / request.user.total_matches
+			if data.get('total_matches'):
+				request.user.total_matches = data.get('total_matches')
+			if data.get('match_history'):
+				history = request.user.match_history
+				if history is None:
+					history = []
+				history.append(data.get('match_history'))
+				request.user.match_history = history
+			if data.get('TwoFA'):
+				request.user.TwoFA = data.get('TwoFA')
+			request.user.save()
+			
+			return Response({"detail": "Profile updated"}, status=status.HTTP_200_OK)
+		else:
+			return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
+
+
 class activateTwoFa(APIView):
 	permission_classes = (permissions.IsAuthenticated,)
 	authentication_classes = (BlacklistCheckJWTAuthentication,)
@@ -302,3 +347,4 @@ class TwoFactorAuth(APIView):
 			return Response({"detail": "OTP verified"}, status=status.HTTP_200_OK)
 		else:
 			return Response({"detail": "Invalid OTP"}, status=status.HTTP_400_BAD_REQUEST)
+		
