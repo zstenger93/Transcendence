@@ -63,9 +63,9 @@ function Pong3D() {
         Math.random()
       );
       this.asteroid.scale.set(
-        Math.random() / 3 + 0.1,
-        Math.random() / 3 + 0.1,
-        Math.random() / 3 + 0.1
+        Math.random() / 5 + 0.15,
+        Math.random() / 5 + 0.15,
+        Math.random() / 5 + 0.15,
       );
       this.scene.add(this.asteroid);
     }
