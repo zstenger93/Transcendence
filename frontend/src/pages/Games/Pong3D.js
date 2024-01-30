@@ -57,7 +57,11 @@ function Pong3D() {
       this.radius = radius;
       this.currentWayPoint = currentWayPoint;
       this.asteroid = new THREE.Mesh(asteroidGeometry, asteroidMaterial);
-      this.asteroid.position.set(x + this.offset, y + this.offset, Math.random());
+      this.asteroid.position.set(
+        x + this.offset,
+        y + this.offset,
+        Math.random()
+      );
       this.asteroid.scale.set(
         Math.random() / 3 + 0.1,
         Math.random() / 3 + 0.1,
@@ -293,7 +297,7 @@ function Pong3D() {
 
     // Loop to add asteroids
     let asteroidsLong = 70;
-    let asteroidsShort = asteroidsLong / 5 * 2;
+    let asteroidsShort = (asteroidsLong / 5) * 2;
     for (let i = 0; i < asteroidsShort; i++) {
       const newAsteroid = new Asteroid(
         longGeometry / 2,
