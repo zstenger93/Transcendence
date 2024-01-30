@@ -35,12 +35,12 @@ function Pong3D() {
   const asteroids = [];
   const containerRef = useRef(null);
   let aspectRatio = getAspectRatio();
-  const paddleHeight = 6;
+  const paddleHeight = 5;
   const paddleWidth = 1;
   const wallOffsetX = 23.5;
   const wallOffsetY = 15;
   const wallThickness = 3;
-  let ballSpeed = 1;
+  let ballSpeed = 0.3;
   let leftPaddlePosition = 0;
   let bounceCounter = 0;
   let isCodeExecuted = false;
@@ -267,7 +267,7 @@ function Pong3D() {
     const paddleGeometry = new THREE.BoxGeometry(
       paddleWidth,
       paddleHeight,
-      wallThickness / 2
+      wallThickness / 3
     );
     const paddleMaterialGeometry = new THREE.MeshLambertMaterial({
       map: textureLoader.load(death),
@@ -280,7 +280,7 @@ function Pong3D() {
     rightPaddle.position.set(21, 0, 0);
     scene.add(rightPaddle);
     // Create
-    const ballGeometry = new THREE.SphereGeometry(1, 32, 32);
+    const ballGeometry = new THREE.SphereGeometry(0.6, 32, 32);
     const ball = new THREE.Mesh(ballGeometry, planetMaterials[7]);
     ball.position.set(0, 0, 0.5);
     scene.add(ball);
