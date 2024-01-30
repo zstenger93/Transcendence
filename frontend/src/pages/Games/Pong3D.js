@@ -23,6 +23,7 @@ function Pong3D() {
   const textureLoader = new THREE.TextureLoader();
   const longGeometry = 50;
   const shortGeometry = 30;
+  let leftPaddleSpeedConst = 0.5;
   const asteroidMaterial = new THREE.MeshLambertMaterial({
     color: 0xffffff,
     map: textureLoader.load(venus),
@@ -414,6 +415,8 @@ function Pong3D() {
           if (!isCodeExecuted) {
             bounceCounter = bounceCounter + 1;
             ballSpeed += 0.02;
+            leftPaddleSpeedConst += 0.005;
+            speed
             bounceContext.clearRect(
               0,
               0,
@@ -454,6 +457,7 @@ function Pong3D() {
               ball.material = planetMaterials[lifes];
               ball.material.needsUpdate = true;
               ballSpeed = 0.3;
+              leftPaddleSpeedConst = 0.5;
             }
             pointLight.intensity += 50;
             pointLight.distance += 10;
@@ -529,11 +533,11 @@ function Pong3D() {
 
     function animatePaddle() {
       if (isWKeyPressed) {
-        leftPaddlePosition += 0.5;
+        leftPaddlePosition += leftPaddleSpeedConst;
       }
 
       if (isSKeyPressed) {
-        leftPaddlePosition -= 0.5;
+        leftPaddlePosition -= leftPaddleSpeedConst;
       }
 
       leftPaddlePosition = Math.max(
