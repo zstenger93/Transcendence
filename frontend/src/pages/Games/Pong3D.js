@@ -413,6 +413,7 @@ function Pong3D() {
           // eslint-disable-next-line react-hooks/exhaustive-deps
           if (!isCodeExecuted) {
             bounceCounter = bounceCounter + 1;
+            ballSpeed += 0.02;
             bounceContext.clearRect(
               0,
               0,
@@ -452,6 +453,7 @@ function Pong3D() {
               orbits.pop();
               ball.material = planetMaterials[lifes];
               ball.material.needsUpdate = true;
+              ballSpeed = 0.3;
             }
             pointLight.intensity += 50;
             pointLight.distance += 10;
