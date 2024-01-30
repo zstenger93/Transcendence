@@ -35,8 +35,8 @@ function Pong3D() {
   const asteroids = [];
   const containerRef = useRef(null);
   let aspectRatio = getAspectRatio();
-  const paddleHeight = 5;
-  const paddleWidth = 1;
+  const paddleHeight = 4;
+  const paddleWidth = 0.7;
   const wallOffsetX = 23.5;
   const wallOffsetY = 15;
   const wallThickness = 3;
@@ -120,7 +120,7 @@ function Pong3D() {
     const sunTexture = textureLoader.load(sunTex);
     // camera.position.set(-15, 5, 35);
     camera.position.set(0, 0, 35);
-    camera.rotation.set(0, 0, 0); // -0.3. -0.3 -0.3
+    camera.rotation.set(-0.3, -0,3, 0); // -0.3. -0.3 -0.3
 
     // Create canvas for rendering text
     const canvas = document.createElement("canvas");
@@ -267,7 +267,7 @@ function Pong3D() {
     const paddleGeometry = new THREE.BoxGeometry(
       paddleWidth,
       paddleHeight,
-      wallThickness / 3
+      paddleWidth
     );
     const paddleMaterialGeometry = new THREE.MeshLambertMaterial({
       map: textureLoader.load(death),
@@ -288,7 +288,7 @@ function Pong3D() {
     // Add lights
     const pointLight = new THREE.PointLight(0xff8800, 1200, 120, 2);
     pointLight.position.set(0, 0, -9);
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.05);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.08);
     scene.add(pointLight, ambientLight);
 
     // Loop to add asteroids
@@ -421,7 +421,7 @@ function Pong3D() {
           }
         }
         ballDirection.x *= -1;
-        ball.position.x += ballDirection.x * ballSpeed * 3;
+        ball.position.x += ballDirection.x * ballSpeed * 6;
       }
       for (let i = 0; i < walls.length; i++) {
         const wall = walls[i];
