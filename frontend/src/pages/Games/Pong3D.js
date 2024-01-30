@@ -416,7 +416,6 @@ function Pong3D() {
             bounceCounter = bounceCounter + 1;
             ballSpeed += 0.02;
             leftPaddleSpeedConst += 0.005;
-            speed
             bounceContext.clearRect(
               0,
               0,
