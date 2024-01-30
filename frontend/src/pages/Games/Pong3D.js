@@ -57,11 +57,11 @@ function Pong3D() {
       this.radius = radius;
       this.currentWayPoint = currentWayPoint;
       this.asteroid = new THREE.Mesh(asteroidGeometry, asteroidMaterial);
-      this.asteroid.position.set(x + this.offset, y + this.offset, 0);
+      this.asteroid.position.set(x + this.offset, y + this.offset, Math.random());
       this.asteroid.scale.set(
-        Math.random() / 2 + 0.5,
-        Math.random() / 2 + 0.5,
-        Math.random() / 2 + 0.5
+        Math.random() / 3 + 0.1,
+        Math.random() / 3 + 0.1,
+        Math.random() / 3 + 0.1
       );
       this.scene.add(this.asteroid);
     }
@@ -128,7 +128,7 @@ function Pong3D() {
     context.font = "20px nosifer";
     context.fillStyle = "white";
     context.fillText("BLACKHOLE PONG", 4, 24);
-
+    // canvas.rotation.set(-1, 0, 0);
     //Text
     const textureText = new THREE.CanvasTexture(canvas);
     const textMaterial = new THREE.MeshBasicMaterial({
@@ -187,7 +187,7 @@ function Pong3D() {
     sun.add(sunLayer2);
 
     const stars = [];
-    for (let i = 0; i < 150; i++) {
+    for (let i = 0; i < 1000; i++) {
       const star = new THREE.Mesh(starGeometry, starMaterial);
       star.position.x = Math.random() * longGeometry * 14 - longGeometry * 7;
       star.position.y = Math.random() * shortGeometry * 8 - shortGeometry * 4;
@@ -292,20 +292,22 @@ function Pong3D() {
     scene.add(pointLight, ambientLight);
 
     // Loop to add asteroids
-    for (let i = 0; i < 8; i++) {
+    let asteroidsLong = 70;
+    let asteroidsShort = asteroidsLong / 5 * 2;
+    for (let i = 0; i < asteroidsShort; i++) {
       const newAsteroid = new Asteroid(
         longGeometry / 2,
-        -shortGeometry / 2 + (shortGeometry / 8) * i,
+        -shortGeometry / 2 + (shortGeometry / asteroidsShort) * i,
         1,
         1,
         scene
       );
       asteroids.push(newAsteroid);
     }
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < asteroidsShort; i++) {
       const newAsteroid = new Asteroid(
         -longGeometry / 2,
-        -shortGeometry / 2 + (shortGeometry / 8) * i,
+        -shortGeometry / 2 + (shortGeometry / asteroidsShort) * i,
         1,
         3,
         scene
@@ -313,9 +315,9 @@ function Pong3D() {
       asteroids.push(newAsteroid);
     }
 
-    for (let i = 0; i < 14; i++) {
+    for (let i = 0; i < asteroidsLong; i++) {
       const newAsteroid = new Asteroid(
-        -longGeometry / 2 + (longGeometry / 14) * i,
+        -longGeometry / 2 + (longGeometry / asteroidsLong) * i,
         -shortGeometry / 2,
         1,
         0,
@@ -324,9 +326,9 @@ function Pong3D() {
       asteroids.push(newAsteroid);
     }
 
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < asteroidsLong; i++) {
       const newAsteroid = new Asteroid(
-        -longGeometry / 2 + (longGeometry / 14) * i,
+        -longGeometry / 2 + (longGeometry / asteroidsLong) * i,
         shortGeometry / 2,
         1,
         2,
