@@ -118,9 +118,9 @@ function Pong3D() {
       textureLoader.load(neptune),
     ];
     const sunTexture = textureLoader.load(sunTex);
-    // camera.position.set(-15, 5, 35);
-    camera.position.set(0, 0, 35);
-    camera.rotation.set(-0.3, -0,3, 0); // -0.3. -0.3 -0.3
+    camera.position.set(-15, -15, 35);
+    //camera.position.set(0, 0, 35);
+    camera.rotation.set(0.3, -0.3, -0.3); // -0.3. -0.3 -0.3
 
     // Create canvas for rendering text
     const canvas = document.createElement("canvas");
@@ -189,8 +189,8 @@ function Pong3D() {
     const stars = [];
     for (let i = 0; i < 150; i++) {
       const star = new THREE.Mesh(starGeometry, starMaterial);
-      star.position.x = Math.random() * longGeometry * 6 - longGeometry * 3;
-      star.position.y = Math.random() * shortGeometry * 4 - shortGeometry * 2;
+      star.position.x = Math.random() * longGeometry * 14 - longGeometry * 7;
+      star.position.y = Math.random() * shortGeometry * 8 - shortGeometry * 4;
       star.position.z = (Math.random() + 1) * -40;
       scene.add(star);
       stars.push(star);
@@ -351,8 +351,8 @@ function Pong3D() {
       requestAnimationFrame(animate);
       for (let i = 0; i < stars.length; i++) {
         stars[i].position.x += 0.1;
-        if (stars[i].position.x > longGeometry * 3)
-          stars[i].position.x = -longGeometry * 3;
+        if (stars[i].position.x > longGeometry * 7)
+          stars[i].position.x = -longGeometry * 7;
       }
 
       // Move the ball
