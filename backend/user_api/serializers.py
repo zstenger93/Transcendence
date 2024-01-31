@@ -8,6 +8,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = UserModel
 		fields = '__all__'
+	##
 	def create(self, clean_data):
 		user_obj = UserModel.objects.create_user(email=clean_data['email'], password=clean_data['password'])
 		user_obj.username = clean_data['username']
@@ -34,6 +35,6 @@ class UserSerializer(serializers.ModelSerializer):
 		model = UserModel
 		fields = ('id', 'email', 'username', 'profile_picture', \
 			 	'total_matches', 'wins', 'losses', \
-				'title')
+				'title', 'TwoFA')
 
 
