@@ -129,12 +129,8 @@ const GameCanvas = (aiDifficulty) => {
   };
 
   const ArtificialInteligenceImpossible = (ctx, canvas) => {
-    const aiSpeed = 440;
     let tempPadleY = rightPaddleY;
-    if (ballY > rightPaddleY + paddleHeight / 2)
-      tempPadleY += aiSpeed * dt * sizeSpeedRatio;
-    else if (ballY < rightPaddleY + paddleHeight / 2)
-      tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
+    tempPadleY = ballY - paddleHeight / 2;
     tempPadleY = Math.max(
       0,
       Math.min(tempPadleY, canvas.height - paddleHeight)
