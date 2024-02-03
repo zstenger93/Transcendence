@@ -9,7 +9,7 @@ import WinScreen from "../../components/game/WinScreen";
 import FullScreenButton from "../../components/buttons/FullScreen";
 import handleResize from "../../components/game/HandleResize";
 
-const GameCanvas = () => {
+const GameCanvas = (aiDifficulty) => {
   // Default Parameters
   const defaultSpeedX = 300;
   let resize = true;
@@ -51,7 +51,7 @@ const GameCanvas = () => {
   };
 
   // This is bloody AI
-  const ArtificialInteligence = (ctx, canvas) => {
+  const ArtificialInteligenceEasy = (ctx, canvas) => {
     const aiSpeed = 440;
     let tempPadleY = rightPaddleY;
     if (ballY > rightPaddleY + paddleHeight / 2)
@@ -70,6 +70,66 @@ const GameCanvas = () => {
       paddleHeight
     );
   };
+
+  const ArtificialInteligenceMedium = (ctx, canvas) => {
+    const aiSpeed = 440;
+    let tempPadleY = rightPaddleY;
+    if (ballY > rightPaddleY + paddleHeight / 2)
+      tempPadleY += aiSpeed * dt * sizeSpeedRatio;
+    else if (ballY < rightPaddleY + paddleHeight / 2)
+      tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
+    tempPadleY = Math.max(
+      0,
+      Math.min(tempPadleY, canvas.height - paddleHeight)
+    );
+    rightPaddleY = tempPadleY;
+    ctx.fillRect(
+      canvas.width - paddleWidth,
+      rightPaddleY,
+      paddleWidth,
+      paddleHeight
+    );
+  }
+
+  const ArtificialInteligenceHard = (ctx, canvas) => {
+    const aiSpeed = 440;
+    let tempPadleY = rightPaddleY;
+    if (ballY > rightPaddleY + paddleHeight / 2)
+      tempPadleY += aiSpeed * dt * sizeSpeedRatio;
+    else if (ballY < rightPaddleY + paddleHeight / 2)
+      tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
+    tempPadleY = Math.max(
+      0,
+      Math.min(tempPadleY, canvas.height - paddleHeight)
+    );
+    rightPaddleY = tempPadleY;
+    ctx.fillRect(
+      canvas.width - paddleWidth,
+      rightPaddleY,
+      paddleWidth,
+      paddleHeight
+    );
+  }
+
+  const ArtificialInteligenceImpossible = (ctx, canvas) => {
+    const aiSpeed = 440;
+    let tempPadleY = rightPaddleY;
+    if (ballY > rightPaddleY + paddleHeight / 2)
+      tempPadleY += aiSpeed * dt * sizeSpeedRatio;
+    else if (ballY < rightPaddleY + paddleHeight / 2)
+      tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
+    tempPadleY = Math.max(
+      0,
+      Math.min(tempPadleY, canvas.height - paddleHeight)
+    );
+    rightPaddleY = tempPadleY;
+    ctx.fillRect(
+      canvas.width - paddleWidth,
+      rightPaddleY,
+      paddleWidth,
+      paddleHeight
+    );
+  }
 
   // this function draws scores
   const drawScores = (ctx, canvas) => {
@@ -177,7 +237,11 @@ const GameCanvas = () => {
     drawWhiteStripe(ctx, canvas);
     ctx.fillStyle = "#FF3366";
     ctx.fillRect(0, leftPaddleY, paddleWidth, paddleHeight);
-    ArtificialInteligence(ctx, canvas);
+    if (aiDifficulty === 0) ArtificialInteligenceEasy(ctx, canvas);
+    else if (aiDifficulty === 1) ArtificialInteligenceMedium(ctx, canvas);
+    else if (aiDifficulty === 1) ArtificialInteligenceHard(ctx, canvas);
+    else if (aiDifficulty === 3) ArtificialInteligenceImpossible(ctx, canvas);
+    // ArtificialInteligence(ctx, canvas);
     updateBallPosition(canvas);
     drawBall(ctx, canvas);
     drawScores(ctx, canvas);
@@ -186,7 +250,6 @@ const GameCanvas = () => {
   };
 
   useEffect(() => {
-
     const handleKeyDown = (event) => {
       keys[event.key] = true;
     };
@@ -282,7 +345,7 @@ const PongAi = () => {
   const location = useLocation();
 
   const [gameStarted, setGameStarted] = useState(false);
-
+  const [difficulty, setGameDifficulty] = useState(0);
   const handleButtonClick = () => {
     setGameStarted(true);
   };
@@ -291,7 +354,12 @@ const PongAi = () => {
     <div id="aiP" className="flex justify-center items-center h-screen">
       <FullScreenButton location={location} page="aiP" />
       {gameStarted ? (
-        <GameCanvas className="m-4" t={t} navigate={navigate} />
+        <GameCanvas
+          className="m-4"
+          t={t}
+          navigate={navigate}
+          aiDifficulty={difficulty}
+        />
       ) : (
         <div className="relative">
           <img
@@ -307,6 +375,16 @@ const PongAi = () => {
             <button onClick={handleButtonClick} className={WelcomeButtonStyle}>
               {t("Start Game")}
             </button>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <input
+                type="range"
+                min="0"
+                max="3"
+                value={difficulty}
+                onChange={(e) => setGameDifficulty(parseInt(e.target.value))}
+                style={{ width: "200px", height: "25px" }}
+              />
+            </div>
           </div>
           <BackButton navigate={navigate} t={t} />
         </div>
