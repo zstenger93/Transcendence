@@ -54,10 +54,20 @@ const GameCanvas = (aiDifficulty) => {
   const ArtificialInteligenceEasy = (ctx, canvas) => {
     const aiSpeed = 440;
     let tempPadleY = rightPaddleY;
-    if (ballY > rightPaddleY + paddleHeight / 2)
-      tempPadleY += aiSpeed * dt * sizeSpeedRatio;
-    else if (ballY < rightPaddleY + paddleHeight / 2)
-      tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
+    if (ballX > canvas.width / 4 && ballX < (canvas.width / 4) * 3) {
+      if (ballY + ballSpeedY * 3 > rightPaddleY + paddleHeight / 2)
+        tempPadleY += aiSpeed * dt * sizeSpeedRatio;
+      else if (ballY - ballSpeedY * 3 < rightPaddleY + paddleHeight / 2)
+        tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
+      else {
+        tempPadleY -= aiSpeed * dt * sizeSpeedRatio * 0.5;
+      }
+    } else {
+      if (ballY > rightPaddleY + paddleHeight / 2)
+        tempPadleY += aiSpeed * dt * sizeSpeedRatio;
+      else if (ballY < rightPaddleY + paddleHeight / 2)
+        tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
+    }
     tempPadleY = Math.max(
       0,
       Math.min(tempPadleY, canvas.height - paddleHeight)
@@ -89,15 +99,22 @@ const GameCanvas = (aiDifficulty) => {
       paddleWidth,
       paddleHeight
     );
-  }
+  };
 
   const ArtificialInteligenceHard = (ctx, canvas) => {
     const aiSpeed = 440;
     let tempPadleY = rightPaddleY;
-    if (ballY > rightPaddleY + paddleHeight / 2)
-      tempPadleY += aiSpeed * dt * sizeSpeedRatio;
-    else if (ballY < rightPaddleY + paddleHeight / 2)
-      tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
+    if (ballX > canvas.width / 4 && ballX < (canvas.width / 4) * 3) {
+      if (ballY + ballSpeedY * 5 > rightPaddleY + paddleHeight / 2)
+        tempPadleY += aiSpeed * dt * sizeSpeedRatio;
+      else if (ballY - ballSpeedY * 5 < rightPaddleY + paddleHeight / 2)
+        tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
+    } else {
+      if (ballY > rightPaddleY + paddleHeight / 2)
+        tempPadleY += aiSpeed * dt * sizeSpeedRatio;
+      else if (ballY < rightPaddleY + paddleHeight / 2)
+        tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
+    }
     tempPadleY = Math.max(
       0,
       Math.min(tempPadleY, canvas.height - paddleHeight)
@@ -109,7 +126,7 @@ const GameCanvas = (aiDifficulty) => {
       paddleWidth,
       paddleHeight
     );
-  }
+  };
 
   const ArtificialInteligenceImpossible = (ctx, canvas) => {
     const aiSpeed = 440;
@@ -129,7 +146,7 @@ const GameCanvas = (aiDifficulty) => {
       paddleWidth,
       paddleHeight
     );
-  }
+  };
 
   // this function draws scores
   const drawScores = (ctx, canvas) => {
@@ -237,11 +254,12 @@ const GameCanvas = (aiDifficulty) => {
     drawWhiteStripe(ctx, canvas);
     ctx.fillStyle = "#FF3366";
     ctx.fillRect(0, leftPaddleY, paddleWidth, paddleHeight);
-    if (aiDifficulty === 0) ArtificialInteligenceEasy(ctx, canvas);
-    else if (aiDifficulty === 1) ArtificialInteligenceMedium(ctx, canvas);
-    else if (aiDifficulty === 1) ArtificialInteligenceHard(ctx, canvas);
-    else if (aiDifficulty === 3) ArtificialInteligenceImpossible(ctx, canvas);
-    // ArtificialInteligence(ctx, canvas);
+    if (aiDifficulty.aiDifficulty === 0) ArtificialInteligenceEasy(ctx, canvas);
+    else if (aiDifficulty.aiDifficulty === 1)
+      ArtificialInteligenceMedium(ctx, canvas);
+    else if (aiDifficulty.aiDifficulty === 2)
+      ArtificialInteligenceHard(ctx, canvas);
+    else ArtificialInteligenceImpossible(ctx, canvas);
     updateBallPosition(canvas);
     drawBall(ctx, canvas);
     drawScores(ctx, canvas);
