@@ -55,13 +55,10 @@ const GameCanvas = (aiDifficulty) => {
     const aiSpeed = 440;
     let tempPadleY = rightPaddleY;
     if (ballX > canvas.width / 4 && ballX < (canvas.width / 4) * 3) {
-      if (ballY + ballSpeedY * 3 > rightPaddleY + paddleHeight / 2)
+      if (ballY + ballSpeedY * 2 > rightPaddleY + paddleHeight / 2)
         tempPadleY += aiSpeed * dt * sizeSpeedRatio;
-      else if (ballY - ballSpeedY * 3 < rightPaddleY + paddleHeight / 2)
+      else if (ballY - ballSpeedY * 2 < rightPaddleY + paddleHeight / 2)
         tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
-      else {
-        tempPadleY -= aiSpeed * dt * sizeSpeedRatio * 0.5;
-      }
     } else {
       if (ballY > rightPaddleY + paddleHeight / 2)
         tempPadleY += aiSpeed * dt * sizeSpeedRatio;
@@ -102,19 +99,17 @@ const GameCanvas = (aiDifficulty) => {
   };
 
   const ArtificialInteligenceHard = (ctx, canvas) => {
-    const aiSpeed = 440;
+    const aiSpeed = 500;
+    let estimateTime = Math.abs((canvas.width - Math.abs(ballX)) / ballSpeedX);
+    let estimatePostionY = ballY + ballSpeedY * estimateTime;
+    if (estimatePostionY > canvas.height) estimatePostionY = Math.abs(canvas.height - estimatePostionY % canvas.height);
+    else if (estimatePostionY < 0) estimatePostionY = Math.abs(estimatePostionY % canvas.height);
+    else estimatePostionY = Math.abs(estimatePostionY);
     let tempPadleY = rightPaddleY;
-    if (ballX > canvas.width / 4 && ballX < (canvas.width / 4) * 3) {
-      if (ballY + ballSpeedY * 5 > rightPaddleY + paddleHeight / 2)
-        tempPadleY += aiSpeed * dt * sizeSpeedRatio;
-      else if (ballY - ballSpeedY * 5 < rightPaddleY + paddleHeight / 2)
-        tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
-    } else {
-      if (ballY > rightPaddleY + paddleHeight / 2)
-        tempPadleY += aiSpeed * dt * sizeSpeedRatio;
-      else if (ballY < rightPaddleY + paddleHeight / 2)
-        tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
-    }
+    if (estimatePostionY > rightPaddleY + paddleHeight / 2 + 10)
+      tempPadleY += aiSpeed * dt * sizeSpeedRatio;
+    else if (estimatePostionY < rightPaddleY + paddleHeight / 2 - 10)
+      tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
     tempPadleY = Math.max(
       0,
       Math.min(tempPadleY, canvas.height - paddleHeight)
