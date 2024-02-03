@@ -12,6 +12,8 @@ import handleResize from "../../components/game/HandleResize";
 const GameCanvas = () => {
   // Default Parameters
   const defaultSpeedX = 300;
+  const playerSpeedIncrease = 0.5;
+  let playerSpeed = 5;
   let resize = true;
   const winScore = 10;
   const defaultSpeedY = 20;
@@ -126,7 +128,10 @@ const GameCanvas = () => {
       ballX = canvas.width - paddleWidth - 10;
       ballSpeedX *= -1;
       if (ballSpeedX < 0) ballSpeedX -= ballSpeedIncrease;
-      else ballSpeedX += ballSpeedIncrease;
+      else {
+        ballSpeedX += ballSpeedIncrease;
+        playerSpeed += playerSpeedIncrease;
+      }
       ballSpeedY +=
         distanceFromCenter *
         ballAngleOffset *
@@ -138,6 +143,7 @@ const GameCanvas = () => {
       ballSpeedX = defaultSpeedX;
       ballSpeedY = defaultSpeedY;
       scoreRight += 1;
+      playerSpeed = 5;
       setScoreRight(scoreRight);
     } else if (ballX - ballSize * 3 > canvas.width) {
       ballX = canvas.width / 2;
@@ -145,11 +151,11 @@ const GameCanvas = () => {
       ballSpeedX = -defaultSpeedX;
       ballSpeedY = -defaultSpeedY;
       scoreLeft += 1;
+      playerSpeed = 5;
       setScoreLeft(scoreLeft);
     }
   };
 
-  const playerSpeed = 10;
   let keys = {};
 
   const movePaddle = () => {
