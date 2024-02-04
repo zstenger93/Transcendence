@@ -341,16 +341,6 @@ function Pong3D() {
       );
       asteroids.push(newAsteroid);
     }
-
-    const david = new THREE.Mesh(
-      new THREE.PlaneGeometry(2, 2),
-      new THREE.MeshBasicMaterial({
-        map: textureLoader.load(goggins),
-        transparent: true,
-      })
-    );
-    david.position.set(0, 1.41, 0);
-    ball.add(david);
     // Animation loop
 
     let ballDirection = new THREE.Vector3(1, 1, 0).normalize();
