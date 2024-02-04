@@ -23,6 +23,7 @@ function Pong3D() {
   const textureLoader = new THREE.TextureLoader();
   const longGeometry = 50;
   const shortGeometry = 30;
+  let leftPaddleSpeedConst = 0.5;
   const asteroidMaterial = new THREE.MeshLambertMaterial({
     color: 0xffffff,
     map: textureLoader.load(venus),
@@ -35,12 +36,12 @@ function Pong3D() {
   const asteroids = [];
   const containerRef = useRef(null);
   let aspectRatio = getAspectRatio();
-  const paddleHeight = 6;
-  const paddleWidth = 1;
+  const paddleHeight = 4;
+  const paddleWidth = 0.7;
   const wallOffsetX = 23.5;
   const wallOffsetY = 15;
   const wallThickness = 3;
-  let ballSpeed = 1;
+  let ballSpeed = 0.3;
   let leftPaddlePosition = 0;
   let bounceCounter = 0;
   let isCodeExecuted = false;
@@ -57,11 +58,15 @@ function Pong3D() {
       this.radius = radius;
       this.currentWayPoint = currentWayPoint;
       this.asteroid = new THREE.Mesh(asteroidGeometry, asteroidMaterial);
-      this.asteroid.position.set(x + this.offset, y + this.offset, 0);
+      this.asteroid.position.set(
+        x + this.offset,
+        y + this.offset,
+        Math.random()
+      );
       this.asteroid.scale.set(
-        Math.random() / 2 + 0.5,
-        Math.random() / 2 + 0.5,
-        Math.random() / 2 + 0.5
+        Math.random() / 5 + 0.15,
+        Math.random() / 5 + 0.15,
+        Math.random() / 5 + 0.15,
       );
       this.scene.add(this.asteroid);
     }
@@ -118,9 +123,9 @@ function Pong3D() {
       textureLoader.load(neptune),
     ];
     const sunTexture = textureLoader.load(sunTex);
-    // camera.position.set(-15, 5, 35);
-    camera.position.set(0, 0, 35);
-    camera.rotation.set(0, 0, 0); // -0.3. -0.3 -0.3
+    camera.position.set(-15, -15, 35);
+    //camera.position.set(0, 0, 35);
+    camera.rotation.set(0.3, -0.3, -0.3); // -0.3. -0.3 -0.3
 
     // Create canvas for rendering text
     const canvas = document.createElement("canvas");
@@ -128,7 +133,7 @@ function Pong3D() {
     context.font = "20px nosifer";
     context.fillStyle = "white";
     context.fillText("BLACKHOLE PONG", 4, 24);
-
+    // canvas.rotation.set(-1, 0, 0);
     //Text
     const textureText = new THREE.CanvasTexture(canvas);
     const textMaterial = new THREE.MeshBasicMaterial({
@@ -187,10 +192,10 @@ function Pong3D() {
     sun.add(sunLayer2);
 
     const stars = [];
-    for (let i = 0; i < 150; i++) {
+    for (let i = 0; i < 1000; i++) {
       const star = new THREE.Mesh(starGeometry, starMaterial);
-      star.position.x = Math.random() * longGeometry * 6 - longGeometry * 3;
-      star.position.y = Math.random() * shortGeometry * 4 - shortGeometry * 2;
+      star.position.x = Math.random() * longGeometry * 14 - longGeometry * 7;
+      star.position.y = Math.random() * shortGeometry * 8 - shortGeometry * 4;
       star.position.z = (Math.random() + 1) * -40;
       scene.add(star);
       stars.push(star);
@@ -267,7 +272,7 @@ function Pong3D() {
     const paddleGeometry = new THREE.BoxGeometry(
       paddleWidth,
       paddleHeight,
-      wallThickness / 2
+      paddleWidth
     );
     const paddleMaterialGeometry = new THREE.MeshLambertMaterial({
       map: textureLoader.load(death),
@@ -280,7 +285,7 @@ function Pong3D() {
     rightPaddle.position.set(21, 0, 0);
     scene.add(rightPaddle);
     // Create
-    const ballGeometry = new THREE.SphereGeometry(1, 32, 32);
+    const ballGeometry = new THREE.SphereGeometry(0.6, 32, 32);
     const ball = new THREE.Mesh(ballGeometry, planetMaterials[7]);
     ball.position.set(0, 0, 0.5);
     scene.add(ball);
@@ -288,24 +293,26 @@ function Pong3D() {
     // Add lights
     const pointLight = new THREE.PointLight(0xff8800, 1200, 120, 2);
     pointLight.position.set(0, 0, -9);
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.05);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.08);
     scene.add(pointLight, ambientLight);
 
     // Loop to add asteroids
-    for (let i = 0; i < 8; i++) {
+    let asteroidsLong = 70;
+    let asteroidsShort = (asteroidsLong / 5) * 2;
+    for (let i = 0; i < asteroidsShort; i++) {
       const newAsteroid = new Asteroid(
         longGeometry / 2,
-        -shortGeometry / 2 + (shortGeometry / 8) * i,
+        -shortGeometry / 2 + (shortGeometry / asteroidsShort) * i,
         1,
         1,
         scene
       );
       asteroids.push(newAsteroid);
     }
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < asteroidsShort; i++) {
       const newAsteroid = new Asteroid(
         -longGeometry / 2,
-        -shortGeometry / 2 + (shortGeometry / 8) * i,
+        -shortGeometry / 2 + (shortGeometry / asteroidsShort) * i,
         1,
         3,
         scene
@@ -313,9 +320,9 @@ function Pong3D() {
       asteroids.push(newAsteroid);
     }
 
-    for (let i = 0; i < 14; i++) {
+    for (let i = 0; i < asteroidsLong; i++) {
       const newAsteroid = new Asteroid(
-        -longGeometry / 2 + (longGeometry / 14) * i,
+        -longGeometry / 2 + (longGeometry / asteroidsLong) * i,
         -shortGeometry / 2,
         1,
         0,
@@ -324,9 +331,9 @@ function Pong3D() {
       asteroids.push(newAsteroid);
     }
 
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < asteroidsLong; i++) {
       const newAsteroid = new Asteroid(
-        -longGeometry / 2 + (longGeometry / 14) * i,
+        -longGeometry / 2 + (longGeometry / asteroidsLong) * i,
         shortGeometry / 2,
         1,
         2,
@@ -334,16 +341,6 @@ function Pong3D() {
       );
       asteroids.push(newAsteroid);
     }
-
-    const david = new THREE.Mesh(
-      new THREE.PlaneGeometry(2, 2),
-      new THREE.MeshBasicMaterial({
-        map: textureLoader.load(goggins),
-        transparent: true,
-      })
-    );
-    david.position.set(0, 1.41, 0);
-    ball.add(david);
     // Animation loop
 
     let ballDirection = new THREE.Vector3(1, 1, 0).normalize();
@@ -351,8 +348,8 @@ function Pong3D() {
       requestAnimationFrame(animate);
       for (let i = 0; i < stars.length; i++) {
         stars[i].position.x += 0.1;
-        if (stars[i].position.x > longGeometry * 3)
-          stars[i].position.x = -longGeometry * 3;
+        if (stars[i].position.x > longGeometry * 7)
+          stars[i].position.x = -longGeometry * 7;
       }
 
       // Move the ball
@@ -407,6 +404,8 @@ function Pong3D() {
           // eslint-disable-next-line react-hooks/exhaustive-deps
           if (!isCodeExecuted) {
             bounceCounter = bounceCounter + 1;
+            ballSpeed += 0.02;
+            leftPaddleSpeedConst += 0.005;
             bounceContext.clearRect(
               0,
               0,
@@ -421,7 +420,7 @@ function Pong3D() {
           }
         }
         ballDirection.x *= -1;
-        ball.position.x += ballDirection.x * ballSpeed * 3;
+        ball.position.x += ballDirection.x * ballSpeed * 6;
       }
       for (let i = 0; i < walls.length; i++) {
         const wall = walls[i];
@@ -446,6 +445,8 @@ function Pong3D() {
               orbits.pop();
               ball.material = planetMaterials[lifes];
               ball.material.needsUpdate = true;
+              ballSpeed = 0.3;
+              leftPaddleSpeedConst = 0.5;
             }
             pointLight.intensity += 50;
             pointLight.distance += 10;
@@ -521,11 +522,11 @@ function Pong3D() {
 
     function animatePaddle() {
       if (isWKeyPressed) {
-        leftPaddlePosition += 0.5;
+        leftPaddlePosition += leftPaddleSpeedConst;
       }
 
       if (isSKeyPressed) {
-        leftPaddlePosition -= 0.5;
+        leftPaddlePosition -= leftPaddleSpeedConst;
       }
 
       leftPaddlePosition = Math.max(

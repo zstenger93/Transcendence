@@ -9,7 +9,7 @@ import WinScreen from "../../components/game/WinScreen";
 import FullScreenButton from "../../components/buttons/FullScreen";
 import handleResize from "../../components/game/HandleResize";
 
-const GameCanvas = () => {
+const GameCanvas = (aiDifficulty) => {
   // Default Parameters
   const defaultSpeedX = 300;
   const playerSpeedIncrease = 0.5;
@@ -53,13 +53,85 @@ const GameCanvas = () => {
   };
 
   // This is bloody AI
-  const ArtificialInteligence = (ctx, canvas) => {
+  const ArtificialInteligenceEasy = (ctx, canvas) => {
+    const aiSpeed = 440;
+    let tempPadleY = rightPaddleY;
+    if (ballX > canvas.width / 4 && ballX < (canvas.width / 4) * 3) {
+      if (ballY + ballSpeedY * 2 > rightPaddleY + paddleHeight / 2)
+        tempPadleY += aiSpeed * dt * sizeSpeedRatio;
+      else if (ballY - ballSpeedY * 2 < rightPaddleY + paddleHeight / 2)
+        tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
+    } else {
+      if (ballY > rightPaddleY + paddleHeight / 2)
+        tempPadleY += aiSpeed * dt * sizeSpeedRatio;
+      else if (ballY < rightPaddleY + paddleHeight / 2)
+        tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
+    }
+    tempPadleY = Math.max(
+      0,
+      Math.min(tempPadleY, canvas.height - paddleHeight)
+    );
+    rightPaddleY = tempPadleY;
+    ctx.fillRect(
+      canvas.width - paddleWidth,
+      rightPaddleY,
+      paddleWidth,
+      paddleHeight
+    );
+  };
+
+  const ArtificialInteligenceMedium = (ctx, canvas) => {
     const aiSpeed = 440;
     let tempPadleY = rightPaddleY;
     if (ballY > rightPaddleY + paddleHeight / 2)
       tempPadleY += aiSpeed * dt * sizeSpeedRatio;
     else if (ballY < rightPaddleY + paddleHeight / 2)
       tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
+    tempPadleY = Math.max(
+      0,
+      Math.min(tempPadleY, canvas.height - paddleHeight)
+    );
+    rightPaddleY = tempPadleY;
+    ctx.fillRect(
+      canvas.width - paddleWidth,
+      rightPaddleY,
+      paddleWidth,
+      paddleHeight
+    );
+  };
+
+  const ArtificialInteligenceHard = (ctx, canvas) => {
+    const aiSpeed = 500;
+    let estimateTime = Math.abs((canvas.width - Math.abs(ballX)) / ballSpeedX);
+    let estimatePostionY = ballY + ballSpeedY * estimateTime;
+    if (estimatePostionY > canvas.height)
+      estimatePostionY = Math.abs(
+        canvas.height - (estimatePostionY % canvas.height)
+      );
+    else if (estimatePostionY < 0)
+      estimatePostionY = Math.abs(estimatePostionY % canvas.height);
+    else estimatePostionY = Math.abs(estimatePostionY);
+    let tempPadleY = rightPaddleY;
+    if (estimatePostionY > rightPaddleY + paddleHeight / 2 + 10)
+      tempPadleY += aiSpeed * dt * sizeSpeedRatio;
+    else if (estimatePostionY < rightPaddleY + paddleHeight / 2 - 10)
+      tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
+    tempPadleY = Math.max(
+      0,
+      Math.min(tempPadleY, canvas.height - paddleHeight)
+    );
+    rightPaddleY = tempPadleY;
+    ctx.fillRect(
+      canvas.width - paddleWidth,
+      rightPaddleY,
+      paddleWidth,
+      paddleHeight
+    );
+  };
+
+  const ArtificialInteligenceImpossible = (ctx, canvas) => {
+    let tempPadleY = rightPaddleY;
+    tempPadleY = ballY - paddleHeight / 2;
     tempPadleY = Math.max(
       0,
       Math.min(tempPadleY, canvas.height - paddleHeight)
@@ -183,7 +255,12 @@ const GameCanvas = () => {
     drawWhiteStripe(ctx, canvas);
     ctx.fillStyle = "#FF3366";
     ctx.fillRect(0, leftPaddleY, paddleWidth, paddleHeight);
-    ArtificialInteligence(ctx, canvas);
+    if (aiDifficulty.aiDifficulty === 0) ArtificialInteligenceEasy(ctx, canvas);
+    else if (aiDifficulty.aiDifficulty === 1)
+      ArtificialInteligenceMedium(ctx, canvas);
+    else if (aiDifficulty.aiDifficulty === 2)
+      ArtificialInteligenceHard(ctx, canvas);
+    else ArtificialInteligenceImpossible(ctx, canvas);
     updateBallPosition(canvas);
     drawBall(ctx, canvas);
     drawScores(ctx, canvas);
@@ -192,7 +269,6 @@ const GameCanvas = () => {
   };
 
   useEffect(() => {
-
     const handleKeyDown = (event) => {
       keys[event.key] = true;
     };
@@ -288,7 +364,7 @@ const PongAi = () => {
   const location = useLocation();
 
   const [gameStarted, setGameStarted] = useState(false);
-
+  const [difficulty, setGameDifficulty] = useState(0);
   const handleButtonClick = () => {
     setGameStarted(true);
   };
@@ -297,7 +373,12 @@ const PongAi = () => {
     <div id="aiP" className="flex justify-center items-center h-screen">
       <FullScreenButton location={location} page="aiP" />
       {gameStarted ? (
-        <GameCanvas className="m-4" t={t} navigate={navigate} />
+        <GameCanvas
+          className="m-4"
+          t={t}
+          navigate={navigate}
+          aiDifficulty={difficulty}
+        />
       ) : (
         <div className="relative">
           <img
@@ -313,6 +394,20 @@ const PongAi = () => {
             <button onClick={handleButtonClick} className={WelcomeButtonStyle}>
               {t("Start Game")}
             </button>
+            <div className="relative">Level: {difficulty}</div>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <input
+                type="range"
+                min="0"
+                max="3"
+                value={difficulty}
+                onChange={(e) => setGameDifficulty(parseInt(e.target.value))}
+                style={{
+                  width: "150px",
+                  height: "25px",
+                }}
+              />
+            </div>
           </div>
           <BackButton navigate={navigate} t={t} />
         </div>
