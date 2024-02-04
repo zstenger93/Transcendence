@@ -388,6 +388,7 @@ const PongAi = () => {
             <button onClick={handleButtonClick} className={WelcomeButtonStyle}>
               {t("Start Game")}
             </button>
+            <div className="relative">Level: {difficulty}</div>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <input
                 type="range"
