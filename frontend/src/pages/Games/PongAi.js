@@ -102,8 +102,12 @@ const GameCanvas = (aiDifficulty) => {
     const aiSpeed = 500;
     let estimateTime = Math.abs((canvas.width - Math.abs(ballX)) / ballSpeedX);
     let estimatePostionY = ballY + ballSpeedY * estimateTime;
-    if (estimatePostionY > canvas.height) estimatePostionY = Math.abs(canvas.height - estimatePostionY % canvas.height);
-    else if (estimatePostionY < 0) estimatePostionY = Math.abs(estimatePostionY % canvas.height);
+    if (estimatePostionY > canvas.height)
+      estimatePostionY = Math.abs(
+        canvas.height - (estimatePostionY % canvas.height)
+      );
+    else if (estimatePostionY < 0)
+      estimatePostionY = Math.abs(estimatePostionY % canvas.height);
     else estimatePostionY = Math.abs(estimatePostionY);
     let tempPadleY = rightPaddleY;
     if (estimatePostionY > rightPaddleY + paddleHeight / 2 + 10)
@@ -391,7 +395,10 @@ const PongAi = () => {
                 max="3"
                 value={difficulty}
                 onChange={(e) => setGameDifficulty(parseInt(e.target.value))}
-                style={{ width: "200px", height: "25px" }}
+                style={{
+                  width: "150px",
+                  height: "25px",
+                }}
               />
             </div>
           </div>
