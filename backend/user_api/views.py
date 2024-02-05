@@ -37,13 +37,13 @@ import requests
 import urllib
 import os
 import qrcode
+import logging
 
+logger = logging.getLogger(__name__)
 
 
 class UserRegister(APIView):
 	permission_classes = (permissions.AllowAny,)
-	# authentication_classes = (JWTAuthentication,)
-	# authentication_classes = (BlacklistCheckJWTAuthentication,)
 
 	def post(self, request):
 		try:
@@ -52,15 +52,20 @@ class UserRegister(APIView):
 			if serializer.is_valid(raise_exception=True):
 				user = serializer.create(clean_data)
 				if user:
-					response = Response(serializer.data, status=status.HTTP_201_CREATED)
+					response = Response({
+						"detail": serializer.data
+						}, status=status.HTTP_201_CREATED)
 					response["Access-Control-Allow-Credentials"] = 'true'
 					return response
 		except ValidationError as e:
-			response = Response({'detail': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+			response = Response({
+				'detail': str(e),
+			}, status=status.HTTP_400_BAD_REQUEST)
 			response["Access-Control-Allow-Credentials"] = 'true'
 			return response
 		
-		response = Response(status=status.HTTP_400_BAD_REQUEST)
+		response = Response({
+			}, status=status.HTTP_400_BAD_REQUEST)
 		response["Access-Control-Allow-Credentials"] = 'true'
 		return response
 
@@ -71,9 +76,9 @@ class UserLogin(APIView):
 	##
 	def post(self, request):
 		if request.user.is_authenticated:
-			response = Response({"detail": "You are already logged in, logout if you want to identify as someone else ;)"}, status=status.HTTP_400_BAD_REQUEST)
-			response["Access-Control-Allow-Credentials"] = 'true'
-			return response
+			response = Response({
+				"detail": "You are already logged in, logout if you want to identify as someone else ;)",
+			}, status=status.HTTP_400_BAD_REQUEST)
 		data = request.data
 		try:
 			assert is_valid_email(data)
@@ -83,6 +88,8 @@ class UserLogin(APIView):
 				user = serializer.check_user(data)
 				login(request, user)
 				token = RefreshToken.for_user(user)
+				token['email'] = user.email
+				token['username'] = user.username
 				response = Response({
 					'refresh': str(token),
 					'access': str(token.access_token),
@@ -104,10 +111,13 @@ class UserLogout(APIView):
 			# Add the token to the blacklist
 			token = request.META.get('HTTP_AUTHORIZATION', " ").split(' ')[1]
 			BlacklistedToken.objects.create(user=request.user, token=token)
-			return Response({"detail": "Logged out Successfully"}, status=status.HTTP_200_OK)
+			response = Response({"detail": "Logged out Successfully"}, status=status.HTTP_200_OK)
+			response["Access-Control-Allow-Credentials"] = 'true'
+			return response
 		else:
-			return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
-
+			response = Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
+			response["Access-Control-Allow-Credentials"] = 'true'
+			return response
 
 class UserProfileView(APIView):
 	permission_classes = (permissions.IsAuthenticated,)
@@ -115,8 +125,9 @@ class UserProfileView(APIView):
 	##
 	def get(self, request):
 		serializer = UserSerializer(request.user)
-		return Response({'user': serializer.data}, status=status.HTTP_200_OK)
-
+		response = Response({'user': serializer.data}, status=status.HTTP_200_OK)
+		response["Access-Control-Allow-Credentials"] = 'true'
+		return response
 
 class UserViewSet(viewsets.ModelViewSet):
 	authentication_classes = (BlacklistCheckJWTAuthentication,)
@@ -130,7 +141,61 @@ class UserViewSet(viewsets.ModelViewSet):
 		refresh = RefreshToken.for_user(user)
 		response.data['refresh'] = str(refresh)
 		response.data['access'] = str(refresh.access_token)
+		response["Access-Control-Allow-Credentials"] = 'true'
 		return response
+
+
+class updateProfile(APIView):
+	permission_classes = (permissions.IsAuthenticated,)
+	authentication_classes = (BlacklistCheckJWTAuthentication,)
+	##
+	def post(self, request):
+		if request.user.is_authenticated:
+			data = request.data
+			if data.get('profile_picture'):
+				request.user.profile_picture = data.get('profile_picture')
+			if data.get('email'):
+				request.user.email = data.get('email')
+			if data.get('username'):
+				request.user.username = data.get('username')
+			if data.get('title'):
+				request.user.title = data.get('title')
+			if data.get('AboutMe'):
+				request.user.AboutMe = data.get('AboutMe')
+			if data.get('school'):
+				request.user.school = data.get('school')
+			if data.get('wins'):
+				request.user.wins = data.get('wins')
+			if data.get('losses'):
+				request.user.losses = data.get('losses')
+			if data.get('win_rate'):
+				if request.user.total_matches == 0:
+					request.user.win_rate = 0
+				else:
+					request.user.win_rate = request.user.wins / request.user.total_matches
+			if data.get('total_matches'):
+				request.user.total_matches = data.get('total_matches')
+			if data.get('match_history'):
+				history = request.user.match_history
+				if history is None:
+					history = []
+				history.append(data.get('match_history'))
+				request.user.match_history = history
+			if data.get('TwoFA'):
+				request.user.TwoFA = data.get('TwoFA')
+			request.user.save()
+			
+			response = Response({
+				"detail": "Profile updated",
+			}, status=status.HTTP_200_OK)
+			response["Access-Control-Allow-Credentials"] = 'true'
+			return response
+		else:
+			response = Response({
+				"detail": "No active user session",
+			}, status=status.HTTP_400_BAD_REQUEST)
+			response["Access-Control-Allow-Credentials"] = 'true'
+			return response
 
 
 class OAuthCallback(APIView):
@@ -172,24 +237,19 @@ class OAuthCallback(APIView):
 			if response.status_code == 200:
 				user.profile_picture.save(f"{username}_profile_picture.jpg", ContentFile(response.content), save=True)
 			login(request, user)
-			html = """
-			<!DOCTYPE html>
-			<html>
-			<body>
-			<script>
-			// Check if window.opener is not null
-			if (window.opener) {
-			// Send a message to the original window with the authentication status
-			window.opener.postMessage({ 'is_authenticated': true }, '*');
-			}
-			// Close this window
-			window.close();
-			</script>
-			</body>
-			</html>
-			"""
-			return HttpResponse(html)
-		return HttpResponse("Auth callback Error, bad token maybe!!")
+			token = RefreshToken.for_user(user)
+			token['email'] = user.email
+			token['username'] = user.username
+			response = Response({
+				'refresh': str(token),
+				'access': str(token.access_token),
+			}, status=status.HTTP_200_OK)
+			response["Access-Control-Allow-Credentials"] = 'true'
+			return response
+
+		response = Response({'detail': "Check you 42API keys"}, status=status.HTTP_400_BAD_REQUEST)
+		response["Access-Control-Allow-Credentials"] = 'true'
+		return response
 
 
 class OAuthAuthorize(APIView):
@@ -205,7 +265,6 @@ class OAuthAuthorize(APIView):
 		return HttpResponseRedirect(f"{auth_url}?{urllib.parse.urlencode(params)}")
 
 
-
 class accountDeletion(APIView):
 	permission_classes = (permissions.IsAuthenticated,)
 	authentication_classes = (BlacklistCheckJWTAuthentication,)
@@ -213,7 +272,58 @@ class accountDeletion(APIView):
 	def post(self, request):
 		if request.user.is_authenticated:
 			request.user.delete()
-			return Response({"detail": "Account deleted"}, status=status.HTTP_200_OK)
+			response = Response({"detail": "Account deleted"}, status=status.HTTP_200_OK)
+			response["Access-Control-Allow-Credentials"] = 'true'
+			return response
+		else:
+			response = Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
+			response["Access-Control-Allow-Credentials"] = 'true'
+			return response
+
+
+class updateProfile(APIView):
+	permission_classes = (permissions.IsAuthenticated,)
+	authentication_classes = (BlacklistCheckJWTAuthentication,)
+	##
+	def post(self, request):
+		if request.user.is_authenticated:
+			data = request.data
+			if data.get('profile_picture'):
+				request.user.profile_picture = data.get('profile_picture')
+			if data.get('email'):
+				request.user.email = data.get('email')
+			if data.get('username'):
+				request.user.username = data.get('username')
+			if data.get('title'):
+				request.user.title = data.get('title')
+			if data.get('AboutMe'):
+				request.user.AboutMe = data.get('AboutMe')
+			if data.get('school'):
+				request.user.school = data.get('school')
+			if data.get('wins'):
+				request.user.wins = data.get('wins')
+			if data.get('losses'):
+				request.user.losses = data.get('losses')
+			if data.get('win_rate'):
+				if request.user.total_matches == 0:
+					request.user.win_rate = 0
+				else:
+					request.user.win_rate = request.user.wins / request.user.total_matches
+			if data.get('total_matches'):
+				request.user.total_matches = data.get('total_matches')
+			if data.get('match_history'):
+				history = request.user.match_history
+				if history is None:
+					history = []
+				history.append(data.get('match_history'))
+				request.user.match_history = history
+			if data.get('TwoFA'):
+				request.user.TwoFA = data.get('TwoFA')
+			if data.get('password'):
+				request.user.set_password(data.get('password'))
+			request.user.save()
+			
+			return Response({"detail": "Profile updated"}, status=status.HTTP_200_OK)
 		else:
 			return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -226,9 +336,13 @@ class activateTwoFa(APIView):
 		if request.user.is_authenticated:
 			request.user.TwoFA = True
 			request.user.save()
-			return Response({"detail": "Two Factor Authentication activated"}, status=status.HTTP_200_OK)
+			response = Response({"detail": "Two Factor Authentication activated"}, status=status.HTTP_200_OK)
+			response["Access-Control-Allow-Credentials"] = 'true'
+			return response
 		else:
-			return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
+			response = Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
+			response["Access-Control-Allow-Credentials"] = 'true'
+			return response
 
 
 class deactivateTwoFa(APIView):
@@ -239,9 +353,13 @@ class deactivateTwoFa(APIView):
 		if request.user.is_authenticated:
 			request.user.TwoFA = False
 			request.user.save()
-			return Response({"detail": "Two Factor Authentication deactivated"}, status=status.HTTP_200_OK)
+			response = Response({"detail": "Two Factor Authentication deactivated"}, status=status.HTTP_200_OK)
+			response["Access-Control-Allow-Credentials"] = 'true'
+			return response
 		else:
-			return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
+			response = Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
+			response["Access-Control-Allow-Credentials"] = 'true'
+			return response
 		
 
 class sendQrCode(APIView):
@@ -283,11 +401,17 @@ class sendQrCode(APIView):
 				email.content_subtype = "html"
 				email.send()
 				messages.success(request, ('Please Confirm your email to complete registration.'))
-				return Response({"detail": "QR Code sent to your email"}, status=status.HTTP_200_OK)
+				response = Response({"detail": "QR Code sent to your email"}, status=status.HTTP_200_OK)
+				response["Access-Control-Allow-Credentials"] = 'true'
+				return response
 			else:
-				return Response({"detail": "Two Factor Authentication is not activated"}, status=status.HTTP_400_BAD_REQUEST)
+				response = Response({"detail": "Two Factor Authentication is not activated"}, status=status.HTTP_400_BAD_REQUEST)
+				response["Access-Control-Allow-Credentials"] = 'true'
+				return response
 		else:
-			return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
+			response = Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
+			response["Access-Control-Allow-Credentials"] = 'true'
+			return response
 
 
 class TwoFactorAuth(APIView):
@@ -299,6 +423,10 @@ class TwoFactorAuth(APIView):
 		device = TOTPDevice.objects.filter(user=request.user).first()
 
 		if device and device.verify_token(otp_code):
-			return Response({"detail": "OTP verified"}, status=status.HTTP_200_OK)
+			response = Response({"detail": "OTP verified"}, status=status.HTTP_200_OK)
+			response["Access-Control-Allow-Credentials"] = 'true'
+			return response
 		else:
-			return Response({"detail": "Invalid OTP"}, status=status.HTTP_400_BAD_REQUEST)
+			response = Response({"detail": "Invalid OTP"}, status=status.HTTP_400_BAD_REQUEST)
+			response["Access-Control-Allow-Credentials"] = 'true'
+			return response

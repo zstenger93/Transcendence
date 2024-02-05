@@ -29,6 +29,10 @@ urlpatterns = [
 		views.accountDeletion.as_view(),
 		name='accountDeletion'
 	),
+    path('updateProfile',
+		views.updateProfile.as_view(),
+		name='updateProfile'
+	),
 
 	## JWT Authentication
     path('oauth/authorize/',

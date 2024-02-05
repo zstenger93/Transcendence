@@ -18,10 +18,9 @@
 }
 Result <- 
 {
-    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcwNjA5NzYzMCwiaWF0IjoxNzA2MDExMjMwLCJqdGkiOiJkNzYyYzdiNjQ1NzY0OWExOTVkN2VkNzQ3YzZjOGEwNyIsInVzZXJfaWQiOjJ9.tQuNOeL_J6Lr9lB7JfmN4bTnGvj_ga9fyQwJ0OslnT4",
-    "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA2MDk3NjMwLCJpYXQiOjE3MDYwMTEyMzAsImp0aSI6IjBiYzI2N2UwMTc4YjQ3MGE5MTEzZjIwYzFkZjVkNTFmIiwidXNlcl9pZCI6Mn0.7-cr7nGgyROSiXSKEtWrW1lCXxMGoUoJp9xGg81FGM0"
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcwNzIxOTM1MSwiaWF0IjoxNzA3MTMyOTUxLCJqdGkiOiJkMTM2ZDIyYjc2NjI0NDk0OWRhZDU3MDYwZjVjOTE0NyIsInVzZXJfaWQiOjEsImVtYWlsIjoic2lvdWRhemVyOEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWx1c2VyIn0.dUc-kYp91jYx1LNxiazHTHxKsbR78lyWTPMQWnMDH-o",
+    "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA3MjE5MzUxLCJpYXQiOjE3MDcxMzI5NTEsImp0aSI6ImRmYmJmNDgyN2MzNTQwM2NhNzFlODc3NjkyYjQzZjM1IiwidXNlcl9pZCI6MSwiZW1haWwiOiJzaW91ZGF6ZXI4QGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicmVhbHVzZXIifQ.0cjP1qZfUfrxiUophcscm3pMv0rJxN7LluokzmAan7w"
 }
-
 
 ## Logout -> Post
 >> Must contain "Authorization: JWT your_token" in the header
@@ -53,12 +52,14 @@ Result <-
 - Input: {"otp_code":"your_otp_code"}
 
 
-# Missing Endpoints:
-- Password Reset
-- Update Profile (e.g Update Picture, name, etc)
-- Look for a match / Start Match / Save Score
-- 
 
 
 ## Tools
 Header Changer: https://chromewebstore.google.com/detail/requestly-open-source-htt/mdnleldcmiljblolnjhpnblkcekpdkpa
+
+
+## TODO
+### MAKE A MORE SECURE WAY TO SAVE PWD, ALSO TO CHANGE IT
+
+- check if the token is valid
+- check if the token is expired

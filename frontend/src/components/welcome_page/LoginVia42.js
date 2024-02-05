@@ -15,11 +15,11 @@ const OAuth = async ({ navigate, redirect_uri }) => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
       response = await fetch(auth, {
         credentials: "include",
-		AccessControlAllowCredentials: true,
+		    AccessControlAllowCredentials: true,
       });
       data = await response.json();
     }
-	navigate("/home");
+    navigate("/home");
   } else {
     navigate("/home");
   }
