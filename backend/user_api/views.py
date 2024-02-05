@@ -37,7 +37,9 @@ import requests
 import urllib
 import os
 import qrcode
+import logging
 
+logger = logging.getLogger(__name__)
 
 
 class UserRegister(APIView):
@@ -235,22 +237,23 @@ class OAuthCallback(APIView):
 			if response.status_code == 200:
 				user.profile_picture.save(f"{username}_profile_picture.jpg", ContentFile(response.content), save=True)
 			login(request, user)
-			html = """
-			<!DOCTYPE html>
-			<html>
-			<body>
-			<script>
-			// Check if window.opener is not null
-			if (window.opener) {
-			// Send a message to the original window with the authentication status
-			window.opener.postMessage({ 'is_authenticated': true }, '*');
-			}
-			// Close this window
-			window.close();
-			</script>
-			</body>
-			</html>
+			token = RefreshToken.for_user(user)
+			token['email'] = user.email
+			token['username'] = user.username
+			html = f"""
+				<!DOCTYPE html>
+				<html>
+				<body>
+				<script>
+				if (window.opener)
+					{{window.opener.postMessage({{'is_authenticated': true, 'token': '{token}'}}, '*');}}
+				window.close();
+				</script>
+				</body>
+				</html>
 			"""
+			print(html)
+			logger.info(html)
 			return HttpResponse(html)
 		return HttpResponse("Auth callback Error, bad token maybe!!")
 

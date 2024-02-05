@@ -15,12 +15,18 @@ const OAuth = async ({ navigate, redirect_uri }) => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
       response = await fetch(auth, {
         credentials: "include",
-		AccessControlAllowCredentials: true,
+		    AccessControlAllowCredentials: true,
       });
       data = await response.json();
+      console.log(data);
+      console.log(data.token);
     }
-	navigate("/home");
+    console.log(data);
+    console.log(data.token);
+    navigate("/home");
   } else {
+    console.log(data);
+    console.log(data.token);
     navigate("/home");
   }
 };
