@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.db.models import JSONField
 
 class AppUserManager(BaseUserManager):
 	def create_user(self, email, password=None):
@@ -34,15 +35,20 @@ class AppUserManager(BaseUserManager):
 class AppUser(AbstractBaseUser, PermissionsMixin):
 	is_staff = models.BooleanField(default=True)
 	## user identity
-	profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
 	id = models.AutoField(primary_key=True)
+	profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
 	email = models.EmailField(max_length=50, unique=True)
 	username = models.CharField(max_length=50)
-	total_matches = models.PositiveIntegerField(default=0)
+	title = models.CharField(max_length=100, null=True, blank=True)
+	intra_level = models.FloatField(default=0)
+	TwoFA = models.BooleanField(default=False)
+	AboutMe = models.TextField(max_length=500, null=True, blank=True)
+	school = models.CharField(max_length=100, null=True, blank=True)
 	wins = models.PositiveIntegerField(default=0)
 	losses = models.PositiveIntegerField(default=0)
-	title = models.CharField(max_length=100, null=True, blank=True)
-	TwoFA = models.BooleanField(default=False)
+	win_rate = models.FloatField(default=0)
+	total_matches = models.PositiveIntegerField(default=0)
+	match_history = JSONField(default=dict)
 
 	USERNAME_FIELD = 'email'
 	REQUIRED_FIELDS = ['username']
