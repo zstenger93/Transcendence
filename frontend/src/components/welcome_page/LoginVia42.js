@@ -18,15 +18,9 @@ const OAuth = async ({ navigate, redirect_uri }) => {
 		    AccessControlAllowCredentials: true,
       });
       data = await response.json();
-      console.log(data);
-      console.log(data.token);
     }
-    console.log(data);
-    console.log(data.token);
     navigate("/home");
   } else {
-    console.log(data);
-    console.log(data.token);
     navigate("/home");
   }
 };

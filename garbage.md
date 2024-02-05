@@ -63,9 +63,3 @@ Header Changer: https://chromewebstore.google.com/detail/requestly-open-source-h
 
 - check if the token is valid
 - check if the token is expired
-
-api endpoints for:
-changing picture
-changing username
-changing password
-setting about me text for profile?

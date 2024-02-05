@@ -240,22 +240,16 @@ class OAuthCallback(APIView):
 			token = RefreshToken.for_user(user)
 			token['email'] = user.email
 			token['username'] = user.username
-			html = f"""
-				<!DOCTYPE html>
-				<html>
-				<body>
-				<script>
-				if (window.opener)
-					{{window.opener.postMessage({{'is_authenticated': true, 'token': '{token}'}}, '*');}}
-				window.close();
-				</script>
-				</body>
-				</html>
-			"""
-			print(html)
-			logger.info(html)
-			return HttpResponse(html)
-		return HttpResponse("Auth callback Error, bad token maybe!!")
+			response = Response({
+				'refresh': str(token),
+				'access': str(token.access_token),
+			}, status=status.HTTP_200_OK)
+			response["Access-Control-Allow-Credentials"] = 'true'
+			return response
+
+		response = Response({'detail': "Check you 42API keys"}, status=status.HTTP_400_BAD_REQUEST)
+		response["Access-Control-Allow-Credentials"] = 'true'
+		return response
 
 
 class OAuthAuthorize(APIView):
