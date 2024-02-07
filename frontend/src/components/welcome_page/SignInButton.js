@@ -20,7 +20,6 @@ const SignInButt = ({ t, redirectToHome, redirect_uri }) => {
         { withCredentials: true }
       );
       localStorage.setItem("access", response.data.access);
-	  console.log("login", response.data.access);
       if (response.data.access) redirectToHome();
     } catch (error) {
       if (error.response && error.response.data) {
