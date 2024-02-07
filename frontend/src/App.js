@@ -23,7 +23,6 @@ import BackButton from "./components/buttons/BackButton";
 import backgroundimage from "./images/pongbg.png";
 
 const PageWrapper = ({ children, image, showSidebar = true, redirectUri }) => {
-	console.log("PageWrapper", redirectUri);
   return (
     <div
       className="overflow-y-auto h-svh"

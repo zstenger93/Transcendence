@@ -15,7 +15,6 @@ const HamburgerMenu = ({
   changeLanguage,
   redirectUri,
 }) => {
-  console.log("HamburgerMenu", redirectUri);
   const navigate = useNavigate();
   if (!isMenuOpen) return null;
 

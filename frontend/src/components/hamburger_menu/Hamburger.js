@@ -6,7 +6,6 @@ import SidebarBigScreen from "../sidebar/Sidebar_Monitor";
 import HamburgerButton from "./HamburgerBars";
 
 const Sidebar = ({ redirectUri }) => {
-	console.log("Sidebar", redirectUri);
   const { t } = useTranslation();
   const [, setDropdownOpen] = useState(false);
 
