@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ButtonStyle } from "../components/buttons/ButtonStyle";
 import UserSettings from "../components/profile/UserSettings";
+import axios from "axios";
+import { use } from "i18next";
 
 const friendsListData = [
   {
@@ -225,7 +227,30 @@ function MatchHistory() {
   );
 }
 
-function Profile() {
+const getUserDetails = async ({ redirectUri }) => {
+  let response = {};
+  try {
+    const token = localStorage.getItem("access");
+    response = await axios.get(
+      `${redirectUri}/api/profile`,
+      {},
+      {
+        headers: {
+          withCredentials: true,
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("nani", response);
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+function Profile({ redirectUri }) {
+  //   let response = getUserDetails((redirectUri = { redirectUri }));
+
   const { t } = useTranslation();
   const [showFriendsList, setShowFriendsList] = useState(false);
   const [showMatchHistory, setShowMatchHistory] = useState(false);
@@ -323,7 +348,7 @@ function Profile() {
         <div className="mt-8 mb-10">
           {showFriendsList && <FriendsList />}
           {showMatchHistory && <MatchHistory />}
-		  {showUserSettings && <UserSettings />}
+          {showUserSettings && <UserSettings />}
         </div>
       </div>
     </div>
