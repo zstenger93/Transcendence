@@ -114,7 +114,7 @@ function App() {
             path="profile"
             element={
               <PageWrapper image={Background} redirectUri={REDIRECT_URI}>
-                <Profile />
+                <Profile redirectUri={REDIRECT_URI} />
               </PageWrapper>
             }
           />
