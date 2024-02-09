@@ -4,18 +4,23 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ButtonStyle } from "../buttons/ButtonStyle";
 import { getUserDetails } from "../../pages/Profile";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const activate2FA = async ({ redirectUri }) => {
   let response = {};
   try {
     const token = localStorage.getItem("access");
-    response = await axios.post(`${redirectUri}/api/activateTwoFa`, {}, {
-		headers: {
-		  Authorization: `Bearer ${token}`,
-		},
-		withCredentials: true,
-	  });
+    response = await axios.post(
+      `${redirectUri}/api/activateTwoFa`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
+    );
   } catch (error) {
     console.log(error);
   }
@@ -26,12 +31,36 @@ const deactivate2FA = async ({ redirectUri }) => {
   let response = {};
   try {
     const token = localStorage.getItem("access");
-    response = await axios.post(`${redirectUri}/api/deactivateTwoFa`, {}, {
-		headers: {
-		  Authorization: `Bearer ${token}`,
-		},
-		withCredentials: true,
-	  });
+    response = await axios.post(
+      `${redirectUri}/api/deactivateTwoFa`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+const deleteAccount = async ({ redirectUri }) => {
+  let response = {};
+  try {
+    const token = localStorage.getItem("access");
+    response = await axios.post(
+      `${redirectUri}/api/accountDeletion`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
+    );
   } catch (error) {
     console.log(error);
   }
@@ -40,21 +69,21 @@ const deactivate2FA = async ({ redirectUri }) => {
 
 function UserSettings({ redirectUri }) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState({ TwoFA: false });
 
   useEffect(() => {
     const fetchUserDetails = async () => {
       const response = await getUserDetails({ redirectUri });
       setUserDetails(response.data.user);
-      console.log("response", response);
     };
 
     fetchUserDetails();
   }, [redirectUri]);
 
-  useEffect(() => {
-    console.log("userDetails:", userDetails);
-  }, [userDetails]);
+  //   useEffect(() => {
+  //     console.log("userDetails:", userDetails);
+  //   }, [userDetails]);
 
   return (
     <div
@@ -78,9 +107,9 @@ function UserSettings({ redirectUri }) {
               setUserDetails({ ...userDetails, TwoFA: newTwoFA });
 
               if (newTwoFA) {
-                await activate2FA({redirectUri});
+                await activate2FA({ redirectUri });
               } else {
-                await deactivate2FA({redirectUri});
+                await deactivate2FA({ redirectUri });
               }
             }}
             className={`toggle-checkbox absolute block w-6 h-6 rounded-full 
@@ -115,11 +144,14 @@ function UserSettings({ redirectUri }) {
       <div className="mb-4">
         <button
           className={`w-38 ${ButtonStyle} mx-auto`}
-          onClick={() => {
+          onClick={async () => {
             if (
               window.confirm(t("Are you sure you want to delete your account?"))
             ) {
-              /* delete the account */
+              const accountDeleted = await deleteAccount({ redirectUri });
+              if (accountDeleted) {
+                navigate("/");
+              }
             }
           }}
         >
