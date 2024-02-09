@@ -230,7 +230,7 @@ const defaultUserDetails = {
     "https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp",
 };
 
-const getUserDetails = async ({ redirectUri }) => {
+export const getUserDetails = async ({ redirectUri }) => {
   let response = {};
   try {
     const token = localStorage.getItem("access");
@@ -253,7 +253,6 @@ function Profile({ redirectUri }) {
     const fetchUserDetails = async () => {
       const response = await getUserDetails({ redirectUri });
       setUserDetails(response.data.user);
-      console.log("response", response);
     };
 
     fetchUserDetails();
@@ -368,7 +367,7 @@ function Profile({ redirectUri }) {
         <div className="mt-8 mb-10">
           {showFriendsList && <FriendsList />}
           {showMatchHistory && <MatchHistory />}
-          {showUserSettings && <UserSettings />}
+          {showUserSettings && <UserSettings redirectUri={redirectUri} />}
         </div>
       </div>
     </div>

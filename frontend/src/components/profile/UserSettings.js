@@ -1,16 +1,60 @@
-// 2FA on/off
-// change avatar
-// change password
-// change username
-// delete the account
+/* disable eslint */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ButtonStyle } from "../buttons/ButtonStyle";
+import { getUserDetails } from "../../pages/Profile";
+import axios from "axios";
 
-function UserSettings() {
+const activate2FA = async ({ redirectUri }) => {
+  let response = {};
+  try {
+    const token = localStorage.getItem("access");
+    response = await axios.post(`${redirectUri}/api/activateTwoFa`, {}, {
+		headers: {
+		  Authorization: `Bearer ${token}`,
+		},
+		withCredentials: true,
+	  });
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+const deactivate2FA = async ({ redirectUri }) => {
+  let response = {};
+  try {
+    const token = localStorage.getItem("access");
+    response = await axios.post(`${redirectUri}/api/deactivateTwoFa`, {}, {
+		headers: {
+		  Authorization: `Bearer ${token}`,
+		},
+		withCredentials: true,
+	  });
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+function UserSettings({ redirectUri }) {
   const { t } = useTranslation();
-  const [is2FAEnabled, set2FA] = useState(false);
+  const [userDetails, setUserDetails] = useState({ TwoFA: false });
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      const response = await getUserDetails({ redirectUri });
+      setUserDetails(response.data.user);
+      console.log("response", response);
+    };
+
+    fetchUserDetails();
+  }, [redirectUri]);
+
+  useEffect(() => {
+    console.log("userDetails:", userDetails);
+  }, [userDetails]);
 
   return (
     <div
@@ -28,17 +72,26 @@ function UserSettings() {
             type="checkbox"
             name="toggle"
             id="toggle"
-            checked={is2FAEnabled}
-            onChange={() => set2FA(!is2FAEnabled)}
+            checked={userDetails?.TwoFA}
+            onChange={async () => {
+              const newTwoFA = !userDetails?.TwoFA;
+              setUserDetails({ ...userDetails, TwoFA: newTwoFA });
+
+              if (newTwoFA) {
+                await activate2FA({redirectUri});
+              } else {
+                await deactivate2FA({redirectUri});
+              }
+            }}
             className={`toggle-checkbox absolute block w-6 h-6 rounded-full 
 			bg-white border-4 appearance-none cursor-pointer 
-			${is2FAEnabled ? "right-0" : "right-4"} 
+			${userDetails?.TwoFA ? "right-0" : "right-4"} 
 			ring-0 transition-transform duration-200 ease-in`}
           />
           <span
             className={`toggle-label block overflow-hidden h-6 rounded-full 
 			bg-gray-300 cursor-pointer transition-colors duration-200 ease-in 
-			${is2FAEnabled ? "bg-green-400" : ""}`}
+			${userDetails?.TwoFA ? "bg-green-400" : ""}`}
           ></span>
         </div>
       </div>
@@ -51,10 +104,10 @@ function UserSettings() {
         <label className="text-gray-300">{t("New Password ")}</label>
         <input type="password" />
       </div>
-	  <div className="mb-4">
-		<label className="text-gray-300">{t("Confirm New Password ")}</label>
+      <div className="mb-4">
+        <label className="text-gray-300">{t("Confirm New Password ")}</label>
         <input type="password" />
-	  </div>
+      </div>
       <div className="mb-4">
         <label className="text-gray-300">{t("Change Username ")}</label>
         <input type="text" />

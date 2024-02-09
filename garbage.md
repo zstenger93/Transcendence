@@ -45,7 +45,7 @@ Result <-
 
 ## sendQrCode -> Post
 >> Must contain "Authorization: JWT your_token" in the header
-- No Input, Check your email ;)
+- No Input, Check your email ;
 
 ## TwoFactorAuth -> Post
 >> Must contain "Authorization: JWT your_token" in the header
