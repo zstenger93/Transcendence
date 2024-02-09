@@ -202,7 +202,6 @@ class updateProfile(APIView):
 			response["Access-Control-Allow-Credentials"] = 'true'
 			return response
 
-
 class OAuthCallback(APIView):
 	permission_classes = (permissions.AllowAny,)
 	##
