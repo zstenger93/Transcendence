@@ -250,7 +250,8 @@ class OAuthCallback(APIView):
 				'access': str(token.access_token),
 			}, status=status.HTTP_200_OK)
 			response["Access-Control-Allow-Credentials"] = 'true'
-			return response
+			redirect_url = 'https://localhost/home?' + urllib.parse.urlencode({'token': str(token.access_token)})
+			return redirect(redirect_url)
 
 		response = Response({'detail': "Check you 42API keys"}, status=status.HTTP_400_BAD_REQUEST)
 		response["Access-Control-Allow-Credentials"] = 'true'
