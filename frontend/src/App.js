@@ -22,6 +22,10 @@ import { WelcomeButtonStyle } from "./components/buttons/ButtonStyle";
 import BackButton from "./components/buttons/BackButton";
 import backgroundimage from "./images/pongbg.png";
 
+
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+// const cors = require('cors');
+
 const PageWrapper = ({ children, image, showSidebar = true, redirectUri }) => {
   return (
     <div
