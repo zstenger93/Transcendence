@@ -52,6 +52,10 @@ Result <-
 - Input: {"otp_code":"your_otp_code"}
 
 
+## UpdateProfile -> Post
+>> Must contain "Authorization: JWT your_token" in the header
+- Input: {"anyProfileField":"New Value"}
+e.g {"AboutMe":"New About Me"}
 
 
 ## Tools
