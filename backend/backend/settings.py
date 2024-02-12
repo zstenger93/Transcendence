@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'user_api.apps.UserApiConfig',
     'friendship_api',
+	'user_block'
 ]
 
 MIDDLEWARE = [
