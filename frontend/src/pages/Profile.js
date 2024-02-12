@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+/* disable eslint */
+
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ButtonStyle } from "../components/buttons/ButtonStyle";
+import UserSettings from "../components/profile/UserSettings";
+import axios from "axios";
 
 const friendsListData = [
   {
@@ -95,18 +99,6 @@ const matchHistoryData = [
     type: "Original",
   },
 ];
-
-const userDetails = {
-  title: "Mastermind",
-  username: "TrasnscEND",
-  email: "fake@mail.com",
-  about: "I turn people crazy with my clear subject description.",
-  age: 42,
-  gender: "Computer",
-  school: "42 Heilbronn",
-  level: "42.42",
-  winRate: "42%",
-};
 
 function FriendsList() {
   const { t } = useTranslation();
@@ -224,19 +216,69 @@ function MatchHistory() {
   );
 }
 
-function Profile() {
+const defaultUserDetails = {
+  title: "Mastermind",
+  username: "TrasnscEND",
+  email: "fake@mail.com",
+  about: "I turn people crazy with my clear subject description.",
+  age: 42,
+  gender: "Computer",
+  school: "42 Heilbronn",
+  level: "42.42",
+  wins: "42",
+  profile_picture:
+    "https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp",
+};
+
+export const getUserDetails = async ({ redirectUri }) => {
+  let response = {};
+  try {
+    const token = localStorage.getItem("access");
+    response = await axios.get(`${redirectUri}/api/profile`, {
+      headers: {
+        withCredentials: true,
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+function Profile({ redirectUri }) {
+  const [userDetails, setUserDetails] = useState(null);
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      const response = await getUserDetails({ redirectUri });
+      setUserDetails(response.data.user);
+    };
+
+    fetchUserDetails();
+  }, [redirectUri]);
+
   const { t } = useTranslation();
   const [showFriendsList, setShowFriendsList] = useState(false);
   const [showMatchHistory, setShowMatchHistory] = useState(false);
+  const [showUserSettings, setShowUserSettings] = useState(false);
 
   const toggleFriendsList = () => {
     setShowFriendsList(!showFriendsList);
     setShowMatchHistory(false);
+    setShowUserSettings(false);
   };
 
   const toggleMatchHistory = () => {
     setShowMatchHistory(!showMatchHistory);
     setShowFriendsList(false);
+    setShowUserSettings(false);
+  };
+
+  const toggleUserSettings = () => {
+    setShowUserSettings(!showUserSettings);
+    setShowFriendsList(false);
+    setShowMatchHistory(false);
   };
 
   return (
@@ -251,65 +293,81 @@ function Profile() {
 			border-purple-600"
         >
           <img
-            src="https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp"
+            src={
+              userDetails?.profile_picture || defaultUserDetails.profile_picture
+            }
             alt="User Avatar"
             className="w-20 h-20 rounded-full mx-auto mb-4"
           />
           <h2 className="text-gray-300 font-nosifer text-1.5xl font-bold">
-            {userDetails.title} {userDetails.username}
+            {userDetails?.title || defaultUserDetails.title}{" "}
+            {userDetails?.username || defaultUserDetails.username}
           </h2>
-          <p className="text-purple-400">{userDetails.email}</p>
+          <p className="text-purple-400">
+            {userDetails?.email || defaultUserDetails.email}
+          </p>
 
           <div className="mt-8">
             <h3 className="font-nosifer text-gray-300 font-semibold mb-4">
               {t("About Me")}
             </h3>
-            <p className="text-purple-400">{userDetails.about}</p>
+            <p className="text-purple-400">
+              {userDetails?.about || defaultUserDetails.about}
+            </p>
           </div>
           <div className="mt-8">
             <h3 className="font-nosifer text-gray-300 font-semibold mb-4">
               {t("User Details")}
             </h3>
             <p className="text-purple-400">
-              <strong>{t("Age")}:</strong> {userDetails.age} {t("years old")}
+              <strong>{t("Age")}:</strong>{" "}
+              {userDetails?.age || defaultUserDetails.age} {t("years old")}
               <br />
-              <strong>{t("Gender")}:</strong> {userDetails.gender}
+              <strong>{t("Gender")}:</strong>{" "}
+              {userDetails?.gender || defaultUserDetails.gender}
               <br />
-              <strong>{t("School")}:</strong> {userDetails.school}
+              <strong>{t("School")}:</strong>{" "}
+              {userDetails?.school || defaultUserDetails.school}
               <br />
-              <strong>{t("Level")}:</strong> {userDetails.level}
+              <strong>{t("Level")}:</strong>{" "}
+              {userDetails?.level || defaultUserDetails.level}
               <br />
-              <strong>{t("Win Rate")}:</strong> {userDetails.winRate}
+              <strong>{t("Win Rate")}:</strong>{" "}
+              {userDetails?.wins || defaultUserDetails.wins}
             </p>
           </div>
-          <div className="mt-8 flex justify-center space-x-4">
-            <button
-              className={`w-38 ${ButtonStyle}
-              ${
-                showFriendsList
-                  ? "bg-purple-600 text-gray-300"
-                  : "text-gray-300"
-              }`}
-              onClick={toggleFriendsList}
-            >
-              {t("Friends")}
-            </button>
-            <button
-              className={`w-38 ${ButtonStyle}
-              ${
-                showMatchHistory
-                  ? "bg-purple-600 text-gray-300"
-                  : "text-gray-300"
-              }`}
-              onClick={toggleMatchHistory}
-            >
-              {t("Match History")}
-            </button>
+          <div className="mt-8 justify-center space-x-4 text-center">
+            <div className="inline-flex space-x-4 justify-center">
+              <button
+                className={`w-38 ${ButtonStyle}
+				${showFriendsList ? "bg-purple-600 text-gray-300" : "text-gray-300"}`}
+                onClick={toggleFriendsList}
+              >
+                {t("Friends")}
+              </button>
+              <button
+                className={`w-38 ${ButtonStyle}
+				${showUserSettings ? "bg-purple-600 text-gray-300" : "text-gray-300"}`}
+                onClick={toggleUserSettings}
+              >
+                {t("Settings")}
+              </button>
+            </div>
+            <div className="mt-4 inline-flex justify-center text-center">
+              <button
+                className={`w-38 ${ButtonStyle}
+				${showMatchHistory ? "bg-purple-600 text-gray-300" : "text-gray-300"}`}
+                onClick={toggleMatchHistory}
+              >
+                {t("Match History")}
+              </button>
+            </div>
           </div>
         </div>
         <div className="mt-8 mb-10">
           {showFriendsList && <FriendsList />}
           {showMatchHistory && <MatchHistory />}
+          {showUserSettings && <UserSettings redirectUri={redirectUri} />}
         </div>
       </div>
     </div>

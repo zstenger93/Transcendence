@@ -5,7 +5,7 @@ import HamburgerMenu from "./HamburgerMenu";
 import SidebarBigScreen from "../sidebar/Sidebar_Monitor";
 import HamburgerButton from "./HamburgerBars";
 
-const Sidebar = () => {
+const Sidebar = ({ redirectUri }) => {
   const { t } = useTranslation();
   const [, setDropdownOpen] = useState(false);
 
@@ -42,13 +42,18 @@ const Sidebar = () => {
           toggleMenu={toggleMenu}
           t={t}
           changeLanguage={changeLanguage}
+          redirectUri={redirectUri}
         />
       )}
       {isMobile && (
         <HamburgerButton isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       )}
       {!isMobile && (
-        <SidebarBigScreen t={t} changeLanguage={changeLanguage} />
+        <SidebarBigScreen
+          t={t}
+          changeLanguage={changeLanguage}
+          redirectUri={redirectUri}
+        />
       )}
     </>
   );
