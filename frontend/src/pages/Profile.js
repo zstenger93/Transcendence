@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { ButtonStyle } from "../components/buttons/ButtonStyle";
 import UserSettings from "../components/profile/UserSettings";
 import axios from "axios";
+import { CiEdit } from "react-icons/ci";
 
 const friendsListData = [
   {
@@ -221,11 +222,11 @@ const defaultUserDetails = {
   username: "TrasnscEND",
   email: "fake@mail.com",
   about: "I turn people crazy with my clear subject description.",
-  age: 42,
-  gender: "Computer",
-  school: "42 Heilbronn",
+  school: "42",
   level: "42.42",
   wins: "42",
+  losses: "58",
+  win_rate: "42%",
   profile_picture:
     "https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp",
 };
@@ -246,6 +247,26 @@ export const getUserDetails = async ({ redirectUri }) => {
   return response;
 };
 
+const changeAbout = async ({ redirectUri, about }) => {
+  let response = {};
+  try {
+    const token = localStorage.getItem("access");
+    response = await axios.post(
+      `${redirectUri}/api/updateProfile`,
+      { AboutMe: about },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
 function Profile({ redirectUri }) {
   const [userDetails, setUserDetails] = useState(null);
   const [imageUrl, setImageUrl] = useState(defaultUserDetails.profile_picture);
@@ -254,37 +275,65 @@ function Profile({ redirectUri }) {
     const fetchUserDetails = async () => {
       const response = await getUserDetails({ redirectUri });
       setUserDetails(response.data.user);
-      let asd = response.data.user.profile_picture.replace("/media/", "");
-      let url = decodeURIComponent(asd).replace(":", ":/");
+      let url = decodeURIComponent(
+        response.data.user.profile_picture.replace("/media/", "")
+      ).replace(":", ":/");
       setImageUrl(url);
     };
 
     fetchUserDetails();
   }, [redirectUri]);
 
-  console.log(userDetails);
-
   const { t } = useTranslation();
+  const [isEditing, setIsEditing] = useState(false);
   const [showFriendsList, setShowFriendsList] = useState(false);
   const [showMatchHistory, setShowMatchHistory] = useState(false);
   const [showUserSettings, setShowUserSettings] = useState(false);
-
+  const [about, setAbout] = useState(
+    userDetails?.AboutMe || defaultUserDetails.about
+  );
+  const handleAboutChange = (event) => {
+    setAbout(event.target.value);
+  };
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
   const toggleFriendsList = () => {
     setShowFriendsList(!showFriendsList);
     setShowMatchHistory(false);
     setShowUserSettings(false);
   };
-
   const toggleMatchHistory = () => {
     setShowMatchHistory(!showMatchHistory);
     setShowFriendsList(false);
     setShowUserSettings(false);
   };
-
   const toggleUserSettings = () => {
     setShowUserSettings(!showUserSettings);
     setShowFriendsList(false);
     setShowMatchHistory(false);
+  };
+
+  useEffect(() => {
+    if (userDetails && userDetails.AboutMe) {
+      setAbout(userDetails.AboutMe);
+    } else {
+      setAbout(defaultUserDetails.about);
+    }
+  }, [userDetails]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await changeAbout({ redirectUri, about });
+    setUserDetails((prevDetails) => {
+      const updatedDetails = {
+        ...prevDetails,
+        AboutMe: about || defaultUserDetails.about,
+      };
+      setAbout(updatedDetails.AboutMe);
+      return updatedDetails;
+    });
+    setIsEditing(false);
   };
 
   return (
@@ -310,14 +359,30 @@ function Profile({ redirectUri }) {
           <p className="text-purple-400">
             {userDetails?.email || defaultUserDetails.email}
           </p>
-
           <div className="mt-8">
-            <h3 className="font-nosifer text-gray-300 font-semibold mb-4">
-              {t("About Me")}
-            </h3>
-            <p className="text-purple-400">
-              {userDetails?.about || defaultUserDetails.about}
-            </p>
+            <div className="flex justify-center items-center">
+              <h3 className="font-nosifer text-gray-300 font-semibold mb-4">
+                {t("About Me")}
+              </h3>
+              {!isEditing && (
+                <CiEdit
+                  onClick={handleEditClick}
+                  className="text-white ml-2, relative top-[-3px]"
+                />
+              )}
+            </div>
+            {isEditing ? (
+              <form onSubmit={handleSubmit}>
+                <input type="text" value={about} onChange={handleAboutChange} />
+                <input
+                  type="submit"
+                  value="Submit"
+                  className="text-white font-bold"
+                />
+              </form>
+            ) : (
+              <p className="text-purple-400">{about}</p>
+            )}
           </div>
           <div className="mt-8">
             <h3 className="font-nosifer text-gray-300 font-semibold mb-4">
