@@ -223,7 +223,12 @@ class OAuthCallback(APIView):
 			
 			username = user_response.json()["login"]
 			email = user_response.json()["email"]
-			picture_url = user_response.json()["image"]["versions"]["medium"]
+			profile_picture_url = user_response.json()["image"]["versions"]["medium"]
+			intra_lvl = user_response.json()["cursus_users"][1]["level"]
+			school = user_response.json()["campus"][0]["name"]
+			
+			# with open('output.json', 'w') as f:
+			# 	json.dump(user_response.json(), f, indent=4)
 
 			titles = user_response.json().get("titles", [])
 			title = ""
@@ -237,11 +242,11 @@ class OAuthCallback(APIView):
 					'username': username,
 					'email': email,
 					'title': title,
+					'profile_picture': profile_picture_url,
+					'intra_level': intra_lvl,
+					'school': school,
 				}
 			)
-			response = requests.get(picture_url)
-			if response.status_code == 200:
-				user.profile_picture.save(f"{username}_profile_picture.jpg", ContentFile(response.content), save=True)
 			login(request, user)
 			token = RefreshToken.for_user(user)
 			token['email'] = user.email

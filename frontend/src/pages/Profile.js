@@ -248,15 +248,21 @@ export const getUserDetails = async ({ redirectUri }) => {
 
 function Profile({ redirectUri }) {
   const [userDetails, setUserDetails] = useState(null);
+  const [imageUrl, setImageUrl] = useState(defaultUserDetails.profile_picture);
 
   useEffect(() => {
     const fetchUserDetails = async () => {
       const response = await getUserDetails({ redirectUri });
       setUserDetails(response.data.user);
+      let asd = response.data.user.profile_picture.replace("/media/", "");
+      let url = decodeURIComponent(asd).replace(":", ":/");
+      setImageUrl(url);
     };
 
     fetchUserDetails();
   }, [redirectUri]);
+
+  console.log(userDetails);
 
   const { t } = useTranslation();
   const [showFriendsList, setShowFriendsList] = useState(false);
@@ -293,9 +299,7 @@ function Profile({ redirectUri }) {
 			border-purple-600"
         >
           <img
-            src={
-              userDetails?.profile_picture || defaultUserDetails.profile_picture
-            }
+            src={imageUrl}
             alt="User Avatar"
             className="w-20 h-20 rounded-full mx-auto mb-4"
           />
@@ -320,17 +324,11 @@ function Profile({ redirectUri }) {
               {t("User Details")}
             </h3>
             <p className="text-purple-400">
-              <strong>{t("Age")}:</strong>{" "}
-              {userDetails?.age || defaultUserDetails.age} {t("years old")}
-              <br />
-              <strong>{t("Gender")}:</strong>{" "}
-              {userDetails?.gender || defaultUserDetails.gender}
-              <br />
               <strong>{t("School")}:</strong>{" "}
               {userDetails?.school || defaultUserDetails.school}
               <br />
               <strong>{t("Level")}:</strong>{" "}
-              {userDetails?.level || defaultUserDetails.level}
+              {userDetails?.intra_level || defaultUserDetails.level}
               <br />
               <strong>{t("Win Rate")}:</strong>{" "}
               {userDetails?.wins || defaultUserDetails.wins}
