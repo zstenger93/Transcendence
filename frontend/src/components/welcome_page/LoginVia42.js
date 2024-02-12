@@ -25,19 +25,3 @@ const LoginButton = ({ t, navigate, redirect_uri }) => {
 };
 
 export default LoginButton;
-
-
-id
-profile_picture
-email
-username
-title
-intra_level
-TwoFA
-AboutMe
-school
-wins
-losses
-win_rate
-total_matches
-match_history
