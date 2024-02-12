@@ -15,7 +15,7 @@ function ScrollDownIndicator() {
   );
 }
 
-function Home() {
+function Home({ redirectUri }) {
   return (
     <>
       <div className="relative h-screen flex items-center justify-center">
@@ -23,7 +23,7 @@ function Home() {
         <ScrollDownIndicator />
         <div className="absolute top-full w-full bg-black home-bg-black-gradient">
           <Readme />
-          <Sidebar />
+          <Sidebar redirectUri={redirectUri} />
         </div>
       </div>
     </>

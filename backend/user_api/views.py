@@ -35,6 +35,7 @@ from django.template.loader import render_to_string
 
 import requests
 import urllib
+import json
 import os
 import qrcode
 import logging
@@ -44,6 +45,7 @@ logger = logging.getLogger(__name__)
 
 class UserRegister(APIView):
 	permission_classes = (permissions.AllowAny,)
+	authentication_classes = (BlacklistCheckJWTAuthentication,)
 
 	def post(self, request):
 		try:
@@ -51,12 +53,15 @@ class UserRegister(APIView):
 			serializer = UserRegisterSerializer(data=clean_data)
 			if serializer.is_valid(raise_exception=True):
 				user = serializer.create(clean_data)
-				if user:
-					response = Response({
-						"detail": serializer.data
-						}, status=status.HTTP_201_CREATED)
-					response["Access-Control-Allow-Credentials"] = 'true'
-					return response
+				token = RefreshToken.for_user(user)
+				token['email'] = user.email
+				token['username'] = user.username
+				response = Response({
+					'refresh': str(token),
+					'access': str(token.access_token),
+				}, status=status.HTTP_200_OK)
+				response["Access-Control-Allow-Credentials"] = 'true'
+				return response
 		except ValidationError as e:
 			response = Response({
 				'detail': str(e),
@@ -212,6 +217,7 @@ class OAuthCallback(APIView):
 				"redirect_uri": settings.REDIRECT_URI + "/api/oauth/callback/",
 			}
 			auth_response = requests.post("https://api.intra.42.fr/oauth/token", data=data)
+
 			access_token = auth_response.json()["access_token"]
 			user_response = requests.get("https://api.intra.42.fr/v2/me", headers={"Authorization": f"Bearer {access_token}"})
 			
@@ -245,7 +251,8 @@ class OAuthCallback(APIView):
 				'access': str(token.access_token),
 			}, status=status.HTTP_200_OK)
 			response["Access-Control-Allow-Credentials"] = 'true'
-			return response
+			redirect_url = 'https://localhost/home?' + urllib.parse.urlencode({'token': str(token.access_token)})
+			return redirect(redirect_url)
 
 		response = Response({'detail': "Check you 42API keys"}, status=status.HTTP_400_BAD_REQUEST)
 		response["Access-Control-Allow-Credentials"] = 'true'
@@ -262,7 +269,9 @@ class OAuthAuthorize(APIView):
 			"redirect_uri": settings.REDIRECT_URI + "/api/oauth/callback/",
 			"response_type": "code",
 		}
-		return HttpResponseRedirect(f"{auth_url}?{urllib.parse.urlencode(params)}")
+		response = HttpResponseRedirect(f"{auth_url}?{urllib.parse.urlencode(params)}")
+		response["Access-Control-Allow-Credentials"] = 'true'
+		return response
 
 
 class accountDeletion(APIView):
