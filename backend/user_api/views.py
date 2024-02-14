@@ -232,11 +232,13 @@ class OAuthCallback(APIView):
 			title = ""
 			if titles:
 				title = titles[0].get("name", "")
-				title = str(title).split()[0] if title else ""
-
+				title = title.split(" ")[0]
 			user, created = AppUser.objects.get_or_create(
 				username = username,
 				ft_user = True,
+				ft_url = user_response.json()["url"],
+				title = title,
+				intra_level = user_response.json()["cursus_users"][1]["level"],
 				defaults = {
 					'username': username,
 					'email': email,
