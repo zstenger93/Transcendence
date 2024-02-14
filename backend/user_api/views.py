@@ -188,6 +188,8 @@ class updateProfile(APIView):
 				request.user.match_history = history
 			if data.get('TwoFA'):
 				request.user.TwoFA = data.get('TwoFA')
+			if data.get('password'):
+				request.user.set_password(data.get('password'))
 			request.user.save()
 			
 			response = Response({
@@ -240,8 +242,7 @@ class OAuthCallback(APIView):
 				}
 			)
 			response = requests.get(picture_url)
-			if response.status_code == 200:
-				user.profile_picture.save(f"{username}_profile_picture.jpg", ContentFile(response.content), save=True)
+		
 			login(request, user)
 			token = RefreshToken.for_user(user)
 			token['email'] = user.email
