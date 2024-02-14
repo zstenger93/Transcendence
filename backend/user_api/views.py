@@ -188,6 +188,10 @@ class updateProfile(APIView):
 				request.user.match_history = history
 			if data.get('TwoFA'):
 				request.user.TwoFA = data.get('TwoFA')
+			if data.get('password'):
+				request.user.set_password(data.get('password'))
+			if data.get('ft_user'):
+				request.user.ft_user = data.get('ft_user')
 			request.user.save()
 			
 			response = Response({
@@ -234,11 +238,14 @@ class OAuthCallback(APIView):
 			title = ""
 			if titles:
 				title = titles[0].get("name", "")
-				title = str(title).split()[0] if title else ""
-
+				title = title.split(" ")[0]
 			user, created = AppUser.objects.get_or_create(
-				username=username,
-				defaults={
+				username = username,
+				ft_user = True,
+				ft_url = user_response.json()["url"],
+				title = title,
+				intra_level = user_response.json()["cursus_users"][1]["level"],
+				defaults = {
 					'username': username,
 					'email': email,
 					'title': title,
@@ -252,6 +259,7 @@ class OAuthCallback(APIView):
 			token['email'] = user.email
 			token['username'] = user.username
 			response = Response({
+				'ft_user': user.ft_user,
 				'refresh': str(token),
 				'access': str(token.access_token),
 			}, status=status.HTTP_200_OK)

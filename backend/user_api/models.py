@@ -49,6 +49,8 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 	win_rate = models.FloatField(default=0)
 	total_matches = models.PositiveIntegerField(default=0)
 	match_history = JSONField(default=dict)
+	ft_user = models.BooleanField(default=False)
+	ft_url = models.URLField(max_length=200, null=True, blank=True)
 
 	USERNAME_FIELD = 'email'
 	REQUIRED_FIELDS = ['username']
