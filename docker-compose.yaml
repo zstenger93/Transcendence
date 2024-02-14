@@ -24,8 +24,8 @@ services:
       context: .
       dockerfile: docker/backend/backend.Dockerfile
     image: transcendence_backend
-    # ports:
-    #   - 8000:8000
+    ports:
+      - 8000:8000
     volumes:
       - ${PWD}:/app/
     entrypoint: /app/docker/backend/backend.sh
