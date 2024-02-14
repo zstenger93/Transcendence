@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import axios from "axios";
 import { WelcomeButtonStyle } from "../buttons/ButtonStyle";
 
 const OAuth = async ({ navigate, redirect_uri }) => {
@@ -8,10 +7,8 @@ const OAuth = async ({ navigate, redirect_uri }) => {
 
 window.onload = () => {
   const urlParams = new URLSearchParams(window.location.search);
-  const token = urlParams.get('token');
-  console.log(token);
+  localStorage.setItem("access", urlParams.get("token"));
 };
-
 
 const LoginButton = ({ t, navigate, redirect_uri }) => {
   return (
@@ -25,19 +22,3 @@ const LoginButton = ({ t, navigate, redirect_uri }) => {
 };
 
 export default LoginButton;
-
-
-id
-profile_picture
-email
-username
-title
-intra_level
-TwoFA
-AboutMe
-school
-wins
-losses
-win_rate
-total_matches
-match_history

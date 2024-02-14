@@ -227,7 +227,13 @@ class OAuthCallback(APIView):
 			
 			username = user_response.json()["login"]
 			email = user_response.json()["email"]
-			picture_url = user_response.json()["image"]["versions"]["medium"]
+			profile_picture_url = user_response.json()["image"]["versions"]["medium"]
+			intra_lvl = user_response.json()["cursus_users"][1]["level"]
+			school = user_response.json()["campus"][0]["name"]
+			
+			# with open('output.json', 'w') as f:
+			# 	json.dump(user_response.json(), f, indent=4)
+
 			titles = user_response.json().get("titles", [])
 			title = ""
 			if titles:
@@ -242,10 +248,12 @@ class OAuthCallback(APIView):
 				defaults = {
 					'username': username,
 					'email': email,
+					'title': title,
+					'profile_picture': profile_picture_url,
+					'intra_level': intra_lvl,
+					'school': school,
 				}
 			)
-			response = requests.get(picture_url)
-			
 			login(request, user)
 			token = RefreshToken.for_user(user)
 			token['email'] = user.email
@@ -256,9 +264,11 @@ class OAuthCallback(APIView):
 				'access': str(token.access_token),
 			}, status=status.HTTP_200_OK)
 			response["Access-Control-Allow-Credentials"] = 'true'
-			# redirect_url = 'https://localhost/home?' + urllib.parse.urlencode({'token': str(token.access_token)})
-			# return redirect(redirect_url)
-			return response
+			if created or user.TwoFA == False:
+				redirect_url = 'https://localhost/home?' + urllib.parse.urlencode({'token': str(token.access_token)})
+			else:
+				redirect_url = 'https://localhost/2fa?' + urllib.parse.urlencode({'token': str(token.access_token)})
+			return redirect(redirect_url)
 
 		response = Response({'detail': "Check you 42API keys"}, status=status.HTTP_400_BAD_REQUEST)
 		response["Access-Control-Allow-Credentials"] = 'true'
