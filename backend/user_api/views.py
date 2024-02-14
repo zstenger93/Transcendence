@@ -190,6 +190,8 @@ class updateProfile(APIView):
 				request.user.TwoFA = data.get('TwoFA')
 			if data.get('password'):
 				request.user.set_password(data.get('password'))
+			if data.get('ft_user'):
+				request.user.ft_user = data.get('ft_user')
 			request.user.save()
 			
 			response = Response({
@@ -226,32 +228,35 @@ class OAuthCallback(APIView):
 			username = user_response.json()["login"]
 			email = user_response.json()["email"]
 			picture_url = user_response.json()["image"]["versions"]["medium"]
-
 			titles = user_response.json().get("titles", [])
 			title = ""
 			if titles:
 				title = titles[0].get("name", "")
 				title = str(title).split()[0] if title else ""
 
-			user= AppUser.objects.get_or_create(
-				username=username,
-				defaults={
+			user, created = AppUser.objects.get_or_create(
+				username = username,
+				ft_user = True,
+				defaults = {
 					'username': username,
 					'email': email,
 				}
 			)
 			response = requests.get(picture_url)
+			
 			login(request, user)
 			token = RefreshToken.for_user(user)
 			token['email'] = user.email
 			token['username'] = user.username
 			response = Response({
+				'ft_user': user.ft_user,
 				'refresh': str(token),
 				'access': str(token.access_token),
 			}, status=status.HTTP_200_OK)
 			response["Access-Control-Allow-Credentials"] = 'true'
-			redirect_url = 'https://localhost/home?' + urllib.parse.urlencode({'token': str(token.access_token)})
-			return redirect(redirect_url)
+			# redirect_url = 'https://localhost/home?' + urllib.parse.urlencode({'token': str(token.access_token)})
+			# return redirect(redirect_url)
+			return response
 
 		response = Response({'detail': "Check you 42API keys"}, status=status.HTTP_400_BAD_REQUEST)
 		response["Access-Control-Allow-Credentials"] = 'true'
