@@ -267,6 +267,26 @@ const changeAbout = async ({ redirectUri, about }) => {
   return response;
 };
 
+const changeUsername = async ({ redirectUri, username }) => {
+  let response = {};
+  try {
+    const token = localStorage.getItem("access");
+    response = await axios.post(
+      `${redirectUri}/api/updateProfile`,
+      { username: username },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
 function Profile({ redirectUri }) {
   const [userDetails, setUserDetails] = useState(null);
   const [imageUrl, setImageUrl] = useState(defaultUserDetails.profile_picture);
@@ -289,6 +309,12 @@ function Profile({ redirectUri }) {
   const [showFriendsList, setShowFriendsList] = useState(false);
   const [showMatchHistory, setShowMatchHistory] = useState(false);
   const [showUserSettings, setShowUserSettings] = useState(false);
+  const [username, setUsername] = useState(
+    userDetails?.username || defaultUserDetails.username
+  );
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
   const [about, setAbout] = useState(
     userDetails?.AboutMe || defaultUserDetails.about
   );
@@ -325,12 +351,15 @@ function Profile({ redirectUri }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await changeAbout({ redirectUri, about });
+    await changeUsername({ redirectUri, username }); // Add this line
     setUserDetails((prevDetails) => {
       const updatedDetails = {
         ...prevDetails,
         AboutMe: about || defaultUserDetails.about,
+        username: username || defaultUserDetails.username, // Add this line
       };
       setAbout(updatedDetails.AboutMe);
+      setUsername(updatedDetails.username); // Add this line
       return updatedDetails;
     });
     setIsEditing(false);
@@ -354,7 +383,28 @@ function Profile({ redirectUri }) {
           />
           <h2 className="text-gray-300 font-nosifer text-1.5xl font-bold">
             {userDetails?.title || defaultUserDetails.title}{" "}
-            {userDetails?.username || defaultUserDetails.username}
+            {isEditing ? (
+              <form onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  value={username}
+                  onChange={handleUsernameChange}
+                />
+                <input
+                  type="submit"
+                  value="Submit"
+                  className="text-white font-bold"
+                />
+              </form>
+            ) : (
+              <>
+                {userDetails?.username || defaultUserDetails.username}
+                <CiEdit
+                  onClick={() => setIsEditing(true)}
+                  className="text-white ml-2, relative top-[-3px]"
+                />
+              </>
+            )}
           </h2>
           <p className="text-purple-400">
             {userDetails?.email || defaultUserDetails.email}
