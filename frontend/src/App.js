@@ -21,6 +21,7 @@ import StartScreen from "./components/game/StartScreen";
 import { WelcomeButtonStyle } from "./components/buttons/ButtonStyle";
 import BackButton from "./components/buttons/BackButton";
 import backgroundimage from "./images/pongbg.png";
+import TwoFA from "./pages/TwoFA";
 
 
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
@@ -169,6 +170,14 @@ function App() {
             element={
               <PageWrapper image={BreakingBadMorty} redirectUri={REDIRECT_URI}>
                 <ChoosePongMode />
+              </PageWrapper>
+            }
+          />
+		   <Route
+            path="2fa"
+            element={
+              <PageWrapper image={Background} showSidebar={false} redirectUri={REDIRECT_URI}>
+                <TwoFA redirectUri={REDIRECT_URI} />
               </PageWrapper>
             }
           />
