@@ -295,17 +295,22 @@ function Profile({ redirectUri }) {
     const fetchUserDetails = async () => {
       const response = await getUserDetails({ redirectUri });
       setUserDetails(response.data.user);
+      setUsername(response.data.user.username);
       let url = decodeURIComponent(
         response.data.user.profile_picture.replace("/media/", "")
       ).replace(":", ":/");
       setImageUrl(url);
     };
-
     fetchUserDetails();
   }, [redirectUri]);
 
+  useEffect(() => {
+    setUsername(userDetails?.username || defaultUserDetails.username);
+  }, [userDetails]);
+
   const { t } = useTranslation();
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditingAbout, setIsEditingAbout] = useState(false);
+  const [isEditingUsername, setIsEditingUsername] = useState(false);
   const [showFriendsList, setShowFriendsList] = useState(false);
   const [showMatchHistory, setShowMatchHistory] = useState(false);
   const [showUserSettings, setShowUserSettings] = useState(false);
@@ -321,8 +326,12 @@ function Profile({ redirectUri }) {
   const handleAboutChange = (event) => {
     setAbout(event.target.value);
   };
-  const handleEditClick = () => {
-    setIsEditing(true);
+  const handleEditClick = (section) => {
+    if (section === "about") {
+      setIsEditingAbout(!isEditingAbout);
+    } else if (section === "username") {
+      setIsEditingUsername(!isEditingUsername);
+    }
   };
   const toggleFriendsList = () => {
     setShowFriendsList(!showFriendsList);
@@ -348,21 +357,31 @@ function Profile({ redirectUri }) {
     }
   }, [userDetails]);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (section, event) => {
     event.preventDefault();
-    await changeAbout({ redirectUri, about });
-    await changeUsername({ redirectUri, username }); // Add this line
-    setUserDetails((prevDetails) => {
-      const updatedDetails = {
-        ...prevDetails,
-        AboutMe: about || defaultUserDetails.about,
-        username: username || defaultUserDetails.username, // Add this line
-      };
-      setAbout(updatedDetails.AboutMe);
-      setUsername(updatedDetails.username); // Add this line
-      return updatedDetails;
-    });
-    setIsEditing(false);
+    if (section === "about") {
+      await changeAbout({ redirectUri, about });
+      setUserDetails((prevDetails) => {
+        const updatedDetails = {
+          ...prevDetails,
+          AboutMe: about || defaultUserDetails.about,
+        };
+        setAbout(updatedDetails.AboutMe);
+        return updatedDetails;
+      });
+      setIsEditingAbout(false);
+    } else if (section === "username") {
+      await changeUsername({ redirectUri, username });
+      setUserDetails((prevDetails) => {
+        const updatedDetails = {
+          ...prevDetails,
+          username: username || defaultUserDetails.username,
+        };
+        setUsername(updatedDetails.username);
+        return updatedDetails;
+      });
+      setIsEditingUsername(false);
+    }
   };
 
   return (
@@ -381,14 +400,18 @@ function Profile({ redirectUri }) {
             alt="User Avatar"
             className="w-20 h-20 rounded-full mx-auto mb-4"
           />
-          <h2 className="text-gray-300 font-nosifer text-1.5xl font-bold">
+          <h2
+            className="text-gray-300 font-nosifer text-1.5xl font-bold"
+            style={{ display: "flex", alignItems: "center" }}
+          >
             {userDetails?.title || defaultUserDetails.title}{" "}
-            {isEditing ? (
-              <form onSubmit={handleSubmit}>
+            {isEditingUsername ? (
+              <form onSubmit={(event) => handleSubmit("username", event)}>
                 <input
                   type="text"
                   value={username}
                   onChange={handleUsernameChange}
+                  className="text-black"
                 />
                 <input
                   type="submit"
@@ -399,10 +422,7 @@ function Profile({ redirectUri }) {
             ) : (
               <>
                 {userDetails?.username || defaultUserDetails.username}
-                <CiEdit
-                  onClick={() => setIsEditing(true)}
-                  className="text-white ml-2, relative top-[-3px]"
-                />
+                <CiEdit onClick={() => handleEditClick("username")} />
               </>
             )}
           </h2>
@@ -410,19 +430,22 @@ function Profile({ redirectUri }) {
             {userDetails?.email || defaultUserDetails.email}
           </p>
           <div className="mt-8">
-            <div className="flex justify-center items-center">
+            <div
+              className="flex justify-center"
+              style={{ display: "flex", alignItems: "center" }}
+            >
               <h3 className="font-nosifer text-gray-300 font-semibold mb-4">
                 {t("About Me")}
               </h3>
-              {!isEditing && (
+              {!isEditingAbout && (
                 <CiEdit
-                  onClick={handleEditClick}
-                  className="text-white ml-2, relative top-[-3px]"
+                  onClick={() => handleEditClick("about")}
+                  className="text-white"
                 />
               )}
             </div>
-            {isEditing ? (
-              <form onSubmit={handleSubmit}>
+            {isEditingAbout ? (
+              <form onSubmit={(event) => handleSubmit("about", event)}>
                 <input type="text" value={about} onChange={handleAboutChange} />
                 <input
                   type="submit"
