@@ -13,7 +13,6 @@ const userLogout = async ({ redirectUri }) => {
         },
       }
     );
-    localStorage.removeItem("refresh");
     localStorage.removeItem("access");
   } catch (error) {
     console.log(error);

@@ -11,8 +11,8 @@ services:
     image: transcendence_frontend
     volumes:
       - ${PWD}:/app/
-    ports:
-      - 3000:3000
+    # ports:
+    #   - 4000:4000
     restart: unless-stopped
     command: npm start
 
