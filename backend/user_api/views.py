@@ -233,16 +233,14 @@ class OAuthCallback(APIView):
 				title = titles[0].get("name", "")
 				title = str(title).split()[0] if title else ""
 
-			user, created = AppUser.objects.get_or_create(
+			user= AppUser.objects.get_or_create(
 				username=username,
 				defaults={
 					'username': username,
 					'email': email,
-					'title': title,
 				}
 			)
 			response = requests.get(picture_url)
-		
 			login(request, user)
 			token = RefreshToken.for_user(user)
 			token['email'] = user.email
