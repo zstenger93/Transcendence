@@ -6,6 +6,7 @@ import { ButtonStyle } from "../components/buttons/ButtonStyle";
 import UserSettings from "../components/profile/UserSettings";
 import axios from "axios";
 import { CiEdit } from "react-icons/ci";
+import Cookies from "js-cookie";
 
 const friendsListData = [
   {
@@ -227,6 +228,8 @@ const defaultUserDetails = {
   wins: "42",
   losses: "58",
   win_rate: "42%",
+  ft_user: false,
+  ft_url: "none",
   profile_picture:
     "https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp",
 };
@@ -234,7 +237,7 @@ const defaultUserDetails = {
 export const getUserDetails = async ({ redirectUri }) => {
   let response = {};
   try {
-    const token = localStorage.getItem("access");
+    const token = Cookies.get('access');
     response = await axios.get(`${redirectUri}/api/profile`, {
       headers: {
         withCredentials: true,
@@ -250,7 +253,7 @@ export const getUserDetails = async ({ redirectUri }) => {
 const changeAbout = async ({ redirectUri, about }) => {
   let response = {};
   try {
-    const token = localStorage.getItem("access");
+    const token = Cookies.get('access');
     response = await axios.post(
       `${redirectUri}/api/updateProfile`,
       { AboutMe: about },
@@ -270,7 +273,7 @@ const changeAbout = async ({ redirectUri, about }) => {
 const changeUsername = async ({ redirectUri, username }) => {
   let response = {};
   try {
-    const token = localStorage.getItem("access");
+    const token = Cookies.get('access');
     response = await axios.post(
       `${redirectUri}/api/updateProfile`,
       { username: username },
@@ -287,21 +290,41 @@ const changeUsername = async ({ redirectUri, username }) => {
   return response;
 };
 
+const fetchUserDetails = async (
+  setUserDetails,
+  setUsername,
+  setImageUrl,
+  redirectUri
+) => {
+  const response = await getUserDetails({ redirectUri });
+  setUserDetails(response.data.user);
+
+  console.log(response.data.user);
+
+  setUsername(response.data.user.username);
+
+  if (response.data.user.profile_picture) {
+    let url = decodeURIComponent(
+      response.data.user.profile_picture.replace("/media/", "")
+    ).replace(":", ":/");
+    setImageUrl(url);
+  }
+};
+
 function Profile({ redirectUri }) {
   const [userDetails, setUserDetails] = useState(null);
   const [imageUrl, setImageUrl] = useState(defaultUserDetails.profile_picture);
+  const [username, setUsername] = useState(
+    userDetails?.username || defaultUserDetails.username
+  );
 
   useEffect(() => {
-    const fetchUserDetails = async () => {
-      const response = await getUserDetails({ redirectUri });
-      setUserDetails(response.data.user);
-      setUsername(response.data.user.username);
-      let url = decodeURIComponent(
-        response.data.user.profile_picture.replace("/media/", "")
-      ).replace(":", ":/");
-      setImageUrl(url);
-    };
-    fetchUserDetails();
+    const wtf = Cookies.get('access');
+	console.log("wtf1: ", wtf);
+    if (wtf) {
+      console.log("wtf2: ", wtf);
+      fetchUserDetails(setUserDetails, setUsername, setImageUrl, redirectUri);
+    }
   }, [redirectUri]);
 
   useEffect(() => {
@@ -314,9 +337,6 @@ function Profile({ redirectUri }) {
   const [showFriendsList, setShowFriendsList] = useState(false);
   const [showMatchHistory, setShowMatchHistory] = useState(false);
   const [showUserSettings, setShowUserSettings] = useState(false);
-  const [username, setUsername] = useState(
-    userDetails?.username || defaultUserDetails.username
-  );
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
@@ -401,7 +421,8 @@ function Profile({ redirectUri }) {
             className="w-20 h-20 rounded-full mx-auto mb-4"
           />
           <h2
-            className="text-gray-300 font-nosifer text-1.5xl font-bold"
+            className="text-gray-300 font-nosifer text-1.5xl font-bold text-center
+			flex justify-center"
             style={{ display: "flex", alignItems: "center" }}
           >
             {userDetails?.title || defaultUserDetails.title}{" "}
@@ -463,13 +484,21 @@ function Profile({ redirectUri }) {
             </h3>
             <p className="text-purple-400">
               <strong>{t("School")}:</strong>{" "}
-              {userDetails?.school || defaultUserDetails.school}
+              {userDetails?.school !== undefined && userDetails?.school !== null
+                ? userDetails?.school
+                : defaultUserDetails.school}
               <br />
               <strong>{t("Level")}:</strong>{" "}
-              {userDetails?.intra_level || defaultUserDetails.level}
+              {userDetails?.intra_level !== undefined &&
+              userDetails?.intra_level !== null
+                ? userDetails?.intra_level
+                : defaultUserDetails.level}
               <br />
               <strong>{t("Win Rate")}:</strong>{" "}
-              {userDetails?.wins || defaultUserDetails.wins}
+              {userDetails?.win_rate !== undefined &&
+              userDetails?.win_rate !== null
+                ? userDetails?.win_rate
+                : defaultUserDetails.wins}
             </p>
           </div>
           <div className="mt-8 justify-center space-x-4 text-center">

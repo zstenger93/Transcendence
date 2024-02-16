@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const sendAuthCode = async ({ redirectUri }) => {
   let response = {};
   try {
-    const token = localStorage.getItem("access");
+    const token = Cookies.get('access');
     console.log("i was here");
     response = await axios.post(
       `${redirectUri}/api/sendQrCode`,
@@ -26,7 +27,7 @@ const sendAuthCode = async ({ redirectUri }) => {
 const verifyAuthCode = async ({ redirectUri, otp_code_input }) => {
   let response = {};
   try {
-    const token = localStorage.getItem("access");
+    const token = Cookies.get('access');
     response = await axios.post(
       `${redirectUri}/api/TwoFactorAuth`,
       { otp_code: otp_code_input },

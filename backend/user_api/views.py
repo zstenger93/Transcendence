@@ -230,6 +230,8 @@ class OAuthCallback(APIView):
 			profile_picture_url = user_response.json()["image"]["versions"]["medium"]
 			intra_lvl = user_response.json()["cursus_users"][1]["level"]
 			school = user_response.json()["campus"][0]["name"]
+			ft_url = user_response.json()["url"],
+			ft_user = True,
 			
 			# with open('output.json', 'w') as f:
 			# 	json.dump(user_response.json(), f, indent=4)
@@ -241,8 +243,6 @@ class OAuthCallback(APIView):
 				title = title.split(" ")[0]
 			user, created = AppUser.objects.get_or_create(
 				username = username,
-				ft_user = True,
-				ft_url = user_response.json()["url"],
 				title = title,
 				intra_level = user_response.json()["cursus_users"][1]["level"],
 				defaults = {
@@ -252,6 +252,8 @@ class OAuthCallback(APIView):
 					'profile_picture': profile_picture_url,
 					'intra_level': intra_lvl,
 					'school': school,
+					'ft_url': ft_url,
+					'ft_user': ft_user
 				}
 			)
 			login(request, user)
@@ -407,7 +409,7 @@ class sendQrCode(APIView):
 
 				# Generate QR code
 				img = qrcode.make(device.config_url)
-				img.save("qrcode.png")
+				# img.save("qrcode.png")
 
 				mail_subject = 'DJANGO OTP DEMO'
 				message = f"Hello {request.user},\n\nYour QR Code is: <img src='cid:image1'>"
