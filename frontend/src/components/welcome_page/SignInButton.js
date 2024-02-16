@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { WelcomeButtonStyle } from "../buttons/ButtonStyle";
+import Cookies from "js-cookie";
 
 const SignInButt = ({ t, redirectToHome, redirect_uri }) => {
   const [showFields, setShowFields] = useState(false);
@@ -19,7 +20,12 @@ const SignInButt = ({ t, redirectToHome, redirect_uri }) => {
         },
         { withCredentials: true }
       );
-      localStorage.setItem("access", response.data.access);
+      const token = response.data.access;
+      Cookies.set("access", token, {
+        expires: 7,
+        sameSite: "Strict",
+        secure: true,
+      });
       if (response.data.access) redirectToHome();
     } catch (error) {
       if (error.response && error.response.data) {
