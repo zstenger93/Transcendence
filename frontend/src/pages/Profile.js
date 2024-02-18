@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import { ButtonStyle } from "../components/buttons/ButtonStyle";
 import UserSettings from "../components/profile/UserSettings";
 import axios from "axios";
+import { CiEdit } from "react-icons/ci";
+import Cookies from "js-cookie";
 
 const friendsListData = [
   {
@@ -221,11 +223,13 @@ const defaultUserDetails = {
   username: "TrasnscEND",
   email: "fake@mail.com",
   about: "I turn people crazy with my clear subject description.",
-  age: 42,
-  gender: "Computer",
-  school: "42 Heilbronn",
+  school: "42",
   level: "42.42",
   wins: "42",
+  losses: "58",
+  win_rate: "42%",
+  ft_user: false,
+  ft_url: "none",
   profile_picture:
     "https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp",
 };
@@ -233,7 +237,7 @@ const defaultUserDetails = {
 export const getUserDetails = async ({ redirectUri }) => {
   let response = {};
   try {
-    const token = localStorage.getItem("access");
+    const token = Cookies.get('access');
     response = await axios.get(`${redirectUri}/api/profile`, {
       headers: {
         withCredentials: true,
@@ -246,39 +250,158 @@ export const getUserDetails = async ({ redirectUri }) => {
   return response;
 };
 
+const changeAbout = async ({ redirectUri, about }) => {
+  let response = {};
+  try {
+    const token = Cookies.get('access');
+    response = await axios.post(
+      `${redirectUri}/api/updateProfile`,
+      { AboutMe: about },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+const changeUsername = async ({ redirectUri, username }) => {
+  let response = {};
+  try {
+    const token = Cookies.get('access');
+    response = await axios.post(
+      `${redirectUri}/api/updateProfile`,
+      { username: username },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+const fetchUserDetails = async (
+  setUserDetails,
+  setUsername,
+  setImageUrl,
+  redirectUri
+) => {
+  const response = await getUserDetails({ redirectUri });
+  setUserDetails(response.data.user);
+
+  console.log(response.data.user);
+
+  setUsername(response.data.user.username);
+
+  if (response.data.user.profile_picture) {
+    let url = decodeURIComponent(
+      response.data.user.profile_picture.replace("/media/", "")
+    ).replace(":", ":/");
+    setImageUrl(url);
+  }
+};
+
 function Profile({ redirectUri }) {
   const [userDetails, setUserDetails] = useState(null);
+  const [imageUrl, setImageUrl] = useState(defaultUserDetails.profile_picture);
+  const [username, setUsername] = useState(
+    userDetails?.username || defaultUserDetails.username
+  );
 
   useEffect(() => {
-    const fetchUserDetails = async () => {
-      const response = await getUserDetails({ redirectUri });
-      setUserDetails(response.data.user);
-    };
-
-    fetchUserDetails();
+    const wtf = Cookies.get('access');
+	console.log("wtf1: ", wtf);
+    if (wtf) {
+      console.log("wtf2: ", wtf);
+      fetchUserDetails(setUserDetails, setUsername, setImageUrl, redirectUri);
+    }
   }, [redirectUri]);
 
+  useEffect(() => {
+    setUsername(userDetails?.username || defaultUserDetails.username);
+  }, [userDetails]);
+
   const { t } = useTranslation();
+  const [isEditingAbout, setIsEditingAbout] = useState(false);
+  const [isEditingUsername, setIsEditingUsername] = useState(false);
   const [showFriendsList, setShowFriendsList] = useState(false);
   const [showMatchHistory, setShowMatchHistory] = useState(false);
   const [showUserSettings, setShowUserSettings] = useState(false);
-
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+  const [about, setAbout] = useState(
+    userDetails?.AboutMe || defaultUserDetails.about
+  );
+  const handleAboutChange = (event) => {
+    setAbout(event.target.value);
+  };
+  const handleEditClick = (section) => {
+    if (section === "about") {
+      setIsEditingAbout(!isEditingAbout);
+    } else if (section === "username") {
+      setIsEditingUsername(!isEditingUsername);
+    }
+  };
   const toggleFriendsList = () => {
     setShowFriendsList(!showFriendsList);
     setShowMatchHistory(false);
     setShowUserSettings(false);
   };
-
   const toggleMatchHistory = () => {
     setShowMatchHistory(!showMatchHistory);
     setShowFriendsList(false);
     setShowUserSettings(false);
   };
-
   const toggleUserSettings = () => {
     setShowUserSettings(!showUserSettings);
     setShowFriendsList(false);
     setShowMatchHistory(false);
+  };
+
+  useEffect(() => {
+    if (userDetails && userDetails.AboutMe) {
+      setAbout(userDetails.AboutMe);
+    } else {
+      setAbout(defaultUserDetails.about);
+    }
+  }, [userDetails]);
+
+  const handleSubmit = async (section, event) => {
+    event.preventDefault();
+    if (section === "about") {
+      await changeAbout({ redirectUri, about });
+      setUserDetails((prevDetails) => {
+        const updatedDetails = {
+          ...prevDetails,
+          AboutMe: about || defaultUserDetails.about,
+        };
+        setAbout(updatedDetails.AboutMe);
+        return updatedDetails;
+      });
+      setIsEditingAbout(false);
+    } else if (section === "username") {
+      await changeUsername({ redirectUri, username });
+      setUserDetails((prevDetails) => {
+        const updatedDetails = {
+          ...prevDetails,
+          username: username || defaultUserDetails.username,
+        };
+        setUsername(updatedDetails.username);
+        return updatedDetails;
+      });
+      setIsEditingUsername(false);
+    }
   };
 
   return (
@@ -293,47 +416,89 @@ function Profile({ redirectUri }) {
 			border-purple-600"
         >
           <img
-            src={
-              userDetails?.profile_picture || defaultUserDetails.profile_picture
-            }
+            src={imageUrl}
             alt="User Avatar"
             className="w-20 h-20 rounded-full mx-auto mb-4"
           />
-          <h2 className="text-gray-300 font-nosifer text-1.5xl font-bold">
+          <h2
+            className="text-gray-300 font-nosifer text-1.5xl font-bold text-center
+			flex justify-center"
+            style={{ display: "flex", alignItems: "center" }}
+          >
             {userDetails?.title || defaultUserDetails.title}{" "}
-            {userDetails?.username || defaultUserDetails.username}
+            {isEditingUsername ? (
+              <form onSubmit={(event) => handleSubmit("username", event)}>
+                <input
+                  type="text"
+                  value={username}
+                  onChange={handleUsernameChange}
+                  className="text-black"
+                />
+                <input
+                  type="submit"
+                  value="Submit"
+                  className="text-white font-bold"
+                />
+              </form>
+            ) : (
+              <>
+                {userDetails?.username || defaultUserDetails.username}
+                <CiEdit onClick={() => handleEditClick("username")} />
+              </>
+            )}
           </h2>
           <p className="text-purple-400">
             {userDetails?.email || defaultUserDetails.email}
           </p>
-
           <div className="mt-8">
-            <h3 className="font-nosifer text-gray-300 font-semibold mb-4">
-              {t("About Me")}
-            </h3>
-            <p className="text-purple-400">
-              {userDetails?.about || defaultUserDetails.about}
-            </p>
+            <div
+              className="flex justify-center"
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <h3 className="font-nosifer text-gray-300 font-semibold mb-4">
+                {t("About Me")}
+              </h3>
+              {!isEditingAbout && (
+                <CiEdit
+                  onClick={() => handleEditClick("about")}
+                  className="text-white"
+                />
+              )}
+            </div>
+            {isEditingAbout ? (
+              <form onSubmit={(event) => handleSubmit("about", event)}>
+                <input type="text" value={about} onChange={handleAboutChange} />
+                <input
+                  type="submit"
+                  value="Submit"
+                  className="text-white font-bold"
+                />
+              </form>
+            ) : (
+              <p className="text-purple-400">{about}</p>
+            )}
           </div>
           <div className="mt-8">
             <h3 className="font-nosifer text-gray-300 font-semibold mb-4">
               {t("User Details")}
             </h3>
             <p className="text-purple-400">
-              <strong>{t("Age")}:</strong>{" "}
-              {userDetails?.age || defaultUserDetails.age} {t("years old")}
-              <br />
-              <strong>{t("Gender")}:</strong>{" "}
-              {userDetails?.gender || defaultUserDetails.gender}
-              <br />
               <strong>{t("School")}:</strong>{" "}
-              {userDetails?.school || defaultUserDetails.school}
+              {userDetails?.school !== undefined && userDetails?.school !== null
+                ? userDetails?.school
+                : defaultUserDetails.school}
               <br />
               <strong>{t("Level")}:</strong>{" "}
-              {userDetails?.level || defaultUserDetails.level}
+              {userDetails?.intra_level !== undefined &&
+              userDetails?.intra_level !== null
+                ? userDetails?.intra_level
+                : defaultUserDetails.level}
               <br />
               <strong>{t("Win Rate")}:</strong>{" "}
-              {userDetails?.wins || defaultUserDetails.wins}
+              {userDetails?.win_rate !== undefined &&
+              userDetails?.win_rate !== null
+                ? userDetails?.win_rate
+                : defaultUserDetails.wins}
             </p>
           </div>
           <div className="mt-8 justify-center space-x-4 text-center">

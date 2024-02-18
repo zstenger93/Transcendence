@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import { WelcomeButtonStyle } from "../buttons/ButtonStyle";
+import Cookies from "js-cookie";
 
 const OAuth = async ({ navigate, redirect_uri }) => {
   window.location.href = `${redirect_uri}/api/oauth/authorize`;
@@ -8,10 +8,13 @@ const OAuth = async ({ navigate, redirect_uri }) => {
 
 window.onload = () => {
   const urlParams = new URLSearchParams(window.location.search);
-  const token = urlParams.get('token');
-  console.log(token);
+  const token = urlParams.get("token");
+  Cookies.set("access", token, {
+	expires: 7,
+	sameSite: "Strict",
+	secure: true,
+  });
 };
-
 
 const LoginButton = ({ t, navigate, redirect_uri }) => {
   return (

@@ -6,11 +6,12 @@ import { ButtonStyle } from "../buttons/ButtonStyle";
 import { getUserDetails } from "../../pages/Profile";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const activate2FA = async ({ redirectUri }) => {
   let response = {};
   try {
-    const token = localStorage.getItem("access");
+    const token = Cookies.get('access');
     response = await axios.post(
       `${redirectUri}/api/activateTwoFa`,
       {},
@@ -30,7 +31,7 @@ const activate2FA = async ({ redirectUri }) => {
 const deactivate2FA = async ({ redirectUri }) => {
   let response = {};
   try {
-    const token = localStorage.getItem("access");
+    const token = Cookies.get('access');
     response = await axios.post(
       `${redirectUri}/api/deactivateTwoFa`,
       {},
@@ -50,7 +51,7 @@ const deactivate2FA = async ({ redirectUri }) => {
 const deleteAccount = async ({ redirectUri }) => {
   let response = {};
   try {
-    const token = localStorage.getItem("access");
+    const token = Cookies.get('access');
     response = await axios.post(
       `${redirectUri}/api/accountDeletion`,
       {},
@@ -124,23 +125,30 @@ function UserSettings({ redirectUri }) {
           ></span>
         </div>
       </div>
-      <div className="mb-4">
-        <label className="text-gray-300">{t("Change Avatar")}</label>
-        <input type="file" accept="image/*" className="mx-auto" />
-      </div>
 
       <div className="mb-4">
-        <label className="text-gray-300">{t("New Password ")}</label>
-        <input type="password" />
+        <label className="text-gray-300">{t("Change Avatar")}</label>
+        <label className={`w-38 ${ButtonStyle} mx-auto`}>
+          <input type="file" accept="image/*" hidden />
+          {t("Choose File")}
+        </label>
       </div>
-      <div className="mb-4">
-        <label className="text-gray-300">{t("Confirm New Password ")}</label>
-        <input type="password" />
-      </div>
-      <div className="mb-4">
-        <label className="text-gray-300">{t("Change Username ")}</label>
-        <input type="text" />
-      </div>
+
+      {!userDetails?.ft_user && (
+        <>
+          <div className="mb-4">
+            <label className="text-gray-300">{t("New Password ")}</label>
+            <input type="password" />
+          </div>
+          <div className="mb-4">
+            <label className="text-gray-300">
+              {t("Confirm New Password ")}
+            </label>
+            <input type="password" />
+          </div>
+        </>
+      )}
+
       <div className="mb-4">
         <button
           className={`w-38 ${ButtonStyle} mx-auto`}
