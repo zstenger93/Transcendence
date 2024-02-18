@@ -47,11 +47,12 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      - ./docker/prometheus/prometheus-data:/prometheus
+      - ./docker/prometheus/:/etc/prometheus/
+      - ./docker/data/prometheus-data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus/data'
+      - '--storage.tsdb.retention.time=30d'
     restart: unless-stopped
   postgres-exporter:
     image: wrouesnel/postgres_exporter
@@ -68,6 +69,6 @@ services:
     ports:
       - '3200:3000'
     volumes:
-      - ./docker/grafana/grafana-data:/var/lib/grafana
+      - ./docker/data/grafana-data:/var/lib/grafana
       - ./docker/grafana/provisioning/:/etc/grafana/provisioning/
     restart: unless-stopped
