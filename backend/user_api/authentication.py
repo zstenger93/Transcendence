@@ -27,6 +27,6 @@ class AccountActivationTokenGenerator(PasswordResetTokenGenerator):
 account_activation_token = AccountActivationTokenGenerator()
 
 def is_authenticated(request):
-	response = JsonResponse({'is_authenticated': request.user.is_authenticated})
-	response["Access-Control-Allow-Credentials"] = 'true'
-	return response
+    response = JsonResponse({'is_authenticated': request.user.is_authenticated})
+    response["Access-Control-Allow-Credentials"] = 'true'
+    return response

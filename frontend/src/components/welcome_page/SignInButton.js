@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { WelcomeButtonStyle } from "../buttons/ButtonStyle";
+import Cookies from "js-cookie";
 
 const SignInButt = ({ t, redirectToHome, redirect_uri }) => {
   const [showFields, setShowFields] = useState(false);
@@ -10,7 +11,6 @@ const SignInButt = ({ t, redirectToHome, redirect_uri }) => {
   const [error, setError] = useState(null);
 
   const loginUser = async (email, password, redirect_uri) => {
-
     try {
       const response = await axios.post(
         `${redirect_uri}/api/login`,
@@ -20,8 +20,13 @@ const SignInButt = ({ t, redirectToHome, redirect_uri }) => {
         },
         { withCredentials: true }
       );
-	  redirectToHome();
-      return response.data;
+      const token = response.data.access;
+      Cookies.set("access", token, {
+        expires: 7,
+        sameSite: "Strict",
+        secure: true,
+      });
+      if (response.data.access) redirectToHome();
     } catch (error) {
       if (error.response && error.response.data) {
         let errorMessage;
@@ -33,7 +38,7 @@ const SignInButt = ({ t, redirectToHome, redirect_uri }) => {
         console.error("An unexpected error occurred:", error.message);
         setError("An unexpected error occurred.");
       }
-	  setShowError(true);
+      setShowError(true);
     }
   };
 

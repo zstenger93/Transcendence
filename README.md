@@ -6,10 +6,6 @@
 
 ---
 
-# The current version deployed can be accessed here: [TranscEND](https://zstenger93.github.io/Transcendence/)
-
----
-
 ## Menu
 
 [MindMap](#mindmap)
@@ -225,7 +221,7 @@ Setting unique username :x:
 
 Uploading an avatar for user :x:
 
-Option to enable 2FA auth :x:
+Option to enable 2FA auth :white_check_mark:
 
 Friend list and their status :x:
 
@@ -247,7 +243,7 @@ Matchmaking system :x:
 
 Faithful to the original pong game :white_check_mark:
 
-Custom options for the game :x:
+Custom options for the game :white_check_mark:
 
 The game must be responsive :white_check_mark:
 
@@ -270,7 +266,7 @@ The game must be responsive :white_check_mark:
 	- *Major module*: Remote players :x:
 	- *Major module*: Multiplayer (more than 2) :x:
 	- *Major module*: Add Another Game with User History and Matchmaking :x:
-	- *Minor module*: Game customization options :x:
+	- *Minor module*: Game customization options :white_check_mark:
 	- *Major module*: Live chat :x:
 - **AI-Algo**
 	- *Major module*: Introduce an AI opponent :white_check_mark:
@@ -278,7 +274,7 @@ The game must be responsive :white_check_mark:
 - **Cybersecurity**
 	- *Major module*: Implement WAF/ModSecurity with Hardened Configuration and HashiCorp Vault for Secrets Management :x:
 	- *Minor module*: GDPR Compliance Options with User Anonymization, Local Data Management, and Account Deletion :x:
-	- *Major module*: Implement Two-Factor Authentication (2FA) and JWT :x:
+	- *Major module*: Implement Two-Factor Authentication (2FA) and JWT :white_check_mark:
 - **Devops**
 	- *Major module*: Infrastructure Setup for Log Management :x:
 	- *Minor module*: Monitoring system :x:

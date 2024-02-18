@@ -1,28 +1,19 @@
 import React from "react";
 import { WelcomeButtonStyle } from "../buttons/ButtonStyle";
+import Cookies from "js-cookie";
 
 const OAuth = async ({ navigate, redirect_uri }) => {
-  const auth = `${redirect_uri}/api/is_authenticated/`;
-  let response = await fetch(auth, {
-    credentials: "include",
+  window.location.href = `${redirect_uri}/api/oauth/authorize`;
+};
+
+window.onload = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const token = urlParams.get("token");
+  Cookies.set("access", token, {
+	expires: 7,
+	sameSite: "Strict",
+	secure: true,
   });
-
-  let data = await response.json();
-
-  if (!data.is_authenticated) {
-    window.open(`${redirect_uri}/api/oauth/authorize/`);
-    if (!data.is_authenticated) {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      response = await fetch(auth, {
-        credentials: "include",
-		AccessControlAllowCredentials: true,
-      });
-      data = await response.json();
-    }
-	navigate("/home");
-  } else {
-    navigate("/home");
-  }
 };
 
 const LoginButton = ({ t, navigate, redirect_uri }) => {

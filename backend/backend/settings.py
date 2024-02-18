@@ -29,7 +29,7 @@ ALLOWED_HOSTS = [
 
 # Authentication settings
 if DEBUG == 'True':
-    REDIRECT_URI = "http://localhost:8000"
+    REDIRECT_URI = "https://localhost"
 else:
 	REDIRECT_URI = "https://transcendence-backend-znhl.onrender.com"
 
@@ -55,23 +55,35 @@ INSTALLED_APPS = [
     'corsheaders',
     'user_api.apps.UserApiConfig',
     'friendship_api',
+	'user_block'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 	'django_otp.middleware.OTPMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+]
+CSRF_ALLOWED_ORIGINS = [
+    "*",
+    "https://localhost",
+	"https://api.intra.42.fr",
+    "http://localhost:3000",
+    "http://frontend:3000",
+    "https://transcendence-frontend-3otz.onrender.com",
+    "https://zstenger93.github.io"
 ]
 
 CORS_ALLOWED_ORIGINS = [
-		"http://localhost:4000",
+        "http://frontend:3000",
+	    "https://api.intra.42.fr",
+		"https://localhost",
 	    "http://localhost:3000",
 		"https://transcendence-frontend-3otz.onrender.com",
 		"https://zstenger93.github.io"
@@ -197,7 +209,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=99),
 }
 
 

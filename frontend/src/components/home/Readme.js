@@ -142,7 +142,7 @@ function Readme() {
                   ❌
                 </li>
                 <li>
-                  <Minor /> Game customization options ❌
+                  <Minor /> Game customization options <GreenCheck />
                 </li>
                 <li>
                   <Major /> Live chat ❌
@@ -182,7 +182,7 @@ function Readme() {
                   Local Data Management, and Account Deletion ❌
                 </li>
                 <li>
-                  <Major /> Implement Two-Factor Authentication (2FA) and JWT ❌
+                  <Major /> Implement Two-Factor Authentication (2FA) and JWT <GreenCheck />
                 </li>
               </ul>
             </div>

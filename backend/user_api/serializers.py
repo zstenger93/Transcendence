@@ -33,8 +33,23 @@ class UserLoginSerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = UserModel
-		fields = ('id', 'email', 'username', 'profile_picture', \
-			 	'total_matches', 'wins', 'losses', \
-				'title', 'TwoFA')
+		fields = (
+			"id",
+			"profile_picture",
+			"email",
+			"username",
+			"title",
+			"intra_level",
+			"TwoFA",
+			"AboutMe",
+			"school",
+			"wins",
+			"losses",
+			"win_rate",
+			"total_matches",
+			"match_history",
+			"ft_user",
+            "ft_url",
+		)
 
 

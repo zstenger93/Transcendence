@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { WelcomeButtonStyle } from "../buttons/ButtonStyle";
+import Cookies from "js-cookie";
 
 const RegisterButt = ({ t, redirectToHome, redirect_uri }) => {
   const [showFields, setShowFields] = useState(false);
@@ -11,7 +12,7 @@ const RegisterButt = ({ t, redirectToHome, redirect_uri }) => {
   const [error, setError] = useState(null);
   const [showError, setShowError] = useState(false);
 
-  const registerTheUser = async () => {
+  const registerUser = async () => {
     try {
       const response = await axios.post(
         `${redirect_uri}/api/register`,
@@ -22,7 +23,13 @@ const RegisterButt = ({ t, redirectToHome, redirect_uri }) => {
         },
         { withCredentials: true }
       );
-      redirectToHome();
+	  const token = response.data.access;
+	  Cookies.set("access", token, {
+        expires: 7,
+        sameSite: "Strict",
+        secure: true,
+      });
+      if (response.data.access) redirectToHome();
     } catch (error) {
       if (error.response && error.response.data) {
         let errorMessage;
@@ -79,7 +86,7 @@ const RegisterButt = ({ t, redirectToHome, redirect_uri }) => {
             autoComplete="new-password"
           />
           <button
-            onClick={() => registerTheUser()}
+            onClick={() => registerUser()}
             className={`mb-20 ${WelcomeButtonStyle}`}
           >
             {t("Join")}
