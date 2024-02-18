@@ -188,6 +188,10 @@ class updateProfile(APIView):
 				request.user.match_history = history
 			if data.get('TwoFA'):
 				request.user.TwoFA = data.get('TwoFA')
+			if data.get('password'):
+				request.user.set_password(data.get('password'))
+			if data.get('ft_user'):
+				request.user.ft_user = data.get('ft_user')
 			request.user.save()
 			
 			response = Response({
@@ -223,35 +227,49 @@ class OAuthCallback(APIView):
 			
 			username = user_response.json()["login"]
 			email = user_response.json()["email"]
-			picture_url = user_response.json()["image"]["versions"]["medium"]
+			profile_picture_url = user_response.json()["image"]["versions"]["medium"]
+			intra_lvl = user_response.json()["cursus_users"][1]["level"]
+			school = user_response.json()["campus"][0]["name"]
+			ft_url = user_response.json()["url"],
+			ft_user = True,
+			
+			# with open('output.json', 'w') as f:
+			# 	json.dump(user_response.json(), f, indent=4)
 
 			titles = user_response.json().get("titles", [])
 			title = ""
 			if titles:
 				title = titles[0].get("name", "")
-				title = str(title).split()[0] if title else ""
-
+				title = title.split(" ")[0]
 			user, created = AppUser.objects.get_or_create(
-				username=username,
-				defaults={
+				username = username,
+				title = title,
+				intra_level = user_response.json()["cursus_users"][1]["level"],
+				defaults = {
 					'username': username,
 					'email': email,
 					'title': title,
+					'profile_picture': profile_picture_url,
+					'intra_level': intra_lvl,
+					'school': school,
+					'ft_url': ft_url,
+					'ft_user': ft_user
 				}
 			)
-			response = requests.get(picture_url)
-			if response.status_code == 200:
-				user.profile_picture.save(f"{username}_profile_picture.jpg", ContentFile(response.content), save=True)
 			login(request, user)
 			token = RefreshToken.for_user(user)
 			token['email'] = user.email
 			token['username'] = user.username
 			response = Response({
+				'ft_user': user.ft_user,
 				'refresh': str(token),
 				'access': str(token.access_token),
 			}, status=status.HTTP_200_OK)
 			response["Access-Control-Allow-Credentials"] = 'true'
-			redirect_url = 'https://localhost/home?' + urllib.parse.urlencode({'token': str(token.access_token)})
+			if created or user.TwoFA == False:
+				redirect_url = 'https://localhost/home?' + urllib.parse.urlencode({'token': str(token.access_token)})
+			else:
+				redirect_url = 'https://localhost/2fa?' + urllib.parse.urlencode({'token': str(token.access_token)})
 			return redirect(redirect_url)
 
 		response = Response({'detail': "Check you 42API keys"}, status=status.HTTP_400_BAD_REQUEST)
@@ -391,7 +409,7 @@ class sendQrCode(APIView):
 
 				# Generate QR code
 				img = qrcode.make(device.config_url)
-				img.save("qrcode.png")
+				# img.save("qrcode.png")
 
 				mail_subject = 'DJANGO OTP DEMO'
 				message = f"Hello {request.user},\n\nYour QR Code is: <img src='cid:image1'>"

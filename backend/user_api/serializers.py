@@ -48,6 +48,8 @@ class UserSerializer(serializers.ModelSerializer):
 			"win_rate",
 			"total_matches",
 			"match_history",
+			"ft_user",
+            "ft_url",
 		)
 
 
