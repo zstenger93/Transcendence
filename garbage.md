@@ -2,11 +2,14 @@
 
 # API Endpoints
 
+## Deactivate extension
+
 ## Register -> Post
 - Input
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA3OTg5NzY4LCJpYXQiOjE3MDc5MDMzNjgsImp0aSI6IjUwOTY2MDk5OTMwODQxNWE5NThjMGRjNWIxYTc3MTBiIiwidXNlcl9pZCI6MiwiZW1haWwiOiJzaW91ZGF6ZXI4MkBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWx1c2VyMiJ9.2bAgvbFoKt-6_l6aqQL0Y3u8clIc_wRfGRguoBhGpsc
 {
-    "email":"sioudazer8@gmail.com",
-    "username":"realuser",
+    "email":"sioudazer82@gmail.com",
+    "username":"realuser2",
     "password":"xhq8mxhq8m"
 }
 
@@ -21,6 +24,8 @@ Result <-
     "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcwNzIxOTM1MSwiaWF0IjoxNzA3MTMyOTUxLCJqdGkiOiJkMTM2ZDIyYjc2NjI0NDk0OWRhZDU3MDYwZjVjOTE0NyIsInVzZXJfaWQiOjEsImVtYWlsIjoic2lvdWRhemVyOEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWx1c2VyIn0.dUc-kYp91jYx1LNxiazHTHxKsbR78lyWTPMQWnMDH-o",
     "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA3MjE5MzUxLCJpYXQiOjE3MDcxMzI5NTEsImp0aSI6ImRmYmJmNDgyN2MzNTQwM2NhNzFlODc3NjkyYjQzZjM1IiwidXNlcl9pZCI6MSwiZW1haWwiOiJzaW91ZGF6ZXI4QGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicmVhbHVzZXIifQ.0cjP1qZfUfrxiUophcscm3pMv0rJxN7LluokzmAan7w"
 }
+
+## Put new access token to the extension
 
 ## Logout -> Post
 >> Must contain "Authorization: JWT your_token" in the header
@@ -67,3 +72,15 @@ Header Changer: https://chromewebstore.google.com/detail/requestly-open-source-h
 
 - check if the token is valid
 - check if the token is expired
+
+## Jamshidbek
+
+### /block/
+{
+	"blocked_username":"realuser"
+}
+
+### /unblock/
+{
+	"blocked_username":"realuser"
+}
