@@ -6,11 +6,7 @@
 
 ## Register -> Post
 - Input
-{
-    "email":"sioudazer8@gmail.com",
-    "username":"realuser",
-    "password":"xhq8mxhq8m"
-}
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA3OTg5NzY4LCJpYXQiOjE3MDc5MDMzNjgsImp0aSI6IjUwOTY2MDk5OTMwODQxNWE5NThjMGRjNWIxYTc3MTBiIiwidXNlcl9pZCI6MiwiZW1haWwiOiJzaW91ZGF6ZXI4MkBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWx1c2VyMiJ9.2bAgvbFoKt-6_l6aqQL0Y3u8clIc_wRfGRguoBhGpsc
 {
     "email":"sioudazer82@gmail.com",
     "username":"realuser2",
