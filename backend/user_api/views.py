@@ -231,7 +231,7 @@ class OAuthCallback(APIView):
 			intra_lvl = user_response.json()["cursus_users"][1]["level"]
 			school = user_response.json()["campus"][0]["name"]
 			ft_url = user_response.json()["url"],
-			ft_user = True,
+			ft_user = True
 			
 			# with open('output.json', 'w') as f:
 			# 	json.dump(user_response.json(), f, indent=4)
