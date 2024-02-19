@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { WelcomeButtonStyle } from "../buttons/ButtonStyle";
 import Cookies from "js-cookie";
+import { getUserDetails } from "../API";
 
 const SignInButt = ({ t, redirectToHome, redirect_uri }) => {
   const [showFields, setShowFields] = useState(false);
@@ -21,12 +22,19 @@ const SignInButt = ({ t, redirectToHome, redirect_uri }) => {
         { withCredentials: true }
       );
       const token = response.data.access;
-      Cookies.set("access", token, {
-        expires: 7,
-        sameSite: "Strict",
-        secure: true,
-      });
-      if (response.data.access) redirectToHome();
+      if (token) {
+        Cookies.set("access", token, {
+          expires: 7,
+          sameSite: "Strict",
+          secure: true,
+        });
+        const user = await getUserDetails({ redirectUri: redirect_uri });
+        if (user.data.user.TwoFA === true) {
+          window.location.href = "/2fa";
+        } else {
+          redirectToHome();
+        }
+      }
     } catch (error) {
       if (error.response && error.response.data) {
         let errorMessage;
