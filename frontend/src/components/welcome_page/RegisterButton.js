@@ -24,12 +24,14 @@ const RegisterButt = ({ t, redirectToHome, redirect_uri }) => {
         { withCredentials: true }
       );
 	  const token = response.data.access;
-	  Cookies.set("access", token, {
-        expires: 7,
-        sameSite: "Strict",
-        secure: true,
-      });
-      if (response.data.access) redirectToHome();
+      if (token) {
+        Cookies.set("access", token, {
+          expires: 7,
+          sameSite: "Strict",
+          secure: true,
+        });
+        redirectToHome();
+      }
     } catch (error) {
       if (error.response && error.response.data) {
         let errorMessage;

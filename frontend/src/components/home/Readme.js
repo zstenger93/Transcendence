@@ -198,7 +198,7 @@ function Readme() {
                   <Major /> Infrastructure Setup for Log Management ❌
                 </li>
                 <li>
-                  <Minor /> Monitoring system ❌
+                  <Minor /> Monitoring system <GreenCheck />
                 </li>
                 <li>
                   <Major /> Designing the Backend as Microservices ❌

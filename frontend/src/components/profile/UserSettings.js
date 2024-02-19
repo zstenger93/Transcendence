@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ButtonStyle } from "../buttons/ButtonStyle";
-import { getUserDetails } from "../../pages/Profile";
+import { getUserDetails } from "../API";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
