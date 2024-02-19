@@ -39,6 +39,7 @@ import json
 import os
 import qrcode
 import logging
+from io import BytesIO
 
 logger = logging.getLogger(__name__)
 
@@ -407,21 +408,24 @@ class sendQrCode(APIView):
 					device = request.user.totpdevice_set.create(confirmed=True)
 				current_site = get_current_site(request)
 
-				# Generate QR code
 				img = qrcode.make(device.config_url)
-				# img.save("qrcode.png")
 
 				mail_subject = 'DJANGO OTP DEMO'
+				byte_stream = BytesIO()
+				img.save(byte_stream, format='PNG')
+				byte_stream.seek(0)
+
+				mail_subject = 'Iiinteernaaal Pooiinteeer Vaariaaablee'
 				message = f"Hello {request.user},\n\nYour QR Code is: <img src='cid:image1'>"
 				to_email = request.user.email
 				email = EmailMessage(
 					mail_subject, message, to=[to_email]
 				)
 
-				# Attach image
 				fp = open('qrcode.png', 'rb')
 				msg_image = MIMEImage(fp.read())
 				fp.close()
+				msg_image = MIMEImage(byte_stream.getvalue())
 				msg_image.add_header('Content-ID', '<image1>')
 				email.attach(msg_image)
 

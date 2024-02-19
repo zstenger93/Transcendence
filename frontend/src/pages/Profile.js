@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ButtonStyle } from "../components/buttons/ButtonStyle";
 import UserSettings from "../components/profile/UserSettings";
-import axios from "axios";
+import { fetchUserDetails, changeUsername, changeAbout } from "../components/API";
 import { CiEdit } from "react-icons/ci";
 import Cookies from "js-cookie";
 
@@ -234,83 +234,6 @@ const defaultUserDetails = {
     "https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp",
 };
 
-export const getUserDetails = async ({ redirectUri }) => {
-  let response = {};
-  try {
-    const token = Cookies.get('access');
-    response = await axios.get(`${redirectUri}/api/profile`, {
-      headers: {
-        withCredentials: true,
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  } catch (error) {
-    console.log(error);
-  }
-  return response;
-};
-
-const changeAbout = async ({ redirectUri, about }) => {
-  let response = {};
-  try {
-    const token = Cookies.get('access');
-    response = await axios.post(
-      `${redirectUri}/api/updateProfile`,
-      { AboutMe: about },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      }
-    );
-  } catch (error) {
-    console.log(error);
-  }
-  return response;
-};
-
-const changeUsername = async ({ redirectUri, username }) => {
-  let response = {};
-  try {
-    const token = Cookies.get('access');
-    response = await axios.post(
-      `${redirectUri}/api/updateProfile`,
-      { username: username },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      }
-    );
-  } catch (error) {
-    console.log(error);
-  }
-  return response;
-};
-
-const fetchUserDetails = async (
-  setUserDetails,
-  setUsername,
-  setImageUrl,
-  redirectUri
-) => {
-  const response = await getUserDetails({ redirectUri });
-  setUserDetails(response.data.user);
-
-  console.log(response.data.user);
-
-  setUsername(response.data.user.username);
-
-  if (response.data.user.profile_picture) {
-    let url = decodeURIComponent(
-      response.data.user.profile_picture.replace("/media/", "")
-    ).replace(":", ":/");
-    setImageUrl(url);
-  }
-};
-
 function Profile({ redirectUri }) {
   const [userDetails, setUserDetails] = useState(null);
   const [imageUrl, setImageUrl] = useState(defaultUserDetails.profile_picture);
@@ -319,10 +242,8 @@ function Profile({ redirectUri }) {
   );
 
   useEffect(() => {
-    const wtf = Cookies.get('access');
-	console.log("wtf1: ", wtf);
-    if (wtf) {
-      console.log("wtf2: ", wtf);
+    const token = Cookies.get('access');
+    if (token) {
       fetchUserDetails(setUserDetails, setUsername, setImageUrl, redirectUri);
     }
   }, [redirectUri]);
