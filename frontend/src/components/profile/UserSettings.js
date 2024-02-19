@@ -3,75 +3,38 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ButtonStyle } from "../buttons/ButtonStyle";
-import { getUserDetails } from "../API";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import Cookies from "js-cookie";
-
-const activate2FA = async ({ redirectUri }) => {
-  let response = {};
-  try {
-    const token = Cookies.get('access');
-    response = await axios.post(
-      `${redirectUri}/api/activateTwoFa`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      }
-    );
-  } catch (error) {
-    console.log(error);
-  }
-  return response;
-};
-
-const deactivate2FA = async ({ redirectUri }) => {
-  let response = {};
-  try {
-    const token = Cookies.get('access');
-    response = await axios.post(
-      `${redirectUri}/api/deactivateTwoFa`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      }
-    );
-  } catch (error) {
-    console.log(error);
-  }
-  return response;
-};
-
-const deleteAccount = async ({ redirectUri }) => {
-  let response = {};
-  try {
-    const token = Cookies.get('access');
-    response = await axios.post(
-      `${redirectUri}/api/accountDeletion`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      }
-    );
-  } catch (error) {
-    console.log(error);
-  }
-  return response;
-};
+import {
+  getUserDetails,
+  activate2FA,
+  deactivate2FA,
+  deleteAccount,
+  changePassword,
+} from "../API";
 
 function UserSettings({ redirectUri }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState({ TwoFA: false });
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (password === confirmPassword) {
+      changePassword({redirectUri, password});
+    } else {
+      alert("Passwords do not match");
+    }
+  };
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -128,25 +91,36 @@ function UserSettings({ redirectUri }) {
 
       <div className="mb-4">
         <label className="text-gray-300">{t("Change Avatar")}</label>
-        <label className={`w-38 ${ButtonStyle} mx-auto`}>
+        <label className={`inline-block mr-2 ${ButtonStyle} mx-auto`}>
           <input type="file" accept="image/*" hidden />
           {t("Choose File")}
         </label>
       </div>
 
       {!userDetails?.ft_user && (
-        <>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="text-gray-300">{t("New Password ")}</label>
-            <input type="password" />
+            <input
+              type="password"
+              value={password}
+              onChange={handlePasswordChange}
+            />
           </div>
           <div className="mb-4">
             <label className="text-gray-300">
               {t("Confirm New Password ")}
             </label>
-            <input type="password" />
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={handleConfirmPasswordChange}
+            />
           </div>
-        </>
+          <button className={`mx-auto block mb-2 ${ButtonStyle}`} type="submit">
+            Submit
+          </button>
+        </form>
       )}
 
       <div className="mb-4">
