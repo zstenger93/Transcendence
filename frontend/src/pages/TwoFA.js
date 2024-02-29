@@ -7,7 +7,6 @@ const sendAuthCode = async ({ redirectUri }) => {
   let response = {};
   try {
     const token = Cookies.get('access');
-    console.log("i was here");
     response = await axios.post(
       `${redirectUri}/api/sendQrCode`,
       {},

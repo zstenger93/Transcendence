@@ -10,6 +10,7 @@ import {
   deactivate2FA,
   deleteAccount,
   changePassword,
+  changeAvatar,
 } from "../API";
 
 function UserSettings({ redirectUri }) {
@@ -30,7 +31,7 @@ function UserSettings({ redirectUri }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
-      changePassword({redirectUri, password});
+      changePassword({ redirectUri, password });
     } else {
       alert("Passwords do not match");
     }
@@ -90,9 +91,18 @@ function UserSettings({ redirectUri }) {
       </div>
 
       <div className="mb-4">
-        <label className="text-gray-300">{t("Change Avatar")}</label>
         <label className={`inline-block mr-2 ${ButtonStyle} mx-auto`}>
-          <input type="file" accept="image/*" hidden />
+          <input
+            type="file"
+            accept="image/*"
+            hidden
+            onChange={(e) => {
+              const file = e.target.files[0];
+              if (file) {
+                changeAvatar({ redirectUri, file });
+              }
+            }}
+          />
           {t("Choose File")}
         </label>
       </div>

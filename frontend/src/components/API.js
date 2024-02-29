@@ -9,15 +9,9 @@ export const fetchUserDetails = async (
 ) => {
   const response = await getUserDetails({ redirectUri });
   setUserDetails(response.data.user);
-
-  console.log(response.data.user);
-
   setUsername(response.data.user.username);
-
   if (response.data.user.profile_picture) {
-    let url = decodeURIComponent(
-      response.data.user.profile_picture.replace("/media/", "")
-    ).replace(":", ":/");
+    let url = response.data.user.profile_picture;
     setImageUrl(url);
   }
 };
@@ -97,6 +91,30 @@ export const changePassword = async ({ redirectUri, password }) => {
 	}
 	return response;
   };
+
+export const changeAvatar = async ({ redirectUri, file }) => {
+	let response = {};
+	try {
+		const token = Cookies.get('access');
+		const formData = new FormData();
+		formData.append('profile_picture', file);
+
+		response = await axios.post(
+			`${redirectUri}/api/updateProfile`,
+			formData,
+			{
+				headers: {
+					'Authorization': `Bearer ${token}`,
+					'Content-Type': 'multipart/form-data',
+				},
+				withCredentials: true,
+			}
+		);
+	} catch (error) {
+		console.log(error);
+	}
+	return response;
+};
 
 export const activate2FA = async ({ redirectUri }) => {
   let response = {};
