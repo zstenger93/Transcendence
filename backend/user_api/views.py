@@ -43,6 +43,7 @@ import os
 import qrcode
 import logging
 from io import BytesIO
+from PIL import Image
 
 logger = logging.getLogger(__name__)
 
@@ -234,7 +235,15 @@ class OAuthCallback(APIView):
 			
 			username = user_response.json()["login"]
 			email = user_response.json()["email"]
+
 			profile_picture_url = user_response.json()["image"]["versions"]["medium"]
+			response = requests.get(profile_picture_url)
+			img = Image.open(BytesIO(response.content))
+			image_name = os.path.basename(profile_picture_url)
+			directory = 'profile_pictures/'
+			save_path = os.path.join(directory, image_name)
+			img.save(save_path)
+
 			intra_lvl = user_response.json()["cursus_users"][1]["level"]
 			school = user_response.json()["campus"][0]["name"]
 			ft_url = user_response.json()["url"],
@@ -253,7 +262,7 @@ class OAuthCallback(APIView):
 					'username': username,
 					'email': email,
 					'title': title,
-					'profile_picture': profile_picture_url,
+					'profile_picture': save_path.replace('/app/backend/media', ''),
 					'intra_level': intra_lvl,
 					'school': school,
 					'ft_url': ft_url,
