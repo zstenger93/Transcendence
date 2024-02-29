@@ -10,6 +10,8 @@ RUN npm install -g serve
 
 RUN npm install
 
+RUN npm ci
+
 COPY . .
 
 EXPOSE 3000
