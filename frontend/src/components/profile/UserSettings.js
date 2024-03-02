@@ -46,10 +46,6 @@ function UserSettings({ redirectUri }) {
     fetchUserDetails();
   }, [redirectUri]);
 
-  //   useEffect(() => {
-  //     console.log("userDetails:", userDetails);
-  //   }, [userDetails]);
-
   return (
     <div
       className="bg-gray-900 bg-opacity-80 p-6 shadow-xl
