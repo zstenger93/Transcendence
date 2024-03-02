@@ -223,7 +223,7 @@ EMAIL_HOST_PASSWORD = 'sayy uonp nado adlm'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # chat settings
-ASGI_APPLICATION = "tutorial.asgi.application"
+ASGI_APPLICATION = "backend.asgi.application"
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels.layers.InMemoryChannelLayer'
