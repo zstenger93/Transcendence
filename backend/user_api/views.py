@@ -163,8 +163,8 @@ class updateProfile(APIView):
 		if request.user.is_authenticated:
 			data = request.data
 			if 'profile_picture' in request.FILES:
-				if default_storage.exists(request.user.profile_picture.path):
-					default_storage.delete(request.user.profile_picture.path)
+				if default_storage.exists(request.user.profile_picture.name):
+					default_storage.delete(request.user.profile_picture.name)
 				image = ImageFile(request.FILES['profile_picture'])
 				request.user.profile_picture.save(image.name, image, save=True)
 			if data.get('email'):
@@ -239,10 +239,13 @@ class OAuthCallback(APIView):
 			profile_picture_url = user_response.json()["image"]["versions"]["medium"]
 			response = requests.get(profile_picture_url)
 			img = Image.open(BytesIO(response.content))
-			image_name = os.path.basename(profile_picture_url)
+			image_name = os.path.basename(profile_picture_url).lstrip('/')
 			directory = 'profile_pictures/'
 			save_path = os.path.join(directory, image_name)
-			img.save(save_path)
+
+			img_io = BytesIO()
+			img.save(img_io, format='JPEG')
+			default_storage.save(save_path, ContentFile(img_io.getvalue()))
 
 			intra_lvl = user_response.json()["cursus_users"][1]["level"]
 			school = user_response.json()["campus"][0]["name"]
