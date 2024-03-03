@@ -277,7 +277,7 @@ The game must be responsive :white_check_mark:
 	- *Major module*: Implement Two-Factor Authentication (2FA) and JWT :white_check_mark:
 - **Devops**
 	- *Major module*: Infrastructure Setup for Log Management :x:
-	- *Minor module*: Monitoring system :x:
+	- *Minor module*: Monitoring system :white_check_mark:
 	- *Major module*: Designing the Backend as Microservices :x:
 - **Graphics**
 	- *Major module*: Use advanced 3D techniques :white_check_mark:

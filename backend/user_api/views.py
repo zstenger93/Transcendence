@@ -23,6 +23,9 @@ from django.core.mail import EmailMessage
 from django_otp import match_token
 from email.mime.image import MIMEImage
 
+from django.core.files.storage import default_storage
+from django.core.files.images import ImageFile
+
 from .authentication import account_activation_token, is_authenticated
 from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
 from .validations import user_registration, is_valid_email, is_valid_password
@@ -39,6 +42,8 @@ import json
 import os
 import qrcode
 import logging
+from io import BytesIO
+from PIL import Image
 
 logger = logging.getLogger(__name__)
 
@@ -157,12 +162,15 @@ class updateProfile(APIView):
 	def post(self, request):
 		if request.user.is_authenticated:
 			data = request.data
-			if data.get('profile_picture'):
-				request.user.profile_picture = data.get('profile_picture')
+			if 'profile_picture' in request.FILES:
+				if default_storage.exists(request.user.profile_picture.path):
+					default_storage.delete(request.user.profile_picture.path)
+				image = ImageFile(request.FILES['profile_picture'])
+				request.user.profile_picture.save(image.name, image, save=True)
 			if data.get('email'):
 				request.user.email = data.get('email')
 			if data.get('username'):
-				request.user.username = data.get('username')
+				request.user.vusername = data.get('username')
 			if data.get('title'):
 				request.user.title = data.get('title')
 			if data.get('AboutMe'):
@@ -227,15 +235,20 @@ class OAuthCallback(APIView):
 			
 			username = user_response.json()["login"]
 			email = user_response.json()["email"]
+
 			profile_picture_url = user_response.json()["image"]["versions"]["medium"]
+			response = requests.get(profile_picture_url)
+			img = Image.open(BytesIO(response.content))
+			image_name = os.path.basename(profile_picture_url)
+			directory = 'profile_pictures/'
+			save_path = os.path.join(directory, image_name)
+			img.save(save_path)
+
 			intra_lvl = user_response.json()["cursus_users"][1]["level"]
 			school = user_response.json()["campus"][0]["name"]
 			ft_url = user_response.json()["url"],
 			ft_user = True
 			
-			# with open('output.json', 'w') as f:
-			# 	json.dump(user_response.json(), f, indent=4)
-
 			titles = user_response.json().get("titles", [])
 			title = ""
 			if titles:
@@ -249,7 +262,7 @@ class OAuthCallback(APIView):
 					'username': username,
 					'email': email,
 					'title': title,
-					'profile_picture': profile_picture_url,
+					'profile_picture': save_path.replace('/app/backend/media', ''),
 					'intra_level': intra_lvl,
 					'school': school,
 					'ft_url': ft_url,
@@ -308,53 +321,6 @@ class accountDeletion(APIView):
 			return response
 
 
-class updateProfile(APIView):
-	permission_classes = (permissions.IsAuthenticated,)
-	authentication_classes = (BlacklistCheckJWTAuthentication,)
-	##
-	def post(self, request):
-		if request.user.is_authenticated:
-			data = request.data
-			if data.get('profile_picture'):
-				request.user.profile_picture = data.get('profile_picture')
-			if data.get('email'):
-				request.user.email = data.get('email')
-			if data.get('username'):
-				request.user.username = data.get('username')
-			if data.get('title'):
-				request.user.title = data.get('title')
-			if data.get('AboutMe'):
-				request.user.AboutMe = data.get('AboutMe')
-			if data.get('school'):
-				request.user.school = data.get('school')
-			if data.get('wins'):
-				request.user.wins = data.get('wins')
-			if data.get('losses'):
-				request.user.losses = data.get('losses')
-			if data.get('win_rate'):
-				if request.user.total_matches == 0:
-					request.user.win_rate = 0
-				else:
-					request.user.win_rate = request.user.wins / request.user.total_matches
-			if data.get('total_matches'):
-				request.user.total_matches = data.get('total_matches')
-			if data.get('match_history'):
-				history = request.user.match_history
-				if history is None:
-					history = []
-				history.append(data.get('match_history'))
-				request.user.match_history = history
-			if data.get('TwoFA'):
-				request.user.TwoFA = data.get('TwoFA')
-			if data.get('password'):
-				request.user.set_password(data.get('password'))
-			request.user.save()
-			
-			return Response({"detail": "Profile updated"}, status=status.HTTP_200_OK)
-		else:
-			return Response({"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST)
-
-
 class activateTwoFa(APIView):
 	permission_classes = (permissions.IsAuthenticated,)
 	authentication_classes = (BlacklistCheckJWTAuthentication,)
@@ -407,21 +373,24 @@ class sendQrCode(APIView):
 					device = request.user.totpdevice_set.create(confirmed=True)
 				current_site = get_current_site(request)
 
-				# Generate QR code
 				img = qrcode.make(device.config_url)
-				# img.save("qrcode.png")
 
 				mail_subject = 'DJANGO OTP DEMO'
+				byte_stream = BytesIO()
+				img.save(byte_stream, format='PNG')
+				byte_stream.seek(0)
+
+				mail_subject = 'Iiinteernaaal Pooiinteeer Vaariaaablee'
 				message = f"Hello {request.user},\n\nYour QR Code is: <img src='cid:image1'>"
 				to_email = request.user.email
 				email = EmailMessage(
 					mail_subject, message, to=[to_email]
 				)
 
-				# Attach image
 				fp = open('qrcode.png', 'rb')
 				msg_image = MIMEImage(fp.read())
 				fp.close()
+				msg_image = MIMEImage(byte_stream.getvalue())
 				msg_image.add_header('Content-ID', '<image1>')
 				email.attach(msg_image)
 

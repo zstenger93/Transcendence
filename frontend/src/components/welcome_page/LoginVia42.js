@@ -9,11 +9,13 @@ const OAuth = async ({ navigate, redirect_uri }) => {
 window.onload = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const token = urlParams.get("token");
-  Cookies.set("access", token, {
-	expires: 7,
-	sameSite: "Strict",
-	secure: true,
-  });
+  if (token) {
+    Cookies.set("access", token, {
+      expires: 7,
+      sameSite: "None",
+      secure: true,
+    });
+  }
 };
 
 const LoginButton = ({ t, navigate, redirect_uri }) => {
