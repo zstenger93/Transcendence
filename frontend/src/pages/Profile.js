@@ -255,16 +255,12 @@ function Profile({ redirectUri }) {
 
   useEffect(() => {
     if (profilePicture) {
-      console.log("Profile Picture");
-      console.log(imageUrl);
-
       fetchUserDetails(
         setUserDetails,
         setUsername,
         setImageUrl,
         redirectUri
       ).then(() => {
-        console.log(imageUrl);
         setProfilePicture(false);
       });
     }
