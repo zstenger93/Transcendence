@@ -3,21 +3,21 @@ from user_api.models import AppUser
 
 class Room(models.Model):
 	id = models.AutoField(primary_key=True)
-	user1 = models.ForeignKey(AppUser, on_delete=models.CASCADE, related_name='user1')
-	user2 = models.ForeignKey(AppUser, on_delete=models.CASCADE, related_name='user2')
+	users = models.ManyToManyField(AppUser)
 	
 	# function checks if a user is in the room
 	def user_in_room(self, user):
-		return user == self.user1 or user == self.user2
+		return user in self.users.all()
 
 	# function returns the other user in the room
 	def other_user(self, user):
-		if user == self.user1:
-			return self.user2
-		elif user == self.user2:
-			return self.user1
+		if self.user_in_room(user):
+			return self.users.exclude(id=user.id)[0]
 		else:
 			return None
+	
+	def room_size(self):
+		return len(self.users.all())
 
 	# # function returns the room's id
 	# def room_id(self):
@@ -53,3 +53,17 @@ class Message(models.Model):
 	user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
 	content = models.TextField()
 	timestamp = models.DateTimeField(auto_now_add=True)
+
+class UserChannelName(models.Model):
+	user = models.OneToOneField(AppUser, on_delete=models.CASCADE)
+	channel_name = models.CharField(max_length=100)
+
+	def update_channel_name(self, channel_name):
+		self.channel_name = channel_name
+		self.save()
+	
+	def delete_channel_name(self):
+		self.delete()
+
+	class Meta:
+		unique_together = ('user', 'channel_name',)

@@ -23,6 +23,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
 #     ),
 # })
 
+
 application = ProtocolTypeRouter({
     "http": get_asgi_application(),
     "websocket": AuthMiddlewareStack(
@@ -31,3 +32,9 @@ application = ProtocolTypeRouter({
         )
     ),
 })
+
+
+with open('text.txt', 'a') as f:
+	f.write('deleting user channel names\n')
+from chat.models import UserChannelName
+UserChannelName.objects.all().delete()
