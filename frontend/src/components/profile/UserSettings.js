@@ -13,7 +13,7 @@ import {
   changeAvatar,
 } from "../API";
 
-function UserSettings({ redirectUri }) {
+function UserSettings({ profilePicture, setProfilePicture, redirectUri }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState({ TwoFA: false });
@@ -95,6 +95,7 @@ function UserSettings({ redirectUri }) {
             onChange={(e) => {
               const file = e.target.files[0];
               if (file) {
+                setProfilePicture(true);
                 changeAvatar({ redirectUri, file });
               }
             }}

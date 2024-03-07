@@ -4,7 +4,11 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ButtonStyle } from "../components/buttons/ButtonStyle";
 import UserSettings from "../components/profile/UserSettings";
-import { fetchUserDetails, changeUsername, changeAbout } from "../components/API";
+import {
+  fetchUserDetails,
+  changeUsername,
+  changeAbout,
+} from "../components/API";
 import { CiEdit } from "react-icons/ci";
 import Cookies from "js-cookie";
 
@@ -240,13 +244,27 @@ function Profile({ redirectUri }) {
   const [username, setUsername] = useState(
     userDetails?.username || defaultUserDetails.username
   );
+  const [profilePicture, setProfilePicture] = useState(null);
 
   useEffect(() => {
-    const token = Cookies.get('access');
+    const token = Cookies.get("access");
     if (token) {
       fetchUserDetails(setUserDetails, setUsername, setImageUrl, redirectUri);
     }
   }, [redirectUri]);
+
+  useEffect(() => {
+    if (profilePicture) {
+      fetchUserDetails(
+        setUserDetails,
+        setUsername,
+        setImageUrl,
+        redirectUri
+      ).then(() => {
+        setProfilePicture(false);
+      });
+    }
+  }, [imageUrl, redirectUri, profilePicture]);
 
   useEffect(() => {
     setUsername(userDetails?.username || defaultUserDetails.username);
@@ -324,8 +342,6 @@ function Profile({ redirectUri }) {
       setIsEditingUsername(false);
     }
   };
-
-  console.log(imageUrl);
 
   return (
     <div
@@ -455,7 +471,13 @@ function Profile({ redirectUri }) {
         <div className="mt-8 mb-10">
           {showFriendsList && <FriendsList />}
           {showMatchHistory && <MatchHistory />}
-          {showUserSettings && <UserSettings redirectUri={redirectUri} />}
+          {showUserSettings && (
+            <UserSettings
+              profilePicture={profilePicture}
+              setProfilePicture={setProfilePicture}
+              redirectUri={redirectUri}
+            />
+          )}
         </div>
       </div>
     </div>
