@@ -24,6 +24,15 @@
 
 		chatSocket.onmessage = function (e) {
 			var data = JSON.parse(e.data);
+			var func_type = data['type'];
+
+			if (func_type === 'notify_user_joined')
+				console.log("User joined: " + data['username']);
+			else if (func_type === 'notify_user_left')
+				console.log("User left: " + data['username']);
+			else if (func_type === 'chat_message')
+				console.log("Chat message: " + data['message']);
+
 			console.log("Data from consumer: " + data);
 			var message = data['message'];
 			document.querySelector('#chat-log').value += (message + '\n');

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../components/buttons/BackButton";
@@ -7,78 +7,69 @@ import { ButtonStyle } from "../components/buttons/ButtonStyle";
 function Chat() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [currentChannel, setCurrentChannel] = useState("General");
+  //   const [viewingImage, setViewingImage] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [currentChannel, setCurrentChannel] = useState("General");
-  const [viewingImage, setViewingImage] = useState(null);
-  const [pastedImage, setPastedImage] = useState(null);
-  const [uploadedFileName, setUploadedFileName] = React.useState("");
-  const [onlineUsers] = useState([
-    "kvebers",
-    "Jesus",
-    "asioud",
-    "zstenger",
-    "jergashe",
-  ]);
 
-  const handleFileChange = (event) => {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
+  const messageInputRef = useRef(null);
+  var chatSocket = new WebSocket(
+    process.env.REACT_APP_LOCAL_URI.replace("https", "wss") + "/chat/"
+  );
 
-      reader.onloadend = () => {
-        setPastedImage(reader.result);
-        setUploadedFileName(file.name);
-      };
+  useEffect(() => {
+    chatSocket.onmessage = function (e) {
+      var data = JSON.parse(e.data);
+      var func_type = data["type"];
 
-      reader.readAsDataURL(file);
-    }
-  };
+      if (func_type === "notify_user_joined")
+        console.log("User joined: " + data["username"]);
+      else if (func_type === "notify_user_left")
+        console.log("User left: " + data["username"]);
+      else if (func_type === "chat_message")
+        console.log("Chat message: " + data["message"]);
 
-  const handlePaste = (event) => {
-    if (event.clipboardData.files.length > 0) {
-      const file = event.clipboardData.files[0];
-      const reader = new FileReader();
-
-      reader.onloadend = () => {
-        setPastedImage(reader.result);
-      };
-
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleImageClick = (image) => {
-    setViewingImage(image);
-  };
-
-  const handleNewMessageChange = (event) => {
-    setNewMessage(event.target.value);
-  };
-
-  const handleSendMessage = (event) => {
-    event.preventDefault();
-
-    if (newMessage || pastedImage) {
+      console.log("Data from consumer: " + data);
+      var message = data["message"];
       setMessages((messages) => [
         ...messages,
         {
           channel: currentChannel,
-          text: newMessage,
-          image: pastedImage,
+          text: message,
         },
       ]);
+    };
 
-      setNewMessage("");
-      setPastedImage(null);
-      setUploadedFileName("");
+    return () => {
+    };
+  }, []);
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSendMessage(event);
     }
   };
 
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter" && !event.shiftKey) {
-      handleSendMessage(event);
+  const handleSendMessage = (event) => {
+    event.preventDefault();
+    // Check if the WebSocket connection is open before sending the message
+    if (chatSocket.readyState === WebSocket.OPEN) {
+      chatSocket.send(
+        JSON.stringify({
+          message: messageInputRef.current.value,
+        })
+      );
+      messageInputRef.current.value = "";
+    } else {
+      console.error(
+        "WebSocket is not open. readyState = " + chatSocket.readyState
+      );
     }
+  };
+
+  const handleNewMessageChange = (event) => {
+    // Update the newMessage state variable
+    setNewMessage(event.target.value);
   };
 
   function ChannelList() {
@@ -125,13 +116,13 @@ function Chat() {
           <h2 className="mb-8 text-2xl font-nosifer font-bold text-gray-300">
             {t("Online")}
           </h2>
-          <ul>
+          {/* <ul>
             {onlineUsers.map((user, index) => (
               <li key={index} className="mb-4">
                 {user}
               </li>
             ))}
-          </ul>
+          </ul> */}
         </div>
       </div>
     );
@@ -156,28 +147,28 @@ function Chat() {
               .map((message, index) => (
                 <p key={index}>
                   {message.text}
-                  {message.image && (
+                  {/* {message.image && (
                     <img
                       src={message.image}
                       alt=""
                       className="max-h-32 cursor-pointer"
                       onClick={() => handleImageClick(message.image)}
                     />
-                  )}
+                  )} */}
                 </p>
               ))}
           </div>
           <form onSubmit={handleSendMessage}>
             <textarea
+              ref={messageInputRef}
               value={newMessage}
               onChange={handleNewMessageChange}
               onKeyPress={handleKeyPress}
-              onPaste={handlePaste}
               className="border border-purple-500 bg-gray-900 bg-opacity-80 
 			  rounded p-2 w-full"
               placeholder={t("Type your message here...")}
             />
-            <input
+            {/* <input
               type="file"
               id="file"
               onChange={handleFileChange}
@@ -193,14 +184,14 @@ function Chat() {
             </div>
             {uploadedFileName && (
               <p className="text-center">{uploadedFileName}</p>
-            )}
+            )} */}
           </form>
         </div>
         <div className="hidden md:block">
           <OnlineUsersList />
         </div>
       </div>
-      {viewingImage && (
+      {/* {viewingImage && (
         <div
           className="fixed top-0 left-0 flex items-center justify-center w-full h-full 
 		  bg-black bg-opacity-50"
@@ -208,7 +199,7 @@ function Chat() {
         >
           <img src={viewingImage} alt="" className="max-h-full max-w-full" />
         </div>
-      )}
+      )} */}
     </div>
   );
 }
