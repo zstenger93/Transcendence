@@ -8,7 +8,6 @@ function Chat() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [currentChannel, setCurrentChannel] = useState("General");
-  //   const [viewingImage, setViewingImage] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
 
@@ -52,7 +51,6 @@ function Chat() {
 
   const handleSendMessage = (event) => {
     event.preventDefault();
-    // Check if the WebSocket connection is open before sending the message
     if (chatSocket.readyState === WebSocket.OPEN) {
       chatSocket.send(
         JSON.stringify({
@@ -68,7 +66,6 @@ function Chat() {
   };
 
   const handleNewMessageChange = (event) => {
-    // Update the newMessage state variable
     setNewMessage(event.target.value);
   };
 
