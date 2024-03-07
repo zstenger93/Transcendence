@@ -1,2 +1,9216 @@
 deleting user channel names
 deleting user channel names
+			 NEW CONNECTION: 14:28:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!SLLjcIOoEqOj
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!JdkmykZBuhiH
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!OnnRqvMvMrOe
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!KWycwzOdpdlz
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!gDGZPrEfAWAu
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!MNDoCInXaanp
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!eLfmZKNPJSGY
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!AtqmhaNaGqpq
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QKsIuAeBNVGT
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!WGwxCojREUpq
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZplmWPUhGMHJ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!LduucVJRNJFn
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CYmrlgJhXkeW
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ArPNTKJZaZCc
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!NGmYuxOxWqcN
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!aaqWqdkjTQAO
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ikxnDFDprNzs
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!MWVXAseegcqB
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!VoZUPUMZxBxm
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!RQYWFhdqgSQr
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!STgBkrpTDGxu
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!rFfiMJWMiDUn
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!MVJVZFCBWwmt
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!rhVfsefuayig
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!qBbVdVLyGZIv
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:26
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DqVCdsxIDxqQ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:26
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!pJrBTVmYQpTc
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:26
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!IkvWrtsdTjJZ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:26
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!UTrcduKPaZUB
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:26
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!crwGqzlpeXZz
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:26
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ioisCnjqmZCj
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:26
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!hksVeFphdwlx
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:27
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!jZjXQqJvIuul
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:27
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!GRWcXEKEqYti
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:27
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CISmogENQPgp
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:27
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!fCIMZbMOpFQg
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:27
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!OZmrqiXrMTjc
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:27
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!FiIQiLILxOpf
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:27
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DhWVuRYLkBWF
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:27
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!EMoYKMXablJR
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:27
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DxGKsBWlMrrM
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:27
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!tSNrAJiBBmRt
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!TkaEOrctlKrz
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!RzeXaJzwjbLe
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ybwYesFEKbDF
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!FXFEwiTVnGME
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!bFKzLiUDvDjv
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!fKfnRvTvVfcz
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!MvzedgQsPAsU
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!nphyvEELFGuO
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CKMYYkuIJkuS
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!legLknLnBGlu
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!GenLoLYMrPLW
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!BBJhoWHEfRwM
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!dPsrtvBeqStq
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!uCzjKZMxEYJm
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!PvANYGwwjJDa
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!xuyVrnagaLzD
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!XVLLHOzgBXvl
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!oHfMokVhzPfD
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DqMCzDZMrBQx
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!zhxWbquEhMll
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!HLuhHIGgDNVG
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZIgPhuSSyvkd
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!sdIuUcGsrRJl
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!gObwlxHVSPTP
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!dNyJeDyByTFV
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!pqTaJhwDdfAo
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!KLrREEyyNyjp
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QUaODdHRGaWx
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!oiSKAOaBQkag
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!xVizNfMDyyeG
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!pDAvvmKOjZLV
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!EbrPBqAWLSms
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!RVqMmZDhIrpO
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!lfKdYqJgTXXb
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!BhNkRXcCcObE
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!VxmycSuYSWjA
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!EzbPitqCKNyi
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ovakfExDlYRC
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!NFJZYRjGQVhP
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!otoZGBpLIdNi
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!YlEiBPruhYvq
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!oNJQJSePZmxl
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!nXGbEzeubbAi
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!odSPGcwgcutC
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!SPYolGjsUsFR
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ljwHeZxuBUWs
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QgKYIeYFbeLz
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!UgHQLGTbQXQn
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!iquuGAHrWazf
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!kALPheVIOnzq
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!VOQDjgwtpVPK
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!YzfCfIWHltTj
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!xqdrZWoaejNi
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!zXkEAXWNDRGL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ekCMVmZLfpOj
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!XfEhxGtRkQZW
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!iJmWRKqxUcSA
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!EoUQqKdmbDpv
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!AfVpmELZYhNM
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!bIExvlhiGxKK
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DDRYaOzaRDLl
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!jThfgmNlIZLU
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ePbhckIdkKPH
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!uAMikTpqMGAn
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CevMiuSDniYK
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ogIfceGAlpsb
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!kNsosjeVMXXi
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!NKyztdwRyJqO
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!bCKOOZLfKlZQ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ukXnVlFTOVaZ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZUbHcDqwQSCs
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!PsUgEvAtGswj
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ITrnTuhnNPLp
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!KxcvxQxeTVqI
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!uBPxSBRBeQhE
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!tBAUOBdjcjen
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QULiwqRjXpui
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DhUJgAIkfxVs
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!wzKAsyWrOewh
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!NSyVuLDvVivZ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QTzOnjLPiVWN
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!LtBuJkFgOSxj
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!elgWAJaMbuLF
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!hWmnNGDHfVpl
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!daslBlTQdcCI
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!pDYbiSZPzVNf
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DeqGzPSMyXHx
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!HmYpvjePfUay
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!vpDYiSidvxvj
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!sCnytFUBNQab
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!BvpRVlMLITNA
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ovtWxvqnmDmf
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!nMCQbMYwkWMZ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!xAaFvDjPGFKW
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!zCDWkgUFlxMn
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QlCpCJPorsft
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!FjLbHeqObVCm
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!kcCYTujXNakW
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!APlzCRAqzuOj
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!OcyYzyVOrPPr
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!miosYiCEuBsm
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!tiWGjzJklAJk
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QALuYbqikMkh
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!lUNvbJOoDvJM
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!peqMgkvnyTbs
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZJNKbRUGLLPk
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!hCzNTrhSDhee
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!wuGtWIRioeOo
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!UdUnasoscZQZ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DGCQZFQjqJgj
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ypTINKSGXPyG
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:36
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!zKAtMvtXWaaL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:36
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!xtGyjXQOkYrD
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:36
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!kSVqaONmcSpY
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:36
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!vSTelTzqVzxq
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:36
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!atdvbdZyJNSt
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:36
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CszooWvGzQWk
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:36
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DGWMnJGSqUWd
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:36
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!JYJRGJpFxPWk
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:36
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!GCFsWKZQEdiP
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:36
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!hymRNMjxaokv
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:36
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!rqtNtXSHLdaY
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:36
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CHYYvFKgFnMB
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:37
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!NUIqeJdpglUM
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:37
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZZwSjmQwAFhK
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:37
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!BafbWkUBAHGA
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:37
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!gpbQFfqHtRgn
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:37
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!GubRdTOWkDUl
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:37
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!rOfkoVadTfED
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:37
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!rdGIbbRgyKjw
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:37
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!NvIsuZyVjXBt
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:37
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CyktpXbMHmUX
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:37
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!fCeZVKdvksSJ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:37
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!uZhkqxrOgpEQ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!pgyuFIuDFOFh
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CHkGQrGGTtwO
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!XTuXOSOKlWNs
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!HFuccfuOohTx
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DuvDwlYjJNyu
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZiiWEkjZSNmD
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!SoTudyqZecQN
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!TehBFTuSaYLr
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DbKoFRKyqPun
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!mZEigiWDNjGc
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ebGsgQRDgNAg
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:39
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZzfNOeLBXpUa
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:39
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CqKbdfcvfEsA
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:39
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!fSDgYDHDEbJD
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:39
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!SMemMVEkqVSh
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:39
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DKySqkORdDNg
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:39
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!qzjbngDmhrYQ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:39
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!pHMmIrGQsLLU
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:39
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!FqReqvAgtRUb
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:39
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!kbNtPxwHMohc
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:39
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!IGQOkhTjXALf
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:39
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!GbTQteFeJQgc
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:39
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!jJFENYDbwwMZ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!iIMYZzXXVSQx
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!NocNOqIafWhK
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!tIERhxPBEgub
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!WYcglhRxovAN
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!xdkIpwHuavra
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!dzuMHvLsdanm
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CtYDsUACshkH
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!NGKLPpHrggEy
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!GqsYsEChEsrt
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!joXMuFyEbXjR
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!YNIcDmdMIeqh
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!EpziEnIICprL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ytzRdtGlnInJ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!YnLwBdGKvUJc
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!vNFBFtxGwWKL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!OnUeqDPfPEqZ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!lrKFezTuWnIN
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!turBEAcEpzcO
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!HdfMuPFiYFaB
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!MlQMLqLyYvlb
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DtaldMKfIDkH
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!hjUpJwgttvbN
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!EuknnmQtLXiF
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CfuprspBdoVF
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ehOgRcVVpNHZ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!iKiEBJaCBrde
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!MRsNQYcOOAWt
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!fyZbSTaVRJHI
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!gTEFiysZhZrQ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!wcxOdhxyxIWJ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!SKSudHHEsoIP
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:43
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!doebPbASAZyh
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:43
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!IPbslqpECuyB
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:43
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!lWubSDQycCHG
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:43
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!XTHRnKrbGfXT
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:43
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!dsBoDISSDJwk
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:28:45
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!iViWlXPGGiGc
+	Active users:
+
+
+			 NEW CONNECTION: 14:28:46
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!USJcbeLltZWv
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:46
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:47
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:47
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:47
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:47
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:47
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:47
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:47
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:47
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:47
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:47
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:47
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:47
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:47
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:47
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:47
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:47
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:47
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:47
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:28:47
+Disconnected user: zstenger
+	Active users:
+
+
+			 NEW CONNECTION: 14:29:22
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!aouTiVOmXIkI
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:29:22
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!wKqTGQVvYGhA
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:29:22
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!gSkfCsCrDVYI
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:29:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!WUUcwsdDQZJs
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:29:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!LWaUDwUMCVSS
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:29:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!PnoVprkqNkLG
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:29:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!dCToSeaNndTE
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:29:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!mTcVxcoBnpiX
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:29:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!zfCwgjdryCMh
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:11
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:36:11
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:36:11
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:36:11
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:36:11
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:36:11
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:36:11
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:36:11
+Disconnected user: zstenger
+	Active users:
+
+
+			 NEW CONNECTION: 14:36:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ImNqEYYDzddm
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!xIFKZxCtQohX
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!kyAvJXNWRxOr
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!vXaTndCYSjfn
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!yWOXKQrsOIqU
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!HCWnPFuLFFKx
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QbseDAficdqY
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!qiXkBWJyDfio
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QQtjakOMRgCn
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!xRWJhBBmKZIr
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CsgTudfXJyDI
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!KoceTZaDbZTw
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!HDjquxjiYEZl
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!dvPmIIcuCvih
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:17
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!PsqWvkRsEnEA
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:17
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!xyfmQCuYDOik
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:17
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!XyIuyungkZUK
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:17
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!UkawQQChIYwe
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:17
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!RuokrWlxPQsT
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:17
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ePuqjVMCeRve
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:17
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!uPAmuKcPMMnR
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:17
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!dOdnHEwCciMC
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!EncKWkHdufjJ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!BrXrphAlChcs
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!BtoWGPRDINOz
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!gMaEAkryxBcC
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!fNcxRSRLqsgL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!SOGtCBuFyuZO
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!wkPBKwaSRehL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!WVHzrieONtpP
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!VthpqcoGIkAp
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!YZvfRIheRYvV
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DmipgZzBxCdt
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!EhSUTLgbdQYx
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ASzZJpGXvvNT
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!spYarbFtZCbs
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!TGzSvDtBfonG
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!iOZOZhISnkXk
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!KkajsSXVlLBY
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!mKrsSwuzBrgO
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!NOmpjjmqULwg
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!tNlajpcraqQj
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!eLIprELiSGgr
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!lnWnDbgFEqxS
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!zZkLmBmZcwXU
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!iWBYmTmKjBHe
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!zoVdkrBbLwoi
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!PJSXnUELKCQq
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!VPnrnTBsXXwY
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!OhjuGORjfSlM
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!AwASwOCcqodq
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!tMVkzYLnrkkA
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QOMNbBiIBFYE
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!UYPmNWVoERUy
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!iGqAKXpozoUw
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!cevTmrbUrBKV
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QeOtTsYZvRXz
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ehLbLalaWJTQ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!cJKPKvQKcsKz
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!yxxMpptGdIfM
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!elvVBBlWoPSh
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:21
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!oMGfThscTLTW
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:21
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!RVszqKeGaqiM
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:21
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!BnccjPSJNttK
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:21
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DAbYpDiItwMQ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:21
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!aOSlWZmLJwjL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:21
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!HaTebtILZYit
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:21
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!rWzFshREyIXe
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:21
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!kNosIreeVRhX
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:21
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!paFZZgMKphUJ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:21
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!aGXjFEkLgOHb
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:21
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!aDDcQPfgEQkD
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:21
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DmDnRryjmRXh
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:21
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!dJYlMfOauJbS
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:21
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!PYZWLRcWbdYL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:21
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!yxWHFePZOWGi
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:21
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ydxUBdHDjWiB
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:22
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QLvOikvJbPHw
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:22
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!LviOifmOhqiG
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:22
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ObKyuIzxBbfq
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:22
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!WKUcmrQgTaSJ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:22
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!WPNeSjgUZYet
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:22
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!aOvbUUsXsBtX
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:22
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!WgzOhlNARFzI
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:22
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QhMtOHIJtzBF
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:22
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!VbNNcPeDesXN
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:22
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!alboRtoobLDw
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:22
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!pwVLIXYLHrNm
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:22
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!durPZvXItOEm
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:22
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!VFfxlqIVsYVl
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:22
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!tfhIrQCmLpqp
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:22
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!TLHyHzEOhaye
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:23
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!zbQgrRvqBDsu
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:23
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!WoxSqyINeDAL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:23
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!cwHSzPVjHLPo
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:23
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!OdmAqKoLYHmn
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:23
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!zPEFaefMewYz
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:23
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!rGioEuCcRyDT
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:23
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!waaUhIfYhOQD
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:23
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!RdfefGnMVaRz
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:23
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CvZfFXWOqpPm
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:23
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ITTAxXkKMecF
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:23
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!RqUULSUbXdrT
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:23
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!wblbcakDTQsq
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:23
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ItLAWTeqXzGJ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:23
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!kvGVExcAsCSE
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:23
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!SeNbsLVJVlaL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!PpfhtvWZOHbE
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!qDJiLelMvCsp
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!cHqkLOEgnfzg
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!bKcefhwqVbMf
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!YuMOewmMbwDI
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!nkcGONOfEGHw
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!LOvxOCzndNZp
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!YDVOrvUMGxCO
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ULKnhFWscOsa
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ayMOlcdGoSKb
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!svyQyptAFCTV
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:24
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!zcjCHnYEfBzC
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!iZTXYqChDVTn
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZvTDcKvmJNcx
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!MVkSoPDAUchW
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!PHYKERirslvM
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!OEuwrdxiTBJQ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!COhWCJcifWAR
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!xhQpjceexZLh
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!wDkEqcghwutL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!XkdqUzlHXCul
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!aYWEjtcUTAYI
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!JWRMXAaQvgDK
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!RhHACrJLPMGE
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:25
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CNUBNMJpixVV
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:26
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZWlScjBBTvXr
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:26
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZRGueXYiRMZX
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:26
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DlbHuWmmTixw
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:26
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ncHGDSVfnQGt
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:26
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!MStgzHXFwfaj
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:26
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!gvOqTelHndtx
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:26
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ejVtYruLVrdU
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:26
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZTVCPVcKbiJg
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:26
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!GzKLPibmvFUD
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:26
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CVdVdjXBgDTo
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:26
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!fnSSjxzYHCXE
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:27
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!RwbLsASSRMNL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:27
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!HdjZxhmZzqQa
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:27
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!wMNJykjwhExu
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:27
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!vPQqILpmUOwX
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:27
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!GlkLJtvdTVAo
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:27
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!eNFAMaJmYReg
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:27
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!fJoRpGDRuFMC
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:27
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QYlhaZPzOPMj
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:27
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!FRqXOjYRplAY
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:27
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!SkwiUYTuPUzB
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:27
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QkhqVymanQYH
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:27
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!SGlclSaNaFrJ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!LwKHorfyMaTS
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!kpoDkUGzDiji
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!TESnIJQZjOyC
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!IEipocHyGkQE
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!hSJnTjiJqozi
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ifVfGmMSERVl
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!OBEauMnStKak
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!EjQorjmIobGE
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!wOyGGpmpQgmA
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!wGtpJuQfCvEz
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:28
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!jqYMIUwNrqQn
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!kzeZTTenjlwd
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!hKeUzyCPCkKS
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!jgAFBtgxIKOd
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!bCeNxrrJzQJu
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!MvwRkNaDsbXW
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!OsnYlFKurRiX
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ssEZUSqrkvMJ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!KRWelHLnOwGJ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!vaQTWlLyMclV
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!hLcJBPsgxqZW
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ewWZPDznWclb
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!IGreyYdVxGVt
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!LMAElpgaEMxi
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CaKrohcqdbLw
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!hwptYiNMPqQi
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!tKeeuNIXqioh
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!RcvpTMiOBWUj
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!zzVlEBPrFnka
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!nJOsTOcwQMpR
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!tCITsyCICEQf
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!YzUnpsMuLKHO
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!tnWsrJfTAxGZ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!sFVWjKkqFmCw
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:30
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ESsZnWCgStOK
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QHkDGdKSQofh
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!vGrerwqsxaas
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CkWsBmmrzxEg
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!nsZmLzvoSxlZ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!gWTJfTDqADTz
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!BbmPkPBqtGdY
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!vgaYbymYvYhx
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!PJKBLrvCULPd
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DCJdwrYSnXeX
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:31
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!MIzqoAgzKCUu
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!rFQfMhGTwSvE
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!zuDzFSnvogcq
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!zADpGgEVXlSw
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!YrKnTdgETvdw
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!MtaMAYXbZsoP
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!haSLDHrNjsPA
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!uacMEYWENkUg
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!BMfRzwWlvasr
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ktZUrhiSuLdm
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZtuSBZxItMAq
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!rkdxbdMiBALm
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!pPEoHcEdoCUU
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!WwBcBbkFeXAL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!kFtfifRlYbna
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!BHdGpltHrlRQ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!NEJMisRqGrsL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!MsruXktVvxNv
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!MzhJDkwRsteu
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!jeezCKuyxGGF
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!blLsHNFvpijY
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!jhZCXctcqSZK
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!PWoCOPvfGklv
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QrXRBjmmLPiZ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:33
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!eSdErGiVqxEf
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:37
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!hOqPUPkhEIZU
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:36:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!XXzJdKDDwWxk
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:36:38
+Disconnected user: zstenger
+	Active users:
+
+
+			 NEW CONNECTION: 14:40:01
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!KWkjXwEyHqOk
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:01
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!iFvsDxUqGzoy
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:01
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!IKpEgokHXDok
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:01
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!gTrRHvvaHLLG
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:01
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!GyteMYXHRquw
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:01
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!gWYPJsyBSleX
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:01
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!iVMXExGAIdbu
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:01
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!gPwTpJPqFkVy
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:02
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!iRkTfjayystG
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:02
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!BqSwlJquNdJj
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:02
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!GrwNCygsWKYD
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:02
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!pRQYJzjHgrwf
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:02
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!JuNNOhFLWZsL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:02
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!WSMWaxTVqtpl
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:02
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!hoQHflpdXOLS
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:02
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!YGGiSttkLIJM
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:02
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!JNIgINvpMAnO
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:02
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!SbxVeePtutuP
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:02
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!gWHTheffsPeI
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:02
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!fXXSUZYBwqkS
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:02
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!BEGJRptxVjVh
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:02
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ubwRUmwxxZgz
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:02
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!mFnBDXprELUO
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:02
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ghlGDBBCRkvk
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:02
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!zURvDQcHhbgG
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:03
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!dAtJnJTRSYYa
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:03
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!UZZyfMJIvQzb
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:03
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!lGUwqOmkhlGN
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:03
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!lxnEUyNXUtrq
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:03
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!tuvzrEiGZTrU
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:03
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!xeIOBbLAbCrL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:03
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!NbcktAsuXUjA
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:04
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!FtadpjyHQBHc
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:04
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!bzVRGEXlrSci
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:04
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!LdlzJvYeOAPM
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:04
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!dTkcnUapfETN
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:04
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!EcnBEFjFiyte
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:04
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!bKoQeXeQoDEM
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:04
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!bUXEqTKQPiLo
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:04
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!KGGfmBlqTKwa
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:04
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!arvEqgGJiEPn
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:04
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!MZTTqaWWdEhl
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:04
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!HcAykwPZAugB
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:04
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!EzWCzbmLApit
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:05
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!IgPuDwieRjhE
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:05
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!pmQZXWnHoTYL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:05
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!LNTkAToYGhtK
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:05
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!uDveggciVvak
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:05
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!TjWWvjowsnjM
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:05
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!TLiSoVLZCfag
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:05
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CniMRFOhwQcC
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:05
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!kygTdgYGUXJj
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:05
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!wPuuhKBBguFH
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:06
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!IylzcRySVUoT
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:06
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!swTCriFUdmry
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:06
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!NignAvsDMIPT
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:06
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!GPYPqeIKHdfD
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:06
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!VekLgFetQGLJ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:06
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!MLYXubmmnisZ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:06
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!OSjSqmmAhSzr
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:06
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!TcbYMZtrCosk
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:06
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!OCwLMXTfLJjL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:06
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!GngNzfrpewQy
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:06
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!zcXmhfJBIAfc
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:06
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZlRKFxRDYGUi
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:07
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!uqlxYhGYQIjR
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:07
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!AvluxxyrYAmR
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:07
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!gxrBYlgoyKbJ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:07
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!zxzFfBCCNMqU
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:07
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!lSyUebQLmsGm
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:07
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!EQhJEyiUwgEr
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:07
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ubFnxZVngrPK
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:07
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!fVoPmrgbWbiH
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:07
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!XvzPLwtuGjgM
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:07
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!tSFPWDuXuFZI
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:08
+Disconnected user: zstenger
+	Active users:
+
+
+			 NEW CONNECTION: 14:40:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!XcAGXyMWUNqD
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ujvIFJuQGiXY
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!gqOuOXdvacxE
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!LxfHBYsjrnKh
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!NrxDFRJaMkgW
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!kZyivTrhGagj
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!AOrIhocIjDGf
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!YzKoNTNpJSXT
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!lAMEnsUtJFnC
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ElKYAkGinJTS
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!OSKBFSPaqFVW
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!BWtBlHYRRhBE
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!tcSijWnuNVOg
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!LOeqqcoXWrWy
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!LYqxGOztuLOg
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DYeyeHMBbJRN
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!AqxjTmgsdXUN
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!LXPjsgdcrmJV
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!nzFvBuchQKwe
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!UoiVqNaGVrll
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!wzXxGScaGdVu
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!hRceRpcdIHXu
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!fLrvHBxtEGKS
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!EcFQRCCLlPlK
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!IqAMwirrrsys
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!OspbZpXeQfGY
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!MSodGVfNxCnz
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!anRyfsIlyozn
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:40:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!PqntkXHfWOGX
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:40:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:23
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:23
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:23
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:23
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:23
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:24
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:24
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:24
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:24
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:24
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:24
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:25
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:25
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:25
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:25
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:26
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:26
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:26
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:26
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:27
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:27
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:27
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:27
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:40:27
+Disconnected user: zstenger
+	Active users:
+
+
+			 NEW CONNECTION: 14:44:13
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!fFpZOgnOZBRK
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:13
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!JGDnyfSABfqL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:13
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!qyYvIGZpJJzs
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:13
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!XMvPbSLBpSZi
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:13
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!nsdycYZkrutH
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:13
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!hLicPQMibLuT
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:13
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!zNNyXyJyjNrv
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:13
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QbnFaQQHpyLV
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:13
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!GczRUvQSanqf
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:13
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!wgKSdOBGTDNR
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:14
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!lXAJcHzoRpZQ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:14
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!eSrMCoHKOvpL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:14
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!MwReTEaNIPZP
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:14
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!cvEcJWIpRPWH
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:14
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!mwPxEOLhraeD
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:14
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!KipREwBHXlzy
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:14
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!MRlIwUCokvSp
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:14
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!AIiHtPQoGcMQ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:14
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!yhVEvaFbqiTD
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:14
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!oDMfcRWiBTxQ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:14
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!xdiBzYaBXOuk
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:14
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!OIasHgUKUrLi
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:14
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!iRFTKSKysZrj
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:14
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!qpVgOIBNolzx
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:14
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!whkpGjhmwLfO
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:15
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!wIPAYYDTslBP
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:15
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!whXEAUfJRQdB
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:15
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!JtXbTfnEjGXp
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:15
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!IGhsPWfqpGqj
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!vNGQKzGyQkiC
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!sNyKqvyBGnnQ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!NBKmqOCMFmIN
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!cdlKxGlpfppa
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZuyVvpBrbRFL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!TCYwxqLzlPTa
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!VBPfMTBBBWrI
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!GqxFaYrSODEV
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:16
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!unmaBxYeAyGZ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:17
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QPBmTKTMBSDJ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:17
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!vDCsxCqmxZsQ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:17
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ksUQxxxuyzVq
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:17
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!gPoeVwwxFzvJ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:17
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!BXrwnWmxhXHp
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:17
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!OmygQfmYfWwJ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:17
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!mGwmpFRafKOc
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:17
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CmaaeTAzCQRS
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:17
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!jUDcIFdCIzYI
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:17
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!eCUwzDQSCQBW
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:17
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!rQRuMMZNBhmP
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!kKCAoWtLxxZr
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!viCYAdKYnNrN
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!sGhFyOUAzKpd
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!usKfqYrQjpmE
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!oUtCmiifRQfZ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!OzJpOtMlWCvj
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!qVDqEhtjusOr
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!lbypBVyuDPza
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!iBZFpfbpCULA
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!KaAGDJbKTlvl
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!wgFhoOdfkrDc
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:18
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!xJyGJOGFqdUI
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!VTfRIHJEUSMJ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ivQrDodflEyI
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!NvtDMybFUgIw
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ycKlNDIJiPwA
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!dyvJHqsdwfZG
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!xNgVjCUrEsdi
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!TkrksUEqOSPN
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!VeMQqNsuZPxT
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!JKLyYHAYrQKU
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!nvFYKvCJhUUK
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!fHYTlDvCNgfw
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!JixRYGQSLzwE
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!gSMjuZkaMkSu
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!dWxQLkbTjCAU
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!tPGGiDZnvraN
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:20
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!PaItteFmANRg
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:21
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!BZFbhmzdrAVj
+	Active users:
+
+
+			 NEW CONNECTION: 14:44:21
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!snSWmkwTgvqB
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:21
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 DISCONNECT: 14:44:22
+Disconnected user: zstenger
+	Active users:
+
+
+			 NEW CONNECTION: 14:44:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!dxtAsHVrhRWe
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CdjSdkCEMDtU
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!SfMXqkhndkxM
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!simQPXFddRrv
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!oiOSnlAKFzks
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!TplEMMNzwzGB
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!KPtsxesVuYLR
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!eJsgDsTJrJOL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!gsxaKUCcNoec
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!WMcSNZywzVUa
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:34
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!mHtKkLzxqOQJ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!szeZcmDJWrJS
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZtLkIHnZunor
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!wgnIHOjCtPyP
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!mAONUydkMDSo
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ryvHSdGZLhGY
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!GqHpAnZwjCZA
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!iXnTLFCqkPmm
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!JHjTZyWDqIZs
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!PNvEmIKSEWnv
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!jvGvOqyPCOEE
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!xwMTpLeQGdJP
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!sQlsyzujGJDE
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZYbIuIEixhDt
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:35
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!MsFTASozfNEO
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:36
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!utIEUqmthOzf
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:36
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!MOZkwRdhFnOE
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:36
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!jLkiUEtGhcdD
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:37
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!MZzfCedqbnBW
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:37
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!sMetvOMjZMas
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:37
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!AYmOEPCOMahM
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:37
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!lnFWBhEXxuns
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:37
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!FhiEVbLvdUsF
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:37
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!fquhpuwykEgp
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!mizNyshmfPfa
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!iQzQpfRHwEUH
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!TrtRQTpQGbcp
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ztIGqjaQqArD
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!xafqcOGuOPgc
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CEkpgaxYVqjP
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DPNOrRczawqv
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!YsCQdkdSSVli
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!uupWrXtgQfUJ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!swhgdXUGzwIi
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:39
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!PYMlZmcSRomC
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:39
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CTuwOTSSsOyT
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:39
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!NNHQuoExbHkF
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:39
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!SKqlJfSQDeuf
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:39
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!eVZQnxxiIdcu
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:39
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!PBeXPUbBDAdL
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:39
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!odEtAZBblEqs
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:39
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!NiMGrMsWklNZ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:39
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!vdaNGXxWDvkT
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:39
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZaibaUAwdtSA
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!PkZyInJzbEFU
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!tPGtcOjAwPkN
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!UdYlCaRmhiKb
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!gGFcPIUUAIHe
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!bnWtmDsTHvwu
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DVjapkrMCwlH
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!tvlivFMrAKqK
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!gdiGJBOmpUFF
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!bQoylCiRFLfj
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!aHTtPFBBlLHQ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!spFwPPjsAcYW
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!fTmiKYWZorti
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!KBCknAauWObq
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!cJyiavMMFvUd
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:40
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!uJFCceBPKMvC
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!qVmCVSVMSKHS
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!gHSiWIxpxOzq
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CJgenNMtUegt
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QlYusuikqyzz
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!lReawzzsfKMl
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ygiVtPagcDMx
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!UoQAYrgegvrv
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QTtBUVzNchsd
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!tuVrZBViNqfB
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!HrBiQAEltvfV
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!fwxJFUDMgVxc
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!GWcHUambnydh
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!RPqZQwpDGsXT
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZoClSpwJxfVd
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DfyKgbKjIfna
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!kQMYXAKQGwzt
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!skzxzpLCLIyP
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!DjoHpwVcmrPr
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!cfZApQxBdrTp
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!hkhAgNbsUDVK
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QfUItLyUlGGK
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZdrDkGMYqvOo
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!jEykjYEDaOaV
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!eRgRKqbNowPa
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!dScPWFEHXFnt
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!klfHYmBJWRWt
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!HlFWDEVNSMby
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!YVwArCZgFOZJ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!uiUbetnagvto
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:42
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!jPCdemLCdjsI
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:43
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!wzOjmPjcFFnb
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:43
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!uONlwvdREwCT
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:43
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!YekynCVEdEXr
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:43
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!vflbtpmawFuR
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:43
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!lVWLIhemUWYs
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:43
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!kjgLHEhSyBta
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:43
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!GAVNCpjdygkm
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:43
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ghtbUJaFdDAe
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:43
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!KNypNLIkuNqi
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:43
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!QpBcBdtYhpKH
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:43
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!knYUYsgZZsYo
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:43
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!yMHLdMWCiGmi
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:43
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!luJqzufwYnGk
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:43
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!HCAkUNUwOCRx
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:44
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!WzjQJaIrSftI
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:44
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!wBhXzPuivjkw
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:44
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!EVJOyzZaCbsV
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:44
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!xUKTjzkBOOKu
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:44
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!mjegbywMLnzT
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:44
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!jkhrprATGpAN
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:44
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZjudBTQSQzVF
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:44
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CIUCOXepllDE
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:44
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!EqUYrLGjuiSB
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:44
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!LUbtHOnbDcqY
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:44
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!vPKvvLYmxrOq
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:44
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!VeksVgiRmwpH
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:44
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!JZqYxitgedbP
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:44
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!xEzVqCeRfVtx
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:44
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!HAOaPDFyoeXF
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:44
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ukOsjOHPRpjk
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:45
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZiqwGVNJUMPH
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:45
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!RxeENnJToyMe
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:45
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!zfvKMtpKTZVj
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:45
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ChHzAziEZEWc
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:45
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!TBKPeFUtUiha
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:45
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!GzhcxJNxtfRu
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:45
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!lwumxBpcKwFJ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:45
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!rnDFSqyVYtMR
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:45
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!CwUDBVwifUhN
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:45
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!KOGCjggFyzQw
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:45
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ebAuSIIRcAQX
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:45
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!tkMVTDOoeiFv
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:44:47
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:44:47
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:47
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!pmtJhBVcaUcC
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:44:47
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:44:47
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:44:47
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:44:47
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:44:47
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:44:47
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:44:47
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:44:47
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:44:47
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:44:47
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:44:47
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:44:47
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:44:47
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:44:47
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:44:47
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:44:47
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:44:47
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:44:48
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:44:48
+Disconnected user: zstenger
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:44:48
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZnabSNwkHqFx
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:44:48
+Disconnected user: zstenger
+	Active users:
+
+
+			 NEW CONNECTION: 14:46:41
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!rJKaEWRwuOpA
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 14:49:46
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!IUqCvbeHCJRx
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:51:38
+Disconnected user: zstenger
+	Active users:
+
+
+			 NEW CONNECTION: 14:51:48
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!GeYmIOeeDEaD
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:54:02
+Disconnected user: zstenger
+	Active users:
+
+
+			 NEW CONNECTION: 14:54:32
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!ZhWxSXDKampL
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 14:58:38
+Disconnected user: zstenger
+	Active users:
+
+
+			 NEW CONNECTION: 14:58:53
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!SJoCOqQGdhin
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 15:01:23
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!upTpeBqyYvhK
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 15:01:23
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!HirWICBGHbpY
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 15:04:43
+Disconnected user: zstenger
+	Active users:
+
+
+			 NEW CONNECTION: 15:04:46
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!kqGHRjMkkOIv
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 15:05:26
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!hMPlwTUqsPEB
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 15:06:13
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!oEklFuEpreYK
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 15:07:08
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!eIJSINKcJNsl
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 15:09:48
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!yLIbnFANUWNx
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 15:13:03
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!vtSoVytHfVCJ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 15:15:49
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!GywaUxwwNZGo
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 15:18:19
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!yGxATeHpCWnl
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 15:20:38
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!XAzbsRQntQcZ
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 15:24:52
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!VlTpVZKszrQB
+	Active users:
+		Username: zstenger
+
+
+			 NEW CONNECTION: 15:25:29
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!RLAXimiQDpaM
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 15:29:18
+Disconnected user: zstenger
+	Active users:
+
+
+			 NEW CONNECTION: 15:29:21
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!eyniaWvWLJaO
+	Active users:
+		Username: zstenger
+
+
+			 DISCONNECT: 15:45:41
+Disconnected user: zstenger
+	Active users:
+
+
+			 NEW CONNECTION: 15:45:44
+Username: zstenger
+Room name: zstenger_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!uEUPDiXznMUr
+	Active users:
+		Username: zstenger
+
+

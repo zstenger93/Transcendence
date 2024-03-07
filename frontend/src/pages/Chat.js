@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../components/buttons/BackButton";
-import { ButtonStyle } from "../components/buttons/ButtonStyle";
+// import { ButtonStyle } from "../components/buttons/ButtonStyle";
 
 function Chat() {
   const { t } = useTranslation();
@@ -10,23 +10,33 @@ function Chat() {
   const [currentChannel, setCurrentChannel] = useState("General");
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const chatSocket = useRef(null);
 
   const messageInputRef = useRef(null);
-  var chatSocket = new WebSocket(
-    process.env.REACT_APP_LOCAL_URI.replace("https", "wss") + "/chat/"
-  );
+
+  const [hasUserLeft, setHasUserLeft] = useState(false);
+  const handleLeave = () => {
+    chatSocket.close();
+    setHasUserLeft(true);
+  };
 
   useEffect(() => {
-    chatSocket.onmessage = function (e) {
-      var data = JSON.parse(e.data);
-      var func_type = data["type"];
+    if (!chatSocket.current) {
+      chatSocket.current = new WebSocket(
+        process.env.REACT_APP_LOCAL_URI.replace("https", "wss") + "/chat/"
+      );
+    }
 
-      if (func_type === "notify_user_joined")
-        console.log("User joined: " + data["username"]);
-      else if (func_type === "notify_user_left")
-        console.log("User left: " + data["username"]);
-      else if (func_type === "chat_message")
-        console.log("Chat message: " + data["message"]);
+    const handleNewMessage = (e) => {
+      var data = JSON.parse(e.data);
+    //   var func_type = data["type"];
+
+      // if (func_type === "notify_user_joined")
+      // 	console.log("User joined: " + data["username"]);
+      // else if (func_type === "notify_user_left")
+      // 	console.log("User left: " + data["username"]);
+      // else if (func_type === "chat_message")
+      // 	console.log("Chat message: " + data["message"]);
 
       console.log("Data from consumer: " + data);
       var message = data["message"];
@@ -39,9 +49,14 @@ function Chat() {
       ]);
     };
 
+    chatSocket.current.onmessage = handleNewMessage;
+
     return () => {
+      if (hasUserLeft) {
+        chatSocket.current.close();
+      }
     };
-  }, []);
+  }, [hasUserLeft]);
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
@@ -51,16 +66,19 @@ function Chat() {
 
   const handleSendMessage = (event) => {
     event.preventDefault();
-    if (chatSocket.readyState === WebSocket.OPEN) {
-      chatSocket.send(
+    if (chatSocket.current.readyState === WebSocket.OPEN) {
+      chatSocket.current.send(
         JSON.stringify({
           message: messageInputRef.current.value,
+		  receiver: "general_group",
         })
       );
+	  console.log("Sent message: " + messageInputRef.current.value);
       messageInputRef.current.value = "";
+	  setNewMessage("");
     } else {
       console.error(
-        "WebSocket is not open. readyState = " + chatSocket.readyState
+        "WebSocket is not open. readyState = " + chatSocket.current.readyState
       );
     }
   };
@@ -71,7 +89,7 @@ function Chat() {
 
   function ChannelList() {
     const { t } = useTranslation();
-    const channels = ["General", "Random", "Memes"];
+    const channels = ["General"];
 
     return (
       <div
