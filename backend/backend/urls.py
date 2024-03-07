@@ -25,4 +25,6 @@ urlpatterns = [
     path('api/', include('friendship_api.urls')),
 	path('api/', include('user_block.urls')),
 	path('api/', include('friendship.urls')),
+	path('chat/', include('chat.urls')),
+
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

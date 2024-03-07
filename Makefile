@@ -4,7 +4,11 @@
 
 
 all:
-	docker-compose up --build -d && \
+	docker-compose up --build
+
+runb:
+	daphne -b 0.0.0.0 backend.asgi:application
+# http://localhost:8000/chat/
 
 
 execbackend:

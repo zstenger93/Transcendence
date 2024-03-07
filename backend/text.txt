@@ -1,0 +1,31 @@
+deleting user channel names
+			 NEW CONNECTION: 11:18:49
+Username: jergashe
+Room name: jergashe_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!KTNMmYDOzrPC
+	Active users:
+		Username: jergashe
+
+
+			 NEW CONNECTION: 11:18:58
+Username: mfaoussi
+Room name: mfaoussi_chat_room
+Room group name: general_group
+Channel name: specific..inmemory!SbuoIUsDwZzD
+	Active users:
+		Username: jergashe
+		Username: mfaoussi
+
+
+			 DISCONNECT: 11:19:03
+Disconnected user: jergashe
+	Active users:
+		Username: mfaoussi
+
+
+			 DISCONNECT: 11:19:20
+Disconnected user: mfaoussi
+	Active users:
+
+

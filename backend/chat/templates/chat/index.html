@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Chat Room</title>
+</head>
+
+<body style="background-color: gray;">
+	<textarea id="chat-log" cols="50" rows="5"></textarea><br>
+	<input id="chat-message-input" type="text" size="50"><br>
+	<input id="chat-message-submit" type="button" value="Send">
+	<script>
+		// Parse the JSON strings back into objects
+		var users = JSON.parse('{{ users|escapejs|safe }}');
+		var rooms = JSON.parse('{{ rooms|escapejs|safe }}');
+		var all_messages = JSON.parse('{{ all_messages|escapejs|safe }}');
+
+		// Now you can use these variables in your JavaScript code
+		console.log(users);
+		console.log(rooms);
+		console.log(all_messages);
+
+		var chatSocket = new WebSocket('ws://' + window.location.host + '/chat/');
+
+		chatSocket.onmessage = function (e) {
+			var data = JSON.parse(e.data);
+			console.log("Data from consumer: " + data);
+			var message = data['message'];
+			document.querySelector('#chat-log').value += (message + '\n');
+		};
+
+		chatSocket.onclose = function (e) {
+			console.error('Chat socket closed unexpectedly');
+		};
+
+		document.querySelector('#chat-message-input').focus();
+		document.querySelector('#chat-message-input').onkeyup = function (e) {
+			if (e.keyCode === 13) {  // enter, return
+				document.querySelector('#chat-message-submit').click();
+			}
+		};
+
+		document.querySelector('#chat-message-submit').onclick = function (e) {
+			var messageInputDom = document.querySelector('#chat-message-input');
+			var message = messageInputDom.value;
+			chatSocket.send(JSON.stringify({
+				'message': message,
+				'receiver': 'jergashe', 
+			}));
+
+			messageInputDom.value = '';
+		};
+	</script>
+</body>
+
+</html>

@@ -41,6 +41,7 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
+	"daphne",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -55,7 +56,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'user_api.apps.UserApiConfig',
     'friendship_api',
-	'user_block'
+	'user_block',
+	'chat',
 ]
 
 MIDDLEWARE = [
@@ -219,3 +221,11 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'sioudazer8@gmail.com'
 EMAIL_HOST_PASSWORD = 'sayy uonp nado adlm'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# chat settings
+ASGI_APPLICATION = "backend.asgi.application"
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'
+    }
+}
