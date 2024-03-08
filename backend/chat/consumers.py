@@ -30,16 +30,19 @@ class ChatConsumer(AsyncWebsocketConsumer):
 		################# ACCEPT CONNECTION #################
 		await self.accept()
 
+
 		# testing purposes
 		users = await self.get_all_user_channel_names()
 		await self.write_to_file_connection(users)
 
 		################# NOTIFY EVERYONE THAT THE USER (CONSUMER) JOINED. (GROUP_SEND) #################
+		online_users = await self.get_all_user_channel_names()
 		await self.channel_layer.group_send(
 			self.room_group_name,
 			{
 				'type': 'notify_user_joined',
-				'message': f'{self.scope["user"].username} has joined the chat.'
+				'message': f'{self.scope["user"].username} has joined the chat.',
+				'online_users': online_users,
 			}
 		)
 
@@ -48,11 +51,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
 	async def disconnect(self, close_code):
 		################# NOTIFY EVERYONE THAT THE USER (CONSUMER) LEFT. (GROUP_SEND) #################
+		online_users = await self.get_all_user_channel_names()
 		await self.channel_layer.group_send(
 			self.room_group_name,
 			{
 				'type': 'notify_user_left',
-				'message': f'{self.scope["user"].username} has left the chat.'
+				'message': f'{self.scope["user"].username} has left the chat.',
+				'online_users': online_users,
 			}
 		)
 
@@ -76,12 +81,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
 	# Receive message from WebSocket
 	async def receive(self, text_data):
 		text_data_json = json.loads(text_data)
-		message = text_data_json['message']
+		message = text_data_json['message', None]
 		receiver = text_data_json.get('receiver', None)
-
-		# testing purposes
-		if receiver:
-			message = receiver + ': ' + message
+		function_name = text_data_json.get('function_name', None)
 
 		################# USER IS AUTHENTICATED CHECK #################
 		if not self.scope['user'].is_authenticated:
@@ -98,6 +100,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 				{
 					# type is the reserved word for the function to call
 					'type': 'chat_message',
+					'receiver': 'general_channel',
 					'message': message
 				}
 			)
@@ -108,43 +111,57 @@ class ChatConsumer(AsyncWebsocketConsumer):
 					userChannelName.channel_name,
 					{
 						'type': 'chat_message',
+						'receiver': 'private_channel',
 						'message': message
 					}
 				)
 		# await self.send(text_data=json.dumps({
 		# 	'message': message
 		# }))
-
+		
 
 	# Receive message from room group
 	async def chat_message(self, event):
 		message = event['message']
+		receiver = event['receiver']
 
 		# Send message to WebSocket
 		await self.send(text_data=json.dumps({
-			'message': message
+			'message': message,
+			'type' : receiver,
 		}))
 	
 
 	async def notify_user_joined(self, event):
 		message = event['message']
+		online_users = event['online_users']
 
 		# Send message to WebSocket
 		await self.send(text_data=json.dumps({
 			'type': 'notify_user_joined',
-			'message': message
+			'message': message,
+			'online_users': online_users
 		}))
 	
 
 	async def notify_user_left(self, event):
 		message = event['message']
+		online_users = event['online_users']
 
 		# Send message to WebSocket
 		await self.send(text_data=json.dumps({
 			'type': 'notify_user_left',
-			'message': message
+			'message': message,
+			'online_users': online_users
 		}))
 	
+
+
+	@database_sync_to_async
+	def get_all_user_channel_names(self):
+		from .models import UserChannelName
+		return UserChannelName.objects.all()
+
 
 	@database_sync_to_async
 	def get_or_create_user_channel_name(self):
@@ -206,3 +223,23 @@ class ChatConsumer(AsyncWebsocketConsumer):
 			for user in users:
 				f.write(f'\t\tUsername: {user.user.username}\n')
 			f.write('\n\n')
+
+
+
+	# NOT USED
+	async def group_send_online_users(self, event):
+		all_users = await self.get_all_user_channel_names()
+		self.chanel_layer.group_send(
+			self.room_group_name,
+			{
+				'type': 'send_online_users',
+				'users': all_users,
+			}
+		)
+
+	async def send_online_users(self, event):
+		users = event['users']
+		await self.send(text_data=json.dumps({
+			'type': 'online_users',
+			'users': users,
+		}))
