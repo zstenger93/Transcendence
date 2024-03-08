@@ -50,6 +50,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
 
 	async def disconnect(self, close_code):
+
+		################# DELETE USER CHANNEL NAME #################
+		userChannelName = await self.get_user_channel_name()
+		if userChannelName:
+			await self.delete_channel_name(userChannelName)
+
 		################# NOTIFY EVERYONE THAT THE USER (CONSUMER) LEFT. (GROUP_SEND) #################
 		online_users = await self.get_all_user_channel_names()
 		await self.channel_layer.group_send(
@@ -60,12 +66,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
 				'online_users': online_users,
 			}
 		)
-
-		################# DELETE USER CHANNEL NAME #################
-		userChannelName = await self.get_user_channel_name()
-		if userChannelName:
-			await self.delete_channel_name(userChannelName)
-
 		# testing purposes
 		users = await self.get_all_user_channel_names()
 		await self.write_to_file_disconnection(users)

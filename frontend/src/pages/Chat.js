@@ -13,7 +13,7 @@ function Chat() {
   const chatSocket = useRef(null);
   const messageInputRef = useRef(null);
   const mounted = useRef(true);
-  const [messageType, setMessageType] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState(null);
 
   useEffect(() => {
     if (!chatSocket.current) {
@@ -34,9 +34,13 @@ function Chat() {
           break;
         case "notify_user_joined":
           console.log("A user has joined the chat");
+          setOnlineUsers(data["online_users"]);
+          console.log(data["online_users"]);
           break;
         case "notify_user_left":
           console.log("A user has left the chat");
+          setOnlineUsers(data["online_users"]);
+          console.log(data["online_users"]);
           break;
         default:
           console.log("Received an unknown message type");
@@ -128,6 +132,7 @@ function Chat() {
   }
 
   function OnlineUsersList() {
+	console.log(onlineUsers);
     return (
       <div
         className="flex flex-col justify-between w-1/7 p-6 text-white
@@ -137,13 +142,17 @@ function Chat() {
           <h2 className="mb-8 text-2xl font-nosifer font-bold text-gray-300">
             {t("Online")}
           </h2>
-          {/* <ul>
-            {onlineUsers.map((user, index) => (
-              <li key={index} className="mb-4">
-                {user}
-              </li>
-            ))}
-          </ul> */}
+          <ul>
+            {onlineUsers ? (
+              onlineUsers.map((user, index) => (
+                <li key={index} className="mb-4">
+                  {user}
+                </li>
+              ))
+            ) : (
+              <li>No users online</li>
+            )}
+          </ul>
         </div>
       </div>
     );
