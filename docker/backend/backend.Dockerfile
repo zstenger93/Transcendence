@@ -33,3 +33,5 @@ RUN     chmod +x /app/backend.sh
 EXPOSE 8000
 
 ENTRYPOINT  ["docker/backend/backend.sh"]
+
+# CMD ["daphne", "-b", "0.0.0.0", "backend.asgi:application"]

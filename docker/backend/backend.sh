@@ -36,7 +36,7 @@ echo "alias get='http --follow --timeout 6'" >> /root/.bashrc
 ############################################
 mkdir -pv /var/{log,run}/daphne/
 python manage.py makemigrations && python manage.py migrate
-daphne -u /tmp/daphne.sock backend.asgi:application
+# daphne -u /tmp/daphne.sock backend.asgi:application
 #
 # watchmedo auto-restart -d . -p "*.py" -- daphne -b 0.0.0.0 backend.asgi:application
 daphne -b 0.0.0.0 backend.asgi:application
