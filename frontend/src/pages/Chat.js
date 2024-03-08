@@ -11,14 +11,8 @@ function Chat() {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const chatSocket = useRef(null);
-
   const messageInputRef = useRef(null);
-
-  const [hasUserLeft, setHasUserLeft] = useState(false);
-  const handleLeave = () => {
-    chatSocket.close();
-    setHasUserLeft(true);
-  };
+  const mounted = useRef(true);
 
   useEffect(() => {
     if (!chatSocket.current) {
@@ -29,7 +23,7 @@ function Chat() {
 
     const handleNewMessage = (e) => {
       var data = JSON.parse(e.data);
-    //   var func_type = data["type"];
+      //   var func_type = data["type"];
 
       // if (func_type === "notify_user_joined")
       // 	console.log("User joined: " + data["username"]);
@@ -38,7 +32,7 @@ function Chat() {
       // else if (func_type === "chat_message")
       // 	console.log("Chat message: " + data["message"]);
 
-      console.log("Data from consumer: " + data);
+      console.log("Data from consumer: " + JSON.stringify(data, null, 2));
       var message = data["message"];
       setMessages((messages) => [
         ...messages,
@@ -52,11 +46,13 @@ function Chat() {
     chatSocket.current.onmessage = handleNewMessage;
 
     return () => {
-      if (hasUserLeft) {
+      if (!mounted.current) {
         chatSocket.current.close();
+      } else {
+        mounted.current = false;
       }
     };
-  }, [hasUserLeft]);
+  }, []);
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
@@ -70,12 +66,12 @@ function Chat() {
       chatSocket.current.send(
         JSON.stringify({
           message: messageInputRef.current.value,
-		  receiver: "general_group",
+          receiver: "general_group",
         })
       );
-	  console.log("Sent message: " + messageInputRef.current.value);
+      console.log("Sent message: " + messageInputRef.current.value);
       messageInputRef.current.value = "";
-	  setNewMessage("");
+      setNewMessage("");
     } else {
       console.error(
         "WebSocket is not open. readyState = " + chatSocket.current.readyState
