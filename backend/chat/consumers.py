@@ -100,6 +100,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 				{
 					# type is the reserved word for the function to call
 					'type': 'chat_message',
+					'receiver': 'general_channel',
 					'message': message
 				}
 			)
@@ -110,6 +111,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 					userChannelName.channel_name,
 					{
 						'type': 'chat_message',
+						'receiver': 'private_channel',
 						'message': message
 					}
 				)
@@ -121,10 +123,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
 	# Receive message from room group
 	async def chat_message(self, event):
 		message = event['message']
+		receiver = event['receiver']
 
 		# Send message to WebSocket
 		await self.send(text_data=json.dumps({
-			'message': message
+			'message': message,
+			'type' : receiver,
 		}))
 	
 
