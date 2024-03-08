@@ -27,10 +27,10 @@ function Chat() {
 
       switch (data["type"]) {
         case "general_channel":
-          console.log("Received a group message: " + message);
+          console.log("Received a group message");
           break;
         case "private_channel":
-          console.log("Received a private message: " + message);
+          console.log("Received a private message");
           break;
         case "notify_user_joined":
           console.log("A user has joined the chat");
