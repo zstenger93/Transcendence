@@ -13,6 +13,7 @@ function Chat() {
   const chatSocket = useRef(null);
   const messageInputRef = useRef(null);
   const mounted = useRef(true);
+  const [messageType, setMessageType] = useState(null);
 
   useEffect(() => {
     if (!chatSocket.current) {
@@ -23,14 +24,20 @@ function Chat() {
 
     const handleNewMessage = (e) => {
       var data = JSON.parse(e.data);
-      //   var func_type = data["type"];
 
-      // if (func_type === "notify_user_joined")
-      // 	console.log("User joined: " + data["username"]);
-      // else if (func_type === "notify_user_left")
-      // 	console.log("User left: " + data["username"]);
-      // else if (func_type === "chat_message")
-      // 	console.log("Chat message: " + data["message"]);
+	  switch (data["type"]) {
+		case "general_group":
+		  console.log("Received a new message: " + message);
+		  break;
+		case "notify_user_joined":
+		  console.log("A user has joined the chat");
+		  break;
+		case "notify_user_left":
+		  console.log("A user has left the chat");
+		  break;
+		default:
+		  console.log("Received an unknown message type");
+	  }
 
       console.log("Data from consumer: " + JSON.stringify(data, null, 2));
       var message = data["message"];
@@ -42,6 +49,8 @@ function Chat() {
         },
       ]);
     };
+
+	
 
     chatSocket.current.onmessage = handleNewMessage;
 
