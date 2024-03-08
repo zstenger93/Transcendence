@@ -81,7 +81,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 	# Receive message from WebSocket
 	async def receive(self, text_data):
 		text_data_json = json.loads(text_data)
-		message = text_data_json['message', None]
+		message = text_data_json.get('message', None)
 		receiver = text_data_json.get('receiver', None)
 		function_name = text_data_json.get('function_name', None)
 
@@ -134,7 +134,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
 	async def notify_user_joined(self, event):
 		message = event['message']
-		online_users = event['online_users']
+		online_users = await sync_to_async(list)(event['online_users'])  # Convert QuerySet to list in a synchronous context
+		online_users = await self.get_usernames_from_user_channel_names(online_users)  # Fetch usernames in a synchronous context
 
 		# Send message to WebSocket
 		await self.send(text_data=json.dumps({
@@ -142,11 +143,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
 			'message': message,
 			'online_users': online_users
 		}))
-	
 
 	async def notify_user_left(self, event):
 		message = event['message']
-		online_users = event['online_users']
+		online_users = await sync_to_async(list)(event['online_users'])  # Convert QuerySet to list in a synchronous context
+		online_users = await self.get_usernames_from_user_channel_names(online_users)  # Fetch usernames in a synchronous context
 
 		# Send message to WebSocket
 		await self.send(text_data=json.dumps({
@@ -155,12 +156,15 @@ class ChatConsumer(AsyncWebsocketConsumer):
 			'online_users': online_users
 		}))
 	
+	@database_sync_to_async
+	def get_usernames_from_user_channel_names(self, user_channel_names):
+		return [user_channel_name.user.username for user_channel_name in user_channel_names]
 
 
 	@database_sync_to_async
 	def get_all_user_channel_names(self):
 		from .models import UserChannelName
-		return UserChannelName.objects.all()
+		return list(UserChannelName.objects.values('user__username'))
 
 
 	@database_sync_to_async

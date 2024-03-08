@@ -25,19 +25,22 @@ function Chat() {
     const handleNewMessage = (e) => {
       var data = JSON.parse(e.data);
 
-	  switch (data["type"]) {
-		case "general_group":
-		  console.log("Received a new message: " + message);
-		  break;
-		case "notify_user_joined":
-		  console.log("A user has joined the chat");
-		  break;
-		case "notify_user_left":
-		  console.log("A user has left the chat");
-		  break;
-		default:
-		  console.log("Received an unknown message type");
-	  }
+      switch (data["type"]) {
+        case "general_channel":
+          console.log("Received a group message: " + message);
+          break;
+        case "private_channel":
+          console.log("Received a private message: " + message);
+          break;
+        case "notify_user_joined":
+          console.log("A user has joined the chat");
+          break;
+        case "notify_user_left":
+          console.log("A user has left the chat");
+          break;
+        default:
+          console.log("Received an unknown message type");
+      }
 
       console.log("Data from consumer: " + JSON.stringify(data, null, 2));
       var message = data["message"];
@@ -49,8 +52,6 @@ function Chat() {
         },
       ]);
     };
-
-	
 
     chatSocket.current.onmessage = handleNewMessage;
 
