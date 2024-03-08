@@ -134,8 +134,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
 	async def notify_user_joined(self, event):
 		message = event['message']
-		online_users = await sync_to_async(list)(event['online_users'])  # Convert QuerySet to list in a synchronous context
-		online_users = await self.get_usernames_from_user_channel_names(online_users)  # Fetch usernames in a synchronous context
+		online_users = await sync_to_async(list)(event['online_users'])
+		online_users = await self.get_usernames_from_user_channel_names(online_users)
 
 		# Send message to WebSocket
 		await self.send(text_data=json.dumps({
@@ -146,8 +146,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
 	async def notify_user_left(self, event):
 		message = event['message']
-		online_users = await sync_to_async(list)(event['online_users'])  # Convert QuerySet to list in a synchronous context
-		online_users = await self.get_usernames_from_user_channel_names(online_users)  # Fetch usernames in a synchronous context
+		online_users = await sync_to_async(list)(event['online_users'])
+		online_users = await self.get_usernames_from_user_channel_names(online_users)
 
 		# Send message to WebSocket
 		await self.send(text_data=json.dumps({

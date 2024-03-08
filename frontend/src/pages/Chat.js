@@ -66,7 +66,7 @@ function Chat() {
         mounted.current = false;
       }
     };
-  }, []);
+  }, [currentChannel]);
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
