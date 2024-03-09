@@ -24,8 +24,7 @@ import BackButton from "./components/buttons/BackButton";
 import backgroundimage from "./images/pongbg.png";
 import TwoFA from "./pages/TwoFA";
 
-
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 // const cors = require('cors');
 
 const PageWrapper = ({ children, image, showSidebar = true, redirectUri }) => {
@@ -182,10 +181,14 @@ function App() {
               </PageWrapper>
             }
           />
-		   <Route
+          <Route
             path="2fa"
             element={
-              <PageWrapper image={Background} showSidebar={false} redirectUri={REDIRECT_URI}>
+              <PageWrapper
+                image={Background}
+                showSidebar={false}
+                redirectUri={REDIRECT_URI}
+              >
                 <TwoFA redirectUri={REDIRECT_URI} />
               </PageWrapper>
             }
