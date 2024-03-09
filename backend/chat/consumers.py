@@ -129,16 +129,21 @@ class ChatConsumer(AsyncWebsocketConsumer):
 	async def chat_message(self, event):
 		message = event['message']
 		channel_name = event['channel_name']
-		sender = event['sender']
-		receiver = event['receiver']
-
 		# Send message to WebSocket
-		await self.send(text_data=json.dumps({
-			'message': message,
-			'type' : channel_name,
-			'sender' : sender,
-			'receiver' : receiver,
-		}))
+		if channel_name == 'general_channel':
+			await self.send(text_data=json.dumps({
+				'message': message,
+				'type' : channel_name,
+			}))
+		else:
+			sender = event['sender']
+			receiver = event['receiver']
+			await self.send(text_data=json.dumps({
+				'message': message,
+				'type' : channel_name,
+				'sender' : sender,
+				'receiver' : receiver,
+			}))
 	
 
 	async def notify_user_joined(self, event):

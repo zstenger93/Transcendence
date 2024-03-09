@@ -2,9 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../components/buttons/BackButton";
+import { getUserDetails } from "../components/API";
 // import { ButtonStyle } from "../components/buttons/ButtonStyle";
 
-function Chat() {
+function Chat({ redirectUri }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [currentChannel, setCurrentChannel] = useState("General");
@@ -14,6 +15,18 @@ function Chat() {
   const messageInputRef = useRef(null);
   const mounted = useRef(true);
   const [onlineUsers, setOnlineUsers] = useState(null);
+  const userDetailsRef = useRef(null);
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      console.log("redirectUri", redirectUri);
+      const details = await getUserDetails({ redirectUri });
+      console.log("Fetched user details:", details);
+      userDetailsRef.current = details;
+    };
+
+    fetchUserDetails();
+  }, [redirectUri]);
 
   useEffect(() => {
     if (!chatSocket.current) {
@@ -28,35 +41,67 @@ function Chat() {
       switch (data["type"]) {
         case "general_channel":
           console.log("Received a group message");
-          setCurrentChannel("General");
+          var message = data["message"];
+          setMessages((messages) => [
+            ...messages,
+            {
+              channel: "General",
+              text: message,
+            },
+          ]);
           break;
         case "private_channel":
           console.log("Received a private message");
-          setCurrentChannel();
+          console.log("sender", data["sender"]);
+          console.log("receiver", data["receiver"]);
+          message = data["message"];
+          setMessages((messages) => [
+            ...messages,
+            {
+              channel: data["receiver"],
+              text: message,
+            },
+          ]);
           break;
         case "notify_user_joined":
           console.log("A user has joined the chat");
           setOnlineUsers(data["online_users"]);
           console.log(data["online_users"]);
+          message = data["message"];
+          setMessages((messages) => [
+            ...messages,
+            {
+              channel: currentChannel,
+              text: message,
+            },
+          ]);
           break;
         case "notify_user_left":
           console.log("A user has left the chat");
           setOnlineUsers(data["online_users"]);
           console.log(data["online_users"]);
+          message = data["message"];
+          setMessages((messages) => [
+            ...messages,
+            {
+              channel: currentChannel,
+              text: message,
+            },
+          ]);
           break;
         default:
           console.log("Received an unknown message type");
       }
 
       console.log("Data from consumer: " + JSON.stringify(data, null, 2));
-      var message = data["message"];
-      setMessages((messages) => [
-        ...messages,
-        {
-          channel: currentChannel,
-          text: message,
-        },
-      ]);
+      //   var message = data["message"];
+      //   setMessages((messages) => [
+      //     ...messages,
+      //     {
+      //       channel: currentChannel,
+      //       text: message,
+      //     },
+      //   ]);
     };
 
     chatSocket.current.onmessage = handleNewMessage;
@@ -165,8 +210,6 @@ function Chat() {
   }
 
   function OnlineUsersList() {
-    console.log(onlineUsers);
-
     const [dropdownUser, setDropdownUser] = useState(null);
 
     const handleUserClick = (user) => {
