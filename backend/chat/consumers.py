@@ -94,6 +94,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
 		message = f'{username}: {message}'
 
 		################# SEND TO GENERAL OR PRIVATE #################
+		with open('text.txt', 'a') as f:
+			f.write('\t\t\tRECEIVER:')
+			f.write(f'{receiver}\n')
 		if receiver == 'general_group':
 			await self.channel_layer.group_send(
 				self.room_group_name,
@@ -105,10 +108,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
 				}
 			)
 		else:
-			userChannelName = await self.get_user_channel_name_by_username(receiver)
-			if userChannelName:
+			receiver_channel_name = await self.get_user_channel_name_by_username(receiver)
+			if receiver_channel_name:
 				await self.channel_layer.send(
-					userChannelName.channel_name,
+					receiver_channel_name,
 					{
 						'type': 'chat_message',
 						'receiver': 'private_channel',
@@ -189,10 +192,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
 	def delete_channel_name(self, userChannelName):
 		userChannelName.delete_channel_name()
 
-	@database_sync_to_async
-	def get_user_channel_name_by_username(self, username):
+	async def get_user_channel_name_by_username(self, username):
 		from .models import UserChannelName
-		return UserChannelName.objects.get(user__username=username)
+		get_user_channel_name = sync_to_async(UserChannelName.objects.get, thread_sensitive=True)
+		return await get_user_channel_name(user__username=username)
 	
 	@database_sync_to_async
 	def get_all_user_channel_names(self):

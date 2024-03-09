@@ -66,7 +66,7 @@ function Chat() {
         mounted.current = false;
       }
     };
-  }, [currentChannel]);
+  }, []);
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
@@ -77,10 +77,12 @@ function Chat() {
   const handleSendMessage = (event) => {
     event.preventDefault();
     if (chatSocket.current.readyState === WebSocket.OPEN) {
+      console.log(currentChannel);
       chatSocket.current.send(
         JSON.stringify({
           message: messageInputRef.current.value,
-          receiver: "general_group",
+          receiver:
+            currentChannel === "General" ? "general_group" : currentChannel,
         })
       );
       console.log("Sent message: " + messageInputRef.current.value);
@@ -95,6 +97,18 @@ function Chat() {
 
   const handleNewMessageChange = (event) => {
     setNewMessage(event.target.value);
+  };
+
+  const [privateMessages, setPrivateMessages] = useState([]);
+
+  const handleMessageOption = (user) => {
+    setPrivateMessages((prevMessages) => {
+      if (!prevMessages.includes(user)) {
+        return [...prevMessages, user];
+      } else {
+        return prevMessages;
+      }
+    });
   };
 
   function ChannelList() {
@@ -125,6 +139,22 @@ function Chat() {
               </li>
             ))}
           </ul>
+          <h2 className="mb-8 mt-8 text-2xl font-nosifer font-bold text-gray-300">
+            {t("Private")}
+          </h2>
+          <ul>
+            {privateMessages.map((user, index) => (
+              <li
+                key={index}
+                className={`cursor-pointer my-4 ${
+                  user === currentChannel ? "text-purple-500 font-nosifer" : ""
+                }`}
+                onClick={() => setCurrentChannel(user)}
+              >
+                {user}
+              </li>
+            ))}
+          </ul>
         </div>
         <BackButton navigate={navigate} t={t} />
       </div>
@@ -132,7 +162,18 @@ function Chat() {
   }
 
   function OnlineUsersList() {
-	console.log(onlineUsers);
+    console.log(onlineUsers);
+
+    const [dropdownUser, setDropdownUser] = useState(null);
+
+    const handleUserClick = (user) => {
+      if (dropdownUser === user) {
+        setDropdownUser(null);
+      } else {
+        setDropdownUser(user);
+      }
+    };
+
     return (
       <div
         className="flex flex-col justify-between w-1/7 p-6 text-white
@@ -145,8 +186,19 @@ function Chat() {
           <ul>
             {onlineUsers ? (
               onlineUsers.map((user, index) => (
-                <li key={index} className="mb-4">
+                <li
+                  key={index}
+                  className="mb-4 cursor-pointer font-bold"
+                  onClick={() => handleUserClick(user)}
+                >
                   {user}
+                  {dropdownUser === user && (
+                    <ul className="bg-purple-500 rounded-xl bg-opacity-20">
+                      <li onClick={() => handleMessageOption(user)}>Message</li>
+                      <li>Friend Request</li>
+                      <li>Block</li>
+                    </ul>
+                  )}
                 </li>
               ))
             ) : (

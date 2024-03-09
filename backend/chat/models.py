@@ -67,3 +67,6 @@ class UserChannelName(models.Model):
 
 	class Meta:
 		unique_together = ('user', 'channel_name',)
+	
+	def __str__(self):
+		return self.user.username + ' ' + self.channel_name
