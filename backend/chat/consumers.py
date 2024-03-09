@@ -95,8 +95,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
 		################# SEND TO GENERAL OR PRIVATE #################
 		with open('text.txt', 'a') as f:
-			f.write('\t\t\tRECEIVER:')
-			f.write(f'{receiver}\n')
+			f.write('\t\t\tIN RECEIVE FUNCTION\n')
+			if receiver == 'general_group':
+				f.write('\t\t\tGeneral Group Message\n')
+			else:
+				f.write('\t\t\tPrivate Message:\n')
+				f.write(f'{receiver}\n')
+
 		if receiver == 'general_group':
 			await self.channel_layer.group_send(
 				self.room_group_name,
@@ -129,16 +134,33 @@ class ChatConsumer(AsyncWebsocketConsumer):
 	async def chat_message(self, event):
 		message = event['message']
 		channel_name = event['channel_name']
-		sender = event['sender']
-		receiver = event['receiver']
 
 		# Send message to WebSocket
-		await self.send(text_data=json.dumps({
-			'message': message,
-			'type' : channel_name,
-			'sender' : sender,
-			'receiver' : receiver,
-		}))
+		if channel_name == 'general_channel':
+			with open('text.txt', 'a') as f:
+				f.write('\t\t\tIN CHAT_MESSAGE FUNCTION\n')
+				f.write('\t\t\tSending General Group Message\n')
+				f.write(f'{message}\n\n')
+			await self.send(text_data=json.dumps({
+				'message': message,
+				'type' : channel_name,
+			}))
+		else:
+			with open('text.txt', 'a') as f:
+				f.write('\t\t\tIN CHAT_MESSAGE FUNCTION\n')
+				f.write('\t\t\tSending Private Message\n')
+				f.write(f'Sender: {event["sender"]}\n')
+				f.write(f'Receiver: {event["receiver"]}\n')
+				f.write(f'Message: {message}\n\n')
+
+			sender = event['sender']
+			receiver = event['receiver']
+			await self.send(text_data=json.dumps({
+				'message': message,
+				'type' : channel_name,
+				'sender' : sender,
+				'receiver' : receiver,
+			}))
 	
 
 	async def notify_user_joined(self, event):
