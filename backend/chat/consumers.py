@@ -176,7 +176,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 		if UserChannelName.objects.filter(user=self.scope['user']).exists():
 			return UserChannelName.objects.get(user=self.scope['user']), False
 		else:
-			return UserChannelName.objects.create(user=self.scope['user']), True
+			return UserChannelName.objects.create(user=self.scope['user'], channel_name=self.channel_name), True
 
 	@database_sync_to_async
 	def update_channel_name(self, userChannelName):
@@ -192,10 +192,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
 	def delete_channel_name(self, userChannelName):
 		userChannelName.delete_channel_name()
 
-	async def get_user_channel_name_by_username(self, username):
+	@database_sync_to_async
+	def get_user_channel_name_by_username(self, username):
 		from .models import UserChannelName
-		get_user_channel_name = sync_to_async(UserChannelName.objects.get, thread_sensitive=True)
-		return await get_user_channel_name(user__username=username)
+		try:
+			user_channel_name = UserChannelName.objects.get(user__username=username)
+			return user_channel_name.channel_name
+		except (UserChannelName.DoesNotExist):
+			return None
 	
 	@database_sync_to_async
 	def get_all_user_channel_names(self):
