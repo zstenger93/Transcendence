@@ -28,9 +28,11 @@ function Chat() {
       switch (data["type"]) {
         case "general_channel":
           console.log("Received a group message");
+          setCurrentChannel("General");
           break;
         case "private_channel":
           console.log("Received a private message");
+          setCurrentChannel();
           break;
         case "notify_user_joined":
           console.log("A user has joined the chat");
@@ -66,6 +68,7 @@ function Chat() {
         mounted.current = false;
       }
     };
+    // eslint-disable-next-line
   }, []);
 
   const handleKeyPress = (event) => {
@@ -227,17 +230,7 @@ function Chat() {
             {messages
               .filter((message) => message.channel === currentChannel)
               .map((message, index) => (
-                <p key={index}>
-                  {message.text}
-                  {/* {message.image && (
-                    <img
-                      src={message.image}
-                      alt=""
-                      className="max-h-32 cursor-pointer"
-                      onClick={() => handleImageClick(message.image)}
-                    />
-                  )} */}
-                </p>
+                <p key={index}>{message.text}</p>
               ))}
           </div>
           <form onSubmit={handleSendMessage}>
@@ -250,38 +243,12 @@ function Chat() {
 			  rounded p-2 w-full"
               placeholder={t("Type your message here...")}
             />
-            {/* <input
-              type="file"
-              id="file"
-              onChange={handleFileChange}
-              style={{ display: "none" }}
-            />
-            <div className="flex justify-center">
-              <label
-                htmlFor="file"
-                className={`cursor-pointer ${ButtonStyle}`}
-              >
-                {t("Choose File")}
-              </label>
-            </div>
-            {uploadedFileName && (
-              <p className="text-center">{uploadedFileName}</p>
-            )} */}
           </form>
         </div>
         <div className="hidden md:block">
           <OnlineUsersList />
         </div>
       </div>
-      {/* {viewingImage && (
-        <div
-          className="fixed top-0 left-0 flex items-center justify-center w-full h-full 
-		  bg-black bg-opacity-50"
-          onClick={() => setViewingImage(null)}
-        >
-          <img src={viewingImage} alt="" className="max-h-full max-w-full" />
-        </div>
-      )} */}
     </div>
   );
 }
