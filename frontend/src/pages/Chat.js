@@ -37,11 +37,11 @@ function Chat({ redirectUri }) {
 
     const handleNewMessage = (e) => {
       var data = JSON.parse(e.data);
+      var message = data["message"];
 
       switch (data["type"]) {
         case "general_channel":
           console.log("Received a group message");
-          var message = data["message"];
           setMessages((messages) => [
             ...messages,
             {
@@ -52,13 +52,19 @@ function Chat({ redirectUri }) {
           break;
         case "private_channel":
           console.log("Received a private message");
-          console.log("sender", data["sender"]);
-          console.log("receiver", data["receiver"]);
-          message = data["message"];
+		  console.log("current: ", currentChannel);
+		  console.log("rec: ", data["receiver"]);
+          setPrivateMessages((prevMessages) => {
+            if (!prevMessages.includes(data["sender"])) {
+              return [...prevMessages, data["sender"]];
+            } else {
+              return prevMessages;
+            }
+          });
           setMessages((messages) => [
             ...messages,
             {
-              channel: data["receiver"],
+              channel: data["sender"],
               text: message,
             },
           ]);
@@ -66,8 +72,6 @@ function Chat({ redirectUri }) {
         case "notify_user_joined":
           console.log("A user has joined the chat");
           setOnlineUsers(data["online_users"]);
-          console.log(data["online_users"]);
-          message = data["message"];
           setMessages((messages) => [
             ...messages,
             {
@@ -79,8 +83,6 @@ function Chat({ redirectUri }) {
         case "notify_user_left":
           console.log("A user has left the chat");
           setOnlineUsers(data["online_users"]);
-          console.log(data["online_users"]);
-          message = data["message"];
           setMessages((messages) => [
             ...messages,
             {
@@ -94,14 +96,6 @@ function Chat({ redirectUri }) {
       }
 
       console.log("Data from consumer: " + JSON.stringify(data, null, 2));
-      //   var message = data["message"];
-      //   setMessages((messages) => [
-      //     ...messages,
-      //     {
-      //       channel: currentChannel,
-      //       text: message,
-      //     },
-      //   ]);
     };
 
     chatSocket.current.onmessage = handleNewMessage;
@@ -125,7 +119,7 @@ function Chat({ redirectUri }) {
   const handleSendMessage = (event) => {
     event.preventDefault();
     if (chatSocket.current.readyState === WebSocket.OPEN) {
-      console.log(currentChannel);
+      console.log("currentchannel: ", currentChannel);
       chatSocket.current.send(
         JSON.stringify({
           message: messageInputRef.current.value,
@@ -194,7 +188,7 @@ function Chat({ redirectUri }) {
             {privateMessages.map((user, index) => (
               <li
                 key={index}
-                className={`cursor-pointer my-4 ${
+                className={`cursor-pointer my-4 font-bold ${
                   user === currentChannel ? "text-purple-500 font-nosifer" : ""
                 }`}
                 onClick={() => setCurrentChannel(user)}

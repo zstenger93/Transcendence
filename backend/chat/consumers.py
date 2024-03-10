@@ -120,6 +120,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
 						'receiver' : receiver
 					}
 				)
+				sneder_channel_name = await self.get_user_channel_name_by_username(username)
+				await self.channel_layer.send(
+					sneder_channel_name,
+					{
+						'type': 'chat_message',
+						'channel_name': 'private_channel',
+						'message': message,
+						'sender' : receiver,
+						'receiver' : username
+					}
+				)
 		# await self.send(text_data=json.dumps({
 		# 	'message': message
 		# }))
