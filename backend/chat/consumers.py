@@ -131,10 +131,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 						'receiver' : username
 					}
 				)
-		# await self.send(text_data=json.dumps({
-		# 	'message': message
-		# }))
-		
+
 
 	# Receive message from room group
 	async def chat_message(self, event):

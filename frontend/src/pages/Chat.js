@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../components/buttons/BackButton";
 import { getUserDetails } from "../components/API";
-// import { ButtonStyle } from "../components/buttons/ButtonStyle";
 
 function Chat({ redirectUri }) {
   const { t } = useTranslation();
@@ -52,8 +51,8 @@ function Chat({ redirectUri }) {
           break;
         case "private_channel":
           console.log("Received a private message");
-		  console.log("current: ", currentChannel);
-		  console.log("rec: ", data["receiver"]);
+          console.log("current: ", currentChannel);
+          console.log("rec: ", data["receiver"]);
           setPrivateMessages((prevMessages) => {
             if (!prevMessages.includes(data["sender"])) {
               return [...prevMessages, data["sender"]];
