@@ -102,6 +102,7 @@ const GameCanvas = () => {
     ) {
       const leftPaddleCenterY = leftPaddleYSecound + paddleHeight / 2;
       const distanceFromCenter = ballY - leftPaddleCenterY;
+	  // eslint-disable-next-line no-unused-expressions
       if (ballSpeedX > 0) paddleWidth * (otherPaddleOffset - 1) - 10;
       else ballX = paddleWidth * otherPaddleOffset + 10;
       ballSpeedX *= -1;
@@ -293,6 +294,7 @@ const GameCanvas = () => {
           const touchY = event.touches[i].clientY - rect.top - window.scrollY;
           // Left paddle controls
           if (touch.clientX < window.innerWidth / 2) {
+			// eslint-disable-next-line react-hooks/exhaustive-deps
             leftPaddleY = touchY - paddleHeight / 2;
             leftPaddleY = Math.max(
               0,
@@ -301,6 +303,7 @@ const GameCanvas = () => {
           }
           // Right paddle controls
           else {
+			// eslint-disable-next-line react-hooks/exhaustive-deps
             rightPaddleY = touchY - paddleHeight / 2;
             rightPaddleY = Math.max(
               0,
