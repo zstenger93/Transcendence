@@ -18,9 +18,9 @@ function Chat({ redirectUri }) {
 
   useEffect(() => {
     const fetchUserDetails = async () => {
-      console.log("redirectUri", redirectUri);
+    //   console.log("redirectUri", redirectUri);
       const details = await getUserDetails({ redirectUri });
-      console.log("Fetched user details:", details);
+    //   console.log("Fetched user details:", details);
       userDetailsRef.current = details;
     };
 
@@ -40,7 +40,7 @@ function Chat({ redirectUri }) {
 
       switch (data["type"]) {
         case "general_channel":
-          console.log("Received a group message");
+        //   console.log("Received a group message");
           setMessages((messages) => [
             ...messages,
             {
@@ -50,9 +50,9 @@ function Chat({ redirectUri }) {
           ]);
           break;
         case "private_channel":
-          console.log("Received a private message");
-          console.log("current: ", currentChannel);
-          console.log("rec: ", data["receiver"]);
+        //   console.log("Received a private message");
+        //   console.log("current: ", currentChannel);
+        //   console.log("rec: ", data["receiver"]);
           setPrivateMessages((prevMessages) => {
             if (!prevMessages.includes(data["sender"])) {
               return [...prevMessages, data["sender"]];
@@ -69,7 +69,7 @@ function Chat({ redirectUri }) {
           ]);
           break;
         case "notify_user_joined":
-          console.log("A user has joined the chat");
+        //   console.log("A user has joined the chat");
           setOnlineUsers(data["online_users"]);
           setMessages((messages) => [
             ...messages,
@@ -80,7 +80,7 @@ function Chat({ redirectUri }) {
           ]);
           break;
         case "notify_user_left":
-          console.log("A user has left the chat");
+        //   console.log("A user has left the chat");
           setOnlineUsers(data["online_users"]);
           setMessages((messages) => [
             ...messages,
@@ -91,10 +91,9 @@ function Chat({ redirectUri }) {
           ]);
           break;
         default:
-          console.log("Received an unknown message type");
+        //   console.log("Received an unknown message type");
       }
-
-      console.log("Data from consumer: " + JSON.stringify(data, null, 2));
+    //   console.log("Data from consumer: " + JSON.stringify(data, null, 2));
     };
 
     chatSocket.current.onmessage = handleNewMessage;
@@ -118,7 +117,7 @@ function Chat({ redirectUri }) {
   const handleSendMessage = (event) => {
     event.preventDefault();
     if (chatSocket.current.readyState === WebSocket.OPEN) {
-      console.log("currentchannel: ", currentChannel);
+    //   console.log("currentchannel: ", currentChannel);
       chatSocket.current.send(
         JSON.stringify({
           message: messageInputRef.current.value,
@@ -126,7 +125,7 @@ function Chat({ redirectUri }) {
             currentChannel === "General" ? "general_group" : currentChannel,
         })
       );
-      console.log("Sent message: " + messageInputRef.current.value);
+    //   console.log("Sent message: " + messageInputRef.current.value);
       messageInputRef.current.value = "";
       setNewMessage("");
     } else {
