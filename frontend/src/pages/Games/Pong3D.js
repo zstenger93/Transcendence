@@ -9,7 +9,6 @@ import saturn from "../../images/game/saturn.png";
 import uranus from "../../images/game/uranus.png";
 import neptune from "../../images/game/neptun.png";
 import sunTex from "../../images/game/sun.jpg";
-import goggins from "../../images/game/stayhard.png";
 import death from "../../images/game/deathstar.png";
 import FullScreenButton from "../../components/buttons/FullScreen";
 import BackButton from "../../components/buttons/BackButton";
@@ -66,7 +65,7 @@ function Pong3D() {
       this.asteroid.scale.set(
         Math.random() / 5 + 0.15,
         Math.random() / 5 + 0.15,
-        Math.random() / 5 + 0.15,
+        Math.random() / 5 + 0.15
       );
       this.scene.add(this.asteroid);
     }
@@ -403,8 +402,11 @@ function Pong3D() {
         if (leftPaddleBoundingBox.intersectsBox(ballBoundingBox)) {
           // eslint-disable-next-line react-hooks/exhaustive-deps
           if (!isCodeExecuted) {
+			// eslint-disable-next-line react-hooks/exhaustive-deps
             bounceCounter = bounceCounter + 1;
+			// eslint-disable-next-line react-hooks/exhaustive-deps
             ballSpeed += 0.02;
+			// eslint-disable-next-line react-hooks/exhaustive-deps
             leftPaddleSpeedConst += 0.005;
             bounceContext.clearRect(
               0,
@@ -414,6 +416,7 @@ function Pong3D() {
             );
             bounceContext.fillText("BOUNCE COUNT: " + bounceCounter, 6, 24);
             bounceMaterialTexture.needsUpdate = true;
+			// eslint-disable-next-line react-hooks/exhaustive-deps
             isCodeExecuted = true;
           } else {
             isCodeExecuted = false;
@@ -528,7 +531,7 @@ function Pong3D() {
       if (isSKeyPressed) {
         leftPaddlePosition -= leftPaddleSpeedConst;
       }
-
+	  // eslint-disable-next-line react-hooks/exhaustive-deps
       leftPaddlePosition = Math.max(
         -wallOffsetY + paddleHeight / 2 + wallThickness / 2,
         Math.min(

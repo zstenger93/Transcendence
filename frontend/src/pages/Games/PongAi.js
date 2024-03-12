@@ -281,6 +281,7 @@ const GameCanvas = (aiDifficulty) => {
       if (canvasRef.current && event.touches.length > 0) {
         const rect = canvasRef.current.getBoundingClientRect();
         const touchY = event.touches[0].clientY - rect.top - window.scrollY;
+		// eslint-disable-next-line react-hooks/exhaustive-deps
         leftPaddleY = touchY - paddleHeight / 2;
         leftPaddleY = Math.max(
           0,
