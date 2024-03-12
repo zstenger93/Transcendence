@@ -1,89 +1,160 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../components/buttons/BackButton";
-import { ButtonStyle } from "../components/buttons/ButtonStyle";
+import { getUserDetails } from "../components/API";
 
-function Chat() {
+function Chat({ redirectUri }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [currentChannel, setCurrentChannel] = useState("General");
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [currentChannel, setCurrentChannel] = useState("General");
-  const [viewingImage, setViewingImage] = useState(null);
-  const [pastedImage, setPastedImage] = useState(null);
-  const [uploadedFileName, setUploadedFileName] = React.useState("");
-  const [onlineUsers] = useState([
-    "kvebers",
-    "Jesus",
-    "asioud",
-    "zstenger",
-    "jergashe",
-  ]);
+  const chatSocket = useRef(null);
+  const messageInputRef = useRef(null);
+  const mounted = useRef(true);
+  const [onlineUsers, setOnlineUsers] = useState(null);
+  const userDetailsRef = useRef(null);
 
-  const handleFileChange = (event) => {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      console.log("redirectUri", redirectUri);
+      const details = await getUserDetails({ redirectUri });
+      console.log("Fetched user details:", details);
+      userDetailsRef.current = details;
+    };
 
-      reader.onloadend = () => {
-        setPastedImage(reader.result);
-        setUploadedFileName(file.name);
-      };
+    fetchUserDetails();
+  }, [redirectUri]);
 
-      reader.readAsDataURL(file);
+  useEffect(() => {
+    if (!chatSocket.current) {
+      chatSocket.current = new WebSocket(
+        process.env.REACT_APP_LOCAL_URI.replace("https", "wss") + "/chat/"
+      );
+    }
+
+    const handleNewMessage = (e) => {
+      var data = JSON.parse(e.data);
+      var message = data["message"];
+
+      switch (data["type"]) {
+        case "general_channel":
+          console.log("Received a group message");
+          setMessages((messages) => [
+            ...messages,
+            {
+              channel: "General",
+              text: message,
+            },
+          ]);
+          break;
+        case "private_channel":
+          console.log("Received a private message");
+          console.log("current: ", currentChannel);
+          console.log("rec: ", data["receiver"]);
+          setPrivateMessages((prevMessages) => {
+            if (!prevMessages.includes(data["sender"])) {
+              return [...prevMessages, data["sender"]];
+            } else {
+              return prevMessages;
+            }
+          });
+          setMessages((messages) => [
+            ...messages,
+            {
+              channel: data["sender"],
+              text: message,
+            },
+          ]);
+          break;
+        case "notify_user_joined":
+          console.log("A user has joined the chat");
+          setOnlineUsers(data["online_users"]);
+          setMessages((messages) => [
+            ...messages,
+            {
+              channel: currentChannel,
+              text: message,
+            },
+          ]);
+          break;
+        case "notify_user_left":
+          console.log("A user has left the chat");
+          setOnlineUsers(data["online_users"]);
+          setMessages((messages) => [
+            ...messages,
+            {
+              channel: currentChannel,
+              text: message,
+            },
+          ]);
+          break;
+        default:
+          console.log("Received an unknown message type");
+      }
+
+      console.log("Data from consumer: " + JSON.stringify(data, null, 2));
+    };
+
+    chatSocket.current.onmessage = handleNewMessage;
+
+    return () => {
+      if (!mounted.current) {
+        chatSocket.current.close();
+      } else {
+        mounted.current = false;
+      }
+    };
+    // eslint-disable-next-line
+  }, []);
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSendMessage(event);
     }
   };
 
-  const handlePaste = (event) => {
-    if (event.clipboardData.files.length > 0) {
-      const file = event.clipboardData.files[0];
-      const reader = new FileReader();
-
-      reader.onloadend = () => {
-        setPastedImage(reader.result);
-      };
-
-      reader.readAsDataURL(file);
+  const handleSendMessage = (event) => {
+    event.preventDefault();
+    if (chatSocket.current.readyState === WebSocket.OPEN) {
+      console.log("currentchannel: ", currentChannel);
+      chatSocket.current.send(
+        JSON.stringify({
+          message: messageInputRef.current.value,
+          receiver:
+            currentChannel === "General" ? "general_group" : currentChannel,
+        })
+      );
+      console.log("Sent message: " + messageInputRef.current.value);
+      messageInputRef.current.value = "";
+      setNewMessage("");
+    } else {
+      console.error(
+        "WebSocket is not open. readyState = " + chatSocket.current.readyState
+      );
     }
-  };
-
-  const handleImageClick = (image) => {
-    setViewingImage(image);
   };
 
   const handleNewMessageChange = (event) => {
     setNewMessage(event.target.value);
   };
 
-  const handleSendMessage = (event) => {
-    event.preventDefault();
+  const [privateMessages, setPrivateMessages] = useState([]);
 
-    if (newMessage || pastedImage) {
-      setMessages((messages) => [
-        ...messages,
-        {
-          channel: currentChannel,
-          text: newMessage,
-          image: pastedImage,
-        },
-      ]);
-
-      setNewMessage("");
-      setPastedImage(null);
-      setUploadedFileName("");
-    }
-  };
-
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter" && !event.shiftKey) {
-      handleSendMessage(event);
-    }
+  const handleMessageOption = (user) => {
+    setPrivateMessages((prevMessages) => {
+      if (!prevMessages.includes(user)) {
+        return [...prevMessages, user];
+      } else {
+        return prevMessages;
+      }
+    });
   };
 
   function ChannelList() {
     const { t } = useTranslation();
-    const channels = ["General", "Random", "Memes"];
+    const channels = ["General"];
 
     return (
       <div
@@ -109,6 +180,22 @@ function Chat() {
               </li>
             ))}
           </ul>
+          <h2 className="mb-8 mt-8 text-2xl font-nosifer font-bold text-gray-300">
+            {t("Private")}
+          </h2>
+          <ul>
+            {privateMessages.map((user, index) => (
+              <li
+                key={index}
+                className={`cursor-pointer my-4 font-bold ${
+                  user === currentChannel ? "text-purple-500 font-nosifer" : ""
+                }`}
+                onClick={() => setCurrentChannel(user)}
+              >
+                {user}
+              </li>
+            ))}
+          </ul>
         </div>
         <BackButton navigate={navigate} t={t} />
       </div>
@@ -116,6 +203,16 @@ function Chat() {
   }
 
   function OnlineUsersList() {
+    const [dropdownUser, setDropdownUser] = useState(null);
+
+    const handleUserClick = (user) => {
+      if (dropdownUser === user) {
+        setDropdownUser(null);
+      } else {
+        setDropdownUser(user);
+      }
+    };
+
     return (
       <div
         className="flex flex-col justify-between w-1/7 p-6 text-white
@@ -126,11 +223,26 @@ function Chat() {
             {t("Online")}
           </h2>
           <ul>
-            {onlineUsers.map((user, index) => (
-              <li key={index} className="mb-4">
-                {user}
-              </li>
-            ))}
+            {onlineUsers ? (
+              onlineUsers.map((user, index) => (
+                <li
+                  key={index}
+                  className="mb-4 cursor-pointer font-bold"
+                  onClick={() => handleUserClick(user)}
+                >
+                  {user}
+                  {dropdownUser === user && (
+                    <ul className="bg-purple-500 rounded-xl bg-opacity-20">
+                      <li onClick={() => handleMessageOption(user)}>Message</li>
+                      <li>Friend Request</li>
+                      <li>Block</li>
+                    </ul>
+                  )}
+                </li>
+              ))
+            ) : (
+              <li>No users online</li>
+            )}
           </ul>
         </div>
       </div>
@@ -154,61 +266,25 @@ function Chat() {
             {messages
               .filter((message) => message.channel === currentChannel)
               .map((message, index) => (
-                <p key={index}>
-                  {message.text}
-                  {message.image && (
-                    <img
-                      src={message.image}
-                      alt=""
-                      className="max-h-32 cursor-pointer"
-                      onClick={() => handleImageClick(message.image)}
-                    />
-                  )}
-                </p>
+                <p key={index}>{message.text}</p>
               ))}
           </div>
           <form onSubmit={handleSendMessage}>
             <textarea
+              ref={messageInputRef}
               value={newMessage}
               onChange={handleNewMessageChange}
               onKeyPress={handleKeyPress}
-              onPaste={handlePaste}
               className="border border-purple-500 bg-gray-900 bg-opacity-80 
 			  rounded p-2 w-full"
               placeholder={t("Type your message here...")}
             />
-            <input
-              type="file"
-              id="file"
-              onChange={handleFileChange}
-              style={{ display: "none" }}
-            />
-            <div className="flex justify-center">
-              <label
-                htmlFor="file"
-                className={`cursor-pointer ${ButtonStyle}`}
-              >
-                {t("Choose File")}
-              </label>
-            </div>
-            {uploadedFileName && (
-              <p className="text-center">{uploadedFileName}</p>
-            )}
           </form>
         </div>
         <div className="hidden md:block">
           <OnlineUsersList />
         </div>
       </div>
-      {viewingImage && (
-        <div
-          className="fixed top-0 left-0 flex items-center justify-center w-full h-full 
-		  bg-black bg-opacity-50"
-          onClick={() => setViewingImage(null)}
-        >
-          <img src={viewingImage} alt="" className="max-h-full max-w-full" />
-        </div>
-      )}
     </div>
   );
 }

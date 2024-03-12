@@ -94,7 +94,7 @@ function App() {
             path="chat"
             element={
               <PageWrapper image={Background} redirectUri={REDIRECT_URI}>
-                <Chat />
+                <Chat redirectUri={REDIRECT_URI} />
               </PageWrapper>
             }
           />
