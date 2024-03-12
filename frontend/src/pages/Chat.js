@@ -151,6 +151,11 @@ function Chat({ redirectUri }) {
     });
   };
 
+  const openProfile = (user) => {
+
+
+  };
+
   function ChannelList() {
     const { t } = useTranslation();
     const channels = ["General"];
@@ -233,6 +238,7 @@ function Chat({ redirectUri }) {
                   {dropdownUser === user && (
                     <ul className="bg-purple-500 rounded-xl bg-opacity-20">
                       <li onClick={() => handleMessageOption(user)}>Message</li>
+					  <li onClick={() => openProfile(user)}>Profile</li>
                       <li>Friend Request</li>
                       <li>Block</li>
                     </ul>
