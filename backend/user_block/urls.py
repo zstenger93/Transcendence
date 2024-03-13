@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
 	# can delete, just for testing
-    path('user_data/', views.UserData.as_view(), name='user_data'),
+    path('user_data/<str:username>/', views.UserData.as_view(), name='user_data'),
 	# can delete, just for testing
 	path('users_data/', views.UsersData.as_view(), name='users_data'),
 	path('block/', views.BlockUser.as_view(), name='block_user'),

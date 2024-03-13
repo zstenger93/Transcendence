@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../components/buttons/BackButton";
-import { getUserDetails } from "../components/API";
+import { getUserDetails, getUserProfile } from "../components/API";
 
 function Chat({ redirectUri }) {
   const { t } = useTranslation();
@@ -15,12 +15,38 @@ function Chat({ redirectUri }) {
   const mounted = useRef(true);
   const [onlineUsers, setOnlineUsers] = useState(null);
   const userDetailsRef = useRef(null);
+  const [userDetails, setUserDetails] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const fetchUserProfile = async (userName) => {
+    //   console.log("redirectUri", redirectUri);
+    if (userName) {
+      const details = await getUserProfile({ redirectUri, userName });
+      setUserDetails(details.data);
+    }
+    //   console.log("Fetched user details:", details);
+  };
+
+  useEffect(() => {
+    if (userDetails) {
+    //   console.log("user_profile_details: ", userDetails);
+      setIsModalOpen(true);
+    }
+  }, [userDetails]);
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  //   useEffect(() => {
+  //     fetchUserProfile(userName);
+  //   }, [redirectUri]);
 
   useEffect(() => {
     const fetchUserDetails = async () => {
-    //   console.log("redirectUri", redirectUri);
+      //   console.log("redirectUri", redirectUri);
       const details = await getUserDetails({ redirectUri });
-    //   console.log("Fetched user details:", details);
+      //   console.log("Fetched user details:", details);
       userDetailsRef.current = details;
     };
 
@@ -40,7 +66,7 @@ function Chat({ redirectUri }) {
 
       switch (data["type"]) {
         case "general_channel":
-        //   console.log("Received a group message");
+          //   console.log("Received a group message");
           setMessages((messages) => [
             ...messages,
             {
@@ -50,9 +76,9 @@ function Chat({ redirectUri }) {
           ]);
           break;
         case "private_channel":
-        //   console.log("Received a private message");
-        //   console.log("current: ", currentChannel);
-        //   console.log("rec: ", data["receiver"]);
+          //   console.log("Received a private message");
+          //   console.log("current: ", currentChannel);
+          //   console.log("rec: ", data["receiver"]);
           setPrivateMessages((prevMessages) => {
             if (!prevMessages.includes(data["sender"])) {
               return [...prevMessages, data["sender"]];
@@ -69,7 +95,7 @@ function Chat({ redirectUri }) {
           ]);
           break;
         case "notify_user_joined":
-        //   console.log("A user has joined the chat");
+          //   console.log("A user has joined the chat");
           setOnlineUsers(data["online_users"]);
           setMessages((messages) => [
             ...messages,
@@ -80,7 +106,7 @@ function Chat({ redirectUri }) {
           ]);
           break;
         case "notify_user_left":
-        //   console.log("A user has left the chat");
+          //   console.log("A user has left the chat");
           setOnlineUsers(data["online_users"]);
           setMessages((messages) => [
             ...messages,
@@ -93,7 +119,7 @@ function Chat({ redirectUri }) {
         default:
         //   console.log("Received an unknown message type");
       }
-    //   console.log("Data from consumer: " + JSON.stringify(data, null, 2));
+      //   console.log("Data from consumer: " + JSON.stringify(data, null, 2));
     };
 
     chatSocket.current.onmessage = handleNewMessage;
@@ -117,7 +143,7 @@ function Chat({ redirectUri }) {
   const handleSendMessage = (event) => {
     event.preventDefault();
     if (chatSocket.current.readyState === WebSocket.OPEN) {
-    //   console.log("currentchannel: ", currentChannel);
+      //   console.log("currentchannel: ", currentChannel);
       chatSocket.current.send(
         JSON.stringify({
           message: messageInputRef.current.value,
@@ -125,7 +151,7 @@ function Chat({ redirectUri }) {
             currentChannel === "General" ? "general_group" : currentChannel,
         })
       );
-    //   console.log("Sent message: " + messageInputRef.current.value);
+      //   console.log("Sent message: " + messageInputRef.current.value);
       messageInputRef.current.value = "";
       setNewMessage("");
     } else {
@@ -152,8 +178,7 @@ function Chat({ redirectUri }) {
   };
 
   const openProfile = (user) => {
-
-
+    fetchUserProfile(user);
   };
 
   function ChannelList() {
@@ -238,7 +263,7 @@ function Chat({ redirectUri }) {
                   {dropdownUser === user && (
                     <ul className="bg-purple-500 rounded-xl bg-opacity-20">
                       <li onClick={() => handleMessageOption(user)}>Message</li>
-					  <li onClick={() => openProfile(user)}>Profile</li>
+                      <li onClick={() => openProfile(user)}>Profile</li>
                       <li>Friend Request</li>
                       <li>Block</li>
                     </ul>
@@ -250,6 +275,54 @@ function Chat({ redirectUri }) {
             )}
           </ul>
         </div>
+        {isModalOpen && userDetails && (
+          <div className="fixed z-10 inset-0 overflow-y-auto">
+            <div
+              className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20
+						text-center sm:block sm:p-0"
+            >
+              <div
+                className="fixed inset-0 transition-opacity"
+                aria-hidden="true"
+              >
+                <div className="absolute inset-0"></div>
+              </div>
+              <span
+                className="hidden sm:inline-block sm:align-middle sm:h-screen"
+                aria-hidden="true"
+              >
+                &#8203;
+              </span>
+              <div
+                className="inline-block align-bottom rounded-lg text-left
+						overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle
+						sm:max-w-lg sm:w-full"
+              >
+                <div className=" bg-blue-500 bg-opacity-25 px-4 pt-5 pb-4 sm:p-6 sm:pb-4 text-center">
+                  <span
+                    className="close float-right text-red-500 mouse-pointer text-xl"
+                    onClick={closeModal}
+                  >
+                    &times;
+                  </span>
+                  <img
+                    className="w-24 h-24 rounded-full mb-4 mx-auto"
+                    src={userDetails.user.profile_picture}
+                    alt="Profile"
+                  />
+                  <p className="font-nosifer mb-2">
+                    {userDetails.user.title} {userDetails.user.username}
+                  </p>
+                  <p className="font-bold">
+                    Intra Level: {userDetails.user.intra_level}
+                  </p>
+                  <p className="font-bold">Email: {userDetails.user.email}</p>
+                  <p className="font-bold">School: {userDetails.user.school}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }

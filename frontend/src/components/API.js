@@ -1,6 +1,24 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
+
+
+export const getUserProfile = async ({ redirectUri, userName }) => {
+	let response = {};
+	try {
+	  const token = Cookies.get("access");
+	  response = await axios.get(`${redirectUri}/api/user_data/${userName}`, {
+		headers: {
+		  Authorization: `Bearer ${token}`,
+		},
+		withCredentials: true,
+	  });
+	} catch (error) {
+	  console.log(error);
+	}
+	return response;
+  };
+
 export const fetchUserDetails = async (
   setUserDetails,
   setUsername,
