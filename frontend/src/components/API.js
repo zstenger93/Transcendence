@@ -1,23 +1,84 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
+export const addUserToFriendList = async ({ redirectUri, userName }) => {
+  let response = {};
+  try {
+    const token = Cookies.get("access");
+    const csrfToken = Cookies.get("csrftoken");
+    response = await axios.get(
+      `${redirectUri}/api/friend/add/${userName}/`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "X-CSRFToken": csrfToken,
+        },
+        withCredentials: true,
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+  console.log(response);
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(response.data, "text/html");
 
+  const csrfTokenInput = doc.querySelector('input[name="csrfmiddlewaretoken"]');
+  const csrfTokenValue = csrfTokenInput ? csrfTokenInput.value : null;
+  Cookies.set("csrftoken", csrfTokenValue);
+  console.log(csrfTokenValue);
+  try {
+    const token = Cookies.get("access");
+    response = await axios.post(
+      `${redirectUri}/api/friend/add/${userName}/`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "X-CSRFToken": csrfTokenValue,
+        },
+        withCredentials: true,
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+
+  return response;
+};
+
+export const getFriendList = async ({ redirectUri, userName }) => {
+  let response = {};
+  try {
+    const token = Cookies.get("access");
+    response = await axios.get(`${redirectUri}/api/friends/${userName}/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
 
 export const getUserProfile = async ({ redirectUri, userName }) => {
-	let response = {};
-	try {
-	  const token = Cookies.get("access");
-	  response = await axios.get(`${redirectUri}/api/user_data/${userName}`, {
-		headers: {
-		  Authorization: `Bearer ${token}`,
-		},
-		withCredentials: true,
-	  });
-	} catch (error) {
-	  console.log(error);
-	}
-	return response;
-  };
+  let response = {};
+  try {
+    const token = Cookies.get("access");
+    response = await axios.get(`${redirectUri}/api/user_data/${userName}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
 
 export const fetchUserDetails = async (
   setUserDetails,
@@ -91,47 +152,43 @@ export const changeAbout = async ({ redirectUri, about }) => {
 };
 
 export const changePassword = async ({ redirectUri, password }) => {
-	let response = {};
-	try {
-	  const token = Cookies.get('access');
-	  response = await axios.post(
-		`${redirectUri}/api/updateProfile`,
-		{ password: password },
-		{
-		  headers: {
-			Authorization: `Bearer ${token}`,
-		  },
-		  withCredentials: true,
-		}
-	  );
-	} catch (error) {
-	  console.log(error);
-	}
-	return response;
-  };
+  let response = {};
+  try {
+    const token = Cookies.get("access");
+    response = await axios.post(
+      `${redirectUri}/api/updateProfile`,
+      { password: password },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
 
 export const changeAvatar = async ({ redirectUri, file }) => {
-	let response = {};
-	try {
-		const token = Cookies.get('access');
-		const formData = new FormData();
-		formData.append('profile_picture', file);
+  let response = {};
+  try {
+    const token = Cookies.get("access");
+    const formData = new FormData();
+    formData.append("profile_picture", file);
 
-		response = await axios.post(
-			`${redirectUri}/api/updateProfile`,
-			formData,
-			{
-				headers: {
-					'Authorization': `Bearer ${token}`,
-					'Content-Type': 'multipart/form-data',
-				},
-				withCredentials: true,
-			}
-		);
-	} catch (error) {
-		console.log(error);
-	}
-	return response;
+    response = await axios.post(`${redirectUri}/api/updateProfile`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+      withCredentials: true,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
 };
 
 export const activate2FA = async ({ redirectUri }) => {

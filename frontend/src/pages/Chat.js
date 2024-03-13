@@ -2,7 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../components/buttons/BackButton";
-import { getUserDetails, getUserProfile } from "../components/API";
+import {
+  getUserDetails,
+  getUserProfile,
+  addUserToFriendList,
+  getFriendList,
+} from "../components/API";
 
 function Chat({ redirectUri }) {
   const { t } = useTranslation();
@@ -29,7 +34,7 @@ function Chat({ redirectUri }) {
 
   useEffect(() => {
     if (userDetails) {
-    //   console.log("user_profile_details: ", userDetails);
+      //   console.log("user_profile_details: ", userDetails);
       setIsModalOpen(true);
     }
   }, [userDetails]);
@@ -181,6 +186,23 @@ function Chat({ redirectUri }) {
     fetchUserProfile(user);
   };
 
+  const addFriend = async (user) => {
+	  if (true) {
+		addUserToFriendList({ redirectUri, userName: user});
+      const friends = await getFriendList({
+        redirectUri,
+        userName: "zstenger",
+      });
+      console.log("Friends: ", friends);
+    } else {
+      console.error(
+        "userDetailsRef.current or userDetailsRef.current.user is undefined"
+      );
+    }
+  };
+  const blockUser = (user) => {};
+  const unblockuser = (user) => {};
+
   function ChannelList() {
     const { t } = useTranslation();
     const channels = ["General"];
@@ -264,8 +286,9 @@ function Chat({ redirectUri }) {
                     <ul className="bg-purple-500 rounded-xl bg-opacity-20">
                       <li onClick={() => handleMessageOption(user)}>Message</li>
                       <li onClick={() => openProfile(user)}>Profile</li>
-                      <li>Friend Request</li>
-                      <li>Block</li>
+                      <li onClick={() => addFriend(user)}>Friend Request</li>
+                      <li onClick={() => blockUser(user)}>Block</li>
+                      <li onClick={() => unblockuser(user)}>Unblock</li>
                     </ul>
                   )}
                 </li>

@@ -65,15 +65,14 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 	'django_otp.middleware.OTPMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 CSRF_ALLOWED_ORIGINS = [
-    "*",
     "https://localhost",
 	"https://api.intra.42.fr",
     "http://localhost:3000",
