@@ -7,12 +7,17 @@ from django.core.exceptions import ObjectDoesNotExist
 from .models import Block, BlockSerializer
 
 class UserData(APIView):
-    def get(self, request):
-        user = request.user
-        data = model_to_dict(user)
-        field_names = list(data.keys())
+    def get(self, request, username):
+        user = AppUser.objects.get(username=username)
+        if not user:
+            response = Response({
+                "detail": "User not found"
+            }, status=status.HTTP_404_NOT_FOUND)
+            response["Access-Control-Allow-Credentials"] = 'true'
+            return response
+        data = user_to_dict(user)
         response = Response({
-            "detail": field_names
+            "user": data,
         }, status=status.HTTP_200_OK)
         response["Access-Control-Allow-Credentials"] = 'true'
         return response
@@ -23,6 +28,8 @@ def user_to_dict(user):
         user_dict['profile_picture'] = user.profile_picture.url
     else:
         user_dict['profile_picture'] = None
+    # keep only fields : email, username, profile_picture, title, school, intra_level
+    user_dict = {key: user_dict[key] for key in ['email', 'username', 'profile_picture', 'title', 'school', 'intra_level']}
     return user_dict
 
 class UsersData(APIView):
