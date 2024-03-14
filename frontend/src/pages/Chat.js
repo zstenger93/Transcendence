@@ -43,10 +43,6 @@ function Chat({ redirectUri }) {
     setIsModalOpen(false);
   };
 
-  //   useEffect(() => {
-  //     fetchUserProfile(userName);
-  //   }, [redirectUri]);
-
   useEffect(() => {
     const fetchUserDetails = async () => {
       //   console.log("redirectUri", redirectUri);
@@ -148,17 +144,19 @@ function Chat({ redirectUri }) {
   const handleSendMessage = (event) => {
     event.preventDefault();
     if (chatSocket.current.readyState === WebSocket.OPEN) {
-      //   console.log("currentchannel: ", currentChannel);
-      chatSocket.current.send(
-        JSON.stringify({
-          message: messageInputRef.current.value,
-          receiver:
-            currentChannel === "General" ? "general_group" : currentChannel,
-        })
-      );
-      //   console.log("Sent message: " + messageInputRef.current.value);
-      messageInputRef.current.value = "";
-      setNewMessage("");
+      if (currentChannel !== userDetailsRef.current.data.user.username) {
+        chatSocket.current.send(
+          JSON.stringify({
+            message: messageInputRef.current.value,
+            receiver:
+              currentChannel === "General" ? "general_group" : currentChannel,
+          })
+        );
+        messageInputRef.current.value = "";
+        setNewMessage("");
+      } else {
+        console.error("Cannot send a private message to yourself.");
+      }
     } else {
       console.error(
         "WebSocket is not open. readyState = " + chatSocket.current.readyState
@@ -187,8 +185,8 @@ function Chat({ redirectUri }) {
   };
 
   const addFriend = async (user) => {
-	  if (true) {
-		addUserToFriendList({ redirectUri, userName: user});
+    if (true) {
+      addUserToFriendList({ redirectUri, userName: user });
       const friends = await getFriendList({
         redirectUri,
         userName: "zstenger",
@@ -284,7 +282,11 @@ function Chat({ redirectUri }) {
                   {user}
                   {dropdownUser === user && (
                     <ul className="bg-purple-500 rounded-xl bg-opacity-20">
-                      <li onClick={() => handleMessageOption(user)}>Message</li>
+                      {user !== userDetailsRef.current.data.user.username && (
+                        <li onClick={() => handleMessageOption(user)}>
+                          Message
+                        </li>
+                      )}
                       <li onClick={() => openProfile(user)}>Profile</li>
                       <li onClick={() => addFriend(user)}>Friend Request</li>
                       <li onClick={() => blockUser(user)}>Block</li>
