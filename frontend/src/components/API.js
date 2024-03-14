@@ -44,6 +44,40 @@ export const addUserToFriendList = async ({ redirectUri, userName }) => {
   } catch (error) {
     console.log(error);
   }
+//   let requests = {};
+//   try {
+//     const token = Cookies.get("access");
+//     requests = await axios.get(
+//       `${redirectUri}/api/friend/requests/`,
+//       {},
+//       {
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//           "X-CSRFToken": csrfTokenValue,
+//         },
+//         withCredentials: true,
+//       }
+//     );
+//   } catch (error) {
+//     console.log(error);
+//   }
+//   console.log(requests);
+//   try {
+//     const token = Cookies.get("access");
+//     response = await axios.post(
+//       `${redirectUri}/api/friend/accept/${requests.data[0].id}/`,
+//       {},
+//       {
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//           "X-CSRFToken": csrfTokenValue,
+//         },
+//         withCredentials: true,
+//       }
+//     );
+//   } catch (error) {
+//     console.log(error);
+//   }
 
   return response;
 };
