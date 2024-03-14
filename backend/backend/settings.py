@@ -16,16 +16,7 @@ DEBUG = os.getenv('DEBUG')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = [
-        '*', 
-        'localhost', 
-        '172.19.0.4',
-        '127.0.0.1', 
-        '0.0.0.0', 
-        '10.13.7.5', 
-        'transcendence-backend-znhl.onrender.com', 
-        'https://transcendence-frontend-3otz.onrender.com'
-    ]
+ALLOWED_HOSTS = ['*']
 
 # Authentication settings
 if DEBUG == 'True':
@@ -91,7 +82,7 @@ CORS_ALLOWED_ORIGINS = [
 	]
 
 CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_ALLOW_ALL = True
 SESSION_COOKIE_SAMESITE = None
 SESSION_COOKIE_SECURE = True
 # SESSION_COOKIE_SAMESITE = 'Lax'

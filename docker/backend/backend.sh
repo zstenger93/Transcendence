@@ -29,20 +29,11 @@ echo "alias get='http --follow --timeout 6'" >> /root/.bashrc
 # python manage.py makemigrations && python manage.py migrate
 # tail -f /var/log/gunicorn/dev.log
 
+export DJANGO_SETTINGS_MODULE=backend.settings
 
+python auto_reload.py
 
-############################################
-# daphne server                            #
-############################################
+sleep 10
+
 mkdir -pv /var/{log,run}/daphne/
 python manage.py makemigrations && python manage.py migrate
-# daphne -u /tmp/daphne.sock backend.asgi:application
-#
-# watchmedo auto-restart -d . -p "*.py" -- daphne -b 0.0.0.0 backend.asgi:application
-#
-# tail -f /var/log/daphne/daphne.log
-
-
-# daphne -b 0.0.0.0 backend.asgi:application
-# hang the container
-tail -f /dev/null

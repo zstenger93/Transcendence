@@ -4,14 +4,19 @@ import json
 from channels.exceptions import StopConsumer
 from asgiref.sync import sync_to_async
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 class ChatConsumer(AsyncWebsocketConsumer):
 	async def connect(self):
-		from .models import UserChannelName
+		# from .models import UserChannelName
 		################# USER IS AUTHENTICATED CHECK #################
 		if not self.scope['user'].is_authenticated:
 			await self.close()
 			raise StopConsumer('User is not authenticated')
 
+		logger.info(f'User {self.scope["user"]} connected to the chat.')
 		username = self.scope['user'].username
 		self.room_name = username + '_chat_room'
 		self.room_group_name = 'general_group'
