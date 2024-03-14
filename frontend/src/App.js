@@ -13,6 +13,7 @@ import Matchmaking from "./pages/Games/Matchmaking";
 import OriginalPong from "./pages/Games/OriginalPong";
 import PongAi from "./pages/Games/PongAi";
 import Pong3D from "./pages/Games/Pong3D";
+import Multiplayer from "./pages/Games/Multiplayer";
 import ChoosePongMode from "./pages/Games/ChoosePongMode";
 import Background from "./images/welcomebg.jpg";
 import BreakingBadMorty from "./images/rmb3.png";
@@ -45,8 +46,8 @@ const PageWrapper = ({ children, image, showSidebar = true, redirectUri }) => {
 
 function App() {
   const { i18n } = useTranslation();
-  const basename =
-    process.env.NODE_ENV === "production" ? "/Transcendence" : "";
+  const basename = "";
+    // process.env.NODE_ENV === "production" ? "/Transcendence" : "";
   let REDIRECT_URI;
 
   if (process.env.NODE_ENV === "development") {
@@ -161,6 +162,14 @@ function App() {
                   WelcomeButtonStyle={WelcomeButtonStyle}
                   BackButton={BackButton}
                 />
+              </PageWrapper>
+            }
+          />
+		  <Route
+            path="multiplayer"
+            element={
+              <PageWrapper image={Background} redirectUri={REDIRECT_URI}>
+                <Multiplayer />
               </PageWrapper>
             }
           />

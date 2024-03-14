@@ -6,15 +6,15 @@ import { useTranslation } from "react-i18next";
 import { WelcomeButtonStyle } from "../../components/buttons/ButtonStyle";
 import LoseScreen from "../../components/game/LoseScreen";
 import WinScreen from "../../components/game/WinScreen";
-import FullScreenButton from "../../components/buttons/FullScreen";
 import handleResize from "../../components/game/HandleResize";
+import FullScreenButton from "../../components/buttons/FullScreen";
 
-const GameCanvas = (aiDifficulty) => {
+const GameCanvas = () => {
   // Default Parameters
-  const defaultSpeedX = 300;
-  const playerSpeedIncrease = 0.5;
   let playerSpeed = 5;
+  const otherPaddleOffset = 3;
   let resize = true;
+  const defaultSpeedX = 300;
   const winScore = 10;
   const defaultSpeedY = 20;
   const [scoreLeftReact, setScoreLeft] = useState(0);
@@ -29,6 +29,12 @@ const GameCanvas = (aiDifficulty) => {
     ? canvasRef.current.height / 2 - paddleHeight / 2
     : 0;
   let rightPaddleY = canvasRef.current
+    ? canvasRef.current.height / 2 - paddleHeight / 2
+    : 0;
+  let leftPaddleYSecound = canvasRef.current
+    ? canvasRef.current.height / 2 - paddleHeight / 2
+    : 0;
+  let rightPaddleYSecound = canvasRef.current
     ? canvasRef.current.height / 2 - paddleHeight / 2
     : 0;
   let ballX = canvasRef.current ? canvasRef.current.width / 2 : 5;
@@ -52,121 +58,14 @@ const GameCanvas = (aiDifficulty) => {
     ctx.fillRect(x, y, stripeWidth, stripeHeight);
   };
 
-  // This is bloody AI
-  const ArtificialInteligenceEasy = (ctx, canvas) => {
-    const aiSpeed = 440;
-    let tempPadleY = rightPaddleY;
-    if (ballX > canvas.width / 4 && ballX < (canvas.width / 4) * 3) {
-      if (ballY + ballSpeedY * 2 > rightPaddleY + paddleHeight / 2)
-        tempPadleY += aiSpeed * dt * sizeSpeedRatio;
-      else if (ballY - ballSpeedY * 2 < rightPaddleY + paddleHeight / 2)
-        tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
-    } else {
-      if (ballY > rightPaddleY + paddleHeight / 2)
-        tempPadleY += aiSpeed * dt * sizeSpeedRatio;
-      else if (ballY < rightPaddleY + paddleHeight / 2)
-        tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
-    }
-    tempPadleY = Math.max(
-      0,
-      Math.min(tempPadleY, canvas.height - paddleHeight)
-    );
-    rightPaddleY = tempPadleY;
-    ctx.fillRect(
-      canvas.width - paddleWidth,
-      rightPaddleY,
-      paddleWidth,
-      paddleHeight
-    );
-  };
-
-  const ArtificialInteligenceMedium = (ctx, canvas) => {
-    const aiSpeed = 440;
-    let tempPadleY = rightPaddleY;
-    if (ballY > rightPaddleY + paddleHeight / 2)
-      tempPadleY += aiSpeed * dt * sizeSpeedRatio;
-    else if (ballY < rightPaddleY + paddleHeight / 2)
-      tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
-    tempPadleY = Math.max(
-      0,
-      Math.min(tempPadleY, canvas.height - paddleHeight)
-    );
-    rightPaddleY = tempPadleY;
-    ctx.fillRect(
-      canvas.width - paddleWidth,
-      rightPaddleY,
-      paddleWidth,
-      paddleHeight
-    );
-  };
-
-  const ArtificialInteligenceHard = (ctx, canvas) => {
-    const aiSpeed = 500;
-    let estimateTime = Math.abs((canvas.width - Math.abs(ballX)) / ballSpeedX);
-    let estimatePostionY = ballY + ballSpeedY * estimateTime;
-    if (estimatePostionY > canvas.height)
-      estimatePostionY = Math.abs(
-        canvas.height - (estimatePostionY % canvas.height)
-      );
-    else if (estimatePostionY < 0)
-      estimatePostionY = Math.abs(estimatePostionY % canvas.height);
-    else estimatePostionY = Math.abs(estimatePostionY);
-    let tempPadleY = rightPaddleY;
-    if (estimatePostionY > rightPaddleY + paddleHeight / 2 + 10)
-      tempPadleY += aiSpeed * dt * sizeSpeedRatio;
-    else if (estimatePostionY < rightPaddleY + paddleHeight / 2 - 10)
-      tempPadleY -= aiSpeed * dt * sizeSpeedRatio;
-    tempPadleY = Math.max(
-      0,
-      Math.min(tempPadleY, canvas.height - paddleHeight)
-    );
-    rightPaddleY = tempPadleY;
-    ctx.fillRect(
-      canvas.width - paddleWidth,
-      rightPaddleY,
-      paddleWidth,
-      paddleHeight
-    );
-  };
-
-  const ArtificialInteligenceImpossible = (ctx, canvas) => {
-    let tempPadleY = rightPaddleY;
-    tempPadleY = ballY - paddleHeight / 2;
-    tempPadleY = Math.max(
-      0,
-      Math.min(tempPadleY, canvas.height - paddleHeight)
-    );
-    rightPaddleY = tempPadleY;
-    ctx.fillRect(
-      canvas.width - paddleWidth,
-      rightPaddleY,
-      paddleWidth,
-      paddleHeight
-    );
-  };
-
-  // this function draws scores
-  const drawScores = (ctx, canvas) => {
-    ctx.fillStyle = "#FFFFFF";
-    ctx.font = "80px Helvetica";
-    ctx.fillText(`${scoreLeft}`, canvas.width / 2 - 100, 100);
-    ctx.fillText(`${scoreRight}`, canvas.width / 2 + 60, 100);
-  };
-
-  // this Function Surprise draws a ball
-  const drawBall = (ctx) => {
-    ctx.beginPath();
-    ctx.arc(ballX, ballY, ballSize * sizeSpeedRatio, 0, Math.PI * 2);
-    ctx.fillStyle = "#00FF00";
-    ctx.fill();
-    ctx.closePath();
-  };
-
+  // This function Updates The Ball Positions
   const updateBallPosition = (canvas) => {
     const ballAngleOffset = 0.02;
     const ballSpeedIncrease = 50;
+    // updates the ball position
     ballX += ballSpeedX * dt * sizeSpeedRatio;
     ballY += ballSpeedY * dt * sizeSpeedRatio;
+    // check for the collision with walls
     if (ballY < 0) {
       ballY = 2;
       ballSpeedY = -ballSpeedY;
@@ -174,6 +73,7 @@ const GameCanvas = (aiDifficulty) => {
       ballY = canvas.height - 2;
       ballSpeedY = -ballSpeedY;
     }
+    // check for the collision with left paddle
     if (
       ballX < paddleWidth + ballSize * sizeSpeedRatio &&
       ballY > leftPaddleY &&
@@ -183,32 +83,92 @@ const GameCanvas = (aiDifficulty) => {
       const distanceFromCenter = ballY - leftPaddleCenterY;
       ballX = paddleWidth + 10;
       ballSpeedX *= -1;
+      // updates the balls speed in case of collusion with the paddle X speed
       if (ballSpeedX < 0) ballSpeedX -= ballSpeedIncrease;
       else ballSpeedX += ballSpeedIncrease;
+      // updates the balls speed in case of collusion with the paddle Y speed
       ballSpeedY +=
         distanceFromCenter *
         ballAngleOffset *
         sizeSpeedRatio *
         Math.abs(ballSpeedX);
+      // check for the collision with right paddle
+    } else if (
+      ballX < paddleWidth * otherPaddleOffset + ballSize * sizeSpeedRatio &&
+      ballX >
+        paddleWidth * (otherPaddleOffset - 1) + ballSize * sizeSpeedRatio &&
+      ballY > leftPaddleYSecound &&
+      ballY < leftPaddleYSecound + paddleHeight
+    ) {
+      const leftPaddleCenterY = leftPaddleYSecound + paddleHeight / 2;
+      const distanceFromCenter = ballY - leftPaddleCenterY;
+	  // eslint-disable-next-line no-unused-expressions
+      if (ballSpeedX > 0) paddleWidth * (otherPaddleOffset - 1) - 10;
+      else ballX = paddleWidth * otherPaddleOffset + 10;
+      ballSpeedX *= -1;
+      // updates the balls speed in case of collusion with the paddle X speed
+      if (ballSpeedX < 0) ballSpeedX -= ballSpeedIncrease;
+      else ballSpeedX += ballSpeedIncrease;
+      // updates the balls speed in case of collusion with the paddle Y speed
+      ballSpeedY +=
+        distanceFromCenter *
+        ballAngleOffset *
+        sizeSpeedRatio *
+        Math.abs(ballSpeedX);
+      // check for the collision with right paddle
     } else if (
       ballX > canvas.width - paddleWidth - ballSize * sizeSpeedRatio &&
       ballY > rightPaddleY &&
       ballY < rightPaddleY + paddleHeight
     ) {
+      // calculates the distance from the center of the paddle
       const rightPaddleCenterY = rightPaddleY + paddleHeight / 2;
       const distanceFromCenter = ballY - rightPaddleCenterY;
       ballX = canvas.width - paddleWidth - 10;
       ballSpeedX *= -1;
+      // updates the balls speed in case of collusion with the paddle X speed
       if (ballSpeedX < 0) ballSpeedX -= ballSpeedIncrease;
       else {
         ballSpeedX += ballSpeedIncrease;
-        playerSpeed += playerSpeedIncrease;
       }
+      // updates the balls speed in case of collusion with the paddle
       ballSpeedY +=
         distanceFromCenter *
         ballAngleOffset *
         sizeSpeedRatio *
         Math.abs(ballSpeedX);
+      //check for score condition and resets the ball
+    } else if (
+      ballX >
+        canvas.width -
+          paddleWidth * (otherPaddleOffset + 1) -
+          ballSize * sizeSpeedRatio &&
+      ballX <
+        canvas.width -
+          paddleWidth * otherPaddleOffset -
+          ballSize * sizeSpeedRatio &&
+      ballY > rightPaddleYSecound &&
+      ballY < rightPaddleYSecound + paddleHeight
+    ) {
+      // calculates the distance from the center of the paddle
+      const rightPaddleCenterY = rightPaddleYSecound + paddleHeight / 2;
+      const distanceFromCenter = ballY - rightPaddleCenterY;
+      if (ballSpeedX > 0)
+        ballX = canvas.width - paddleWidth * (otherPaddleOffset + 1) - 10;
+      else ballX = canvas.width - paddleWidth * otherPaddleOffset + 10;
+      ballSpeedX *= -1;
+      // updates the balls speed in case of collusion with the paddle X speed
+      if (ballSpeedX < 0) ballSpeedX -= ballSpeedIncrease;
+      else {
+        ballSpeedX += ballSpeedIncrease;
+      }
+      // updates the balls speed in case of collusion with the paddle
+      ballSpeedY +=
+        distanceFromCenter *
+        ballAngleOffset *
+        sizeSpeedRatio *
+        Math.abs(ballSpeedX);
+      //check for score condition and resets the ball
     } else if (ballX + ballSize * 3 < 0) {
       ballX = canvas.width / 2;
       ballY = canvas.height / 2;
@@ -228,19 +188,20 @@ const GameCanvas = (aiDifficulty) => {
     }
   };
 
-  let keys = {};
-
-  const movePaddle = () => {
-    if (canvasRef.current) {
-      if (keys["ArrowUp"] || keys["w"])
-        leftPaddleY -= playerSpeed * sizeSpeedRatio;
-      else if (keys["ArrowDown"] || keys["s"])
-        leftPaddleY += playerSpeed * sizeSpeedRatio;
-      leftPaddleY = Math.max(
-        0,
-        Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
-      );
-    }
+  // this function draws scores
+  const drawScores = (ctx, canvas) => {
+    ctx.fillStyle = "#FFFFFF";
+    ctx.font = "80px Helvetica";
+    ctx.fillText(`${scoreLeft}`, canvas.width / 2 - 100, 100);
+    ctx.fillText(`${scoreRight}`, canvas.width / 2 + 60, 100);
+  };
+  // this Function Surprise draws a ball
+  const drawBall = (ctx, canvas) => {
+    ctx.beginPath();
+    ctx.arc(ballX, ballY, ballSize * sizeSpeedRatio, 0, Math.PI * 2);
+    ctx.fillStyle = "#00FF00";
+    ctx.fill();
+    ctx.closePath();
   };
 
   const draw = (timestamp) => {
@@ -255,43 +216,106 @@ const GameCanvas = (aiDifficulty) => {
     drawWhiteStripe(ctx, canvas);
     ctx.fillStyle = "#FF3366";
     ctx.fillRect(0, leftPaddleY, paddleWidth, paddleHeight);
-    if (aiDifficulty.aiDifficulty === 0) ArtificialInteligenceEasy(ctx, canvas);
-    else if (aiDifficulty.aiDifficulty === 1)
-      ArtificialInteligenceMedium(ctx, canvas);
-    else if (aiDifficulty.aiDifficulty === 2)
-      ArtificialInteligenceHard(ctx, canvas);
-    else ArtificialInteligenceImpossible(ctx, canvas);
+    ctx.fillRect(
+      paddleWidth * otherPaddleOffset,
+      leftPaddleYSecound,
+      paddleWidth,
+      paddleHeight
+    );
+    ctx.fillRect(
+      canvas.width - paddleWidth,
+      rightPaddleY,
+      paddleWidth,
+      paddleHeight
+    );
+    ctx.fillRect(
+      canvas.width - paddleWidth * (otherPaddleOffset + 1),
+      rightPaddleYSecound,
+      paddleWidth,
+      paddleHeight
+    );
     updateBallPosition(canvas);
     drawBall(ctx, canvas);
     drawScores(ctx, canvas);
     requestAnimationFrame(draw);
-    movePaddle();
+    handleKeys();
+  };
+
+  const keysPressed = {};
+
+  const handleKeys = () => {
+    if (canvasRef.current) {
+      // Left paddle controls
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      if (keysPressed["w"]) leftPaddleY -= playerSpeed * sizeSpeedRatio;
+      if (keysPressed["s"]) leftPaddleY += playerSpeed * sizeSpeedRatio;
+      if (keysPressed["ArrowUp"]) rightPaddleY -= playerSpeed * sizeSpeedRatio;
+      if (keysPressed["ArrowDown"])
+        rightPaddleY += playerSpeed * sizeSpeedRatio;
+      if (keysPressed["t"]) leftPaddleYSecound -= playerSpeed * sizeSpeedRatio;
+      if (keysPressed["g"]) leftPaddleYSecound += playerSpeed * sizeSpeedRatio;
+      if (keysPressed["o"]) rightPaddleYSecound -= playerSpeed * sizeSpeedRatio;
+      if (keysPressed["l"]) rightPaddleYSecound += playerSpeed * sizeSpeedRatio;
+      leftPaddleYSecound = Math.max(
+        0,
+        Math.min(leftPaddleYSecound, canvasRef.current.height - paddleHeight)
+      );
+      rightPaddleYSecound = Math.max(
+        0,
+        Math.min(rightPaddleYSecound, canvasRef.current.height - paddleHeight)
+      );
+      leftPaddleY = Math.max(
+        0,
+        Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
+      );
+      rightPaddleY = Math.max(
+        0,
+        Math.min(rightPaddleY, canvasRef.current.height - paddleHeight)
+      );
+    }
   };
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      keys[event.key] = true;
+      keysPressed[event.key] = true;
     };
 
     const handleKeyUp = (event) => {
-      keys[event.key] = false;
+      keysPressed[event.key] = false;
     };
 
+    // touchpad controlls
     const handleTouchMove = (event) => {
-      if (canvasRef.current && event.touches.length > 0) {
+      if (canvasRef.current) {
+        const touches = event.touches;
         const rect = canvasRef.current.getBoundingClientRect();
-        const touchY = event.touches[0].clientY - rect.top - window.scrollY;
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-        leftPaddleY = touchY - paddleHeight / 2;
-        leftPaddleY = Math.max(
-          0,
-          Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
-        );
+        for (let i = 0; i < touches.length; i++) {
+          const touch = touches[i];
+          const touchY = event.touches[i].clientY - rect.top - window.scrollY;
+          // Left paddle controls
+          if (touch.clientX < window.innerWidth / 2) {
+			// eslint-disable-next-line react-hooks/exhaustive-deps
+            leftPaddleY = touchY - paddleHeight / 2;
+            leftPaddleY = Math.max(
+              0,
+              Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
+            );
+          }
+          // Right paddle controls
+          else {
+			// eslint-disable-next-line react-hooks/exhaustive-deps
+            rightPaddleY = touchY - paddleHeight / 2;
+            rightPaddleY = Math.max(
+              0,
+              Math.min(rightPaddleY, canvasRef.current.height - paddleHeight)
+            );
+          }
+        }
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
+    window.addEventListener("keydown", handleKeyDown);
     document.addEventListener("touchmove", handleTouchMove);
     window.addEventListener("resize", () =>
       handleResize(
@@ -304,7 +328,9 @@ const GameCanvas = (aiDifficulty) => {
         ballX,
         ballY,
         leftPaddleY,
-        rightPaddleY
+        rightPaddleY,
+        leftPaddleYSecound,
+        rightPaddleYSecound
       )
     );
     handleResize(
@@ -322,6 +348,7 @@ const GameCanvas = (aiDifficulty) => {
     draw(0);
 
     return () => {
+      document.removeEventListener("keyup", handleKeyUp);
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("resize", handleResize);
@@ -359,27 +386,21 @@ const GameCanvas = (aiDifficulty) => {
   );
 };
 
-const PongAi = () => {
+const Multiplayer = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const location = useLocation();
-
+  const navigate = useNavigate();
   const [gameStarted, setGameStarted] = useState(false);
-  const [difficulty, setGameDifficulty] = useState(0);
+
   const handleButtonClick = () => {
     setGameStarted(true);
   };
 
   return (
-    <div id="aiP" className="flex justify-center items-center h-screen">
-      <FullScreenButton location={location} page="aiP" />
+    <div id="oP" className="flex justify-center items-center h-screen">
+      <FullScreenButton location={location} page="oP" />
       {gameStarted ? (
-        <GameCanvas
-          className="m-4"
-          t={t}
-          navigate={navigate}
-          aiDifficulty={difficulty}
-        />
+        <GameCanvas className="m-4" />
       ) : (
         <div className="relative">
           <img
@@ -390,25 +411,11 @@ const PongAi = () => {
           />
           <div
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 
-		  -translate-y-1/2 text-center"
+		        -translate-y-1/2 text-center"
           >
             <button onClick={handleButtonClick} className={WelcomeButtonStyle}>
               {t("Start Game")}
             </button>
-            <div className="relative">Level: {difficulty}</div>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <input
-                type="range"
-                min="0"
-                max="3"
-                value={difficulty}
-                onChange={(e) => setGameDifficulty(parseInt(e.target.value))}
-                style={{
-                  width: "150px",
-                  height: "25px",
-                }}
-              />
-            </div>
           </div>
           <BackButton navigate={navigate} t={t} />
         </div>
@@ -417,4 +424,4 @@ const PongAi = () => {
   );
 };
 
-export default PongAi;
+export default Multiplayer;

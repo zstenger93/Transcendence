@@ -30,6 +30,7 @@
     "react-router-dom": "^6.21.1",
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
+    "serve": "^14.2.1",
     "slick-carousel": "^1.8.1",
     "tailwindcss": "^3.4.1",
     "three": "^0.160.0",
