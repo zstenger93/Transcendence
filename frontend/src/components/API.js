@@ -1,18 +1,16 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-export const addUserToFriendList = async ({ redirectUri, userName }) => {
+export const friendRequest = async ({ redirectUri, userName }) => {
   let response = {};
   try {
     const token = Cookies.get("access");
-    const csrfToken = Cookies.get("csrftoken");
     response = await axios.get(
       `${redirectUri}/api/friend/add/${userName}/`,
       {},
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          "X-CSRFToken": csrfToken,
         },
         withCredentials: true,
       }
@@ -21,64 +19,6 @@ export const addUserToFriendList = async ({ redirectUri, userName }) => {
     console.log(error);
   }
   console.log(response);
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(response.data, "text/html");
-
-  const csrfTokenInput = doc.querySelector('input[name="csrfmiddlewaretoken"]');
-  const csrfTokenValue = csrfTokenInput ? csrfTokenInput.value : null;
-  Cookies.set("csrftoken", csrfTokenValue);
-  console.log(csrfTokenValue);
-  try {
-    const token = Cookies.get("access");
-    response = await axios.post(
-      `${redirectUri}/api/friend/add/${userName}/`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "X-CSRFToken": csrfTokenValue,
-        },
-        withCredentials: true,
-      }
-    );
-  } catch (error) {
-    console.log(error);
-  }
-//   let requests = {};
-//   try {
-//     const token = Cookies.get("access");
-//     requests = await axios.get(
-//       `${redirectUri}/api/friend/requests/`,
-//       {},
-//       {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//           "X-CSRFToken": csrfTokenValue,
-//         },
-//         withCredentials: true,
-//       }
-//     );
-//   } catch (error) {
-//     console.log(error);
-//   }
-//   console.log(requests);
-//   try {
-//     const token = Cookies.get("access");
-//     response = await axios.post(
-//       `${redirectUri}/api/friend/accept/${requests.data[0].id}/`,
-//       {},
-//       {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//           "X-CSRFToken": csrfTokenValue,
-//         },
-//         withCredentials: true,
-//       }
-//     );
-//   } catch (error) {
-//     console.log(error);
-//   }
-
   return response;
 };
 

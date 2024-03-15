@@ -5,7 +5,7 @@ import BackButton from "../components/buttons/BackButton";
 import {
   getUserDetails,
   getUserProfile,
-  addUserToFriendList,
+  friendRequest,
   getFriendList,
 } from "../components/API";
 
@@ -184,20 +184,7 @@ function Chat({ redirectUri }) {
     fetchUserProfile(user);
   };
 
-  const addFriend = async (user) => {
-    if (true) {
-      addUserToFriendList({ redirectUri, userName: user });
-      const friends = await getFriendList({
-        redirectUri,
-        userName: "zstenger",
-      });
-      console.log("Friends: ", friends);
-    } else {
-      console.error(
-        "userDetailsRef.current or userDetailsRef.current.user is undefined"
-      );
-    }
-  };
+  
   const blockUser = (user) => {};
   const unblockuser = (user) => {};
 
@@ -287,8 +274,8 @@ function Chat({ redirectUri }) {
                           Message
                         </li>
                       )}
+                      <li onClick={() => friendRequest({ redirectUri, userName: user })}>Friend Request</li>
                       <li onClick={() => openProfile(user)}>Profile</li>
-                      <li onClick={() => addFriend(user)}>Friend Request</li>
                       <li onClick={() => blockUser(user)}>Block</li>
                       <li onClick={() => unblockuser(user)}>Unblock</li>
                     </ul>
