@@ -24,12 +24,14 @@ def generate_random_lobby_name(length=10):
     lobby_name = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(length))
     return lobby_name 
 
+
 def prepare_room(room_name):
     """
     Helper function to get the game room object by room name.
     """
     game_room = GameRoom.objects.filter(name=room_name).first()
     return game_room
+
 
 def room(request, room_name):
     # Get or create the game room for the users

@@ -22,7 +22,9 @@ logger = logging.getLogger(__name__)
 
 
 class GameConsumer(AsyncWebsocketConsumer):
-    # Class lvl variables, shared between all instances of the class
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.game_state = 'on hold'
     connected_clients = {}
     game_state = {}
     game_tasks = {}
@@ -32,12 +34,12 @@ class GameConsumer(AsyncWebsocketConsumer):
         self.room_group_name = f"game_{self.room_name}"
 
         if not self.scope['user'].is_authenticated:
-            logger.info(f"{self.scope['user']}user is not authenticated-----------------")
+            logger.info(f"{self.scope['user']} user is not authenticated------")
             await self.close()
             raise StopConsumer('User is not authenticated')
 
         user = self.scope["user"]
-        logger.info(f"{user}user is authenticated-----------------")
+        logger.info(f"{user} user is authenticated------")
         # If the room exists, it means it's the second player connecting
         if self.room_name in self.connected_clients:
             self.game_instance = self.connected_clients[self.room_name]
@@ -51,7 +53,7 @@ class GameConsumer(AsyncWebsocketConsumer):
         else:
             # Create a new game instance if the room doesn't exist
             self.connected_clients[self.room_name] = GameInstance()
-            self.game_state[self.room_name] = 'waiting'
+            self.game_state = 'waiting'
             self.game_instance = self.connected_clients[self.room_name]
 
             # Assign the first user to user0
@@ -66,7 +68,7 @@ class GameConsumer(AsyncWebsocketConsumer):
                     'data': self.user0_id,
                 }
             )
-        logger.info(f"User0: {self.user0_id}, User1: {self.user1_id}")
+        # logger.info(f"User0: {self.user0_id}, User1: {self.user1_id}")
 
         await self.channel_layer.group_add(self.room_group_name, self.channel_name)
         await self.accept()
@@ -83,7 +85,10 @@ class GameConsumer(AsyncWebsocketConsumer):
         # Ensure both user IDs are set before processing game events
         if not hasattr(self, 'user0_id') or not hasattr(self, 'user1_id'):
             logger.error("User IDs not set. Ensure connect method is called and completes successfully before receive is called.")
+            self.game_state = 'waiting'
             return
+        else:
+            self.game_state = 'running'
 
         # Set testing mode
         local = False
