@@ -1,336 +1,236 @@
-import React, { useEffect, useRef, useState } from "react";
-import backgroundImage from "../../images/pongbg.png";
-import { useLocation, useNavigate } from "react-router-dom";
-import BackButton from "../../components/buttons/BackButton";
-import { useTranslation } from "react-i18next";
-import { WelcomeButtonStyle } from "../../components/buttons/ButtonStyle";
-import LoseScreen from "../../components/game/LoseScreen";
-import WinScreen from "../../components/game/WinScreen";
-import handleResize from "../../components/game/HandleResize";
-import FullScreenButton from "../../components/buttons/FullScreen";
-
-const GameCanvas = () => {
-  // Default Parameters
-  let playerSpeed = 5;
-  const playerSpeedIncrease = 500;
-  let resize = true;
-  const defaultSpeedX = 300;
-  const winScore = 10;
-  const defaultSpeedY = 20;
-  const [scoreLeftReact, setScoreLeft] = useState(0);
-  const [scoreRightReact, setScoreRight] = useState(0);
-  let ballSize = 8;
-  let scoreLeft = 0;
-  let scoreRight = 0;
-  const canvasRef = useRef(null);
-  let paddleWidth = canvasRef.current ? canvasRef.current.width / 70 : 0;
-  let paddleHeight = canvasRef.current ? canvasRef.current.width / 20 : 0;
-  let leftPaddleY = canvasRef.current
-    ? canvasRef.current.height / 2 - paddleHeight / 2
-    : 0;
-  let rightPaddleY = canvasRef.current
-    ? canvasRef.current.height / 2 - paddleHeight / 2
-    : 0;
-  let ballX = canvasRef.current ? canvasRef.current.width / 2 : 5;
-  let ballY = canvasRef.current ? canvasRef.current.height / 2 : 5;
-  let ballSpeedX = defaultSpeedX;
-  let ballSpeedY = defaultSpeedY;
-  let canvasDefaultWidth = 1920;
-  let sizeSpeedRatio = canvasRef.current
-    ? canvasRef.current.width / canvasDefaultWidth
-    : 1;
-  let lastFrame = 0;
-  let dt = 0;
-
-  // This Function Adds A White Stripe in The middle of the map
-  const drawWhiteStripe = (ctx, canvas) => {
-    ctx.fillStyle = "#FFFFFF";
-    const stripeWidth = 8;
-    const stripeHeight = canvas.height;
-    const x = canvas.width / 2 - stripeWidth / 2;
-    const y = 0;
-    ctx.fillRect(x, y, stripeWidth, stripeHeight);
-  };
-
-  // This function Updates The Ball Positions
-  const updateBallPosition = (canvas) => {
-    const ballAngleOffset = 0.02;
-    const ballSpeedIncrease = 50;
-    ballX += ballSpeedX * dt * sizeSpeedRatio;
-    ballY += ballSpeedY * dt * sizeSpeedRatio;
-    if (ballY < 0) {
-      ballY = 2;
-      ballSpeedY = -ballSpeedY;
-    } else if (ballY > canvas.height) {
-      ballY = canvas.height - 2;
-      ballSpeedY = -ballSpeedY;
-    }
-    if (
-      ballX < paddleWidth + ballSize * sizeSpeedRatio &&
-      ballY > leftPaddleY &&
-      ballY < leftPaddleY + paddleHeight
-    ) {
-      const leftPaddleCenterY = leftPaddleY + paddleHeight / 2;
-      const distanceFromCenter = ballY - leftPaddleCenterY;
-      ballX = paddleWidth + 10;
-      ballSpeedX *= -1;
-      if (ballSpeedX < 0) ballSpeedX -= ballSpeedIncrease;
-      else ballSpeedX += ballSpeedIncrease;
-      ballSpeedY +=
-        distanceFromCenter *
-        ballAngleOffset *
-        sizeSpeedRatio *
-        Math.abs(ballSpeedX);
-    } else if (
-      ballX > canvas.width - paddleWidth - ballSize * sizeSpeedRatio &&
-      ballY > rightPaddleY &&
-      ballY < rightPaddleY + paddleHeight
-    ) {
-      const rightPaddleCenterY = rightPaddleY + paddleHeight / 2;
-      const distanceFromCenter = ballY - rightPaddleCenterY;
-      ballX = canvas.width - paddleWidth - 10;
-      ballSpeedX *= -1;
-      if (ballSpeedX < 0) ballSpeedX -= ballSpeedIncrease;
-      else {
-        ballSpeedX += ballSpeedIncrease;
-        playerSpeed += playerSpeedIncrease;
-      }
-      ballSpeedY +=
-        distanceFromCenter *
-        ballAngleOffset *
-        sizeSpeedRatio *
-        Math.abs(ballSpeedX);
-    } else if (ballX + ballSize * 3 < 0) {
-      ballX = canvas.width / 2;
-      ballY = canvas.height / 2;
-      ballSpeedX = defaultSpeedX;
-      ballSpeedY = defaultSpeedY;
-      scoreRight += 1;
-      playerSpeed = 5;
-      setScoreRight(scoreRight);
-    } else if (ballX - ballSize * 3 > canvas.width) {
-      ballX = canvas.width / 2;
-      ballY = canvas.height / 2;
-      ballSpeedX = -defaultSpeedX;
-      ballSpeedY = -defaultSpeedY;
-      scoreLeft += 1;
-      playerSpeed = 5;
-      setScoreLeft(scoreLeft);
-    }
-  };
-
-  // this function draws scores
-  const drawScores = (ctx, canvas) => {
-    ctx.fillStyle = "#FFFFFF";
-    ctx.font = "80px Helvetica";
-    ctx.fillText(`${scoreLeft}`, canvas.width / 2 - 100, 100);
-    ctx.fillText(`${scoreRight}`, canvas.width / 2 + 60, 100);
-  };
-  // this Function Surprise draws a ball
-  const drawBall = (ctx, canvas) => {
-    ctx.beginPath();
-    ctx.arc(ballX, ballY, ballSize * sizeSpeedRatio, 0, Math.PI * 2);
-    ctx.fillStyle = "#00FF00";
-    ctx.fill();
-    ctx.closePath();
-  };
-
-  const draw = (timestamp) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    dt = (timestamp - lastFrame) / 1000;
-    lastFrame = timestamp;
-    paddleWidth = canvasRef.current ? canvasRef.current.width / 80 : 0;
-    paddleHeight = canvasRef.current ? canvasRef.current.width / 20 : 0;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawWhiteStripe(ctx, canvas);
-    ctx.fillStyle = "#FF3366";
-    ctx.fillRect(0, leftPaddleY, paddleWidth, paddleHeight);
-    ctx.fillRect(
-      canvas.width - paddleWidth,
-      rightPaddleY,
-      paddleWidth,
-      paddleHeight
-    );
-    updateBallPosition(canvas);
-    drawBall(ctx, canvas);
-    drawScores(ctx, canvas);
-    requestAnimationFrame(draw);
-    handleKeys();
-  };
-
-  const keysPressed = {};
-
-  const handleKeys = () => {
-    if (canvasRef.current) {
-      // Left paddle controls
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      if (keysPressed["w"]) leftPaddleY -= playerSpeed * sizeSpeedRatio;
-      if (keysPressed["s"]) leftPaddleY += playerSpeed * sizeSpeedRatio;
-      leftPaddleY = Math.max(
-        0,
-        Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
-      );
-
-      // Right paddle controls
-      if (keysPressed["ArrowUp"])
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        rightPaddleY -= playerSpeed * sizeSpeedRatio;
-      if (keysPressed["ArrowDown"])
-        rightPaddleY += playerSpeed * sizeSpeedRatio;
-      rightPaddleY = Math.max(
-        0,
-        Math.min(rightPaddleY, canvasRef.current.height - paddleHeight)
-      );
-    }
-  };
-
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      keysPressed[event.key] = true;
-    };
-
-    const handleKeyUp = (event) => {
-      keysPressed[event.key] = false;
-    };
-
-    // touchpad controlls
-    const handleTouchMove = (event) => {
-      if (canvasRef.current) {
-        const touches = event.touches;
-        const rect = canvasRef.current.getBoundingClientRect();
-        for (let i = 0; i < touches.length; i++) {
-          const touch = touches[i];
-          const touchY = event.touches[i].clientY - rect.top - window.scrollY;
-          // Left paddle controls
-          if (touch.clientX < window.innerWidth / 2) {
-			// eslint-disable-next-line react-hooks/exhaustive-deps
-            leftPaddleY = touchY - paddleHeight / 2;
-            leftPaddleY = Math.max(
-              0,
-              Math.min(leftPaddleY, canvasRef.current.height - paddleHeight)
-            );
-          }
-          // Right paddle controls
-          else {
-			// eslint-disable-next-line react-hooks/exhaustive-deps
-            rightPaddleY = touchY - paddleHeight / 2;
-            rightPaddleY = Math.max(
-              0,
-              Math.min(rightPaddleY, canvasRef.current.height - paddleHeight)
-            );
-          }
-        }
-      }
-    };
-
-    window.addEventListener("keyup", handleKeyUp);
-    window.addEventListener("keydown", handleKeyDown);
-    document.addEventListener("touchmove", handleTouchMove);
-    window.addEventListener("resize", () =>
-      handleResize(
-        canvasRef,
-        resize,
-        paddleWidth,
-        paddleHeight,
-        sizeSpeedRatio,
-        canvasDefaultWidth,
-        ballX,
-        ballY,
-        leftPaddleY,
-        rightPaddleY
-      )
-    );
-    handleResize(
-      canvasRef,
-      resize,
-      paddleWidth,
-      paddleHeight,
-      sizeSpeedRatio,
-      canvasDefaultWidth,
-      ballX,
-      ballY,
-      leftPaddleY,
-      rightPaddleY
-    );
-    draw(0);
-
-    return () => {
-      document.removeEventListener("keyup", handleKeyUp);
-      document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("touchmove", handleTouchMove);
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [canvasRef]);
-
-  return (
-    <div className="flex justify-center items-center h-screen">
-      {scoreLeftReact === winScore || scoreRightReact === winScore ? (
-        scoreLeftReact === winScore ? (
-          <WinScreen
-            GameCanvas={GameCanvas}
-            backgroundImage={backgroundImage}
-            WelcomeButtonStyle={WelcomeButtonStyle}
-            BackButton={BackButton}
-          />
-        ) : (
-          <LoseScreen
-            GameCanvas={GameCanvas}
-            backgroundImage={backgroundImage}
-            WelcomeButtonStyle={WelcomeButtonStyle}
-            BackButton={BackButton}
-          />
-        )
-      ) : (
-        <>
-          <canvas
-            ref={canvasRef}
-            className="border-8 border-solid border-white"
-            style={{ backgroundColor: "#0F0F0F" }}
-          ></canvas>
-        </>
-      )}
-    </div>
-  );
-};
+import React, { useState, useEffect } from 'react';
 
 const Pong = () => {
-  const { t } = useTranslation();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const [gameStarted, setGameStarted] = useState(false);
+    const [username, setUsername] = useState("");
+    useEffect(() => {
+        // ask for username in a prompt
+        fetch(`https://localhost/game/1v1/${username}/`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.room_name, data.user1, data.user2, data.sender, data.player0, data.player1);
+                const room_name = data.room_name;
+                const user1 = data.user1;
+                const user2 = data.user2;
+                const sender = data.sender;
+                const player0 = data.player0;
+                const player1 = data.player1;
+            
+                const gameSocket = new WebSocket('ws://localhost:8000/wss/game/' + room_name + '/' + user1 + '/' + user2 + '/');
+                let canvas = document.getElementById('gameCanvas');
+                let context = canvas.getContext('2d');
+                gameSocket.onopen = function(event) {
+                    gameSocket.send("Connection established.");
+                    console.log('Connection established');
+                };
+                gameSocket.onmessage = function(event) {
+                    const receivedData = JSON.parse(event.data);
+                    if (receivedData['type'] === 'game_message') {
+                        renderGameFrame(receivedData);
+                    }
+                    // else if (receivedData['type'] === 'countdown_message') {
+                    //     renderCountdown(receivedData);
+                    // }
+                    else if (receivedData['type'] === 'ending_message') {
+                        window.location.href = 'https://localhost/game/ending/?gameinfo=' + receivedData['score'] + '&gametag=' + receivedData['game_tag'] + '&roomname=' + room_name;
+                    }
+                };
+                const renderGameFrame = (gameData) => {
+                    if (context && canvas) {
+                        clearCanvas();
+                        drawField();
+                        var score = player0 + "  " + gameData.score + " " + player1;
+                        displayScore(score);
+                        drawPaddle(0, gameData.player0, 10, 110);
+                        drawPaddle(1, gameData.player1, 10, 110);
+                        drawBall(gameData.ball_x, gameData.ball_y, gameData.ball_speed_x ,gameData.ball_speed_y, gameData.ball_speed);
+                    }
+                };
 
-  const handleButtonClick = () => {
-    setGameStarted(true);
-  };
+                const clearCanvas = () => {
+                    if (context && canvas) {
+                        context.clearRect(0, 0, canvas.width, canvas.height);
+                    }
+                };
 
-  return (
-    <div id="oP" className="flex justify-center items-center h-screen">
-      <FullScreenButton location={location} page="oP" />
-      {gameStarted ? (
-        <GameCanvas className="m-4" />
-      ) : (
-        <div className="relative">
-          <img
-            src={backgroundImage}
-            style={{ width: "80vw", height: "45vw", objectFit: "cover" }}
-            alt="Background"
-            className="rounded-xl shadow-lg"
-          />
-          <div
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 
-		        -translate-y-1/2 text-center"
-          >
-            <button onClick={handleButtonClick} className={WelcomeButtonStyle}>
-              {t("Start Game")}
-            </button>
-          </div>
-          <BackButton navigate={navigate} t={t} />
+                function hexToRgb(hex) {
+                    // Remove the hash if it exists
+                    hex = hex.replace(/^#/, '');
+
+                    // Parse the hex values to separate R, G, B components
+                    const bigint = parseInt(hex, 16);
+                    const r = (bigint >> 16) & 255;
+                    const g = (bigint >> 8) & 255;
+                    const b = bigint & 255;
+
+                    // Return the RGB values as an object
+                    return { r, g, b };
+                }
+
+                const drawBall = (x, y, speedX, speedY, ballSpeed) => {
+                    if (context) {
+                        // Define a color gradient based on speed
+                        const colorGradient = [
+                            { speed: 7, color: '#ffff00' },
+                            { speed: 10, color: '#ff4d00' },
+                            { speed: 13, color: '#ff0000' },
+                            { speed: 18, color: '#0000ff' },
+                            { speed: 50, color: '#bf00ff' },
+                        ];
+
+                        // Find the color corresponding to the ball's speed in the gradient
+                        let ballColor = 'white';  // Default color
+                        for (const { speed, color } of colorGradient) {
+                            if (ballSpeed <= speed) {
+                                ballColor = color;
+                                break;
+                            }
+                        }
+
+                        // Display the magnitude of the speed
+                        context.fillStyle = ballColor;
+                        context.font = '14px Arial';
+                        let show_speed = `Speed: ${ballSpeed.toFixed(3)}`;
+                        context.fillText(show_speed, x - 30, y - 30);
+
+                        // Draw the main ball
+                        context.fillStyle = ballColor;
+                        context.beginPath();
+                        context.arc(x, y, 10, 0, Math.PI * 2);
+                        context.fill();
+                        context.closePath();
+
+                        // Draw the trailing circles
+                        const trailCount = 5;  // Adjust the number of circles in the trail
+                        const trailSpacing = 1.5;  // Adjust the spacing between circles in the trail
+
+                        for (let i = 1; i <= trailCount; i++) {
+                            const trailOpacity = 1 - (i / trailCount);
+                            const trailRadius = i * trailSpacing;
+
+
+                            const rgb = hexToRgb(ballColor)
+                            context.fillStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${trailOpacity})`;// Yellow color with variable opacity
+                            context.beginPath();
+                            context.arc(x - speedX * trailRadius, y - speedY * trailRadius, 10, 0, Math.PI * 2);
+                            context.fill();
+                            context.closePath();
+                        }
+                    }
+                };
+
+                const drawPaddle = (player, y, width, height) => {
+                    if (context) {
+                        if (player === 0) {
+                            context.fillStyle = 'red'; // Player 0 Paddle color
+                            context.fillRect(0, y, width, height);
+                        } else {
+                            context.fillStyle = 'blue'; // Player 1 Paddle color
+                            context.fillRect(790, y, width, height);
+                        }
+                    }
+                };
+
+                const drawField = () => {
+                    if (context) {
+                        context.fillStyle = '#ffffff'
+                        context.fillRect(398, 0, 4, 400);
+                    }
+                };
+
+                const displayScore = (score) => {
+                    if (context) {
+                        context.fillStyle = 'white'
+                        context.fillRect(285, 5, 240, 70);
+                        context.fillStyle = 'black';
+                        context.fillText("Score!", 295, 40);
+                        context.fillText(score, 300, 65);
+                    }
+                };
+
+                const handleKeyDown = (event) => {
+                    // console.log(event.key)
+                    // const user = JSON.parse(document.getElementById('sender').textContent)
+                    const user = sender;
+                    // {#console.log(user);#}
+                    if (event.key === "w") {
+                        // Handle Player 0 UP key press
+                        gameSocket.send("pw" + user);
+                    } else if (event.key === "s") {
+                        // Handle Player 0 DOWN key press
+                        gameSocket.send("ps" + user);
+                    } else if (event.key === "i") {
+                        // Handle Player 1 UP key press
+                        gameSocket.send("pi" + user);
+                    } else if (event.key === "k") {
+                        // Handle Player 1 DOWN key press
+                        gameSocket.send("pk" + user);
+                    }
+                };
+
+                const handleKeyUp = (event) => {
+                    // const user = JSON.parse(document.getElementById('sender').textContent)
+                    const user = sender;
+                    // {#console.log(user);#}
+                    if (event.key === "w") {
+                        // Handle Player 0 UP key press
+                        gameSocket.send("rw" + user);
+                    } else if (event.key === "s") {
+                        // Handle Player 0 DOWN key press
+                        gameSocket.send("rs" + user);
+                    } else if (event.key === "i") {
+                        // Handle Player 1 UP key press
+                        gameSocket.send("ri" + user);
+                    } else if (event.key === "k") {
+                        // Handle Player 1 DOWN key press
+                        gameSocket.send("rk" + user);
+                    }
+                };
+
+                const startGame = () => {
+                    gameSocket.send('startgame');
+                };
+
+                document.addEventListener("keyup", handleKeyUp);
+                document.addEventListener("keydown", handleKeyDown);
+                const startButton = document.getElementById("startGame");
+                startButton.addEventListener("click", startGame);
+
+                // Cleanup function
+                return () => {
+                    gameSocket.close();
+                    document.removeEventListener("keyup", handleKeyUp);
+                    document.removeEventListener("keydown", handleKeyDown);
+                    startButton.removeEventListener("click", startGame);
+                };
+            })
+            .catch(error => { // node, it keeps printing this for some reason
+                alert('Invalid Username, try again');
+                console.error('Error:', error);
+            });
+    }, [username]);
+    useEffect(() => {
+            const inputUsername = prompt("Enter your username");
+            if (inputUsername) {
+                setUsername(inputUsername);
+            }
+    }, []);
+
+    return (
+        <div id="game-container" 
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '100vh'
+            }}
+        >
+            <canvas id="gameCanvas" width="1000" height="700" 
+                style={{ backgroundColor: 'black'}}>   
+            </canvas>
+            <button id="startGame">Start Game</button>
         </div>
-      )}
-    </div>
-  );
-};
+    );
+}
 
 export default Pong;
