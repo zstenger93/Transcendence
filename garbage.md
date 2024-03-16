@@ -84,8 +84,3 @@ Header Changer: https://chromewebstore.google.com/detail/requestly-open-source-h
 	"blocked_username":"realuser"
 }
 
-
-
-
-
-
