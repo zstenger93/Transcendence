@@ -184,7 +184,6 @@ function Chat({ redirectUri }) {
     fetchUserProfile(user);
   };
 
-  
   const blockUser = (user) => {};
   const unblockuser = (user) => {};
 
@@ -270,14 +269,22 @@ function Chat({ redirectUri }) {
                   {dropdownUser === user && (
                     <ul className="bg-purple-500 rounded-xl bg-opacity-20">
                       {user !== userDetailsRef.current.data.user.username && (
-                        <li onClick={() => handleMessageOption(user)}>
-                          Message
-                        </li>
+                        <>
+                          <li onClick={() => handleMessageOption(user)}>
+                            Message
+                          </li>
+                          <li
+                            onClick={() =>
+                              friendRequest({ redirectUri, userName: user })
+                            }
+                          >
+                            Friend Request
+                          </li>
+                          <li onClick={() => blockUser(user)}>Block</li>
+                          <li onClick={() => unblockuser(user)}>Unblock</li>
+                        </>
                       )}
-                      <li onClick={() => friendRequest({ redirectUri, userName: user })}>Friend Request</li>
                       <li onClick={() => openProfile(user)}>Profile</li>
-                      <li onClick={() => blockUser(user)}>Block</li>
-                      <li onClick={() => unblockuser(user)}>Unblock</li>
                     </ul>
                   )}
                 </li>
