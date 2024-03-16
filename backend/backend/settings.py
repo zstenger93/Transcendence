@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'user_api.apps.UserApiConfig',
     'friendship_api',
 	'user_block',
+	'game',
 	'chat',
 ]
 
@@ -82,7 +83,7 @@ CORS_ALLOWED_ORIGINS = [
 	]
 
 CORS_ALLOW_CREDENTIALS = True
-# CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_ALLOW_ALL = Truereate a consumer class to handle WebSocket connect
 SESSION_COOKIE_SAMESITE = None
 SESSION_COOKIE_SECURE = True
 # SESSION_COOKIE_SAMESITE = 'Lax'

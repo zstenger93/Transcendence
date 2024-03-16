@@ -55,7 +55,7 @@ class Message(models.Model):
 	timestamp = models.DateTimeField(auto_now_add=True)
 
 class UserChannelName(models.Model):
-	user = models.OneToOneField(AppUser, on_delete=models.CASCADE)
+	user = models.OneToOneField(AppUser, on_delete=models.CASCADE, related_name='chat_channel_name')
 	channel_name = models.CharField(max_length=100)
 
 	def update_channel_name(self, channel_name):

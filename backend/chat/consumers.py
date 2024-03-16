@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 class ChatConsumer(AsyncWebsocketConsumer):
 	async def connect(self):
-		# from .models import UserChannelName
+		from .models import UserChannelName
 		################# USER IS AUTHENTICATED CHECK #################
 		if not self.scope['user'].is_authenticated:
 			await self.close()
