@@ -9,10 +9,6 @@ from django.http.response import JsonResponse
 from django.views.decorators.http import require_GET, require_POST
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
-from webpush.models import PushInformation
-
-from webpush.utils import send_to_subscription
-from webpush import send_user_notification, send_group_notification
 
 import string
 import string
@@ -61,23 +57,6 @@ def room(request, other_user):
     # logger.info("-----------------------------------------")
     # logger.info(f"{context['room_name']}, {context['sender']}, {context['user1']}, {context['user2']}, {context['player0']}, {context['player1']}")
     # logger.info("-----------------------------------------")
-    
-    webpush_settings = getattr(settings, 'WEBPUSH_SETTINGS', {})
-    vapid_key = webpush_settings.get('VAPID_PUBLIC_KEY')
-    user = request.user
-
-    notification = {
-            'title': 'Your Notification Title',
-            'body': 'Your Notification Body',
-            'icon': 'URL to Notification Icon',
-        }
-    logger.info("-----------------------------------------")
-    logger.info(notification)
-    logger.info("-----------------------------------------")
-        # Get user's subscriptions and send notification
-    subscriptions = PushInformation.objects.filter(user=user)
-    for subscription in subscriptions:
-        send_to_subscription(subscription, payload=notification)
 
     return JsonResponse(context)
 

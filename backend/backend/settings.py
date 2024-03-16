@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'friendship_api',
 	'user_block',
 	'chat',
+	'game',
 ]
 
 MIDDLEWARE = [
