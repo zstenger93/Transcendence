@@ -50,13 +50,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 	'django_otp',
     'django_otp.plugins.otp_totp',
-    'friendship',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'user_api.apps.UserApiConfig',
+    'friendship',
     'friendship_api',
-	'user_block',
 	'chat',
 ]
 
