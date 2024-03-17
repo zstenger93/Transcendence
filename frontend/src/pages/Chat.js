@@ -28,17 +28,14 @@ function Chat({ redirectUri }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchUserProfile = async (userName) => {
-    //   console.log("redirectUri", redirectUri);
     if (userName) {
       const details = await getUserProfile({ redirectUri, userName });
       setUserDetails(details.data);
     }
-    //   console.log("Fetched user details:", details);
   };
 
   useEffect(() => {
     if (userDetails) {
-      //   console.log("user_profile_details: ", userDetails);
       setIsModalOpen(true);
     }
   }, [userDetails]);
@@ -49,9 +46,7 @@ function Chat({ redirectUri }) {
 
   useEffect(() => {
     const fetchUserDetails = async () => {
-      //   console.log("redirectUri", redirectUri);
       const details = await getUserDetails({ redirectUri });
-      //   console.log("Fetched user details:", details);
       userDetailsRef.current = details;
     };
 
@@ -71,7 +66,6 @@ function Chat({ redirectUri }) {
 
       switch (data["type"]) {
         case "general_channel":
-          //   console.log("Received a group message");
           setMessages((messages) => [
             ...messages,
             {
@@ -81,9 +75,6 @@ function Chat({ redirectUri }) {
           ]);
           break;
         case "private_channel":
-          //   console.log("Received a private message");
-          //   console.log("current: ", currentChannel);
-          //   console.log("rec: ", data["receiver"]);
           setPrivateMessages((prevMessages) => {
             if (!prevMessages.includes(data["sender"])) {
               return [...prevMessages, data["sender"]];
@@ -100,7 +91,6 @@ function Chat({ redirectUri }) {
           ]);
           break;
         case "notify_user_joined":
-          //   console.log("A user has joined the chat");
           setOnlineUsers(data["online_users"]);
           setMessages((messages) => [
             ...messages,
@@ -121,9 +111,7 @@ function Chat({ redirectUri }) {
           ]);
           break;
         default:
-        //   console.log("Received an unknown message type");
       }
-      //   console.log("Data from consumer: " + JSON.stringify(data, null, 2));
     };
 
     chatSocket.current.onmessage = handleNewMessage;
