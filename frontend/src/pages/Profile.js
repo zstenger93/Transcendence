@@ -152,65 +152,6 @@ function FriendsList() {
   );
 }
 
-function FriendRequests() {
-  const { t } = useTranslation();
-  return (
-    <div
-      className="bg-gray-900 bg-opacity-80 p-4 rounded-md max-h-96
-	  overflow-y-auto mb-10 border-r-2 border-b-2 border-purple-600"
-    >
-      <h3 className="text-xl text-gray-300 font-nosifer font-bold mb-4 text-center">
-        {t("Requests")}
-      </h3>
-      <table
-        className="bg-purple-900 bg-opacity-60 w-full border-collapse border 
-		  border-gray-500 mx-auto"
-      >
-        <thead>
-          <tr>
-            <th className="p-2 border border-gray-900 mx-auto">{t("Name")}</th>
-            <th className="p-2 border text-center border-gray-900 mx-auto">
-              {t("Accept")}
-            </th>
-			<th className="p-2 border text-center border-gray-900 mx-auto">
-              {t("GTFO")}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {friendsListData.map((friend, index) => (
-            <tr key={index} className="bg-white bg-opacity-10">
-              <td className="p-2 border border-gray-900 mx-auto">
-                {friend.name}
-              </td>
-              <td className="p-2 border text-center border-gray-900 mx-auto">
-                <a
-                  href={friend.profileLink}
-                  className="text-blue-500 underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {"Accept"}
-                </a>
-              </td>
-			  <td className="p-2 border text-center border-gray-900 mx-auto">
-                <a
-                  href={friend.profileLink}
-                  className="text-blue-500 underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {"Reject"}
-                </a>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
 function MatchHistory() {
   const { t } = useTranslation();
   return (
@@ -333,7 +274,6 @@ function Profile({ redirectUri }) {
   const [isEditingAbout, setIsEditingAbout] = useState(false);
   const [isEditingUsername, setIsEditingUsername] = useState(false);
   const [showFriendsList, setShowFriendsList] = useState(false);
-  const [showFriendRequests, setShowFriendRequests] = useState(false);
   const [showMatchHistory, setShowMatchHistory] = useState(false);
   const [showUserSettings, setShowUserSettings] = useState(false);
   const handleUsernameChange = (event) => {
@@ -356,23 +296,14 @@ function Profile({ redirectUri }) {
     setShowFriendsList(!showFriendsList);
     setShowMatchHistory(false);
     setShowUserSettings(false);
-    setShowFriendRequests(false);
   };
   const toggleMatchHistory = () => {
     setShowMatchHistory(!showMatchHistory);
     setShowFriendsList(false);
     setShowUserSettings(false);
-    setShowFriendRequests(false);
   };
   const toggleUserSettings = () => {
     setShowUserSettings(!showUserSettings);
-    setShowFriendsList(false);
-    setShowMatchHistory(false);
-    setShowFriendRequests(false);
-  };
-  const toggleFriendRequests = () => {
-    setShowFriendRequests(!showFriendRequests);
-    setShowUserSettings(false);
     setShowFriendsList(false);
     setShowMatchHistory(false);
   };
@@ -520,10 +451,10 @@ function Profile({ redirectUri }) {
               </button>
               <button
                 className={`w-38 ${ButtonStyle}
-				${showUserSettings ? "bg-purple-600 text-gray-300" : "text-gray-300"}`}
-                onClick={toggleFriendRequests}
+				${showMatchHistory ? "bg-purple-600 text-gray-300" : "text-gray-300"}`}
+                onClick={toggleUserSettings}
               >
-                {t("Requests")}
+                {t("Settings")}
               </button>
             </div>
             <div className="mt-4 inline-flex justify-center text-center">
@@ -535,20 +466,10 @@ function Profile({ redirectUri }) {
                 {t("Match History")}
               </button>
             </div>
-            <div className="mt-4 inline-flex justify-center text-center">
-              <button
-                className={`w-38 ${ButtonStyle}
-				${showMatchHistory ? "bg-purple-600 text-gray-300" : "text-gray-300"}`}
-                onClick={toggleUserSettings}
-              >
-                {t("Settings")}
-              </button>
-            </div>
           </div>
         </div>
         <div className="mt-8 mb-10">
           {showFriendsList && <FriendsList />}
-          {showFriendRequests && <FriendRequests />}
           {showMatchHistory && <MatchHistory />}
           {showUserSettings && (
             <UserSettings
