@@ -17,6 +17,7 @@ def generate_random_string(length):
     return random_string
 
 import logging
+from asyncio import Lock
 
 logger = logging.getLogger(__name__)
 
@@ -28,85 +29,57 @@ class GameConsumer(AsyncWebsocketConsumer):
     connected_clients = {}
     game_state = {}
     game_tasks = {}
+    connect_lock = Lock()
+    user_ids = {}
+    id_sem = asyncio.Semaphore(value=1)  # Semaphore to control access to user IDs
 
     async def connect(self):
-        self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
-        self.room_group_name = f"game_{self.room_name}"
+        async with self.connect_lock:
+            self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
+            self.room_group_name = f"game_{self.room_name}"
 
-        if not self.scope['user'].is_authenticated:
-            logger.info(f"{self.scope['user']} user is not authenticated------")
-            await self.close()
-            raise StopConsumer('User is not authenticated')
+            if not self.scope['user'].is_authenticated:
+                logger.info(f"{self.scope['user']} user is not authenticated-----")
+                await self.close()
+                raise StopConsumer('User is not authenticated')
 
-        user = self.scope["user"]
-        logger.info(f"{user} user is authenticated------")
-        # If the room exists, it means it's the second player connecting
-        if self.room_name in self.connected_clients:
-            self.game_instance = self.connected_clients[self.room_name]
+            user = self.scope["user"]
+            if self.room_name in self.connected_clients:
+                self.game_instance = self.connected_clients[self.room_name]
+                async with self.id_sem:
+                    self.user_ids[self.room_name][1] = user.id
+                logger.info(f"0... Id: {self.user_ids[self.room_name][1]} User: {self.scope['user']} connected to {self.room_name}")
+            else:
+                self.connected_clients[self.room_name] = GameInstance()
+                self.game_state[self.room_name] = 'waiting'
+                self.game_instance = self.connected_clients[self.room_name]
+                async with self.id_sem:
+                    self.user_ids[self.room_name] = [user.id, None]
+                logger.info(f"1... Id: {self.user_ids[self.room_name][0]} User: {self.scope['user']} connected to {self.room_name}")
 
-            # Assign the second user to user1
-            self.user0_id = user.id
-
-            # Set user0_id based on the existing game instance
-            self.user0_id = self.game_instance.user0.id
-
-        else:
-            # Create a new game instance if the room doesn't exist
-            self.connected_clients[self.room_name] = GameInstance()
-            self.game_state = 'waiting'
-            self.game_instance = self.connected_clients[self.room_name]
-
-            # Assign the first user to user0
-            self.user0_id = user.id
-
-            # Set user0 attribute of the game instance
-            self.game_instance.user0 = user
-            await self.channel_layer.group_send(
-                self.room_name,
-                {
-                    'type': 'send_user_info',
-                    'data': self.user0_id,
-                }
-            )
-        # logger.info(f"User0: {self.user0_id}, User1: {self.user1_id}")
-
-        await self.channel_layer.group_add(self.room_group_name, self.channel_name)
-        await self.accept()
-
-
-    async def disconnect(self, close_code):
-        await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
+            await self.channel_layer.group_add(self.room_group_name, self.channel_name)
+            await self.accept()
 
     async def receive(self, text_data):
+        # Wait until both user IDs are set
+        user_ids = self.user_ids.get(self.room_name)
+        logger.info(f"User IDs: {user_ids}")
+        if not user_ids or None in user_ids:
+            logger.info("Waiting for user IDs to be set")
+            return
+
+        # Now both user IDs are set, proceed with processing game events
         game_event = text_data
         cmd = game_event[:2]
         userid = game_event[2:]
 
-        # Ensure both user IDs are set before processing game events
-        if not hasattr(self, 'user0_id') or not hasattr(self, 'user1_id'):
-            logger.error("User IDs not set. Ensure connect method is called and completes successfully before receive is called.")
-            self.game_state = 'waiting'
-            return
-        else:
-            self.game_state = 'running'
-
-        # Set testing mode
         local = False
-
+        logger.info(f"Game started by {userid}")
         if game_event == 'startgame':
             await self.start_game()
-        elif not local:
-            paddle = None
-            if userid == self.user0_id:
-                paddle = 'p0'
-            elif userid == self.user1_id:
-                paddle = 'p1'
 
-            if paddle:
-                direction = 1 if cmd == 'ps' or cmd == 'rs' else -1
-                state = 'release' if cmd.startswith('r') else 'press'
-                await self.game_instance.move_paddle(paddle, direction, state)
-
+    async def disconnect(self, close_code):
+        await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
 
     async def game_loop(self):
         while self.game_state[self.room_name] == 'running':

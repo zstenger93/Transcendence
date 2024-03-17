@@ -2,10 +2,9 @@ import React, { useEffect } from 'react';
 
 const Pong = () => {
     useEffect(() => {
-        // ask for username in a prompt
-        fetch(`https://localhost/game/1v1/asdfasdf/`)
-            .then(response => response.json())
-            .then(data => {
+        fetch(`http://localhost:8000/game/1v1/asdfasdf/`, {
+              credentials: 'include',
+            }).then(response => response.json()).then(data => {
                 console.log(data.room_name, data.user1, data.user2, data.sender, data.player0, data.player1);
                 const room_name = data.room_name;
                 const user1 = data.user1;
@@ -14,7 +13,7 @@ const Pong = () => {
                 const player0 = data.player0;
                 const player1 = data.player1;
             
-                const gameSocket = new WebSocket('ws://localhost:8000/wss/game/' + room_name + '/' + user1 + '/' + user2 + '/');
+                const gameSocket = new WebSocket('ws://localhost:8000/game/' + room_name + '/');
                 let canvas = document.getElementById('gameCanvas');
                 let context = canvas.getContext('2d');
                 gameSocket.onopen = function(event) {
@@ -203,10 +202,17 @@ const Pong = () => {
                 };
             })
             .catch(error => { // node, it keeps printing this for some reason
-                alert('Invalid Username, try again');
+                alert('Invalid lobbyname, try again');
                 console.error('Error:', error);
             });
-    }, []);
+    // }, [username]);
+        }, []);
+    // useEffect(() => {
+    //         const inputUsername = prompt("Enter your username");
+    //         if (inputUsername) {
+    //             setUsername(inputUsername);
+    //         }
+    // }, []);
 
     return (
         <div id="game-container" 
