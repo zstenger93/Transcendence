@@ -7,7 +7,7 @@ import BackButton from "../components/buttons/BackButton";
 import {
 	getUserDetails,
 	getUserProfile,
-	addUserToFriendList,
+	friendRequest,
 	getFriendList,
 	blockUser,
 	unblockUser,
@@ -279,44 +279,52 @@ function Chat({ redirectUri }) {
 			<div
 				className="flex flex-col justify-between w-1/7 p-6 text-white
 		text-center bg-gray-900 bg-opacity-80 rounded-xl shadow h-full"
-			>
-				<div>
-					<h2 className="mb-8 text-2xl font-nosifer font-bold text-gray-300">
-						{t("Online")}
-					</h2>
-					<ul>
-						{onlineUsers ? (
-							onlineUsers.map((user, index) => (
-								<li
-									key={index}
-									className="mb-4 cursor-pointer font-bold"
-									onClick={() => handleUserClick(user)}
-								>
-									{user}
-									{dropdownUser === user && (
-										<ul className="bg-purple-500 rounded-xl bg-opacity-20">
-											{user !== userDetailsRef.current.data.user.username && (
-												<li onClick={() => handleMessageOption(user)}>
-													Message
-												</li>
-											)}
-											<li onClick={() => openProfile(user)}>Profile</li>
-											<li onClick={() => addFriend(user)}>Friend Request</li>
-											<li onClick={() => blockTheUser(user)}>Block</li>
-											<li onClick={() => unblockTheUser(user)}>Unblock</li>
-										</ul>
-									)}
-								</li>
-							))
-						) : (
-							<li>No users online</li>
-						)}
-					</ul>
-				</div>
-				{isModalOpen && userDetails && (
-					<div className="fixed z-10 inset-0 overflow-y-auto">
-						<div
-							className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20
+      >
+        <div>
+          <h2 className="mb-8 text-2xl font-nosifer font-bold text-gray-300">
+            {t("Online")}
+          </h2>
+          <ul>
+            {onlineUsers ? (
+              onlineUsers.map((user, index) => (
+                <li
+                  key={index}
+                  className="mb-4 cursor-pointer font-bold"
+                  onClick={() => handleUserClick(user)}
+                >
+                  {user}
+                  {dropdownUser === user && (
+                    <ul className="bg-purple-500 rounded-xl bg-opacity-20">
+                      {user !== userDetailsRef.current.data.user.username && (
+                        <>
+                          <li onClick={() => handleMessageOption(user)}>
+                            Message
+                          </li>
+                          <li
+                            onClick={() =>
+                              friendRequest({ redirectUri, userName: user })
+                            }
+                          >
+                            Friend Request
+                          </li>
+                          <li onClick={() => blockUser(user)}>Block</li>
+                          <li onClick={() => unblockuser(user)}>Unblock</li>
+                        </>
+                      )}
+                      <li onClick={() => openProfile(user)}>Profile</li>
+                    </ul>
+                  )}
+                </li>
+              ))
+            ) : (
+              <li>No users online</li>
+            )}
+          </ul>
+        </div>
+        {isModalOpen && userDetails && (
+          <div className="fixed z-10 inset-0 overflow-y-auto">
+            <div
+              className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20
 						text-center sm:block sm:p-0"
 						>
 							<div

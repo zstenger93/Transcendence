@@ -1,28 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-export const addUserToFriendList = async ({ redirectUri, userName }) => {
-	let response = {};
-	try {
-		const token = Cookies.get("access");
-		response = await axios.get(
-			`${redirectUri}/api/friend/add/${userName}/`,
-			{},
-			{
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-				withCredentials: true,
-			}
-		);
-	} catch (error) {
-		console.log(error);
-	}
-	console.log(response);
-
-	return response;
-};
-
 export const getFriendList = async ({ redirectUri }) => {
 	let response = {};
 	try {
@@ -69,6 +47,26 @@ export const unblockUser = async ({ redirectUri, userName }) => {
 		console.log(error);
 	}
 	return response;
+
+  export const friendRequest = async ({ redirectUri, userName }) => {
+  let response = {};
+  try {
+    const token = Cookies.get("access");
+    response = await axios.get(
+      `${redirectUri}/api/friend/add/${userName}/`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+  console.log(response);
+  return response;
 };
 
 export const getBlockedUsers = async ({ redirectUri }) => {
