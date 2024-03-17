@@ -114,7 +114,7 @@ function Readme() {
               <ul>
                 <li>
                   <Major /> Standard user management, authentication, users
-                  across tournaments ❌
+                  across tournaments <GreenCheck />
                 </li>
                 <li>
                   <Major /> Implementing a remote authentication <GreenCheck />
@@ -135,7 +135,7 @@ function Readme() {
                   <Major /> Remote players ❌
                 </li>
                 <li>
-                  <Major /> Multiplayer (more than 2) ❌
+                  <Major /> Multiplayer (more than 2) <GreenCheck />
                 </li>
                 <li>
                   <Major /> Add Another Game with User History and Matchmaking
@@ -145,7 +145,7 @@ function Readme() {
                   <Minor /> Game customization options <GreenCheck />
                 </li>
                 <li>
-                  <Major /> Live chat ❌
+                  <Major /> Live chat <GreenCheck />
                 </li>
               </ul>
             </div>
@@ -254,7 +254,7 @@ function Readme() {
               <ul>
                 <li>
                   <Major /> Replacing Basic Pong with Server-Side Pong and
-                  Implementing an API ❌
+                  Implementing an API <GreenCheck />
                 </li>
                 <li>
                   <Major /> Enabling Pong Gameplay via CLI against Web Users
