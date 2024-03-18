@@ -13,7 +13,7 @@ import {
   changeAvatar,
 } from "../API";
 
-function UserSettings({ profilePicture, setProfilePicture, redirectUri }) {
+function UserSettings({ setProfilePicture, redirectUri }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState({ TwoFA: false });

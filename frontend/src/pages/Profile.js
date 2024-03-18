@@ -8,37 +8,38 @@ import {
   fetchUserDetails,
   changeUsername,
   changeAbout,
+  getFriendList,
 } from "../components/API";
 import { CiEdit } from "react-icons/ci";
 import Cookies from "js-cookie";
 
-const friendsListData = [
-  {
-    name: "Zsolt",
-    intra: "zstenger",
-    profileLink: "https://profile.intra.42.fr/users/zstenger",
-  },
-  {
-    name: "Karlis",
-    intra: "kvebers",
-    profileLink: "https://profile.intra.42.fr/users/kvebers",
-  },
-  {
-    name: "Jergashe",
-    intra: "jergahse",
-    profileLink: "https://profile.intra.42.fr/users/jergashe",
-  },
-  {
-    name: "Azer",
-    intra: "asioud",
-    profileLink: "https://profile.intra.42.fr/users/asioud",
-  },
-  {
-    name: "Emotional Damage",
-    intra: "ed",
-    profileLink: "https://github.com/zstenger93/Transcendence",
-  },
-];
+// const friendsListData = [
+//   {
+//     name: "Zsolt",
+//     intra: "zstenger",
+//     profileLink: "https://profile.intra.42.fr/users/zstenger",
+//   },
+//   {
+//     name: "Karlis",
+//     intra: "kvebers",
+//     profileLink: "https://profile.intra.42.fr/users/kvebers",
+//   },
+//   {
+//     name: "Jergashe",
+//     intra: "jergahse",
+//     profileLink: "https://profile.intra.42.fr/users/jergashe",
+//   },
+//   {
+//     name: "Azer",
+//     intra: "asioud",
+//     profileLink: "https://profile.intra.42.fr/users/asioud",
+//   },
+//   {
+//     name: "Emotional Damage",
+//     intra: "ed",
+//     profileLink: "https://github.com/zstenger93/Transcendence",
+//   },
+// ];
 
 const matchHistoryData = [
   {
@@ -106,8 +107,20 @@ const matchHistoryData = [
   },
 ];
 
-function FriendsList() {
+function FriendsList({ redirectUri }) {
   const { t } = useTranslation();
+
+  const [friendsListData, setFriendsListData] = useState([]);
+  useEffect(() => {
+    const fetchFriendsList = async () => {
+      const response = await getFriendList({ redirectUri });
+      console.log("friends: ", response.data);
+      setFriendsListData(response.data);
+    };
+
+    fetchFriendsList();
+  }, [redirectUri]);
+
   return (
     <div
       className="bg-gray-900 bg-opacity-80 p-4 rounded-md max-h-96
@@ -129,23 +142,23 @@ function FriendsList() {
           </tr>
         </thead>
         <tbody>
-          {friendsListData.map((friend, index) => (
-            <tr key={index} className="bg-white bg-opacity-10">
-              <td className="p-2 border border-gray-900 mx-auto">
-                {friend.name}
-              </td>
-              <td className="p-2 border text-center border-gray-900 mx-auto">
-                <a
-                  href={friend.profileLink}
-                  className="text-blue-500 underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {friend.intra}
-                </a>
-              </td>
-            </tr>
-          ))}
+          {friendsListData &&
+            friendsListData.length > 0 &&
+            friendsListData.map((friend, index) => (
+              <tr key={index} className="bg-white bg-opacity-10">
+                <td className="p-2 border border-gray-900 mx-auto">{friend}</td>
+                <td className="p-2 border text-center border-gray-900 mx-auto">
+                  <a
+                    href={"friend.profileLink"}
+                    className="text-blue-500 underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {"friend.intra"}
+                  </a>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
@@ -469,11 +482,10 @@ function Profile({ redirectUri }) {
           </div>
         </div>
         <div className="mt-8 mb-10">
-          {showFriendsList && <FriendsList />}
+          {showFriendsList && <FriendsList redirectUri={redirectUri} />}
           {showMatchHistory && <MatchHistory />}
           {showUserSettings && (
             <UserSettings
-              profilePicture={profilePicture}
               setProfilePicture={setProfilePicture}
               redirectUri={redirectUri}
             />

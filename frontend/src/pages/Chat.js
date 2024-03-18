@@ -195,12 +195,6 @@ function Chat({ redirectUri }) {
     setIsUserBlocked(false);
   };
 
-  const checkIfUserIsBlocked = async (user) => {
-    const users_blocked = await getBlockedUsers({ redirectUri });
-    console.log("Blocked users: ", users_blocked);
-    setIsUserBlocked(users_blocked.data.blocked_users.includes(user));
-  };
-
   function ChannelList() {
     const { t } = useTranslation();
     const channels = ["General"];
