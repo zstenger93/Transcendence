@@ -56,8 +56,10 @@ export const friendRequest = async ({ redirectUri, userName }) => {
   let response = {};
   try {
     const token = Cookies.get("access");
+	console.log("uname ", userName.userName);
+	console.log("uri ", redirectUri);
     response = await axios.get(
-      `${redirectUri}/api/friend/add/${userName}/`,
+      `${redirectUri}/api/friend/add/${userName.userName}/`,
       {},
       {
         headers: {

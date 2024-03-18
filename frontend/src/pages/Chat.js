@@ -286,7 +286,7 @@ function Chat({ redirectUri }) {
                               addFriend({ redirectUri, userName: user })
                             }
                           >
-                            Friend Request
+                            Add Friend
                           </li>
                           {!isUserBlocked ? (
                             <li

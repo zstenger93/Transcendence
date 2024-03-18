@@ -9,37 +9,10 @@ import {
   changeUsername,
   changeAbout,
   getFriendList,
+  getUserProfile,
 } from "../components/API";
 import { CiEdit } from "react-icons/ci";
 import Cookies from "js-cookie";
-
-// const friendsListData = [
-//   {
-//     name: "Zsolt",
-//     intra: "zstenger",
-//     profileLink: "https://profile.intra.42.fr/users/zstenger",
-//   },
-//   {
-//     name: "Karlis",
-//     intra: "kvebers",
-//     profileLink: "https://profile.intra.42.fr/users/kvebers",
-//   },
-//   {
-//     name: "Jergashe",
-//     intra: "jergahse",
-//     profileLink: "https://profile.intra.42.fr/users/jergashe",
-//   },
-//   {
-//     name: "Azer",
-//     intra: "asioud",
-//     profileLink: "https://profile.intra.42.fr/users/asioud",
-//   },
-//   {
-//     name: "Emotional Damage",
-//     intra: "ed",
-//     profileLink: "https://github.com/zstenger93/Transcendence",
-//   },
-// ];
 
 const matchHistoryData = [
   {
@@ -107,19 +80,8 @@ const matchHistoryData = [
   },
 ];
 
-function FriendsList({ redirectUri }) {
+function FriendsList({ friendsListData }) {
   const { t } = useTranslation();
-
-  const [friendsListData, setFriendsListData] = useState([]);
-  useEffect(() => {
-    const fetchFriendsList = async () => {
-      const response = await getFriendList({ redirectUri });
-      console.log("friends: ", response.data);
-      setFriendsListData(response.data);
-    };
-
-    fetchFriendsList();
-  }, [redirectUri]);
 
   return (
     <div
@@ -146,15 +108,17 @@ function FriendsList({ redirectUri }) {
             friendsListData.length > 0 &&
             friendsListData.map((friend, index) => (
               <tr key={index} className="bg-white bg-opacity-10">
-                <td className="p-2 border border-gray-900 mx-auto">{friend}</td>
+                <td className="p-2 border border-gray-900 mx-auto">
+                  {friend.name}
+                </td>
                 <td className="p-2 border text-center border-gray-900 mx-auto">
                   <a
-                    href={"friend.profileLink"}
+                    href={friend.intra}
                     className="text-blue-500 underline"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {"friend.intra"}
+                    {"Link"}
                   </a>
                 </td>
               </tr>
@@ -167,6 +131,7 @@ function FriendsList({ redirectUri }) {
 
 function MatchHistory() {
   const { t } = useTranslation();
+
   return (
     <div
       className="bg-gray-900 bg-opacity-80 p-6 shadow-xl
@@ -258,6 +223,34 @@ function Profile({ redirectUri }) {
     userDetails?.username || defaultUserDetails.username
   );
   const [profilePicture, setProfilePicture] = useState(null);
+  const [friendsListData, setFriendsListData] = useState([]);
+  useEffect(() => {
+    const fetchFriendsList = async () => {
+      const response = await getFriendList({ redirectUri });
+      const friends = response.data.friends;
+
+      const profilePromises = friends.map(async (friend) => {
+        const profileResponse = await getUserProfile({
+          redirectUri,
+          userName: friend,
+        });
+        console.log("profileresponse: ", profileResponse);
+        return {
+          name: friend,
+          intra: profileResponse.data.user.ft_url
+            .replace("('", "")
+            .replace("',)", "")
+            .replace("v2/", "")
+			.replace("api", "profile"),
+        };
+      });
+
+      const friendsWithProfiles = await Promise.all(profilePromises);
+      setFriendsListData(friendsWithProfiles);
+    };
+
+    fetchFriendsList();
+  }, [redirectUri]);
 
   useEffect(() => {
     const token = Cookies.get("access");
@@ -482,7 +475,7 @@ function Profile({ redirectUri }) {
           </div>
         </div>
         <div className="mt-8 mb-10">
-          {showFriendsList && <FriendsList redirectUri={redirectUri} />}
+          {showFriendsList && <FriendsList friendsListData={friendsListData} />}
           {showMatchHistory && <MatchHistory />}
           {showUserSettings && (
             <UserSettings

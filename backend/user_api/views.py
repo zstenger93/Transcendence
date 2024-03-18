@@ -450,5 +450,5 @@ def user_to_dict(user):
     else:
         user_dict['profile_picture'] = None
     # keep only fields : email, username, profile_picture, title, school, intra_level
-    user_dict = {key: user_dict[key] for key in ['email', 'username', 'profile_picture', 'title', 'school', 'intra_level']}
+    user_dict = {key: user_dict[key] for key in ['email', 'username', 'profile_picture', 'title', 'school', 'intra_level', 'ft_url']}
     return user_dict
