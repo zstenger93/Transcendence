@@ -29,7 +29,7 @@ ALLOWED_HOSTS = [
 
 # Authentication settings
 if DEBUG == 'True':
-    REDIRECT_URI = "https://localhost"
+    REDIRECT_URI = "https://10.12.2.2"
 else:
 	REDIRECT_URI = "https://transcendence-backend-znhl.onrender.com"
 
@@ -72,7 +72,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 CSRF_ALLOWED_ORIGINS = [
-    "https://localhost",
+    "https://10.12.2.2",
 	"https://api.intra.42.fr",
     "http://localhost:3000",
     "http://frontend:3000",
@@ -83,7 +83,7 @@ CSRF_ALLOWED_ORIGINS = [
 CORS_ALLOWED_ORIGINS = [
         "http://frontend:3000",
 	    "https://api.intra.42.fr",
-		"https://localhost",
+		"https://10.12.2.2",
 	    "http://localhost:3000",
 		"https://transcendence-frontend-3otz.onrender.com",
 		"https://zstenger93.github.io"

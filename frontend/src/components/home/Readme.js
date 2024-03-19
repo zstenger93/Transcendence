@@ -132,7 +132,7 @@ function Readme() {
               </h3>
               <ul>
                 <li>
-                  <Major /> Remote players ❌
+                  <Major /> Remote players <GreenCheck />
                 </li>
                 <li>
                   <Major /> Multiplayer (more than 2) <GreenCheck />

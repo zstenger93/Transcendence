@@ -261,7 +261,7 @@ The game must be responsive :white_check_mark:
 	- *Major module*: Standard user management, authentication, users across tournaments :x:
 	- *Major module*: Implementing a remote authentication :white_check_mark:
 - **Gameplay and User Experience**
-	- *Major module*: Remote players :x:
+	- *Major module*: Remote players :white_check_mark:
 	- *Major module*: Multiplayer (more than 2) :white_check_mark:
 	- *Major module*: Add Another Game with User History and Matchmaking :x:
 	- *Minor module*: Game customization options :white_check_mark:
