@@ -1,6 +1,23 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
+
+export const getGameRoom = async ({ redirectUri, userName }) => {
+	let response = {};
+	try {
+	  const token = Cookies.get("access");
+	  response = await axios.get(`https://10.12.2.2/game/1v1/asdfasdf/`, {
+		headers: {
+		  Authorization: `Bearer ${token}`,
+		},
+		withCredentials: true,
+	  });
+	} catch (error) {
+	  console.log(error);
+	}
+	return response.data;
+  };
+
 export const addUserToFriendList = async ({ redirectUri, userName }) => {
   let response = {};
   try {
