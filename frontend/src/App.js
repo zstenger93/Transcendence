@@ -22,6 +22,7 @@ import { WelcomeButtonStyle } from "./components/buttons/ButtonStyle";
 import BackButton from "./components/buttons/BackButton";
 import backgroundimage from "./images/pongbg.png";
 import TwoFA from "./pages/TwoFA";
+// import Tournament from "./pages/Games/Tournament";
 
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
@@ -45,7 +46,7 @@ const PageWrapper = ({ children, image, showSidebar = true, redirectUri }) => {
 function App() {
   const { i18n } = useTranslation();
   const basename = "";
-    // process.env.NODE_ENV === "production" ? "/Transcendence" : "";
+  // process.env.NODE_ENV === "production" ? "/Transcendence" : "";
   let REDIRECT_URI;
 
   if (process.env.NODE_ENV === "development") {
@@ -163,6 +164,19 @@ function App() {
               </PageWrapper>
             }
           />
+		  {/* <Route
+            path="tournament"
+            element={
+              <PageWrapper image={Background} redirectUri={REDIRECT_URI}>
+                <StartScreen
+                  Game={Tournament}
+                  backgroundImage={backgroundimage}
+                  WelcomeButtonStyle={WelcomeButtonStyle}
+                  BackButton={BackButton}
+                />
+              </PageWrapper>
+            }
+          /> */}
           <Route
             path="choosepongmode"
             element={

@@ -30,6 +30,9 @@ function ChoosePongMode() {
         <Link to="/multiplayer" className={`mb-8 ${ButtonStyle}`}>
           {t("Multiplayer")}
         </Link>
+		<Link to="/tournament" className={`mb-8 ${ButtonStyle}`}>
+          {t("Tournament")}
+        </Link>
         <Link
           onClick={(e) => {
             e.preventDefault();
