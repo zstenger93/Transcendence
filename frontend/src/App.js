@@ -22,7 +22,7 @@ import { WelcomeButtonStyle } from "./components/buttons/ButtonStyle";
 import BackButton from "./components/buttons/BackButton";
 import backgroundimage from "./images/pongbg.png";
 import TwoFA from "./pages/TwoFA";
-// import Tournament from "./pages/Games/Tournament";
+import Tournament from "./pages/Games/Tournament";
 
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
@@ -164,7 +164,7 @@ function App() {
               </PageWrapper>
             }
           />
-		  {/* <Route
+		  <Route
             path="tournament"
             element={
               <PageWrapper image={Background} redirectUri={REDIRECT_URI}>
@@ -176,7 +176,7 @@ function App() {
                 />
               </PageWrapper>
             }
-          /> */}
+          />
           <Route
             path="choosepongmode"
             element={
