@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -5,8 +7,10 @@ import BackButton from "../components/buttons/BackButton";
 import {
   getUserDetails,
   getUserProfile,
-  addUserToFriendList,
-  getFriendList,
+  friendRequest,
+  blockUser,
+  unblockUser,
+  getBlockedUsers,
 } from "../components/API";
 
 function Chat({ redirectUri }) {
@@ -24,17 +28,14 @@ function Chat({ redirectUri }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchUserProfile = async (userName) => {
-    //   console.log("redirectUri", redirectUri);
     if (userName) {
       const details = await getUserProfile({ redirectUri, userName });
       setUserDetails(details.data);
     }
-    //   console.log("Fetched user details:", details);
   };
 
   useEffect(() => {
     if (userDetails) {
-      //   console.log("user_profile_details: ", userDetails);
       setIsModalOpen(true);
     }
   }, [userDetails]);
@@ -43,15 +44,9 @@ function Chat({ redirectUri }) {
     setIsModalOpen(false);
   };
 
-  //   useEffect(() => {
-  //     fetchUserProfile(userName);
-  //   }, [redirectUri]);
-
   useEffect(() => {
     const fetchUserDetails = async () => {
-      //   console.log("redirectUri", redirectUri);
       const details = await getUserDetails({ redirectUri });
-      //   console.log("Fetched user details:", details);
       userDetailsRef.current = details;
     };
 
@@ -71,7 +66,6 @@ function Chat({ redirectUri }) {
 
       switch (data["type"]) {
         case "general_channel":
-          //   console.log("Received a group message");
           setMessages((messages) => [
             ...messages,
             {
@@ -81,9 +75,6 @@ function Chat({ redirectUri }) {
           ]);
           break;
         case "private_channel":
-          //   console.log("Received a private message");
-          //   console.log("current: ", currentChannel);
-          //   console.log("rec: ", data["receiver"]);
           setPrivateMessages((prevMessages) => {
             if (!prevMessages.includes(data["sender"])) {
               return [...prevMessages, data["sender"]];
@@ -100,7 +91,6 @@ function Chat({ redirectUri }) {
           ]);
           break;
         case "notify_user_joined":
-          //   console.log("A user has joined the chat");
           setOnlineUsers(data["online_users"]);
           setMessages((messages) => [
             ...messages,
@@ -111,7 +101,6 @@ function Chat({ redirectUri }) {
           ]);
           break;
         case "notify_user_left":
-          //   console.log("A user has left the chat");
           setOnlineUsers(data["online_users"]);
           setMessages((messages) => [
             ...messages,
@@ -122,9 +111,7 @@ function Chat({ redirectUri }) {
           ]);
           break;
         default:
-        //   console.log("Received an unknown message type");
       }
-      //   console.log("Data from consumer: " + JSON.stringify(data, null, 2));
     };
 
     chatSocket.current.onmessage = handleNewMessage;
@@ -148,17 +135,19 @@ function Chat({ redirectUri }) {
   const handleSendMessage = (event) => {
     event.preventDefault();
     if (chatSocket.current.readyState === WebSocket.OPEN) {
-      //   console.log("currentchannel: ", currentChannel);
-      chatSocket.current.send(
-        JSON.stringify({
-          message: messageInputRef.current.value,
-          receiver:
-            currentChannel === "General" ? "general_group" : currentChannel,
-        })
-      );
-      //   console.log("Sent message: " + messageInputRef.current.value);
-      messageInputRef.current.value = "";
-      setNewMessage("");
+      if (currentChannel !== userDetailsRef.current.data.user.username) {
+        chatSocket.current.send(
+          JSON.stringify({
+            message: messageInputRef.current.value,
+            receiver:
+              currentChannel === "General" ? "general_group" : currentChannel,
+          })
+        );
+        messageInputRef.current.value = "";
+        setNewMessage("");
+      } else {
+        console.error("Cannot send a private message to yourself.");
+      }
     } else {
       console.error(
         "WebSocket is not open. readyState = " + chatSocket.current.readyState
@@ -187,21 +176,24 @@ function Chat({ redirectUri }) {
   };
 
   const addFriend = async (user) => {
-	  if (true) {
-		addUserToFriendList({ redirectUri, userName: user});
-      const friends = await getFriendList({
-        redirectUri,
-        userName: "zstenger",
-      });
-      console.log("Friends: ", friends);
-    } else {
-      console.error(
-        "userDetailsRef.current or userDetailsRef.current.user is undefined"
-      );
-    }
+    friendRequest({ redirectUri, userName: user });
   };
-  const blockUser = (user) => {};
-  const unblockuser = (user) => {};
+
+  let [isUserBlocked, setIsUserBlocked] = useState(false);
+
+  const blockTheUser = async (user) => {
+    await blockUser({ redirectUri, userName: user });
+    const users_blocked = await getBlockedUsers({ redirectUri });
+    console.log("Blocked users: ", users_blocked);
+    setIsUserBlocked(true);
+  };
+
+  const unblockTheUser = async (user) => {
+    await unblockUser({ redirectUri, userName: user });
+    const users_blocked = await getBlockedUsers({ redirectUri });
+    console.log("Blocked users: ", users_blocked);
+    setIsUserBlocked(false);
+  };
 
   function ChannelList() {
     const { t } = useTranslation();
@@ -284,11 +276,38 @@ function Chat({ redirectUri }) {
                   {user}
                   {dropdownUser === user && (
                     <ul className="bg-purple-500 rounded-xl bg-opacity-20">
-                      <li onClick={() => handleMessageOption(user)}>Message</li>
+                      {user !== userDetailsRef.current.data.user.username && (
+                        <>
+                          <li onClick={() => handleMessageOption(user)}>
+                            Message
+                          </li>
+                          <li
+                            onClick={() =>
+                              addFriend({ redirectUri, userName: user })
+                            }
+                          >
+                            Add Friend
+                          </li>
+                          {!isUserBlocked ? (
+                            <li
+                              onClick={async () => {
+                                await blockTheUser(user);
+                              }}
+                            >
+                              Block
+                            </li>
+                          ) : (
+                            <li
+                              onClick={async () => {
+                                await unblockTheUser(user);
+                              }}
+                            >
+                              Unblock
+                            </li>
+                          )}
+                        </>
+                      )}
                       <li onClick={() => openProfile(user)}>Profile</li>
-                      <li onClick={() => addFriend(user)}>Friend Request</li>
-                      <li onClick={() => blockUser(user)}>Block</li>
-                      <li onClick={() => unblockuser(user)}>Unblock</li>
                     </ul>
                   )}
                 </li>
