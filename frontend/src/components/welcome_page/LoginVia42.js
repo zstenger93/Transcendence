@@ -2,7 +2,7 @@ import React from "react";
 import { WelcomeButtonStyle } from "../buttons/ButtonStyle";
 import Cookies from "js-cookie";
 
-const OAuth = async ({ navigate, redirect_uri }) => {
+const OAuth = async ({ redirect_uri }) => {
   window.location.href = `${redirect_uri}/api/oauth/authorize`;
 };
 

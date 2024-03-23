@@ -1,6 +1,6 @@
 from django.contrib.auth import login, logout
 from django.core.files.base import ContentFile
-from django.shortcuts import HttpResponse, redirect
+from django.shortcuts import redirect
 from django.conf import settings
 
 
@@ -12,21 +12,18 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken
-from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework.permissions import IsAuthenticated
 
 
-from django_otp.forms import OTPAuthenticationForm
+
 from django_otp import devices_for_user
 from django_otp.plugins.otp_totp.models import TOTPDevice
 from django.core.mail import EmailMessage
-from django_otp import match_token
 from email.mime.image import MIMEImage
 
 from django.core.files.storage import default_storage
 from django.core.files.images import ImageFile
 
-from .authentication import account_activation_token, is_authenticated
+from .authentication import is_authenticated
 from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
 from .validations import user_registration, is_valid_email, is_valid_password
 from .authentication import BlacklistCheckJWTAuthentication
@@ -34,11 +31,10 @@ from .models import AppUser, BlacklistedToken
 
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
-from django.template.loader import render_to_string
+from django.forms.models import model_to_dict
 
 import requests
 import urllib
-import json
 import os
 import qrcode
 import logging
@@ -283,9 +279,9 @@ class OAuthCallback(APIView):
 			}, status=status.HTTP_200_OK)
 			response["Access-Control-Allow-Credentials"] = 'true'
 			if created or user.TwoFA == False:
-				redirect_url = 'https://localhost/home?' + urllib.parse.urlencode({'token': str(token.access_token)})
+				redirect_url = 'https://10.12.2.2/home?' + urllib.parse.urlencode({'token': str(token.access_token)})
 			else:
-				redirect_url = 'https://localhost/2fa?' + urllib.parse.urlencode({'token': str(token.access_token)})
+				redirect_url = 'https://10.12.2.2/2fa?' + urllib.parse.urlencode({'token': str(token.access_token)})
 			return redirect(redirect_url)
 
 		response = Response({'detail': "Check you 42API keys"}, status=status.HTTP_400_BAD_REQUEST)
@@ -429,3 +425,30 @@ class TwoFactorAuth(APIView):
 			response = Response({"detail": "Invalid OTP"}, status=status.HTTP_400_BAD_REQUEST)
 			response["Access-Control-Allow-Credentials"] = 'true'
 			return response
+
+
+class UserData(APIView):
+    def get(self, request, username):
+        user = AppUser.objects.get(username=username)
+        if not user:
+            response = Response({
+                "detail": "User not found"
+            }, status=status.HTTP_404_NOT_FOUND)
+            response["Access-Control-Allow-Credentials"] = 'true'
+            return response
+        data = user_to_dict(user)
+        response = Response({
+            "user": data,
+        }, status=status.HTTP_200_OK)
+        response["Access-Control-Allow-Credentials"] = 'true'
+        return response
+
+def user_to_dict(user):
+    user_dict = model_to_dict(user)
+    if user.profile_picture and user.profile_picture.file:
+        user_dict['profile_picture'] = user.profile_picture.url
+    else:
+        user_dict['profile_picture'] = None
+    # keep only fields : email, username, profile_picture, title, school, intra_level
+    user_dict = {key: user_dict[key] for key in ['email', 'username', 'profile_picture', 'title', 'school', 'intra_level', 'ft_url']}
+    return user_dict

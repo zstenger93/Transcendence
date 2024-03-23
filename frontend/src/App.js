@@ -25,7 +25,6 @@ import backgroundimage from "./images/pongbg.png";
 import TwoFA from "./pages/TwoFA";
 
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
-// const cors = require('cors');
 
 const PageWrapper = ({ children, image, showSidebar = true, redirectUri }) => {
   return (
