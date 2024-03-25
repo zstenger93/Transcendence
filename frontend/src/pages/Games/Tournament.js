@@ -9,6 +9,52 @@ import WinScreen from "../../components/game/WinScreen";
 import handleResize from "../../components/game/HandleResize";
 import FullScreenButton from "../../components/buttons/FullScreen";
 
-const Tournament = () => { };
+
+
+class player extends React.Component {
+    constructor(playerName, id) {
+        this.playerName = playerName;
+        this.id = id;
+    }
+    renderPlayer() {
+        return (
+            <div style={{width: "200px", height: "200px", border: "1px solid white"}}>
+            </div>
+        )
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const Tournament = () => {
+    const navigate = useNavigate();
+    const { t } = useTranslation();
+    return (
+        <div className="flex justify-center items-center h-screen">
+        <div className="relative">
+        <img
+          src={backgroundImage}
+          style={{ width: "80vw", height: "100%", objectFit: "cover" }}
+          alt="Background"
+          className="rounded-xl shadow-lg"
+        />
+        <BackButton navigate={navigate} t={t} />
+      </div>
+      </div>
+    );
+};
 
 export default Tournament;
