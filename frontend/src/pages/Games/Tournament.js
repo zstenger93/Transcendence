@@ -1,23 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import backgroundImage from "../../images/pongbg.png";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../../components/buttons/BackButton";
 import { useTranslation } from "react-i18next";
 import { WelcomeButtonStyle } from "../../components/buttons/ButtonStyle";
 
-function drawOnSelectionCanvas() {
-  const canvas = document.getElementById("selectionCanvas");
-  const ctx = canvas.getContext("2d");
-  canvas.width = canvas.width * 4;
-  canvas.height = canvas.height * 4;
-  ctx.fillRect(10, 10, 100, 50);
-  ctx.strokeText("Selection Page Content", 50, 30);
-}
-
 const Tournament = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [pageToRender, setPageToRender] = useState(0);
+  const canvasRef = useRef(null);
+
   useEffect(() => {
     if (pageToRender === 1) {
       drawOnSelectionCanvas();
@@ -32,10 +25,17 @@ const Tournament = () => {
     setPageToRender(2);
   }
 
+  function drawOnSelectionCanvas() {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    
+  }
+
   function tournomentPage() {
     return (
       <div className="flex justify-center items-center h-screen">
         <canvas
+          ref={canvasRef}
           style={{
             width: "80vw",
             height: "45vw",
@@ -53,6 +53,7 @@ const Tournament = () => {
       <div className="flex justify-center items-center h-screen">
         <div className="relative">
           <canvas
+            ref={canvasRef}
             id="selectionCanvas"
             style={{
               width: "80vw",
