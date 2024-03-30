@@ -33,7 +33,7 @@ function UserSettings({ setProfilePicture, redirectUri }) {
     if (password === confirmPassword) {
       changePassword({ redirectUri, password });
     } else {
-      alert("Passwords do not match");
+      alert(t("Passwords do not match"));
     }
   };
 
@@ -125,7 +125,7 @@ function UserSettings({ setProfilePicture, redirectUri }) {
             />
           </div>
           <button className={`mx-auto block mb-2 ${ButtonStyle}`} type="submit">
-            Submit
+            {t("Submit")}
           </button>
         </form>
       )}

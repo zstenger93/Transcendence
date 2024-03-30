@@ -1,4 +1,16 @@
 {
+  "Delete Account": "Delete Account",
+  "Are you sure you want to delete your account?" : "Are you sure you want to delete your account?",
+  "Submit": "Submit",
+  "New Password ": "New Password ",
+  "Confirm New Password ": "Confirm New Password ",
+  "2 Factor Authentication": "2 Factor Authentication",
+  "Settings": "Settings",
+  "Passwords do not match": "Passwords do not match",
+  "Tournament": "Tournament",
+  
+  
+
   "The Project": "The Project",
   "16 Major & 11 Minor modules": "16 Major & 11 Minor modules",
   "Web": "Web",
