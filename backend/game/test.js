@@ -1,4 +1,4 @@
-const websocketUrl = 'ws://localhost:8000/wss/game/asdfasdf/';
+const websocketUrl = 'wss://localhost:8000/game/asdfasdf/';
 
 // Create a new WebSocket instance
 const websocket = new WebSocket(websocketUrl);

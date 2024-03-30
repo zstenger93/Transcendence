@@ -14,12 +14,17 @@ const Pong = () => {
       // const user1 = data.user1;
       // const user2 = data.user2;
       const sender = data.sender;
-      const player0 = data.player0;
-      const player1 = data.player1;
-
+      // const player0 = data.player0;
+      // const player1 = data.player1;
+      const user1 = "asioud";
+      const user2 = "asioud";
+      const player0 = "asioud";
+      const player1 = "asioud";
+      console.log(room_name);
+      console.log(sender);
       const gameSocket = new WebSocket(
         process.env.REACT_APP_LOCAL_URI.replace("https", "wss") +
-          "/game/" +
+          "/game/1v1/" +
           room_name +
           "/"
       );
@@ -40,7 +45,7 @@ const Pong = () => {
         // }
         else if (receivedData["type"] === "ending_message") {
           window.location.href =
-            "https://10.12.2.2/game/ending/?gameinfo=" +
+            "https://10.13.7.5/game/ending/?gameinfo=" +
             receivedData["score"] +
             "&gametag=" +
             receivedData["game_tag"] +
