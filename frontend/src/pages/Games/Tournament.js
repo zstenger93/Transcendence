@@ -4,12 +4,46 @@ import { useNavigate } from "react-router-dom";
 import BackButton from "../../components/buttons/BackButton";
 import { useTranslation } from "react-i18next";
 import { WelcomeButtonStyle } from "../../components/buttons/ButtonStyle";
+import babyPic from "../../images/tournoment/baby.png";
+import mediumPic from "../../images/tournoment/balanced.png";
+import insanePic from "../../images/tournoment/insane.png";
+import playerPic from "../../images/tournoment/player.png";
+import eliminate from "../../images/tournoment/eliminate.png";
+
+class Player {
+  constructor(name, mode) {
+    this.name = name;
+    this.mode = mode;
+    this.picture = this.setPicture(mode);
+    this.score = 0;
+  }
+
+  setPicture(mode) {
+    let picture;
+    switch (mode) {
+      case 0:
+        picture = playerPic;
+        break;
+      case 1:
+        picture = babyPic;
+        break;
+      case 2:
+        picture = mediumPic;
+        break;
+      case 3:
+        picture = insanePic;
+        break;
+    }
+    return picture;
+  }
+}
 
 const Tournament = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [pageToRender, setPageToRender] = useState(0);
   const canvasRef = useRef(null);
+  const [listOfPlayers, setListOfPlayers] = useState([]);
   let playerModeToAdd = 0;
 
   useEffect(() => {
@@ -43,6 +77,31 @@ const Tournament = () => {
     selectedButton.style.height = "100%";
   }
 
+  function addPlayer() {
+    const input = document.querySelector("input");
+    const name = input.value;
+    if (name === "") {
+      return;
+    }
+    for (let i = 0; i < listOfPlayers.length; i++) {
+      const player = listOfPlayers[i];
+      if (player.name === name) {
+        return;
+      }
+    }
+    setListOfPlayers((prevPlayers) => [
+      ...prevPlayers,
+      new Player(name, playerModeToAdd),
+    ]);
+  }
+
+  // function removePlayer(index) {
+  //   setListOfPlayers((prevPlayers) =>
+  //     prevPlayers.filter((player, i) => i !== index)
+  //   );
+  //   console.log(listOfPlayers);
+  // }
+
   function tournomentPage() {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -56,6 +115,100 @@ const Tournament = () => {
             border: "1px solid white",
           }}
         ></canvas>
+      </div>
+    );
+  }
+
+  function renderPlayers() {
+    const playerElements = [];
+
+    for (let i = 0; i < listOfPlayers.length; i++) {
+      playerElements.push(
+        <div
+          key={i}
+          style={{
+            margin: "1%",
+            width: "80%",
+            height: "20%",
+            border: "1px solid white",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <img
+            src={listOfPlayers[i].picture}
+            alt={listOfPlayers[i].name}
+            style={{
+              margin: "2%",
+              height: "70%",
+              aspectRatio: "1/1",
+              border: "1px solid white",
+            }}
+          />
+          <p
+            style={{
+              maxWidth: "50%",
+              maxHeight: "80%",
+              overflow: "hidden",
+            }}
+          >
+            {listOfPlayers[i].name}
+          </p>
+          <button
+            key={i}
+            style={{ height: "20%", aspectRatio: "1/1", margin: "2%" }}
+          >
+            <img src={eliminate} style={{ overflow: "fit" }}></img>
+          </button>
+        </div>
+      );
+    }
+
+    return playerElements;
+  }
+
+  function renderButtons() {
+    const buttonData = [
+      { id: 0, imgSrc: playerPic, alt: "Player" },
+      { id: 1, imgSrc: babyPic, alt: "BabyBot" },
+      { id: 2, imgSrc: mediumPic, alt: "MediumBot" },
+      { id: 3, imgSrc: insanePic, alt: "InsaneBot" },
+    ];
+
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          width: "100%",
+          height: "20%",
+          justifyContent: "center",
+        }}
+      >
+        {buttonData.map((button) => (
+          <button
+            key={button.id}
+            onClick={() => selectButton(button.id)}
+            id={`button${button.id}`}
+            style={{
+              width: "12%",
+              height: "90%",
+              margin: "3%",
+              border: "1px solid white",
+            }}
+          >
+            <img
+              src={button.imgSrc}
+              alt={button.alt}
+              style={{
+                objectFit: "cover",
+                width: "100%",
+                height: "100%",
+              }}
+            />
+          </button>
+        ))}
       </div>
     );
   }
@@ -112,57 +265,9 @@ const Tournament = () => {
                   textIndent: "1vw",
                 }}
               ></input>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  width: "100%",
-                  height: "20%",
-                  justifyContent: "center",
-                }}
-              >
-                <button
-                  onClick={() => selectButton(0)}
-                  id="button0"
-                  style={{
-                    width: "14%",
-                    height: "100%",
-                    margin: "3%",
-                    border: "1px solid white",
-                  }}
-                ></button>
-                <button
-                  onClick={() => selectButton(1)}
-                  id="button1"
-                  style={{
-                    width: "12%",
-                    height: "90%",
-                    margin: "3%",
-                    border: "1px solid white",
-                  }}
-                ></button>
-                <button
-                  onClick={() => selectButton(2)}
-                  id="button2"
-                  style={{
-                    width: "12%",
-                    height: "90%",
-                    margin: "3%",
-                    border: "1px solid white",
-                  }}
-                ></button>
-                <button
-                  onClick={() => selectButton(3)}
-                  id="button3"
-                  style={{
-                    width: "12%",
-                    height: "90%",
-                    margin: "3%",
-                    border: "1px solid white",
-                  }}
-                ></button>
-              </div>
+              {renderButtons()}
               <button
+                onClick={() => addPlayer()}
                 style={{
                   width: "80%",
                   height: "20%",
@@ -176,6 +281,18 @@ const Tournament = () => {
               >
                 Add
               </button>
+            </div>
+            <div
+              style={{
+                overflowY: "auto",
+                height: "70%",
+                width: "100%",
+                alignItems: "center",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              {renderPlayers()}
             </div>
           </div>
         </div>
