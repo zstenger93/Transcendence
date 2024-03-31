@@ -16,6 +16,8 @@ class Player {
     this.mode = mode;
     this.picture = this.setPicture(mode);
     this.score = 0;
+    this.x = Math.random();
+    this.y = Math.random();
   }
 
   setPicture(mode) {
@@ -42,15 +44,8 @@ const Tournament = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [pageToRender, setPageToRender] = useState(0);
-  const canvasRef = useRef(null);
   const [listOfPlayers, setListOfPlayers] = useState([]);
   let playerModeToAdd = 0;
-
-  useEffect(() => {
-    if (pageToRender === 1) {
-      drawOnSelectionCanvas();
-    }
-  }, [pageToRender]);
 
   function createTournomentButtonClicked() {
     setPageToRender(1);
@@ -60,9 +55,42 @@ const Tournament = () => {
     setPageToRender(2);
   }
 
-  function drawOnSelectionCanvas() {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
+  function CanvasComponent() {
+    useEffect(() => {
+      const canvas = document.getElementById("selectionCanvas");
+      const ctx = canvas.getContext("2d");
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = canvas.offsetWidth * ratio;
+      canvas.height = canvas.offsetHeight * ratio;
+      ctx.scale(ratio, ratio);
+
+      for (let i = 0; i < listOfPlayers.length; i++) {
+        const player = listOfPlayers[i];
+        const img = new Image();
+
+        img.onload = function () {
+          const x = (player.x * canvas.width * 0.75) / 2;
+          const y = (player.y * canvas.height) / 2;
+          const textWidth = ctx.measureText(player.name).width;
+          ctx.drawImage(img, x, y, 32, 32);
+          ctx.fillStyle = "white";
+          ctx.fillText(player.name, x - textWidth / 2 + 16, y - 20);
+        };
+        img.src = player.picture;
+      }
+    }, [listOfPlayers]);
+    return (
+      <canvas
+        id="selectionCanvas"
+        style={{
+          width: "80vw",
+          height: "45vw",
+          objectFit: "cover",
+          backgroundColor: "black",
+          border: "1px solid white",
+        }}
+      ></canvas>
+    );
   }
 
   function selectButton(input) {
@@ -95,18 +123,16 @@ const Tournament = () => {
     ]);
   }
 
-  // function removePlayer(index) {
-  //   setListOfPlayers((prevPlayers) =>
-  //     prevPlayers.filter((player, i) => i !== index)
-  //   );
-  //   console.log(listOfPlayers);
-  // }
+  function removePlayer(index) {
+    setListOfPlayers((prevPlayers) =>
+      prevPlayers.filter((player, i) => i !== index)
+    );
+  }
 
   function tournomentPage() {
     return (
       <div className="flex justify-center items-center h-screen">
         <canvas
-          ref={canvasRef}
           style={{
             width: "80vw",
             height: "45vw",
@@ -157,6 +183,7 @@ const Tournament = () => {
           </p>
           <button
             key={i}
+            onClick={() => removePlayer(i)}
             style={{ height: "20%", aspectRatio: "1/1", margin: "2%" }}
           >
             <img src={eliminate} style={{ overflow: "fit" }}></img>
@@ -217,17 +244,7 @@ const Tournament = () => {
     return (
       <div className="flex justify-center items-center h-screen">
         <div className="relative">
-          <canvas
-            ref={canvasRef}
-            id="selectionCanvas"
-            style={{
-              width: "80vw",
-              height: "45vw",
-              objectFit: "cover",
-              backgroundColor: "black",
-              border: "1px solid white",
-            }}
-          ></canvas>
+          <CanvasComponent />
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center font-bold font-nosifer">
             <button
               onClick={startTournomentButtonPressed}
