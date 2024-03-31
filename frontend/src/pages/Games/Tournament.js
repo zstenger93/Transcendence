@@ -40,6 +40,15 @@ class Player {
   }
 }
 
+class Tournoment {
+  constructor(players) {
+    this.players = players;
+    this.round = 0;
+    this.currentMatch = 0;
+    this.mode = 0;
+  }
+}
+
 const Tournament = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
