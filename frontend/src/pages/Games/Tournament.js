@@ -217,23 +217,27 @@ const Tournament = () => {
           <button
             key={button.id}
             onClick={() => selectButton(button.id)}
+            alt={button.alt}
             id={`button${button.id}`}
             style={{
+              fontSize: "0.4vw",
               width: "12%",
               height: "90%",
               margin: "3%",
               border: "1px solid white",
             }}
+            title={button.alt}
           >
             <img
               src={button.imgSrc}
-              alt={button.alt}
+              title={button.alt}
               style={{
                 objectFit: "cover",
                 width: "100%",
                 height: "100%",
               }}
             />
+            {button.alt}
           </button>
         ))}
       </div>
