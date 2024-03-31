@@ -1,4 +1,13 @@
 {
+  "Delete Account": "アカウントを削除する",
+  "Are you sure you want to delete your account?": "本当にアカウントを削除しますか？",
+  "Submit": "送信",
+  "New Password": "新しいパスワード",
+  "Confirm New Password": "新しいパスワードを確認",
+  "2 Factor Authentication": "2要素認証",
+  "Settings": "設定",
+  "Passwords do not match": "パスワードが一致しません",
+  "Tournament": "トーナメント",
   "The Project": "プロジェクト",
   "16 Major & 11 Minor modules": "16のメジャーモジュールと11のマイナーモジュール",
   "Web": "ウェブ",

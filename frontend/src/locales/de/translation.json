@@ -1,4 +1,13 @@
 {
+  "Delete Account": "Konto löschen",
+  "Are you sure you want to delete your account?": "Sind Sie sicher, dass Sie Ihr Konto löschen möchten?",
+  "Submit": "Absenden",
+  "New Password": "Neues Passwort",
+  "Confirm New Password": "Neues Passwort bestätigen",
+  "2 Factor Authentication": "Zwei-Faktor-Authentifizierung",
+  "Settings": "Einstellungen",
+  "Passwords do not match": "Passwörter stimmen nicht überein",
+  "Tournament": "Turnier",
   "The Project": "Das Projekt",
   "16 Major & 11 Minor modules": "16 Haupt- und 11 Nebenmodule",
   "Web": "Web",
