@@ -75,7 +75,9 @@ const Tournament = () => {
   }
 
   function startTournomentButtonPressed() {
-    setPageToRender(2);
+    if (listOfPlayers.length > 2) {
+      setPageToRender(2);
+    }
   }
 
   function CanvasComponent() {
