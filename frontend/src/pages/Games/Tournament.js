@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 import BackButton from "../../components/buttons/BackButton";
 import { useTranslation } from "react-i18next";
 import { WelcomeButtonStyle } from "../../components/buttons/ButtonStyle";
-import babyPic from "../../images/tournoment/baby.png";
-import mediumPic from "../../images/tournoment/balanced.png";
-import insanePic from "../../images/tournoment/insane.png";
-import playerPic from "../../images/tournoment/player.png";
-import eliminate from "../../images/tournoment/eliminate.png";
+import babyPic from "../../images/tournament/baby.png";
+import mediumPic from "../../images/tournament/balanced.png";
+import insanePic from "../../images/tournament/insane.png";
+import playerPic from "../../images/tournament/player.png";
+import eliminate from "../../images/tournament/eliminate.png";
 
 class Match {
   constructor(player1, player2) {
@@ -52,7 +52,7 @@ class Player {
   }
 }
 
-class Tournoment {
+class TournamentData {
   constructor(players) {
     this.players = players;
     this.roundCount = 0;
@@ -81,15 +81,17 @@ const Tournament = () => {
   const [pageToRender, setPageToRender] = useState(0);
   const [listOfPlayers, setListOfPlayers] = useState([]);
   let playerModeToAdd = 0;
-  let tournoment;
-  function createTournomentButtonClicked() {
+  let tournamentModeToAdd = 0;
+  let tournamentName = "Round Robin";
+  let tournament;
+  function createtournamentButtonClicked() {
     setPageToRender(1);
   }
 
-  function startTournomentButtonPressed() {
+  function starttournamentButtonPressed() {
     if (listOfPlayers.length > 2) {
       setPageToRender(2);
-      tournoment = new Tournoment(listOfPlayers);
+      tournament = new TournamentData(listOfPlayers);
     }
   }
 
@@ -131,6 +133,24 @@ const Tournament = () => {
     );
   }
 
+  function tournamentMode(input) {
+    const buttonData = [
+      { id: 0, imgSrc: playerPic, alt: "Round Robin" },
+      { id: 1, imgSrc: babyPic, alt: "Single Elimination" },
+      { id: 2, imgSrc: mediumPic, alt: "Swiss" },
+    ];
+    for (let i = 0; i < 3; i++) {
+      const button = document.getElementById("buttonMode" + i);
+      button.style.width = "12%";
+      button.style.height = "90%";
+    }
+    tournamentModeToAdd = input;
+    tournamentName = buttonData[input].alt;
+    const selectedButton = document.getElementById("buttonMode" + input);
+    selectedButton.style.width = "14%";
+    selectedButton.style.height = "100%";
+  }
+
   function selectButton(input) {
     for (let i = 0; i < 4; i++) {
       const button = document.getElementById("button" + i);
@@ -167,7 +187,7 @@ const Tournament = () => {
     );
   }
 
-  function renderPlayersTournoment() {
+  function renderPlayersTournament() {
     const playerElements = [];
 
     for (let i = 0; i < listOfPlayers.length; i++) {
@@ -180,6 +200,7 @@ const Tournament = () => {
             height: "10%",
             border: "1px solid white",
             display: "flex",
+            backgroundColor: "gray",
             justifyContent: "space-between",
             alignItems: "center",
           }}
@@ -220,7 +241,7 @@ const Tournament = () => {
     return playerElements;
   }
 
-  function tournomentPage() {
+  function tournamentPage() {
     return (
       <div className="flex justify-center items-center h-screen">
         <div
@@ -238,7 +259,7 @@ const Tournament = () => {
               flexDirection: "column",
               width: "100%",
               height: "45vw",
-              backgroundColor: "gray",
+              backgroundColor: "black",
               border: "1px solid white",
               alignItems: "center",
               boxSizing: "border-box",
@@ -254,7 +275,7 @@ const Tournament = () => {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-                backgroundColor: "darkgray",
+                backgroundColor: "gray",
               }}
             >
               <h1
@@ -266,13 +287,13 @@ const Tournament = () => {
                 LeaderBoards
               </h1>
             </div>
-            {renderPlayersTournoment()}
+            {renderPlayersTournament()}
           </div>
           <div
             style={{
               width: "100%",
               height: "45vw",
-              backgroundColor: "gray",
+              backgroundColor: "black",
               border: "1px solid white",
               boxSizing: "border-box",
             }}
@@ -281,7 +302,7 @@ const Tournament = () => {
             style={{
               width: "100%",
               height: "45vw",
-              backgroundColor: "gray",
+              backgroundColor: "black",
               border: "1px solid white",
               boxSizing: "border-box",
             }}
@@ -290,11 +311,33 @@ const Tournament = () => {
             style={{
               width: "100%",
               height: "45vw",
-              backgroundColor: "gray",
+              backgroundColor: "black",
               border: "1px solid white",
               boxSizing: "border-box",
             }}
-          ></div>
+          >
+            <div
+              style={{
+                width: "100%",
+                height: "12%",
+                marginBottom: "5%",
+                alignItems: "center",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                backgroundColor: "gray",
+              }}
+            >
+              <h1
+                style={{
+                  fontFamily: "Nosifer",
+                  fontWeight: "bold",
+                }}
+              >
+                {tournamentName}
+              </h1>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -352,6 +395,55 @@ const Tournament = () => {
     return playerElements;
   }
 
+  function rendertournamentMode() {
+    const buttonData = [
+      { id: 0, imgSrc: playerPic, alt: "Round Robin" },
+      { id: 1, imgSrc: babyPic, alt: "Single Elimination" },
+      { id: 2, imgSrc: mediumPic, alt: "Swiss" },
+    ];
+
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          width: "100%",
+          height: "15%",
+          justifyContent: "center",
+        }}
+      >
+        {buttonData.map((button) => (
+          <button
+            key={button.id}
+            onClick={() => tournamentMode(button.id)}
+            alt={button.alt}
+            id={`buttonMode${button.id}`}
+            style={{
+              fontSize: "0.4vw",
+              width: "12%",
+              height: "90%",
+              margin: "3%",
+            }}
+            title={button.alt}
+          >
+            <img
+              src={button.imgSrc}
+              title={button.alt}
+              style={{
+                aspectRatio: "1/1",
+                border: "1px solid white",
+                objectFit: "cover",
+                width: "100%",
+                height: "100%",
+              }}
+            />
+            {button.alt}
+          </button>
+        ))}
+      </div>
+    );
+  }
+
   function renderButtons() {
     const buttonData = [
       { id: 0, imgSrc: playerPic, alt: "Player" },
@@ -366,7 +458,7 @@ const Tournament = () => {
           display: "flex",
           alignItems: "center",
           width: "100%",
-          height: "20%",
+          height: "15%",
           justifyContent: "center",
         }}
       >
@@ -389,6 +481,7 @@ const Tournament = () => {
               src={button.imgSrc}
               title={button.alt}
               style={{
+                aspectRatio: "1/1",
                 objectFit: "cover",
                 width: "100%",
                 height: "100%",
@@ -408,7 +501,7 @@ const Tournament = () => {
           <CanvasComponent />
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center font-bold font-nosifer">
             <button
-              onClick={startTournomentButtonPressed}
+              onClick={starttournamentButtonPressed}
               className={`mt-10 ${WelcomeButtonStyle}`}
             >
               {t("Start Tournament")}
@@ -426,7 +519,7 @@ const Tournament = () => {
           >
             <div
               style={{
-                height: "30%",
+                height: "50%",
                 width: "100%",
                 backgroundColor: "#BFBFBF",
                 border: "1px solid white",
@@ -437,7 +530,7 @@ const Tournament = () => {
             >
               <input
                 style={{
-                  height: "20%",
+                  height: "15%",
                   width: "80%",
                   margin: "5%",
                   textIndent: "1vw",
@@ -448,7 +541,7 @@ const Tournament = () => {
                 onClick={() => addPlayer()}
                 style={{
                   width: "80%",
-                  height: "20%",
+                  height: "15%",
                   backgroundColor: "#0D0D0D",
                   border: "1px solid white",
                   color: "white",
@@ -459,11 +552,24 @@ const Tournament = () => {
               >
                 Add
               </button>
+              <h3
+                style={{
+                  width: "80%",
+                  height: "10%",
+                  fontFamily: "Nosifer",
+                  textAlign: "center",
+                  margin: "0%",
+                  padidng: "0%",
+                }}
+              >
+                Choose tournament Mode
+              </h3>
+              {rendertournamentMode()}
             </div>
             <div
               style={{
                 overflowY: "auto",
-                height: "70%",
+                height: "50%",
                 width: "100%",
                 alignItems: "center",
                 display: "flex",
@@ -490,7 +596,7 @@ const Tournament = () => {
           />
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2  -translate-y-1/2 text-center font-bold font-nosifer">
             <button
-              onClick={createTournomentButtonClicked}
+              onClick={createtournamentButtonClicked}
               className={`mt-10 ${WelcomeButtonStyle}`}
             >
               {t("Create Torunament")}
@@ -508,7 +614,7 @@ const Tournament = () => {
     case 1:
       return selectionPage();
     case 2:
-      return tournomentPage();
+      return tournamentPage();
     default:
       return startPage();
   }
