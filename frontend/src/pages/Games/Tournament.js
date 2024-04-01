@@ -31,7 +31,6 @@ class Player {
     this.y = Math.random();
     this.matchHistory = [];
   }
-
   setPicture(mode) {
     let picture;
     switch (mode) {
@@ -104,10 +103,10 @@ const Tournament = () => {
   const { t } = useTranslation();
   const [pageToRender, setPageToRender] = useState(0);
   const [listOfPlayers, setListOfPlayers] = useState([]);
+  const [tournamentName, setTournamentName] = useState("Round Robin");
+  const [tournament, setTournament] = useState(null);
   let playerModeToAdd = 0;
   let tournamentModeToAdd = 0;
-  let tournamentName = "Round Robin";
-  const [tournament, setTournament] = useState(null);
 
   function createTournamentButtonClicked() {
     setPageToRender(1);
@@ -170,7 +169,7 @@ const Tournament = () => {
       button.style.height = "90%";
     }
     tournamentModeToAdd = input;
-    tournamentName = buttonData[input].alt;
+    setTournamentName(buttonData[input].alt);
     const selectedButton = document.getElementById("buttonMode" + input);
     selectedButton.style.width = "14%";
     selectedButton.style.height = "100%";
@@ -212,6 +211,53 @@ const Tournament = () => {
     );
   }
 
+  function displayCurrentMatch() {
+    const match = tournament.matches[tournament.currentMatch];
+    return (
+      <div
+        style={{
+          margin: "1%",
+          width: "80%",
+          height: "10%",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexDirection: "column",
+          backgroundColor: "gray",
+        }}
+      >
+        <div
+          style={{
+            border: "1px solid white",
+            height: "50%",
+            width: "100%",
+            fontFamily: "Nosifer",
+            alignItems: "center",
+            justifyContent: "center",
+            display: "flex",
+            fontSize: "1vw",
+          }}
+        >
+          <h2>{match.player1.name}</h2>
+        </div>
+        <div
+          style={{
+            border: "1px solid white",
+            height: "50%",
+            width: "100%",
+            fontFamily: "Nosifer",
+            alignItems: "center",
+            justifyContent: "center",
+            display: "flex",
+            fontSize: "1vw",
+          }}
+        >
+          <h2>{match.player2.name}</h2>
+        </div>
+      </div>
+    );
+  }
+
   function renderMatches(matches) {
     const listOfMatches = [];
 
@@ -240,6 +286,7 @@ const Tournament = () => {
               alignItems: "center",
               justifyContent: "center",
               display: "flex",
+              fontSize: "1vw",
             }}
           >
             <h2>{match.player1.name}</h2>
@@ -253,6 +300,7 @@ const Tournament = () => {
               alignItems: "center",
               justifyContent: "center",
               display: "flex",
+              fontSize: "1vw",
             }}
           >
             <h2>{match.player2.name}</h2>
@@ -298,6 +346,7 @@ const Tournament = () => {
               overflow: "hidden",
               fontFamily: "Nosifer",
               fontWeight: "bold",
+              fontSize: "1vw",
             }}
           >
             {tournament.players[i].name}
@@ -307,6 +356,7 @@ const Tournament = () => {
               margin: "5px",
               fontFamily: "Nosifer",
               fontWeight: "bold",
+              fontSize: "1.2vw",
             }}
           >
             {tournament.players[i].score}
@@ -358,6 +408,7 @@ const Tournament = () => {
                 style={{
                   fontFamily: "Nosifer",
                   fontWeight: "bold",
+                  fontSize: "1.5vw",
                 }}
               >
                 LeaderBoards
@@ -394,6 +445,7 @@ const Tournament = () => {
                 style={{
                   fontFamily: "Nosifer",
                   fontWeight: "bold",
+                  fontSize: "1.5vw",
                 }}
               >
                 Round {tournament.currentRound} of {tournament.roundCount}
@@ -403,20 +455,15 @@ const Tournament = () => {
           </div>
           <div
             style={{
+              display: "flex",
+              flexDirection: "column",
               width: "100%",
               height: "45vw",
               backgroundColor: "black",
               border: "1px solid white",
+              alignItems: "center",
               boxSizing: "border-box",
-            }}
-          ></div>
-          <div
-            style={{
-              width: "100%",
-              height: "45vw",
-              backgroundColor: "black",
-              border: "1px solid white",
-              boxSizing: "border-box",
+              overflowY: "auto",
             }}
           >
             <div
@@ -435,11 +482,74 @@ const Tournament = () => {
                 style={{
                   fontFamily: "Nosifer",
                   fontWeight: "bold",
+                  fontSize: "1.5vw",
+                }}
+              >
+                Match History
+              </h1>
+            </div>
+            {renderMatches(tournament.matchHistory)}
+          </div>
+          <div
+            style={{
+              width: "100%",
+              height: "45vw",
+              backgroundColor: "black",
+              border: "1px solid white",
+              boxSizing: "border-box",
+              alignItems: "center",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <div
+              style={{
+                width: "100%",
+                height: "12%",
+                marginBottom: "5%",
+                alignItems: "center",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                backgroundColor: "gray",
+              }}
+            >
+              <h1
+                style={{
+                  fontFamily: "Nosifer",
+                  fontWeight: "bold",
+                  fontSize: "1.5vw",
+                  textAlign: "center",
                 }}
               >
                 {tournamentName}
               </h1>
             </div>
+            <div style={{ height: "50%" }}></div>
+            <div
+              style={{
+                width: "100%",
+                height: "12%",
+                marginBottom: "5%",
+                alignItems: "center",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                backgroundColor: "gray",
+              }}
+            >
+              <h1
+                style={{
+                  fontFamily: "Nosifer",
+                  fontWeight: "bold",
+                  fontSize: "1.5vw",
+                  textAlign: "center",
+                }}
+              >
+                Next Match
+              </h1>
+            </div>
+            {displayCurrentMatch()}
           </div>
         </div>
       </div>
