@@ -10,6 +10,17 @@ import insanePic from "../../images/tournoment/insane.png";
 import playerPic from "../../images/tournoment/player.png";
 import eliminate from "../../images/tournoment/eliminate.png";
 
+class Match {
+  constructor(player1, player2) {
+    this.player1 = player1;
+    this.player2 = player2;
+    this.winner = null;
+    this.matchId = null;
+  }
+
+  playMatch() {}
+}
+
 class Player {
   constructor(name, mode) {
     this.name = name;
@@ -18,6 +29,7 @@ class Player {
     this.score = 0;
     this.x = Math.random();
     this.y = Math.random();
+    this.matchHistory = [];
   }
 
   setPicture(mode) {
@@ -69,7 +81,7 @@ const Tournament = () => {
   const [pageToRender, setPageToRender] = useState(0);
   const [listOfPlayers, setListOfPlayers] = useState([]);
   let playerModeToAdd = 0;
-
+  let tournoment;
   function createTournomentButtonClicked() {
     setPageToRender(1);
   }
@@ -77,6 +89,7 @@ const Tournament = () => {
   function startTournomentButtonPressed() {
     if (listOfPlayers.length > 2) {
       setPageToRender(2);
+      tournoment = new Tournoment(listOfPlayers);
     }
   }
 
@@ -154,18 +167,135 @@ const Tournament = () => {
     );
   }
 
+  function renderPlayersTournoment() {
+    const playerElements = [];
+
+    for (let i = 0; i < listOfPlayers.length; i++) {
+      playerElements.push(
+        <button
+          key={i}
+          style={{
+            margin: "1%",
+            width: "80%",
+            height: "10%",
+            border: "1px solid white",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <img
+            src={listOfPlayers[i].picture}
+            alt={listOfPlayers[i].name}
+            style={{
+              margin: "2%",
+              height: "70%",
+              aspectRatio: "1/1",
+              border: "1px solid white",
+            }}
+          />
+          <h2
+            style={{
+              maxWidth: "50%",
+              maxHeight: "80%",
+              overflow: "hidden",
+              fontFamily: "Nosifer",
+              fontWeight: "bold",
+            }}
+          >
+            {listOfPlayers[i].name}
+          </h2>
+          <h1
+            style={{
+              margin: "5px",
+              fontFamily: "Nosifer",
+              fontWeight: "bold",
+            }}
+          >
+            {listOfPlayers[i].score}
+          </h1>
+        </button>
+      );
+    }
+    return playerElements;
+  }
+
   function tournomentPage() {
     return (
       <div className="flex justify-center items-center h-screen">
-        <canvas
+        <div
           style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
             width: "80vw",
             height: "45vw",
-            objectFit: "cover",
-            backgroundColor: "black",
             border: "1px solid white",
           }}
-        ></canvas>
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "100%",
+              height: "45vw",
+              backgroundColor: "gray",
+              border: "1px solid white",
+              alignItems: "center",
+              boxSizing: "border-box",
+              overflowY: "auto",
+            }}
+          >
+            <div
+              style={{
+                width: "100%",
+                height: "12%",
+                marginBottom: "5%",
+                alignItems: "center",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                backgroundColor: "darkgray",
+              }}
+            >
+              <h1
+                style={{
+                  fontFamily: "Nosifer",
+                  fontWeight: "bold",
+                }}
+              >
+                LeaderBoards
+              </h1>
+            </div>
+            {renderPlayersTournoment()}
+          </div>
+          <div
+            style={{
+              width: "100%",
+              height: "45vw",
+              backgroundColor: "gray",
+              border: "1px solid white",
+              boxSizing: "border-box",
+            }}
+          ></div>
+          <div
+            style={{
+              width: "100%",
+              height: "45vw",
+              backgroundColor: "gray",
+              border: "1px solid white",
+              boxSizing: "border-box",
+            }}
+          ></div>
+          <div
+            style={{
+              width: "100%",
+              height: "45vw",
+              backgroundColor: "gray",
+              border: "1px solid white",
+              boxSizing: "border-box",
+            }}
+          ></div>
+        </div>
       </div>
     );
   }
@@ -202,6 +332,8 @@ const Tournament = () => {
               maxWidth: "50%",
               maxHeight: "80%",
               overflow: "hidden",
+              fontFamily: "Nosifer",
+              fontWeight: "bold",
             }}
           >
             {listOfPlayers[i].name}
