@@ -62,17 +62,22 @@ class TournamentData {
     this.matches = [];
     this.matchesPlayed = [];
     this.hostory = [];
+    this.randomizePlayerOrder();
   }
 
   randomizePlayerOrder() {
     this.players.sort(() => Math.random() - 0.5);
   }
 
-  createMatchesSingleElinimationWithoutElimination() {}
+  sortPlayersByScore() {
+    this.players.sort((a, b) => b.score - a.score);
+  }
 
-  createMatchesSwiss() {}
+  createSingleElimination() {}
 
-  createMatchesRoundRobin() {}
+  createSwiss() {}
+
+  createRoundRobin() {}
 }
 
 const Tournament = () => {
@@ -83,12 +88,13 @@ const Tournament = () => {
   let playerModeToAdd = 0;
   let tournamentModeToAdd = 0;
   let tournamentName = "Round Robin";
-  let tournament;
-  function createtournamentButtonClicked() {
+  let tournament = new TournamentData(listOfPlayers);
+
+  function createTournamentButtonClicked() {
     setPageToRender(1);
   }
 
-  function starttournamentButtonPressed() {
+  function startTournamentButtonPressed() {
     if (listOfPlayers.length > 2) {
       setPageToRender(2);
       tournament = new TournamentData(listOfPlayers);
@@ -190,7 +196,7 @@ const Tournament = () => {
   function renderPlayersTournament() {
     const playerElements = [];
 
-    for (let i = 0; i < listOfPlayers.length; i++) {
+    for (let i = 0; i < tournament.players.length; i++) {
       playerElements.push(
         <button
           key={i}
@@ -206,8 +212,8 @@ const Tournament = () => {
           }}
         >
           <img
-            src={listOfPlayers[i].picture}
-            alt={listOfPlayers[i].name}
+            src={tournament.players[i].picture}
+            alt={tournament.players[i].name}
             style={{
               margin: "2%",
               height: "70%",
@@ -224,7 +230,7 @@ const Tournament = () => {
               fontWeight: "bold",
             }}
           >
-            {listOfPlayers[i].name}
+            {tournament.players[i].name}
           </h2>
           <h1
             style={{
@@ -233,7 +239,7 @@ const Tournament = () => {
               fontWeight: "bold",
             }}
           >
-            {listOfPlayers[i].score}
+            {tournament.players[i].score}
           </h1>
         </button>
       );
@@ -395,7 +401,7 @@ const Tournament = () => {
     return playerElements;
   }
 
-  function rendertournamentMode() {
+  function renderTournamentMode() {
     const buttonData = [
       { id: 0, imgSrc: playerPic, alt: "Round Robin" },
       { id: 1, imgSrc: babyPic, alt: "Single Elimination" },
@@ -501,7 +507,7 @@ const Tournament = () => {
           <CanvasComponent />
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center font-bold font-nosifer">
             <button
-              onClick={starttournamentButtonPressed}
+              onClick={startTournamentButtonPressed}
               className={`mt-10 ${WelcomeButtonStyle}`}
             >
               {t("Start Tournament")}
@@ -564,7 +570,7 @@ const Tournament = () => {
               >
                 Choose tournament Mode
               </h3>
-              {rendertournamentMode()}
+              {renderTournamentMode()}
             </div>
             <div
               style={{
@@ -596,7 +602,7 @@ const Tournament = () => {
           />
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2  -translate-y-1/2 text-center font-bold font-nosifer">
             <button
-              onClick={createtournamentButtonClicked}
+              onClick={createTournamentButtonClicked}
               className={`mt-10 ${WelcomeButtonStyle}`}
             >
               {t("Create Torunament")}
