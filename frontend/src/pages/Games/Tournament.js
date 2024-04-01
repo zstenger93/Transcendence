@@ -43,10 +43,24 @@ class Player {
 class Tournoment {
   constructor(players) {
     this.players = players;
-    this.round = 0;
+    this.roundCount = 0;
     this.currentMatch = 0;
+    this.curretnRound = 0;
     this.mode = 0;
+    this.matches = [];
+    this.matchesPlayed = [];
+    this.hostory = [];
   }
+
+  randomizePlayerOrder() {
+    this.players.sort(() => Math.random() - 0.5);
+  }
+
+  createMatchesSingleElinimationWithoutElimination() {}
+
+  createMatchesSwiss() {}
+
+  createMatchesRoundRobin() {}
 }
 
 const Tournament = () => {
