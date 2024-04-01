@@ -53,16 +53,27 @@ class Player {
 }
 
 class TournamentData {
-  constructor(players) {
+  constructor(players, mode) {
     this.players = players;
     this.roundCount = 0;
     this.currentMatch = 0;
-    this.curretnRound = 0;
+    this.currentRound = 0;
     this.mode = 0;
     this.matches = [];
     this.matchesPlayed = [];
-    this.hostory = [];
+    this.matchHistory = [];
     this.randomizePlayerOrder();
+    switch (mode) {
+      case 0:
+        this.createRoundRobin();
+        break;
+      case 1:
+        this.createSingleElimination();
+        break;
+      case 2:
+        this.createSwiss();
+        break;
+    }
   }
 
   randomizePlayerOrder() {
@@ -77,7 +88,15 @@ class TournamentData {
 
   createSwiss() {}
 
-  createRoundRobin() {}
+  createRoundRobin() {
+    this.roundCount = 1;
+    this.currentRound = 1;
+    for (let i = 0; i < this.players.length; i++) {
+      for (let j = i + 1; j < this.players.length; j++) {
+        this.matches.push(new Match(this.players[i], this.players[j]));
+      }
+    }
+  }
 }
 
 const Tournament = () => {
@@ -88,7 +107,7 @@ const Tournament = () => {
   let playerModeToAdd = 0;
   let tournamentModeToAdd = 0;
   let tournamentName = "Round Robin";
-  let tournament = new TournamentData(listOfPlayers);
+  const [tournament, setTournament] = useState(null);
 
   function createTournamentButtonClicked() {
     setPageToRender(1);
@@ -97,7 +116,7 @@ const Tournament = () => {
   function startTournamentButtonPressed() {
     if (listOfPlayers.length > 2) {
       setPageToRender(2);
-      tournament = new TournamentData(listOfPlayers);
+      setTournament(new TournamentData(listOfPlayers, tournamentModeToAdd));
     }
   }
 
@@ -191,6 +210,57 @@ const Tournament = () => {
     setListOfPlayers((prevPlayers) =>
       prevPlayers.filter((player, i) => i !== index)
     );
+  }
+
+  function renderMatches(matches) {
+    const listOfMatches = [];
+
+    for (let i = 0; i < matches.length; i++) {
+      const match = matches[i];
+      listOfMatches.push(
+        <div
+          key={i}
+          style={{
+            margin: "1%",
+            width: "80%",
+            height: "10%",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexDirection: "column",
+            backgroundColor: "gray",
+          }}
+        >
+          <div
+            style={{
+              border: "1px solid white",
+              height: "50%",
+              width: "100%",
+              fontFamily: "Nosifer",
+              alignItems: "center",
+              justifyContent: "center",
+              display: "flex",
+            }}
+          >
+            <h2>{match.player1.name}</h2>
+          </div>
+          <div
+            style={{
+              border: "1px solid white",
+              height: "50%",
+              width: "100%",
+              fontFamily: "Nosifer",
+              alignItems: "center",
+              justifyContent: "center",
+              display: "flex",
+            }}
+          >
+            <h2>{match.player2.name}</h2>
+          </div>
+        </div>
+      );
+    }
+    return listOfMatches;
   }
 
   function renderPlayersTournament() {
@@ -297,13 +367,40 @@ const Tournament = () => {
           </div>
           <div
             style={{
+              display: "flex",
+              flexDirection: "column",
               width: "100%",
               height: "45vw",
               backgroundColor: "black",
               border: "1px solid white",
+              alignItems: "center",
               boxSizing: "border-box",
+              overflowY: "auto",
             }}
-          ></div>
+          >
+            <div
+              style={{
+                width: "100%",
+                height: "12%",
+                marginBottom: "5%",
+                alignItems: "center",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                backgroundColor: "gray",
+              }}
+            >
+              <h1
+                style={{
+                  fontFamily: "Nosifer",
+                  fontWeight: "bold",
+                }}
+              >
+                Round {tournament.currentRound} of {tournament.roundCount}
+              </h1>
+            </div>
+            {renderMatches(tournament.matches)}
+          </div>
           <div
             style={{
               width: "100%",
