@@ -885,44 +885,35 @@ const Tournament = () => {
   }, [pageToRender]);
 
   useEffect(() => {
-    if (pageToRender !== 3) {
-      return;
-    }
+    const keysPressed = new Set();
     const handleKeyDown = (event) => {
-      switch (event.key) {
-        case "w":
-          break;
-        case "s":
-          break;
-        case "ArrowUp":
-          break;
-        case "ArrowDown":
-          break;
-        default:
-          break;
+      keysPressed.add(event.key);
+
+      if (keysPressed.has("w")) {
+        setPaddle1Position((prevPosition) => prevPosition - 1);
+      }
+      if (keysPressed.has("s")) {
+        setPaddle1Position((prevPosition) => prevPosition + 1);
+      }
+      if (keysPressed.has("ArrowUp")) {
+        setPaddle2Position((prevPosition) => prevPosition - 1);
+      }
+      if (keysPressed.has("ArrowDown")) {
+        setPaddle2Position((prevPosition) => prevPosition + 1);
       }
     };
+
     const handleKeyUp = (event) => {
-      switch (event.key) {
-        case "w":
-          break;
-        case "s":
-          break;
-        case "ArrowUp":
-          break;
-        case "ArrowDown":
-          break;
-        default:
-          break;
-      }
+      keysPressed.delete(event.key);
     };
+
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
     };
-  }, [pageToRender]);
+  }, []);
 
   function gamePage(match) {
     return (
