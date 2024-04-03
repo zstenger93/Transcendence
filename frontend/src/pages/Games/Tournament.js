@@ -9,6 +9,7 @@ import mediumPic from "../../images/tournament/balanced.png";
 import insanePic from "../../images/tournament/insane.png";
 import playerPic from "../../images/tournament/player.png";
 import eliminate from "../../images/tournament/eliminate.png";
+import playPong from "../../images/tournament/pong.jpg";
 
 class Match {
   constructor(player1, player2) {
@@ -105,6 +106,8 @@ const Tournament = () => {
   const [listOfPlayers, setListOfPlayers] = useState([]);
   const [tournamentName, setTournamentName] = useState("Round Robin");
   const [tournament, setTournament] = useState(null);
+  const [paddle1Position, setPaddle1Position] = useState(0);
+  const [paddle2Position, setPaddle2Position] = useState(0);
   let playerModeToAdd = 0;
   let tournamentModeToAdd = 0;
 
@@ -117,6 +120,10 @@ const Tournament = () => {
       setPageToRender(2);
       setTournament(new TournamentData(listOfPlayers, tournamentModeToAdd));
     }
+  }
+
+  function playGameButtonPressed() {
+    setPageToRender(3);
   }
 
   function CanvasComponent() {
@@ -367,6 +374,45 @@ const Tournament = () => {
     return playerElements;
   }
 
+  function tournomentButtons(functionToCall, text, imgSrc, alt) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
+        <button
+          onClick={functionToCall}
+          style={{ width: "100px", aspectRatio: "1/1" }}
+        >
+          <img
+            alt={alt}
+            src={imgSrc}
+            style={{
+              aspectRatio: "1/1",
+              border: "1px solid white",
+              objectFit: "cover",
+              width: "100px",
+              height: "100%",
+            }}
+          ></img>
+        </button>
+        <p
+          style={{
+            color: "white",
+            fontFamily: "Nosifer",
+            textAlign: "center",
+            margin: "5px",
+          }}
+        >
+          {text}
+        </p>
+      </div>
+    );
+  }
+
   function tournamentPage() {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -525,6 +571,12 @@ const Tournament = () => {
                 {tournamentName}
               </h1>
             </div>
+            {tournomentButtons(
+              playGameButtonPressed,
+              "Play Match",
+              playPong,
+              "Play"
+            )}
             <div style={{ height: "50%" }}></div>
             <div
               style={{
@@ -692,7 +744,7 @@ const Tournament = () => {
           >
             <img
               src={button.imgSrc}
-              title={button.alt}
+              alt={button.alt}
               style={{
                 aspectRatio: "1/1",
                 objectFit: "cover",
@@ -821,6 +873,77 @@ const Tournament = () => {
     );
   }
 
+  useEffect(() => {
+    if (pageToRender === 3) {
+      const canvas = document.getElementById("gameCanvas");
+      const ctx = canvas.getContext("2d");
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = canvas.offsetWidth * ratio;
+      canvas.height = canvas.offsetHeight * ratio;
+      ctx.scale(ratio, ratio);
+    }
+  }, [pageToRender]);
+
+  useEffect(() => {
+    if (pageToRender !== 3) {
+      return;
+    }
+    const handleKeyDown = (event) => {
+      switch (event.key) {
+        case "w":
+          break;
+        case "s":
+          break;
+        case "ArrowUp":
+          break;
+        case "ArrowDown":
+          break;
+        default:
+          break;
+      }
+    };
+    const handleKeyUp = (event) => {
+      switch (event.key) {
+        case "w":
+          break;
+        case "s":
+          break;
+        case "ArrowUp":
+          break;
+        case "ArrowDown":
+          break;
+        default:
+          break;
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, [pageToRender]);
+
+  function gamePage(match) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="relative">
+          <canvas
+            id="gameCanvas"
+            style={{
+              width: "80vw",
+              height: "45vw",
+              aspectRatio: "80/45",
+              objectFit: "cover",
+              backgroundColor: "black",
+              border: "1px solid white",
+            }}
+          ></canvas>
+        </div>
+      </div>
+    );
+  }
+
   switch (pageToRender) {
     case 0:
       return startPage();
@@ -828,6 +951,8 @@ const Tournament = () => {
       return selectionPage();
     case 2:
       return tournamentPage();
+    case 3:
+      return gamePage(tournament.matches[tournament.currentMatch]);
     default:
       return startPage();
   }
