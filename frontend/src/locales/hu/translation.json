@@ -1,4 +1,13 @@
 {
+  "Delete Account": "Fiók törlése",
+  "Are you sure you want to delete your account?": "Biztosan törölni szeretné a fiókját?",
+  "Submit": "Küldés",
+  "New Password": "Új jelszó",
+  "Confirm New Password": "Új jelszó megerősítése",
+  "2 Factor Authentication": "Kétlépcsős azonosítás",
+  "Settings": "Beállítások",
+  "Passwords do not match": "A jelszavak nem egyeznek",
+  "Tournament": "Verseny",
   "The Project": "A Projekt",
   "16 Major & 11 Minor modules": "16 fő és 11 kisebb modul",
   "Web": "Web",
