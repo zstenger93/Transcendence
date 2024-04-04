@@ -108,8 +108,19 @@ const Tournament = () => {
   const [tournament, setTournament] = useState(null);
   const [paddle1Position, setPaddle1Position] = useState(0);
   const [paddle2Position, setPaddle2Position] = useState(0);
+  const [ball, setBall] = useState({
+    x: 400,
+    y: 300,
+    dx: 5,
+    dy: 5,
+    radius: 10,
+  });
+  const paddleWidth = 10;
+  const paddleHeight = 100;
   let playerModeToAdd = 0;
   let tournamentModeToAdd = 0;
+  const canvasRef = useRef(null);
+  const ctxRef = useRef(null);
 
   function createTournamentButtonClicked() {
     setPageToRender(1);
@@ -825,6 +836,7 @@ const Tournament = () => {
                   textAlign: "center",
                   margin: "0%",
                   padidng: "0%",
+                  fontSize: "0.8vw",
                 }}
               >
                 Choose tournament Mode
@@ -873,53 +885,80 @@ const Tournament = () => {
     );
   }
 
+  // useEffect(() => {
+  //   const keysPressed = new Set();
+  //   const handleKeyDown = (event) => {
+  //     keysPressed.add(event.key);
+
+  //     if (keysPressed.has("w")) {
+  //       setPaddle1Position((prevPosition) => Math.max(0, prevPosition - 0.01));
+  //     }
+  //     if (keysPressed.has("s")) {
+  //       setPaddle1Position((prevPosition) => Math.max(0, prevPosition + 0.01));
+  //     }
+  //     if (keysPressed.has("ArrowUp")) {
+  //       setPaddle2Position((prevPosition) => Math.max(0, prevPosition + 0.01));
+  //     }
+  //     if (keysPressed.has("ArrowDown")) {
+  //       setPaddle2Position((prevPosition) => Math.max(0, prevPosition - 0.01));
+  //     }
+  //   };
+  //   const handleKeyUp = (event) => {
+  //     keysPressed.delete(event.key);
+  //   };
+  //   window.addEventListener("keydown", handleKeyDown);
+  //   window.addEventListener("keyup", handleKeyUp);
+  //   return () => {
+  //     window.removeEventListener("keydown", handleKeyDown);
+  //     window.removeEventListener("keyup", handleKeyUp);
+  //   };
+  // }, []);
+
   useEffect(() => {
     if (pageToRender === 3) {
-      const canvas = document.getElementById("gameCanvas");
+      const canvas = canvasRef.current;
       const ctx = canvas.getContext("2d");
       const ratio = window.devicePixelRatio || 1;
       canvas.width = canvas.offsetWidth * ratio;
       canvas.height = canvas.offsetHeight * ratio;
       ctx.scale(ratio, ratio);
+      ctxRef.current = ctx;
+      const interval = setInterval(update, 1000 / 60);
+      return () => clearInterval(interval);
     }
   }, [pageToRender]);
 
-  useEffect(() => {
-    const keysPressed = new Set();
-    const handleKeyDown = (event) => {
-      keysPressed.add(event.key);
+  const update = () => {};
 
-      if (keysPressed.has("w")) {
-        setPaddle1Position((prevPosition) => prevPosition - 1);
-      }
-      if (keysPressed.has("s")) {
-        setPaddle1Position((prevPosition) => prevPosition + 1);
-      }
-      if (keysPressed.has("ArrowUp")) {
-        setPaddle2Position((prevPosition) => prevPosition - 1);
-      }
-      if (keysPressed.has("ArrowDown")) {
-        setPaddle2Position((prevPosition) => prevPosition + 1);
-      }
-    };
-
-    const handleKeyUp = (event) => {
-      keysPressed.delete(event.key);
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("keyup", handleKeyUp);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("keyup", handleKeyUp);
-    };
-  }, []);
+  const handleKeyDown = (event) => {
+    if (event.key === "w") {
+      setPaddle1Position(Math.max(0, paddle1Position - 10));
+    }
+    if (event.key === "s") {
+      setPaddle1Position(
+        Math.min(canvasHeight - paddleHeight, paddle1Position + 10)
+      );
+    }
+    if (event.key === "ArrowUp") {
+      setPaddle2Position(Math.max(0, paddle2Position - 10));
+    }
+    if (event.key === "ArrowDown") {
+      setPaddle2Position(
+        Math.min(canvasHeight - paddleHeight, paddle2Position + 10)
+      );
+    }
+  };
 
   function gamePage(match) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div
+        className="flex justify-center items-center h-screen"
+        tabIndex="0"
+        onKeyDown={handleKeyDown}
+      >
         <div className="relative">
           <canvas
+            ref={canvasRef}
             id="gameCanvas"
             style={{
               width: "80vw",
