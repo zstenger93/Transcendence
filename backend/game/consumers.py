@@ -59,6 +59,20 @@ class GameConsumer(AsyncWebsocketConsumer):
             await self.channel_layer.group_add(self.room_group_name, self.channel_name)
             await self.accept()
 
+            await self.send_user_info_to_group()
+
+
+    async def send_user_info_to_group(self):
+    # Send user information to the "user_group" group
+        await self.channel_layer.group_send(
+        "user_group",
+        {
+            "type": "user_info",
+            "user_id": self.user_id,
+            "room_name": self.room_name,
+        }
+        )
+
     async def receive(self, text_data):
         # Wait until both user IDs are set
         user_ids = self.user_ids.get(self.room_name)
@@ -154,6 +168,11 @@ class GameConsumer(AsyncWebsocketConsumer):
     def get_room(self, room_name):
         from game.models import GameRoom
         return GameRoom.objects.get(name=room_name)
+
+    @database_sync_to_async
+    def get_all_user_channel_names(self):
+        from .models import UserChannelName
+        return list(UserChannelName.objects.values('user__username'))
 
 
 class GameInstance:
@@ -286,4 +305,3 @@ class GameInstance:
     def is_colliding_with_paddle(self, player, paddle_height, paddle_width):
         return (self.ball_x - self.ball_size < paddle_width and
                 player < self.ball_y < player + paddle_height)
-    

@@ -8,7 +8,7 @@ from django.http.response import JsonResponse
 from django.views.decorators.http import require_GET, require_POST
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
-
+from .consumers import GameConsumer
 
 from django.contrib.sessions.models import Session
 from django.contrib.auth.models import User
@@ -18,6 +18,8 @@ import random
 import json
 import logging
 from django.http import JsonResponse
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 
 
 def get_user_from_session(session_key):
@@ -57,16 +59,13 @@ def room(request, room_name):
 
     user = request.user
 
-    # # Prepare data for rendering, will be passed to template
-    # users = room_obj.objects.all()
-    # logger.info("-----------------------------------------")
-    # logger.info(f"context: {users}")
-    # logger.info("-----------------------------------------")
+    channel_layer = get_channel_layer()
+    async_to_sync(channel_layer.group_receive)("user_group", my_handler)
     context = {
         "room_name": room_obj.name,
-        "sender": user.id,
-        "user1": user.id,
-        "user2": room_obj.user2,
+        # "sender": user0_id,
+        # "user1": user0_id,
+        # "user2": user1_id,
         # "player0": room_obj.user1.username,
         # "player1": room_obj.user2.username,
     }
@@ -76,6 +75,12 @@ def room(request, room_name):
 
     return JsonResponse(context)
 
+
+def my_handler(message):
+    # Extract user information from the message payload
+    user_id = message.get("user_id")
+    room_name = message.get("room_name")
+    print(f"User {user_id} joined room {room_name}")
 
 def game_ending(request):
     # Get parameters from request
