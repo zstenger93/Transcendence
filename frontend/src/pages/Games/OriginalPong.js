@@ -45,7 +45,7 @@ const Pong = () => {
         // }
         else if (receivedData["type"] === "ending_message") {
           window.location.href =
-            "https://10.13.7.5/game/ending/?gameinfo=" +
+            "https://localhost/game/ending/?gameinfo=" +
             receivedData["score"] +
             "&gametag=" +
             receivedData["game_tag"] +

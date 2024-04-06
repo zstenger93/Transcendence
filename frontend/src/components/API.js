@@ -6,7 +6,7 @@ export const getGameRoom = async ({ redirectUri, userName }) => {
 	let response = {};
 	try {
 	  const token = Cookies.get("access");
-	  response = await axios.get(`https://10.13.7.5/game/1v1/asdfasdf/`, {
+	  response = await axios.get(`https://localhost/game/1v1/asdfasdf/`, {
 		headers: {
 		  Authorization: `Bearer ${token}`,
 		},

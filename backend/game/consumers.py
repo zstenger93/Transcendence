@@ -25,9 +25,8 @@ logger = logging.getLogger(__name__)
 class GameConsumer(AsyncWebsocketConsumer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.game_state = 'on hold'
+        self.game_state = {}
     connected_clients = {}
-    game_state = {}
     game_tasks = {}
     connect_lock = Lock()
     user_ids = {}

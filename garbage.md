@@ -24,6 +24,10 @@ Result <-
     "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9."
 }
 
+realuser2: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIwNTE3NTI3LCJpYXQiOjE3MTE5NjM5MjcsImp0aSI6IjFjZGY5ZDk3ZDY3YzQxODc4MmVmNTgyZDg3MmM5M2Q2IiwidXNlcl9pZCI6MSwiZW1haWwiOiJzaW91ZGF6ZXI4MkBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWx1c2VyMiJ9.06R3e43s9VhLW3DgC7MgaoblXidZQ6Kd4ojrDEt26MY
+
+azer: 
+
 ## Put new access token to the extension
 
 ## Logout -> Post
