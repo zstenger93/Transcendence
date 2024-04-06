@@ -159,7 +159,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 			}))
 	
 
-	async def (self, event):
+	async def notify_user_joined(self, event):
 		message = event['message']
 		online_users = await sync_to_async(list)(event['online_users'])
 		online_users = await self.get_usernames_from_user_channel_names(online_users)
