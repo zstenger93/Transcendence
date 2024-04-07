@@ -29,13 +29,10 @@ const Pong = () => {
 
       let canvas = document.getElementById("gameCanvas");
       let context = canvas.getContext("2d");
-      gameSocket.onopen = function (event) {
-        gameSocket.send("Connection established.");
-        console.log("Connection established");
-      };
       gameSocket.onmessage = function (event) {
         const receivedData = JSON.parse(event.data);
         if (receivedData["type"] === "game_message") {
+          console.log("rendering game frame" + event.data);
           renderGameFrame(receivedData);
         }
         // else if (receivedData['type'] === 'countdown_message') {

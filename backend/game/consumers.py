@@ -49,19 +49,17 @@ class GameConsumer(AsyncWebsocketConsumer):
                     self.user_ids[self.room_name][1] = user.id
                     self.users[self.room_name][1] = user
                     self.game_state[self.room_name] = "starting"
-                logger.info(f"0... Id: {self.user_ids[self.room_name][1]} User: {self.scope['user']} connected to {self.room_name}")
             else:
-                self.connected_clients[self.room_name] = GameInstance()
-                self.game_state[self.room_name] = 'waiting'
-                self.game_instance = self.connected_clients[self.room_name]
                 async with self.id_sem:
                     self.user_ids[self.room_name] = [user.id, None]
                     self.users[self.room_name] = [user, None]
-                logger.info(f"1... Id: {self.user_ids[self.room_name][0]} User: {self.scope['user']} connected to {self.room_name}")
+                self.connected_clients[self.room_name] = GameInstance()
+                self.game_state[self.room_name] = 'waiting'
+                self.game_instance = self.connected_clients[self.room_name]
 
             await self.channel_layer.group_add(self.room_group_name, self.channel_name)
             await self.accept()
-            await self.send_room_info_to_group()
+            await self.send_game_state_to_clients()
 
     async def send_room_info_to_group(self):
         await self.send(
@@ -90,6 +88,7 @@ class GameConsumer(AsyncWebsocketConsumer):
         userid = game_event[2:]
 
         local = False
+        logger.info(f"Game event: {game_event}")
         logger.info(f"Game started by {userid}")
         if game_event == 'startgame':
             await self.start_game()
@@ -124,10 +123,11 @@ class GameConsumer(AsyncWebsocketConsumer):
         }))
 
     async def start_game(self):
-        if self.game_state[self.room_name] == 'ready':
+        logger.info("++++game_state", self.game_state[self.room_name])
+        if self.game_state[self.room_name] == 'starting':
             self.game_state[self.room_name] = 'running'
         else:
-            self.game_state[self.room_name] = 'ready'
+            self.game_state[self.room_name] = 'starting'
         if self.room_name in self.connected_clients:
             self.game_instance = self.connected_clients[self.room_name]
         else:
@@ -148,9 +148,14 @@ class GameConsumer(AsyncWebsocketConsumer):
                 "player0": self.game_instance.player0,
                 "player1": self.game_instance.player1,
                 "hit": self.game_instance.hit,
-                "ball_speed": self.game_instance.ball_speed
+                "ball_speed": self.game_instance.ball_speed,
+                "room_name": self.room_name,
+                "game_state": self.game_state.get(self.room_name),
+                "user_ids": self.user_ids.get(self.room_name),
+                "users": [str(user) for user in self.users.get(self.room_name)]
             }
         )
+        logger.info("game_stat", self.game_instance.ball_x, self.game_instance.ball_y, self.game_instance.ball_speed_x, self.game_instance.ball_speed_y, self.game_instance.score, self.game_instance.player0, self.game_instance.player1, self.game_instance.hit, self.game_instance.ball_speed)
 
     async def game_message(self, event):
         # This method is called when the group receives a message
@@ -164,7 +169,11 @@ class GameConsumer(AsyncWebsocketConsumer):
             "player0": event["player0"],
             "player1": event["player1"],
             "hit": event["hit"],
-            "ball_speed": event["ball_speed"]
+            "ball_speed": event["ball_speed"],
+            "room_name": self.room_name,
+            "game_state": self.game_state.get(self.room_name),
+            "user_ids": self.user_ids.get(self.room_name),
+            "users": [str(user) for user in self.users.get(self.room_name)]
         }))
 
     @database_sync_to_async

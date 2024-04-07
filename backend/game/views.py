@@ -87,6 +87,7 @@ def game_ending(request):
     game_info = request.GET.get("gameinfo", None)
     game_tag = request.GET.get("gametag", None)
     lobby_name = request.GET.get("roomname", None)
+    logger.info("game____info", game_info)
     # Parse game_info string from request
     users = game_info.split("|")
     winner_id = users[0].split(":")[0]
