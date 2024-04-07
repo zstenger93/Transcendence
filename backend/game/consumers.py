@@ -155,7 +155,7 @@ class GameConsumer(AsyncWebsocketConsumer):
                 "users": [str(user) for user in self.users.get(self.room_name)]
             }
         )
-        logger.info("game_stat", self.game_instance.ball_x, self.game_instance.ball_y, self.game_instance.ball_speed_x, self.game_instance.ball_speed_y, self.game_instance.score, self.game_instance.player0, self.game_instance.player1, self.game_instance.hit, self.game_instance.ball_speed)
+        logger.info(f"Game state sent: {self.game_instance.ball_x}, {self.game_instance.ball_y},  {self.game_instance.score},  {self.game_instance.player0},  {self.game_instance.player1},  {self.game_instance.hit},  {self.game_instance.ball_speed},  {self.room_name},  {self.game_state.get(self.room_name)},  {self.user_ids.get(self.room_name)},  {[str(user) for user in self.users.get(self.room_name)]}")
 
     async def game_message(self, event):
         # This method is called when the group receives a message

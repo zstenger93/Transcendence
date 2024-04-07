@@ -1,36 +1,29 @@
-import React, { useEffect } from "react";
-import { getGameRoom } from "../../components/API";
+import React, { useEffect, useRef, useState } from "react";
 
 const Pong = () => {
-  let receivedData = null;
-  let room_name, game_state, user1, user2, sender, player0, player1;
+  const [room_name, setRoomName] = useState(null);
+  const [gameState, setGameState] = useState(null);
+  const [users, setUsers] = useState([]);
+  const sender = useRef(null);
+  const player0 = useRef(null);
+  const player1 = useRef(null);
+  
   useEffect(() => {
     async function getData() {
       const gameSocket = new WebSocket("wss://localhost/game/asdfasdf/");
-      
-      gameSocket.onmessage = function (event) {
-        receivedData = JSON.parse(event.data);
-        console.log("received data: " + event.data)
-
-
-      room_name = receivedData["room_name"];
-      game_state = receivedData["game_state"];
-      user1 = receivedData["users"][0];
-      user2 = receivedData["users"][1];
-      sender = receivedData["users"][0];
-      player0 = receivedData["users"][0];
-      player1 = receivedData["users"][1];
-      };
-      const data = await getGameRoom({
-        redirectUri: "https://localhost",
-        userName: "asdfasdf",
-      });
-
 
       let canvas = document.getElementById("gameCanvas");
       let context = canvas.getContext("2d");
       gameSocket.onmessage = function (event) {
         const receivedData = JSON.parse(event.data);
+        console.log("received data: " + event.data)
+        setRoomName(receivedData["room_name"]);
+        setGameState(receivedData["game_state"]);
+        setUsers(receivedData["users"]);
+        console.log("data" + users, room_name, gameState);
+        sender.current = receivedData["users"][0];
+        player0.current = receivedData["users"][0];
+        player1.current = receivedData["users"][1];
         if (receivedData["type"] === "game_message") {
           console.log("rendering game frame" + event.data);
           renderGameFrame(receivedData);
@@ -229,7 +222,7 @@ const Pong = () => {
       };
     }
     getData();
-  }, []);
+  }, [gameState, room_name, users]);
 
   return (
     <div
