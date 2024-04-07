@@ -60,7 +60,7 @@ def room(request, room_name):
     user = request.user
 
     channel_layer = get_channel_layer()
-    async_to_sync(channel_layer.group_receive)("user_group", my_handler)
+    async_to_sync(channel_layer.group_send)("user_group", {"type": "user_info_request"})
     context = {
         "room_name": room_obj.name,
         # "sender": user0_id,

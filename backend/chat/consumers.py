@@ -15,7 +15,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
 		if not self.scope['user'].is_authenticated:
 			await self.close()
 			raise StopConsumer('User is not authenticated')
-
 		logger.info(f'User {self.scope["user"]} connected to the chat.')
 		username = self.scope['user'].username
 		self.room_name = username + '_chat_room'
@@ -50,8 +49,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
 				'online_users': online_users,
 			}
 		)
-
-
 
 
 	async def disconnect(self, close_code):

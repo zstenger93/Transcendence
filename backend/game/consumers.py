@@ -59,20 +59,23 @@ class GameConsumer(AsyncWebsocketConsumer):
             await self.channel_layer.group_add(self.room_group_name, self.channel_name)
             await self.accept()
 
-            await self.send_user_info_to_group()
+            await self.send_room_info_to_group()
 
-
-    async def send_user_info_to_group(self):
-    # Send user information to the "user_group" group
+    async def send_room_info_to_group(self):
+        # Send room information to the "user_group" group
         await self.channel_layer.group_send(
-        "user_group",
-        {
-            "type": "user_info",
-            "user_id": self.user_id,
-            "room_name": self.room_name,
-        }
+            "user_group",
+            {
+                "type": "room_info",
+                "room_name": self.room_name,
+                "room_group_name": self.room_group_name,
+                "game_state": self.game_state.get(self.room_name),
+                "user_ids": self.user_ids.get(self.room_name),
+            },
         )
-
+        print(f"+++Room info sent to group {self.room_group_name} {self.user_ids.get(self.room_name)}")
+    
+    
     async def receive(self, text_data):
         # Wait until both user IDs are set
         user_ids = self.user_ids.get(self.room_name)

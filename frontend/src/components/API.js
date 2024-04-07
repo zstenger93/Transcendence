@@ -5,7 +5,8 @@ import Cookies from "js-cookie";
 export const getGameRoom = async ({ redirectUri, userName }) => {
 	let response = {};
 	try {
-	  const token = Cookies.get("access");
+    const token = Cookies.get("access");
+    const csrfToken = Cookies.get("csrftoken");
 	  response = await axios.get(`https://localhost/game/1v1/asdfasdf/`, {
 		headers: {
 		  Authorization: `Bearer ${token}`,

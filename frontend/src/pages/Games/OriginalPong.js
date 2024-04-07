@@ -4,30 +4,33 @@ import { getGameRoom } from "../../components/API";
 const Pong = () => {
   useEffect(() => {
     async function getData() {
+      const gameSocket = new WebSocket("ws://localhost:8000/game/asdfasdf/",
+        { credentials: 'include' }
+      );
+      
+      gameSocket.onmessage = function (event) {
+      const receivedData = JSON.parse(event.data);
+      // if (receivedData["type"] === "room_info") {
+        console.log("received data: " + receivedData);
+      // }
+    };
       const data = await getGameRoom({
         redirectUri: "http://localhost:8000",
         userName: "asdfasdf",
       });
 
       console.log(data);
-      const room_name = data.room_name;
+      const room_name = "asdfasdf";
       // const user1 = data.user1;
       // const user2 = data.user2;
-      const sender = data.sender;
+      const sender = "asioud";
       // const player0 = data.player0;
       // const player1 = data.player1;
       const user1 = "asioud";
       const user2 = "asioud";
       const player0 = "asioud";
       const player1 = "asioud";
-      console.log(room_name);
-      console.log(sender);
-      const gameSocket = new WebSocket(
-        process.env.REACT_APP_LOCAL_URI.replace("https", "wss") +
-          "/game/1v1/" +
-          room_name +
-          "/"
-      );
+      console.log(room_name, sender, user1, user2, player0, player1);
 
       let canvas = document.getElementById("gameCanvas");
       let context = canvas.getContext("2d");

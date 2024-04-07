@@ -1,4 +1,6 @@
-const websocketUrl = 'ws://localhost:8000/game/asdfasdf/';
+// const websocketUrl = 'ws://localhost:8000/game/asdfasdf/';
+const websocketUrl = 'wss://localhost/chat/';
+
 
 // Create a new WebSocket instance
 const websocket = new WebSocket(websocketUrl);
@@ -14,7 +16,6 @@ websocket.onopen = function(event) {
 // Event listener for WebSocket messages received
 websocket.onmessage = function(event) {
   console.log('Message received from server:', event.data);
-  
   // You can add further processing of the received message here
 };
 
