@@ -2,35 +2,30 @@ import React, { useEffect } from "react";
 import { getGameRoom } from "../../components/API";
 
 const Pong = () => {
+  let receivedData = null;
+  let room_name, game_state, user1, user2, sender, player0, player1;
   useEffect(() => {
     async function getData() {
       const gameSocket = new WebSocket("wss://localhost/game/asdfasdf/");
       
-      gameSocket.onopen = function (event) {
-        const receivedData = JSON.parse(event.data);
-        // if (receivedData["type"] === "room_info") {
+      gameSocket.onmessage = function (event) {
+        receivedData = JSON.parse(event.data);
         console.log("received data: " + event.data)
-        console.log("received data: " + receivedData["user_ids"]);
-        // }
-      };
 
+
+      room_name = receivedData["room_name"];
+      game_state = receivedData["game_state"];
+      user1 = receivedData["users"][0];
+      user2 = receivedData["users"][1];
+      sender = receivedData["users"][0];
+      player0 = receivedData["users"][0];
+      player1 = receivedData["users"][1];
+      };
       const data = await getGameRoom({
         redirectUri: "https://localhost",
         userName: "asdfasdf",
       });
 
-      console.log(data);
-      const room_name = "asdfasdf";
-      // const user1 = data.user1;
-      // const user2 = data.user2;
-      const sender = "asioud";
-      // const player0 = data.player0;
-      // const player1 = data.player1;
-      const user1 = "asioud";
-      const user2 = "asioud";
-      const player0 = "asioud";
-      const player1 = "asioud";
-      console.log(room_name, sender, user1, user2, player0, player1);
 
       let canvas = document.getElementById("gameCanvas");
       let context = canvas.getContext("2d");

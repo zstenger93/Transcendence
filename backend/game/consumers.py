@@ -30,6 +30,7 @@ class GameConsumer(AsyncWebsocketConsumer):
     game_tasks = {}
     connect_lock = Lock()
     user_ids = {}
+    users = {}
     id_sem = asyncio.Semaphore(value=1)  # Semaphore to control access to user IDs
 
     async def connect(self):
@@ -38,7 +39,6 @@ class GameConsumer(AsyncWebsocketConsumer):
             self.room_group_name = f"game_{self.room_name}"
 
             if not self.scope['user'].is_authenticated:
-                logger.info(f"{self.scope['user']} user is not authenticated-----")
                 await self.close()
                 raise StopConsumer('User is not authenticated')
 
@@ -47,6 +47,7 @@ class GameConsumer(AsyncWebsocketConsumer):
                 self.game_instance = self.connected_clients[self.room_name]
                 async with self.id_sem:
                     self.user_ids[self.room_name][1] = user.id
+                    self.users[self.room_name][1] = user
                     self.game_state[self.room_name] = "starting"
                 logger.info(f"0... Id: {self.user_ids[self.room_name][1]} User: {self.scope['user']} connected to {self.room_name}")
             else:
@@ -55,36 +56,25 @@ class GameConsumer(AsyncWebsocketConsumer):
                 self.game_instance = self.connected_clients[self.room_name]
                 async with self.id_sem:
                     self.user_ids[self.room_name] = [user.id, None]
+                    self.users[self.room_name] = [user, None]
                 logger.info(f"1... Id: {self.user_ids[self.room_name][0]} User: {self.scope['user']} connected to {self.room_name}")
 
             await self.channel_layer.group_add(self.room_group_name, self.channel_name)
             await self.accept()
-            await self.send(
-                text_data=json.dumps(
-                    {
-                            "type": "room_info",
-                            "room_name": self.room_name,
-                            "room_group_name": self.room_group_name,
-                            "game_state": self.game_state.get(self.room_name),
-                            "user_ids": self.user_ids.get(self.room_name),
-                    }
-                )
-            )
             await self.send_room_info_to_group()
 
     async def send_room_info_to_group(self):
-        # Send room information to the "user_group" group
-        await self.channel_layer.group_send(
-            "user_group",
-            {
-                "type": "room_info",
-                "room_name": self.room_name,
-                "room_group_name": self.room_group_name,
-                "game_state": self.game_state.get(self.room_name),
-                "user_ids": self.user_ids.get(self.room_name),
-            },
+        await self.send(
+            text_data=json.dumps(
+                {
+                    "type": "room_info",
+                    "room_name": self.room_name,
+                    "game_state": self.game_state.get(self.room_name),
+                    "user_ids": self.user_ids.get(self.room_name),
+                    "users": [str(user) for user in self.users.get(self.room_name)]
+                }
+            )
         )
-        print(f"+++Room info sent to group {self.room_group_name} {self.user_ids.get(self.room_name)}")
 
     async def receive(self, text_data):
         # Wait until both user IDs are set
