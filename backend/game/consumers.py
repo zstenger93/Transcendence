@@ -47,6 +47,7 @@ class GameConsumer(AsyncWebsocketConsumer):
                 self.game_instance = self.connected_clients[self.room_name]
                 async with self.id_sem:
                     self.user_ids[self.room_name][1] = user.id
+                    self.game_state[self.room_name] = "starting"
                 logger.info(f"0... Id: {self.user_ids[self.room_name][1]} User: {self.scope['user']} connected to {self.room_name}")
             else:
                 self.connected_clients[self.room_name] = GameInstance()
@@ -58,7 +59,17 @@ class GameConsumer(AsyncWebsocketConsumer):
 
             await self.channel_layer.group_add(self.room_group_name, self.channel_name)
             await self.accept()
-
+            await self.send(
+                text_data=json.dumps(
+                    {
+                            "type": "room_info",
+                            "room_name": self.room_name,
+                            "room_group_name": self.room_group_name,
+                            "game_state": self.game_state.get(self.room_name),
+                            "user_ids": self.user_ids.get(self.room_name),
+                    }
+                )
+            )
             await self.send_room_info_to_group()
 
     async def send_room_info_to_group(self):
@@ -74,8 +85,7 @@ class GameConsumer(AsyncWebsocketConsumer):
             },
         )
         print(f"+++Room info sent to group {self.room_group_name} {self.user_ids.get(self.room_name)}")
-    
-    
+
     async def receive(self, text_data):
         # Wait until both user IDs are set
         user_ids = self.user_ids.get(self.room_name)
