@@ -1,25 +1,25 @@
 import React, { useEffect, useRef, useState } from "react";
 
 const Pong = () => {
-  const [room_name, setRoomName] = useState(null);
-  const [gameState, setGameState] = useState(null);
-  const [users, setUsers] = useState([]);
   const sender = useRef(null);
   const player0 = useRef(null);
   const player1 = useRef(null);
-  
+  const gameSocket = useRef(null);
+
   useEffect(() => {
     async function getData() {
-      const gameSocket = new WebSocket("wss://localhost/game/asdfasdf/");
+      gameSocket.current = new WebSocket("wss://localhost/game/asdfasdf/");
 
       let canvas = document.getElementById("gameCanvas");
       let context = canvas.getContext("2d");
-      gameSocket.onmessage = function (event) {
+      gameSocket.current.onmessage = function (event) {
         const receivedData = JSON.parse(event.data);
         console.log("received data: " + event.data)
-        setRoomName(receivedData["room_name"]);
-        setGameState(receivedData["game_state"]);
-        setUsers(receivedData["users"]);
+
+        let room_name = receivedData["room_name"];
+        let gameState = receivedData["game_state"];
+        let users = receivedData["users"];
+
         console.log("data" + users, room_name, gameState);
         sender.current = receivedData["users"][0];
         player0.current = receivedData["users"][0];
@@ -41,11 +41,12 @@ const Pong = () => {
             room_name;
         }
       };
+
       const renderGameFrame = (gameData) => {
         if (context && canvas) {
           clearCanvas();
           drawField();
-          var score = player0 + "  " + gameData.score + " " + player1;
+          var score = player0.current + "  " + gameData.score + " " + player1.current;
           displayScore(score);
           drawPaddle(0, gameData.player0, 10, 110);
           drawPaddle(1, gameData.player1, 10, 110);
@@ -57,6 +58,7 @@ const Pong = () => {
             gameData.ball_speed
           );
         }
+        console.log("gameData::::::: " + gameData, gameData.player0);
       };
 
       const clearCanvas = () => {
@@ -166,46 +168,34 @@ const Pong = () => {
       };
 
       const handleKeyDown = (event) => {
-        // console.log(event.key)
-        // const user = JSON.parse(document.getElementById('sender').textContent)
-        const user = sender;
-        // {#console.log(user);#}
+        console.log(event.key)
+        const user = sender.current;
         if (event.key === "w") {
-          // Handle Player 0 UP key press
-          gameSocket.send("pw" + user);
+          gameSocket.current.send("pw" + user);
         } else if (event.key === "s") {
-          // Handle Player 0 DOWN key press
-          gameSocket.send("ps" + user);
+          gameSocket.current.send("ps" + user);
         } else if (event.key === "i") {
-          // Handle Player 1 UP key press
-          gameSocket.send("pi" + user);
+          gameSocket.current.send("pi" + user);
         } else if (event.key === "k") {
-          // Handle Player 1 DOWN key press
-          gameSocket.send("pk" + user);
+          gameSocket.current.send("pk" + user);
         }
       };
 
       const handleKeyUp = (event) => {
-        // const user = JSON.parse(document.getElementById('sender').textContent)
-        const user = sender;
-        // {#console.log(user);#}
+        const user = sender.current;
         if (event.key === "w") {
-          // Handle Player 0 UP key press
-          gameSocket.send("rw" + user);
+          gameSocket.current.send("rw" + user);
         } else if (event.key === "s") {
-          // Handle Player 0 DOWN key press
-          gameSocket.send("rs" + user);
+          gameSocket.current.send("rs" + user);
         } else if (event.key === "i") {
-          // Handle Player 1 UP key press
-          gameSocket.send("ri" + user);
+          gameSocket.current.send("ri" + user);
         } else if (event.key === "k") {
-          // Handle Player 1 DOWN key press
-          gameSocket.send("rk" + user);
+          gameSocket.current.send("rk" + user);
         }
       };
 
       const startGame = () => {
-        gameSocket.send("startgame");
+        gameSocket.current.send("startgame");
       };
 
       document.addEventListener("keyup", handleKeyUp);
@@ -215,14 +205,15 @@ const Pong = () => {
 
       // Cleanup function
       return () => {
-        gameSocket.close();
+        console.log("closing socket and removing listener");
+        gameSocket.current.close();
         document.removeEventListener("keyup", handleKeyUp);
         document.removeEventListener("keydown", handleKeyDown);
         startButton.removeEventListener("click", startGame);
       };
     }
     getData();
-  }, [gameState, room_name, users]);
+  }, []);
 
   return (
     <div

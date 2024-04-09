@@ -77,7 +77,6 @@ class GameConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         # Wait until both user IDs are set
         user_ids = self.user_ids.get(self.room_name)
-        logger.info(f"User IDs: {user_ids}")
         if not user_ids or None in user_ids:
             logger.info("Waiting for user IDs to be set")
             return
@@ -88,10 +87,30 @@ class GameConsumer(AsyncWebsocketConsumer):
         userid = game_event[2:]
 
         local = False
-        logger.info(f"Game event: {game_event}")
-        logger.info(f"Game started by {userid}")
         if game_event == 'startgame':
             await self.start_game()
+        else:
+            logger.info(f"Game event: {game_event}, {cmd}")
+            await self.handle_game_input(cmd, userid)
+
+    async def handle_game_input(self, cmd, userid):
+        if self.game_state[self.room_name] == 'running':
+            if cmd == 'pw' and userid == self.user0_id:
+                await self.game_instance.move_p0_up('press')
+            elif cmd == 'ps' and userid == self.user0_id:
+                await self.game_instance.move_p0_down('press')
+            elif cmd == 'rw' and userid == self.user0_id:
+                await self.game_instance.move_p0_up('release')
+            elif cmd == 'rs' and userid == self.user0_id:
+                await self.game_instance.move_p0_down('release')
+            elif cmd == 'pw' and userid == self.user1_id:
+                await self.game_instance.move_p1_up('press')
+            elif cmd == 'ps' and userid == self.user1_id:
+                await self.game_instance.move_p1_down('press')
+            elif cmd == 'rw' and userid == self.user1_id:
+                await self.game_instance.move_p1_up('release')
+            elif cmd == 'rs' and userid == self.user1_id:
+                await self.game_instance.move_p1_down('release')
 
     async def disconnect(self, close_code):
         await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
@@ -218,6 +237,18 @@ class GameInstance:
         elif state == 'release':
             setattr(self, f'{paddle}_moving', 0)
 
+    async def move_p0_up(self, state):
+        await self.move_paddle("p0", -1, state)
+
+    async def move_p0_down(self, state):
+        await self.move_paddle("p0", 1, state)
+
+    async def move_p1_up(self, state):
+        await self.move_paddle("p1", -1, state)
+
+    async def move_p1_down(self, state):
+        await self.move_paddle("p1", 1, state)
+
     async def update_game(self, game_state, room_name, user0, user1):
         """
         Updates the game state
@@ -249,7 +280,6 @@ class GameInstance:
         # Handle scoring and ball reset
         if self.ball_x < 0 or self.ball_x + self.ball_size > self.canvas_width:
             await self.handle_goal('player0' if self.ball_x < 0 else 'player1', game_state, room_name, user0, user1)
-
 
         # Handle ball collision with top or bottom wall
         elif self.is_ball_colliding_with_walls():
