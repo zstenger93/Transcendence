@@ -236,7 +236,7 @@ function Readme() {
                   <Minor /> {t("Support on all devices")} <GreenCheck />
                 </li>
                 <li>
-                  <Minor /> {"Expanding browser compatibility"} <GreenCheck />
+                  <Minor /> {t("Expanding browser compatibility")} <GreenCheck />
                 </li>
                 <li>
                   <Minor /> {t("Multiple language support")} <GreenCheck />

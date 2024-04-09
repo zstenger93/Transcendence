@@ -9,7 +9,8 @@
   "Passwords do not match": "Passwords do not match",
   "Tournament": "Tournament",
   
-  
+  "Private": "Private",
+  "Expanding browser compatibility": "Expanding browser compatibility",
 
   "The Project": "The Project",
   "16 Major & 11 Minor modules": "16 Major & 11 Minor modules",
@@ -42,7 +43,6 @@
   "Use advanced 3D techniques": "Use advanced 3D techniques",
   "Accessibility": "Accessibility",
   "Support on all devices": "Support on all devices",
-  "Expanding browser compatibility": "Expanding browser compatibility",
   "Multiple language support": "Multiple language support",
   "Add accessibility for visually impaired users": "Add accessibility for visually impaired users",
   "Server-side rendering (SSR) integration": "Server-side rendering (SSR) integration",
