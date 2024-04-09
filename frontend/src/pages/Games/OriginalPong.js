@@ -5,6 +5,7 @@ const Pong = () => {
   const player0 = useRef(null);
   const player1 = useRef(null);
   const gameSocket = useRef(null);
+  const [receivedData, setReceivedData] = useState(null);
 
   useEffect(() => {
     async function getData() {
@@ -13,30 +14,27 @@ const Pong = () => {
       let canvas = document.getElementById("gameCanvas");
       let context = canvas.getContext("2d");
       gameSocket.current.onmessage = function (event) {
-        const receivedData = JSON.parse(event.data);
+        setReceivedData(JSON.parse(event.data));
         console.log("received data: " + event.data)
 
-        let room_name = receivedData["room_name"];
-        let gameState = receivedData["game_state"];
-        let users = receivedData["users"];
+        let room_name = receivedData.current["room_name"];
+        let gameState = receivedData.current["game_state"];
+        let users = receivedData.current["users"];
 
         console.log("data" + users, room_name, gameState);
-        sender.current = receivedData["users"][0];
-        player0.current = receivedData["users"][0];
-        player1.current = receivedData["users"][1];
-        if (receivedData["type"] === "game_message") {
+        sender.current = receivedData.current["users"][0];
+        player0.current = receivedData.current["users"][0];
+        player1.current = receivedData.current["users"][1];
+        if (receivedData.current["type"] === "game_message") {
           console.log("rendering game frame" + event.data);
-          renderGameFrame(receivedData);
+          renderGameFrame(receivedData.current);
         }
-        // else if (receivedData['type'] === 'countdown_message') {
-        //     renderCountdown(receivedData);
-        // }
-        else if (receivedData["type"] === "ending_message") {
+        else if (receivedData.current["type"] === "ending_message") {
           window.location.href =
             "https://localhost/game/ending/?gameinfo=" +
-            receivedData["score"] +
+            receivedData.current["score"] +
             "&gametag=" +
-            receivedData["game_tag"] +
+            receivedData.current["game_tag"] +
             "&roomname=" +
             room_name;
         }
@@ -213,7 +211,7 @@ const Pong = () => {
       };
     }
     getData();
-  }, []);
+  }, [receivedData]);
 
   return (
     <div
