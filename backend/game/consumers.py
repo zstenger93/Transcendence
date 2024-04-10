@@ -127,9 +127,9 @@ class GameConsumer(AsyncWebsocketConsumer):
             )
             await self.send_game_state_to_clients()
             await asyncio.sleep(0.015625)
-        # self.game_tasks.pop(self.room_name)
-        # if self.game_state[self.room_name] != 'ready' and self.game_state[self.room_name] != 'stopped':
-        #     await self.send_game_end()
+        # if self.game_state[self.room_name] != 'ending':
+            # self.game_tasks.pop(self.room_name)
+        await self.send_game_end()
 
     async def send_game_end(self):
         game_tag = generate_random_string(19)
@@ -342,7 +342,7 @@ class GameInstance:
             self.player0_score += 1
             if self.player0_score == self.score_to_win:
                 # game_state[room_name] = user0 + ':' + str(self.player0_score) + '|' + user1 + ':' + str(self.player1_score)
-                game_state[room_name] = "running"
+                game_state[room_name] = "ending"
                 self.player1_score = 0
                 self.player0_score = 0
                 self.player0 = 200 - self.paddle_height / 2
@@ -351,7 +351,7 @@ class GameInstance:
             self.player1_score += 1
             if self.player1_score == self.score_to_win:
                 # game_state[room_name] = user1 + ':' + str(self.player1_score) + '|' + user0 + ':' + str(self.player0_score)
-                game_state[room_name] = "running"
+                game_state[room_name] = "ending"
                 self.player1_score = 0
                 self.player0_score = 0
                 self.player0 = 200 - self.paddle_height / 2

@@ -88,3 +88,7 @@ Header Changer: https://chromewebstore.google.com/detail/requestly-open-source-h
 	"blocked_username":"realuser"
 }
 
+
+
+## Notes
+Paddle speed increases with ball speed
