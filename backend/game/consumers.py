@@ -10,11 +10,13 @@ from rest_framework.request import Request
 import secrets
 import string
 
+
 ## The consumer will be responsible for handling the game logic and updating the game state(websockets)
 def generate_random_string(length):
     characters = string.ascii_letters + string.digits + "_"
-    random_string = ''.join(secrets.choice(characters) for _ in range(length))
+    random_string = "".join(secrets.choice(characters) for _ in range(length))
     return random_string
+
 
 import logging
 from asyncio import Lock
@@ -26,6 +28,7 @@ class GameConsumer(AsyncWebsocketConsumer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.game_state = {}
+
     connected_clients = {}
     game_tasks = {}
     connect_lock = Lock()
@@ -38,9 +41,9 @@ class GameConsumer(AsyncWebsocketConsumer):
             self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
             self.room_group_name = f"game_{self.room_name}"
 
-            if not self.scope['user'].is_authenticated:
+            if not self.scope["user"].is_authenticated:
                 await self.close()
-                raise StopConsumer('User is not authenticated')
+                raise StopConsumer("User is not authenticated")
 
             user = self.scope["user"]
             if self.room_name in self.connected_clients:
@@ -54,11 +57,12 @@ class GameConsumer(AsyncWebsocketConsumer):
                     self.user_ids[self.room_name] = [user.id, None]
                     self.users[self.room_name] = [user, None]
                 self.connected_clients[self.room_name] = GameInstance()
-                self.game_state[self.room_name] = 'waiting'
+                self.game_state[self.room_name] = "starting"
                 self.game_instance = self.connected_clients[self.room_name]
-
+            logger.info(f"game_stataaaaaaaaa {self.game_state[self.room_name]}")
             await self.channel_layer.group_add(self.room_group_name, self.channel_name)
             await self.accept()
+            await self.start_game()
             await self.send_game_state_to_clients()
 
     async def send_room_info_to_group(self):
@@ -69,7 +73,7 @@ class GameConsumer(AsyncWebsocketConsumer):
                     "room_name": self.room_name,
                     "game_state": self.game_state.get(self.room_name),
                     "user_ids": self.user_ids.get(self.room_name),
-                    "users": [str(user) for user in self.users.get(self.room_name)]
+                    "users": [str(user) for user in self.users.get(self.room_name)],
                 }
             )
         )
@@ -84,80 +88,91 @@ class GameConsumer(AsyncWebsocketConsumer):
         # Now both user IDs are set, proceed with processing game events
         game_event = text_data
         cmd = game_event[:2]
-        userid = game_event[2:]
+        userid = int(game_event[2:])
 
         local = False
-        if game_event == 'startgame':
-            await self.start_game()
-        else:
-            logger.info(f"Game event: {game_event}, {cmd}")
-            await self.handle_game_input(cmd, userid)
+        await self.handle_game_input(cmd, userid)
 
     async def handle_game_input(self, cmd, userid):
-        if self.game_state[self.room_name] == 'running':
-            if cmd == 'pw' and userid == self.user0_id:
-                await self.game_instance.move_p0_up('press')
-            elif cmd == 'ps' and userid == self.user0_id:
-                await self.game_instance.move_p0_down('press')
-            elif cmd == 'rw' and userid == self.user0_id:
-                await self.game_instance.move_p0_up('release')
-            elif cmd == 'rs' and userid == self.user0_id:
-                await self.game_instance.move_p0_down('release')
-            elif cmd == 'pw' and userid == self.user1_id:
-                await self.game_instance.move_p1_up('press')
-            elif cmd == 'ps' and userid == self.user1_id:
-                await self.game_instance.move_p1_down('press')
-            elif cmd == 'rw' and userid == self.user1_id:
-                await self.game_instance.move_p1_up('release')
-            elif cmd == 'rs' and userid == self.user1_id:
-                await self.game_instance.move_p1_down('release')
+        # if self.game_state[self.room_name] == 'running':
+        if cmd == "pw" and userid == self.user_ids[self.room_name][0]:
+            await self.game_instance.move_p0_up("press")
+        elif cmd == "ps" and userid == self.user_ids[self.room_name][0]:
+            await self.game_instance.move_p0_down("press")
+        elif cmd == "rw" and userid == self.user_ids[self.room_name][0]:
+            await self.game_instance.move_p0_up("release")
+        elif cmd == "rs" and userid == self.user_ids[self.room_name][0]:
+            await self.game_instance.move_p0_down("release")
+        elif cmd == "pw" and userid == self.user_ids[self.room_name][1]:
+            await self.game_instance.move_p1_up("press")
+        elif cmd == "ps" and userid == self.user_ids[self.room_name][1]:
+            await self.game_instance.move_p1_down("press")
+        elif cmd == "rw" and userid == self.user_ids[self.room_name][1]:
+            await self.game_instance.move_p1_up("release")
+        elif cmd == "rs" and userid == self.user_ids[self.room_name][1]:
+            await self.game_instance.move_p1_down("release")
+        await self.send_game_state_to_clients()
 
     async def disconnect(self, close_code):
         await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
 
     async def game_loop(self):
-        while self.game_state[self.room_name] == 'running':
-            await self.game_instance.update_game(self.game_state, self.room_name, self.user0_id, self.user1_id)
+        # logger.info(f"game_stateeeeeeeee {self.game_state[self.room_name]}")
+        while self.game_state[self.room_name] == "running":
+            await self.game_instance.update_game(
+                self.game_state,
+                self.room_name,
+                self.user_ids[self.room_name][0],
+                self.user_ids[self.room_name][1],
+            )
             await self.send_game_state_to_clients()
             await asyncio.sleep(0.015625)
-        self.game_tasks.pop(self.room_name)
-        if self.game_state[self.room_name] != 'ready' and self.game_state[self.room_name] != 'stopped':
-            await self.send_game_end()
+        # self.game_tasks.pop(self.room_name)
+        # if self.game_state[self.room_name] != 'ready' and self.game_state[self.room_name] != 'stopped':
+        #     await self.send_game_end()
 
     async def send_game_end(self):
         game_tag = generate_random_string(19)
         await self.channel_layer.group_send(
-            self.room_group_name, {
+            self.room_group_name,
+            {
                 "type": "ending_message",
                 "final_game_state": self.game_state[self.room_name],
-                "game_tag": game_tag
-            }
+                "game_tag": game_tag,
+            },
         )
 
     async def ending_message(self, event):
-        await self.send(text_data=json.dumps({
-            "type": "ending_message",
-            "score": event["final_game_state"],
-            "game_tag": event['game_tag']
-        }))
+        await self.send(
+            text_data=json.dumps(
+                {
+                    "type": "ending_message",
+                    "score": event["final_game_state"],
+                    "game_tag": event["game_tag"],
+                }
+            )
+        )
 
     async def start_game(self):
-        logger.info("++++game_state", self.game_state[self.room_name])
-        if self.game_state[self.room_name] == 'starting':
-            self.game_state[self.room_name] = 'running'
+        # logger.info(f"game_satekkkkkk {self.game_state[self.room_name]}")
+        if self.game_state[self.room_name] == "starting":
+            self.game_state[self.room_name] = "running"
+            # logger.info(f"game_stateeeeeee {self.game_state[self.room_name]}")
         else:
-            self.game_state[self.room_name] = 'starting'
+            self.game_state[self.room_name] = "starting"
         if self.room_name in self.connected_clients:
             self.game_instance = self.connected_clients[self.room_name]
         else:
             self.connected_clients[self.room_name] = GameInstance()
             self.game_instance = self.connected_clients[self.room_name]
-        if self.room_name not in self.game_tasks:
-            self.game_tasks[self.room_name] = asyncio.create_task(self.game_loop())
+        # if self.room_name not in self.game_tasks:
+        # logger.info(f"++++game_state{self.game_state[self.room_name]} looooooooppppp")
+        self.game_tasks[self.room_name] = asyncio.create_task(self.game_loop())
 
     async def send_game_state_to_clients(self):
         await self.channel_layer.group_send(
-            self.room_group_name, {
+            self.room_group_name,
+            {
                 "type": "game_message",
                 "ball_x": self.game_instance.ball_x,
                 "ball_y": self.game_instance.ball_y,
@@ -170,40 +185,47 @@ class GameConsumer(AsyncWebsocketConsumer):
                 "ball_speed": self.game_instance.ball_speed,
                 "room_name": self.room_name,
                 "game_state": self.game_state.get(self.room_name),
-                "user_ids": self.user_ids.get(self.room_name),
-                "users": [str(user) for user in self.users.get(self.room_name)]
-            }
+                "w": self.user_ids.get(self.room_name),
+                "users": [str(user) for user in self.users.get(self.room_name)],
+            },
         )
-        logger.info(f"Game state sent: {self.game_instance.ball_x}, {self.game_instance.ball_y},  {self.game_instance.score},  {self.game_instance.player0},  {self.game_instance.player1},  {self.game_instance.hit},  {self.game_instance.ball_speed},  {self.room_name},  {self.game_state.get(self.room_name)},  {self.user_ids.get(self.room_name)},  {[str(user) for user in self.users.get(self.room_name)]}")
+        # logger.info("sending back")
+        # logger.info(f"Game state sent: {self.game_instance.ball_x}, {self.game_instance.ball_y},  {self.game_instance.score},  {self.game_instance.player0},  {self.game_instance.player1},  {self.game_instance.hit},  {self.game_instance.ball_speed},  {self.room_name},  {self.game_state.get(self.room_name)},  {self.user_ids.get(self.room_name)},  {[str(user) for user in self.users.get(self.room_name)]}")
 
     async def game_message(self, event):
         # This method is called when the group receives a message
-        await self.send(text_data=json.dumps({
-            "type": "game_message",
-            "ball_x": event["ball_x"],
-            "ball_y": event["ball_y"],
-            "ball_speed_x": event["ball_speed_x"],
-            "ball_speed_y": event["ball_speed_y"],
-            "score": event["score"],
-            "player0": event["player0"],
-            "player1": event["player1"],
-            "hit": event["hit"],
-            "ball_speed": event["ball_speed"],
-            "room_name": self.room_name,
-            "game_state": self.game_state.get(self.room_name),
-            "user_ids": self.user_ids.get(self.room_name),
-            "users": [str(user) for user in self.users.get(self.room_name)]
-        }))
+        await self.send(
+            text_data=json.dumps(
+                {
+                    "type": "game_message",
+                    "ball_x": event["ball_x"],
+                    "ball_y": event["ball_y"],
+                    "ball_speed_x": event["ball_speed_x"],
+                    "ball_speed_y": event["ball_speed_y"],
+                    "score": event["score"],
+                    "player0": event["player0"],
+                    "player1": event["player1"],
+                    "hit": event["hit"],
+                    "ball_speed": event["ball_speed"],
+                    "room_name": self.room_name,
+                    "game_state": self.game_state.get(self.room_name),
+                    "user_ids": self.user_ids.get(self.room_name),
+                    "users": [str(user) for user in self.users.get(self.room_name)],
+                }
+            )
+        )
 
     @database_sync_to_async
     def get_room(self, room_name):
         from game.models import GameRoom
+
         return GameRoom.objects.get(name=room_name)
 
     @database_sync_to_async
     def get_all_user_channel_names(self):
         from .models import UserChannelName
-        return list(UserChannelName.objects.values('user__username'))
+
+        return list(UserChannelName.objects.values("user__username"))
 
 
 class GameInstance:
@@ -232,54 +254,79 @@ class GameInstance:
         self.score_to_win = 2
 
     async def move_paddle(self, paddle, direction, state):
-        if state == 'press':
-            setattr(self, f'{paddle}_moving', direction)
-        elif state == 'release':
-            setattr(self, f'{paddle}_moving', 0)
+        if state == "press":
+            if paddle == "player0":
+                setattr(self, paddle, self.player0 + direction)
+            else:
+                setattr(self, paddle, self.player1 + direction)
+        elif state == "release":
+            if paddle == "player0":
+                setattr(self, paddle, self.player0 + direction)
+            else:
+                setattr(self, paddle, self.player1 + direction)
 
     async def move_p0_up(self, state):
-        await self.move_paddle("p0", -1, state)
+        await self.move_paddle("player0", -3, state)
+        # self.player0 += 1
 
     async def move_p0_down(self, state):
-        await self.move_paddle("p0", 1, state)
+        await self.move_paddle("player0", 3, state)
 
     async def move_p1_up(self, state):
-        await self.move_paddle("p1", -1, state)
+        await self.move_paddle("player1", -3, state)
 
     async def move_p1_down(self, state):
-        await self.move_paddle("p1", 1, state)
+        await self.move_paddle("player1", 3, state)
 
     async def update_game(self, game_state, room_name, user0, user1):
         """
         Updates the game state
         """
         self.player0 += self.p0_moving * 10
-        self.player0 = max(0, min(self.canvas_height - self.paddle_height, self.player0))
+        self.player0 = max(
+            0, min(self.canvas_height - self.paddle_height, self.player0)
+        )
         self.player1 += self.p1_moving * 10
-        self.player1 = max(0, min(self.canvas_height - self.paddle_height, self.player1))
+        self.player1 = max(
+            0, min(self.canvas_height - self.paddle_height, self.player1)
+        )
         await self.update_ball_position(game_state, room_name, user0, user1)
-        self.score = f'{self.player0_score} : {self.player1_score}'
-        self.ball_speed = math.sqrt(self.ball_speed_x ** 2 + self.ball_speed_y ** 2)
+        self.score = f"{self.player0_score} : {self.player1_score}"
+        self.ball_speed = math.sqrt(self.ball_speed_x**2 + self.ball_speed_y**2)
 
     async def update_ball_position(self, game_state, room_name, user0, user1):
         self.ball_x += self.ball_speed_x
         self.ball_y += self.ball_speed_y
 
         # Handle collision with Player 0 paddle
-        if (self.ball_x - self.ball_size < self.paddle_width and
-                self.player0 < self.ball_y < self.player0 + self.paddle_height and
-                self.ball_speed_x < 0):  # Check if ball is moving towards the paddle
-            await self.handle_collision_with_paddle(self.player0, self.paddle_height, self.paddle_width)
+        if (
+            self.ball_x - self.ball_size < self.paddle_width
+            and self.player0 < self.ball_y < self.player0 + self.paddle_height
+            and self.ball_speed_x < 0
+        ):  # Check if ball is moving towards the paddle
+            await self.handle_collision_with_paddle(
+                self.player0, self.paddle_height, self.paddle_width
+            )
 
         # Handle collision with Player 1 paddle
-        elif (self.ball_x + self.ball_size > self.canvas_width - self.paddle_width and
-                self.player1 < self.ball_y < self.player1 + self.paddle_height and
-                self.ball_speed_x > 0):  # Check if ball is moving towards the paddle
-            await self.handle_collision_with_paddle(self.player1, self.paddle_height, self.paddle_width)
+        elif (
+            self.ball_x + self.ball_size > self.canvas_width - self.paddle_width
+            and self.player1 < self.ball_y < self.player1 + self.paddle_height
+            and self.ball_speed_x > 0
+        ):  # Check if ball is moving towards the paddle
+            await self.handle_collision_with_paddle(
+                self.player1, self.paddle_height, self.paddle_width
+            )
 
         # Handle scoring and ball reset
         if self.ball_x < 0 or self.ball_x + self.ball_size > self.canvas_width:
-            await self.handle_goal('player0' if self.ball_x < 0 else 'player1', game_state, room_name, user0, user1)
+            await self.handle_goal(
+                "player0" if self.ball_x < 0 else "player1",
+                game_state,
+                room_name,
+                user0,
+                user1,
+            )
 
         # Handle ball collision with top or bottom wall
         elif self.is_ball_colliding_with_walls():
@@ -287,14 +334,15 @@ class GameInstance:
 
     async def handle_goal(self, player_id, game_state, room_name, user0, user1):
         self.ball_hit_counter = 1
-        self.ball_speed_x = 5 if player_id == 'player0' else -5
+        self.ball_speed_x = 5 if player_id == "player0" else -5
         self.ball_speed_y = random.uniform(-2, 2)
-        self.ball_x = 50 if player_id == 'player0' else 750
+        self.ball_x = 50 if player_id == "player0" else 750
         self.ball_y = random.uniform(20, 370)
-        if player_id == 'player0':
+        if player_id == "player0":
             self.player0_score += 1
             if self.player0_score == self.score_to_win:
-                game_state[room_name] = user0 + ':' + str(self.player0_score) + '|' + user1 + ':' + str(self.player1_score)
+                # game_state[room_name] = user0 + ':' + str(self.player0_score) + '|' + user1 + ':' + str(self.player1_score)
+                game_state[room_name] = "running"
                 self.player1_score = 0
                 self.player0_score = 0
                 self.player0 = 200 - self.paddle_height / 2
@@ -302,7 +350,8 @@ class GameInstance:
         else:
             self.player1_score += 1
             if self.player1_score == self.score_to_win:
-                game_state[room_name] = user1 + ':' + str(self.player1_score) + '|' + user0 + ':' + str(self.player0_score)
+                # game_state[room_name] = user1 + ':' + str(self.player1_score) + '|' + user0 + ':' + str(self.player0_score)
+                game_state[room_name] = "running"
                 self.player1_score = 0
                 self.player0_score = 0
                 self.player0 = 200 - self.paddle_height / 2
@@ -331,19 +380,28 @@ class GameInstance:
         self.ball_speed_x *= 1 + (1 / self.ball_hit_counter) / 2
         self.ball_speed_y *= 1 + (1 / self.ball_hit_counter) / 2
         angle = math.pi / 14 * deviate
-        magnitude = math.sqrt(self.ball_speed_x ** 2 + self.ball_speed_y ** 2)
+        magnitude = math.sqrt(self.ball_speed_x**2 + self.ball_speed_y**2)
         normalized_speed_x = self.ball_speed_x / magnitude
         normalized_speed_y = self.ball_speed_y / magnitude
-        self.ball_speed_x = normalized_speed_x * math.cos(angle) - normalized_speed_y * math.sin(angle)
-        self.ball_speed_y = normalized_speed_x * math.sin(angle) + normalized_speed_y * math.cos(angle)
+        self.ball_speed_x = normalized_speed_x * math.cos(
+            angle
+        ) - normalized_speed_y * math.sin(angle)
+        self.ball_speed_y = normalized_speed_x * math.sin(
+            angle
+        ) + normalized_speed_y * math.cos(angle)
         self.ball_speed_x *= magnitude
         self.ball_speed_y *= magnitude
-        magnitude = math.sqrt(self.ball_speed_x ** 2 + self.ball_speed_y ** 2)
+        magnitude = math.sqrt(self.ball_speed_x**2 + self.ball_speed_y**2)
         self.hit = 1
 
     def is_ball_colliding_with_walls(self):
-        return self.ball_y - self.ball_size < 0 or self.ball_y + self.ball_size > self.canvas_height
+        return (
+            self.ball_y - self.ball_size < 0
+            or self.ball_y + self.ball_size > self.canvas_height
+        )
 
     def is_colliding_with_paddle(self, player, paddle_height, paddle_width):
-        return (self.ball_x - self.ball_size < paddle_width and
-                player < self.ball_y < player + paddle_height)
+        return (
+            self.ball_x - self.ball_size < paddle_width
+            and player < self.ball_y < player + paddle_height
+        )

@@ -5,7 +5,6 @@ const Pong = () => {
   const player0 = useRef(null);
   const player1 = useRef(null);
   const gameSocket = useRef(null);
-  const [receivedData, setReceivedData] = useState(null);
 
   useEffect(() => {
     async function getData() {
@@ -13,28 +12,29 @@ const Pong = () => {
 
       let canvas = document.getElementById("gameCanvas");
       let context = canvas.getContext("2d");
+      let receivedData;
       gameSocket.current.onmessage = function (event) {
-        setReceivedData(JSON.parse(event.data));
-        console.log("received data: " + event.data)
+        // console.log("received data: " + event.data)
+        receivedData = JSON.parse(event.data);
 
-        let room_name = receivedData.current["room_name"];
-        let gameState = receivedData.current["game_state"];
-        let users = receivedData.current["users"];
+        let room_name = receivedData["room_name"];
+        let gameState = receivedData["game_state"];
+        let users = receivedData["users"];
 
-        console.log("data" + users, room_name, gameState);
-        sender.current = receivedData.current["users"][0];
-        player0.current = receivedData.current["users"][0];
-        player1.current = receivedData.current["users"][1];
-        if (receivedData.current["type"] === "game_message") {
-          console.log("rendering game frame" + event.data);
-          renderGameFrame(receivedData.current);
+        // console.log("data" + users, room_name, gameState);
+        sender.current = receivedData["users"][0];
+        player0.current = receivedData["users"][0];
+        player1.current = receivedData["users"][1];
+        if (receivedData["type"] === "game_message") {
+          // console.log("rendering game frame" + event.data);
+          renderGameFrame(receivedData);
         }
-        else if (receivedData.current["type"] === "ending_message") {
+        else if (receivedData["type"] === "ending_message") {
           window.location.href =
             "https://localhost/game/ending/?gameinfo=" +
-            receivedData.current["score"] +
+            receivedData["score"] +
             "&gametag=" +
-            receivedData.current["game_tag"] +
+            receivedData["game_tag"] +
             "&roomname=" +
             room_name;
         }
@@ -168,27 +168,28 @@ const Pong = () => {
       const handleKeyDown = (event) => {
         console.log(event.key)
         const user = sender.current;
+        console.log("user", receivedData["user_ids"][0]);
         if (event.key === "w") {
-          gameSocket.current.send("pw" + user);
+          gameSocket.current.send("pw" + receivedData["user_ids"][0]);
         } else if (event.key === "s") {
-          gameSocket.current.send("ps" + user);
+          gameSocket.current.send("ps" + receivedData["user_ids"][0]);
         } else if (event.key === "i") {
-          gameSocket.current.send("pi" + user);
+          gameSocket.current.send("pi" + receivedData["user_ids"][0]);
         } else if (event.key === "k") {
-          gameSocket.current.send("pk" + user);
+          gameSocket.current.send("pk" + receivedData["user_ids"][0]);
         }
       };
 
       const handleKeyUp = (event) => {
         const user = sender.current;
         if (event.key === "w") {
-          gameSocket.current.send("rw" + user);
+          gameSocket.current.send("rw" + receivedData["user_ids"][1]);
         } else if (event.key === "s") {
-          gameSocket.current.send("rs" + user);
+          gameSocket.current.send("rs" + receivedData["user_ids"][1]);
         } else if (event.key === "i") {
-          gameSocket.current.send("ri" + user);
+          gameSocket.current.send("ri" + receivedData["user_ids"][1]);
         } else if (event.key === "k") {
-          gameSocket.current.send("rk" + user);
+          gameSocket.current.send("rk" + receivedData["user_ids"][1]);
         }
       };
 
@@ -211,7 +212,7 @@ const Pong = () => {
       };
     }
     getData();
-  }, [receivedData]);
+  }, []);
 
   return (
     <div
