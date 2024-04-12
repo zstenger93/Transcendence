@@ -21,18 +21,18 @@ const Pong = () => {
         let gameState = receivedData["game_state"];
         let users = receivedData["users"];
 
-        // console.log("data" + users, room_name, gameState);
-        sender.current = receivedData["users"][0];
-        player0.current = receivedData["users"][0];
-        player1.current = receivedData["users"][1];
         if (receivedData["type"] === "game_message") {
-          // console.log("rendering game frame" + event.data);
+          sender.current = receivedData["users"][0];
+          player0.current = receivedData["users"][0];
+          player1.current = receivedData["users"][1];
           renderGameFrame(receivedData);
         }
         else if (receivedData["type"] === "ending_message") {
+          console.log("data: " + JSON.stringify(receivedData));
+          var score = receivedData["user_ids"][0] + " " + receivedData.score + " " + receivedData["user_ids"][1];
           window.location.href =
             "https://localhost/game/ending/?gameinfo=" +
-            receivedData["score"] +
+            score +
             "&gametag=" +
             receivedData["game_tag"] +
             "&roomname=" +
@@ -56,7 +56,6 @@ const Pong = () => {
             gameData.ball_speed
           );
         }
-        console.log("gameData::::::: " + gameData, gameData.player0);
       };
 
       const clearCanvas = () => {

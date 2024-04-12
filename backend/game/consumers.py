@@ -90,7 +90,6 @@ class GameConsumer(AsyncWebsocketConsumer):
         cmd = game_event[:2]
         userid = int(game_event[2:])
 
-        local = False
         await self.handle_game_input(cmd, userid)
 
     async def handle_game_input(self, cmd, userid):
@@ -128,16 +127,21 @@ class GameConsumer(AsyncWebsocketConsumer):
             await self.send_game_state_to_clients()
             await asyncio.sleep(0.015625)
         # if self.game_state[self.room_name] != 'ending':
-            # self.game_tasks.pop(self.room_name)
+        # self.game_tasks.pop(self.room_name)
         await self.send_game_end()
 
     async def send_game_end(self):
-        game_tag = generate_random_string(19)
+        game_tag = generate_random_string(20)
         await self.channel_layer.group_send(
             self.room_group_name,
             {
                 "type": "ending_message",
-                "final_game_state": self.game_state[self.room_name],
+                "score": self.game_instance.score,
+                "player0": self.game_instance.player0,
+                "player1": self.game_instance.player1,
+                "room_name": self.room_name,
+                "game_state": self.game_state.get(self.room_name),
+                "users": [str(user) for user in self.users.get(self.room_name)],
                 "game_tag": game_tag,
             },
         )
@@ -147,7 +151,13 @@ class GameConsumer(AsyncWebsocketConsumer):
             text_data=json.dumps(
                 {
                     "type": "ending_message",
-                    "score": event["final_game_state"],
+                    "score": event["score"],
+                    "player0": event["player0"],
+                    "player1": event["player1"],
+                    "room_name": event["room_name"],
+                    "game_state": event["game_state"],
+                    "users": event["users"],
+                    "user_ids": self.user_ids.get(self.room_name),
                     "game_tag": event["game_tag"],
                 }
             )
