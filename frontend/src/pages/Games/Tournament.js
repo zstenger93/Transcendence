@@ -106,15 +106,10 @@ const Tournament = () => {
   const [listOfPlayers, setListOfPlayers] = useState([]);
   const [tournamentName, setTournamentName] = useState("Round Robin");
   const [tournament, setTournament] = useState(null);
-  const [paddle1Position, setPaddle1Position] = useState(0);
-  const [paddle2Position, setPaddle2Position] = useState(0);
-  const [ball, setBall] = useState({
-    x: 400,
-    y: 300,
-    dx: 5,
-    dy: 5,
-    radius: 10,
-  });
+  const [arrowUp, setArrowUp] = useState(false);
+  const [arrowDown, setArrowDown] = useState(false);
+  const [wDown, setWDown] = useState(false);
+  const [sDown, setSDown] = useState(false);
   const paddleWidth = 10;
   const paddleHeight = 100;
   let playerModeToAdd = 0;
@@ -392,6 +387,7 @@ const Tournament = () => {
           display: "flex",
           alignItems: "center",
           flexDirection: "column",
+          height: "3vw",
         }}
       >
         <button
@@ -885,35 +881,6 @@ const Tournament = () => {
     );
   }
 
-  // useEffect(() => {
-  //   const keysPressed = new Set();
-  //   const handleKeyDown = (event) => {
-  //     keysPressed.add(event.key);
-
-  //     if (keysPressed.has("w")) {
-  //       setPaddle1Position((prevPosition) => Math.max(0, prevPosition - 0.01));
-  //     }
-  //     if (keysPressed.has("s")) {
-  //       setPaddle1Position((prevPosition) => Math.max(0, prevPosition + 0.01));
-  //     }
-  //     if (keysPressed.has("ArrowUp")) {
-  //       setPaddle2Position((prevPosition) => Math.max(0, prevPosition + 0.01));
-  //     }
-  //     if (keysPressed.has("ArrowDown")) {
-  //       setPaddle2Position((prevPosition) => Math.max(0, prevPosition - 0.01));
-  //     }
-  //   };
-  //   const handleKeyUp = (event) => {
-  //     keysPressed.delete(event.key);
-  //   };
-  //   window.addEventListener("keydown", handleKeyDown);
-  //   window.addEventListener("keyup", handleKeyUp);
-  //   return () => {
-  //     window.removeEventListener("keydown", handleKeyDown);
-  //     window.removeEventListener("keyup", handleKeyUp);
-  //   };
-  // }, []);
-
   useEffect(() => {
     if (pageToRender === 3) {
       const canvas = canvasRef.current;
@@ -928,26 +895,50 @@ const Tournament = () => {
     }
   }, [pageToRender]);
 
-  const update = () => {};
+  const arrowUpRef = useRef(arrowUp);
+  const arrowDownRef = useRef(arrowDown);
+  const wDownRef = useRef(wDown);
+  const sDownRef = useRef(sDown);
 
-  const handleKeyDown = (event) => {
-    if (event.key === "w") {
-      setPaddle1Position(Math.max(0, paddle1Position - 10));
-    }
-    if (event.key === "s") {
-      setPaddle1Position(
-        Math.min(canvasHeight - paddleHeight, paddle1Position + 10)
-      );
-    }
-    if (event.key === "ArrowUp") {
-      setPaddle2Position(Math.max(0, paddle2Position - 10));
-    }
-    if (event.key === "ArrowDown") {
-      setPaddle2Position(
-        Math.min(canvasHeight - paddleHeight, paddle2Position + 10)
-      );
-    }
+  useEffect(() => {
+    arrowUpRef.current = arrowUp;
+    arrowDownRef.current = arrowDown;
+    wDownRef.current = wDown;
+    sDownRef.current = sDown;
+  }, [arrowUp, arrowDown, wDown, sDown]);
+
+  const update = () => {
+    console.log(
+      sDownRef.current,
+      wDownRef.current,
+      arrowDownRef.current,
+      arrowUpRef.current
+    );
   };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "ArrowUp") setArrowUp(true);
+    if (e.key === "ArrowDown") setArrowDown(true);
+    if (e.key === "w") setWDown(true);
+    if (e.key === "s") setSDown(true);
+  };
+
+  const handleKeyUp = (event) => {
+    if (event.key === "ArrowUp") setArrowUp(false);
+    if (event.key === "ArrowDown") setArrowDown(false);
+    if (event.key === "w") setWDown(false);
+    if (event.key === "s") setSDown(false);
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, []);
 
   function gamePage(match) {
     return (
