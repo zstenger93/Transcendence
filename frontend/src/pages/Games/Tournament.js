@@ -110,8 +110,8 @@ const Tournament = () => {
   const [arrowDown, setArrowDown] = useState(false);
   const [wDown, setWDown] = useState(false);
   const [sDown, setSDown] = useState(false);
-  const paddleWidth = 10;
-  const paddleHeight = 100;
+  const paddleWidth = 20;
+  const paddleHeight = 12;
   let playerModeToAdd = 0;
   let tournamentModeToAdd = 0;
   const canvasRef = useRef(null);
@@ -888,9 +888,8 @@ const Tournament = () => {
       const ratio = window.devicePixelRatio || 1;
       canvas.width = canvas.offsetWidth * ratio;
       canvas.height = canvas.offsetHeight * ratio;
-      ctx.scale(ratio, ratio);
       ctxRef.current = ctx;
-      const interval = setInterval(update, 1000 / 60);
+      const interval = setInterval(() => update(canvas, ctx), 1000 / 30);
       return () => clearInterval(interval);
     }
   }, [pageToRender]);
@@ -899,6 +898,9 @@ const Tournament = () => {
   const arrowDownRef = useRef(arrowDown);
   const wDownRef = useRef(wDown);
   const sDownRef = useRef(sDown);
+  let paddleSpeed = 1;
+  let leftPaddlePos = 50;
+  let rightPaddlePos = 50;
 
   useEffect(() => {
     arrowUpRef.current = arrowUp;
@@ -907,12 +909,34 @@ const Tournament = () => {
     sDownRef.current = sDown;
   }, [arrowUp, arrowDown, wDown, sDown]);
 
-  const update = () => {
-    console.log(
-      sDownRef.current,
-      wDownRef.current,
-      arrowDownRef.current,
-      arrowUpRef.current
+  const updatePaddles = () => {
+    if (arrowUpRef.current)
+      if (rightPaddlePos - paddleSpeed >= 0) rightPaddlePos -= paddleSpeed;
+    if (arrowDownRef.current)
+      if (rightPaddlePos + paddleSpeed <= 100 - paddleHeight)
+        rightPaddlePos += paddleSpeed;
+    if (wDownRef.current)
+      if (leftPaddlePos - paddleSpeed >= 0) leftPaddlePos -= paddleSpeed;
+    if (sDownRef.current)
+      if (leftPaddlePos + paddleSpeed <= 100 - paddleHeight)
+        leftPaddlePos += paddleSpeed;
+  };
+
+  const update = (canvas, ctx) => {
+    updatePaddles();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "red";
+    ctx.fillRect(
+      0,
+      (leftPaddlePos / 100) * canvas.height,
+      paddleWidth,
+      (paddleHeight / 100) * canvas.height
+    );
+    ctx.fillRect(
+      canvas.width - paddleWidth,
+      (rightPaddlePos / 100) * canvas.height,
+      paddleWidth,
+      (paddleHeight / 100) * canvas.height
     );
   };
 
