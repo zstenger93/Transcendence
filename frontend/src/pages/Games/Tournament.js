@@ -1128,28 +1128,74 @@ const Tournament = () => {
       rightPaddlePos = 100 - paddleHeight;
   };
 
-  const updatePaddlesInsaneBot1 = (canvas) => {};
+  const updatePaddlesInsaneBot1 = (canvas) => {
+    let estimateTime = Math.abs(ballX) / ((ballSpeed * canvas.width) / 100);
+    let estimatePostionY =
+      ballY + (ballDirY * estimateTime * canvas.height * ballSpeed) / 100;
+    if (estimatePostionY > canvas.height)
+      estimatePostionY = Math.abs(
+        canvas.height - (estimatePostionY % canvas.height)
+      );
+    else if (estimatePostionY < 0)
+      estimatePostionY = Math.abs(estimatePostionY % canvas.height);
+    else estimatePostionY = Math.abs(estimatePostionY);
+    if (
+      estimatePostionY + 30 <
+      ((leftPaddlePos + paddleHeight / 2) * canvas.height) / 100
+    )
+      leftPaddlePos -= paddleSpeed;
+    else if (
+      estimatePostionY - 30 >
+      ((leftPaddlePos + paddleHeight / 2) * canvas.height) / 100
+    )
+      leftPaddlePos += paddleSpeed;
+    if (leftPaddlePos < 0) leftPaddlePos = 0;
+    if (leftPaddlePos > 100 - paddleHeight) leftPaddlePos = 100 - paddleHeight;
+  };
 
-  const updatePaddlesInsaneBot2 = (canvas) => {};
+  const updatePaddlesInsaneBot2 = (canvas) => {
+    let estimateTime =
+      Math.abs(canvas.width - ballX) / ((ballSpeed * canvas.width) / 100);
+    let estimatePostionY =
+      ballY + (ballDirY * estimateTime * canvas.height * ballSpeed) / 100;
+    if (estimatePostionY > canvas.height)
+      estimatePostionY = Math.abs(
+        canvas.height - (estimatePostionY % canvas.height)
+      );
+    else if (estimatePostionY < 0)
+      estimatePostionY = Math.abs(estimatePostionY % canvas.height);
+    else estimatePostionY = Math.abs(estimatePostionY);
+    if (
+      estimatePostionY + 30 <
+      ((rightPaddlePos + paddleHeight / 2) * canvas.height) / 100
+    )
+      rightPaddlePos -= paddleSpeed;
+    else if (
+      estimatePostionY - 30 >
+      ((rightPaddlePos + paddleHeight / 2) * canvas.height) / 100
+    )
+      rightPaddlePos += paddleSpeed;
+    if (rightPaddlePos < 0) rightPaddlePos = 0;
+    if (rightPaddlePos > 100 - paddleHeight)
+      rightPaddlePos = 100 - paddleHeight;
+  };
 
   const drawScore = (ctx, canvas) => {
     if (tournament.matches.length === 0) return;
     ctx.fillStyle = "white";
     ctx.font = "50px Nosifer";
-    ctx.fillText(
+    let text =
       tournament.matches[tournament.currentMatch].player1.name +
-        " " +
-        scorePlayer1,
-      canvas.width / 4,
-      120
-    );
-    ctx.fillText(
+      " Score:" +
+      scorePlayer1;
+    let textMetrics = ctx.measureText(text);
+    ctx.fillText(text, canvas.width / 4 - textMetrics.width / 2, 120);
+    text =
       tournament.matches[tournament.currentMatch].player2.name +
-        " " +
-        scorePlayer2,
-      (canvas.width * 3) / 4,
-      120
-    );
+      " Score:" +
+      scorePlayer2;
+    textMetrics = ctx.measureText(text);
+    ctx.fillText(text, (canvas.width * 3) / 4 - textMetrics.width / 2, 120);
   };
 
   const paddlesToRender = (canvas) => {
