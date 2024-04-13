@@ -1025,6 +1025,7 @@ const Tournament = () => {
       ballY = canvas.height / 2;
       ballDirX = -1;
       ballDirY = -1;
+      ballSpeed = 0.6;
       if (scorePlayer1 >= 2 || scorePlayer2 >= 2) {
         ballSpeed = 0;
         updateResults();
@@ -1037,12 +1038,15 @@ const Tournament = () => {
     ctx.fill();
   };
 
-  const updatePaddles = () => {
+  const updatePaddlesPlayer1 = () => {
     if (arrowUpRef.current)
       if (rightPaddlePos - paddleSpeed >= 0) rightPaddlePos -= paddleSpeed;
     if (arrowDownRef.current)
       if (rightPaddlePos + paddleSpeed <= 100 - paddleHeight)
         rightPaddlePos += paddleSpeed;
+  };
+
+  const updatePaddlesPlayer2 = () => {
     if (wDownRef.current)
       if (leftPaddlePos - paddleSpeed >= 0) leftPaddlePos -= paddleSpeed;
     if (sDownRef.current)
@@ -1072,10 +1076,32 @@ const Tournament = () => {
     }
   };
 
+  const drawScore = (ctx, canvas) => {
+    if (tournament.matches.length === 0) return;
+    ctx.fillStyle = "white";
+    ctx.font = "50px Nosifer";
+    ctx.fillText(
+      tournament.matches[tournament.currentMatch].player1.name +
+        " " +
+        scorePlayer1,
+      canvas.width / 4,
+      200
+    );
+    ctx.fillText(
+      tournament.matches[tournament.currentMatch].player2.name +
+        " " +
+        scorePlayer2,
+      (canvas.width * 3) / 4,
+      200
+    );
+  };
+
   const update = (canvas, ctx) => {
-    updatePaddles();
+    updatePaddlesPlayer1();
+    updatePaddlesPlayer2();
     drawPaddles(ctx, canvas);
     updateBall(ctx, canvas);
+    drawScore(ctx, canvas);
   };
 
   const handleKeyDown = (e) => {
