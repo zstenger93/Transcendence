@@ -1078,9 +1078,36 @@ const Tournament = () => {
     }
   };
 
-  const updatePaddlesBabyBot1 = (canvas) => {};
+  const updatePaddlesBabyBot1 = (canvas) => {
+    if (
+      ballY + (ballDirY / 15) * canvas.height <
+      ((leftPaddlePos + paddleHeight / 2) * canvas.height) / 100
+    )
+      leftPaddlePos -= paddleSpeed;
+    if (
+      ballY + (ballDirY / 15) * canvas.height >
+      ((leftPaddlePos + paddleHeight / 2) * canvas.height) / 100
+    )
+      leftPaddlePos += paddleSpeed;
+    if (leftPaddlePos < 0) leftPaddlePos = 0;
+    if (leftPaddlePos > 100 - paddleHeight) leftPaddlePos = 100 - paddleHeight;
+  };
 
-  const updatePaddlesBabyBot2 = (canvas) => {};
+  const updatePaddlesBabyBot2 = (canvas) => {
+    if (
+      ballY + (ballDirY / 15) * canvas.height <
+      ((rightPaddlePos + paddleHeight / 2) * canvas.height) / 100
+    )
+      rightPaddlePos -= paddleSpeed;
+    if (
+      ballY + (ballDirY / 15) * canvas.height >
+      ((rightPaddlePos + paddleHeight / 2) * canvas.height) / 100
+    )
+      rightPaddlePos += paddleSpeed;
+    if (rightPaddlePos < 0) rightPaddlePos = 0;
+    if (rightPaddlePos > 100 - paddleHeight)
+      rightPaddlePos = 100 - paddleHeight;
+  };
 
   const updatePaddlesMediumBot1 = (canvas) => {
     if (ballY < ((leftPaddlePos + paddleHeight / 2) * canvas.height) / 100)
