@@ -15,6 +15,8 @@ class Match {
   constructor(player1, player2) {
     this.player1 = player1;
     this.player2 = player2;
+    this.scorePlayer1 = 0;
+    this.scorePlayer2 = 0;
     this.winner = null;
     this.matchId = null;
   }
@@ -63,7 +65,6 @@ class TournamentData {
     this.currentRound = 0;
     this.mode = 0;
     this.matches = [];
-    this.matchesPlayed = [];
     this.matchHistory = [];
     this.randomizePlayerOrder();
     switch (mode) {
@@ -231,6 +232,8 @@ const Tournament = () => {
   }
 
   function displayCurrentMatch() {
+    if (tournament.matches.length === 0)
+      return <h1 style={{ color: "white" }}>No Matches</h1>;
     const match = tournament.matches[tournament.currentMatch];
     return (
       <div
@@ -303,12 +306,13 @@ const Tournament = () => {
               width: "100%",
               fontFamily: "Nosifer",
               alignItems: "center",
-              justifyContent: "center",
+              justifyContent: "space-between",
               display: "flex",
               fontSize: "1vw",
             }}
           >
             <h2>{match.player1.name}</h2>
+            <h2>{match.scorePlayer1}</h2>
           </div>
           <div
             style={{
@@ -317,12 +321,13 @@ const Tournament = () => {
               width: "100%",
               fontFamily: "Nosifer",
               alignItems: "center",
-              justifyContent: "center",
+              justifyContent: "space-between",
               display: "flex",
               fontSize: "1vw",
             }}
           >
             <h2>{match.player2.name}</h2>
+            <h2>{match.scorePlayer2}</h2>
           </div>
         </div>
       );
@@ -896,15 +901,20 @@ const Tournament = () => {
   const arrowDownRef = useRef(arrowDown);
   const wDownRef = useRef(wDown);
   const sDownRef = useRef(sDown);
-  let paddleSpeed = 1;
-  let leftPaddlePos = 50;
-  let rightPaddlePos = 50;
-  let ballSpeed = 0.6;
-  let ballX = 50;
-  let ballY = 50;
-  let ballDirX = 1;
-  let ballDirY = 1;
+  var paddleSpeed = 1;
+  var leftPaddlePos = 50;
+  var rightPaddlePos = 50;
+  var ballSpeed = 0.6;
+  var ballX = 50;
+  var ballY = 50;
+  var ballDirX = 1;
+  var ballDirY = 1;
+  var scorePlayer1 = 0;
+  var scorePlayer2 = 0;
 
+
+
+  
   useEffect(() => {
     if (pageToRender === 3) {
       const canvas = canvasRef.current;
@@ -912,8 +922,16 @@ const Tournament = () => {
       const ratio = window.devicePixelRatio || 1;
       canvas.width = canvas.offsetWidth * ratio;
       canvas.height = canvas.offsetHeight * ratio;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       ballX = canvas.width / 2;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       ballY = canvas.height / 2;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      ballSpeed = 0.6;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      scorePlayer1 = 0;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      scorePlayer2 = 0;
       ctxRef.current = ctx;
       const interval = setInterval(() => update(canvas, ctx), 1000 / 30);
       return () => clearInterval(interval);
@@ -928,41 +946,66 @@ const Tournament = () => {
     sDownRef.current = sDown;
   }, [arrowUp, arrowDown, wDown, sDown]);
 
-  //   0,
-  //   (leftPaddlePos / 100) * canvas.height,
-  //   (paddleWidth * canvas.width) / 100,
-  //   (paddleHeight / 100) * canvas.height
-  // );
-  // ctx.fillRect(
-  //   canvas.width - (paddleWidth * canvas.width) / 100,
-  //   (rightPaddlePos / 100) * canvas.height,
-  //   (paddleWidth * canvas.width) / 100,
-  //   (paddleHeight / 100) * canvas.height
+  const updateResults = () => {
+    const match = tournament.matches[tournament.currentMatch];
+    match.winner = scorePlayer1 > scorePlayer2 ? match.player1 : match.player2;
+    match.matchId = tournament.currentMatch;
+    if (match.player1.score > match.player2.score) match.player1.score += 1;
+    else match.player2.score += 1;
+    match.scorePlayer1 = scorePlayer1;
+    match.scorePlayer2 = scorePlayer2;
+    tournament.matchHistory.push(match);
+    tournament.matches.splice(tournament.currentMatch, 1);
+  };
 
   const updateBall = (ctx, canvas) => {
     ballX += (ballSpeed * ballDirX * canvas.width) / 100;
     ballY += (ballSpeed * ballDirY * canvas.height) / 100;
     if (ballY <= 0 || ballY >= canvas.height) ballDirY *= -1;
+    if (ballY <= 0) ballY = 25;
+    if (ballY >= canvas.height) ballY = canvas.height - 25;
+
     if (ballX <= (paddleWidth * canvas.width) / 100) {
       if (
         ballY >= (leftPaddlePos * canvas.height) / 100 &&
         ballY <= ((leftPaddlePos + paddleHeight) * canvas.height) / 100
-      )
+      ) {
+        ballDirY =
+          2 *
+            ((ballY - (leftPaddlePos * canvas.height) / 100) /
+              ((paddleHeight * canvas.height) / 100)) -
+          1;
         ballDirX *= -1;
+        ballSpeed += 0.05;
+      }
     }
     if (ballX >= canvas.width - (paddleWidth * canvas.width) / 100) {
       if (
         ballY >= (rightPaddlePos * canvas.height) / 100 &&
         ballY <= ((rightPaddlePos + paddleHeight) * canvas.height) / 100
-      )
+      ) {
+        ballDirY =
+          2 *
+            ((ballY - (rightPaddlePos * canvas.height) / 100) /
+              ((paddleHeight * canvas.height) / 100)) -
+          1;
         ballDirX *= -1;
+        ballSpeed += 0.05;
+      }
     }
-
     if (ballX <= 0 || ballX >= canvas.width) {
+      if (ballX <= 0) scorePlayer2++;
+      if (ballX >= canvas.width) scorePlayer1++;
       ballX = canvas.width / 2;
       ballY = canvas.height / 2;
       ballDirX = -1;
       ballDirY = -1;
+      if (scorePlayer1 >= 2 || scorePlayer2 >= 2) {
+        ballSpeed = 0;
+        updateResults();
+        setPageToRender(2);
+        console.log("Game Over");
+      }
     }
     ctx.beginPath();
     ctx.arc(ballX, ballY, canvas.height / 100, 0, Math.PI * 2, false);
