@@ -16,26 +16,31 @@ const Pong = () => {
       gameSocket.current.onmessage = function (event) {
         // console.log("received data: " + event.data)
         receivedData = JSON.parse(event.data);
-
+        console.log("data: " + JSON.stringify(receivedData));
+        
         let room_name = receivedData["room_name"];
         let gameState = receivedData["game_state"];
         let users = receivedData["users"];
-
+        
         if (receivedData["type"] === "game_message") {
+          console.log("Game Message: " + JSON.stringify(receivedData));
           sender.current = receivedData["users"][0];
           player0.current = receivedData["users"][0];
           player1.current = receivedData["users"][1];
           renderGameFrame(receivedData);
         }
+        else if (receivedData["type"] === "waiting_message") {
+          console.log("Waiting Message: " + JSON.stringify(receivedData));
+        }
         else if (receivedData["type"] === "ending_message") {
-          console.log("data: " + JSON.stringify(receivedData));
+          console.log("Ending Message: " + JSON.stringify(receivedData));
           var score = receivedData["user_ids"][0] + " " + receivedData.score + " " + receivedData["user_ids"][1];
           window.location.href =
-            "https://localhost/game/ending/?gameinfo=" +
-            score +
-            "&gametag=" +
-            receivedData["game_tag"] +
-            "&roomname=" +
+          "https://localhost/game/ending/?gameinfo=" +
+          score +
+          "&gametag=" +
+          receivedData["game_tag"] +
+          "&roomname=" +
             room_name;
         }
       };
@@ -182,22 +187,23 @@ const Pong = () => {
       const handleKeyUp = (event) => {
         const user = sender.current;
         if (event.key === "w") {
-          gameSocket.current.send("rw" + receivedData["user_ids"][1]);
+          gameSocket.current.send("rw" + receivedData["user_ids"][0]);
         } else if (event.key === "s") {
-          gameSocket.current.send("rs" + receivedData["user_ids"][1]);
+          gameSocket.current.send("rs" + receivedData["user_ids"][0]);
         } else if (event.key === "i") {
-          gameSocket.current.send("ri" + receivedData["user_ids"][1]);
+          gameSocket.current.send("ri" + receivedData["user_ids"][0]);
         } else if (event.key === "k") {
-          gameSocket.current.send("rk" + receivedData["user_ids"][1]);
+          gameSocket.current.send("rk" + receivedData["user_ids"][0]);
         }
       };
 
       const startGame = () => {
+        document.addEventListener("keyup", handleKeyUp);
+        document.addEventListener("keydown", handleKeyDown);
         gameSocket.current.send("startgame");
       };
 
-      document.addEventListener("keyup", handleKeyUp);
-      document.addEventListener("keydown", handleKeyDown);
+
       const startButton = document.getElementById("startGame");
       startButton.addEventListener("click", startGame);
 
@@ -212,6 +218,7 @@ const Pong = () => {
     }
     getData();
   }, []);
+  
 
   return (
     <div

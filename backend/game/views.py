@@ -88,15 +88,7 @@ def game_ending(request):
     game_tag = request.GET.get("gametag", None)
     lobby_name = request.GET.get("roomname", None)
     logger.info("game____info", game_info)
-    # Parse game_info string from request
-    # users = game_info.split("|")
-    # winner_id = users[0].split(":")[0]
-    # winner_score = users[0].split(":")[1]
-    # loser_id = users[1].split(":")[0]
-    # loser_score = users[1].split(":")[1]
-    ## Instead of parsing the previous way I want to parse this result asioud 0 : 1 asioud (user1 score : user2 score)
     users = game_info.split(" ")
-    logger.info(f"..............................................................users {users}")
     winner_id = users[0]
     winner_score = users[1]
     loser_id = users[3]

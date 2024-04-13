@@ -48,16 +48,17 @@ class GameConsumer(AsyncWebsocketConsumer):
             user = self.scope["user"]
             if self.room_name in self.connected_clients:
                 self.game_instance = self.connected_clients[self.room_name]
-                async with self.id_sem:
-                    self.user_ids[self.room_name][1] = user.id
-                    self.users[self.room_name][1] = user
-                    self.game_state[self.room_name] = "starting"
+                if (user.id != self.user_ids[self.room_name][0]):
+                    async with self.id_sem:
+                        self.user_ids[self.room_name][1] = user.id
+                        self.users[self.room_name][1] = user
+                        self.game_state[self.room_name] = "starting"
             else:
                 async with self.id_sem:
                     self.user_ids[self.room_name] = [user.id, None]
                     self.users[self.room_name] = [user, None]
+                self.game_state[self.room_name] = "waiting"
                 self.connected_clients[self.room_name] = GameInstance()
-                self.game_state[self.room_name] = "starting"
                 self.game_instance = self.connected_clients[self.room_name]
             logger.info(f"game_stataaaaaaaaa {self.game_state[self.room_name]}")
             await self.channel_layer.group_add(self.room_group_name, self.channel_name)
@@ -93,24 +94,24 @@ class GameConsumer(AsyncWebsocketConsumer):
         await self.handle_game_input(cmd, userid)
 
     async def handle_game_input(self, cmd, userid):
-        # if self.game_state[self.room_name] == 'running':
-        if cmd == "pw" and userid == self.user_ids[self.room_name][0]:
-            await self.game_instance.move_p0_up("press")
-        elif cmd == "ps" and userid == self.user_ids[self.room_name][0]:
-            await self.game_instance.move_p0_down("press")
-        elif cmd == "rw" and userid == self.user_ids[self.room_name][0]:
-            await self.game_instance.move_p0_up("release")
-        elif cmd == "rs" and userid == self.user_ids[self.room_name][0]:
-            await self.game_instance.move_p0_down("release")
-        elif cmd == "pw" and userid == self.user_ids[self.room_name][1]:
-            await self.game_instance.move_p1_up("press")
-        elif cmd == "ps" and userid == self.user_ids[self.room_name][1]:
-            await self.game_instance.move_p1_down("press")
-        elif cmd == "rw" and userid == self.user_ids[self.room_name][1]:
-            await self.game_instance.move_p1_up("release")
-        elif cmd == "rs" and userid == self.user_ids[self.room_name][1]:
-            await self.game_instance.move_p1_down("release")
-        await self.send_game_state_to_clients()
+        if self.game_state[self.room_name] == 'running':
+            if cmd == "pw" and userid == self.user_ids[self.room_name][0]:
+                await self.game_instance.move_p0_up("press")
+            elif cmd == "ps" and userid == self.user_ids[self.room_name][0]:
+                await self.game_instance.move_p0_down("press")
+            elif cmd == "rw" and userid == self.user_ids[self.room_name][0]:
+                await self.game_instance.move_p0_up("release")
+            elif cmd == "rs" and userid == self.user_ids[self.room_name][0]:
+                await self.game_instance.move_p0_down("release")
+            elif cmd == "pw" and userid == self.user_ids[self.room_name][1]:
+                await self.game_instance.move_p1_up("press")
+            elif cmd == "ps" and userid == self.user_ids[self.room_name][1]:
+                await self.game_instance.move_p1_down("press")
+            elif cmd == "rw" and userid == self.user_ids[self.room_name][1]:
+                await self.game_instance.move_p1_up("release")
+            elif cmd == "rs" and userid == self.user_ids[self.room_name][1]:
+                await self.game_instance.move_p1_down("release")
+            await self.send_game_state_to_clients()
 
     async def disconnect(self, close_code):
         await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
@@ -165,9 +166,9 @@ class GameConsumer(AsyncWebsocketConsumer):
 
     async def start_game(self):
         # logger.info(f"game_satekkkkkk {self.game_state[self.room_name]}")
-        if self.game_state[self.room_name] == "starting":
-            self.game_state[self.room_name] = "running"
-            # logger.info(f"game_stateeeeeee {self.game_state[self.room_name]}")
+        if self.game_state[self.room_name] == "waiting":
+            while self.user_ids[self.room_name][1] is None:
+                await self.send_game_state_to_clients()
         else:
             self.game_state[self.room_name] = "starting"
         if self.room_name in self.connected_clients:
