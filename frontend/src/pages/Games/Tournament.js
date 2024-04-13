@@ -47,6 +47,9 @@ class Player {
       case 3:
         picture = insanePic;
         break;
+      default:
+        picture = playerPic;
+        break;
     }
     return picture;
   }
@@ -72,6 +75,9 @@ class TournamentData {
         break;
       case 2:
         this.createSwiss();
+        break;
+      default:
+        this.createRoundRobin();
         break;
     }
   }
@@ -110,7 +116,7 @@ const Tournament = () => {
   const [arrowDown, setArrowDown] = useState(false);
   const [wDown, setWDown] = useState(false);
   const [sDown, setSDown] = useState(false);
-  const paddleWidth = 20;
+  const paddleWidth = 5;
   const paddleHeight = 12;
   let playerModeToAdd = 0;
   let tournamentModeToAdd = 0;
@@ -155,7 +161,7 @@ const Tournament = () => {
         };
         img.src = player.picture;
       }
-    }, [listOfPlayers]);
+    }, []);
     return (
       <canvas
         id="selectionCanvas"
@@ -658,7 +664,11 @@ const Tournament = () => {
             onClick={() => removePlayer(i)}
             style={{ height: "20%", aspectRatio: "1/1", margin: "2%" }}
           >
-            <img src={eliminate} style={{ overflow: "fit" }}></img>
+            <img
+              src={eliminate}
+              style={{ overflow: "fit" }}
+              alt="remove player"
+            ></img>
           </button>
         </div>
       );
@@ -699,6 +709,7 @@ const Tournament = () => {
             title={button.alt}
           >
             <img
+              alt={button.alt}
               src={button.imgSrc}
               title={button.alt}
               style={{
@@ -892,6 +903,7 @@ const Tournament = () => {
       const interval = setInterval(() => update(canvas, ctx), 1000 / 30);
       return () => clearInterval(interval);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageToRender]);
 
   const arrowUpRef = useRef(arrowUp);
@@ -929,13 +941,13 @@ const Tournament = () => {
     ctx.fillRect(
       0,
       (leftPaddlePos / 100) * canvas.height,
-      paddleWidth,
+      (paddleWidth * canvas.width) / 100,
       (paddleHeight / 100) * canvas.height
     );
     ctx.fillRect(
-      canvas.width - paddleWidth,
+      canvas.width - (paddleWidth * canvas.width) / 100,
       (rightPaddlePos / 100) * canvas.height,
-      paddleWidth,
+      (paddleWidth * canvas.width) / 100,
       (paddleHeight / 100) * canvas.height
     );
   };
