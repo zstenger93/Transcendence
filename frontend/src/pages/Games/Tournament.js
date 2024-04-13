@@ -116,7 +116,7 @@ const Tournament = () => {
   const [arrowDown, setArrowDown] = useState(false);
   const [wDown, setWDown] = useState(false);
   const [sDown, setSDown] = useState(false);
-  const paddleWidth = 5;
+  const paddleWidth = 1;
   const paddleHeight = 12;
   let playerModeToAdd = 0;
   let tournamentModeToAdd = 0;
@@ -892,20 +892,6 @@ const Tournament = () => {
     );
   }
 
-  useEffect(() => {
-    if (pageToRender === 3) {
-      const canvas = canvasRef.current;
-      const ctx = canvas.getContext("2d");
-      const ratio = window.devicePixelRatio || 1;
-      canvas.width = canvas.offsetWidth * ratio;
-      canvas.height = canvas.offsetHeight * ratio;
-      ctxRef.current = ctx;
-      const interval = setInterval(() => update(canvas, ctx), 1000 / 30);
-      return () => clearInterval(interval);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageToRender]);
-
   const arrowUpRef = useRef(arrowUp);
   const arrowDownRef = useRef(arrowDown);
   const wDownRef = useRef(wDown);
@@ -913,6 +899,27 @@ const Tournament = () => {
   let paddleSpeed = 1;
   let leftPaddlePos = 50;
   let rightPaddlePos = 50;
+  let ballSpeed = 0.6;
+  let ballX = 50;
+  let ballY = 50;
+  let ballDirX = 1;
+  let ballDirY = 1;
+
+  useEffect(() => {
+    if (pageToRender === 3) {
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext("2d");
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = canvas.offsetWidth * ratio;
+      canvas.height = canvas.offsetHeight * ratio;
+      ballX = canvas.width / 2;
+      ballY = canvas.height / 2;
+      ctxRef.current = ctx;
+      const interval = setInterval(() => update(canvas, ctx), 1000 / 30);
+      return () => clearInterval(interval);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageToRender]);
 
   useEffect(() => {
     arrowUpRef.current = arrowUp;
@@ -920,6 +927,47 @@ const Tournament = () => {
     wDownRef.current = wDown;
     sDownRef.current = sDown;
   }, [arrowUp, arrowDown, wDown, sDown]);
+
+  //   0,
+  //   (leftPaddlePos / 100) * canvas.height,
+  //   (paddleWidth * canvas.width) / 100,
+  //   (paddleHeight / 100) * canvas.height
+  // );
+  // ctx.fillRect(
+  //   canvas.width - (paddleWidth * canvas.width) / 100,
+  //   (rightPaddlePos / 100) * canvas.height,
+  //   (paddleWidth * canvas.width) / 100,
+  //   (paddleHeight / 100) * canvas.height
+
+  const updateBall = (ctx, canvas) => {
+    ballX += (ballSpeed * ballDirX * canvas.width) / 100;
+    ballY += (ballSpeed * ballDirY * canvas.height) / 100;
+    if (ballY <= 0 || ballY >= canvas.height) ballDirY *= -1;
+    if (ballX <= (paddleWidth * canvas.width) / 100) {
+      if (
+        ballY >= (leftPaddlePos * canvas.height) / 100 &&
+        ballY <= ((leftPaddlePos + paddleHeight) * canvas.height) / 100
+      )
+        ballDirX *= -1;
+    }
+    if (ballX >= canvas.width - (paddleWidth * canvas.width) / 100) {
+      if (
+        ballY >= (rightPaddlePos * canvas.height) / 100 &&
+        ballY <= ((rightPaddlePos + paddleHeight) * canvas.height) / 100
+      )
+        ballDirX *= -1;
+    }
+
+    if (ballX <= 0 || ballX >= canvas.width) {
+      ballX = canvas.width / 2;
+      ballY = canvas.height / 2;
+      ballDirX = -1;
+      ballDirY = -1;
+    }
+    ctx.beginPath();
+    ctx.arc(ballX, ballY, canvas.height / 100, 0, Math.PI * 2, false);
+    ctx.fill();
+  };
 
   const updatePaddles = () => {
     if (arrowUpRef.current)
@@ -934,10 +982,9 @@ const Tournament = () => {
         leftPaddlePos += paddleSpeed;
   };
 
-  const update = (canvas, ctx) => {
-    updatePaddles();
+  const drawPaddles = (ctx, canvas) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "red";
+    ctx.fillStyle = "white";
     ctx.fillRect(
       0,
       (leftPaddlePos / 100) * canvas.height,
@@ -950,6 +997,17 @@ const Tournament = () => {
       (paddleWidth * canvas.width) / 100,
       (paddleHeight / 100) * canvas.height
     );
+    let lineLen = canvas.width / 40 - 2;
+    for (let i = 0; i < 22; i++) {
+      if (i % 2 === 0) continue;
+      ctx.fillRect((canvas.width - 5) / 2, i * lineLen, 10, lineLen);
+    }
+  };
+
+  const update = (canvas, ctx) => {
+    updatePaddles();
+    drawPaddles(ctx, canvas);
+    updateBall(ctx, canvas);
   };
 
   const handleKeyDown = (e) => {
