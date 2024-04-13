@@ -913,16 +913,26 @@ const Tournament = () => {
   var scorePlayer2 = 0;
 
   function resultPage() {
+    tournament.sortPlayersByScore();
     return (
       <div className="flex justify-center items-center h-screen">
         <div className="relative">
-          <img
-            src={backgroundImage}
-            style={{ width: "80vw", height: "45vw", objectFit: "cover" }}
-            alt="Background"
+          <div
+            style={{
+              width: "80vw",
+              height: "45vw",
+              backgroundColor: "black",
+              alignItems: "center",
+              display: "flex",
+              flexDirection: "column",
+              border: "1px solid white",
+              boxSizing: "border-box",
+              overflowY: "auto",
+            }}
             className="rounded-xl shadow-lg"
-          />
-
+          >
+            {renderPlayersTournament()}
+          </div>
           <BackButton navigate={navigate} t={t} />
         </div>
       </div>
@@ -970,6 +980,7 @@ const Tournament = () => {
     match.scorePlayer2 = scorePlayer2;
     tournament.matchHistory.push(match);
     tournament.matches.splice(tournament.currentMatch, 1);
+    tournament.sortPlayersByScore();
   };
 
   const updateBall = (ctx, canvas) => {
