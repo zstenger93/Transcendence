@@ -117,9 +117,9 @@ const Tournament = () => {
   const [arrowDown, setArrowDown] = useState(false);
   const [wDown, setWDown] = useState(false);
   const [sDown, setSDown] = useState(false);
+  const [playerModeToAdd, setPlayerModeToAdd] = useState(0);
   const paddleWidth = 1;
   const paddleHeight = 12;
-  let playerModeToAdd = 0;
   let tournamentModeToAdd = 0;
   const canvasRef = useRef(null);
   const ctxRef = useRef(null);
@@ -201,7 +201,7 @@ const Tournament = () => {
       button.style.width = "12%";
       button.style.height = "90%";
     }
-    playerModeToAdd = input;
+    setPlayerModeToAdd(input);
     const selectedButton = document.getElementById("button" + input);
     selectedButton.style.width = "14%";
     selectedButton.style.height = "100%";
@@ -1002,6 +1002,7 @@ const Tournament = () => {
           1;
         ballDirX *= -1;
         ballSpeed += 0.05;
+        ballX = (paddleWidth * canvas.width) / 100;
       }
     }
     if (ballX >= canvas.width - (paddleWidth * canvas.width) / 100) {
@@ -1016,6 +1017,7 @@ const Tournament = () => {
           1;
         ballDirX *= -1;
         ballSpeed += 0.05;
+        ballX = canvas.width - (paddleWidth * canvas.width) / 100;
       }
     }
     if (ballX <= 0 || ballX >= canvas.width) {
@@ -1039,19 +1041,19 @@ const Tournament = () => {
   };
 
   const updatePaddlesPlayer1 = () => {
-    if (arrowUpRef.current)
-      if (rightPaddlePos - paddleSpeed >= 0) rightPaddlePos -= paddleSpeed;
-    if (arrowDownRef.current)
-      if (rightPaddlePos + paddleSpeed <= 100 - paddleHeight)
-        rightPaddlePos += paddleSpeed;
-  };
-
-  const updatePaddlesPlayer2 = () => {
     if (wDownRef.current)
       if (leftPaddlePos - paddleSpeed >= 0) leftPaddlePos -= paddleSpeed;
     if (sDownRef.current)
       if (leftPaddlePos + paddleSpeed <= 100 - paddleHeight)
         leftPaddlePos += paddleSpeed;
+  };
+
+  const updatePaddlesPlayer2 = () => {
+    if (arrowUpRef.current)
+      if (rightPaddlePos - paddleSpeed >= 0) rightPaddlePos -= paddleSpeed;
+    if (arrowDownRef.current)
+      if (rightPaddlePos + paddleSpeed <= 100 - paddleHeight)
+        rightPaddlePos += paddleSpeed;
   };
 
   const drawPaddles = (ctx, canvas) => {
@@ -1076,6 +1078,33 @@ const Tournament = () => {
     }
   };
 
+  const updatePaddlesBabyBot1 = (canvas) => {};
+
+  const updatePaddlesBabyBot2 = (canvas) => {};
+
+  const updatePaddlesMediumBot1 = (canvas) => {
+    if (ballY < ((leftPaddlePos + paddleHeight / 2) * canvas.height) / 100)
+      leftPaddlePos -= paddleSpeed;
+    if (ballY > ((leftPaddlePos + paddleHeight / 2) * canvas.height) / 100)
+      leftPaddlePos += paddleSpeed;
+    if (leftPaddlePos < 0) leftPaddlePos = 0;
+    if (leftPaddlePos > 100 - paddleHeight) leftPaddlePos = 100 - paddleHeight;
+  };
+
+  const updatePaddlesMediumBot2 = (canvas) => {
+    if (ballY < ((rightPaddlePos + paddleHeight / 2) * canvas.height) / 100)
+      rightPaddlePos -= paddleSpeed;
+    if (ballY > ((rightPaddlePos + paddleHeight / 2) * canvas.height) / 100)
+      rightPaddlePos += paddleSpeed;
+    if (rightPaddlePos < 0) rightPaddlePos = 0;
+    if (rightPaddlePos > 100 - paddleHeight)
+      rightPaddlePos = 100 - paddleHeight;
+  };
+
+  const updatePaddlesInsaneBot1 = (canvas) => {};
+
+  const updatePaddlesInsaneBot2 = (canvas) => {};
+
   const drawScore = (ctx, canvas) => {
     if (tournament.matches.length === 0) return;
     ctx.fillStyle = "white";
@@ -1085,20 +1114,56 @@ const Tournament = () => {
         " " +
         scorePlayer1,
       canvas.width / 4,
-      200
+      120
     );
     ctx.fillText(
       tournament.matches[tournament.currentMatch].player2.name +
         " " +
         scorePlayer2,
       (canvas.width * 3) / 4,
-      200
+      120
     );
   };
 
+  const paddlesToRender = (canvas) => {
+    switch (tournament.matches[tournament.currentMatch].player1.mode) {
+      case 0:
+        updatePaddlesPlayer1();
+        break;
+      case 1:
+        updatePaddlesBabyBot1(canvas);
+        break;
+      case 2:
+        updatePaddlesMediumBot1(canvas);
+        break;
+      case 3:
+        updatePaddlesInsaneBot1(canvas);
+        break;
+      default:
+        updatePaddlesPlayer1();
+        break;
+    }
+    switch (tournament.matches[tournament.currentMatch].player2.mode) {
+      case 0:
+        updatePaddlesPlayer2();
+        break;
+      case 1:
+        updatePaddlesBabyBot2(canvas);
+        break;
+      case 2:
+        updatePaddlesMediumBot2(canvas);
+        break;
+      case 3:
+        updatePaddlesInsaneBot2(canvas);
+        break;
+      default:
+        updatePaddlesPlayer2();
+        break;
+    }
+  };
+
   const update = (canvas, ctx) => {
-    updatePaddlesPlayer1();
-    updatePaddlesPlayer2();
+    paddlesToRender(canvas);
     drawPaddles(ctx, canvas);
     updateBall(ctx, canvas);
     drawScore(ctx, canvas);
