@@ -912,9 +912,23 @@ const Tournament = () => {
   var scorePlayer1 = 0;
   var scorePlayer2 = 0;
 
+  function resultPage() {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="relative">
+          <img
+            src={backgroundImage}
+            style={{ width: "80vw", height: "45vw", objectFit: "cover" }}
+            alt="Background"
+            className="rounded-xl shadow-lg"
+          />
 
+          <BackButton navigate={navigate} t={t} />
+        </div>
+      </div>
+    );
+  }
 
-  
   useEffect(() => {
     if (pageToRender === 3) {
       const canvas = canvasRef.current;
@@ -1003,8 +1017,8 @@ const Tournament = () => {
       if (scorePlayer1 >= 2 || scorePlayer2 >= 2) {
         ballSpeed = 0;
         updateResults();
-        setPageToRender(2);
-        console.log("Game Over");
+        if (tournament.matches.length !== 0) setPageToRender(2);
+        else setPageToRender(4);
       }
     }
     ctx.beginPath();
@@ -1111,6 +1125,8 @@ const Tournament = () => {
       return tournamentPage();
     case 3:
       return gamePage(tournament.matches[tournament.currentMatch]);
+    case 4:
+      return resultPage();
     default:
       return startPage();
   }
