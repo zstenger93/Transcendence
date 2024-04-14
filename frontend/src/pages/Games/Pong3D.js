@@ -44,7 +44,7 @@ function Pong3D() {
   let leftPaddlePosition = 0;
   let bounceCounter = 0;
   let isCodeExecuted = false;
-  let lifes = 7;
+  var lifes = 7;
 
   class Asteroid {
     constructor(x, y, radius, currentWayPoint, scene) {
