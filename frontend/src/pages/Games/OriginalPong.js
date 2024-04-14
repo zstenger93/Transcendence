@@ -11,6 +11,8 @@ import FullScreenButton from "../../components/buttons/FullScreen";
 
 const GameCanvas = () => {
   // Default Parameters
+  let playerSpeed = 5;
+  const playerSpeedIncrease = 500;
   let resize = true;
   const defaultSpeedX = 300;
   const winScore = 10;
@@ -89,7 +91,10 @@ const GameCanvas = () => {
       ballX = canvas.width - paddleWidth - 10;
       ballSpeedX *= -1;
       if (ballSpeedX < 0) ballSpeedX -= ballSpeedIncrease;
-      else ballSpeedX += ballSpeedIncrease;
+      else {
+        ballSpeedX += ballSpeedIncrease;
+        playerSpeed += playerSpeedIncrease;
+      }
       ballSpeedY +=
         distanceFromCenter *
         ballAngleOffset *
@@ -101,6 +106,7 @@ const GameCanvas = () => {
       ballSpeedX = defaultSpeedX;
       ballSpeedY = defaultSpeedY;
       scoreRight += 1;
+      playerSpeed = 5;
       setScoreRight(scoreRight);
     } else if (ballX - ballSize * 3 > canvas.width) {
       ballX = canvas.width / 2;
@@ -108,6 +114,7 @@ const GameCanvas = () => {
       ballSpeedX = -defaultSpeedX;
       ballSpeedY = -defaultSpeedY;
       scoreLeft += 1;
+      playerSpeed = 5;
       setScoreLeft(scoreLeft);
     }
   };
@@ -153,7 +160,6 @@ const GameCanvas = () => {
     handleKeys();
   };
 
-  const playerSpeed = 5;
   const keysPressed = {};
 
   const handleKeys = () => {
@@ -199,6 +205,7 @@ const GameCanvas = () => {
           const touchY = event.touches[i].clientY - rect.top - window.scrollY;
           // Left paddle controls
           if (touch.clientX < window.innerWidth / 2) {
+			// eslint-disable-next-line react-hooks/exhaustive-deps
             leftPaddleY = touchY - paddleHeight / 2;
             leftPaddleY = Math.max(
               0,
@@ -207,6 +214,7 @@ const GameCanvas = () => {
           }
           // Right paddle controls
           else {
+			// eslint-disable-next-line react-hooks/exhaustive-deps
             rightPaddleY = touchY - paddleHeight / 2;
             rightPaddleY = Math.max(
               0,

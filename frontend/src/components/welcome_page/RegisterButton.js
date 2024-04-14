@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { WelcomeButtonStyle } from "../buttons/ButtonStyle";
+import Cookies from "js-cookie";
 
 const RegisterButt = ({ t, redirectToHome, redirect_uri }) => {
   const [showFields, setShowFields] = useState(false);
@@ -11,7 +12,7 @@ const RegisterButt = ({ t, redirectToHome, redirect_uri }) => {
   const [error, setError] = useState(null);
   const [showError, setShowError] = useState(false);
 
-  const registerTheUser = async () => {
+  const registerUser = async () => {
     try {
       const response = await axios.post(
         `${redirect_uri}/api/register`,
@@ -22,8 +23,15 @@ const RegisterButt = ({ t, redirectToHome, redirect_uri }) => {
         },
         { withCredentials: true }
       );
-      console.log(response.data);
-      redirectToHome();
+	  const token = response.data.access;
+      if (token) {
+        Cookies.set("access", token, {
+          expires: 7,
+          sameSite: "Strict",
+          secure: true,
+        });
+        redirectToHome();
+      }
     } catch (error) {
       if (error.response && error.response.data) {
         let errorMessage;
@@ -54,7 +62,7 @@ const RegisterButt = ({ t, redirectToHome, redirect_uri }) => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder={t("Username")}
-            onKeyPress={(e) => e.key === "Enter" && redirectToHome()}
+            onKeyPress={(e) => e.key === "Enter"}
             className="mb-2 mt-4 bg-gray-900 bg-opacity-60 text-white 
 			rounded text-center border-b-2 border-r-2 border-purple-600"
             autoComplete="new-username"
@@ -64,7 +72,7 @@ const RegisterButt = ({ t, redirectToHome, redirect_uri }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder={t("Email")}
-            onKeyPress={(e) => e.key === "Enter" && redirectToHome()}
+            onKeyPress={(e) => e.key === "Enter"}
             className="mb-2 bg-gray-900 bg-opacity-60 text-white 
 			rounded text-center border-b-2 border-r-2 border-purple-600"
             autoComplete="new-email"
@@ -74,13 +82,13 @@ const RegisterButt = ({ t, redirectToHome, redirect_uri }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder={t("Password")}
-            onKeyPress={(e) => e.key === "Enter" && redirectToHome()}
+            onKeyPress={(e) => e.key === "Enter"}
             className="mb-4 bg-gray-900 bg-opacity-60 text-white 
 			rounded text-center border-b-2 border-r-2 border-purple-600"
             autoComplete="new-password"
           />
           <button
-            onClick={() => registerTheUser()}
+            onClick={() => registerUser()}
             className={`mb-20 ${WelcomeButtonStyle}`}
           >
             {t("Join")}

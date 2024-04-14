@@ -8,6 +8,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = UserModel
 		fields = '__all__'
+	##
 	def create(self, clean_data):
 		user_obj = UserModel.objects.create_user(email=clean_data['email'], password=clean_data['password'])
 		user_obj.username = clean_data['username']
@@ -16,21 +17,39 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 
 
 class UserLoginSerializer(serializers.Serializer):
-	email = serializers.EmailField()
-	password = serializers.CharField()
-	##
-	def check_user(self, clean_data):
-		user = authenticate(username=clean_data['email'], password=clean_data['password'])
-		if not user:
-			raise ValidationError('user not found')
-		return user
+    email = serializers.EmailField()
+    password = serializers.CharField()
+
+    def check_user(self, clean_data):
+        try:
+            user = UserModel.objects.get(email=clean_data['email'])
+        except UserModel.DoesNotExist:
+            raise ValidationError('User not found')
+        if not user.check_password(clean_data['password']):
+            raise ValidationError('Incorrect password')
+        return user
 
 
 class UserSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = UserModel
-		fields = ('id', 'email', 'username', 'profile_picture', \
-			 	'total_matches', 'wins', 'losses', \
-				'title')
+		fields = (
+			"id",
+			"profile_picture",
+			"email",
+			"username",
+			"title",
+			"intra_level",
+			"TwoFA",
+			"AboutMe",
+			"school",
+			"wins",
+			"losses",
+			"win_rate",
+			"total_matches",
+			"match_history",
+			"ft_user",
+            "ft_url",
+		)
 
 

@@ -6,7 +6,6 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -17,12 +16,20 @@ DEBUG = os.getenv('DEBUG')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '10.13.7.5', 'transcendence-backend-znhl.onrender.com', 'https://transcendence-frontend-3otz.onrender.com']
+ALLOWED_HOSTS = [
+        '*', 
+        'localhost', 
+        '172.19.0.4',
+        '127.0.0.1', 
+        '0.0.0.0', 
+        '10.13.7.5', 
+        'transcendence-backend-znhl.onrender.com', 
+        'https://transcendence-frontend-3otz.onrender.com'
+    ]
 
 # Authentication settings
 if DEBUG == 'True':
-    REDIRECT_URI = "http://localhost:8000"
+    REDIRECT_URI = "https://10.12.2.2"
 else:
 	REDIRECT_URI = "https://transcendence-backend-znhl.onrender.com"
 
@@ -34,38 +41,59 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
+	"daphne",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    ## apps
-    'friendship',
+	'django_otp',
+    'django_otp.plugins.otp_totp',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'user_api.apps.UserApiConfig',
+    'friendship',
     'friendship_api',
+	'chat',
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+	'django_otp.middleware.OTPMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+]
+CSRF_ALLOWED_ORIGINS = [
+    "https://10.12.2.2",
+	"https://api.intra.42.fr",
+    "http://localhost:3000",
+    "http://frontend:3000",
+    "https://transcendence-frontend-3otz.onrender.com",
+    "https://zstenger93.github.io"
 ]
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "https://transcendence-frontend-3otz.onrender.com", "https://zstenger93.github.io"]
+CORS_ALLOWED_ORIGINS = [
+        "http://frontend:3000",
+	    "https://api.intra.42.fr",
+		"https://10.12.2.2",
+	    "http://localhost:3000",
+		"https://transcendence-frontend-3otz.onrender.com",
+		"https://zstenger93.github.io"
+	]
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
 SESSION_COOKIE_SAMESITE = None
-SESSION_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = True
+# SESSION_COOKIE_SAMESITE = 'Lax'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -75,8 +103,6 @@ REST_FRAMEWORK = {
         'user_api.authentication.BlacklistCheckJWTAuthentication',
     ),
 }
-
-SESSION_COOKIE_SAMESITE = 'Lax'
 
 
 ROOT_URLCONF = 'backend.urls'
@@ -149,7 +175,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -165,7 +190,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+# STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -175,12 +203,27 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # For the custom user model to work we need to include this line
 # AUTH_USER_MODEL = 'authentication.User'
 
-# STATIC_URL = '/static/'
-# STATICFILES_DIRS = [BASE_DIR / 'static']
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=99),
+}
+
+
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'sioudazer8@gmail.com'
+EMAIL_HOST_PASSWORD = 'sayy uonp nado adlm'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# chat settings
+ASGI_APPLICATION = "backend.asgi.application"
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'
+    }
 }

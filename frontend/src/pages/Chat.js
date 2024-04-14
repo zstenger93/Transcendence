@@ -1,89 +1,203 @@
-import React, { useState } from "react";
+/* eslint-disable */
+
+import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../components/buttons/BackButton";
-import { ButtonStyle } from "../components/buttons/ButtonStyle";
+import {
+  getUserDetails,
+  getUserProfile,
+  friendRequest,
+  blockUser,
+  unblockUser,
+  getBlockedUsers,
+} from "../components/API";
 
-function Chat() {
+function Chat({ redirectUri }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [currentChannel, setCurrentChannel] = useState("General");
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [currentChannel, setCurrentChannel] = useState("General");
-  const [viewingImage, setViewingImage] = useState(null);
-  const [pastedImage, setPastedImage] = useState(null);
-  const [uploadedFileName, setUploadedFileName] = React.useState("");
-  const [onlineUsers] = useState([
-    "kvebers",
-    "Jesus",
-    "asioud",
-    "zstenger",
-    "jergashe",
-  ]);
+  const chatSocket = useRef(null);
+  const messageInputRef = useRef(null);
+  const mounted = useRef(true);
+  const [onlineUsers, setOnlineUsers] = useState(null);
+  const userDetailsRef = useRef(null);
+  const [userDetails, setUserDetails] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleFileChange = (event) => {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
-
-      reader.onloadend = () => {
-        setPastedImage(reader.result);
-        setUploadedFileName(file.name);
-      };
-
-      reader.readAsDataURL(file);
+  const fetchUserProfile = async (userName) => {
+    if (userName) {
+      const details = await getUserProfile({ redirectUri, userName });
+      setUserDetails(details.data);
     }
   };
 
-  const handlePaste = (event) => {
-    if (event.clipboardData.files.length > 0) {
-      const file = event.clipboardData.files[0];
-      const reader = new FileReader();
+  useEffect(() => {
+    if (userDetails) {
+      setIsModalOpen(true);
+    }
+  }, [userDetails]);
 
-      reader.onloadend = () => {
-        setPastedImage(reader.result);
-      };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
-      reader.readAsDataURL(file);
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      const details = await getUserDetails({ redirectUri });
+      userDetailsRef.current = details;
+    };
+
+    fetchUserDetails();
+  }, [redirectUri]);
+
+  useEffect(() => {
+    if (!chatSocket.current) {
+      chatSocket.current = new WebSocket(
+        process.env.REACT_APP_LOCAL_URI.replace("https", "wss") + "/chat/"
+      );
+    }
+
+    const handleNewMessage = (e) => {
+      var data = JSON.parse(e.data);
+      var message = data["message"];
+
+      switch (data["type"]) {
+        case "general_channel":
+          setMessages((messages) => [
+            ...messages,
+            {
+              channel: "General",
+              text: message,
+            },
+          ]);
+          break;
+        case "private_channel":
+          setPrivateMessages((prevMessages) => {
+            if (!prevMessages.includes(data["sender"])) {
+              return [...prevMessages, data["sender"]];
+            } else {
+              return prevMessages;
+            }
+          });
+          setMessages((messages) => [
+            ...messages,
+            {
+              channel: data["sender"],
+              text: message,
+            },
+          ]);
+          break;
+        case "notify_user_joined":
+          setOnlineUsers(data["online_users"]);
+          setMessages((messages) => [
+            ...messages,
+            {
+              channel: currentChannel,
+              text: message,
+            },
+          ]);
+          break;
+        case "notify_user_left":
+          setOnlineUsers(data["online_users"]);
+          setMessages((messages) => [
+            ...messages,
+            {
+              channel: currentChannel,
+              text: message,
+            },
+          ]);
+          break;
+        default:
+      }
+    };
+
+    chatSocket.current.onmessage = handleNewMessage;
+
+    return () => {
+      if (!mounted.current) {
+        chatSocket.current.close();
+      } else {
+        mounted.current = false;
+      }
+    };
+    // eslint-disable-next-line
+  }, []);
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSendMessage(event);
     }
   };
 
-  const handleImageClick = (image) => {
-    setViewingImage(image);
+  const handleSendMessage = (event) => {
+    event.preventDefault();
+    if (chatSocket.current.readyState === WebSocket.OPEN) {
+      if (currentChannel !== userDetailsRef.current.data.user.username) {
+        chatSocket.current.send(
+          JSON.stringify({
+            message: messageInputRef.current.value,
+            receiver:
+              currentChannel === "General" ? "general_group" : currentChannel,
+          })
+        );
+        messageInputRef.current.value = "";
+        setNewMessage("");
+      } else {
+        console.error("Cannot send a private message to yourself.");
+      }
+    } else {
+      console.error(
+        "WebSocket is not open. readyState = " + chatSocket.current.readyState
+      );
+    }
   };
 
   const handleNewMessageChange = (event) => {
     setNewMessage(event.target.value);
   };
 
-  const handleSendMessage = (event) => {
-    event.preventDefault();
+  const [privateMessages, setPrivateMessages] = useState([]);
 
-    if (newMessage || pastedImage) {
-      setMessages((messages) => [
-        ...messages,
-        {
-          channel: currentChannel,
-          text: newMessage,
-          image: pastedImage,
-        },
-      ]);
-
-      setNewMessage("");
-      setPastedImage(null);
-      setUploadedFileName("");
-    }
+  const handleMessageOption = (user) => {
+    setPrivateMessages((prevMessages) => {
+      if (!prevMessages.includes(user)) {
+        return [...prevMessages, user];
+      } else {
+        return prevMessages;
+      }
+    });
   };
 
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter" && !event.shiftKey) {
-      handleSendMessage(event);
-    }
+  const openProfile = (user) => {
+    fetchUserProfile(user);
+  };
+
+  const addFriend = async (user) => {
+    friendRequest({ redirectUri, userName: user });
+  };
+
+  let [isUserBlocked, setIsUserBlocked] = useState(false);
+
+  const blockTheUser = async (user) => {
+    await blockUser({ redirectUri, userName: user });
+    const users_blocked = await getBlockedUsers({ redirectUri });
+    console.log("Blocked users: ", users_blocked);
+    setIsUserBlocked(true);
+  };
+
+  const unblockTheUser = async (user) => {
+    await unblockUser({ redirectUri, userName: user });
+    const users_blocked = await getBlockedUsers({ redirectUri });
+    console.log("Blocked users: ", users_blocked);
+    setIsUserBlocked(false);
   };
 
   function ChannelList() {
     const { t } = useTranslation();
-    const channels = ["General", "Random", "Memes"];
+    const channels = ["General"];
 
     return (
       <div
@@ -109,6 +223,22 @@ function Chat() {
               </li>
             ))}
           </ul>
+          <h2 className="mb-8 mt-8 text-2xl font-nosifer font-bold text-gray-300">
+            {t("Private")}
+          </h2>
+          <ul>
+            {privateMessages.map((user, index) => (
+              <li
+                key={index}
+                className={`cursor-pointer my-4 font-bold ${
+                  user === currentChannel ? "text-purple-500 font-nosifer" : ""
+                }`}
+                onClick={() => setCurrentChannel(user)}
+              >
+                {user}
+              </li>
+            ))}
+          </ul>
         </div>
         <BackButton navigate={navigate} t={t} />
       </div>
@@ -116,6 +246,16 @@ function Chat() {
   }
 
   function OnlineUsersList() {
+    const [dropdownUser, setDropdownUser] = useState(null);
+
+    const handleUserClick = (user) => {
+      if (dropdownUser === user) {
+        setDropdownUser(null);
+      } else {
+        setDropdownUser(user);
+      }
+    };
+
     return (
       <div
         className="flex flex-col justify-between w-1/7 p-6 text-white
@@ -126,13 +266,105 @@ function Chat() {
             {t("Online")}
           </h2>
           <ul>
-            {onlineUsers.map((user, index) => (
-              <li key={index} className="mb-4">
-                {user}
-              </li>
-            ))}
+            {onlineUsers ? (
+              onlineUsers.map((user, index) => (
+                <li
+                  key={index}
+                  className="mb-4 cursor-pointer font-bold"
+                  onClick={() => handleUserClick(user)}
+                >
+                  {user}
+                  {dropdownUser === user && (
+                    <ul className="bg-purple-500 rounded-xl bg-opacity-20">
+                      {user !== userDetailsRef.current.data.user.username && (
+                        <>
+                          <li onClick={() => handleMessageOption(user)}>
+                            Message
+                          </li>
+                          <li
+                            onClick={() =>
+                              addFriend({ redirectUri, userName: user })
+                            }
+                          >
+                            Add Friend
+                          </li>
+                          {!isUserBlocked ? (
+                            <li
+                              onClick={async () => {
+                                await blockTheUser(user);
+                              }}
+                            >
+                              Block
+                            </li>
+                          ) : (
+                            <li
+                              onClick={async () => {
+                                await unblockTheUser(user);
+                              }}
+                            >
+                              Unblock
+                            </li>
+                          )}
+                        </>
+                      )}
+                      <li onClick={() => openProfile(user)}>Profile</li>
+                    </ul>
+                  )}
+                </li>
+              ))
+            ) : (
+              <li>No users online</li>
+            )}
           </ul>
         </div>
+        {isModalOpen && userDetails && (
+          <div className="fixed z-10 inset-0 overflow-y-auto">
+            <div
+              className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20
+						text-center sm:block sm:p-0"
+            >
+              <div
+                className="fixed inset-0 transition-opacity"
+                aria-hidden="true"
+              >
+                <div className="absolute inset-0"></div>
+              </div>
+              <span
+                className="hidden sm:inline-block sm:align-middle sm:h-screen"
+                aria-hidden="true"
+              >
+                &#8203;
+              </span>
+              <div
+                className="inline-block align-bottom rounded-lg text-left
+						overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle
+						sm:max-w-lg sm:w-full"
+              >
+                <div className=" bg-blue-500 bg-opacity-25 px-4 pt-5 pb-4 sm:p-6 sm:pb-4 text-center">
+                  <span
+                    className="close float-right text-red-500 mouse-pointer text-xl"
+                    onClick={closeModal}
+                  >
+                    &times;
+                  </span>
+                  <img
+                    className="w-24 h-24 rounded-full mb-4 mx-auto"
+                    src={userDetails.user.profile_picture}
+                    alt="Profile"
+                  />
+                  <p className="font-nosifer mb-2">
+                    {userDetails.user.title} {userDetails.user.username}
+                  </p>
+                  <p className="font-bold">
+                    Intra Level: {userDetails.user.intra_level}
+                  </p>
+                  <p className="font-bold">Email: {userDetails.user.email}</p>
+                  <p className="font-bold">School: {userDetails.user.school}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -154,61 +386,25 @@ function Chat() {
             {messages
               .filter((message) => message.channel === currentChannel)
               .map((message, index) => (
-                <p key={index}>
-                  {message.text}
-                  {message.image && (
-                    <img
-                      src={message.image}
-                      alt=""
-                      className="max-h-32 cursor-pointer"
-                      onClick={() => handleImageClick(message.image)}
-                    />
-                  )}
-                </p>
+                <p key={index}>{message.text}</p>
               ))}
           </div>
           <form onSubmit={handleSendMessage}>
             <textarea
+              ref={messageInputRef}
               value={newMessage}
               onChange={handleNewMessageChange}
               onKeyPress={handleKeyPress}
-              onPaste={handlePaste}
               className="border border-purple-500 bg-gray-900 bg-opacity-80 
 			  rounded p-2 w-full"
               placeholder={t("Type your message here...")}
             />
-            <input
-              type="file"
-              id="file"
-              onChange={handleFileChange}
-              style={{ display: "none" }}
-            />
-            <div className="flex justify-center">
-              <label
-                htmlFor="file"
-                className={`cursor-pointer ${ButtonStyle}`}
-              >
-                {t("Choose File")}
-              </label>
-            </div>
-            {uploadedFileName && (
-              <p className="text-center">{uploadedFileName}</p>
-            )}
           </form>
         </div>
         <div className="hidden md:block">
           <OnlineUsersList />
         </div>
       </div>
-      {viewingImage && (
-        <div
-          className="fixed top-0 left-0 flex items-center justify-center w-full h-full 
-		  bg-black bg-opacity-50"
-          onClick={() => setViewingImage(null)}
-        >
-          <img src={viewingImage} alt="" className="max-h-full max-w-full" />
-        </div>
-      )}
     </div>
   );
 }

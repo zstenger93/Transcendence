@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "Fullstack SPA",
   "main": "index.js",
-  "homepage": "https://zstenger93.github.io/Transcendence/",
   "scripts": {
     "build:css": "postcss src/styles/tailwind.css -o src/index.css",
     "watch:css": "postcss src/styles/tailwind.css -o src/index.css --watch",
-    "start": "REACT_APP_LOCAL_URI=http://localhost:8000 react-scripts start",
-    "build": "CI=false NODE_ENV=production REACT_APP_REDIRECT_URI=https://transcendence-backend-znhl.onrender.com react-scripts build",
+    "start": "REACT_APP_LOCAL_URI=https://10.12.2.2 react-scripts start",
+    "build": "HOMEPAGE=https://zstenger93.github.io/Transcendence/ node SetHomepage.js && CI=false NODE_ENV=production REACT_APP_REDIRECT_URI=https://transcendence-backend-znhl.onrender.com react-scripts build",
+    "local_build": "node SetHomepage.js && CI=false NODE_ENV=production REACT_APP_REDIRECT_URI=https://localhost react-scripts build",
     "test": "react-scripts test --detectOpenHandles",
     "eject": "react-scripts eject"
   },
@@ -18,7 +18,9 @@
   "dependencies": {
     "autoprefixer": "^10.4.16",
     "axios": "^1.6.5",
+    "cors": "^2.8.5",
     "i18next": "^23.7.16",
+    "js-cookie": "^3.0.5",
     "matchmedia-polyfill": "^0.3.2",
     "postcss": "^8.4.33",
     "react": "^18.2.0",
@@ -28,6 +30,7 @@
     "react-router-dom": "^6.21.1",
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
+    "serve": "^14.2.1",
     "slick-carousel": "^1.8.1",
     "tailwindcss": "^3.4.1",
     "three": "^0.160.0",
@@ -35,7 +38,8 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@testing-library/jest-dom": "^6.2.0"
+    "@testing-library/jest-dom": "^6.2.0",
+    "@types/cors": "^2.8.17"
   },
   "eslintConfig": {
     "extends": [

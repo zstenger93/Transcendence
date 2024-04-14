@@ -47,6 +47,7 @@ node_modules
 # Jamshidbek
 to-do.txt
 jsonuser.json
+text.txt
 
 # backend/authentication
 backend/authentication/images/*

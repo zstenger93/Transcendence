@@ -6,12 +6,6 @@
 
 ---
 
-# The current version deployed can be accessed by the following link (only frontend atm)
-
-[TranscEND](https://zstenger93.github.io/Transcendence/)
-
----
-
 ## Menu
 
 [MindMap](#mindmap)
@@ -58,8 +52,9 @@ Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices
 - Base of the project
 	- PostgreSQL
 	- Django backend
-	- Rest for API to connect back and frontend
+	- Rest API to connect back and frontend
 	- Frontend with React
+	- Nginx proxy
 - Backend
 	- Django
 - Frontend
@@ -75,6 +70,7 @@ Master <--- :white_check_mark: --- Dev <--- :white_check_mark: --- Microservices
 		- each microservice is an app
 	- PostgreSQL database
 	- frontend
+	- nginx proxy
 
 
 - images (not customized yet for front and back)
@@ -113,6 +109,7 @@ postgreSQL
 
 React
 Tailwind
+ThreeJS
 
 - Multi language support
 - Extra browser support
@@ -123,8 +120,8 @@ Tailwind
 	- Register with username email and password to the site
 	- Login with your username and password
 	- Login via 42 auth
-- Home / Welcome
-	- ?
+- Home
+	- Readme styled (kinda)
 - Game & Watch
 	- Pong
 		- Original
@@ -210,9 +207,7 @@ First mindmap :white_check_mark:
 
 Docker files for services :white_check_mark:
 
-docker-compose.dev :x: :white_check_mark:
-
-Hashed passwords :x:
+Hashed passwords :white_check_mark:
 
 Using OAuth system from 42 :white_check_mark:
 
@@ -220,25 +215,25 @@ CI/CD pipeline setup :white_check_mark:
 
 Deploying to github pages :white_check_mark:
 
-Setting unique username :x:
+Setting unique username :white_check_mark:
 
-Uploading an avatar for user :x:
+Uploading an avatar for user :white_check_mark:
 
-Option to enable 2FA auth :x:
+Option to enable 2FA auth :white_check_mark:
 
-Friend list and their status :x:
+Friend list and their status :white_check_mark:
 
 User stats of wins, losses etc.. :x:
 
 Match history from games :x:
 
-User being able to create private, protected and public channels :x:
+User being able to create private channels :white_check_mark:
 
-Be able to block and unblock other users :x:
+Be able to block and unblock other users :white_check_mark:
 
 Able to invite other users to play a game :x:
 
-Accessing other users profile :x:
+Accessing other users profile :white_check_mark:
 
 Playing live games on the site :x:
 
@@ -246,7 +241,7 @@ Matchmaking system :x:
 
 Faithful to the original pong game :white_check_mark:
 
-Custom options for the game :x:
+Custom options for the game :white_check_mark:
 
 The game must be responsive :white_check_mark:
 
@@ -266,21 +261,21 @@ The game must be responsive :white_check_mark:
 	- *Major module*: Standard user management, authentication, users across tournaments :x:
 	- *Major module*: Implementing a remote authentication :white_check_mark:
 - **Gameplay and User Experience**
-	- *Major module*: Remote players :x:
-	- *Major module*: Multiplayer (more than 2) :x:
+	- *Major module*: Remote players :white_check_mark:
+	- *Major module*: Multiplayer (more than 2) :white_check_mark:
 	- *Major module*: Add Another Game with User History and Matchmaking :x:
-	- *Minor module*: Game customization options :x:
-	- *Major module*: Live chat :x:
+	- *Minor module*: Game customization options :white_check_mark:
+	- *Major module*: Live chat :white_check_mark:
 - **AI-Algo**
 	- *Major module*: Introduce an AI opponent :white_check_mark:
 	- *Minor module*: User and game stats dashboard :x:
 - **Cybersecurity**
 	- *Major module*: Implement WAF/ModSecurity with Hardened Configuration and HashiCorp Vault for Secrets Management :x:
 	- *Minor module*: GDPR Compliance Options with User Anonymization, Local Data Management, and Account Deletion :x:
-	- *Major module*: Implement Two-Factor Authentication (2FA) and JWT :x:
+	- *Major module*: Implement Two-Factor Authentication (2FA) and JWT :white_check_mark:
 - **Devops**
 	- *Major module*: Infrastructure Setup for Log Management :x:
-	- *Minor module*: Monitoring system :x:
+	- *Minor module*: Monitoring system :white_check_mark:
 	- *Major module*: Designing the Backend as Microservices :x:
 - **Graphics**
 	- *Major module*: Use advanced 3D techniques :white_check_mark:

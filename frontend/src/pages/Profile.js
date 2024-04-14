@@ -1,34 +1,18 @@
-import React, { useState } from "react";
+/* disable eslint */
+
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ButtonStyle } from "../components/buttons/ButtonStyle";
-
-const friendsListData = [
-  {
-    name: "Zsolt",
-    intra: "zstenger",
-    profileLink: "https://profile.intra.42.fr/users/zstenger",
-  },
-  {
-    name: "Karlis",
-    intra: "kvebers",
-    profileLink: "https://profile.intra.42.fr/users/kvebers",
-  },
-  {
-    name: "Jergashe",
-    intra: "jergahse",
-    profileLink: "https://profile.intra.42.fr/users/jergashe",
-  },
-  {
-    name: "Azer",
-    intra: "asioud",
-    profileLink: "https://profile.intra.42.fr/users/asioud",
-  },
-  {
-    name: "Emotional Damage",
-    intra: "ed",
-    profileLink: "https://github.com/zstenger93/Transcendence",
-  },
-];
+import UserSettings from "../components/profile/UserSettings";
+import {
+  fetchUserDetails,
+  changeUsername,
+  changeAbout,
+  getFriendList,
+  getUserProfile,
+} from "../components/API";
+import { CiEdit } from "react-icons/ci";
+import Cookies from "js-cookie";
 
 const matchHistoryData = [
   {
@@ -96,20 +80,9 @@ const matchHistoryData = [
   },
 ];
 
-const userDetails = {
-  title: "Mastermind",
-  username: "TrasnscEND",
-  email: "fake@mail.com",
-  about: "I turn people crazy with my clear subject description.",
-  age: 42,
-  gender: "Computer",
-  school: "42 Heilbronn",
-  level: "42.42",
-  winRate: "42%",
-};
-
-function FriendsList() {
+function FriendsList({ friendsListData }) {
   const { t } = useTranslation();
+
   return (
     <div
       className="bg-gray-900 bg-opacity-80 p-4 rounded-md max-h-96
@@ -131,23 +104,25 @@ function FriendsList() {
           </tr>
         </thead>
         <tbody>
-          {friendsListData.map((friend, index) => (
-            <tr key={index} className="bg-white bg-opacity-10">
-              <td className="p-2 border border-gray-900 mx-auto">
-                {friend.name}
-              </td>
-              <td className="p-2 border text-center border-gray-900 mx-auto">
-                <a
-                  href={friend.profileLink}
-                  className="text-blue-500 underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {friend.intra}
-                </a>
-              </td>
-            </tr>
-          ))}
+          {friendsListData &&
+            friendsListData.length > 0 &&
+            friendsListData.map((friend, index) => (
+              <tr key={index} className="bg-white bg-opacity-10">
+                <td className="p-2 border border-gray-900 mx-auto">
+                  {friend.name}
+                </td>
+                <td className="p-2 border text-center border-gray-900 mx-auto">
+                  <a
+                    href={friend.intra}
+                    className="text-blue-500 underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {"Link"}
+                  </a>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
@@ -156,6 +131,7 @@ function FriendsList() {
 
 function MatchHistory() {
   const { t } = useTranslation();
+
   return (
     <div
       className="bg-gray-900 bg-opacity-80 p-6 shadow-xl
@@ -224,19 +200,153 @@ function MatchHistory() {
   );
 }
 
-function Profile() {
+const defaultUserDetails = {
+  title: "Mastermind",
+  username: "TrasnscEND",
+  email: "fake@mail.com",
+  about: "I turn people crazy with my clear subject description.",
+  school: "42",
+  level: "42.42",
+  wins: "42",
+  losses: "58",
+  win_rate: "42%",
+  ft_user: false,
+  ft_url: "none",
+  profile_picture:
+    "https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp",
+};
+
+function Profile({ redirectUri }) {
+  const [userDetails, setUserDetails] = useState(null);
+  const [imageUrl, setImageUrl] = useState(defaultUserDetails.profile_picture);
+  const [username, setUsername] = useState(
+    userDetails?.username || defaultUserDetails.username
+  );
+  const [profilePicture, setProfilePicture] = useState(null);
+  const [friendsListData, setFriendsListData] = useState([]);
+  useEffect(() => {
+    const fetchFriendsList = async () => {
+      const response = await getFriendList({ redirectUri });
+      const friends = response.data.friends;
+
+      const profilePromises = friends.map(async (friend) => {
+        const profileResponse = await getUserProfile({
+          redirectUri,
+          userName: friend,
+        });
+        console.log("profileresponse: ", profileResponse);
+        return {
+          name: friend,
+          intra: profileResponse.data.user.ft_url
+            .replace("('", "")
+            .replace("',)", "")
+            .replace("v2/", "")
+			.replace("api", "profile"),
+        };
+      });
+
+      const friendsWithProfiles = await Promise.all(profilePromises);
+      setFriendsListData(friendsWithProfiles);
+    };
+
+    fetchFriendsList();
+  }, [redirectUri]);
+
+  useEffect(() => {
+    const token = Cookies.get("access");
+    if (token) {
+      fetchUserDetails(setUserDetails, setUsername, setImageUrl, redirectUri);
+    }
+  }, [redirectUri]);
+
+  useEffect(() => {
+    if (profilePicture) {
+      fetchUserDetails(
+        setUserDetails,
+        setUsername,
+        setImageUrl,
+        redirectUri
+      ).then(() => {
+        setProfilePicture(false);
+      });
+    }
+  }, [imageUrl, redirectUri, profilePicture]);
+
+  useEffect(() => {
+    setUsername(userDetails?.username || defaultUserDetails.username);
+  }, [userDetails]);
+
   const { t } = useTranslation();
+  const [isEditingAbout, setIsEditingAbout] = useState(false);
+  const [isEditingUsername, setIsEditingUsername] = useState(false);
   const [showFriendsList, setShowFriendsList] = useState(false);
   const [showMatchHistory, setShowMatchHistory] = useState(false);
-
+  const [showUserSettings, setShowUserSettings] = useState(false);
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+  const [about, setAbout] = useState(
+    userDetails?.AboutMe || defaultUserDetails.about
+  );
+  const handleAboutChange = (event) => {
+    setAbout(event.target.value);
+  };
+  const handleEditClick = (section) => {
+    if (section === "about") {
+      setIsEditingAbout(!isEditingAbout);
+    } else if (section === "username") {
+      setIsEditingUsername(!isEditingUsername);
+    }
+  };
   const toggleFriendsList = () => {
     setShowFriendsList(!showFriendsList);
     setShowMatchHistory(false);
+    setShowUserSettings(false);
   };
-
   const toggleMatchHistory = () => {
     setShowMatchHistory(!showMatchHistory);
     setShowFriendsList(false);
+    setShowUserSettings(false);
+  };
+  const toggleUserSettings = () => {
+    setShowUserSettings(!showUserSettings);
+    setShowFriendsList(false);
+    setShowMatchHistory(false);
+  };
+
+  useEffect(() => {
+    if (userDetails && userDetails.AboutMe) {
+      setAbout(userDetails.AboutMe);
+    } else {
+      setAbout(defaultUserDetails.about);
+    }
+  }, [userDetails]);
+
+  const handleSubmit = async (section, event) => {
+    event.preventDefault();
+    if (section === "about") {
+      await changeAbout({ redirectUri, about });
+      setUserDetails((prevDetails) => {
+        const updatedDetails = {
+          ...prevDetails,
+          AboutMe: about || defaultUserDetails.about,
+        };
+        setAbout(updatedDetails.AboutMe);
+        return updatedDetails;
+      });
+      setIsEditingAbout(false);
+    } else if (section === "username") {
+      await changeUsername({ redirectUri, username });
+      setUserDetails((prevDetails) => {
+        const updatedDetails = {
+          ...prevDetails,
+          username: username || defaultUserDetails.username,
+        };
+        setUsername(updatedDetails.username);
+        return updatedDetails;
+      });
+      setIsEditingUsername(false);
+    }
   };
 
   return (
@@ -251,65 +361,128 @@ function Profile() {
 			border-purple-600"
         >
           <img
-            src="https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp"
+            src={imageUrl}
             alt="User Avatar"
             className="w-20 h-20 rounded-full mx-auto mb-4"
           />
-          <h2 className="text-gray-300 font-nosifer text-1.5xl font-bold">
-            {userDetails.title} {userDetails.username}
+          <h2
+            className="text-gray-300 font-nosifer text-1.5xl font-bold text-center
+			flex justify-center"
+            style={{ display: "flex", alignItems: "center" }}
+          >
+            {userDetails?.title || defaultUserDetails.title}{" "}
+            {isEditingUsername ? (
+              <form onSubmit={(event) => handleSubmit("username", event)}>
+                <input
+                  type="text"
+                  value={username}
+                  onChange={handleUsernameChange}
+                  className="text-black"
+                />
+                <input
+                  type="submit"
+                  value="Submit"
+                  className="text-white font-bold"
+                />
+              </form>
+            ) : (
+              <>
+                {userDetails?.username || defaultUserDetails.username}
+                <CiEdit onClick={() => handleEditClick("username")} />
+              </>
+            )}
           </h2>
-          <p className="text-purple-400">{userDetails.email}</p>
-
+          <p className="text-purple-400">
+            {userDetails?.email || defaultUserDetails.email}
+          </p>
           <div className="mt-8">
-            <h3 className="font-nosifer text-gray-300 font-semibold mb-4">
-              {t("About Me")}
-            </h3>
-            <p className="text-purple-400">{userDetails.about}</p>
+            <div
+              className="flex justify-center"
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <h3 className="font-nosifer text-gray-300 font-semibold mb-4">
+                {t("About Me")}
+              </h3>
+              {!isEditingAbout && (
+                <CiEdit
+                  onClick={() => handleEditClick("about")}
+                  className="text-white"
+                />
+              )}
+            </div>
+            {isEditingAbout ? (
+              <form onSubmit={(event) => handleSubmit("about", event)}>
+                <input type="text" value={about} onChange={handleAboutChange} />
+                <input
+                  type="submit"
+                  value="Submit"
+                  className="text-white font-bold"
+                />
+              </form>
+            ) : (
+              <p className="text-purple-400">{about}</p>
+            )}
           </div>
           <div className="mt-8">
             <h3 className="font-nosifer text-gray-300 font-semibold mb-4">
               {t("User Details")}
             </h3>
             <p className="text-purple-400">
-              <strong>{t("Age")}:</strong> {userDetails.age} {t("years old")}
+              <strong>{t("School")}:</strong>{" "}
+              {userDetails?.school !== undefined && userDetails?.school !== null
+                ? userDetails?.school
+                : defaultUserDetails.school}
               <br />
-              <strong>{t("Gender")}:</strong> {userDetails.gender}
+              <strong>{t("Level")}:</strong>{" "}
+              {userDetails?.intra_level !== undefined &&
+              userDetails?.intra_level !== null
+                ? userDetails?.intra_level
+                : defaultUserDetails.level}
               <br />
-              <strong>{t("School")}:</strong> {userDetails.school}
-              <br />
-              <strong>{t("Level")}:</strong> {userDetails.level}
-              <br />
-              <strong>{t("Win Rate")}:</strong> {userDetails.winRate}
+              <strong>{t("Win Rate")}:</strong>{" "}
+              {userDetails?.win_rate !== undefined &&
+              userDetails?.win_rate !== null
+                ? userDetails?.win_rate
+                : defaultUserDetails.wins}
             </p>
           </div>
-          <div className="mt-8 flex justify-center space-x-4">
-            <button
-              className={`w-38 ${ButtonStyle}
-              ${
-                showFriendsList
-                  ? "bg-purple-600 text-gray-300"
-                  : "text-gray-300"
-              }`}
-              onClick={toggleFriendsList}
-            >
-              {t("Friends")}
-            </button>
-            <button
-              className={`w-38 ${ButtonStyle}
-              ${
-                showMatchHistory
-                  ? "bg-purple-600 text-gray-300"
-                  : "text-gray-300"
-              }`}
-              onClick={toggleMatchHistory}
-            >
-              {t("Match History")}
-            </button>
+          <div className="mt-8 justify-center space-x-4 text-center">
+            <div className="inline-flex space-x-4 justify-center">
+              <button
+                className={`w-38 ${ButtonStyle}
+				${showFriendsList ? "bg-purple-600 text-gray-300" : "text-gray-300"}`}
+                onClick={toggleFriendsList}
+              >
+                {t("Friends")}
+              </button>
+              <button
+                className={`w-38 ${ButtonStyle}
+				${showMatchHistory ? "bg-purple-600 text-gray-300" : "text-gray-300"}`}
+                onClick={toggleUserSettings}
+              >
+                {t("Settings")}
+              </button>
+            </div>
+            <div className="mt-4 inline-flex justify-center text-center">
+              <button
+                className={`w-38 ${ButtonStyle}
+				${showMatchHistory ? "bg-purple-600 text-gray-300" : "text-gray-300"}`}
+                onClick={toggleMatchHistory}
+              >
+                {t("Match History")}
+              </button>
+            </div>
           </div>
         </div>
         <div className="mt-8 mb-10">
-          {showFriendsList && <FriendsList />}
+          {showFriendsList && <FriendsList friendsListData={friendsListData} />}
           {showMatchHistory && <MatchHistory />}
+          {showUserSettings && (
+            <UserSettings
+              setProfilePicture={setProfilePicture}
+              redirectUri={redirectUri}
+            />
+          )}
         </div>
       </div>
     </div>

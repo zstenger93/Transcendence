@@ -1,31 +1,20 @@
 import React from "react";
 import { WelcomeButtonStyle } from "../buttons/ButtonStyle";
+import Cookies from "js-cookie";
 
-const OAuth = async ({ navigate, redirect_uri }) => {
-  console.log("OAuth");
-  console.log(redirect_uri);
-  const auth = `${redirect_uri}/api/is_authenticated/`;
-  let response = await fetch(auth, {
-    credentials: "include",
-  });
+const OAuth = async ({ redirect_uri }) => {
+  window.location.href = `${redirect_uri}/api/oauth/authorize`;
+};
 
-  let data = await response.json();
-
-  if (!data.is_authenticated) {
-    window.open(`${redirect_uri}/api/oauth/authorize/`);
-    if (!data.is_authenticated) {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      response = await fetch(auth, {
-        credentials: "include",
-      });
-      data = await response.json();
-	  console.log("I'm stuck in authception")
-    }
-	console.log(data.is_authenticated);
-	console.log("authenticated");
-	navigate("/home");
-  } else {
-    navigate("/home");
+window.onload = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const token = urlParams.get("token");
+  if (token) {
+    Cookies.set("access", token, {
+      expires: 7,
+      sameSite: "None",
+      secure: true,
+    });
   }
 };
 
