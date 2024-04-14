@@ -435,20 +435,23 @@ function Pong3D() {
             ball.position.x = 0;
             ball.position.y = 0;
             // eslint-disable-next-line react-hooks/exhaustive-deps
-            lifes = orbits.length - 1;
-            if (orbits.length === 0) {
-              setGameOver(true);
-              setBounceCounter(bounceCounter);
-              ballSpeed = 0;
-            }
-            if (orbits.length > 0) {
-              scene.remove(orbits[orbits.length - 1]);
-              orbits.pop();
-              ball.material = planetMaterials[lifes];
-              ball.material.needsUpdate = true;
-              ballSpeed = 0.3;
-              leftPaddleSpeedConst = 0.5;
-            }
+            // lifes = orbits.length - 1;
+            // if (orbits.length === 0) {
+            //   // setGameOver(true);
+            //   setBounceCounter(bounceCounter);
+            //   ballSpeed = 0;
+            // }
+            // if (orbits.length > 0) {
+            //   scene.remove(orbits[orbits.length - 1]);
+            //   orbits.pop();
+
+            ball.material =
+              planetMaterials[Math.floor(Math.random() * (lifes + 1))];
+            ball.material.needsUpdate = true;
+            //   ballSpeed = 0.3;
+            //   leftPaddleSpeedConst = 0.5;
+            // }
+
             pointLight.intensity += 50;
             pointLight.distance += 10;
           } else ballDirection.y *= -1;
