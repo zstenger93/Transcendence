@@ -938,7 +938,7 @@ const Tournament = () => {
       </div>
     );
   }
-
+  const interval = useRef(null);
   useEffect(() => {
     if (pageToRender === 3) {
       const canvas = canvasRef.current;
@@ -957,7 +957,7 @@ const Tournament = () => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       scorePlayer2 = 0;
       ctxRef.current = ctx;
-      const interval = setInterval(() => update(canvas, ctx), 1000 / 30);
+      interval.current = setInterval(() => update(canvas, ctx), 1000 / 30);
       return () => clearInterval(interval);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -1031,6 +1031,7 @@ const Tournament = () => {
       if (scorePlayer1 >= 2 || scorePlayer2 >= 2) {
         ballSpeed = 0;
         updateResults();
+        clearInterval(interval.current);
         if (tournament.matches.length !== 0) setPageToRender(2);
         else setPageToRender(4);
       }
