@@ -173,8 +173,8 @@ function Pong3D() {
     const sunMaterial = new THREE.MeshBasicMaterial({
       color: 0xff8800,
       map: sunTexture,
-      rougness: 0.1,
-      metalness: 1,
+      // rougness: 0.1,
+      // metalness: 1,
     });
     const sunGeometry = new THREE.SphereGeometry(10, 32, 32);
     const sunGeometryLayer2 = new THREE.SphereGeometry(12, 32, 32);
