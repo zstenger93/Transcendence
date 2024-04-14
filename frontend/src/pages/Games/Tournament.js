@@ -904,7 +904,7 @@ const Tournament = () => {
   var paddleSpeed = 1;
   var leftPaddlePos = 50;
   var rightPaddlePos = 50;
-  var ballSpeed = 0.6;
+  var ballSpeed = 0.9;
   var ballX = 50;
   var ballY = 50;
   var ballDirX = 1;
@@ -951,7 +951,7 @@ const Tournament = () => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       ballY = canvas.height / 2;
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      ballSpeed = 0.6;
+      ballSpeed = 0.9;
       // eslint-disable-next-line react-hooks/exhaustive-deps
       scorePlayer1 = 0;
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -1027,7 +1027,7 @@ const Tournament = () => {
       ballY = canvas.height / 2;
       ballDirX = -1;
       ballDirY = -1;
-      ballSpeed = 0.6;
+      ballSpeed = 0.9;
       if (scorePlayer1 >= 2 || scorePlayer2 >= 2) {
         ballSpeed = 0;
         updateResults();
