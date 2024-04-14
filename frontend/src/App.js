@@ -177,12 +177,7 @@ function App() {
             path="tournament"
             element={
               <PageWrapper image={Background} redirectUri={REDIRECT_URI}>
-                <StartScreen
-                  Game={Tournament}
-                  backgroundImage={backgroundimage}
-                  WelcomeButtonStyle={WelcomeButtonStyle}
-                  BackButton={BackButton}
-                />
+                <Tournament />
               </PageWrapper>
             }
           />
