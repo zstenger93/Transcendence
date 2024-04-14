@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Transcendence/static/css/main.3d5b820c.css",
-    "main.js": "/Transcendence/static/js/main.e503157b.js",
+    "main.css": "/Transcendence/static/css/main.94d30ca3.css",
+    "main.js": "/Transcendence/static/js/main.c771a6e4.js",
     "static/js/496.b48b2ec3.chunk.js": "/Transcendence/static/js/496.b48b2ec3.chunk.js",
     "static/media/404.mp4": "/Transcendence/static/media/404.036827f1db48d0ae1d47.mp4",
     "static/media/welcomebg.jpg": "/Transcendence/static/media/welcomebg.e865aad312e9f209a8e9.jpg",
@@ -19,21 +19,27 @@
     "static/media/venus.jpg": "/Transcendence/static/media/venus.b431256724651b4e2fb6.jpg",
     "static/media/saturn.png": "/Transcendence/static/media/saturn.73d1ef8108e1daf5c624.png",
     "static/media/mars.jpg": "/Transcendence/static/media/mars.871e422803417c08cdd4.jpg",
+    "static/media/player.png": "/Transcendence/static/media/player.75d8d1d160f9580bd6e0.png",
+    "static/media/baby.png": "/Transcendence/static/media/baby.e43e13c423fc2c4c0bd3.png",
     "static/media/jupiter.jpg": "/Transcendence/static/media/jupiter.446f928a1bc44cdf9b65.jpg",
     "static/media/uranus.png": "/Transcendence/static/media/uranus.14a96a0871a8ad9ba89a.png",
+    "static/media/insane.png": "/Transcendence/static/media/insane.7e4234331321a56c030f.png",
     "static/media/world.jpg": "/Transcendence/static/media/world.b8a85c872c155ae4708b.jpg",
+    "static/media/pong.jpg": "/Transcendence/static/media/pong.db0e2da9f27a468335f9.jpg",
+    "static/media/balanced.png": "/Transcendence/static/media/balanced.47ee6fc26265b0bc6e13.png",
+    "static/media/eliminate.png": "/Transcendence/static/media/eliminate.4fb49f89a8742c4a7e34.png",
     "static/media/neptun.png": "/Transcendence/static/media/neptun.ad33b1344bb86f5ad954.png",
     "static/media/slick.svg": "/Transcendence/static/media/slick.2630a3e3eab21c607e21.svg",
     "static/media/slick.eot": "/Transcendence/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/Transcendence/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/Transcendence/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/Transcendence/index.html",
-    "main.3d5b820c.css.map": "/Transcendence/static/css/main.3d5b820c.css.map",
-    "main.e503157b.js.map": "/Transcendence/static/js/main.e503157b.js.map",
+    "main.94d30ca3.css.map": "/Transcendence/static/css/main.94d30ca3.css.map",
+    "main.c771a6e4.js.map": "/Transcendence/static/js/main.c771a6e4.js.map",
     "496.b48b2ec3.chunk.js.map": "/Transcendence/static/js/496.b48b2ec3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3d5b820c.css",
-    "static/js/main.e503157b.js"
+    "static/css/main.94d30ca3.css",
+    "static/js/main.c771a6e4.js"
   ]
 }
