@@ -72,10 +72,10 @@ class TournamentData {
         this.createRoundRobin();
         break;
       case 1:
-        this.createSingleElimination();
+        this.createRoundRobin();
         break;
       case 2:
-        this.createSwiss();
+        this.createRoundRobin();
         break;
       default:
         this.createRoundRobin();
