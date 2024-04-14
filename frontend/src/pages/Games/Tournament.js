@@ -908,7 +908,7 @@ const Tournament = () => {
   var ballX = 50;
   var ballY = 50;
   var ballDirX = 1;
-  var ballDirY = 1;
+  var ballDirY = 0;
   var scorePlayer1 = 0;
   var scorePlayer2 = 0;
 
@@ -1025,8 +1025,8 @@ const Tournament = () => {
       if (ballX >= canvas.width) scorePlayer1++;
       ballX = canvas.width / 2;
       ballY = canvas.height / 2;
-      ballDirX = -1;
-      ballDirY = -1;
+      ballDirX = ballDirX * -1;
+      ballDirY = 0;
       ballSpeed = 0.9;
       if (scorePlayer1 >= 2 || scorePlayer2 >= 2) {
         ballSpeed = 0;
