@@ -8,41 +8,43 @@ const Pong = () => {
 
   useEffect(() => {
     async function getData() {
-      gameSocket.current = new WebSocket("wss://localhost/game/asdfasdf/");
+      gameSocket.current = new WebSocket("wss://10.13.7.8/game/asdfasdf/");
 
       let canvas = document.getElementById("gameCanvas");
+      canvas.width = 1000;
+      canvas.height = 700;
       let context = canvas.getContext("2d");
       let receivedData;
       gameSocket.current.onmessage = function (event) {
         // console.log("received data: " + event.data)
         receivedData = JSON.parse(event.data);
-        console.log("data: " + JSON.stringify(receivedData));
+        // console.log("data: " + JSON.stringify(receivedData));
         
         let room_name = receivedData["room_name"];
         let gameState = receivedData["game_state"];
         let users = receivedData["users"];
         
         if (receivedData["type"] === "game_message") {
-          console.log("Game Message: " + JSON.stringify(receivedData));
+          // console.log("Game Message: " + JSON.stringify(receivedData));
           sender.current = receivedData["users"][0];
           player0.current = receivedData["users"][0];
           player1.current = receivedData["users"][1];
           renderGameFrame(receivedData);
         }
         else if (receivedData["type"] === "waiting_message") {
-          console.log("Waiting Message: " + JSON.stringify(receivedData));
+          // console.log("Waiting Message: " + JSON.stringify(receivedData));
         }
-        else if (receivedData["type"] === "ending_message") {
-          console.log("Ending Message: " + JSON.stringify(receivedData));
-          var score = receivedData["user_ids"][0] + " " + receivedData.score + " " + receivedData["user_ids"][1];
-          window.location.href =
-          "https://localhost/game/ending/?gameinfo=" +
-          score +
-          "&gametag=" +
-          receivedData["game_tag"] +
-          "&roomname=" +
-            room_name;
-        }
+        // else if (receivedData["type"] === "ending_message") {
+        //   console.log("Ending Message: " + JSON.stringify(receivedData));
+        //   var score = receivedData["user_ids"][0] + " " + receivedData.score + " " + receivedData["user_ids"][1];
+        //   window.location.href =
+        //   "https://10.13.7.8/game/ending/?gameinfo=" +
+        //   score +
+        //   "&gametag=" +
+        //   receivedData["game_tag"] +
+        //   "&roomname=" +
+        //     room_name;
+        // }
       };
 
       const renderGameFrame = (gameData) => {
@@ -147,15 +149,15 @@ const Pong = () => {
             context.fillRect(0, y, width, height);
           } else {
             context.fillStyle = "blue"; // Player 1 Paddle color
-            context.fillRect(790, y, width, height);
+            context.fillRect(990, y, width, height);
           }
         }
       };
 
       const drawField = () => {
         if (context) {
-          context.fillStyle = "#ffffff";
-          context.fillRect(398, 0, 4, 400);
+          context.fillStyle = "#000000";
+          context.fillRect(0, 0, canvas.width, canvas.height);
         }
       };
 
@@ -198,12 +200,11 @@ const Pong = () => {
       };
 
       const startGame = () => {
-        document.addEventListener("keyup", handleKeyUp);
-        document.addEventListener("keydown", handleKeyDown);
         gameSocket.current.send("startgame");
       };
 
-
+      document.addEventListener("keyup", handleKeyUp);
+      document.addEventListener("keydown", handleKeyDown);
       const startButton = document.getElementById("startGame");
       startButton.addEventListener("click", startGame);
 

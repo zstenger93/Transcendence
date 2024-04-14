@@ -13,6 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG")
 
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
@@ -20,7 +21,7 @@ ALLOWED_HOSTS = ["*"]
 
 # Authentication settings
 if DEBUG == "True":
-    REDIRECT_URI = "https://localhost"
+    REDIRECT_URI = "https://10.13.7.8"
 else:
     REDIRECT_URI = "https://transcendence-backend-znhl.onrender.com"
 
@@ -65,9 +66,9 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 CSRF_ALLOWED_ORIGINS = [
-    "https://localhost",
+    "https://10.13.7.8",
     "https://api.intra.42.fr",
-    "http://localhost:3000",
+    "http://10.13.7.8:3000",
     "http://frontend:3000",
     "https://transcendence-frontend-3otz.onrender.com",
     "https://zstenger93.github.io",
@@ -76,8 +77,8 @@ CSRF_ALLOWED_ORIGINS = [
 CORS_ALLOWED_ORIGINS = [
     "http://frontend:3000",
     "https://api.intra.42.fr",
-    "https://localhost",
-    "http://localhost:3000",
+    "https://10.13.7.8",
+    "http://10.13.7.8:3000",
     "https://transcendence-frontend-3otz.onrender.com",
     "https://zstenger93.github.io",
 ]

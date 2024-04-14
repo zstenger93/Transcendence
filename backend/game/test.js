@@ -1,5 +1,5 @@
-// const websocketUrl = 'ws://localhost:8000/game/asdfasdf/';
-const websocketUrl = 'wss://localhost/chat/';
+// const websocketUrl = 'ws://10.13.7.8:8000/game/asdfasdf/';
+const websocketUrl = 'wss://10.13.7.8/chat/';
 
 
 // Create a new WebSocket instance
