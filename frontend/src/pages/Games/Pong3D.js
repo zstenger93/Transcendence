@@ -402,11 +402,11 @@ function Pong3D() {
         if (leftPaddleBoundingBox.intersectsBox(ballBoundingBox)) {
           // eslint-disable-next-line react-hooks/exhaustive-deps
           if (!isCodeExecuted) {
-			// eslint-disable-next-line react-hooks/exhaustive-deps
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             bounceCounter = bounceCounter + 1;
-			// eslint-disable-next-line react-hooks/exhaustive-deps
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             ballSpeed += 0.02;
-			// eslint-disable-next-line react-hooks/exhaustive-deps
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             leftPaddleSpeedConst += 0.005;
             bounceContext.clearRect(
               0,
@@ -416,7 +416,7 @@ function Pong3D() {
             );
             bounceContext.fillText("BOUNCE COUNT: " + bounceCounter, 6, 24);
             bounceMaterialTexture.needsUpdate = true;
-			// eslint-disable-next-line react-hooks/exhaustive-deps
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             isCodeExecuted = true;
           } else {
             isCodeExecuted = false;
@@ -437,11 +437,9 @@ function Pong3D() {
             // eslint-disable-next-line react-hooks/exhaustive-deps
             lifes = orbits.length - 1;
             if (orbits.length === 0) {
-              if (orbits.length === 0) {
-                setGameOver(true);
-                setBounceCounter(bounceCounter);
-                ballSpeed = 0;
-              }
+              setGameOver(true);
+              setBounceCounter(bounceCounter);
+              ballSpeed = 0;
             }
             if (orbits.length > 0) {
               scene.remove(orbits[orbits.length - 1]);
@@ -531,7 +529,7 @@ function Pong3D() {
       if (isSKeyPressed) {
         leftPaddlePosition -= leftPaddleSpeedConst;
       }
-	  // eslint-disable-next-line react-hooks/exhaustive-deps
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       leftPaddlePosition = Math.max(
         -wallOffsetY + paddleHeight / 2 + wallThickness / 2,
         Math.min(
