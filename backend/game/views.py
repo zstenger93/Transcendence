@@ -103,11 +103,7 @@ def game_ending(request):
     if loser.game_stats is None:
         loser.game_stats = GameStats.objects.create(user=loser)
         loser.save()
-    # logger.info("-----------------------------------------")
-    # logger.info(f"{winner}, {loser}, {winner_score}, {loser_score}, {game_tag}, {lobby_name}")
-    # logger.info("-----------------------------------------")
 
-    # Set up variables to populate entry in GameHistory table
     final_score = f"{winner_score}:{loser_score}"
     # Check if the entry already exists
     existing_entry = GameHistory.objects.filter(game_tag=game_tag).first()

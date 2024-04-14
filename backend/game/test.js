@@ -1,4 +1,4 @@
-// const websocketUrl = 'ws://10.13.7.8:8000/game/asdfasdf/';
+// const websocketUrl = 'ws://40.13.7.8:8000/game/asdfasdf/';
 const websocketUrl = 'wss://10.13.7.8/chat/';
 
 
@@ -28,3 +28,7 @@ websocket.onerror = function(error) {
 websocket.onclose = function(event) {
   console.log('WebSocket connection closed.');
 };
+
+- start only when starg game pressed 
+- Prevent user from playing again itself
+- Ending

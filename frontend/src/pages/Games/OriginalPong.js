@@ -22,7 +22,7 @@ const Pong = () => {
       let room_name = randomString(10);
       if (!gameSocket.current) {
         // gameSocket.current = new WebSocket("wss://10.13.7.8/game/" + room_name + "/");
-        gameSocket.current = new WebSocket("wss://10.13.7.8/game/asdfasdf/");
+        gameSocket.current = new WebSocket("wss://10.13.7.8/game/pong/");
       }
 
       let canvas = document.getElementById("gameCanvas");

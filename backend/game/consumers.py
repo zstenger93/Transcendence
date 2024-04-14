@@ -256,9 +256,9 @@ class GameInstance:
         self.ball_y = 50
         self.canvas_width = 1000
         self.canvas_height = 700
-        self.player0 = 145
+        self.player0 = 295
         self.player0_score = 0
-        self.player1 = 145
+        self.player1 = 295
         self.player1_score = 0
         self.paddle_height = 110
         self.paddle_width = 10
