@@ -28,6 +28,7 @@ class GameConsumer(AsyncWebsocketConsumer):
         super().__init__(*args, **kwargs)
         self.game_state = {}
         self.condition = asyncio.Condition()
+
     user_ids = {}
 
     connected_clients = {}
@@ -48,23 +49,22 @@ class GameConsumer(AsyncWebsocketConsumer):
             logger.info(
                 f"User {user.id} is already connected to room {self.room_name}, {self.user_ids[self.room_name]}"
             )
-            # if user.id in self.user_ids[self.room_name]:
-            #     logger.info(f"User {user.id} is already connected to room {self.room_name}")
-            #     return
             logger.info("Player 2 Joined Waiting for second player 222222222222222222")
             self.game_instance = self.connected_clients[self.room_name]
             self.user_ids[self.room_name][1] = user.id
             self.users[self.room_name][1] = user
             self.game_state[self.room_name] = "starting"
         else:
-            logger.info("Player 1 Joined Waiting for second player 11111111111111111111")
+            logger.info(
+                "Player 1 Joined Waiting for second player 11111111111111111111"
+            )
             self.user_ids[self.room_name] = [user.id, None]
             self.users[self.room_name] = [user, None]
             self.game_state[self.room_name] = "waiting"
             self.connected_clients[self.room_name] = GameInstance()
 
         self.game_instance = self.connected_clients[self.room_name]
-        
+
         logger.info(f"game_stataaaaaaaaa {self.game_state[self.room_name]}")
         await self.channel_layer.group_add(self.room_group_name, self.channel_name)
         await self.accept()
@@ -86,13 +86,6 @@ class GameConsumer(AsyncWebsocketConsumer):
         )
 
     async def receive(self, text_data):
-        # Wait until both user IDs are set
-        # user_ids = self.user_ids.get(self.room_name)
-        # if not user_ids or None in user_ids:
-        #     logger.info("Waiting for user IDs to be set")
-        #     return
-
-        # Now both user IDs are set, proceed with processing game events
         game_event = text_data
         cmd = game_event[:2]
         userid = int(game_event[2:])
@@ -100,7 +93,7 @@ class GameConsumer(AsyncWebsocketConsumer):
 
     async def handle_game_input(self, cmd, userid):
         logger.info(f"cmd {cmd} userid {userid}")
-        if self.game_state[self.room_name] == 'starting':
+        if self.game_state[self.room_name] == "starting":
             if cmd == "pw" and userid == self.user_ids[self.room_name][0]:
                 await self.game_instance.move_p0_up("press")
             elif cmd == "ps" and userid == self.user_ids[self.room_name][0]:
@@ -175,7 +168,9 @@ class GameConsumer(AsyncWebsocketConsumer):
         logger.info(f"game_usersssss {self.user_ids[self.room_name]}")
         async with self.condition:
             if self.game_state[self.room_name] == "waiting":
-                await self.condition.wait_for(lambda: self.user_ids[self.room_name][1] is not None)
+                await self.condition.wait_for(
+                    lambda: self.user_ids[self.room_name][1] is not None
+                )
                 await self.send_game_state_to_clients()
             else:
                 self.game_state[self.room_name] = "starting"
@@ -185,7 +180,9 @@ class GameConsumer(AsyncWebsocketConsumer):
             self.connected_clients[self.room_name] = GameInstance()
             self.game_instance = self.connected_clients[self.room_name]
         if self.room_name not in self.game_tasks:
-            logger.info(f"++++game_state{self.game_state[self.room_name]} looooooooppppp")
+            logger.info(
+                f"++++game_state{self.game_state[self.room_name]} looooooooppppp"
+            )
             self.game_tasks[self.room_name] = asyncio.create_task(self.game_loop())
 
     async def send_game_state_to_clients(self):
@@ -206,9 +203,9 @@ class GameConsumer(AsyncWebsocketConsumer):
                 "game_state": self.game_state.get(self.room_name),
                 "w": self.user_ids.get(self.room_name),
                 "users": [str(user) for user in self.users.get(self.room_name)],
+                "sender": self.scope["user"].id,
             },
         )
-        # logger.info("sending back")
         # logger.info(f"Game state sent: {self.game_instance.ball_x}, {self.game_instance.ball_y},  {self.game_instance.score},  {self.game_instance.player0},  {self.game_instance.player1},  {self.game_instance.hit},  {self.game_instance.ball_speed},  {self.room_name},  {self.game_state.get(self.room_name)},  {self.user_ids.get(self.room_name)},  {[str(user) for user in self.users.get(self.room_name)]}")
 
     async def game_message(self, event):
@@ -230,6 +227,7 @@ class GameConsumer(AsyncWebsocketConsumer):
                     "game_state": self.game_state.get(self.room_name),
                     "user_ids": self.user_ids.get(self.room_name),
                     "users": [str(user) for user in self.users.get(self.room_name)],
+                    "sender": self.scope["user"].id,
                 }
             )
         )
@@ -285,17 +283,17 @@ class GameInstance:
                 setattr(self, paddle, self.player1 + direction)
 
     async def move_p0_up(self, state):
-        await self.move_paddle("player0", -3, state)
+        await self.move_paddle("player0", -10, state)
         # self.player0 += 1
 
     async def move_p0_down(self, state):
-        await self.move_paddle("player0", 3, state)
+        await self.move_paddle("player0", 10, state)
 
     async def move_p1_up(self, state):
-        await self.move_paddle("player1", -3, state)
+        await self.move_paddle("player1", -10, state)
 
     async def move_p1_down(self, state):
-        await self.move_paddle("player1", 3, state)
+        await self.move_paddle("player1", 10, state)
 
     async def update_game(self, game_state, room_name, user0, user1):
         """

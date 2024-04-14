@@ -7,8 +7,23 @@ const Pong = () => {
   const gameSocket = useRef(null);
 
   useEffect(() => {
+    function randomString(length) {
+      var result = "";
+      var characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      var charactersLength = characters.length;
+      for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+      return result;
+    }
+
     async function getData() {
-      gameSocket.current = new WebSocket("wss://10.13.7.8/game/asdfasdf/");
+      let room_name = randomString(10);
+      if (!gameSocket.current) {
+        // gameSocket.current = new WebSocket("wss://10.13.7.8/game/" + room_name + "/");
+        gameSocket.current = new WebSocket("wss://10.13.7.8/game/asdfasdf/");
+      }
 
       let canvas = document.getElementById("gameCanvas");
       canvas.width = 1000;
@@ -16,35 +31,32 @@ const Pong = () => {
       let context = canvas.getContext("2d");
       let receivedData;
       gameSocket.current.onmessage = function (event) {
-        // console.log("received data: " + event.data)
         receivedData = JSON.parse(event.data);
-        // console.log("data: " + JSON.stringify(receivedData));
         
         let room_name = receivedData["room_name"];
         let gameState = receivedData["game_state"];
         let users = receivedData["users"];
         
         if (receivedData["type"] === "game_message") {
-          // console.log("Game Message: " + JSON.stringify(receivedData));
-          sender.current = receivedData["users"][0];
+          sender.current = receivedData["sender"];
           player0.current = receivedData["users"][0];
           player1.current = receivedData["users"][1];
           renderGameFrame(receivedData);
         }
         else if (receivedData["type"] === "waiting_message") {
-          // console.log("Waiting Message: " + JSON.stringify(receivedData));
+          console.log("Waiting Message: " + JSON.stringify(receivedData));
         }
-        // else if (receivedData["type"] === "ending_message") {
-        //   console.log("Ending Message: " + JSON.stringify(receivedData));
-        //   var score = receivedData["user_ids"][0] + " " + receivedData.score + " " + receivedData["user_ids"][1];
-        //   window.location.href =
-        //   "https://10.13.7.8/game/ending/?gameinfo=" +
-        //   score +
-        //   "&gametag=" +
-        //   receivedData["game_tag"] +
-        //   "&roomname=" +
-        //     room_name;
-        // }
+        else if (receivedData["type"] === "ending_message") {
+          console.log("Ending Message: " + JSON.stringify(receivedData));
+          var score = receivedData["user_ids"][0] + " " + receivedData.score + " " + receivedData["user_ids"][1];
+          window.location.href =
+          "https://10.13.7.8/game/ending/?gameinfo=" +
+          score +
+          "&gametag=" +
+          receivedData["game_tag"] +
+          "&roomname=" +
+            room_name;
+        }
       };
 
       const renderGameFrame = (gameData) => {
@@ -172,30 +184,28 @@ const Pong = () => {
       };
 
       const handleKeyDown = (event) => {
-        console.log(event.key)
         const user = sender.current;
-        console.log("user", receivedData["user_ids"][0]);
         if (event.key === "w") {
-          gameSocket.current.send("pw" + receivedData["user_ids"][0]);
+          gameSocket.current.send("pw" + user);
         } else if (event.key === "s") {
-          gameSocket.current.send("ps" + receivedData["user_ids"][0]);
+          gameSocket.current.send("ps" + user);
         } else if (event.key === "i") {
-          gameSocket.current.send("pi" + receivedData["user_ids"][0]);
+          gameSocket.current.send("pi" + user);
         } else if (event.key === "k") {
-          gameSocket.current.send("pk" + receivedData["user_ids"][0]);
+          gameSocket.current.send("pk" + user);
         }
       };
 
       const handleKeyUp = (event) => {
         const user = sender.current;
         if (event.key === "w") {
-          gameSocket.current.send("rw" + receivedData["user_ids"][0]);
+          gameSocket.current.send("rw" + user);
         } else if (event.key === "s") {
-          gameSocket.current.send("rs" + receivedData["user_ids"][0]);
+          gameSocket.current.send("rs" + user);
         } else if (event.key === "i") {
-          gameSocket.current.send("ri" + receivedData["user_ids"][0]);
+          gameSocket.current.send("ri" + user);
         } else if (event.key === "k") {
-          gameSocket.current.send("rk" + receivedData["user_ids"][0]);
+          gameSocket.current.send("rk" + user);
         }
       };
 

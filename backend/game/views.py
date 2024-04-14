@@ -54,7 +54,7 @@ def room(request, room_name):
     # Get or create the game room for the users
     room_obj = prepare_room(room_name)
     if not room_obj:
-        room_name = "asdfasdf"
+        room_name = generate_random_lobby_name(10)
         room_obj = GameRoom.objects.create(name=room_name)
 
     user = request.user
