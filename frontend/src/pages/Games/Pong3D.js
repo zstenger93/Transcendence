@@ -28,8 +28,8 @@ function Pong3D() {
     map: textureLoader.load(venus),
     reflectivity: 1,
   });
-  const [gameOver, setGameOver] = React.useState(false);
-  const [returnCounter, setBounceCounter] = useState(0);
+  const [gameOver] = React.useState(false);
+  const [returnCounter] = useState(0);
 
   const asteroidGeometry = new THREE.SphereGeometry(1, 32, 32);
   const asteroids = [];
