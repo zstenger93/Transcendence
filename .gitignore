@@ -55,11 +55,4 @@ backend/authentication/images/*
 # media
 media
 node_modules
-
-#ssl_keys
-*.crt
-*.key
-*.pem
-
-
-backend/output.json
+docker/data

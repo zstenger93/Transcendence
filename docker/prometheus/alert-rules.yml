@@ -1,0 +1,41 @@
+groups:
+- name: PostgresSQL
+  rules:
+  - alert: PostgresExporterDown
+    expr: up{job="postgres-exporter"} == 0
+    for: 2m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Postgres Exporter is down"
+      description: "The Postgres Exporter job has been down for more than 2 minutes."
+- name: PostgresSQL HighMemoryUsage
+  rules:
+  - alert: HighMemoryUsage
+    expr: (node_memory_MemTotal - node_memory_MemFree - node_memory_Buffers - node_memory_Cached) / node_memory_MemTotal * 100 > 90
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High Memory Usage Detected"
+      description: "The Prometheus server has high memory usage for more than 5 minutes."
+- name: PostgresSQL SlowPostgresQueries
+  rules:
+  - alert: SlowPostgresQueries
+    expr: rate(pg_stat_activity_total{state='active'}[5m]) > 10
+    for: 10m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Slow Postgres Queries Detected"
+      description: "There are more than 10 slow queries per minute for more than 10 minutes."
+- name: Prometheus
+  rules:
+  - alert: PrometheusHealthCheckFailed
+    expr: prometheus_targets_failed > 0
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Prometheus Health Check Failed"
+      description: "Prometheus is failing to scrape targets."
