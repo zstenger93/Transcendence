@@ -43,6 +43,6 @@ python manage.py makemigrations && python manage.py migrate
 # tail -f /var/log/daphne/daphne.log
 
 
-# daphne -b 0.0.0.0 backend.asgi:application
+daphne -b 0.0.0.0 backend.asgi:application
 # hang the container
 tail -f /dev/null
