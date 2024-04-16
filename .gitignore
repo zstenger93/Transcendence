@@ -62,12 +62,4 @@ node_modules
 *.pem
 
 
-backend/output.json
-
-# my stuff
-
-backend/backend/settings.py
-backend/user_api/views.py
-docker/backend/backend.sh
-frontend/package.json
-.gitignore
+docker/data
