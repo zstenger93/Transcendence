@@ -3,7 +3,6 @@ import { I18nextProvider, useTranslation } from "react-i18next";
 import Translation from "./components/Translation";
 import Home from "./pages/Home";
 import Chat from "./pages/Chat";
-import Games from "./pages/Games/Games";
 import About from "./pages/About";
 import NotFound from "./components/404";
 import Sidebar from "./components/hamburger_menu/Hamburger";
@@ -104,14 +103,6 @@ function App() {
             element={
               <PageWrapper image={Background} redirectUri={REDIRECT_URI}>
                 <Matchmaking />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="games"
-            element={
-              <PageWrapper image={Background} redirectUri={REDIRECT_URI}>
-                <Games />
               </PageWrapper>
             }
           />
