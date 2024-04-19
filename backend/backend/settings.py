@@ -21,7 +21,7 @@ ALLOWED_HOSTS = ["*"]
 
 # Authentication settings
 if DEBUG == "True":
-    REDIRECT_URI = "https://10.13.7.8"
+    REDIRECT_URI = "https://10.13.7.5"
 else:
     REDIRECT_URI = "https://transcendence-backend-znhl.onrender.com"
 
@@ -66,9 +66,9 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 CSRF_ALLOWED_ORIGINS = [
-    "https://10.13.7.8",
+    "https://10.13.7.5",
     "https://api.intra.42.fr",
-    "http://10.13.7.8:3000",
+    "http://10.13.7.5:3000",
     "http://frontend:3000",
     "https://transcendence-frontend-3otz.onrender.com",
     "https://zstenger93.github.io",
@@ -77,8 +77,8 @@ CSRF_ALLOWED_ORIGINS = [
 CORS_ALLOWED_ORIGINS = [
     "http://frontend:3000",
     "https://api.intra.42.fr",
-    "https://10.13.7.8",
-    "http://10.13.7.8:3000",
+    "https://10.13.7.5",
+    "http://10.13.7.5:3000",
     "https://transcendence-frontend-3otz.onrender.com",
     "https://zstenger93.github.io",
 ]

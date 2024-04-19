@@ -92,3 +92,8 @@ Header Changer: https://chromewebstore.google.com/detail/requestly-open-source-h
 
 ## Notes
 Paddle speed increases with ball speed
+
+
+- start only when starg game pressed 
+- Prevent user from playing again itself
+- Ending

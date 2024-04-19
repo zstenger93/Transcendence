@@ -91,12 +91,16 @@ def game_ending(request):
     users = game_info.split(" ")
     winner_id = users[0]
     winner_score = users[1]
-    loser_id = users[3]
-    loser_score = users[4]
+    loser_id = users[4]
+    loser_score = users[3]
 
     # Get User objects
+    logger.info(f"winner_id {winner_id}")
+    logger.info(f"loser_id {loser_id}")
     winner = get_object_or_404(AppUser, id=winner_id)
+    logger.info(f"winner {winner}")
     loser = get_object_or_404(AppUser, id=loser_id)
+    logger.info(f"loser {loser}")
     if winner.game_stats is None:
         winner.game_stats = GameStats.objects.create(user=winner)
         winner.save()

@@ -21,8 +21,8 @@ const Pong = () => {
     async function getData() {
       let room_name = randomString(10);
       if (!gameSocket.current) {
-        // gameSocket.current = new WebSocket("wss://10.13.7.8/game/" + room_name + "/");
-        gameSocket.current = new WebSocket("wss://10.13.7.8/game/pong/");
+        // gameSocket.current = new WebSocket("wss://10.13.7.5/game/" + room_name + "/");
+        gameSocket.current = new WebSocket("wss://10.13.7.5/game/pong/");
       }
 
       let canvas = document.getElementById("gameCanvas");
@@ -50,7 +50,7 @@ const Pong = () => {
           console.log("Ending Message: " + JSON.stringify(receivedData));
           var score = receivedData["user_ids"][0] + " " + receivedData.score + " " + receivedData["user_ids"][1];
           window.location.href =
-          "https://10.13.7.8/game/ending/?gameinfo=" +
+          "https://10.13.7.5/game/ending/?gameinfo=" +
           score +
           "&gametag=" +
           receivedData["game_tag"] +
