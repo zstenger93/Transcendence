@@ -42,42 +42,7 @@ def generate_random_lobby_name(length=10):
     return lobby_name
 
 
-def prepare_room(room_name):
-    """
-    Helper function to get the game room object by room name.
-    """
-    game_room = GameRoom.objects.filter(name=room_name).first()
-    return game_room
-
-
-def room(request, room_name):
-    # Get or create the game room for the users
-    room_obj = prepare_room(room_name)
-    if not room_obj:
-        room_name = generate_random_lobby_name(10)
-        room_obj = GameRoom.objects.create(name=room_name)
-
-    user = request.user
-
-    channel_layer = get_channel_layer()
-    async_to_sync(channel_layer.group_send)("user_group", {"type": "user_info_request"})
-    context = {
-        "room_name": room_obj.name,
-        # "sender": user0_id,
-        # "user1": user0_id,
-        # "user2": user1_id,
-        # "player0": room_obj.user1.username,
-        # "player1": room_obj.user2.username,
-    }
-    logger.info("-----------------------------------------")
-    logger.info(f"context: {context}")
-    logger.info("-----------------------------------------")
-
-    return JsonResponse(context)
-
-
 def my_handler(message):
-    # Extract user information from the message payload
     user_id = message.get("user_id")
     room_name = message.get("room_name")
     print(f"User {user_id} joined room {room_name}")
@@ -87,7 +52,6 @@ def game_ending(request):
     game_info = request.GET.get("gameinfo", None)
     game_tag = request.GET.get("gametag", None)
     lobby_name = request.GET.get("roomname", None)
-    logger.info("game____info", game_info)
     users = game_info.split(" ")
     winner_id = users[0]
     winner_score = users[1]
@@ -95,18 +59,8 @@ def game_ending(request):
     loser_score = users[3]
 
     # Get User objects
-    logger.info(f"winner_id {winner_id}")
-    logger.info(f"loser_id {loser_id}")
     winner = get_object_or_404(AppUser, id=winner_id)
-    logger.info(f"winner {winner}")
     loser = get_object_or_404(AppUser, id=loser_id)
-    logger.info(f"loser {loser}")
-    if winner.game_stats is None:
-        winner.game_stats = GameStats.objects.create(user=winner)
-        winner.save()
-    if loser.game_stats is None:
-        loser.game_stats = GameStats.objects.create(user=loser)
-        loser.save()
 
     final_score = f"{winner_score}:{loser_score}"
     # Check if the entry already exists
