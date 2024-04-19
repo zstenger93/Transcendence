@@ -47,52 +47,29 @@ def my_handler(message):
     room_name = message.get("room_name")
     print(f"User {user_id} joined room {room_name}")
 
-def game_ending(request):
-    # Get parameters from request
-    game_info = request.GET.get("gameinfo", None)
-    game_tag = request.GET.get("gametag", None)
-    lobby_name = request.GET.get("roomname", None)
-    users = game_info.split(" ")
-    winner_id = users[0]
-    winner_score = users[1]
-    loser_id = users[4]
-    loser_score = users[3]
 
-    # Get User objects
-    winner = get_object_or_404(AppUser, id=winner_id)
-    loser = get_object_or_404(AppUser, id=loser_id)
+def end_game(request):
+    lobby_info = request.GET.get("gameinfo", None)
+    score_board = lobby_info.split(" ")
+    winner_score = score_board[0]
+    user1_id = score_board[1]
+    user2_id = score_board[3]
+    loser_score = score_board[4]
+    logger.info(f"Game ended with score: {score_board}")
+    user1 = get_object_or_404(AppUser, id=user1_id)
+    user2 = get_object_or_404(AppUser, id=user2_id)
 
-    final_score = f"{winner_score}:{loser_score}"
-    # Check if the entry already exists
-    existing_entry = GameHistory.objects.filter(game_tag=game_tag).first()
-    if not existing_entry:
-        # Entry does not exist, create a new one
-        game_history = GameHistory(
-            type="1v1",
-            winner=winner,
-            loser=loser,
-            final_score=final_score,
-            game_tag=game_tag,
-        )
-        game_history.save()
-        winner.game_stats.add_game_history(game_history)
-        loser.game_stats.add_game_history(game_history)
-        winner.game_stats.add_win()
-        loser.game_stats.add_loss()
-    # Return to game room
-    room_obj = GameRoom.objects.filter(name=lobby_name).first()
-    other_user = (
-        room_obj.user1.username
-        if room_obj.user1.username != request.user.username
-        else room_obj.user2.username
-    )
-    # return game info to the room
+    logger.info(f"Game ended with score: {score_board}")
 
     return JsonResponse(
         {
-            "winner": winner.username,
-            "loser": loser.username,
-            "final_score": final_score,
-            "other_user": other_user,
+            "winner": user1,
+            "score": winner_score,
+            
+            "loser": user2,
+            "scoree": loser_score,
         }
     )
+
+
+# id1 score1 id2 score2
