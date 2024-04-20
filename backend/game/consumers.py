@@ -45,32 +45,36 @@ class GameConsumer(AsyncWebsocketConsumer):
 
         user = self.scope["user"]
         if self.room_name in self.connected_clients:
-            # Check if the user is already connected to the room
-            logger.info(
-                f"User {user.id} is already connected to room {self.room_name}, {self.user_ids[self.room_name]}"
-            )
-            logger.info("Player 2 Joined Waiting for second player 222222222222222222")
-            self.game_instance = self.connected_clients[self.room_name]
-            self.user_ids[self.room_name][1] = user.id
-            self.users[self.room_name][1] = user
-            self.game_state[self.room_name] = "starting"
+            if self.user_ids[self.room_name][0] != user.id:
+
+                # Check if the user is already connected to the room
+                logger.info(
+                    f"User {user.id} is already connected to room {self.room_name}, {self.user_ids[self.room_name]}"
+                )
+                logger.info("Player 2 Joined Waiting for second player 222222222222222222")
+                self.game_instance = self.connected_clients[self.room_name]
+                self.user_ids[self.room_name][1] = user.id
+                self.users[self.room_name][1] = user
+                self.game_state[self.room_name] = "starting"
+                await self.send_game_state_to_clients()
+            else:
+                return
         else:
             logger.info(
                 "Player 1 Joined Waiting for second player 11111111111111111111"
             )
             self.user_ids[self.room_name] = [user.id, None]
             self.users[self.room_name] = [user, None]
-            self.game_state[self.room_name] = "waiting"
             self.connected_clients[self.room_name] = GameInstance()
+            self.game_state[self.room_name] = "waiting"
+            self.game_instance = self.connected_clients[self.room_name]
+            await self.send_game_state_to_clients()
 
-        self.game_instance = self.connected_clients[self.room_name]
-
-        logger.info(f"game_stataaaaaaaaa {self.game_state[self.room_name]}")
         await self.channel_layer.group_add(self.room_group_name, self.channel_name)
         await self.accept()
         logger.info(f"groups: {self.channel_layer.groups}")
         await self.start_game()
-        await self.send_game_state_to_clients()
+        # await self.send_game_state_to_clients()
 
     async def send_room_info_to_group(self):
         await self.send(
@@ -164,8 +168,6 @@ class GameConsumer(AsyncWebsocketConsumer):
         )
 
     async def start_game(self):
-        logger.info(f"game_satekkkkkk {self.game_state[self.room_name]}")
-        logger.info(f"game_usersssss {self.user_ids[self.room_name]}")
         async with self.condition:
             if self.game_state[self.room_name] == "waiting":
                 await self.condition.wait_for(
@@ -174,15 +176,13 @@ class GameConsumer(AsyncWebsocketConsumer):
                 await self.send_game_state_to_clients()
             else:
                 self.game_state[self.room_name] = "starting"
+                await self.send_game_state_to_clients()
         if self.room_name in self.connected_clients:
             self.game_instance = self.connected_clients[self.room_name]
         else:
             self.connected_clients[self.room_name] = GameInstance()
             self.game_instance = self.connected_clients[self.room_name]
         if self.room_name not in self.game_tasks:
-            logger.info(
-                f"++++game_state{self.game_state[self.room_name]} looooooooppppp"
-            )
             self.game_tasks[self.room_name] = asyncio.create_task(self.game_loop())
 
     async def send_game_state_to_clients(self):
@@ -268,7 +268,7 @@ class GameInstance:
         self.p0_moving = 0
         self.p1_moving = 0
         self.ball_speed = 0
-        self.score_to_win = 2
+        self.score_to_win = 10
 
     async def move_paddle(self, paddle, direction, state):
         if state == "press":

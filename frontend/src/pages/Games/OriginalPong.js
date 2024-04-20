@@ -32,7 +32,7 @@ const Pong = () => {
       let receivedData;
       gameSocket.current.onmessage = function (event) {
         receivedData = JSON.parse(event.data);
-        
+        console.log("Received Data: " + JSON.stringify(receivedData));
         let room_name = receivedData["room_name"];
         let gameState = receivedData["game_state"];
         let users = receivedData["users"];
@@ -185,28 +185,38 @@ const Pong = () => {
 
       const handleKeyDown = (event) => {
         const user = sender.current;
-        if (event.key === "w") {
-          gameSocket.current.send("pw" + user);
-        } else if (event.key === "s") {
-          gameSocket.current.send("ps" + user);
-        } else if (event.key === "i") {
-          gameSocket.current.send("pi" + user);
-        } else if (event.key === "k") {
-          gameSocket.current.send("pk" + user);
+        if (gameSocket.current.readyState === WebSocket.OPEN) {
+          if (event.key === "w") {
+            gameSocket.current.send("pw" + user);
+          } else if (event.key === "s") {
+            gameSocket.current.send("ps" + user);
+          } else if (event.key === "i") {
+            gameSocket.current.send("pi" + user);
+          } else if (event.key === "k") {
+            gameSocket.current.send("pk" + user);
+          }
+        } else {
+          console.log("Socket not open");
         }
+
       };
 
       const handleKeyUp = (event) => {
         const user = sender.current;
-        if (event.key === "w") {
-          gameSocket.current.send("rw" + user);
-        } else if (event.key === "s") {
-          gameSocket.current.send("rs" + user);
-        } else if (event.key === "i") {
-          gameSocket.current.send("ri" + user);
-        } else if (event.key === "k") {
-          gameSocket.current.send("rk" + user);
+        if (gameSocket.current.readyState === WebSocket.OPEN) {
+          if (event.key === "w") {
+            gameSocket.current.send("rw" + user);
+          } else if (event.key === "s") {
+            gameSocket.current.send("rs" + user);
+          } else if (event.key === "i") {
+            gameSocket.current.send("ri" + user);
+          } else if (event.key === "k") {
+            gameSocket.current.send("rk" + user);
+          }
+        } else {
+          console.log("Socket not open");
         }
+
       };
 
       const startGame = () => {
