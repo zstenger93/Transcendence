@@ -24,9 +24,17 @@ const Pong = () => {
       if (!gameSocket.current) {
         gameSocket.current = new WebSocket("wss://10.13.7.5/game/pong/");
       }
-
-
-
+      gameSocket.current.onopen = function (event) {
+        console.log("Data:" + JSON.stringify(receivedData));
+        console.log("WebSocket is open now.!!!!!!!!!!!!!!!");
+      };
+      gameSocket.current.onclose = function(event) {
+        console.log('WebSocket is closed now.!!!!!!!!!!!!!!', event.data);
+      };
+      gameSocket.onerror = function(error) {
+        console.error('WebSocket error:?????????', error);
+      };
+      
       let canvas = document.getElementById("gameCanvas");
       canvas.width = 1000;
       canvas.height = 700;
@@ -34,7 +42,7 @@ const Pong = () => {
       let receivedData;
       gameSocket.current.onmessage = function (event) {
         receivedData = JSON.parse(event.data);
-        console.log("Received Data: " + JSON.stringify(receivedData));
+        // console.log("Received Data: " + JSON.stringify(receivedData));
         let room_name = receivedData["room_name"];
         let gameState = receivedData["game_state"];
         let users = receivedData["users"];
@@ -46,18 +54,13 @@ const Pong = () => {
           renderGameFrame(receivedData);
         }
         else if (receivedData["type"] === "waiting_message") {
-          console.log("Waiting Message: " + JSON.stringify(receivedData));
+          // console.log("Waiting Message: " + JSON.stringify(receivedData));
         }
         else if (receivedData["type"] === "ending_message") {
-          console.log("Ending Message: " + JSON.stringify(receivedData));
-          var score = receivedData["user_ids"][0] + " " + receivedData.score + " " + receivedData["user_ids"][1];
-          window.location.href =
-          "https://10.13.7.5/game/ending/?gameinfo=" +
-          score +
-          "&gametag=" +
-          receivedData["game_tag"] +
-          "&roomname=" +
-            room_name;
+          // return black canvas
+          clearCanvas();
+          // display score
+          displayScore(receivedData["score"]);
         }
       };
 
@@ -178,15 +181,17 @@ const Pong = () => {
       const displayScore = (score) => {
         if (context) {
           context.fillStyle = "white";
-          context.fillRect(285, 5, 240, 70);
+          context.fillRect(400, 0, 200, 70);
           context.fillStyle = "black";
-          context.fillText("Score!", 295, 40);
-          context.fillText(score, 300, 65);
+          context.fillText("Score!", 400, 50);
+          context.fillText(score, 450, 50);
         }
       };
 
       const handleKeyDown = (event) => {
+
         const user = sender.current;
+        console.log("Key up event: " + user);
         if (gameSocket.current.readyState === WebSocket.OPEN) {
           if (event.key === "w") {
             gameSocket.current.send("pw" + user);
@@ -200,11 +205,11 @@ const Pong = () => {
         } else {
           console.log("Socket not open");
         }
-
       };
 
       const handleKeyUp = (event) => {
         const user = sender.current;
+        console.log("Key up event: " + user);
         if (gameSocket.current.readyState === WebSocket.OPEN) {
           if (event.key === "w") {
             gameSocket.current.send("rw" + user);
@@ -258,7 +263,7 @@ const Pong = () => {
         id="gameCanvas"
         width="1000"
         height="700"
-        style={{ backgroundColor: "black" }}
+        style={{ backgroundColor: "black" , border: "1px solid white" }}
       ></canvas>
       <button id="startGame">Start Game</button>
     </div>
