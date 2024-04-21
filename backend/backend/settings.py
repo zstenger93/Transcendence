@@ -19,6 +19,7 @@ DEBUG = os.getenv('DEBUG')
 ALLOWED_HOSTS = [
         '*', 
         'localhost', 
+        '10.12.2.2',
         '172.19.0.4',
         '127.0.0.1', 
         '0.0.0.0', 
@@ -90,7 +91,7 @@ CORS_ALLOWED_ORIGINS = [
 	]
 
 CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_ALLOW_ALL = True
 SESSION_COOKIE_SAMESITE = None
 SESSION_COOKIE_SECURE = True
 # SESSION_COOKIE_SAMESITE = 'Lax'
