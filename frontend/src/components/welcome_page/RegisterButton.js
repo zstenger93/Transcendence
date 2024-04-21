@@ -23,14 +23,26 @@ const RegisterButt = ({ t, redirectToHome, redirect_uri }) => {
         },
         { withCredentials: true }
       );
-	  const token = response.data.access;
+
+      const token = response.data.access;
+
       if (token) {
         Cookies.set("access", token, {
           expires: 7,
           sameSite: "Strict",
           secure: true,
         });
-        redirectToHome();
+        const login = await axios.post(
+          `${redirect_uri}/api/login`,
+          {
+            email: email,
+            password: password,
+          },
+          { withCredentials: true }
+        );
+        if (login) {
+          redirectToHome();
+        }
       }
     } catch (error) {
       if (error.response && error.response.data) {

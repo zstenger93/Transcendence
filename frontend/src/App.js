@@ -8,7 +8,6 @@ import NotFound from "./components/404";
 import Sidebar from "./components/hamburger_menu/Hamburger";
 import Welcome from "./pages/Welcome";
 import Profile from "./pages/Profile";
-import Matchmaking from "./pages/Games/Matchmaking";
 import OriginalPong from "./pages/Games/OriginalPong";
 import PongAi from "./pages/Games/PongAi";
 import Pong3D from "./pages/Games/Pong3D";
@@ -94,14 +93,6 @@ function App() {
             element={
               <PageWrapper image={Background} redirectUri={REDIRECT_URI}>
                 <Chat redirectUri={REDIRECT_URI} />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="matchmaking"
-            element={
-              <PageWrapper image={Background} redirectUri={REDIRECT_URI}>
-                <Matchmaking />
               </PageWrapper>
             }
           />
