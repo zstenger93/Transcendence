@@ -34,8 +34,9 @@ class GameConsumer(AsyncWebsocketConsumer):
     connected_clients = {}
     game_tasks = {}
     users = {}
-
+    connected_users = set()
     async def connect(self):
+        self.connected_users.add(self.scope["user"].id)
         self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
         self.room_group_name = f"game_{self.room_name}"
         if not self.scope["user"].is_authenticated:
@@ -117,10 +118,10 @@ class GameConsumer(AsyncWebsocketConsumer):
             await self.send_game_state_to_clients()
 
     async def disconnect(self, close_code):
+        self.connected_users.add(self.scope["user"].id)
         await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
 
     async def game_loop(self):
-        # logger.info(f"game_stateeeeeeeee {self.game_state[self.room_name]}")
         while self.game_state[self.room_name] == "starting":
             await self.game_instance.update_game(
                 self.game_state,
@@ -130,9 +131,26 @@ class GameConsumer(AsyncWebsocketConsumer):
             )
             await asyncio.sleep(0.015625)
             await self.send_game_state_to_clients()
-        # if self.game_state[self.room_name] != 'ending':
         self.game_tasks.pop(self.room_name)
         await self.send_game_end()
+
+    async def start_game(self):
+        async with self.condition:
+            if self.game_state[self.room_name] == "waiting":
+                await self.condition.wait_for(
+                    lambda: self.user_ids[self.room_name][1] is not None
+                )
+                await self.send_game_state_to_clients()
+            else:
+                self.game_state[self.room_name] = "starting"
+                await self.send_game_state_to_clients()
+        if self.room_name in self.connected_clients:
+            self.game_instance = self.connected_clients[self.room_name]
+        else:
+            self.connected_clients[self.room_name] = GameInstance()
+            self.game_instance = self.connected_clients[self.room_name]
+        if self.room_name not in self.game_tasks:
+            self.game_tasks[self.room_name] = asyncio.create_task(self.game_loop())
 
     async def send_game_end(self):
         game_tag = generate_random_string(20)
@@ -167,25 +185,8 @@ class GameConsumer(AsyncWebsocketConsumer):
             )
         )
 
-    async def start_game(self):
-        async with self.condition:
-            if self.game_state[self.room_name] == "waiting":
-                await self.condition.wait_for(
-                    lambda: self.user_ids[self.room_name][1] is not None
-                )
-                await self.send_game_state_to_clients()
-            else:
-                self.game_state[self.room_name] = "starting"
-                await self.send_game_state_to_clients()
-        if self.room_name in self.connected_clients:
-            self.game_instance = self.connected_clients[self.room_name]
-        else:
-            self.connected_clients[self.room_name] = GameInstance()
-            self.game_instance = self.connected_clients[self.room_name]
-        if self.room_name not in self.game_tasks:
-            self.game_tasks[self.room_name] = asyncio.create_task(self.game_loop())
-
     async def send_game_state_to_clients(self):
+        logger.info(f"Connected users: {self.connected_users}")
         await self.channel_layer.group_send(
             self.room_group_name,
             {

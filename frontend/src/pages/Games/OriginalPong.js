@@ -19,11 +19,13 @@ const Pong = () => {
     }
 
     async function getData() {
+
       let room_name = randomString(10);
       if (!gameSocket.current) {
-        // gameSocket.current = new WebSocket("wss://10.13.7.5/game/" + room_name + "/");
         gameSocket.current = new WebSocket("wss://10.13.7.5/game/pong/");
       }
+
+
 
       let canvas = document.getElementById("gameCanvas");
       canvas.width = 1000;
