@@ -16,8 +16,18 @@ import { useLocation } from "react-router-dom";
 import backgroundImage from "../../images/pongbg.png";
 import { WelcomeButtonStyle } from "../../components/buttons/ButtonStyle";
 import EndScreen from "../../components/game/EndScreen";
+import Cookies from "js-cookie";
 
 function Pong3D() {
+  useEffect(() => {
+    setTimeout(() => {
+      const accessToken = Cookies.get("access");
+
+      if (!accessToken) {
+        window.location.href = "/404.html";
+      }
+    }, 1000);
+  }, []);
   const location = useLocation();
   const textureLoader = new THREE.TextureLoader();
   const longGeometry = 50;

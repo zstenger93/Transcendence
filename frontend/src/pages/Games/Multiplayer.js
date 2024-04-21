@@ -8,8 +8,18 @@ import LoseScreen from "../../components/game/LoseScreen";
 import WinScreen from "../../components/game/WinScreen";
 import handleResize from "../../components/game/HandleResize";
 import FullScreenButton from "../../components/buttons/FullScreen";
+import Cookies from "js-cookie";
 
 const GameCanvas = () => {
+  useEffect(() => {
+    setTimeout(() => {
+      const accessToken = Cookies.get("access");
+
+      if (!accessToken) {
+        window.location.href = "/404.html";
+      }
+    }, 1000);
+  }, []);
   // Default Parameters
   let playerSpeed = 5;
   const otherPaddleOffset = 3;
@@ -103,6 +113,7 @@ const GameCanvas = () => {
       const leftPaddleCenterY = leftPaddleYSecound + paddleHeight / 2;
       const distanceFromCenter = ballY - leftPaddleCenterY;
       // eslint-disable-next-line no-unused-expressions
+
       if (ballSpeedX > 0) {
         ballX = paddleWidth * (otherPaddleOffset - 1) - 10;
       } else {

@@ -1,6 +1,6 @@
 /* disable eslint */
 
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import WelcomeMessage from "../components/home/WelcomeMessage";
 import Readme from "../components/home/Readme";
 import Sidebar from "../components/hamburger_menu/Hamburger";
@@ -20,7 +20,6 @@ function Home({ redirectUri }) {
   useEffect(() => {
     setTimeout(() => {
       const accessToken = Cookies.get("access");
-      console.log(accessToken);
 
       if (!accessToken) {
         window.location.href = "/404.html";

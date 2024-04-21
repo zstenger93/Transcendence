@@ -201,11 +201,11 @@ function MatchHistory() {
 }
 
 const defaultUserDetails = {
-  title: "Mastermind",
+  title: "Random Chad",
   username: "TrasnscEND",
   email: "fake@mail.com",
   about: "I turn people crazy with my clear subject description.",
-  school: "42",
+  school: "Homeless",
   level: "42.42",
   wins: "42",
   losses: "58",
@@ -220,16 +220,15 @@ function Profile({ redirectUri }) {
   useEffect(() => {
     setTimeout(() => {
       const accessToken = Cookies.get("access");
-      console.log(accessToken);
 
       if (!accessToken) {
         window.location.href = "/404.html";
       }
     }, 1000);
   }, []);
-  
+
   const [userDetails, setUserDetails] = useState(null);
-  const [imageUrl, setImageUrl] = useState(defaultUserDetails.profile_picture);
+  let [imageUrl, setImageUrl] = useState(defaultUserDetails.profile_picture);
   const [username, setUsername] = useState(
     userDetails?.username || defaultUserDetails.username
   );

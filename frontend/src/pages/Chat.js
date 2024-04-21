@@ -18,7 +18,6 @@ function Chat({ redirectUri }) {
   useEffect(() => {
     setTimeout(() => {
       const accessToken = Cookies.get("access");
-      console.log(accessToken);
 
       if (!accessToken) {
         window.location.href = "/404.html";
@@ -361,7 +360,7 @@ function Chat({ redirectUri }) {
                   </span>
                   <img
                     className="w-24 h-24 rounded-full mb-4 mx-auto"
-                    src={userDetails.user.profile_picture}
+                    src={userDetails.user.profile_picture ? userDetails.user.profile_picture : "https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp"}
                     alt="Profile"
                   />
                   <p className="font-nosifer mb-2">
