@@ -15,14 +15,13 @@ function About() {
   useEffect(() => {
     setTimeout(() => {
       const accessToken = Cookies.get("access");
-      console.log(accessToken);
 
       if (!accessToken) {
         window.location.href = "/404.html";
       }
     }, 1000);
   }, []);
-  
+
   const [selectedCard, setSelectedCard] = React.useState(null);
   const { t } = useTranslation();
   const teamMembers = [

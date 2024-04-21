@@ -16,8 +16,18 @@ import { useLocation } from "react-router-dom";
 import backgroundImage from "../../images/pongbg.png";
 import { WelcomeButtonStyle } from "../../components/buttons/ButtonStyle";
 import EndScreen from "../../components/game/EndScreen";
+import Cookies from "js-cookie";
 
 function Pong3D() {
+  useEffect(() => {
+    setTimeout(() => {
+      const accessToken = Cookies.get("access");
+
+      if (!accessToken) {
+        window.location.href = "/404.html";
+      }
+    }, 1000);
+  }, []);
   const location = useLocation();
   const textureLoader = new THREE.TextureLoader();
   const longGeometry = 50;
@@ -402,11 +412,11 @@ function Pong3D() {
         if (leftPaddleBoundingBox.intersectsBox(ballBoundingBox)) {
           // eslint-disable-next-line react-hooks/exhaustive-deps
           if (!isCodeExecuted) {
-			// eslint-disable-next-line react-hooks/exhaustive-deps
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             bounceCounter = bounceCounter + 1;
-			// eslint-disable-next-line react-hooks/exhaustive-deps
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             ballSpeed += 0.02;
-			// eslint-disable-next-line react-hooks/exhaustive-deps
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             leftPaddleSpeedConst += 0.005;
             bounceContext.clearRect(
               0,
@@ -416,7 +426,7 @@ function Pong3D() {
             );
             bounceContext.fillText("BOUNCE COUNT: " + bounceCounter, 6, 24);
             bounceMaterialTexture.needsUpdate = true;
-			// eslint-disable-next-line react-hooks/exhaustive-deps
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             isCodeExecuted = true;
           } else {
             isCodeExecuted = false;
@@ -531,7 +541,7 @@ function Pong3D() {
       if (isSKeyPressed) {
         leftPaddlePosition -= leftPaddleSpeedConst;
       }
-	  // eslint-disable-next-line react-hooks/exhaustive-deps
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       leftPaddlePosition = Math.max(
         -wallOffsetY + paddleHeight / 2 + wallThickness / 2,
         Math.min(

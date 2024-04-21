@@ -18,7 +18,6 @@ function Chat({ redirectUri }) {
   useEffect(() => {
     setTimeout(() => {
       const accessToken = Cookies.get("access");
-      console.log(accessToken);
 
       if (!accessToken) {
         window.location.href = "/404.html";

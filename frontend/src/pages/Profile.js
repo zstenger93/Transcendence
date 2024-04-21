@@ -220,14 +220,13 @@ function Profile({ redirectUri }) {
   useEffect(() => {
     setTimeout(() => {
       const accessToken = Cookies.get("access");
-      console.log(accessToken);
 
       if (!accessToken) {
         window.location.href = "/404.html";
       }
     }, 1000);
   }, []);
-  
+
   const [userDetails, setUserDetails] = useState(null);
   const [imageUrl, setImageUrl] = useState(defaultUserDetails.profile_picture);
   const [username, setUsername] = useState(
