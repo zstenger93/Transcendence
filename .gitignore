@@ -64,4 +64,4 @@ node_modules
 
 backend/output.json
 
-docker/data/*
+docker/data

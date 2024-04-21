@@ -24,7 +24,7 @@ const GameCanvas = () => {
   let playerSpeed = 5;
   const otherPaddleOffset = 3;
   let resize = true;
-  const defaultSpeedX = 300;
+  const defaultSpeedX = 200;
   const winScore = 10;
   const defaultSpeedY = 20;
   const [scoreLeftReact, setScoreLeft] = useState(0);
@@ -47,8 +47,8 @@ const GameCanvas = () => {
   let rightPaddleYSecound = canvasRef.current
     ? canvasRef.current.height / 2 - paddleHeight / 2
     : 0;
-  let ballX = canvasRef.current ? canvasRef.current.width / 2 : 5;
-  let ballY = canvasRef.current ? canvasRef.current.height / 2 : 5;
+  let ballX = canvasRef.current ? canvasRef.current.width / 2 : 500;
+  let ballY = canvasRef.current ? canvasRef.current.height / 2 : 500;
   let ballSpeedX = defaultSpeedX;
   let ballSpeedY = defaultSpeedY;
   let canvasDefaultWidth = 1920;
@@ -104,17 +104,21 @@ const GameCanvas = () => {
         Math.abs(ballSpeedX);
       // check for the collision with right paddle
     } else if (
-      ballX < paddleWidth * otherPaddleOffset + ballSize * sizeSpeedRatio &&
-      ballX >
-        paddleWidth * (otherPaddleOffset - 1) + ballSize * sizeSpeedRatio &&
+      ballX <
+        paddleWidth * (otherPaddleOffset + 1) + ballSize * sizeSpeedRatio &&
+      ballX > paddleWidth * otherPaddleOffset + ballSize * sizeSpeedRatio &&
       ballY > leftPaddleYSecound &&
       ballY < leftPaddleYSecound + paddleHeight
     ) {
       const leftPaddleCenterY = leftPaddleYSecound + paddleHeight / 2;
       const distanceFromCenter = ballY - leftPaddleCenterY;
       // eslint-disable-next-line no-unused-expressions
-      if (ballSpeedX > 0) paddleWidth * (otherPaddleOffset - 1) - 10;
-      else ballX = paddleWidth * otherPaddleOffset + 10;
+
+      if (ballSpeedX > 0) {
+        ballX = paddleWidth * (otherPaddleOffset - 1) - 10;
+      } else {
+        ballX = paddleWidth * (otherPaddleOffset + 1) + 10;
+      }
       ballSpeedX *= -1;
       // updates the balls speed in case of collusion with the paddle X speed
       if (ballSpeedX < 0) ballSpeedX -= ballSpeedIncrease;
