@@ -12,8 +12,20 @@ import {
   unblockUser,
   getBlockedUsers,
 } from "../components/API";
+import Cookies from "js-cookie";
 
 function Chat({ redirectUri }) {
+  useEffect(() => {
+    setTimeout(() => {
+      const accessToken = Cookies.get("access");
+      console.log(accessToken);
+
+      if (!accessToken) {
+        window.location.href = "/404.html";
+      }
+    }, 1000);
+  }, []);
+
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [currentChannel, setCurrentChannel] = useState("General");

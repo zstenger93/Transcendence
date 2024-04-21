@@ -46,7 +46,6 @@ const PageWrapper = ({ children, image, showSidebar = true, redirectUri }) => {
 function App() {
   const { i18n } = useTranslation();
   const basename = "";
-  // process.env.NODE_ENV === "production" ? "/Transcendence" : "";
   let REDIRECT_URI;
 
   if (process.env.NODE_ENV === "development") {
@@ -164,7 +163,7 @@ function App() {
               </PageWrapper>
             }
           />
-		  <Route
+          <Route
             path="tournament"
             element={
               <PageWrapper image={Background} redirectUri={REDIRECT_URI}>
