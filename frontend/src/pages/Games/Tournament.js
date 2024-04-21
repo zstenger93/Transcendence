@@ -908,7 +908,7 @@ const Tournament = () => {
   var ballX = 50;
   var ballY = 50;
   var ballDirX = 1;
-  var ballDirY = 0;
+  var ballDirY = 0.05;
   var scorePlayer1 = 0;
   var scorePlayer2 = 0;
 
@@ -974,7 +974,7 @@ const Tournament = () => {
     const match = tournament.matches[tournament.currentMatch];
     match.winner = scorePlayer1 > scorePlayer2 ? match.player1 : match.player2;
     match.matchId = tournament.currentMatch;
-    if (match.player1.score > match.player2.score) match.player1.score += 1;
+    if (scorePlayer1 > scorePlayer2) match.player1.score += 1;
     else match.player2.score += 1;
     match.scorePlayer1 = scorePlayer1;
     match.scorePlayer2 = scorePlayer2;
@@ -1026,7 +1026,7 @@ const Tournament = () => {
       ballX = canvas.width / 2;
       ballY = canvas.height / 2;
       ballDirX = ballDirX * -1;
-      ballDirY = 0;
+      ballDirY = 0.05;
       ballSpeed = 0.9;
       if (scorePlayer1 >= 2 || scorePlayer2 >= 2) {
         ballSpeed = 0;
