@@ -23,7 +23,6 @@ function Readme() {
   const [pong, visiblePong] = useOnScreen();
   const [pongai, visiblePongai] = useOnScreen();
   const [pong3d, visiblePong3d] = useOnScreen();
-  const [game, visibleGame] = useOnScreen();
   const [contributors, visibleContributors] = useOnScreen();
   const [github, visibleGithub] = useOnScreen();
   const [isOpen, setIsOpen] = useState(false);

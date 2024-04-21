@@ -3,13 +3,11 @@ import { I18nextProvider, useTranslation } from "react-i18next";
 import Translation from "./components/Translation";
 import Home from "./pages/Home";
 import Chat from "./pages/Chat";
-import Games from "./pages/Games/Games";
 import About from "./pages/About";
 import NotFound from "./components/404";
 import Sidebar from "./components/hamburger_menu/Hamburger";
 import Welcome from "./pages/Welcome";
 import Profile from "./pages/Profile";
-import Matchmaking from "./pages/Games/Matchmaking";
 import OriginalPong from "./pages/Games/OriginalPong";
 import PongAi from "./pages/Games/PongAi";
 import Pong3D from "./pages/Games/Pong3D";
@@ -47,7 +45,6 @@ const PageWrapper = ({ children, image, showSidebar = true, redirectUri }) => {
 function App() {
   const { i18n } = useTranslation();
   const basename = "";
-  // process.env.NODE_ENV === "production" ? "/Transcendence" : "";
   let REDIRECT_URI;
 
   if (process.env.NODE_ENV === "development") {
@@ -96,22 +93,6 @@ function App() {
             element={
               <PageWrapper image={Background} redirectUri={REDIRECT_URI}>
                 <Chat redirectUri={REDIRECT_URI} />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="matchmaking"
-            element={
-              <PageWrapper image={Background} redirectUri={REDIRECT_URI}>
-                <Matchmaking />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="games"
-            element={
-              <PageWrapper image={Background} redirectUri={REDIRECT_URI}>
-                <Games />
               </PageWrapper>
             }
           />
@@ -173,7 +154,7 @@ function App() {
               </PageWrapper>
             }
           />
-		  <Route
+          <Route
             path="tournament"
             element={
               <PageWrapper image={Background} redirectUri={REDIRECT_URI}>

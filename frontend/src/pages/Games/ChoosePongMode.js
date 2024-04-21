@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import BackButton from "../../components/buttons/BackButton";
@@ -6,8 +6,19 @@ import { ButtonStyle } from "../../components/buttons/ButtonStyle";
 import backgroundimage from "../../images/pongbg.png";
 import background from "../../images/welcomebg.jpg";
 import HowToPlay from "../../components/game/HowToPlay";
+import Cookies from "js-cookie";
 
 function ChoosePongMode() {
+  useEffect(() => {
+    setTimeout(() => {
+      const accessToken = Cookies.get("access");
+
+      if (!accessToken) {
+        window.location.href = "/404.html";
+      }
+    }, 1000);
+  }, []);
+
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -30,7 +41,7 @@ function ChoosePongMode() {
         <Link to="/multiplayer" className={`mb-8 ${ButtonStyle}`}>
           {t("Multiplayer")}
         </Link>
-		<Link to="/tournament" className={`mb-8 ${ButtonStyle}`}>
+        <Link to="/tournament" className={`mb-8 ${ButtonStyle}`}>
           {t("Tournament")}
         </Link>
         <Link
@@ -45,7 +56,7 @@ function ChoosePongMode() {
         <BackButton navigate={navigate} t={t} />
         <HowToPlay
           isOpen={isOpen}
-		  setIsOpen={setIsOpen}
+          setIsOpen={setIsOpen}
           background={background}
           backgroundimage={backgroundimage}
         />

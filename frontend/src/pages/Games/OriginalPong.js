@@ -8,8 +8,18 @@ import LoseScreen from "../../components/game/LoseScreen";
 import WinScreen from "../../components/game/WinScreen";
 import handleResize from "../../components/game/HandleResize";
 import FullScreenButton from "../../components/buttons/FullScreen";
+import Cookies from "js-cookie";
 
 const GameCanvas = () => {
+  useEffect(() => {
+    setTimeout(() => {
+      const accessToken = Cookies.get("access");
+
+      if (!accessToken) {
+        window.location.href = "/404.html";
+      }
+    }, 1000);
+  }, []);
   // Default Parameters
   let playerSpeed = 5;
   const playerSpeedIncrease = 500;
@@ -205,7 +215,7 @@ const GameCanvas = () => {
           const touchY = event.touches[i].clientY - rect.top - window.scrollY;
           // Left paddle controls
           if (touch.clientX < window.innerWidth / 2) {
-			// eslint-disable-next-line react-hooks/exhaustive-deps
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             leftPaddleY = touchY - paddleHeight / 2;
             leftPaddleY = Math.max(
               0,
@@ -214,7 +224,7 @@ const GameCanvas = () => {
           }
           // Right paddle controls
           else {
-			// eslint-disable-next-line react-hooks/exhaustive-deps
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             rightPaddleY = touchY - paddleHeight / 2;
             rightPaddleY = Math.max(
               0,

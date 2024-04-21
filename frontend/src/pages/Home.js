@@ -1,9 +1,10 @@
 /* disable eslint */
 
-import React from "react";
+import React, { useEffect } from "react";
 import WelcomeMessage from "../components/home/WelcomeMessage";
 import Readme from "../components/home/Readme";
 import Sidebar from "../components/hamburger_menu/Hamburger";
+import Cookies from "js-cookie";
 
 function ScrollDownIndicator() {
   return (
@@ -16,6 +17,16 @@ function ScrollDownIndicator() {
 }
 
 function Home({ redirectUri }) {
+  useEffect(() => {
+    setTimeout(() => {
+      const accessToken = Cookies.get("access");
+
+      if (!accessToken) {
+        window.location.href = "/404.html";
+      }
+    }, 1000);
+  }, []);
+
   return (
     <>
       <div className="relative h-screen flex items-center justify-center">

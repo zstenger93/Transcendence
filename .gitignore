@@ -62,4 +62,6 @@ node_modules
 *.pem
 
 
+backend/output.json
+
 docker/data

@@ -8,8 +8,18 @@ import LoseScreen from "../../components/game/LoseScreen";
 import WinScreen from "../../components/game/WinScreen";
 import FullScreenButton from "../../components/buttons/FullScreen";
 import handleResize from "../../components/game/HandleResize";
+import Cookies from "js-cookie";
 
 const GameCanvas = (aiDifficulty) => {
+	useEffect(() => {
+		setTimeout(() => {
+		  const accessToken = Cookies.get("access");
+	
+		  if (!accessToken) {
+			window.location.href = "/404.html";
+		  }
+		}, 1000);
+	  }, []);
   // Default Parameters
   const defaultSpeedX = 300;
   const playerSpeedIncrease = 0.5;
