@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Transcendence/static/css/main.94d30ca3.css",
-    "main.js": "/Transcendence/static/js/main.4fe01fb6.js",
+    "main.css": "/Transcendence/static/css/main.79d98301.css",
+    "main.js": "/Transcendence/static/js/main.594eaec2.js",
     "static/js/496.b48b2ec3.chunk.js": "/Transcendence/static/js/496.b48b2ec3.chunk.js",
     "static/media/404.mp4": "/Transcendence/static/media/404.036827f1db48d0ae1d47.mp4",
     "static/media/welcomebg.jpg": "/Transcendence/static/media/welcomebg.e865aad312e9f209a8e9.jpg",
@@ -34,12 +34,12 @@
     "static/media/slick.ttf": "/Transcendence/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/Transcendence/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/Transcendence/index.html",
-    "main.94d30ca3.css.map": "/Transcendence/static/css/main.94d30ca3.css.map",
-    "main.4fe01fb6.js.map": "/Transcendence/static/js/main.4fe01fb6.js.map",
+    "main.79d98301.css.map": "/Transcendence/static/css/main.79d98301.css.map",
+    "main.594eaec2.js.map": "/Transcendence/static/js/main.594eaec2.js.map",
     "496.b48b2ec3.chunk.js.map": "/Transcendence/static/js/496.b48b2ec3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.94d30ca3.css",
-    "static/js/main.4fe01fb6.js"
+    "static/css/main.79d98301.css",
+    "static/js/main.594eaec2.js"
   ]
 }
