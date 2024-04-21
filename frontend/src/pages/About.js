@@ -9,8 +9,20 @@ import zsolt from "../images/about/zsolt.jpeg";
 import jamshidbek from "../images/about/jamshidbek.jpg";
 import karlis from "../images/about/karlis.png";
 import laszlo from "../images/about/laszlo.png";
+import Cookies from "js-cookie";
 
 function About() {
+  useEffect(() => {
+    setTimeout(() => {
+      const accessToken = Cookies.get("access");
+      console.log(accessToken);
+
+      if (!accessToken) {
+        window.location.href = "/404.html";
+      }
+    }, 1000);
+  }, []);
+  
   const [selectedCard, setSelectedCard] = React.useState(null);
   const { t } = useTranslation();
   const teamMembers = [
@@ -121,10 +133,10 @@ function About() {
 				flex flex-col items-center justify-start transition-all duration-800
 				ease-in-out transform-gpu shadow-2xl
 				${
-				selectedCard === index
-					? "w-96 absolute top-1/2 transform -translate-y-1/2"
-					: ""
-				}`}
+          selectedCard === index
+            ? "w-96 absolute top-1/2 transform -translate-y-1/2"
+            : ""
+        }`}
                 style={{
                   backgroundImage: `url(${backgroundImage})`,
                   transition: "transform 0.0s ease-in-out",

@@ -34,7 +34,7 @@ const HamburgerMenu = ({
         <SidebarIcon
           icon={<SiGameandwatch size="32" />}
           text={t("Play or Watch Games")}
-          to="/games"
+          to="/choosepongmode"
         />
         <SidebarIcon
           icon={<FaUser size="32" />}
