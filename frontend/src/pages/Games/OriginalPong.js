@@ -22,7 +22,7 @@ const Pong = () => {
 
       let room_name = randomString(10);
       if (!gameSocket.current) {
-        gameSocket.current = new WebSocket("wss://10.13.7.5/game/pong/");
+        gameSocket.current = new WebSocket("wss://192.168.178.84/game/pong/");
       }
       gameSocket.current.onopen = function (event) {
         console.log("Data:" + JSON.stringify(receivedData));

@@ -60,7 +60,9 @@ class GameConsumer(AsyncWebsocketConsumer):
 
         await self.channel_layer.group_add(self.room_group_name, self.channel_name)
         await self.accept()
-        await self.startGame()
+        if (self.game_state[self.room_name] != "waiting"):
+            await self.send_room_info_to_group()
+            await self.startGame()
 
     async def send_room_info_to_group(self):
         await self.send(
@@ -77,30 +79,29 @@ class GameConsumer(AsyncWebsocketConsumer):
 
     async def receive(self, text_data):
         game_event = text_data
-        cmd = game_event[:2]
+        cmd = str(game_event[:2])
         userid = int(game_event[2:])
         await self.handleInput(cmd, userid)
 
     async def handleInput(self, cmd, userid):
-        if self.game_state[self.room_name] == "starting":
-            if cmd == "pw" and userid == self.user_ids[self.room_name][0]:
-                await self.game_instance.move_p0_up("press")
-            elif cmd == "ps" and userid == self.user_ids[self.room_name][0]:
-                await self.game_instance.move_p0_down("press")
-            elif cmd == "rw" and userid == self.user_ids[self.room_name][0]:
-                await self.game_instance.move_p0_up("release")
-            elif cmd == "rs" and userid == self.user_ids[self.room_name][0]:
-                await self.game_instance.move_p0_down("release")
+        if cmd == "pw" and userid == self.user_ids[self.room_name][0]:
+            await self.game_instance.move_p0_up("press")
+        elif cmd == "ps" and userid == self.user_ids[self.room_name][0]:
+            await self.game_instance.move_p0_down("press")
+        elif cmd == "rw" and userid == self.user_ids[self.room_name][0]:
+            await self.game_instance.move_p0_up("release")
+        elif cmd == "rs" and userid == self.user_ids[self.room_name][0]:
+            await self.game_instance.move_p0_down("release")
 
-            elif cmd == "pw" and userid == self.user_ids[self.room_name][1]:
-                await self.game_instance.move_p1_up("press")
-            elif cmd == "ps" and userid == self.user_ids[self.room_name][1]:
-                await self.game_instance.move_p1_down("press")
-            elif cmd == "rw" and userid == self.user_ids[self.room_name][1]:
-                await self.game_instance.move_p1_up("release")
-            elif cmd == "rs" and userid == self.user_ids[self.room_name][1]:
-                await self.game_instance.move_p1_down("release")
-            await self.send_game_state_to_clients()
+        elif cmd == "pw" and userid == self.user_ids[self.room_name][1]:
+            await self.game_instance.move_p1_up("press")
+        elif cmd == "ps" and userid == self.user_ids[self.room_name][1]:
+            await self.game_instance.move_p1_down("press")
+        elif cmd == "rw" and userid == self.user_ids[self.room_name][1]:
+            await self.game_instance.move_p1_up("release")
+        elif cmd == "rs" and userid == self.user_ids[self.room_name][1]:
+            await self.game_instance.move_p1_down("release")
+        await self.send_game_state_to_clients()
 
     async def disconnect(self):
         logger.info(f"User disconnected: {self.scope['user'].id}")
