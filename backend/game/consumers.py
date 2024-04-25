@@ -130,9 +130,7 @@ class GameConsumer(AsyncWebsocketConsumer):
             await asyncio.sleep(0.015625)
             await self.send_game_state_to_clients()
         self.game_tasks.pop(self.room_name)
-
-        if (self.game_state[self.room_name] != "endingg"):
-            await self.send_game_end()
+        await self.send_game_end()
 
     async def send_game_end(self):
         game_tag = generate_random_string(20)
