@@ -248,7 +248,7 @@ class GameInstance:
         self.p0_moving = 0
         self.p1_moving = 0
         self.ball_speed = 0
-        self.score_to_win = 1
+        self.score_to_win = 3
 
     async def move_paddle(self, paddle, direction, state):
         if state == "press":
@@ -338,8 +338,7 @@ class GameInstance:
         if player_id == "player0":
             self.player0_score += 1
             if self.player0_score == self.score_to_win:
-                # game_state[room_name] = user0 + ':' + str(self.player0_score) + '|' + user1 + ':' + str(self.player1_score)
-                game_state[room_name] = "endingg"
+                game_state[room_name] = f"{self.player0_score} : {self.player1_score}"
                 self.player1_score = 0
                 self.player0_score = 0
                 self.player0 = 200 - self.paddle_height / 2
@@ -347,8 +346,7 @@ class GameInstance:
         else:
             self.player1_score += 1
             if self.player1_score == self.score_to_win:
-                # game_state[room_name] = user1 + ':' + str(self.player1_score) + '|' + user0 + ':' + str(self.player0_score)
-                game_state[room_name] = "endingg"
+                game_state[room_name] = f"{self.player0_score} : {self.player1_score}"
                 self.player1_score = 0
                 self.player0_score = 0
                 self.player0 = 200 - self.paddle_height / 2

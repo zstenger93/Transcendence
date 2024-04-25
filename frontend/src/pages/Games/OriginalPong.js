@@ -58,6 +58,7 @@ const Pong = () => {
         }
         else if (receivedData["type"] === "ending_message") {
           console.log("endingggggggggg");
+          console.log("Received Data: " + JSON.stringify(receivedData));
           // return black canvas
           clearCanvas();
           // display score
