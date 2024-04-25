@@ -121,12 +121,6 @@ class GameConsumer(AsyncWebsocketConsumer):
 
     async def game_loop(self):
         while self.game_state[self.room_name] == "starting" or self.game_state[self.room_name] == "waiting":
-            while self.game_state[self.room_name] == "waiting":
-                await self.print_countdown()
-                for i in range(0, 5):
-                    print(i)
-                    await asyncio.sleep(1)
-
             await self.game_instance.update_game(
                 self.game_state,
                 self.room_name,
@@ -256,7 +250,7 @@ class GameInstance:
         self.p0_moving = 0
         self.p1_moving = 0
         self.ball_speed = 0
-        self.score_to_win = 3
+        self.score_to_win = 1
 
     async def move_paddle(self, paddle, direction, state):
         if state == "press":

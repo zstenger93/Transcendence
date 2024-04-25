@@ -57,6 +57,7 @@ const Pong = () => {
           // console.log("Waiting Message: " + JSON.stringify(receivedData));
         }
         else if (receivedData["type"] === "ending_message") {
+          console.log("endingggggggggg");
           // return black canvas
           clearCanvas();
           // display score
