@@ -22,7 +22,7 @@ const Pong = () => {
 
       let room_name = randomString(10);
       if (!gameSocket.current) {
-        gameSocket.current = new WebSocket("wss://192.168.178.84/game/pong/");
+        gameSocket.current = new WebSocket("wss://10.13.7.5/game/pong/");
       }
       gameSocket.current.onopen = function (event) {
         console.log("Data:" + JSON.stringify(receivedData));
@@ -42,10 +42,6 @@ const Pong = () => {
       let receivedData;
       gameSocket.current.onmessage = function (event) {
         receivedData = JSON.parse(event.data);
-        // console.log("Received Data: " + JSON.stringify(receivedData));
-        let room_name = receivedData["room_name"];
-        let gameState = receivedData["game_state"];
-        let users = receivedData["users"];
         
         if (receivedData["type"] === "game_message") {
           sender.current = receivedData["sender"];
@@ -57,12 +53,11 @@ const Pong = () => {
           // console.log("Waiting Message: " + JSON.stringify(receivedData));
         }
         else if (receivedData["type"] === "ending_message") {
-          console.log("endingggggggggg");
           console.log("Received Data: " + JSON.stringify(receivedData));
           // return black canvas
           clearCanvas();
           // display score
-          displayScore(receivedData["score"]);
+          displayEndScore(receivedData["game_state"]);
         }
       };
 
@@ -185,8 +180,20 @@ const Pong = () => {
           context.fillStyle = "white";
           context.fillRect(400, 0, 200, 70);
           context.fillStyle = "black";
-          context.fillText("Score!", 400, 50);
+          context.fillText("Score", 400, 50);
           context.fillText(score, 450, 50);
+        }
+      };
+      const displayEndScore = (score) => {
+        if (context) {
+          context.fillStyle = "white";
+          context.fillRect(300, 250, 400, 140);
+          context.fillStyle = "red";
+          context.textAlign = "center";
+          context.textBaseline = "middle";
+          context.font = "bold 24px Arial";
+          context.fillText("Score", canvas.width / 2, canvas.height / 2 - 40);
+          context.fillText(score, canvas.width / 2, canvas.height / 2);
         }
       };
 

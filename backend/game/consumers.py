@@ -248,7 +248,7 @@ class GameInstance:
         self.p0_moving = 0
         self.p1_moving = 0
         self.ball_speed = 0
-        self.score_to_win = 3
+        self.score_to_win = 2
 
     async def move_paddle(self, paddle, direction, state):
         if state == "press":
