@@ -207,8 +207,6 @@ First mindmap :white_check_mark:
 
 Docker files for services :white_check_mark:
 
-docker-compose.dev :x: :white_check_mark:
-
 Hashed passwords :white_check_mark:
 
 Using OAuth system from 42 :white_check_mark:
@@ -217,25 +215,25 @@ CI/CD pipeline setup :white_check_mark:
 
 Deploying to github pages :white_check_mark:
 
-Setting unique username :x:
+Setting unique username :white_check_mark:
 
-Uploading an avatar for user :x:
+Uploading an avatar for user :white_check_mark:
 
 Option to enable 2FA auth :white_check_mark:
 
-Friend list and their status :x:
+Friend list and their status :white_check_mark:
 
 User stats of wins, losses etc.. :x:
 
 Match history from games :x:
 
-User being able to create private, protected and public channels :x:
+User being able to create private channels :white_check_mark:
 
-Be able to block and unblock other users :x:
+Be able to block and unblock other users :white_check_mark:
 
 Able to invite other users to play a game :x:
 
-Accessing other users profile :x:
+Accessing other users profile :white_check_mark:
 
 Playing live games on the site :x:
 
@@ -263,11 +261,11 @@ The game must be responsive :white_check_mark:
 	- *Major module*: Standard user management, authentication, users across tournaments :x:
 	- *Major module*: Implementing a remote authentication :white_check_mark:
 - **Gameplay and User Experience**
-	- *Major module*: Remote players :x:
-	- *Major module*: Multiplayer (more than 2) :x:
+	- *Major module*: Remote players :white_check_mark:
+	- *Major module*: Multiplayer (more than 2) :white_check_mark:
 	- *Major module*: Add Another Game with User History and Matchmaking :x:
 	- *Minor module*: Game customization options :white_check_mark:
-	- *Major module*: Live chat :x:
+	- *Major module*: Live chat :white_check_mark:
 - **AI-Algo**
 	- *Major module*: Introduce an AI opponent :white_check_mark:
 	- *Minor module*: User and game stats dashboard :x:

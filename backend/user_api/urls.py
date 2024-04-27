@@ -34,6 +34,11 @@ urlpatterns = [
 		name='updateProfile'
 	),
 
+	path('user_data/<str:username>/', 
+		views.UserData.as_view(),
+		name='user_data'
+	),
+
 	## JWT Authentication
     path('oauth/authorize/',
 		views.OAuthAuthorize.as_view(),

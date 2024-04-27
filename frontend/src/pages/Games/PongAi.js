@@ -8,8 +8,18 @@ import LoseScreen from "../../components/game/LoseScreen";
 import WinScreen from "../../components/game/WinScreen";
 import FullScreenButton from "../../components/buttons/FullScreen";
 import handleResize from "../../components/game/HandleResize";
+import Cookies from "js-cookie";
 
 const GameCanvas = (aiDifficulty) => {
+	useEffect(() => {
+		setTimeout(() => {
+		  const accessToken = Cookies.get("access");
+	
+		  if (!accessToken) {
+			window.location.href = "/404.html";
+		  }
+		}, 1000);
+	  }, []);
   // Default Parameters
   const defaultSpeedX = 300;
   const playerSpeedIncrease = 0.5;
@@ -281,7 +291,7 @@ const GameCanvas = (aiDifficulty) => {
       if (canvasRef.current && event.touches.length > 0) {
         const rect = canvasRef.current.getBoundingClientRect();
         const touchY = event.touches[0].clientY - rect.top - window.scrollY;
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         leftPaddleY = touchY - paddleHeight / 2;
         leftPaddleY = Math.max(
           0,
@@ -395,19 +405,36 @@ const PongAi = () => {
             <button onClick={handleButtonClick} className={WelcomeButtonStyle}>
               {t("Start Game")}
             </button>
-            <div className="relative">Level: {difficulty}</div>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <input
-                type="range"
-                min="0"
-                max="3"
-                value={difficulty}
-                onChange={(e) => setGameDifficulty(parseInt(e.target.value))}
-                style={{
-                  width: "150px",
-                  height: "25px",
-                }}
-              />
+            <div
+              style={{
+                textAlign: "center",
+                marginBottom: "20px",
+                alignItems: "center",
+                justifyContent: "center",
+                marginLeft: "-16px",
+              }}
+            >
+              <div style={{ fontWeight: "bold", marginBottom: "10px" }}>
+                Level: {difficulty}
+              </div>
+              <div style={{ display: "flex" }}>
+                <input
+                  type="range"
+                  min="0"
+                  max="3"
+                  value={difficulty}
+                  onChange={(e) => setGameDifficulty(parseInt(e.target.value))}
+                  style={{
+                    fontSize: "30px",
+                    width: "200px",
+                    height: "25px",
+                    border: "none",
+                    borderRadius: "5px",
+                    outline: "none",
+                    backgroundColor: "#444",
+                  }}
+                />
+              </div>
             </div>
           </div>
           <BackButton navigate={navigate} t={t} />
