@@ -85,7 +85,6 @@ services:
       args:
         FRONTEND_URL: ${FRONTEND_URL}
         BACKEND_URL: ${BACKEND_URL}
-        BACKEND_URLL: ${BACKEND_URLL}
         SERVER: ${SERVER}
         LOCATION: ${LOCATION}
     entrypoint: /app/docker/nginx/nginx.sh
