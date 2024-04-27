@@ -22,7 +22,7 @@ const Pong = () => {
 
       let room_name = randomString(10);
       if (!gameSocket.current) {
-        gameSocket.current = new WebSocket("wss://10.13.7.5/game/pong/");
+        gameSocket.current = new WebSocket("wss://10.12.2.4/game/pong/");
       }
       gameSocket.current.onopen = function (event) {
         console.log("Data:" + JSON.stringify(receivedData));
@@ -49,15 +49,11 @@ const Pong = () => {
           player1.current = receivedData["users"][1];
           renderGameFrame(receivedData);
         }
-        else if (receivedData["type"] === "waiting_message") {
-          // console.log("Waiting Message: " + JSON.stringify(receivedData));
-        }
         else if (receivedData["type"] === "ending_message") {
           console.log("Received Data: " + JSON.stringify(receivedData));
-          // return black canvas
           clearCanvas();
-          // display score
           displayEndScore(receivedData["game_state"]);
+          gameSocket.current.close();
         }
       };
 

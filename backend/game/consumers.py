@@ -43,7 +43,7 @@ class GameConsumer(AsyncWebsocketConsumer):
             await self.close()
             logger.info("User is not authenticated!!!!!")
             raise StopConsumer("User is not authenticated")
-
+        logger.info(f"connected clients: {self.connected_clients}")
         user = self.scope["user"]
         if self.room_name in self.connected_clients:
             if self.user_ids[self.room_name][0] != user.id:
@@ -60,6 +60,9 @@ class GameConsumer(AsyncWebsocketConsumer):
 
         await self.channel_layer.group_add(self.room_group_name, self.channel_name)
         await self.accept()
+        # if self.room_name not in self.game_state:
+        #     self.game_state[self.room_name] = "waiting"
+
         if (self.game_state[self.room_name] != "waiting"):
             await self.send_room_info_to_group()
             await self.startGame()
@@ -103,8 +106,13 @@ class GameConsumer(AsyncWebsocketConsumer):
             await self.game_instance.move_p1_down("release")
         await self.send_game_state_to_clients()
 
-    async def disconnect(self):
+    async def disconnect(self, close_code):
         logger.info(f"User disconnected: {self.scope['user'].id}")
+        self.connected_users.remove(self.scope["user"].id)
+        if not self.connected_users:
+            self.game_state = {}
+            self.connected_clients = {}
+
         await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
 
     async def startGame(self):
