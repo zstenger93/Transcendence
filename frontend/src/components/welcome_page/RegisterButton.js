@@ -23,14 +23,26 @@ const RegisterButt = ({ t, redirectToHome, redirect_uri }) => {
         },
         { withCredentials: true }
       );
-	  const token = response.data.access;
+
+      const token = response.data.access;
+
       if (token) {
         Cookies.set("access", token, {
           expires: 7,
           sameSite: "Strict",
           secure: true,
         });
-        redirectToHome();
+        const login = await axios.post(
+          `${redirect_uri}/api/login`,
+          {
+            email: email,
+            password: password,
+          },
+          { withCredentials: true }
+        );
+        if (login) {
+          redirectToHome();
+        }
       }
     } catch (error) {
       if (error.response && error.response.data) {
@@ -62,7 +74,7 @@ const RegisterButt = ({ t, redirectToHome, redirect_uri }) => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder={t("Username")}
-            onKeyPress={(e) => e.key === "Enter" && redirectToHome()}
+            onKeyPress={(e) => e.key === "Enter"}
             className="mb-2 mt-4 bg-gray-900 bg-opacity-60 text-white 
 			rounded text-center border-b-2 border-r-2 border-purple-600"
             autoComplete="new-username"
@@ -72,7 +84,7 @@ const RegisterButt = ({ t, redirectToHome, redirect_uri }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder={t("Email")}
-            onKeyPress={(e) => e.key === "Enter" && redirectToHome()}
+            onKeyPress={(e) => e.key === "Enter"}
             className="mb-2 bg-gray-900 bg-opacity-60 text-white 
 			rounded text-center border-b-2 border-r-2 border-purple-600"
             autoComplete="new-email"
@@ -82,7 +94,7 @@ const RegisterButt = ({ t, redirectToHome, redirect_uri }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder={t("Password")}
-            onKeyPress={(e) => e.key === "Enter" && redirectToHome()}
+            onKeyPress={(e) => e.key === "Enter"}
             className="mb-4 bg-gray-900 bg-opacity-60 text-white 
 			rounded text-center border-b-2 border-r-2 border-purple-600"
             autoComplete="new-password"

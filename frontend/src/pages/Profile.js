@@ -8,37 +8,11 @@ import {
   fetchUserDetails,
   changeUsername,
   changeAbout,
+  getFriendList,
+  getUserProfile,
 } from "../components/API";
 import { CiEdit } from "react-icons/ci";
 import Cookies from "js-cookie";
-
-const friendsListData = [
-  {
-    name: "Zsolt",
-    intra: "zstenger",
-    profileLink: "https://profile.intra.42.fr/users/zstenger",
-  },
-  {
-    name: "Karlis",
-    intra: "kvebers",
-    profileLink: "https://profile.intra.42.fr/users/kvebers",
-  },
-  {
-    name: "Jergashe",
-    intra: "jergahse",
-    profileLink: "https://profile.intra.42.fr/users/jergashe",
-  },
-  {
-    name: "Azer",
-    intra: "asioud",
-    profileLink: "https://profile.intra.42.fr/users/asioud",
-  },
-  {
-    name: "Emotional Damage",
-    intra: "ed",
-    profileLink: "https://github.com/zstenger93/Transcendence",
-  },
-];
 
 const matchHistoryData = [
   {
@@ -106,8 +80,9 @@ const matchHistoryData = [
   },
 ];
 
-function FriendsList() {
+function FriendsList({ friendsListData }) {
   const { t } = useTranslation();
+
   return (
     <div
       className="bg-gray-900 bg-opacity-80 p-4 rounded-md max-h-96
@@ -129,23 +104,25 @@ function FriendsList() {
           </tr>
         </thead>
         <tbody>
-          {friendsListData.map((friend, index) => (
-            <tr key={index} className="bg-white bg-opacity-10">
-              <td className="p-2 border border-gray-900 mx-auto">
-                {friend.name}
-              </td>
-              <td className="p-2 border text-center border-gray-900 mx-auto">
-                <a
-                  href={friend.profileLink}
-                  className="text-blue-500 underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {friend.intra}
-                </a>
-              </td>
-            </tr>
-          ))}
+          {friendsListData &&
+            friendsListData.length > 0 &&
+            friendsListData.map((friend, index) => (
+              <tr key={index} className="bg-white bg-opacity-10">
+                <td className="p-2 border border-gray-900 mx-auto">
+                  {friend.name}
+                </td>
+                <td className="p-2 border text-center border-gray-900 mx-auto">
+                  <a
+                    href={friend.intra}
+                    className="text-blue-500 underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {"Link"}
+                  </a>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
@@ -154,6 +131,7 @@ function FriendsList() {
 
 function MatchHistory() {
   const { t } = useTranslation();
+
   return (
     <div
       className="bg-gray-900 bg-opacity-80 p-6 shadow-xl
@@ -223,11 +201,11 @@ function MatchHistory() {
 }
 
 const defaultUserDetails = {
-  title: "Mastermind",
+  title: "Random Chad",
   username: "TrasnscEND",
   email: "fake@mail.com",
   about: "I turn people crazy with my clear subject description.",
-  school: "42",
+  school: "Homeless",
   level: "42.42",
   wins: "42",
   losses: "58",
@@ -239,12 +217,50 @@ const defaultUserDetails = {
 };
 
 function Profile({ redirectUri }) {
+  useEffect(() => {
+    setTimeout(() => {
+      const accessToken = Cookies.get("access");
+
+      if (!accessToken) {
+        window.location.href = "/404.html";
+      }
+    }, 1000);
+  }, []);
+
   const [userDetails, setUserDetails] = useState(null);
-  const [imageUrl, setImageUrl] = useState(defaultUserDetails.profile_picture);
+  let [imageUrl, setImageUrl] = useState(defaultUserDetails.profile_picture);
   const [username, setUsername] = useState(
     userDetails?.username || defaultUserDetails.username
   );
   const [profilePicture, setProfilePicture] = useState(null);
+  const [friendsListData, setFriendsListData] = useState([]);
+  useEffect(() => {
+    const fetchFriendsList = async () => {
+      const response = await getFriendList({ redirectUri });
+      const friends = response.data.friends;
+
+      const profilePromises = friends.map(async (friend) => {
+        const profileResponse = await getUserProfile({
+          redirectUri,
+          userName: friend,
+        });
+        console.log("profileresponse: ", profileResponse);
+        return {
+          name: friend,
+          intra: profileResponse.data.user.ft_url
+            .replace("('", "")
+            .replace("',)", "")
+            .replace("v2/", "")
+            .replace("api", "profile"),
+        };
+      });
+
+      const friendsWithProfiles = await Promise.all(profilePromises);
+      setFriendsListData(friendsWithProfiles);
+    };
+
+    fetchFriendsList();
+  }, [redirectUri]);
 
   useEffect(() => {
     const token = Cookies.get("access");
@@ -451,7 +467,7 @@ function Profile({ redirectUri }) {
               </button>
               <button
                 className={`w-38 ${ButtonStyle}
-				${showUserSettings ? "bg-purple-600 text-gray-300" : "text-gray-300"}`}
+				${showMatchHistory ? "bg-purple-600 text-gray-300" : "text-gray-300"}`}
                 onClick={toggleUserSettings}
               >
                 {t("Settings")}
@@ -469,11 +485,10 @@ function Profile({ redirectUri }) {
           </div>
         </div>
         <div className="mt-8 mb-10">
-          {showFriendsList && <FriendsList />}
+          {showFriendsList && <FriendsList friendsListData={friendsListData} />}
           {showMatchHistory && <MatchHistory />}
           {showUserSettings && (
             <UserSettings
-              profilePicture={profilePicture}
               setProfilePicture={setProfilePicture}
               redirectUri={redirectUri}
             />

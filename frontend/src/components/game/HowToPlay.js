@@ -51,6 +51,18 @@ const HowToPlay = ({ isOpen, setIsOpen, background, backgroundimage }) => {
           </p>
         </div>
         <div className="text-center">
+          <h1 className="text-4xl mb-10">{t("Tournament")}</h1>
+          <p>
+            {t("Play a Tournament against other players.")}
+            <br />
+            {t("This mode is played in multiple rounds.")}
+            <br />
+            {t("You need to provide the nicknames for the participants")}
+            <br />
+            {t("Choose if they are real players or an AI.")}
+          </p>
+        </div>
+        <div className="text-center">
           <h1 className="text-4xl mb-10">{t("Keybinds")}</h1>
           <div className="flex justify-between">
             <div className="w-1/2 p-2">

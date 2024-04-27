@@ -85,7 +85,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
 		text_data_json = json.loads(text_data)
 		message = text_data_json.get('message', None)
 		receiver = text_data_json.get('receiver', None)
-		function_name = text_data_json.get('function_name', None)
 
 		################# USER IS AUTHENTICATED CHECK #################
 		if not self.scope['user'].is_authenticated:
@@ -110,6 +109,18 @@ class ChatConsumer(AsyncWebsocketConsumer):
 				}
 			)
 		else:
+			if await self.user_is_blocked(receiver, username):
+				await self.send(text_data=json.dumps({
+					'message': 'You are blocked by this user.',
+					'type' : 'private_channel',
+				}))
+				return
+			elif await self.user_is_blocked(username, receiver):
+				await self.send(text_data=json.dumps({
+					'message': 'You have blocked this user.',
+					'type' : 'private_channel',
+				}))
+				return
 			receiver_channel_name = await self.get_user_channel_name_by_username(receiver)
 			if receiver_channel_name:
 				await self.channel_layer.send(
@@ -179,6 +190,16 @@ class ChatConsumer(AsyncWebsocketConsumer):
 			'message': message,
 			'online_users': online_users
 		}))
+
+
+	@database_sync_to_async
+	def user_is_blocked(self, blocker, blocked):
+		from friendship.models import Block
+		from user_api.models import AppUser as User
+		blocker_user = User.objects.get(username=blocker)
+		blocked_user = User.objects.get(username=blocked)
+		return Block.objects.filter(blocker=blocker_user, blocked=blocked_user).exists()
+	
 	
 	@database_sync_to_async
 	def get_usernames_from_user_channel_names(self, user_channel_names):

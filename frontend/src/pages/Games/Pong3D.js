@@ -16,8 +16,18 @@ import { useLocation } from "react-router-dom";
 import backgroundImage from "../../images/pongbg.png";
 import { WelcomeButtonStyle } from "../../components/buttons/ButtonStyle";
 import EndScreen from "../../components/game/EndScreen";
+import Cookies from "js-cookie";
 
 function Pong3D() {
+  useEffect(() => {
+    setTimeout(() => {
+      const accessToken = Cookies.get("access");
+
+      if (!accessToken) {
+        window.location.href = "/404.html";
+      }
+    }, 1000);
+  }, []);
   const location = useLocation();
   const textureLoader = new THREE.TextureLoader();
   const longGeometry = 50;
@@ -28,8 +38,8 @@ function Pong3D() {
     map: textureLoader.load(venus),
     reflectivity: 1,
   });
-  const [gameOver, setGameOver] = React.useState(false);
-  const [returnCounter, setBounceCounter] = useState(0);
+  const [gameOver] = React.useState(false);
+  const [returnCounter] = useState(0);
 
   const asteroidGeometry = new THREE.SphereGeometry(1, 32, 32);
   const asteroids = [];
@@ -44,7 +54,7 @@ function Pong3D() {
   let leftPaddlePosition = 0;
   let bounceCounter = 0;
   let isCodeExecuted = false;
-  let lifes = 7;
+  var lifes = 7;
 
   class Asteroid {
     constructor(x, y, radius, currentWayPoint, scene) {
@@ -141,17 +151,13 @@ function Pong3D() {
     });
     const textGeometry = new THREE.PlaneGeometry(15, 15);
     const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-    textMesh.position.set(
-      0,
-      -shortGeometry / 2 - wallThickness * 3,
-      wallThickness / 2 + 0.1
-    );
-    scene.add(textMesh);
+    textMesh.position.set(2, -6, 13);
+    // scene.add(textMesh);
     const boucneCanvas = document.createElement("canvas");
     const bounceContext = boucneCanvas.getContext("2d");
     bounceContext.font = "20px nosifer";
     bounceContext.fillStyle = "white";
-    bounceContext.fillText("BOUNCE COUNT: 0", 6, 24);
+    // bounceContext.fillText("BOUNCE COUNT: 0", 6, 24);
     const bounceMaterialTexture = new THREE.CanvasTexture(boucneCanvas);
     const bounceMaterial = new THREE.MeshBasicMaterial({
       map: bounceMaterialTexture,
@@ -170,8 +176,6 @@ function Pong3D() {
     const sunMaterialLayer2 = new THREE.MeshBasicMaterial({
       color: 0xffff00,
       map: sunTexture,
-      rougness: 0.1,
-      metalness: 1,
       opacity: 0.1,
       transparent: true,
     });
@@ -179,8 +183,8 @@ function Pong3D() {
     const sunMaterial = new THREE.MeshBasicMaterial({
       color: 0xff8800,
       map: sunTexture,
-      rougness: 0.1,
-      metalness: 1,
+      // rougness: 0.1,
+      // metalness: 1,
     });
     const sunGeometry = new THREE.SphereGeometry(10, 32, 32);
     const sunGeometryLayer2 = new THREE.SphereGeometry(12, 32, 32);
@@ -189,6 +193,7 @@ function Pong3D() {
     const sunLayer2 = new THREE.Mesh(sunGeometryLayer2, sunMaterialLayer2);
     scene.add(sun);
     sun.add(sunLayer2);
+    sun.add(textMesh);
 
     const stars = [];
     for (let i = 0; i < 1000; i++) {
@@ -402,11 +407,11 @@ function Pong3D() {
         if (leftPaddleBoundingBox.intersectsBox(ballBoundingBox)) {
           // eslint-disable-next-line react-hooks/exhaustive-deps
           if (!isCodeExecuted) {
-			// eslint-disable-next-line react-hooks/exhaustive-deps
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             bounceCounter = bounceCounter + 1;
-			// eslint-disable-next-line react-hooks/exhaustive-deps
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             ballSpeed += 0.02;
-			// eslint-disable-next-line react-hooks/exhaustive-deps
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             leftPaddleSpeedConst += 0.005;
             bounceContext.clearRect(
               0,
@@ -414,9 +419,9 @@ function Pong3D() {
               boucneCanvas.width,
               boucneCanvas.height
             );
-            bounceContext.fillText("BOUNCE COUNT: " + bounceCounter, 6, 24);
-            bounceMaterialTexture.needsUpdate = true;
-			// eslint-disable-next-line react-hooks/exhaustive-deps
+            // bounceContext.fillText("BOUNCE COUNT: " + bounceCounter, 6, 24);
+            // bounceMaterialTexture.needsUpdate = true;
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             isCodeExecuted = true;
           } else {
             isCodeExecuted = false;
@@ -435,22 +440,23 @@ function Pong3D() {
             ball.position.x = 0;
             ball.position.y = 0;
             // eslint-disable-next-line react-hooks/exhaustive-deps
-            lifes = orbits.length - 1;
-            if (orbits.length === 0) {
-              if (orbits.length === 0) {
-                setGameOver(true);
-                setBounceCounter(bounceCounter);
-                ballSpeed = 0;
-              }
-            }
-            if (orbits.length > 0) {
-              scene.remove(orbits[orbits.length - 1]);
-              orbits.pop();
-              ball.material = planetMaterials[lifes];
-              ball.material.needsUpdate = true;
-              ballSpeed = 0.3;
-              leftPaddleSpeedConst = 0.5;
-            }
+            // lifes = orbits.length - 1;
+            // if (orbits.length === 0) {
+            //   // setGameOver(true);
+            //   setBounceCounter(bounceCounter);
+            //   ballSpeed = 0;
+            // }
+            // if (orbits.length > 0) {
+            //   scene.remove(orbits[orbits.length - 1]);
+            //   orbits.pop();
+
+            ball.material =
+              planetMaterials[Math.floor(Math.random() * (lifes + 1))];
+            ball.material.needsUpdate = true;
+            //   ballSpeed = 0.3;
+            //   leftPaddleSpeedConst = 0.5;
+            // }
+
             pointLight.intensity += 50;
             pointLight.distance += 10;
           } else ballDirection.y *= -1;
@@ -531,7 +537,7 @@ function Pong3D() {
       if (isSKeyPressed) {
         leftPaddlePosition -= leftPaddleSpeedConst;
       }
-	  // eslint-disable-next-line react-hooks/exhaustive-deps
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       leftPaddlePosition = Math.max(
         -wallOffsetY + paddleHeight / 2 + wallThickness / 2,
         Math.min(
