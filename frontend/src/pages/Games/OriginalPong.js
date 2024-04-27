@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import Cookies from "js-cookie";
 
 const Pong = () => {
   const sender = useRef(null);
@@ -7,34 +8,42 @@ const Pong = () => {
   const gameSocket = useRef(null);
 
   useEffect(() => {
+    setTimeout(() => {
+      const accessToken = Cookies.get("access");
+
+      if (!accessToken) {
+        window.location.href = "/404.html";
+      }
+    }, 1000);
     function randomString(length) {
       var result = "";
       var characters =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
       var charactersLength = characters.length;
       for (var i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
       }
       return result;
     }
 
     async function getData() {
-
       let room_name = randomString(10);
       if (!gameSocket.current) {
-        gameSocket.current = new WebSocket("wss://10.12.2.4/game/pong/");
+        gameSocket.current = new WebSocket("wss://10.12.2.2/game/pong/");
       }
       gameSocket.current.onopen = function (event) {
         console.log("Data:" + JSON.stringify(receivedData));
         console.log("WebSocket is open now.!!!!!!!!!!!!!!!");
       };
-      gameSocket.current.onclose = function(event) {
-        console.log('WebSocket is closed now.!!!!!!!!!!!!!!', event.data);
+      gameSocket.current.onclose = function (event) {
+        console.log("WebSocket is closed now.!!!!!!!!!!!!!!", event.data);
       };
-      gameSocket.onerror = function(error) {
-        console.error('WebSocket error:?????????', error);
+      gameSocket.onerror = function (error) {
+        console.error("WebSocket error:?????????", error);
       };
-      
+
       let canvas = document.getElementById("gameCanvas");
       canvas.width = 1000;
       canvas.height = 700;
@@ -42,14 +51,13 @@ const Pong = () => {
       let receivedData;
       gameSocket.current.onmessage = function (event) {
         receivedData = JSON.parse(event.data);
-        
+
         if (receivedData["type"] === "game_message") {
           sender.current = receivedData["sender"];
           player0.current = receivedData["users"][0];
           player1.current = receivedData["users"][1];
           renderGameFrame(receivedData);
-        }
-        else if (receivedData["type"] === "ending_message") {
+        } else if (receivedData["type"] === "ending_message") {
           console.log("Received Data: " + JSON.stringify(receivedData));
           clearCanvas();
           displayEndScore(receivedData["game_state"]);
@@ -61,7 +69,8 @@ const Pong = () => {
         if (context && canvas) {
           clearCanvas();
           drawField();
-          var score = player0.current + "  " + gameData.score + " " + player1.current;
+          var score =
+            player0.current + "  " + gameData.score + " " + player1.current;
           displayScore(score);
           drawPaddle(0, gameData.player0, 10, 110);
           drawPaddle(1, gameData.player1, 10, 110);
@@ -194,7 +203,6 @@ const Pong = () => {
       };
 
       const handleKeyDown = (event) => {
-
         const user = sender.current;
         console.log("Key up event: " + user);
         if (gameSocket.current.readyState === WebSocket.OPEN) {
@@ -228,7 +236,6 @@ const Pong = () => {
         } else {
           console.log("Socket not open");
         }
-
       };
 
       const startGame = () => {
@@ -251,7 +258,6 @@ const Pong = () => {
     }
     getData();
   }, []);
-  
 
   return (
     <div
@@ -268,7 +274,7 @@ const Pong = () => {
         id="gameCanvas"
         width="1000"
         height="700"
-        style={{ backgroundColor: "black" , border: "1px solid white" }}
+        style={{ backgroundColor: "black", border: "1px solid white" }}
       ></canvas>
       <button id="startGame">Start Game</button>
     </div>

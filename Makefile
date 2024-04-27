@@ -8,7 +8,7 @@ all:
 
 runb:
 	daphne -b 0.0.0.0 backend.asgi:application
-# http://10.12.2.4:8000/chat/
+# http://10.12.2.2:8000/chat/
 
 
 execbackend:
