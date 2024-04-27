@@ -10,9 +10,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
-DEBUG = os.getenv('DEBUG')
+SECRET_KEY = os.getenv("SECRET_KEY")
+DEBUG = os.getenv("DEBUG")
 
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
@@ -32,53 +33,56 @@ ALLOWED_HOSTS = [
 if DEBUG == 'True':
     REDIRECT_URI = "https://10.12.2.2"
 else:
-	REDIRECT_URI = "https://transcendence-backend-znhl.onrender.com"
+    REDIRECT_URI = "https://transcendence-backend-znhl.onrender.com"
 
-if DEBUG == 'True':
-	print("DEBUG: True: ", DEBUG)
+if DEBUG == "True":
+    print("DEBUG: True: ", DEBUG)
 else:
-	print("DEBUG: False: ", DEBUG)
+    print("DEBUG: False: ", DEBUG)
 
 # Application definition
 
 INSTALLED_APPS = [
-	"daphne",
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-	'django_otp',
-    'django_otp.plugins.otp_totp',
-    'rest_framework',
-    'rest_framework_simplejwt.token_blacklist',
-    'corsheaders',
-    'user_api.apps.UserApiConfig',
-    'friendship',
-    'friendship_api',
-	'chat',
+    "daphne",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "django_otp",
+    "django_otp.plugins.otp_totp",
+    "friendship",
+    "rest_framework",
+    "rest_framework_simplejwt.token_blacklist",
+    "corsheaders",
+    "user_api.apps.UserApiConfig",
+    "friendship_api",
+    "user_block",
+    "game",
+    "chat",
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
-	'django_otp.middleware.OTPMiddleware',
-    'django.middleware.security.SecurityMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django_otp.middleware.OTPMiddleware",
+    "django.middleware.security.SecurityMiddleware",
     # 'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 CSRF_ALLOWED_ORIGINS = [
+
     "https://10.12.2.2",
 	"https://api.intra.42.fr",
     "http://localhost:3000",
     "http://frontend:3000",
     "https://transcendence-frontend-3otz.onrender.com",
-    "https://zstenger93.github.io"
+    "https://zstenger93.github.io",
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -97,37 +101,35 @@ SESSION_COOKIE_SECURE = True
 # SESSION_COOKIE_SAMESITE = 'Lax'
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'user_api.authentication.BlacklistCheckJWTAuthentication',
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "user_api.authentication.BlacklistCheckJWTAuthentication",
     ),
 }
 
 
-ROOT_URLCONF = 'backend.urls'
+ROOT_URLCONF = "backend.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'backend.wsgi.application'
+WSGI_APPLICATION = "backend.wsgi.application"
 
 ## User model
-AUTH_USER_MODEL = 'user_api.AppUser'
+AUTH_USER_MODEL = "user_api.AppUser"
 
 
 # Database
@@ -142,46 +144,44 @@ AUTH_USER_MODEL = 'user_api.AppUser'
 # }
 
 # THIS IS THE DATABASE CONFIGURATION FOR THE DOCKER CONTAINER
-if DEBUG == 'True':
+if DEBUG == "True":
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'transcend_users_db',
-            'USER': 'transcend_user',
-            'PASSWORD': 'transcend_pwd',
-            'HOST': 'db',
-            'PORT': '5432',
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "transcend_users_db",
+            "USER": "transcend_user",
+            "PASSWORD": "transcend_pwd",
+            "HOST": "db",
+            "PORT": "5432",
         }
     }
 else:
-	DATABASES = {
-		'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
-	}
+    DATABASES = {"default": dj_database_url.parse(os.getenv("DATABASE_URL"))}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -191,40 +191,35 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 # STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR / 'static'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = BASE_DIR / "static"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # For the custom user model to work we need to include this line
 # AUTH_USER_MODEL = 'authentication.User'
 
 
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=99),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=99),
 }
 
 
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'sioudazer8@gmail.com'
-EMAIL_HOST_PASSWORD = 'sayy uonp nado adlm'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "sioudazer8@gmail.com"
+EMAIL_HOST_PASSWORD = "sayy uonp nado adlm"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 # chat settings
 ASGI_APPLICATION = "backend.asgi.application"
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer'
-    }
-}
+CHANNEL_LAYERS = {"default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}}

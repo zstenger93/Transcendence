@@ -6,7 +6,6 @@
 
 ## Register -> Post
 - Input
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA3OTg5NzY4LCJpYXQiOjE3MDc5MDMzNjgsImp0aSI6IjUwOTY2MDk5OTMwODQxNWE5NThjMGRjNWIxYTc3MTBiIiwidXNlcl9pZCI6MiwiZW1haWwiOiJzaW91ZGF6ZXI4MkBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWx1c2VyMiJ9.2bAgvbFoKt-6_l6aqQL0Y3u8clIc_wRfGRguoBhGpsc
 {
     "email":"sioudazer82@gmail.com",
     "username":"realuser2",
@@ -21,9 +20,13 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA
 }
 Result <- 
 {
-    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcwNzIxOTM1MSwiaWF0IjoxNzA3MTMyOTUxLCJqdGkiOiJkMTM2ZDIyYjc2NjI0NDk0OWRhZDU3MDYwZjVjOTE0NyIsInVzZXJfaWQiOjEsImVtYWlsIjoic2lvdWRhemVyOEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWx1c2VyIn0.dUc-kYp91jYx1LNxiazHTHxKsbR78lyWTPMQWnMDH-o",
-    "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA3MjE5MzUxLCJpYXQiOjE3MDcxMzI5NTEsImp0aSI6ImRmYmJmNDgyN2MzNTQwM2NhNzFlODc3NjkyYjQzZjM1IiwidXNlcl9pZCI6MSwiZW1haWwiOiJzaW91ZGF6ZXI4QGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicmVhbHVzZXIifQ.0cjP1qZfUfrxiUophcscm3pMv0rJxN7LluokzmAan7w"
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.",
+    "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9."
 }
+
+realuser2: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIwNTE3NTI3LCJpYXQiOjE3MTE5NjM5MjcsImp0aSI6IjFjZGY5ZDk3ZDY3YzQxODc4MmVmNTgyZDg3MmM5M2Q2IiwidXNlcl9pZCI6MSwiZW1haWwiOiJzaW91ZGF6ZXI4MkBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWx1c2VyMiJ9.06R3e43s9VhLW3DgC7MgaoblXidZQ6Kd4ojrDEt26MY
+
+azer: 
 
 ## Put new access token to the extension
 
@@ -84,3 +87,13 @@ Header Changer: https://chromewebstore.google.com/detail/requestly-open-source-h
 {
 	"blocked_username":"realuser"
 }
+
+
+
+## Notes
+Paddle speed increases with ball speed
+
+
+- start only when starg game pressed 
+- Prevent user from playing again itself
+- Ending
