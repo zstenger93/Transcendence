@@ -435,24 +435,21 @@ class sendQrCode(APIView):
                     device = request.user.totpdevice_set.create(confirmed=True)
                 current_site = get_current_site(request)
 
+                # Generate QR code
                 img = qrcode.make(device.config_url)
+                img.save("qrcode.png")
 
                 mail_subject = "DJANGO OTP DEMO"
-                byte_stream = BytesIO()
-                img.save(byte_stream, format="PNG")
-                byte_stream.seek(0)
-
-                mail_subject = "Iiinteernaaal Pooiinteeer Vaariaaablee"
                 message = (
                     f"Hello {request.user},\n\nYour QR Code is: <img src='cid:image1'>"
                 )
                 to_email = request.user.email
                 email = EmailMessage(mail_subject, message, to=[to_email])
 
+                # Attach image
                 fp = open("qrcode.png", "rb")
                 msg_image = MIMEImage(fp.read())
                 fp.close()
-                msg_image = MIMEImage(byte_stream.getvalue())
                 msg_image.add_header("Content-ID", "<image1>")
                 email.attach(msg_image)
 
@@ -461,24 +458,18 @@ class sendQrCode(APIView):
                 messages.success(
                     request, ("Please Confirm your email to complete registration.")
                 )
-                response = Response(
+                return Response(
                     {"detail": "QR Code sent to your email"}, status=status.HTTP_200_OK
                 )
-                response["Access-Control-Allow-Credentials"] = "true"
-                return response
             else:
-                response = Response(
+                return Response(
                     {"detail": "Two Factor Authentication is not activated"},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
-                response["Access-Control-Allow-Credentials"] = "true"
-                return response
         else:
-            response = Response(
+            return Response(
                 {"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST
             )
-            response["Access-Control-Allow-Credentials"] = "true"
-            return response
 
 
 class TwoFactorAuth(APIView):
@@ -491,15 +482,11 @@ class TwoFactorAuth(APIView):
         device = TOTPDevice.objects.filter(user=request.user).first()
 
         if device and device.verify_token(otp_code):
-            response = Response({"detail": "OTP verified"}, status=status.HTTP_200_OK)
-            response["Access-Control-Allow-Credentials"] = "true"
-            return response
+            return Response({"detail": "OTP verified"}, status=status.HTTP_200_OK)
         else:
-            response = Response(
+            return Response(
                 {"detail": "Invalid OTP"}, status=status.HTTP_400_BAD_REQUEST
             )
-            response["Access-Control-Allow-Credentials"] = "true"
-            return response
 
 
 class UserData(APIView):
