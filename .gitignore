@@ -56,6 +56,8 @@ backend/authentication/images/*
 media
 node_modules
 
+backend/qrcode*
+
 #ssl_keys
 *.crt
 *.key

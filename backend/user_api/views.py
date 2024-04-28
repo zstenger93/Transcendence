@@ -14,7 +14,6 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken
 
 
-
 from django_otp import devices_for_user
 from django_otp.plugins.otp_totp.models import TOTPDevice
 from django.core.mail import EmailMessage
@@ -242,81 +241,96 @@ class updateProfile(APIView):
 
 
 class OAuthCallback(APIView):
-	permission_classes = (permissions.AllowAny,)
-	##
-	def get(self, request):
-		if request.method == "GET":
-			code = request.GET.get("code")
-			data = {
-				"grant_type": "authorization_code",
-				"client_id": os.environ.get("UID"),
-				"client_secret": os.environ.get("SECRET"),
-				"code": code,
-				"redirect_uri": settings.REDIRECT_URI + "/api/oauth/callback/",
-			}
-			auth_response = requests.post("https://api.intra.42.fr/oauth/token", data=data)
+    permission_classes = (permissions.AllowAny,)
 
-			access_token = auth_response.json()["access_token"]
-			user_response = requests.get("https://api.intra.42.fr/v2/me", headers={"Authorization": f"Bearer {access_token}"})
-			
-			username = user_response.json()["login"]
-			email = user_response.json()["email"]
+    ##
+    def get(self, request):
+        if request.method == "GET":
+            code = request.GET.get("code")
+            data = {
+                "grant_type": "authorization_code",
+                "client_id": os.environ.get("UID"),
+                "client_secret": os.environ.get("SECRET"),
+                "code": code,
+                "redirect_uri": settings.REDIRECT_URI + "/api/oauth/callback/",
+            }
+            auth_response = requests.post(
+                "https://api.intra.42.fr/oauth/token", data=data
+            )
 
-			profile_picture_url = user_response.json()["image"]["versions"]["medium"]
-			response = requests.get(profile_picture_url)
-			img = Image.open(BytesIO(response.content))
-			image_name = os.path.basename(profile_picture_url).lstrip('/')
-			directory = 'profile_pictures/'
-			save_path = os.path.join(directory, image_name)
+            access_token = auth_response.json()["access_token"]
+            user_response = requests.get(
+                "https://api.intra.42.fr/v2/me",
+                headers={"Authorization": f"Bearer {access_token}"},
+            )
 
-			img_io = BytesIO()
-			img.save(img_io, format='JPEG')
-			default_storage.save(save_path, ContentFile(img_io.getvalue()))
+            username = user_response.json()["login"]
+            email = user_response.json()["email"]
 
-			intra_lvl = user_response.json()["cursus_users"][1]["level"]
-			school = user_response.json()["campus"][0]["name"]
-			ft_url = user_response.json()["url"],
-			ft_user = True
-			
-			titles = user_response.json().get("titles", [])
-			title = ""
-			if titles:
-				title = titles[0].get("name", "")
-				title = title.split(" ")[0]
-			user, created = AppUser.objects.get_or_create(
-				username = username,
-				title = title,
-				intra_level = user_response.json()["cursus_users"][1]["level"],
-				defaults = {
-					'username': username,
-					'email': email,
-					'title': title,
-					'profile_picture': save_path.replace('/app/backend/media', ''),
-					'intra_level': intra_lvl,
-					'school': school,
-					'ft_url': ft_url,
-					'ft_user': ft_user
-				}
-			)
-			login(request, user)
-			token = RefreshToken.for_user(user)
-			token['email'] = user.email
-			token['username'] = user.username
-			response = Response({
-				'ft_user': user.ft_user,
-				'refresh': str(token),
-				'access': str(token.access_token),
-			}, status=status.HTTP_200_OK)
-			response["Access-Control-Allow-Credentials"] = 'true'
-			if created or user.TwoFA == False:
-				redirect_url = 'https://10.12.2.2/home?' + urllib.parse.urlencode({'token': str(token.access_token)})
-			else:
-				redirect_url = 'https://10.12.2.2/2fa?' + urllib.parse.urlencode({'token': str(token.access_token)})
-			return redirect(redirect_url)
+            profile_picture_url = user_response.json()["image"]["versions"]["medium"]
+            response = requests.get(profile_picture_url)
+            img = Image.open(BytesIO(response.content))
+            image_name = os.path.basename(profile_picture_url).lstrip("/")
+            directory = "profile_pictures/"
+            save_path = os.path.join(directory, image_name)
 
-		response = Response({'detail': "Check you 42API keys"}, status=status.HTTP_400_BAD_REQUEST)
-		response["Access-Control-Allow-Credentials"] = 'true'
-		return response
+            img_io = BytesIO()
+            img.save(img_io, format="JPEG")
+            default_storage.save(save_path, ContentFile(img_io.getvalue()))
+
+            intra_lvl = user_response.json()["cursus_users"][1]["level"]
+            school = user_response.json()["campus"][0]["name"]
+            ft_url = (user_response.json()["url"],)
+            ft_user = True
+
+            titles = user_response.json().get("titles", [])
+            title = ""
+            if titles:
+                title = titles[0].get("name", "")
+                title = title.split(" ")[0]
+            user, created = AppUser.objects.get_or_create(
+                username=username,
+                title=title,
+                intra_level=user_response.json()["cursus_users"][1]["level"],
+                defaults={
+                    "username": username,
+                    "email": email,
+                    "title": title,
+                    "profile_picture": save_path.replace("/app/backend/media", ""),
+                    "intra_level": intra_lvl,
+                    "school": school,
+                    "ft_url": ft_url,
+                    "ft_user": ft_user,
+                },
+            )
+            login(request, user)
+            token = RefreshToken.for_user(user)
+            token["email"] = user.email
+            token["username"] = user.username
+            response = Response(
+                {
+                    "ft_user": user.ft_user,
+                    "refresh": str(token),
+                    "access": str(token.access_token),
+                },
+                status=status.HTTP_200_OK,
+            )
+            response["Access-Control-Allow-Credentials"] = "true"
+            if created or user.TwoFA == False:
+                redirect_url = "https://10.12.2.2/home?" + urllib.parse.urlencode(
+                    {"token": str(token.access_token)}
+                )
+            else:
+                redirect_url = "https://10.12.2.2/2fa?" + urllib.parse.urlencode(
+                    {"token": str(token.access_token)}
+                )
+            return redirect(redirect_url)
+
+        response = Response(
+            {"detail": "Check you 42API keys"}, status=status.HTTP_400_BAD_REQUEST
+        )
+        response["Access-Control-Allow-Credentials"] = "true"
+        return response
 
 
 class OAuthAuthorize(APIView):
@@ -421,24 +435,21 @@ class sendQrCode(APIView):
                     device = request.user.totpdevice_set.create(confirmed=True)
                 current_site = get_current_site(request)
 
+                # Generate QR code
                 img = qrcode.make(device.config_url)
+                img.save("qrcode.png")
 
                 mail_subject = "DJANGO OTP DEMO"
-                byte_stream = BytesIO()
-                img.save(byte_stream, format="PNG")
-                byte_stream.seek(0)
-
-                mail_subject = "Iiinteernaaal Pooiinteeer Vaariaaablee"
                 message = (
                     f"Hello {request.user},\n\nYour QR Code is: <img src='cid:image1'>"
                 )
                 to_email = request.user.email
                 email = EmailMessage(mail_subject, message, to=[to_email])
 
+                # Attach image
                 fp = open("qrcode.png", "rb")
                 msg_image = MIMEImage(fp.read())
                 fp.close()
-                msg_image = MIMEImage(byte_stream.getvalue())
                 msg_image.add_header("Content-ID", "<image1>")
                 email.attach(msg_image)
 
@@ -447,66 +458,74 @@ class sendQrCode(APIView):
                 messages.success(
                     request, ("Please Confirm your email to complete registration.")
                 )
-                response = Response(
+                return Response(
                     {"detail": "QR Code sent to your email"}, status=status.HTTP_200_OK
                 )
-                response["Access-Control-Allow-Credentials"] = "true"
-                return response
             else:
-                response = Response(
+                return Response(
                     {"detail": "Two Factor Authentication is not activated"},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
-                response["Access-Control-Allow-Credentials"] = "true"
-                return response
         else:
-            response = Response(
+            return Response(
                 {"detail": "No active user session"}, status=status.HTTP_400_BAD_REQUEST
             )
-            response["Access-Control-Allow-Credentials"] = "true"
-            return response
 
 
 class TwoFactorAuth(APIView):
-	permission_classes = (permissions.IsAuthenticated,)
-	authentication_classes = (BlacklistCheckJWTAuthentication,)
-	## check if use is authenticated
-	def post(self, request):
-		otp_code = request.data.get('otp_code')
-		device = TOTPDevice.objects.filter(user=request.user).first()
+    permission_classes = (permissions.IsAuthenticated,)
+    authentication_classes = (BlacklistCheckJWTAuthentication,)
 
-		if device and device.verify_token(otp_code):
-			response = Response({"detail": "OTP verified"}, status=status.HTTP_200_OK)
-			response["Access-Control-Allow-Credentials"] = 'true'
-			return response
-		else:
-			response = Response({"detail": "Invalid OTP"}, status=status.HTTP_400_BAD_REQUEST)
-			response["Access-Control-Allow-Credentials"] = 'true'
-			return response
+    ## check if use is authenticated
+    def post(self, request):
+        otp_code = request.data.get("otp_code")
+        device = TOTPDevice.objects.filter(user=request.user).first()
+
+        if device and device.verify_token(otp_code):
+            return Response({"detail": "OTP verified"}, status=status.HTTP_200_OK)
+        else:
+            return Response(
+                {"detail": "Invalid OTP"}, status=status.HTTP_400_BAD_REQUEST
+            )
 
 
 class UserData(APIView):
     def get(self, request, username):
         user = AppUser.objects.get(username=username)
         if not user:
-            response = Response({
-                "detail": "User not found"
-            }, status=status.HTTP_404_NOT_FOUND)
-            response["Access-Control-Allow-Credentials"] = 'true'
+            response = Response(
+                {"detail": "User not found"}, status=status.HTTP_404_NOT_FOUND
+            )
+            response["Access-Control-Allow-Credentials"] = "true"
             return response
         data = user_to_dict(user)
-        response = Response({
-            "user": data,
-        }, status=status.HTTP_200_OK)
-        response["Access-Control-Allow-Credentials"] = 'true'
+        response = Response(
+            {
+                "user": data,
+            },
+            status=status.HTTP_200_OK,
+        )
+        response["Access-Control-Allow-Credentials"] = "true"
         return response
+
 
 def user_to_dict(user):
     user_dict = model_to_dict(user)
     if user.profile_picture and user.profile_picture.file:
-        user_dict['profile_picture'] = user.profile_picture.url
+        user_dict["profile_picture"] = user.profile_picture.url
     else:
-        user_dict['profile_picture'] = None
+        user_dict["profile_picture"] = None
     # keep only fields : email, username, profile_picture, title, school, intra_level
-    user_dict = {key: user_dict[key] for key in ['email', 'username', 'profile_picture', 'title', 'school', 'intra_level', 'ft_url']}
+    user_dict = {
+        key: user_dict[key]
+        for key in [
+            "email",
+            "username",
+            "profile_picture",
+            "title",
+            "school",
+            "intra_level",
+            "ft_url",
+        ]
+    }
     return user_dict
