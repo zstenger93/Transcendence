@@ -317,11 +317,11 @@ class OAuthCallback(APIView):
             )
             response["Access-Control-Allow-Credentials"] = "true"
             if created or user.TwoFA == False:
-                redirect_url = "https://10.13.1.1/home?" + urllib.parse.urlencode(
+                redirect_url = "https://10.12.2.2/home?" + urllib.parse.urlencode(
                     {"token": str(token.access_token)}
                 )
             else:
-                redirect_url = "https://10.13.1.1/2fa?" + urllib.parse.urlencode(
+                redirect_url = "https://10.12.2.2/2fa?" + urllib.parse.urlencode(
                     {"token": str(token.access_token)}
                 )
             return redirect(redirect_url)

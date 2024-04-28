@@ -115,8 +115,9 @@ class GameConsumer(AsyncWebsocketConsumer):
         if not self.connected_users:
             self.game_state = {}
             self.connected_clients = {}
-            # self.game_instance = None
+            self.game_instance = None
             self.game_tasks = {}
+            self.connected_users = set()
 
         await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
 
@@ -248,7 +249,7 @@ class GameInstance:
         self.p0_moving = 0
         self.p1_moving = 0
         self.ball_speed = 0
-        self.score_to_win = 3
+        self.score_to_win = 10
 
     async def move_paddle(self, paddle, direction, state):
         if state == "press":
@@ -288,7 +289,7 @@ class GameInstance:
             0, min(self.canvas_height - self.paddle_height, self.player1)
         )
         await self.update_ball_position(game_state, room_name, user0, user1)
-        self.score = f"{self.player0_score} : {self.player1_score}"
+        self.score = f"{self.player1_score} : {self.player0_score}"
         self.ball_speed = math.sqrt(self.ball_speed_x**2 + self.ball_speed_y**2)
 
     async def update_ball_position(self, game_state, room_name, user0, user1):

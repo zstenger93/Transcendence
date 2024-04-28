@@ -30,17 +30,17 @@ const Pong = () => {
 
     async function getData() {
       if (!game_socket.current) {
-        game_socket.current = new WebSocket("wss://10.13.1.1/game/pong/");
+        game_socket.current = new WebSocket("wss://10.12.2.2/game/pong/");
       }
       game_socket.current.onopen = function (event) {
         console.log("Data:" + JSON.stringify(received_data));
         console.log("WebSocket is open now.!!!!!!!!!!!!!!!");
       };
-      game_socket.current.onclose = function(event) {
-        console.log('WebSocket is closed now.!!!!!!!!!!!!!!', event.data);
+      game_socket.current.onclose = function (event) {
+        console.log("WebSocket is closed now.!!!!!!!!!!!!!!", event.data);
       };
-      game_socket.onerror = function(error) {
-        console.error('WebSocket error:?????????', error);
+      game_socket.onerror = function (error) {
+        console.error("WebSocket error:?????????", error);
       };
 
       let canvas = document.getElementById("gameCanvas");
@@ -50,14 +50,13 @@ const Pong = () => {
       let received_data;
       game_socket.current.onmessage = function (event) {
         received_data = JSON.parse(event.data);
-        
+
         if (received_data["type"] === "game_message") {
           sender.current = received_data["sender"];
           player0.current = received_data["users"][0];
           player1.current = received_data["users"][1];
           render_game_frame(received_data);
-        }
-        else if (received_data["type"] === "ending_message") {
+        } else if (received_data["type"] === "ending_message") {
           console.log("Received Data: " + JSON.stringify(received_data));
           clear_canvas();
           display_end_score(received_data["game_state"]);
@@ -69,14 +68,12 @@ const Pong = () => {
         if (context && canvas) {
           clear_canvas();
           drawField();
-          var score = player0.current + "  " + game_data.score + " " + player1.current;
+          var score =
+            player0.current + "  " + game_data.score + " " + player1.current;
           display_score(score);
           draw_paddle(0, game_data.player0, 10, 110);
           draw_paddle(1, game_data.player1, 10, 110);
-          drawBall(
-            game_data.ball_x,
-            game_data.ball_y,
-          );
+          drawBall(game_data.ball_x, game_data.ball_y);
         }
       };
 
@@ -119,13 +116,15 @@ const Pong = () => {
 
       const display_score = (score) => {
         if (context) {
-          context.fillStyle = "white";
-          context.fillRect(400, 0, 200, 70);
-          context.fillStyle = "black";
-          context.fillText("Score", 400, 50);
-          context.fillText(score, 450, 50);
+		  context.fillStyle = "white";
+          context.textAlign = "center";
+          context.textBaseline = "middle";
+          context.font = "bold 24px Arial";
+          context.fillText(score, canvas.width / 2, canvas.height / 2);
         }
       };
+
+
       const display_end_score = (score) => {
         if (context) {
           context.fillStyle = "white";

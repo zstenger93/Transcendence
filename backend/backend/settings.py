@@ -20,7 +20,7 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 ALLOWED_HOSTS = [
     "*",
     "localhost",
-    "10.13.1.1",
+    "10.12.2.2",
     "172.19.0.4",
     "127.0.0.1",
     "0.0.0.0",
@@ -31,7 +31,7 @@ ALLOWED_HOSTS = [
 
 # Authentication settings
 if DEBUG == "True":
-    REDIRECT_URI = "https://10.13.1.1"
+    REDIRECT_URI = "https://10.12.2.2"
 else:
     REDIRECT_URI = "https://transcendence-backend-znhl.onrender.com"
 
@@ -76,7 +76,7 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 CSRF_ALLOWED_ORIGINS = [
-    "https://10.13.1.1",
+    "https://10.12.2.2",
     "https://api.intra.42.fr",
     "http://localhost:3000",
     "http://frontend:3000",
@@ -87,7 +87,7 @@ CSRF_ALLOWED_ORIGINS = [
 CORS_ALLOWED_ORIGINS = [
     "http://frontend:3000",
     "https://api.intra.42.fr",
-    "https://10.13.1.1",
+    "https://10.12.2.2",
     "http://localhost:3000",
     "https://transcendence-frontend-3otz.onrender.com",
     "https://zstenger93.github.io",
