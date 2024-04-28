@@ -25,15 +25,16 @@ echo "alias get='http --follow --timeout 6'" >> /root/.bashrc
 # ############################################
 # mkdir -pv /var/{log,run}/gunicorn/
 # gunicorn -c config/gunicorn/dev.py --reload
-# sleep 5
-# python manage.py makemigrations && python manage.py migrate
+sleep 3
+python manage.py makemigrations && python manage.py migrate
 # tail -f /var/log/gunicorn/dev.log
 
+export DJANGO_SETTINGS_MODULE=backend.settings
 
+python auto_reload.py
 
-############################################
-# daphne server                            #
-############################################
+sleep 10
+
 mkdir -pv /var/{log,run}/daphne/
 python manage.py makemigrations && python manage.py migrate
 # daphne -u /tmp/daphne.sock backend.asgi:application

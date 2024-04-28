@@ -15,6 +15,7 @@ services:
     #   - 4000:4000
     restart: unless-stopped
     command: npm start
+
   backend:
     container_name: backend
     env_file:
@@ -23,8 +24,8 @@ services:
       context: .
       dockerfile: docker/backend/backend.Dockerfile
     image: transcendence_backend
-    ports:
-      - 8000:8000
+    # ports:
+    #   - 8000:8000
     volumes:
       - ${PWD}:/app/
     entrypoint: /app/docker/backend/backend.sh

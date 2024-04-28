@@ -12,8 +12,8 @@ sed -i 's|${BACKEND_URL}|'${BACKEND_URL}'|g' /etc/nginx/sites-available/backend
 sed -i 's|${SERVER}|'${SERVER}'|g' /etc/nginx/sites-available/backend
 sed -i 's|${LOCATION}|'${LOCATION}'|g' /etc/nginx/sites-available/backend
 
-openssl req -x509 -nodes -new -sha256 -days 1024 -newkey rsa:2048 -keyout /etc/ssl/localhost.key -out /etc/ssl/localhost.pem -subj "/C=DE/CN=localhost"
-openssl x509 -outform pem -in /etc/ssl/localhost.pem -out /etc/ssl/localhost.crt
+openssl req -x509 -nodes -new -sha256 -days 1024 -newkey rsa:2048 -keyout /etc/ssl/10.12.2.2.key -out /etc/ssl/10.12.2.2.pem -subj "/C=DE/CN=10.12.2.2"
+openssl x509 -outform pem -in /etc/ssl/10.12.2.2.pem -out /etc/ssl/10.12.2.2.crt
 
 cd /etc/nginx/sites-enabled
 

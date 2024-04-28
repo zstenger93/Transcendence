@@ -182,6 +182,25 @@ function Chat({ redirectUri }) {
     });
   };
 
+  const handleInviteMessage = (user) => {
+    setPrivateMessages((prevMessages) => {
+      if (!prevMessages.includes(user)) {
+        if (chatSocket.current.readyState === WebSocket.OPEN) {
+          chatSocket.current.send(
+            JSON.stringify({
+              message:
+                "Prove your worthiness to mighty odyn! Beat me in a pong game here: https://10.12.2.2/originalpong",
+              receiver: user,
+            })
+          );
+        }
+        return [...prevMessages, user];
+      } else {
+        return prevMessages;
+      }
+    });
+  };
+
   const openProfile = (user) => {
     fetchUserProfile(user);
   };
@@ -292,6 +311,9 @@ function Chat({ redirectUri }) {
                           <li onClick={() => handleMessageOption(user)}>
                             Message
                           </li>
+                          <li onClick={() => handleInviteMessage(user)}>
+                            Invitie to play
+                          </li>
                           <li
                             onClick={() =>
                               addFriend({ redirectUri, userName: user })
@@ -360,7 +382,11 @@ function Chat({ redirectUri }) {
                   </span>
                   <img
                     className="w-24 h-24 rounded-full mb-4 mx-auto"
-                    src={userDetails.user.profile_picture ? userDetails.user.profile_picture : "https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp"}
+                    src={
+                      userDetails.user.profile_picture
+                        ? userDetails.user.profile_picture
+                        : "https://raw.githubusercontent.com/zstenger93/Transcendence/master/images/transcendence.webp"
+                    }
                     alt="Profile"
                   />
                   <p className="font-nosifer mb-2">
