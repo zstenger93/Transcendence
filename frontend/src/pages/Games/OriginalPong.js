@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import Cookies from "js-cookie";
 
 const Pong = () => {
   const sender = useRef(null);
@@ -7,13 +8,22 @@ const Pong = () => {
   const game_socket = useRef(null);
 
   useEffect(() => {
+    setTimeout(() => {
+      const accessToken = Cookies.get("access");
+
+      if (!accessToken) {
+        window.location.href = "/404.html";
+      }
+    }, 1000);
     function randomString(length) {
       var result = "";
       var characters =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
       var charactersLength = characters.length;
       for (var i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
       }
       return result;
     }
@@ -32,7 +42,7 @@ const Pong = () => {
       game_socket.onerror = function(error) {
         console.error('WebSocket error:?????????', error);
       };
-      
+
       let canvas = document.getElementById("gameCanvas");
       canvas.width = 1000;
       canvas.height = 700;
@@ -130,7 +140,6 @@ const Pong = () => {
       };
 
       const handleKeyDown = (event) => {
-
         const user = sender.current;
         console.log("Key up event: " + user);
         if (game_socket.current.readyState === WebSocket.OPEN) {
@@ -171,7 +180,6 @@ const Pong = () => {
     }
     getData();
   }, []);
-  
 
   return (
     <div
@@ -188,7 +196,7 @@ const Pong = () => {
         id="gameCanvas"
         width="1000"
         height="700"
-        style={{ backgroundColor: "black" , border: "1px solid white" }}
+        style={{ backgroundColor: "black", border: "1px solid white" }}
       ></canvas>
     </div>
   );
