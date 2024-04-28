@@ -18,20 +18,20 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 # SECURITY WARNING: don't run with debug turned on in production!
 
 ALLOWED_HOSTS = [
-        '*', 
-        'localhost', 
-        '10.12.2.2',
-        '172.19.0.4',
-        '127.0.0.1', 
-        '0.0.0.0', 
-        '10.13.7.5', 
-        'transcendence-backend-znhl.onrender.com', 
-        'https://transcendence-frontend-3otz.onrender.com'
-    ]
+    "*",
+    "localhost",
+    "10.13.1.1",
+    "172.19.0.4",
+    "127.0.0.1",
+    "0.0.0.0",
+    "10.13.7.5",
+    "transcendence-backend-znhl.onrender.com",
+    "https://transcendence-frontend-3otz.onrender.com",
+]
 
 # Authentication settings
-if DEBUG == 'True':
-    REDIRECT_URI = "https://10.12.2.2"
+if DEBUG == "True":
+    REDIRECT_URI = "https://10.13.1.1"
 else:
     REDIRECT_URI = "https://transcendence-backend-znhl.onrender.com"
 
@@ -76,9 +76,8 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 CSRF_ALLOWED_ORIGINS = [
-
-    "https://10.12.2.2",
-	"https://api.intra.42.fr",
+    "https://10.13.1.1",
+    "https://api.intra.42.fr",
     "http://localhost:3000",
     "http://frontend:3000",
     "https://transcendence-frontend-3otz.onrender.com",
@@ -86,13 +85,13 @@ CSRF_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-        "http://frontend:3000",
-	    "https://api.intra.42.fr",
-		"https://10.12.2.2",
-	    "http://localhost:3000",
-		"https://transcendence-frontend-3otz.onrender.com",
-		"https://zstenger93.github.io"
-	]
+    "http://frontend:3000",
+    "https://api.intra.42.fr",
+    "https://10.13.1.1",
+    "http://localhost:3000",
+    "https://transcendence-frontend-3otz.onrender.com",
+    "https://zstenger93.github.io",
+]
 
 CORS_ALLOW_CREDENTIALS = True
 # CORS_ORIGIN_ALLOW_ALL = True
