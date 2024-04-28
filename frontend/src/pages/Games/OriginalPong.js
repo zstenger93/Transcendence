@@ -15,19 +15,6 @@ const Pong = () => {
         window.location.href = "/404.html";
       }
     }, 1000);
-	// eslint-disable-next-line
-    function randomString(length) {
-      var result = "";
-      var characters =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      var charactersLength = characters.length;
-      for (var i = 0; i < length; i++) {
-        result += characters.charAt(
-          Math.floor(Math.random() * charactersLength)
-        );
-      }
-      return result;
-    }
 
     async function getData() {
       if (!game_socket.current) {
