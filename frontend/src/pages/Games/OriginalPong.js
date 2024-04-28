@@ -15,6 +15,7 @@ const Pong = () => {
         window.location.href = "/404.html";
       }
     }, 1000);
+	// eslint-disable-next-line
     function randomString(length) {
       var result = "";
       var characters =
