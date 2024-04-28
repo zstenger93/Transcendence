@@ -4,18 +4,7 @@ import random
 import math
 
 from channels.generic.websocket import AsyncWebsocketConsumer
-from channels.db import database_sync_to_async
 from channels.exceptions import StopConsumer
-from rest_framework.request import Request
-import secrets
-import string
-
-
-## The consumer will be responsible for handling the game logic and updating the game state(websockets)
-def generate_random_string(length):
-    characters = string.ascii_letters + string.digits + "_"
-    random_string = "".join(secrets.choice(characters) for _ in range(length))
-    return random_string
 
 
 import logging
@@ -90,7 +79,6 @@ class GameConsumer(AsyncWebsocketConsumer):
         cmd = str(game_event[:2])
         userid = int(game_event[2:])
         # if connected client < 2, then create a new game instance
-        logger.info(f"connected clientssssssss: {self.connected_clients}")
         if (
             self.room_name not in self.connected_clients
             and len(self.connected_clients) < 2
@@ -100,12 +88,9 @@ class GameConsumer(AsyncWebsocketConsumer):
             self.users[self.room_name][1] = self.scope["user"]
             self.game_instance = self.connected_clients[self.room_name]
 
-        logger.info(f"ccccccconnected clients: {self.connected_clients}")
         await self.handleInput(cmd, userid)
 
     async def handleInput(self, cmd, userid):
-        logger.info(f"users in room: {self.users[self.room_name]}")
-        logger.info(f"User {userid} sent command: {cmd}")
         if cmd == "pw" and userid == self.user_ids[self.room_name][0]:
             await self.game_instance.move_p0_up("press")
         elif cmd == "ps" and userid == self.user_ids[self.room_name][0]:
@@ -132,12 +117,10 @@ class GameConsumer(AsyncWebsocketConsumer):
             self.connected_clients = {}
             # self.game_instance = None
             self.game_tasks = {}
-            # self.connected_users = set()
 
         await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
 
     async def startGame(self):
-        logger.info(f"Game loop started status: {self.game_state[self.room_name]}")
         self.game_state[self.room_name] = "starting"
         await self.send_game_state_to_clients()
         if self.room_name in self.connected_clients:
@@ -165,7 +148,6 @@ class GameConsumer(AsyncWebsocketConsumer):
         await self.send_game_end()
 
     async def send_game_end(self):
-        game_tag = generate_random_string(20)
         await self.channel_layer.group_send(
             self.room_group_name,
             {
@@ -176,7 +158,6 @@ class GameConsumer(AsyncWebsocketConsumer):
                 "room_name": self.room_name,
                 "game_state": self.game_state.get(self.room_name),
                 "users": [str(user) for user in self.users.get(self.room_name)],
-                "game_tag": game_tag,
             },
         )
 
@@ -192,7 +173,6 @@ class GameConsumer(AsyncWebsocketConsumer):
                     "game_state": event["game_state"],
                     "users": event["users"],
                     "user_ids": self.user_ids.get(self.room_name),
-                    "game_tag": event["game_tag"],
                 }
             )
         )
@@ -244,18 +224,6 @@ class GameConsumer(AsyncWebsocketConsumer):
             )
         )
 
-    @database_sync_to_async
-    def get_room(self, room_name):
-        from game.models import GameRoom
-
-        return GameRoom.objects.get(name=room_name)
-
-    @database_sync_to_async
-    def get_all_user_channel_names(self):
-        from .models import UserChannelName
-
-        return list(UserChannelName.objects.values("user__username"))
-
 
 class GameInstance:
     def __init__(self):
@@ -280,7 +248,7 @@ class GameInstance:
         self.p0_moving = 0
         self.p1_moving = 0
         self.ball_speed = 0
-        self.score_to_win = 10
+        self.score_to_win = 3
 
     async def move_paddle(self, paddle, direction, state):
         if state == "press":

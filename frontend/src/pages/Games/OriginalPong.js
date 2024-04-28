@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 const Pong = () => {
   const sender = useRef(null);
   const player0 = useRef(null);
   const player1 = useRef(null);
-  const gameSocket = useRef(null);
+  const game_socket = useRef(null);
 
   useEffect(() => {
     function randomString(length) {
@@ -19,19 +19,17 @@ const Pong = () => {
     }
 
     async function getData() {
-
-      let room_name = randomString(10);
-      if (!gameSocket.current) {
-        gameSocket.current = new WebSocket("wss://10.12.2.4/game/pong/");
+      if (!game_socket.current) {
+        game_socket.current = new WebSocket("wss://10.13.1.1/game/pong/");
       }
-      gameSocket.current.onopen = function (event) {
-        console.log("Data:" + JSON.stringify(receivedData));
+      game_socket.current.onopen = function (event) {
+        console.log("Data:" + JSON.stringify(received_data));
         console.log("WebSocket is open now.!!!!!!!!!!!!!!!");
       };
-      gameSocket.current.onclose = function(event) {
+      game_socket.current.onclose = function(event) {
         console.log('WebSocket is closed now.!!!!!!!!!!!!!!', event.data);
       };
-      gameSocket.onerror = function(error) {
+      game_socket.onerror = function(error) {
         console.error('WebSocket error:?????????', error);
       };
       
@@ -39,127 +37,65 @@ const Pong = () => {
       canvas.width = 1000;
       canvas.height = 700;
       let context = canvas.getContext("2d");
-      let receivedData;
-      gameSocket.current.onmessage = function (event) {
-        receivedData = JSON.parse(event.data);
+      let received_data;
+      game_socket.current.onmessage = function (event) {
+        received_data = JSON.parse(event.data);
         
-        if (receivedData["type"] === "game_message") {
-          sender.current = receivedData["sender"];
-          player0.current = receivedData["users"][0];
-          player1.current = receivedData["users"][1];
-          renderGameFrame(receivedData);
+        if (received_data["type"] === "game_message") {
+          sender.current = received_data["sender"];
+          player0.current = received_data["users"][0];
+          player1.current = received_data["users"][1];
+          render_game_frame(received_data);
         }
-        else if (receivedData["type"] === "ending_message") {
-          console.log("Received Data: " + JSON.stringify(receivedData));
-          clearCanvas();
-          displayEndScore(receivedData["game_state"]);
-          gameSocket.current.close();
+        else if (received_data["type"] === "ending_message") {
+          console.log("Received Data: " + JSON.stringify(received_data));
+          clear_canvas();
+          display_end_score(received_data["game_state"]);
+          game_socket.current.close();
         }
       };
 
-      const renderGameFrame = (gameData) => {
+      const render_game_frame = (game_data) => {
         if (context && canvas) {
-          clearCanvas();
+          clear_canvas();
           drawField();
-          var score = player0.current + "  " + gameData.score + " " + player1.current;
-          displayScore(score);
-          drawPaddle(0, gameData.player0, 10, 110);
-          drawPaddle(1, gameData.player1, 10, 110);
+          var score = player0.current + "  " + game_data.score + " " + player1.current;
+          display_score(score);
+          draw_paddle(0, game_data.player0, 10, 110);
+          draw_paddle(1, game_data.player1, 10, 110);
           drawBall(
-            gameData.ball_x,
-            gameData.ball_y,
-            gameData.ball_speed_x,
-            gameData.ball_speed_y,
-            gameData.ball_speed
+            game_data.ball_x,
+            game_data.ball_y,
           );
         }
       };
 
-      const clearCanvas = () => {
+      const clear_canvas = () => {
         if (context && canvas) {
           context.clearRect(0, 0, canvas.width, canvas.height);
         }
       };
 
-      function hexToRgb(hex) {
-        // Remove the hash if it exists
-        hex = hex.replace(/^#/, "");
-
-        // Parse the hex values to separate R, G, B components
-        const bigint = parseInt(hex, 16);
-        const r = (bigint >> 16) & 255;
-        const g = (bigint >> 8) & 255;
-        const b = bigint & 255;
-
-        // Return the RGB values as an object
-        return { r, g, b };
-      }
-
-      const drawBall = (x, y, speedX, speedY, ballSpeed) => {
+      const drawBall = (x, y) => {
         if (context) {
-          // Define a color gradient based on speed
-          const colorGradient = [
-            { speed: 7, color: "#ffff00" },
-            { speed: 10, color: "#ff4d00" },
-            { speed: 13, color: "#ff0000" },
-            { speed: 18, color: "#0000ff" },
-            { speed: 50, color: "#bf00ff" },
-          ];
+          let ballColor = "orange";
 
-          // Find the color corresponding to the ball's speed in the gradient
-          let ballColor = "white"; // Default color
-          for (const { speed, color } of colorGradient) {
-            if (ballSpeed <= speed) {
-              ballColor = color;
-              break;
-            }
-          }
-
-          // Display the magnitude of the speed
-          context.fillStyle = ballColor;
-          context.font = "14px Arial";
-          let show_speed = `Speed: ${ballSpeed.toFixed(3)}`;
-          context.fillText(show_speed, x - 30, y - 30);
-
-          // Draw the main ball
           context.fillStyle = ballColor;
           context.beginPath();
-          context.arc(x, y, 10, 0, Math.PI * 2);
+          context.arc(x, y, 11, 0, Math.PI * 2);
           context.fill();
           context.closePath();
-
-          // Draw the trailing circles
-          const trailCount = 5; // Adjust the number of circles in the trail
-          const trailSpacing = 1.5; // Adjust the spacing between circles in the trail
-
-          for (let i = 1; i <= trailCount; i++) {
-            const trailOpacity = 1 - i / trailCount;
-            const trailRadius = i * trailSpacing;
-
-            const rgb = hexToRgb(ballColor);
-            context.fillStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${trailOpacity})`; // Yellow color with variable opacity
-            context.beginPath();
-            context.arc(
-              x - speedX * trailRadius,
-              y - speedY * trailRadius,
-              10,
-              0,
-              Math.PI * 2
-            );
-            context.fill();
-            context.closePath();
-          }
         }
       };
 
-      const drawPaddle = (player, y, width, height) => {
+      const draw_paddle = (player, y, width, height) => {
         if (context) {
           if (player === 0) {
-            context.fillStyle = "red"; // Player 0 Paddle color
-            context.fillRect(0, y, width, height);
+            context.fillStyle = "blue";
+            context.fillRect(3, y, width, height);
           } else {
-            context.fillStyle = "blue"; // Player 1 Paddle color
-            context.fillRect(990, y, width, height);
+            context.fillStyle = "red";
+            context.fillRect(992, y, width, height);
           }
         }
       };
@@ -171,7 +107,7 @@ const Pong = () => {
         }
       };
 
-      const displayScore = (score) => {
+      const display_score = (score) => {
         if (context) {
           context.fillStyle = "white";
           context.fillRect(400, 0, 200, 70);
@@ -180,7 +116,7 @@ const Pong = () => {
           context.fillText(score, 450, 50);
         }
       };
-      const displayEndScore = (score) => {
+      const display_end_score = (score) => {
         if (context) {
           context.fillStyle = "white";
           context.fillRect(300, 250, 400, 140);
@@ -197,15 +133,11 @@ const Pong = () => {
 
         const user = sender.current;
         console.log("Key up event: " + user);
-        if (gameSocket.current.readyState === WebSocket.OPEN) {
+        if (game_socket.current.readyState === WebSocket.OPEN) {
           if (event.key === "w") {
-            gameSocket.current.send("pw" + user);
+            game_socket.current.send("pw" + user);
           } else if (event.key === "s") {
-            gameSocket.current.send("ps" + user);
-          } else if (event.key === "i") {
-            gameSocket.current.send("pi" + user);
-          } else if (event.key === "k") {
-            gameSocket.current.send("pk" + user);
+            game_socket.current.send("ps" + user);
           }
         } else {
           console.log("Socket not open");
@@ -215,38 +147,26 @@ const Pong = () => {
       const handleKeyUp = (event) => {
         const user = sender.current;
         console.log("Key up event: " + user);
-        if (gameSocket.current.readyState === WebSocket.OPEN) {
+        if (game_socket.current.readyState === WebSocket.OPEN) {
           if (event.key === "w") {
-            gameSocket.current.send("rw" + user);
+            game_socket.current.send("rw" + user);
           } else if (event.key === "s") {
-            gameSocket.current.send("rs" + user);
-          } else if (event.key === "i") {
-            gameSocket.current.send("ri" + user);
-          } else if (event.key === "k") {
-            gameSocket.current.send("rk" + user);
+            game_socket.current.send("rs" + user);
           }
         } else {
           console.log("Socket not open");
         }
-
-      };
-
-      const startGame = () => {
-        gameSocket.current.send("startgame");
       };
 
       document.addEventListener("keyup", handleKeyUp);
       document.addEventListener("keydown", handleKeyDown);
-      const startButton = document.getElementById("startGame");
-      startButton.addEventListener("click", startGame);
 
       // Cleanup function
       return () => {
         console.log("closing socket and removing listener");
-        gameSocket.current.close();
+        game_socket.current.close();
         document.removeEventListener("keyup", handleKeyUp);
         document.removeEventListener("keydown", handleKeyDown);
-        startButton.removeEventListener("click", startGame);
       };
     }
     getData();
@@ -270,7 +190,6 @@ const Pong = () => {
         height="700"
         style={{ backgroundColor: "black" , border: "1px solid white" }}
       ></canvas>
-      <button id="startGame">Start Game</button>
     </div>
   );
 };
